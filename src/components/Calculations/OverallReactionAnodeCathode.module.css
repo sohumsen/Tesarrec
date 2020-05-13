@@ -1,0 +1,19 @@
+.HeatMaps{
+    
+    width: 100%;
+    display:inline-block;
+    vertical-align: top;
+
+}
+
+.HeatMapProductionRate{
+    float: left;
+    width: 50%;
+}
+
+.HeatMapEnergyPerformance{
+    float: left;
+    width: 50%;
+
+
+}

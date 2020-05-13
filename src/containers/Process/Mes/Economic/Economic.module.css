@@ -1,0 +1,24 @@
+.Economic{
+
+    background-color: violet;
+    float: left;
+    display: block;
+    position: absolute;
+    clear: both;
+    top: 800px;
+    left: 0;
+
+
+}
+
+.Environmental {
+    background-color: violet;
+    float: left;
+    display: block;
+    position: relative;
+    top: 1000px;
+    clear: both;
+
+
+  
+  }

@@ -1,0 +1,13 @@
+.MESPic{
+    background-color: rgb(97, 176, 240);
+    padding: 8px;
+    height: 100%;
+    box-sizing: border-box;
+    border-radius: 5px;
+
+}
+
+.MESPic img{
+    height:100%;
+
+}

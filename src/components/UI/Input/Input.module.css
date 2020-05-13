@@ -1,0 +1,18 @@
+.Input {
+    border: none;
+
+    display: flex;
+    width: 100%;
+    font-size: 14px;
+    border-radius: 5px;
+    padding: 2px;
+    margin: 2px;
+
+    
+}
+
+
+
+.Input:focus {
+    background-color: rgb(193, 228, 240);
+  }

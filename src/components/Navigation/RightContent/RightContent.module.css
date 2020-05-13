@@ -1,0 +1,10 @@
+.RightContent{
+    width: 21%;
+    position: fixed;
+    top: 60px;
+    right: 0px;
+    background-color: #296aa3;
+    border-radius: 10px;
+    text-align: center;
+}
+

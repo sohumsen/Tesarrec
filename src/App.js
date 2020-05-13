@@ -1,26 +1,35 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from "react";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+
+import Layout from "./hoc/Layout/Layout";
+import { Route, Switch, withRouter, Redirect } from "react-router-dom";
+import About from './containers/About/About'
+import Reference from "./containers/Reference/Reference";
+import Mes from './containers/Process/Mes/Mes'
+import Mfc from './containers/Process/Mfc/Mfc'
+
+
+class App extends Component {
+
+  render() {
+
+
+    let routes = (
+      <Switch>
+        <Route path="/process/mfc" exact component={Mfc} />
+        <Route path="/process/mes" exact component={Mes} />
+        <Route path="/reference" component={Reference} />
+        <Route path="/" exact component={About} />
+        <Redirect to="/" />
+      </Switch>
+    );
+    
+    return (
+      <div>
+        <Layout>{routes}</Layout>
+      </div>
+    );
+  }
 }
 
-export default App;
+export default withRouter(App);
