@@ -1,11 +1,12 @@
 .Button {
-    background-color: #296aa3;
+    background-color: #2387df;
     border: none;
     color: white;
     outline: none;
     cursor: pointer;
     font: inherit;
     padding: 20px;
+    width: auto;
     margin: 10px;
     border-radius: 10px;
 }
@@ -13,6 +14,6 @@
 
 
 .Button:hover, .active{
-    background-color: #26509e;
+    background-color: #1052cc;
 }
 

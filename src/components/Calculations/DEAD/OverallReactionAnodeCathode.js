@@ -1,10 +1,10 @@
 
 import React from 'react'
 
-import ReadAnodeJSON from '../Excel/Anode/ReadAndodeJSON'
-import ReadCathodeJSON from '../Excel/Cathode/ReadCathodeJSON'
+import ReadAnodeJSON from '../../Excel/Anode/ReadAndodeJSON'
+import ReadCathodeJSON from '../../Excel/Cathode/ReadCathodeJSON'
 
-import Graph from '../Graph/Graph'
+import Graph from '../../Graph/Graph'
 
 const OverallReactionAnodeCathode=(props)=>{
 

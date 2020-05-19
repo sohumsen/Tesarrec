@@ -1,0 +1,19 @@
+
+volumes only go up in 10s DONE
+add tests DONE
+link  the  references DONE
+
+make request to another carbon footprint page elexon or someone
+get a better heat map package
+when all values are 0 the colours are still there so find a better normalisation
+find a heatmap normalisation
+Write code to convert $data/xls/* xls to $data/json/*
+
+Audit
+========
+
+1. Cleanup Dead Files
+2. Cleanup Old Folders
+3. WriteUp a project description in Readme.md
+
+

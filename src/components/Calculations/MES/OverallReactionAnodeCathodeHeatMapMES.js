@@ -1,15 +1,40 @@
 import React from "react";
 
-import ReadAnodeJSON from "../Excel/Anode/ReadAndodeJSON";
-import ReadCathodeJSON from "../Excel/Cathode/ReadCathodeJSON";
+import ReadAnodeJSON from "../../Excel/Anode/ReadAndodeJSON";
+import ReadCathodeJSON from "../../Excel/Cathode/ReadCathodeJSON";
 
-import MyHeatMap from "../UI/MyHeatMap/MyHeatMap";
-import classes from "./OverallReactionAnodeCathode.module.css";
+import MyHeatMap from "../../UI/MyHeatMap/MyHeatMap";
+import classes from "./OverallReactionAnodeCathodeMES.module.css";
 const OverallReactionAnodeCathode = (props) => {
   //console.log(props.anodeSubstrate)
   //console.log(props.cathodeProduct)
 
-  let ProductionRategData = [];
+  let CCGT=props.CCGT
+
+
+  let CarbonEmmision =
+  (props.CCGT * 0.1386 +
+    props.Nuclear * 0.0081 +
+    props.Biomass * 0.0125 +
+    props.Coal * 0.2466 +
+    props.Wind * 0.0072 +
+    props.Solar * 0.02361 +
+    props.Oil * 0.20361 +
+    props.OCGT * 0.1386 +
+    props.Hydroelectric * 0.00722 +
+    props.PumpedHydro * 0.11527 +
+    props.Other * 0.07583) /
+  (props.CCGT +
+    props.Nuclear +
+    props.Biomass +
+    props.Coal +
+    props.Wind +
+    props.Solar +
+    props.Oil +
+    props.OCGT +
+    props.Hydroelectric +
+    props.PumpedHydro +
+    props.Other);  let ProductionRategData = [];
   let GibbsEnergyData = [];
   let GWPSavingData = [];
 
@@ -78,15 +103,14 @@ const OverallReactionAnodeCathode = (props) => {
       //console.log((StandardGibbsEnergyOfReactionkJ.toFixed(2)))
 
       let GWPSaving =
-        1 /
-        1000*(
+(
           (GWPp *
             props.concentration *
             props.volume *
             props.efficiency *
             MolarMassOfProduct) /
             (xDash * MolarMassOfSubstrate) -
-            StandardGibbsEnergyOfReactionkJ * 1
+            StandardGibbsEnergyOfReactionkJ * CarbonEmmision
         );
 
       GWPSavingData.push(GWPSaving.toFixed(2));
@@ -142,7 +166,7 @@ const OverallReactionAnodeCathode = (props) => {
       </div>
 
       <div className={classes.HeatMapEnergyPerformance}>
-        <h3>GWP saving </h3>
+        <h3 >Global Warming Potential saving g carbon dioxide eq.</h3>
         <MyHeatMap
           xLabels={props.heatMapContents.xLabels}
           yLabels={props.heatMapContents.yLabels}

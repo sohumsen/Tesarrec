@@ -1,12 +1,12 @@
 import React from 'react'
 
-import MES from '../../../assets/MES schematic 1.jpg'
+import MFC from '../../../../assets/MFC.png'
 
 
-import classes from './MESPic.module.css'
+import classes from './MFCPic.module.css'
 const MESPic=(props)=>(
     <div className={classes.MESPic} style={{height:props.height}}>
-        <img src={MES} alt="MESPic"/>
+        <img src={MFC} alt="MFCPic"/>
     </div>
    
 )

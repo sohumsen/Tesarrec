@@ -7,8 +7,8 @@ const slider=(props)=>(
 
     <div className={classes.slider}>
 
-    <p>{props.displayCaption} : {props.displayValue}</p>
-    <Grid container spacing={0}>
+    <p><i>{props.displayCaption}</i> : {props.displayValue}</p>
+    <Grid container>
       <Grid item>
         <p>{props.lowestVal}</p>
       </Grid>

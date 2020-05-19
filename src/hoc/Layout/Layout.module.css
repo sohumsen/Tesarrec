@@ -6,5 +6,6 @@
     top: 32px;
     padding: 10px;
     background-color: #3c7eb8;
+    scroll-behavior: auto;
 }
 

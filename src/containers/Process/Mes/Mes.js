@@ -1,12 +1,11 @@
 import React, { Component } from "react";
 
 
-import AnodeAndCathodeForm from './Technical/AnodeAndCathodeForm/AnodeAndCathodeForm'
 import classes from './Mes.module.css'
 import Economic from './Economic/Economic'
 import Environmental from './Environmental/Environmental'
 import Social from './Social/Social'
-import HeatMapForm from './Technical/HeatMapForm/HeatMapForm'
+import HeatMapForm from './Technical/HeatMapForm/HeatMapFormMES'
 class Mes extends Component {
   render() {
 

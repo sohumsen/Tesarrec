@@ -1,17 +1,22 @@
 import React, { Component } from "react";
 
 
-class Mfc extends Component {
+import classes from './Mfc.module.css'
 
+import HeatMapForm from './Technical/HeatMapForm/HeatMapFormMFC'
+class MFC extends Component {
   render() {
 
-
+    
     return (
-      <div>
-        <p>Mfc Page</p>
+      <div className={classes.parentContainer}>
+        <h1>Microbial Fuel Cell</h1>
+
+        <HeatMapForm/>
+
       </div>
     );
   }
 }
 
-export default Mfc;
+export default MFC;

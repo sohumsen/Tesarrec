@@ -1,0 +1,8 @@
+.parentContainer {
+  position: relative;
+
+  width: 90%;
+
+  float: left;
+  align-items: center;
+}

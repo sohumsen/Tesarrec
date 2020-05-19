@@ -9,7 +9,7 @@ class LeftContent extends Component{
 
         return(
             <div className={classes.LeftContent}>
-                <p>d</p>
+                <p>Left Content</p>
             </div>
 
         )
