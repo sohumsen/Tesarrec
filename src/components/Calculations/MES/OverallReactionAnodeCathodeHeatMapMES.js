@@ -9,7 +9,6 @@ const OverallReactionAnodeCathode = (props) => {
   //console.log(props.anodeSubstrate)
   //console.log(props.cathodeProduct)
 
-  let CCGT=props.CCGT
 
 
   let CarbonEmmision =
@@ -37,9 +36,9 @@ const OverallReactionAnodeCathode = (props) => {
     props.Other);  let ProductionRategData = [];
   let GibbsEnergyData = [];
   let GWPSavingData = [];
-
+  props.heatMapContents.yLabels.forEach((Yelement) => {
   props.heatMapContents.xLabels.forEach((Xelement) => {
-    props.heatMapContents.yLabels.forEach((Yelement) => {
+    
       let AnodeData = ReadAnodeJSON(Xelement);
       //console.log(AnodeData)
       let x = parseInt(AnodeData.value.x);
@@ -64,22 +63,19 @@ const OverallReactionAnodeCathode = (props) => {
 
       let xDash = c / x;
       let m = o - (c * z) / x;
-      let mDash = 0.5 * (-h + (c * y) / x + 2 * o - (2 * c * z) / x);
+      //let mDash = 0.5 * (-h + (c * y) / x + 2 * o - (2 * c * z) / x);
 
       let StandardGibbsEnergyOfReactionProductkJMol =
         GibbsProductInitial - xDash * GibbsSubstrateInitial - m * -237.13;
 
-      let StandardGibbsEnergyOfFormationOfWater = -237.13;
-      let StandardGibbsEnergyOfReactionSubstratekJMol =
-        (1 / xDash) * StandardGibbsEnergyOfReactionProductkJMol;
+      //let StandardGibbsEnergyOfFormationOfWater = -237.13;
+      //let StandardGibbsEnergyOfReactionSubstratekJMol =(1 / xDash) * StandardGibbsEnergyOfReactionProductkJMol;
 
       let MolarMassOfProduct = 12 * c + h + 16 * o;
       let MolarMassOfSubstrate = 12 * x + y + 16 * z;
 
-      let StandardGibbsEnergyOfReactionProductkJg =
-        (1 / MolarMassOfProduct) * StandardGibbsEnergyOfReactionProductkJMol;
-      let StandardGibbsEnergyOfReactionSubstratekJg =
-        (1 / MolarMassOfProduct) * StandardGibbsEnergyOfReactionSubstratekJMol;
+      //let StandardGibbsEnergyOfReactionProductkJg =(1 / MolarMassOfProduct) * StandardGibbsEnergyOfReactionProductkJMol;
+      //let StandardGibbsEnergyOfReactionSubstratekJg =(1 / MolarMassOfProduct) * StandardGibbsEnergyOfReactionSubstratekJMol;
 
       let StandardGibbsEnergyOfReactionkJ =
         ((props.volume * props.efficiency) / (xDash * MolarMassOfSubstrate)) *
@@ -114,8 +110,10 @@ const OverallReactionAnodeCathode = (props) => {
         );
 
       GWPSavingData.push(GWPSaving.toFixed(2));
+
     });
   });
+
 
   let TwoDProductionRategData = [];
 
@@ -137,7 +135,9 @@ const OverallReactionAnodeCathode = (props) => {
     TwoDGWPSavingyData.push(
       GWPSavingData.splice(0, props.heatMapContents.xLabels.length)
     );
-  //console.log(energyObj)
+
+
+    //console.log(energyObj)
 
   //console.log("heat map contents   "+ props.heatMapContents)
   return (
@@ -166,7 +166,7 @@ const OverallReactionAnodeCathode = (props) => {
       </div>
 
       <div className={classes.HeatMapEnergyPerformance}>
-        <h3 >Global Warming Potential saving g carbon dioxide eq.</h3>
+        <h3 >Global Warming Potential saving g CO&#8322; eq.</h3>
         <MyHeatMap
           xLabels={props.heatMapContents.xLabels}
           yLabels={props.heatMapContents.yLabels}

@@ -2,12 +2,23 @@
 volumes only go up in 10s DONE
 add tests DONE
 link  the  references DONE
+turn the heatmap around DONE
+pass eqn from mfc DONE
+add all the differential qn methods DONE
 
-make request to another carbon footprint page elexon or someone
+
+
+
+make request to another carbon footprint page elexon or someone NOT NEEDED
+
 get a better heat map package
 when all values are 0 the colours are still there so find a better normalisation
 find a heatmap normalisation
 Write code to convert $data/xls/* xls to $data/json/*
+add the ui tabs
+enlarge pic on click
+logs and trig dont work
+
 
 Audit
 ========

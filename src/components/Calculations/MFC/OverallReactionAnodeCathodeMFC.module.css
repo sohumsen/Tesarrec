@@ -9,6 +9,7 @@
 .HeatMapProductionRate{
     float: left;
     width: 50%;
+    color: rgb(208, 226, 226);
 }
 
 .HeatMapEnergyPerformance{

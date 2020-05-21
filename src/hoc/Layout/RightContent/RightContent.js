@@ -4,7 +4,6 @@ import MESPic from "../../../components/UI/MESandMFCPics/MESPic/MESPic";
 import MFCPic from "../../../components/UI/MESandMFCPics/MFCPic/MFCPic";
 
 import MySliderContainer from "../../../components/UI/SliderContainer/SliderContainer";
-import MySlider from "../../../components/UI/SliderContainer/Slider/Slider";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Switch from "@material-ui/core/Switch";
 import { withStyles } from "@material-ui/core/styles";

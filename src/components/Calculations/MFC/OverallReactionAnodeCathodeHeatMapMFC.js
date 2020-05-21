@@ -1,7 +1,8 @@
 import React from "react";
 
 import ReadAnodeJSON from "../../Excel/Anode/ReadAndodeJSON";
-import ReadCathodeJSON from "../../Excel/Cathode/ReadCathodeJSON";
+//import ReadCathodeJSON from "../../Excel/Cathode/ReadCathodeJSON";
+
 
 import MyHeatMap from "../../UI/MyHeatMap/MyHeatMap";
 import classes from "./OverallReactionAnodeCathodeMFC.module.css";
@@ -45,7 +46,7 @@ const OverallReactionAnodeCathode = (props) => {
 
     let xDash = 1 / x;
     let nDash = y / (2 * x);
-    let n = 0.5 * (2 + y / (2 * x) - z / x);
+    //let n = 0.5 * (2 + y / (2 * x) - z / x);
 
     let MolarMassOfSubstrate = 12 * x + y + 16 * z;
 
@@ -58,23 +59,9 @@ const OverallReactionAnodeCathode = (props) => {
 
     GibbsEnergyData.push(StandardGibbsEnergyOfReactionkJ.toFixed(2));
 
-    let GWPsaving =
-      (11.56 *
-        props.concentration *
-        props.volume *
-        props.efficiency *
-        n *
-        x *
-        32 *
-        CarbonEmmision) /
-        MolarMassOfSubstrate -
-      (props.concentration *
-        props.volume *
-        props.efficiency *
-        (-394.36 -
-          xDash * GibbsSubstrateInitial -
-          nDash * -237.13 * CarbonEmmision)) /
-        (xDash * MolarMassOfSubstrate);
+
+
+    let GWPsaving= -StandardGibbsEnergyOfReactionkJ*CarbonEmmision
 
     GWPSavingData.push(GWPsaving.toFixed(2));
 
@@ -114,7 +101,7 @@ const OverallReactionAnodeCathode = (props) => {
       </div>
 
       <div className={classes.HeatMapEnergyPerformance}>
-        <h3>Global Warming Potential saving g carbon dioxide eq.</h3>
+        <h3>Global Warming Potential saving g CO&#8322; eq.</h3>
         <MyHeatMap
           xLabels={props.heatMapContents.xLabels}
           yLabels={["GWP"]}

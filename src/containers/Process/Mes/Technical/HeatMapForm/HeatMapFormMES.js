@@ -27,7 +27,7 @@ class HeatMapForm extends Component {
       data: null,
     },
 
-    AnodeSubstrateChemical: "Ethanol",
+    AnodeSubstrateChemical: "Acetate",
     CathodeProductChemical: "Acetic acid",
     chosenValue: "",
 
@@ -117,8 +117,8 @@ class HeatMapForm extends Component {
             cathodeProduct={this.state.CathodeProductChemical}
             anodeSubstrate={this.state.AnodeSubstrateChemical}
             concentration={this.state.AnodeSubstrateConcentration}
-            volume={this.state.Volume * 10}
-            efficiency={this.state.efficiencyValue / 100}
+            volume={this.state.Volume }
+            efficiency={this.state.efficiencyValue }
             heatMapContents={this.state.HeatMapState}
             HeatMapChangedOnClick={this.HeatMapChangedOnClick}
             CCGT={this.state.CCGT}

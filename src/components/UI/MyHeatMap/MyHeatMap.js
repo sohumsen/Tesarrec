@@ -1,28 +1,28 @@
 import React from "react";
 import HeatMap from "react-heatmap-grid";
 
-const consoleLogger = (background, value, min, max, data, x, y) => {
-  console.log(background, value, min, max, data, x, y);
+//const consoleLogger = (background, value, min, max, data, x, y) => {
+ // console.log(background, value, min, max, data, x, y);
   //console.log(1 - (max - value) / (max - min))
 
-  return null;
-};
+ // return null;
+//};
 
 const MyHeatMap = (props) => {
-  let maxRow = props.data.map(function (row) {
-    return Math.max.apply(Math, row);
-  });
-  let max = Math.max.apply(null, maxRow);
+  //let maxRow = props.data.map(function (row) {
+  //  return Math.max.apply(Math, row);
+  //});
+  //let max = Math.max.apply(null, maxRow);
 
-  let minRow = props.data.map(function (row) {
-    return Math.min.apply(Math, row);
-  });
-  let min = Math.min.apply(null, minRow);
+  //let minRow = props.data.map(function (row) {
+  //  return Math.min.apply(Math, row);
+  //});
+  //let min = Math.min.apply(null, minRow);
 
-  let transparrency = 0;
-  if (max !== min) {
-    transparrency = 1 - (max - 10) / (max - min);
-  }
+  //let transparrency = 0;
+  //if (max !== min) {
+  //  transparrency = 1 - (max - 10) / (max - min);
+  //}
 
   let data = props.data;
 
