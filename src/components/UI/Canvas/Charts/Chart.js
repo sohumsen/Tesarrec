@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import MyMathJax from '../../../UI/Math/MyMathJax'
 import CanvasJSReact from '../../../../assets/canvasjs.react';
+import { renderToString } from 'react-dom/server'
 //import classes from './Chart.module.css';
 //import FractionDisplay from '../../Math/Math'
 var CanvasJSChart = CanvasJSReact.CanvasJSChart;
@@ -12,7 +13,7 @@ class LineChart extends Component {
 			exportEnabled: true,
 			theme: "light2", // "light1", "dark1", "dark2"
 			title:{
-				text: "dy/dx= "+this.props.eqn,
+				text: "dy/dx= "+this.props.eqn
 			},
 			axisY: {
 				title: "Y",
@@ -21,6 +22,7 @@ class LineChart extends Component {
 				title: "X",
 			},
 			backgroundColor: "white",
+			zoomEnabled: true, 
 			data: [{
 				type: "line",
 				name: "Euler",
@@ -52,10 +54,11 @@ class LineChart extends Component {
 		}
 		return (
 		<div style={{width:"500px"}}>
+			<MyMathJax eqn={this.props.eqn}/>
 
 
 			
-		<MyMathJax tex={ `\(frac{4}{3})`}/>
+		
 			<CanvasJSChart options = {options} 
 				/* onRef={ref => this.chart = ref} */
 			/>

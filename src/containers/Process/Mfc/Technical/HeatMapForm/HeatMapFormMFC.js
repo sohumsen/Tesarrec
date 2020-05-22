@@ -5,6 +5,7 @@ import RightContent from "../../../../../hoc/Layout/RightContent/RightContent";
 import classes from "./HeatMapFormMFC.module.css";
 import OverallReactionAnodeCathode from "../../../../../components/Calculations/MFC/OverallReactionAnodeCathodeHeatMapMFC";
 import Method from "../../../../../components/Calculations/Calculus/Method/Method";
+import Input from "../../../../../components/UI/DEAD/Input/Input";
 class HeatMapFormMFC extends Component {
   state = {
     HeatMapState: {
@@ -46,6 +47,9 @@ class HeatMapFormMFC extends Component {
     Hydroelectric: 100,
     PumpedHydro: 100,
     Other: 100,
+
+    DyByDxEquals: "e^x",
+    SubmittedDyByDxEquals:"e^x",
   };
 
   HeatMapChangedOnClick = (x, y, value) => {
@@ -68,10 +72,18 @@ class HeatMapFormMFC extends Component {
     let { value, min, max } = event.target;
     value = Math.max(Number(min), Math.min(Number(max), Number(value)));
 
-    console.log(value, min, max);
-
     this.setState({ [name]: value });
   };
+  EqnInputHandleChange = (event) => {
+
+    this.setState({ DyByDxEquals: event.target.value });
+  };
+
+  handleSubmit=(event)=>{
+    event.preventDefault()
+    
+    this.setState({SubmittedDyByDxEquals:this.state.DyByDxEquals})
+  }
 
   render() {
     return (
@@ -122,13 +134,22 @@ class HeatMapFormMFC extends Component {
             PumpedHydro={this.state.PumpedHydro}
             Other={this.state.Other}
           />
-          <Method
-            h={0.2}
-            X0={0}
-            Y0={0}
-            eqn={"0.9*x/(0.103+x)"}
-          />
+          <form onSubmit={this.handleSubmit}>
+            <input
+              value={this.state.DyByDxEquals}
+              type="text"
+              onChange={this.EqnInputHandleChange}
+            ></input>
+            <input type="submit" value="Submit" />
+          </form>
 
+          <Method
+            h={0.4}
+            X0={-5}
+            Y0={-5}
+            numberOfCycles={10}
+            eqn={this.state.SubmittedDyByDxEquals}
+          />
         </div>
       </div>
     );

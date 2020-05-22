@@ -2,19 +2,37 @@ import React from "react";
 import MyChart from "../../../UI/Canvas/Charts/Chart";
 import classes from "./Method.module.css";
 import Table from "../../../UI/Table/Table";
-//import {atan2, chain, derivative, e, evaluate, log, pi, pow, round, sqrt, sin} from 'mathjs'
+import {
+  atan2,
+  chain,
+  derivative,
+  e,
+  evaluate,
+  log,
+  pi,
+  pow,
+  round,
+  sqrt,
+  parse,
+  sin,
+  simplify,
+} from "mathjs";
 
 //DyByDx= x+3y
 
 const Method = (props) => {
-  //let eqn = window[props.eqn]
+  const f = parse(props.eqn);
+  const simplified = simplify(f);
+
   //console.log(this[props.eqn])
   //console.log(eval(props.eqn));
 
   const DyByDxFunc = (x, y) => {
-
     // eslint-disable-next-line
-    return eval(props.eqn);
+
+
+
+    return simplified.evaluate({ x: x ,y:y});
   };
   const SolveForRthMidpoint = (X0Y0hArr) => {
     let k1 = X0Y0hArr[2] * DyByDxFunc(X0Y0hArr[0], X0Y0hArr[1]);
@@ -68,26 +86,32 @@ const Method = (props) => {
   };
 
   const ShowGraph = (Euler, Midpoint, RungeKutta) => {
-
+    console.log(Euler)
     return (
       <div className={classes.Container}>
         <div className={classes.Chart}>
-          <MyChart EulerData={Euler} MidpointData={Midpoint} RungeKuttaData={RungeKutta} eqn={props.eqn} />
+          <MyChart
+            EulerData={Euler}
+            MidpointData={Midpoint}
+            RungeKuttaData={RungeKutta}
+            eqn={props.eqn}
+          />
         </div>
+        
         <div className={classes.Table}>
           <Table rowData={Euler} />
-          </div>
-          <div className={classes.Table}><Table rowData={Midpoint} /></div>
-          <div className={classes.Table}><Table rowData={RungeKutta} /></div>
-          
-
-
-        
+        </div>
+        <div className={classes.Table}>
+          <Table rowData={Midpoint} />
+        </div>
+        <div className={classes.Table}>
+          <Table rowData={RungeKutta} />
+        </div>
       </div>
     );
   };
 
-  const FormatArray=(arr)=>{
+  const FormatArray = (arr) => {
     let newCompletedGid = [];
 
     arr.forEach((element) => {
@@ -95,21 +119,19 @@ const Method = (props) => {
         newCompletedGid.push(e.toFixed(2));
       });
     });
-  
+
     let TwoDcompletedGrid = [];
-  
+
     while (newCompletedGid.length)
       TwoDcompletedGrid.push(newCompletedGid.splice(0, 3));
-
 
     let GraphDataXY = [];
 
     TwoDcompletedGrid.forEach((element) =>
-        GraphDataXY.push({ x: parseFloat(element[0]), y: parseFloat(element[1]) })
-      );
-    return GraphDataXY
-
-  }
+      GraphDataXY.push({ x: parseFloat(element[0]), y: parseFloat(element[1]) })
+    );
+    return GraphDataXY;
+  };
 
   let Y0 = parseFloat(props.Y0);
   let X0 = parseFloat(props.X0);
@@ -122,26 +144,20 @@ const Method = (props) => {
 
   let CompletedGridRungeKutta = [];
 
-
   //SolveForRth(SolveForRth(Y0,h,X0))
-  for (let i = 1; i <= 100; i++) {
-    CompletedGridEuler.push(recursive(i, X0Y0hArr,"Euler"));
-    CompletedGridMidpoint.push(recursive(i, X0Y0hArr,"Midpoint"));
-    CompletedGridRungeKutta.push(recursive(i, X0Y0hArr,"RungeKutta"));
-
-
+  for (let i = 1; i <= props.numberOfCycles; i++) {
+    CompletedGridEuler.push(recursive(i, X0Y0hArr, "Euler"));
+    CompletedGridMidpoint.push(recursive(i, X0Y0hArr, "Midpoint"));
+    CompletedGridRungeKutta.push(recursive(i, X0Y0hArr, "RungeKutta"));
   }
 
-  FormatArray(CompletedGridEuler)
-  console.log(FormatArray(CompletedGridEuler))
+  FormatArray(CompletedGridEuler);
 
-
-
-  
-
- 
-
-  return ShowGraph(FormatArray(CompletedGridEuler), FormatArray(CompletedGridMidpoint), FormatArray(CompletedGridRungeKutta));
+  return ShowGraph(
+    FormatArray(CompletedGridEuler),
+    FormatArray(CompletedGridMidpoint),
+    FormatArray(CompletedGridRungeKutta)
+  );
 };
 
 export default Method;

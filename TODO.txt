@@ -5,6 +5,12 @@ link  the  references DONE
 turn the heatmap around DONE
 pass eqn from mfc DONE
 add all the differential qn methods DONE
+allow zooming into chart DONE
+latex math DONE
+logs and trig dont work DONE
+alternative to eval DONE
+
+
 
 
 
@@ -17,8 +23,9 @@ find a heatmap normalisation
 Write code to convert $data/xls/* xls to $data/json/*
 add the ui tabs
 enlarge pic on click
-logs and trig dont work
+input box for eqn
 
+Debug window for table
 
 Audit
 ========
