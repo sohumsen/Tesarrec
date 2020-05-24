@@ -12,11 +12,11 @@ class MyMathJax extends React.Component {
             <MathJax.Provider>
                 <div>
 
-                    <MathJax.Node formula={`\\frac{\\mathrm{d} y}{\\mathrm{d} x}=`+this.props.eqn }>
+                    <MathJax.Node formula={`\\frac{\\mathrm{d} y}{\\mathrm{d} x}=`+this.props.eqn }/>
                     
 
 
-                    </MathJax.Node>
+                    
 
                 </div>
             </MathJax.Provider>

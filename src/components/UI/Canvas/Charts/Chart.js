@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import MyMathJax from '../../../UI/Math/MyMathJax'
 import CanvasJSReact from '../../../../assets/canvasjs.react';
 import { renderToString } from 'react-dom/server'
 //import classes from './Chart.module.css';
@@ -54,7 +53,6 @@ class LineChart extends Component {
 		}
 		return (
 		<div style={{width:"500px"}}>
-			<MyMathJax eqn={this.props.eqn}/>
 
 
 			

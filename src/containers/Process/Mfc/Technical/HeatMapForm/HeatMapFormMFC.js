@@ -4,8 +4,7 @@ import LeftContent from "../../../../../hoc/Layout/LeftContent/LeftContent";
 import RightContent from "../../../../../hoc/Layout/RightContent/RightContent";
 import classes from "./HeatMapFormMFC.module.css";
 import OverallReactionAnodeCathode from "../../../../../components/Calculations/MFC/OverallReactionAnodeCathodeHeatMapMFC";
-import Method from "../../../../../components/Calculations/Calculus/Method/Method";
-import Input from "../../../../../components/UI/DEAD/Input/Input";
+
 class HeatMapFormMFC extends Component {
   state = {
     HeatMapState: {
@@ -48,8 +47,7 @@ class HeatMapFormMFC extends Component {
     PumpedHydro: 100,
     Other: 100,
 
-    DyByDxEquals: "e^x",
-    SubmittedDyByDxEquals:"e^x",
+
   };
 
   HeatMapChangedOnClick = (x, y, value) => {
@@ -60,9 +58,6 @@ class HeatMapFormMFC extends Component {
     });
   };
 
-  componentDidMount() {
-    //https://api.bmreports.com/BMRS/B1720/v1?APIKey=op174l2qrpu3s7t&SettlementDate=<SettlementDate>&Period=<Period>&ServiceType=<xml/csv>
-  }
 
   SliderhandleChange = (name) => (event, value) => {
     this.setState({ [name]: value });
@@ -74,16 +69,7 @@ class HeatMapFormMFC extends Component {
 
     this.setState({ [name]: value });
   };
-  EqnInputHandleChange = (event) => {
-
-    this.setState({ DyByDxEquals: event.target.value });
-  };
-
-  handleSubmit=(event)=>{
-    event.preventDefault()
-    
-    this.setState({SubmittedDyByDxEquals:this.state.DyByDxEquals})
-  }
+ 
 
   render() {
     return (
@@ -134,22 +120,7 @@ class HeatMapFormMFC extends Component {
             PumpedHydro={this.state.PumpedHydro}
             Other={this.state.Other}
           />
-          <form onSubmit={this.handleSubmit}>
-            <input
-              value={this.state.DyByDxEquals}
-              type="text"
-              onChange={this.EqnInputHandleChange}
-            ></input>
-            <input type="submit" value="Submit" />
-          </form>
-
-          <Method
-            h={0.4}
-            X0={-5}
-            Y0={-5}
-            numberOfCycles={10}
-            eqn={this.state.SubmittedDyByDxEquals}
-          />
+        
         </div>
       </div>
     );

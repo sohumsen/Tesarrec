@@ -1,7 +1,7 @@
 import React from "react";
-import MyChart from "../../../UI/Canvas/Charts/Chart";
-import classes from "./Method.module.css";
-import Table from "../../../UI/Table/Table";
+import MyChart from "../../UI/Canvas/Charts/Chart";
+import classes from "./SolveDiffEquations.module.css";
+
 import {
   atan2,
   chain,
@@ -20,19 +20,20 @@ import {
 
 //DyByDx= x+3y
 
-const Method = (props) => {
+const SolveDiffEquations = (props) => {
+  /**
+   * A method component that takes in a equation and outputs a chart
+   */
   const f = parse(props.eqn);
   const simplified = simplify(f);
 
-  //console.log(this[props.eqn])
+  console.log('caling',props.eqn)
   //console.log(eval(props.eqn));
 
   const DyByDxFunc = (x, y) => {
     // eslint-disable-next-line
 
-
-
-    return simplified.evaluate({ x: x ,y:y});
+    return simplified.evaluate({ x: x, y: y });
   };
   const SolveForRthMidpoint = (X0Y0hArr) => {
     let k1 = X0Y0hArr[2] * DyByDxFunc(X0Y0hArr[0], X0Y0hArr[1]);
@@ -86,7 +87,7 @@ const Method = (props) => {
   };
 
   const ShowGraph = (Euler, Midpoint, RungeKutta) => {
-    console.log(Euler)
+    console.log(Euler);
     return (
       <div className={classes.Container}>
         <div className={classes.Chart}>
@@ -97,8 +98,9 @@ const Method = (props) => {
             eqn={props.eqn}
           />
         </div>
-        
-        <div className={classes.Table}>
+
+        {/*
+          <div className={classes.Table}>
           <Table rowData={Euler} />
         </div>
         <div className={classes.Table}>
@@ -107,6 +109,7 @@ const Method = (props) => {
         <div className={classes.Table}>
           <Table rowData={RungeKutta} />
         </div>
+        */}
       </div>
     );
   };
@@ -160,4 +163,4 @@ const Method = (props) => {
   );
 };
 
-export default Method;
+export default SolveDiffEquations;

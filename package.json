@@ -21,6 +21,7 @@
     "react-dom": "^16.13.1",
     "react-heatmap-grid": "^0.8.1",
     "react-mathjax": "^1.0.1",
+    "react-mathquill": "^0.2.5",
     "react-router-dom": "^5.1.2",
     "react-scripts": "3.4.1",
     "read-excel-file": "^4.0.6",

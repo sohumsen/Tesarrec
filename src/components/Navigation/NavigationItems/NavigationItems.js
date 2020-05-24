@@ -10,6 +10,8 @@ const navigationItems=(props)=>(
 
 
         <Dropdown>
+            <NavigationItem link="/process/dynamic">Dynamic</NavigationItem> 
+
             <NavigationItem link="/process/mfc">MFC</NavigationItem> 
             <NavigationItem link="/process/mes">MES</NavigationItem> 
         </Dropdown>
