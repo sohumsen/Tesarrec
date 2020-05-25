@@ -2,21 +2,7 @@ import React from "react";
 import MyChart from "../../UI/Canvas/Charts/Chart";
 import classes from "./SolveDiffEquations.module.css";
 
-import {
-  atan2,
-  chain,
-  derivative,
-  e,
-  evaluate,
-  log,
-  pi,
-  pow,
-  round,
-  sqrt,
-  parse,
-  sin,
-  simplify,
-} from "mathjs";
+import { parse, simplify } from "mathjs";
 
 //DyByDx= x+3y
 
@@ -24,17 +10,16 @@ const SolveDiffEquations = (props) => {
   /**
    * A method component that takes in a equation and outputs a chart
    */
-  const f = parse(props.eqn);
-  const simplified = simplify(f);
+  const simplifiedNormal = simplify(parse(props.eqn));
 
-  console.log('caling',props.eqn)
   //console.log(eval(props.eqn));
 
   const DyByDxFunc = (x, y) => {
     // eslint-disable-next-line
 
-    return simplified.evaluate({ x: x, y: y });
+    return simplifiedNormal.evaluate({ x: x, y: y });
   };
+
   const SolveForRthMidpoint = (X0Y0hArr) => {
     let k1 = X0Y0hArr[2] * DyByDxFunc(X0Y0hArr[0], X0Y0hArr[1]);
     let k2 =
@@ -73,21 +58,20 @@ const SolveDiffEquations = (props) => {
     return [X1, Y1, X0Y0hArr[2]];
   };
 
-  const recursive = (numberOfLoops, X0Y0hArr, method) => {
+  const recursive = (numberOfLoops, Arr, method) => {
     for (let i = 0; i < numberOfLoops; i++) {
       if (method === "RungeKutta") {
-        X0Y0hArr = SolveForRthRungeKutta(X0Y0hArr);
+        Arr = SolveForRthRungeKutta(Arr);
       } else if (method === "Midpoint") {
-        X0Y0hArr = SolveForRthMidpoint(X0Y0hArr);
+        Arr = SolveForRthMidpoint(Arr);
       } else if (method === "Euler") {
-        X0Y0hArr = SolveForRthEuler(X0Y0hArr);
+        Arr = SolveForRthEuler(Arr);
       }
     }
-    return X0Y0hArr;
+    return Arr;
   };
 
   const ShowGraph = (Euler, Midpoint, RungeKutta) => {
-    console.log(Euler);
     return (
       <div className={classes.Container}>
         <div className={classes.Chart}>
@@ -144,7 +128,6 @@ const SolveDiffEquations = (props) => {
 
   let CompletedGridEuler = [];
   let CompletedGridMidpoint = [];
-
   let CompletedGridRungeKutta = [];
 
   //SolveForRth(SolveForRth(Y0,h,X0))
@@ -153,8 +136,6 @@ const SolveDiffEquations = (props) => {
     CompletedGridMidpoint.push(recursive(i, X0Y0hArr, "Midpoint"));
     CompletedGridRungeKutta.push(recursive(i, X0Y0hArr, "RungeKutta"));
   }
-
-  FormatArray(CompletedGridEuler);
 
   return ShowGraph(
     FormatArray(CompletedGridEuler),

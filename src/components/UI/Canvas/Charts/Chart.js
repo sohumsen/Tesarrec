@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import CanvasJSReact from '../../../../assets/canvasjs.react';
-import { renderToString } from 'react-dom/server'
 //import classes from './Chart.module.css';
 //import FractionDisplay from '../../Math/Math'
 var CanvasJSChart = CanvasJSReact.CanvasJSChart;
@@ -11,9 +10,7 @@ class LineChart extends Component {
 			animationEnabled: true,
 			exportEnabled: true,
 			theme: "light2", // "light1", "dark1", "dark2"
-			title:{
-				text: "dy/dx= "+this.props.eqn
-			},
+
 			axisY: {
 				title: "Y",
 			},
