@@ -3,7 +3,7 @@ import classes from './Dropdown.module.css'
 const Dropdown=(props)=>(
 
     <div className={classes.dropdown}>
-        <button className={classes.dropbtn}>Process
+        <button className={classes.dropbtn}>Steady State
         
         </button>
         <div className={classes.dropdowncontent}>

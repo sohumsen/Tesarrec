@@ -9,10 +9,7 @@ allow zooming into chart DONE
 latex math DONE
 logs and trig dont work DONE
 alternative to eval DONE
-
-
-
-
+input box for eqn DONE
 
 
 make request to another carbon footprint page elexon or someone NOT NEEDED
@@ -23,9 +20,23 @@ find a heatmap normalisation
 Write code to convert $data/xls/* xls to $data/json/*
 add the ui tabs
 enlarge pic on click
-input box for eqn
-
 Debug window for table
+
+
+Dynamic Sumultaion
+Grid Font size make it bigger
+Align dx/dt and = 
+Steady State meanus as tabs
+Single ODE vs Coupled ODE vs MFC Modelling vs MES vs COVID 
+make text field bg white with shadow when selected
+change X to t 
+move abc as legend to top
+Reset Deafult 
+In the Coupled ODE solver , have a + sign to add new eqautions and a - sign to remove
+Variable Descfiption of a , b , c has default values from Mama but user can override
+( when user presses submit )
+Alternative chart libs
+
 
 Audit
 ========

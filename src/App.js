@@ -12,7 +12,7 @@ class App extends Component {
   render() {
     let routes = (
       <Switch>
-        <Route path="/process/dynamic" exact component={Dynamic} />
+        <Route path="/dynamic" exact component={Dynamic} />
 
         <Route path="/process/mfc" exact component={Mfc} />
         <Route path="/process/mes" exact component={Mes} />

@@ -90,7 +90,7 @@ const LinearCoupledDiffEquations = (props) => {
     return (
       <div className={classes.Container}>
         <div className={classes.Chart}>
-          <MyChart EulerData={eqn1} MidpointData={eqn2} RungeKuttaData={eqn3} />
+          <MyChart EulerData={eqn1} MidpointData={eqn2} RungeKuttaData={eqn3} LineNames={props.LineNames}/>
         </div>
       </div>
     );

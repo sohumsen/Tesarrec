@@ -76,6 +76,7 @@ const SolveDiffEquations = (props) => {
       <div className={classes.Container}>
         <div className={classes.Chart}>
           <MyChart
+            LineNames={props.LineNames}
             EulerData={Euler}
             MidpointData={Midpoint}
             RungeKuttaData={RungeKutta}

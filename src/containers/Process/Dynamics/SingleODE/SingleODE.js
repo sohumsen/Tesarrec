@@ -3,6 +3,11 @@ import SolveDiffEquations from "../../../../components/Calculations/Method/Solve
 
 import MyMathQuill from "../../../../components/UI/Math/MyMathQuill";
 import { evaluate } from "mathjs";
+import MyButton from "../../../../components/UI/Button/Button";
+import classes from "./SingleODE.module.css";
+import CircularProgress from '@material-ui/core/CircularProgress';
+import SelectInput from "@material-ui/core/Select/SelectInput";
+
 
 class SingleODE extends Component {
   /**
@@ -13,9 +18,10 @@ class SingleODE extends Component {
 
   //y1=a, y2=b,y3=c
   state = {
-    calculate: true,
+    submitted: true,
     SingleDiffChangeableLatex: "e^x",
     SingleDiffChangeableText: "e^x",
+    showSpinner:false,
 
     DyByDxLatex: "\\frac{dy}{dx}=",
   };
@@ -33,27 +39,33 @@ class SingleODE extends Component {
   };
 
   handleMathQuillInputChange = (nameLatex, nameText) => (mathField) => {
+    console.log(mathField.text());
     this.setState({
       [nameLatex]: mathField.latex(),
       [nameText]: mathField.text(),
-      calculate: false,
+      submitted: false,
+      showSpinner:false
     });
   };
 
   handleMathQuillInputSubmit = (event) => {
     event.preventDefault();
-
+    this.setState({showSpinner:true})
     if (this.validateExpression(this.state.SingleDiffChangeableText)) {
-      this.setState({ calculate: true });
+      this.setState({ submitted: true  });
     } else {
       alert("invalid equation");
     }
   };
 
+  componentDidUpdate(){
+    console.log("Now")
+  }
+
   render() {
     return (
-      <div>
-        <h1>Single ODE </h1>
+      <div className={classes.Container}>
+        <div className={classes.Form}>
 
         <form onSubmit={this.handleMathQuillInputSubmit}>
           <MyMathQuill
@@ -64,18 +76,27 @@ class SingleODE extends Component {
               "SingleDiffChangeableText"
             )}
           />
-          <input type="submit" value="Submit" />
-        </form>
+          <div className={classes.ButtonPos}>
+            <MyButton type="submit" value="Submit" />
 
-        {this.state.calculate ? (
+          </div>
+        </form>
+        </div>
+        <div className={classes.Graph}>
+        {this.state.submitted ? (
           <SolveDiffEquations
             h={0.5}
-            X0={-5}
-            Y0={-5}
-            numberOfCycles={20}
+            X0={-12.5}
+            Y0={-12.5}
+            numberOfCycles={50}
             eqn={this.state.SingleDiffChangeableText}
+            LineNames={["Euler", "Midpoint", "Runge Kutta"]}
+
           />
-        ) : null}
+        ) :null}
+        { !this.state.showSpinner ? <CircularProgress/>:null}
+
+      </div>
       </div>
     );
   }
