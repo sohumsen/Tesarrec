@@ -10,6 +10,11 @@ latex math DONE
 logs and trig dont work DONE
 alternative to eval DONE
 input box for eqn DONE
+Dynamic Sumultaion DONE
+Grid Font size make it bigger DONE
+Align dx/dt and = DONE
+Single ODE vs Coupled ODE vs MFC Modelling vs MES vs COVID DONE
+
 
 
 make request to another carbon footprint page elexon or someone NOT NEEDED
@@ -23,11 +28,8 @@ enlarge pic on click
 Debug window for table
 
 
-Dynamic Sumultaion
-Grid Font size make it bigger
-Align dx/dt and = 
-Steady State meanus as tabs
-Single ODE vs Coupled ODE vs MFC Modelling vs MES vs COVID 
+
+Steady State meanus as tabs 
 make text field bg white with shadow when selected
 change X to t 
 move abc as legend to top
