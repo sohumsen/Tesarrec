@@ -14,7 +14,7 @@ const navigationItems=(props)=>(
             <NavigationItem link="/process/mfc">MFC</NavigationItem> 
             <NavigationItem link="/process/mes">MES</NavigationItem> 
         </Dropdown>
-        <NavigationItem link="/dynamic">Dynamic</NavigationItem> 
+        <NavigationItem link="/dynamic">Dynamic Simulation</NavigationItem> 
 
         <NavigationItem link="/reference">Reference</NavigationItem> 
         <NavigationItem link="/contact">Contact</NavigationItem> 

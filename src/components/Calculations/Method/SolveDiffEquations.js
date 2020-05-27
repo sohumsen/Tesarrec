@@ -1,6 +1,5 @@
 import React from "react";
 import MyChart from "../../UI/Canvas/Charts/Chart";
-import classes from "./SolveDiffEquations.module.css";
 
 import { parse, simplify } from "mathjs";
 
@@ -73,14 +72,16 @@ const SolveDiffEquations = (props) => {
 
   const ShowGraph = (Euler, Midpoint, RungeKutta) => {
     return (
-      <div className={classes.Container}>
-        <div className={classes.Chart}>
+      <div>
+        <div >
           <MyChart
             LineNames={props.LineNames}
             EulerData={Euler}
             MidpointData={Midpoint}
             RungeKuttaData={RungeKutta}
             eqn={props.eqn}
+            axisNames={["x", "y"]}
+
           />
         </div>
 

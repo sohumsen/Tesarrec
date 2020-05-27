@@ -15,8 +15,14 @@ export default function CenteredTabs(props) {
         textColor="primary"
         centered
       >
-        <Tab label="ODE Solver" />
-        <Tab label="Linear Coupled" />
+        <Tab label="Single ODE" />
+        <Tab label="Coupled ODE" />
+        <Tab label="MFC Modelling" />
+        <Tab label="MES" />
+        <Tab label="COVID" />
+
+
+
       </Tabs>
     </Paper>
     </div>

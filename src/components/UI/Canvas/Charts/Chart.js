@@ -12,11 +12,13 @@ class LineChart extends Component {
       theme: "light2", // "light1", "dark1", "dark2"
 
       axisY: {
-		title: "Y",
-		
+        title: this.props.axisNames[1],
       },
       axisX: {
-        title: "X",
+        title: this.props.axisNames[0],
+      },
+      legend:{
+        verticalAlign:"top"
       },
       backgroundColor: "white",
       zoomEnabled: true,
@@ -44,6 +46,14 @@ class LineChart extends Component {
 
           toolTipContent: "{x}, {y}",
           dataPoints: this.props.RungeKuttaData,
+        },
+        {
+          type: "line",
+          name: this.props.LineNames[3],
+          showInLegend: true,
+
+          toolTipContent: "{x}, {y}",
+          dataPoints: this.props.Line4Data,
         },
       ],
     };

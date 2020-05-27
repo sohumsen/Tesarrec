@@ -6,7 +6,6 @@
 }
 
 .Form {
-  text-align: center;
   font-size: xx-large;
   float: left;
   width: 50%;
@@ -20,5 +19,7 @@
 
 .ButtonPos {
   position: relative;
+  left: 30%;
   top: 50px;
+  float: left;
 }

@@ -1,12 +1,11 @@
 import React from "react";
-import MyChart from "../../UI/Canvas/Charts/Chart";
-import classes from "./SolveDiffEquations.module.css";
+import MyChart from "../../../UI/Canvas/Charts/Chart";
 
 import { parse, simplify } from "mathjs";
 
 //DyByDx= x+3y
 
-const LinearCoupledDiffEquations = (props) => {
+const LinearCoupledDiffThreeEqn = (props) => {
   /**
    * A method component that takes in a equation and outputs a chart
    */
@@ -88,9 +87,15 @@ const LinearCoupledDiffEquations = (props) => {
 
   const ShowLinearCoupledGraph = (eqn1, eqn2, eqn3) => {
     return (
-      <div className={classes.Container}>
-        <div className={classes.Chart}>
-          <MyChart EulerData={eqn1} MidpointData={eqn2} RungeKuttaData={eqn3} LineNames={props.LineNames}/>
+      <div >
+        <div>
+          <MyChart
+            EulerData={eqn1}
+            MidpointData={eqn2}
+            RungeKuttaData={eqn3}
+            LineNames={props.LineNames}
+            axisNames={["t", ""]}
+          />
         </div>
       </div>
     );
@@ -136,4 +141,4 @@ const LinearCoupledDiffEquations = (props) => {
   return ShowLinearCoupledGraph(EqnArr[0], EqnArr[1], EqnArr[2]);
 };
 
-export default LinearCoupledDiffEquations;
+export default LinearCoupledDiffThreeEqn;

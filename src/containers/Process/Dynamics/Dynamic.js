@@ -13,7 +13,7 @@ class Dynamic extends Component {
    *
    */
   state={
-    choiceValue:0
+    choiceValue:1
   }
   handleTabChange=(event, val)=>{
     console.log(val)

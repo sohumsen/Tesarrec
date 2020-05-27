@@ -5,9 +5,8 @@ import MyMathQuill from "../../../../components/UI/Math/MyMathQuill";
 import { evaluate } from "mathjs";
 import MyButton from "../../../../components/UI/Button/Button";
 import classes from "./SingleODE.module.css";
-import CircularProgress from '@material-ui/core/CircularProgress';
+import CircularProgress from "@material-ui/core/CircularProgress";
 import SelectInput from "@material-ui/core/Select/SelectInput";
-
 
 class SingleODE extends Component {
   /**
@@ -21,7 +20,6 @@ class SingleODE extends Component {
     submitted: true,
     SingleDiffChangeableLatex: "e^x",
     SingleDiffChangeableText: "e^x",
-    showSpinner:false,
 
     DyByDxLatex: "\\frac{dy}{dx}=",
   };
@@ -39,64 +37,67 @@ class SingleODE extends Component {
   };
 
   handleMathQuillInputChange = (nameLatex, nameText) => (mathField) => {
-    console.log(mathField.text());
     this.setState({
       [nameLatex]: mathField.latex(),
       [nameText]: mathField.text(),
       submitted: false,
-      showSpinner:false
     });
   };
 
   handleMathQuillInputSubmit = (event) => {
     event.preventDefault();
-    this.setState({showSpinner:true})
     if (this.validateExpression(this.state.SingleDiffChangeableText)) {
-      this.setState({ submitted: true  });
+      this.setState({ submitted: true });
     } else {
       alert("invalid equation");
     }
   };
 
-  componentDidUpdate(){
-    console.log("Now")
-  }
+  resetForm = (event) => {
+    this.setState({
+      submitted: true,
+      SingleDiffChangeableLatex: "e^x",
+      SingleDiffChangeableText: "e^x",
+    });
+    console.log(this.state.submitted);
+  };
 
   render() {
     return (
       <div className={classes.Container}>
         <div className={classes.Form}>
-
-        <form onSubmit={this.handleMathQuillInputSubmit}>
-          <MyMathQuill
-            firstBit={this.state.DyByDxLatex}
-            latex={this.state.SingleDiffChangeableLatex}
-            onInputChange={this.handleMathQuillInputChange(
-              "SingleDiffChangeableLatex",
-              "SingleDiffChangeableText"
-            )}
-          />
-          <div className={classes.ButtonPos}>
-            <MyButton type="submit" value="Submit" />
-
-          </div>
-        </form>
+          <form onSubmit={this.handleMathQuillInputSubmit}>
+            <MyMathQuill
+              firstBit={this.state.DyByDxLatex}
+              latex={this.state.SingleDiffChangeableLatex}
+              onInputChange={this.handleMathQuillInputChange(
+                "SingleDiffChangeableLatex",
+                "SingleDiffChangeableText"
+              )}
+            />
+            <div className={classes.ButtonPos}>
+              <MyButton type="submit" value="Submit" displayValue="SUBMIT" />
+              <MyButton
+                type="reset"
+                value="Reset"
+                displayValue="RESET"
+                onClick={this.resetForm}
+              />
+            </div>
+          </form>
         </div>
         <div className={classes.Graph}>
-        {this.state.submitted ? (
-          <SolveDiffEquations
-            h={0.5}
-            X0={-12.5}
-            Y0={-12.5}
-            numberOfCycles={50}
-            eqn={this.state.SingleDiffChangeableText}
-            LineNames={["Euler", "Midpoint", "Runge Kutta"]}
-
-          />
-        ) :null}
-        { !this.state.showSpinner ? <CircularProgress/>:null}
-
-      </div>
+          {this.state.submitted ? (
+            <SolveDiffEquations
+              h={0.5}
+              X0={-12.5}
+              Y0={-12.5}
+              numberOfCycles={50}
+              eqn={this.state.SingleDiffChangeableText}
+              LineNames={["Euler", "Midpoint", "Runge Kutta"]}
+            />
+          ) : null}
+        </div>
       </div>
     );
   }

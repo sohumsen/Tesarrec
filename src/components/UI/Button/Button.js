@@ -11,11 +11,13 @@ export default function MyButton(props) {
       <Button
       type={props.type}
       value={props.value}
+      onClick={props.onClick}
+      
 
         variant="contained"
         color="primary"
       >
-        Submit
+        {props.displayValue}
       </Button>
     </div>
   );
