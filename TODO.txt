@@ -26,7 +26,9 @@ Audit
 2. Cleanup Old Folders
 3. WriteUp a project description in Readme.md  . 27/05 - 0/10
 4. Suggested Convention - https://google.github.io/styleguide/jsguide.html
-5. Github Commits
+5. Github Commits  27/5 - Excellent
+6. Test Code - Key modules identified 
+
 
 DONE
 

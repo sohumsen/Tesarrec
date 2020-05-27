@@ -1,0 +1,14 @@
+components ( functional )
+	Calculations
+		MES   * ( next step )
+		MFC   * ( next step )
+	
+	UI
+		Logo  *
+		
+containers ( manages states)
+	diffEqn
+		coupled  *
+		singleODE *
+	MES
+	MFC
