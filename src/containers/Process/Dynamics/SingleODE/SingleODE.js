@@ -3,7 +3,7 @@ import SolveDiffEquations from "../../../../components/Calculations/Method/Solve
 
 import MyMathQuill from "../../../../components/UI/Math/MyMathQuill";
 import { evaluate } from "mathjs";
-import MyButton from "../../../../components/UI/Button/Button";
+import MyButton from "../../../../components/UI/Button/GenericButton";
 import classes from "./SingleODE.module.css";
 
 class SingleODE extends Component {

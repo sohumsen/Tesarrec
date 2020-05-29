@@ -4,8 +4,9 @@ import LinearCoupledDiffTwoEqn from "../../../../components/Calculations/Method/
 import LinearCoupledDiffFourEqn from "../../../../components/Calculations/Method/LinearCoupled/Calcs/LinearCoupledDiffFourEqn";
 import EqnItems from "../../../../components/Calculations/Method/LinearCoupled/Eqns/EqnItems";
 import { evaluate } from "mathjs";
-import MyButton from "../../../../components/UI/Button/Button";
+import MyButton from "../../../../components/UI/Button/GenericButton";
 import classes from "../SingleODE/SingleODE.module.css";
+import InteractiveTextBox from '../../../../components/UI/InteractiveTextBox/InteractiveTextBox'
 
 class LinearCoupled extends Component {
   /**
@@ -17,6 +18,13 @@ class LinearCoupled extends Component {
   //y1=a, y2=b,y3=c
   state = {
     calculate: true,
+    variableDescription:{
+      a:"this is some stuff",
+      b:"this is some stuff",
+      c:"this is some stuff",
+      d:"this is some stuff",
+
+    },
 
     Eqns: [
       {
@@ -246,6 +254,7 @@ class LinearCoupled extends Component {
     return (
       <div className={classes.Container}>
         <div className={classes.Form}>
+        <InteractiveTextBox variableDescriptionObj={this.state.variableDescription} />
           <form onSubmit={this.handleMathQuillInputSubmit}>
             <ul style={{ listStyle: "none" }}>{Eqns}</ul>
             <div className={classes.ButtonPos}>

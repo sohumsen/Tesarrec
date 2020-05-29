@@ -13,7 +13,6 @@ Debug window for table
 
 Steady State meanus as tabs 
 make text field bg white with shadow when selected
-In the Coupled ODE solver , have a + sign to add new eqautions and a - sign to remove
 Variable Descfiption of a , b , c has default values from Mama but user can override
 ( when user presses submit )
 Alternative chart libs
@@ -50,3 +49,4 @@ Single ODE vs Coupled ODE vs MFC Modelling vs MES vs COVID DONE
 change X to t DONE
 move abc as legend to top DONE
 Reset Deafult DONE
+In the Coupled ODE solver , have a + sign to add new eqautions and a - sign to remove DONE
