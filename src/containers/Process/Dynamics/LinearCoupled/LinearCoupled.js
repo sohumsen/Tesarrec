@@ -5,8 +5,8 @@ import LinearCoupledDiffFourEqn from "../../../../components/Calculations/Method
 import EqnItems from "../../../../components/Calculations/Method/LinearCoupled/Eqns/EqnItems";
 import { evaluate } from "mathjs";
 import MyButton from "../../../../components/UI/Button/GenericButton";
-import classes from "../SingleODE/SingleODE.module.css";
-import InteractiveTextBox from '../../../../components/UI/InteractiveTextBox/InteractiveTextBox'
+import classes from "./LinearCoupled.module.css";
+import InteractiveTextBox from "../../../../components/UI/InteractiveTextBox/InteractiveTextBox";
 
 class LinearCoupled extends Component {
   /**
@@ -18,35 +18,41 @@ class LinearCoupled extends Component {
   //y1=a, y2=b,y3=c
   state = {
     calculate: true,
-    variableDescription:{
-      a:"this is some stuff",
-      b:"this is some stuff",
-      c:"this is some stuff",
-      d:"this is some stuff",
-
+    variableDescription: {
+      a: "this is some stuff",
+      b: "this is some stuff",
+      c: "this is some stuff",
+      d: "this is some stuff",
     },
 
     Eqns: [
       {
         id: "qwert",
+        line:"a",
         DByDLatex: "\\frac{da}{dt}=",
         LatexEqn: "-\\frac{0.09ab}{0.103+a}-\\frac{0.84ac}{0.425+a}",
         TextEqn: "-(0.09*a*b)/(0.103+a)-(0.84*a*c)/(0.425+a)",
       },
       {
         id: "yuiop",
+        line:"b",
+
         DByDLatex: "\\frac{db}{dt}=",
         LatexEqn: "\\frac{7.1ab}{0.103+a}-0.142b",
         TextEqn: "(7.1*a*b)/(0.103+a)-0.142*b",
       },
       {
         id: "asdfg",
+        line:"c",
+
         DByDLatex: "\\frac{dc}{dt}=",
         LatexEqn: "\\frac{0.6ac}{0.103+a}-0.0102c",
         TextEqn: "(0.6*a*c)/(0.103+a)-0.0102*c",
       },
       {
         id: "hjklz",
+        line:"d",
+
         DByDLatex: "\\frac{dd}{dt}=",
         LatexEqn: "-\\frac{0.09ab}{0.103+a}-\\frac{0.84ac}{0.425+a}",
         TextEqn: "-(0.09*a*b)/(0.103+a)-(0.84*a*c)/(0.425+a)",
@@ -69,38 +75,36 @@ class LinearCoupled extends Component {
   //\\frac{0.6 \\cdot a \\cdot c}{0.103+a}-(0.0102 \\cdot c)
 
   validateExpression = (expr) => {
-    console.log(this.state.Eqns.length)
-    if (this.state.Eqns.length===4){
+    console.log(this.state.Eqns.length);
+    if (this.state.Eqns.length === 4) {
       try {
         evaluate(expr, { a: 1, b: 1, c: 1, d: 1 });
         return true;
       } catch (error) {
         return false;
       }
-
-    }else if (this.state.Eqns.length===3){
+    } else if (this.state.Eqns.length === 3) {
       try {
         evaluate(expr, { a: 1, b: 1, c: 1 });
         return true;
       } catch (error) {
         return false;
       }
-    }else if (this.state.Eqns.length===2){
+    } else if (this.state.Eqns.length === 2) {
       try {
-        evaluate(expr, { a: 1, b: 1});
+        evaluate(expr, { a: 1, b: 1 });
         return true;
       } catch (error) {
         return false;
       }
-    }else if (this.state.Eqns.length===1){
+    } else if (this.state.Eqns.length === 1) {
       try {
-        evaluate(expr, { a: 1});
+        evaluate(expr, { a: 1 });
         return true;
       } catch (error) {
         return false;
       }
     }
-   
   };
 
   handleMathQuillInputChange = (id) => (mathField) => {
@@ -117,9 +121,8 @@ class LinearCoupled extends Component {
 
     const Eqns = [...this.state.Eqns];
     Eqns[EqnIndex] = Eqn;
-    console.log(Eqns);
 
-    this.setState({ Eqns: Eqns, calculate:false });
+    this.setState({ Eqns: Eqns, calculate: false });
   };
 
   handleMathQuillInputSubmit = (event) => {
@@ -135,8 +138,9 @@ class LinearCoupled extends Component {
 
   removeEqn = (id) => {
     this.setState((prevState) => {
+
       return {
-        calculate:false,
+        calculate: false,
         Eqns: prevState.Eqns.filter((element) => {
           return element.id !== id;
         }),
@@ -216,11 +220,10 @@ class LinearCoupled extends Component {
     this.setState((prevState) => {
       return {
         Eqns: prevState.Eqns.concat(this.nextPossibleEqn(prevState)),
-        calculate:false
+        calculate: false,
       };
     });
   };
-
 
   render() {
     let Eqns = (
@@ -253,67 +256,78 @@ class LinearCoupled extends Component {
 
     return (
       <div className={classes.Container}>
-        <div className={classes.Form}>
-        <InteractiveTextBox variableDescriptionObj={this.state.variableDescription} />
-          <form onSubmit={this.handleMathQuillInputSubmit}>
-            <ul style={{ listStyle: "none" }}>{Eqns}</ul>
-            <div className={classes.ButtonPos}>
-              <MyButton
-                type="button"
-                value="addODE"
-                disabled={this.state.Eqns.length === 4}
-                displayValue="Add ODE"
-                onClick={this.onIncrementEqn}
-              />
-              <MyButton type="submit" value="Submit" displayValue="SUBMIT" />
-              <MyButton
-                type="reset"
-                value="Reset"
-                displayValue="RESET"
-                onClick={this.resetForm}
-              />
-            </div>
-          </form>
+        <form onSubmit={this.handleMathQuillInputSubmit}>
+          <div className={classes.Eqns}>
+            {Eqns}
+            <div className={classes.ButtonContainer}>
+              <div className={classes.Button}>
+                <MyButton
+                  type="button"
+                  value="addODE"
+                  disabled={this.state.Eqns.length === 4}
+                  displayValue="Add ODE"
+                  onClick={this.onIncrementEqn}
+                />
+              </div>
+              <div className={classes.Button}>
+                <MyButton
+                  type="reset"
+                  value="Reset"
+                  displayValue="RESET"
+                  onClick={this.resetForm}
+                />
+              </div>
 
-          <div className={classes.Graph}>
-            {this.state.Eqns.length === 4 && this.state.calculate ? (
-              <LinearCoupledDiffFourEqn
-                h={0.05}
-                numberOfCycles={31}
-                eqn1={this.state.Eqns[0].TextEqn}
-                eqn2={this.state.Eqns[1].TextEqn}
-                eqn3={this.state.Eqns[2].TextEqn}
-                eqn4={this.state.Eqns[3].TextEqn}
-                LineNames={["a", "b", "c", "d"]}
-                a={1}
-                b={0.5}
-                c={1}
-                d={0.5}
-              />
-            ) : this.state.Eqns.length === 2 && this.state.calculate ? (
-              <LinearCoupledDiffTwoEqn
-                h={0.05}
-                numberOfCycles={31}
-                eqn1={this.state.Eqns[0].TextEqn}
-                eqn2={this.state.Eqns[1].TextEqn}
-                LineNames={["a", "b"]}
-                a={1}
-                b={0.5}
-              />
-            ) : this.state.Eqns.length === 3 && this.state.calculate ? (
-              <LinearCoupledDiffThreeEqn
-                h={0.05}
-                numberOfCycles={31}
-                eqn1={this.state.Eqns[0].TextEqn}
-                eqn2={this.state.Eqns[1].TextEqn}
-                eqn3={this.state.Eqns[2].TextEqn}
-                LineNames={["a", "b", "c"]}
-                a={1}
-                b={0.5}
-                c={0.75}
-              />
-            ) : null}
+              <div className={classes.Button}>
+                <MyButton type="submit" value="Submit" displayValue="SUBMIT" />
+              </div>
+            </div>
           </div>
+        </form>
+
+        <div className={classes.Graph}>
+       {/*   <div className={classes.Legend}>
+            <InteractiveTextBox
+              variableDescriptionObj={this.state.variableDescription}
+            />
+    </div>*/}
+          {this.state.Eqns.length === 4 && this.state.calculate ? (
+            <LinearCoupledDiffFourEqn
+              h={0.05}
+              numberOfCycles={31}
+              eqn1={this.state.Eqns[0].TextEqn}
+              eqn2={this.state.Eqns[1].TextEqn}
+              eqn3={this.state.Eqns[2].TextEqn}
+              eqn4={this.state.Eqns[3].TextEqn}
+              LineNames={["a", "b", "c", "d"]}
+              a={1}
+              b={0.5}
+              c={1}
+              d={0.5}
+            />
+          ) : this.state.Eqns.length === 2 && this.state.calculate ? (
+            <LinearCoupledDiffTwoEqn
+              h={0.05}
+              numberOfCycles={31}
+              eqn1={this.state.Eqns[0].TextEqn}
+              eqn2={this.state.Eqns[1].TextEqn}
+              LineNames={["a", "b"]}
+              a={1}
+              b={0.5}
+            />
+          ) : this.state.Eqns.length === 3 && this.state.calculate ? (
+            <LinearCoupledDiffThreeEqn
+              h={0.05}
+              numberOfCycles={31}
+              eqn1={this.state.Eqns[0].TextEqn}
+              eqn2={this.state.Eqns[1].TextEqn}
+              eqn3={this.state.Eqns[2].TextEqn}
+              LineNames={["a", "b", "c"]}
+              a={1}
+              b={0.5}
+              c={0.75}
+            />
+          ) : null}
         </div>
       </div>
     );

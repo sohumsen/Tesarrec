@@ -1,0 +1,31 @@
+.Container {
+  display: inline-block;
+  width: 90%;
+  margin: 5%;
+  height: 450px;
+}
+
+.Eqns {
+  font-size: x-large;
+  width: 50%;
+  float: left;
+  display: block;
+}
+
+.Graph {
+  float: left;
+}
+
+.ButtonContainer {
+  background-color: turquoise;
+}
+
+.Button{
+    float: left;
+    margin-left: 40px;
+}
+
+.Legend{
+    display: inline-block;
+    line-height: 5px;
+}
