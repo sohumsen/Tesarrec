@@ -5,8 +5,6 @@ import MyMathQuill from "../../../../components/UI/Math/MyMathQuill";
 import { evaluate } from "mathjs";
 import MyButton from "../../../../components/UI/Button/Button";
 import classes from "./SingleODE.module.css";
-import CircularProgress from "@material-ui/core/CircularProgress";
-import SelectInput from "@material-ui/core/Select/SelectInput";
 
 class SingleODE extends Component {
   /**

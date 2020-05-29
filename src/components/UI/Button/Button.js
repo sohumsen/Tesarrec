@@ -1,7 +1,6 @@
 import React from "react";
 import Button from "@material-ui/core/Button";
 
-import Icon from "@material-ui/core/Icon";
 
 
 export default function MyButton(props) {
@@ -12,6 +11,7 @@ export default function MyButton(props) {
       type={props.type}
       value={props.value}
       onClick={props.onClick}
+      disabled={props.disabled}
       
 
         variant="contained"
