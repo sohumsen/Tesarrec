@@ -1,10 +1,9 @@
 .Container {
   display: inline-block;
-  height: 400px;
   width: 90%;
   margin: 5%;
+  height: 60vh;
 }
-
 .Form {
   font-size: xx-large;
   float: left;
@@ -18,7 +17,13 @@
 }
 
 .ButtonPos {
-  position: relative;
+  width: fit-content;
+  display: table;
+  margin: 0 auto;
+}
 
-  float: left;
+.Eqn {
+  width: fit-content;
+  display: table;
+  margin: 0 auto;
 }

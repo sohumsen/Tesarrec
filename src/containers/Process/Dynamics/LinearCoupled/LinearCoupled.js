@@ -31,6 +31,7 @@ class LinearCoupled extends Component {
         DByDLatex: "\\frac{da}{dt}=",
         LatexEqn: "-\\frac{0.09ab}{0.103+a}-\\frac{0.84ac}{0.425+a}",
         TextEqn: "-(0.09*a*b)/(0.103+a)-(0.84*a*c)/(0.425+a)",
+        errorMessage: "",
       },
       {
         id: "yuiop",
@@ -39,6 +40,7 @@ class LinearCoupled extends Component {
         DByDLatex: "\\frac{db}{dt}=",
         LatexEqn: "\\frac{7.1ab}{0.103+a}-0.142b",
         TextEqn: "(7.1*a*b)/(0.103+a)-0.142*b",
+        errorMessage: "",
       },
       {
         id: "asdfg",
@@ -47,6 +49,7 @@ class LinearCoupled extends Component {
         DByDLatex: "\\frac{dc}{dt}=",
         LatexEqn: "\\frac{0.6ac}{0.103+a}-0.0102c",
         TextEqn: "(0.6*a*c)/(0.103+a)-0.0102*c",
+        errorMessage: "",
       },
       {
         id: "hjklz",
@@ -55,23 +58,10 @@ class LinearCoupled extends Component {
         DByDLatex: "\\frac{dd}{dt}=",
         LatexEqn: "-\\frac{0.09ab}{0.103+a}-\\frac{0.84ac}{0.425+a}",
         TextEqn: "-(0.09*a*b)/(0.103+a)-(0.84*a*c)/(0.425+a)",
+        errorMessage: "",
       },
     ],
-
-    //Eqn1LinearCoupledDiffLatex:
-    //"-\\frac{0.09ab}{0.103+a}-\\frac{0.84ac}{0.425+a}",
-    //Eqn1LinearCoupledDiffText: "-(0.09*a*b)/(0.103+a)-(0.84*a*c)/(0.425+a)",
-    //Eqn2LinearCoupledDiffLatex: "\\frac{7.1ab}{0.103+a}-0.142b",
-    //Eqn2LinearCoupledDiffText: "(7.1*a*b)/(0.103+a)-0.142*b",
-    //Eqn3LinearCoupledDiffLatex: "\\frac{0.6ac}{0.103+a}-0.0102c",
-    //Eqn3LinearCoupledDiffText: "(0.6*a*c)/(0.103+a)-0.0102*c",
-    //DaByDtLatex: "\\frac{da}{dt}=",
-    //DbByDtLatex: "\\frac{db}{dt}=",
-    //DcByDtLatex: "\\frac{dc}{dt}=",
   };
-  //\\frac{-0.09 \\cdot a \\cdot b}{0.103+a}-\\frac{0.84 \\cdot a \\cdot c}{0.425+a}
-  //\\frac{7.1 \\cdot a \\cdot b}{0.103+a}-(0.142 \\cdot b)
-  //\\frac{0.6 \\cdot a \\cdot c}{0.103+a}-(0.0102 \\cdot c)
 
   validateExpression = (expr, line) => {
     if (this.state.Eqns.length === 4) {
@@ -131,17 +121,46 @@ class LinearCoupled extends Component {
   };
 
   handleMathQuillInputSubmit = (event) => {
+    let valid = [];
     event.preventDefault();
     this.state.Eqns.forEach((elementObj) => {
       if (this.validateExpression(elementObj.TextEqn, elementObj.line)) {
-        this.setState({ calculate: true });
+        valid.push("1");
       } else {
-        alert("invalid equation");
-        this.setState({ calculate: false });
+        valid.push("0");
       }
     });
+    if (valid.includes("0")) {
+      let validIndex = [];
+      for (let i = 0; i < valid.length; i++) {
+        if (valid[i] === "0") validIndex.push(i);
+      }
+      this.showErrorMessage(validIndex);
+
+      this.setState({ calculate: false });
+    } else {
+      this.setState({ calculate: true });
+    }
   };
 
+  showErrorMessage = (arrEqnIndex) => {
+    let Eqns = [...this.state.Eqns];
+
+    arrEqnIndex.forEach((EqnIndex) => {
+      console.log(EqnIndex);
+      let Eqn = {
+        ...this.state.Eqns[EqnIndex],
+      };
+      Eqn.errorMessage = "this one is bad";
+
+      Eqns[EqnIndex] = Eqn;
+      console.log(Eqns);
+    });
+
+    this.setState({ Eqns: Eqns }, () => {
+      console.log(this.state.Eqns);
+    });
+  };
   removeEqn = (id) => {
     this.setState((prevState) => {
       return {
@@ -244,6 +263,63 @@ class LinearCoupled extends Component {
     });
   };
 
+  renderSwitchGraph = (length) => {
+
+
+    switch (length) {
+      case 2:
+        return (
+          <LinearCoupledDiffTwoEqn
+            h={0.05}
+            numberOfCycles={31}
+            eqn1={this.state.Eqns[0].TextEqn}
+            eqn2={this.state.Eqns[1].TextEqn}
+            LineNames={[this.state.Eqns[0].line, this.state.Eqns[1].line]}
+            a={1}
+            b={0.5}
+          />
+        );
+      case 3:
+        return (
+          <LinearCoupledDiffThreeEqn
+            h={0.05}
+            numberOfCycles={31}
+            eqn1={this.state.Eqns[0].TextEqn}
+            eqn2={this.state.Eqns[1].TextEqn}
+            eqn3={this.state.Eqns[2].TextEqn}
+            LineNames={[
+              this.state.Eqns[0].line,
+              this.state.Eqns[1].line,
+              this.state.Eqns[2].line,
+            ]}
+            a={1}
+            b={0.5}
+            c={0.75}
+          />
+        );
+      case 4:
+        return (
+          <LinearCoupledDiffFourEqn
+            h={0.05}
+            numberOfCycles={31}
+            eqn1={this.state.Eqns[0].TextEqn}
+            eqn2={this.state.Eqns[1].TextEqn}
+            eqn3={this.state.Eqns[2].TextEqn}
+            eqn4={this.state.Eqns[3].TextEqn}
+            LineNames={[
+              this.state.Eqns[0].line,
+              this.state.Eqns[1].line,
+              this.state.Eqns[2].line,
+              this.state.Eqns[3].line,
+            ]}
+            a={1}
+            b={0.5}
+            c={1}
+            d={0.5}
+          />
+        );
+    }
+  };
   render() {
     let Eqns = (
       <EqnItems
@@ -290,52 +366,10 @@ class LinearCoupled extends Component {
               variableDescriptionObj={this.state.variableDescription}
             />
     </div>*/}
-          {this.state.Eqns.length === 4 && this.state.calculate ? (
-            <LinearCoupledDiffFourEqn
-              h={0.05}
-              numberOfCycles={31}
-              eqn1={this.state.Eqns[0].TextEqn}
-              eqn2={this.state.Eqns[1].TextEqn}
-              eqn3={this.state.Eqns[2].TextEqn}
-              eqn4={this.state.Eqns[3].TextEqn}
-              LineNames={[
-                this.state.Eqns[0].line,
-                this.state.Eqns[1].line,
-                this.state.Eqns[2].line,
-                this.state.Eqns[3].line,
-              ]}
-              a={1}
-              b={0.5}
-              c={1}
-              d={0.5}
-            />
-          ) : this.state.Eqns.length === 2 && this.state.calculate ? (
-            <LinearCoupledDiffTwoEqn
-              h={0.05}
-              numberOfCycles={31}
-              eqn1={this.state.Eqns[0].TextEqn}
-              eqn2={this.state.Eqns[1].TextEqn}
-              LineNames={[this.state.Eqns[0].line, this.state.Eqns[1].line]}
-              a={1}
-              b={0.5}
-            />
-          ) : this.state.Eqns.length === 3 && this.state.calculate ? (
-            <LinearCoupledDiffThreeEqn
-              h={0.05}
-              numberOfCycles={31}
-              eqn1={this.state.Eqns[0].TextEqn}
-              eqn2={this.state.Eqns[1].TextEqn}
-              eqn3={this.state.Eqns[2].TextEqn}
-              LineNames={[
-                this.state.Eqns[0].line,
-                this.state.Eqns[1].line,
-                this.state.Eqns[2].line,
-              ]}
-              a={1}
-              b={0.5}
-              c={0.75}
-            />
-          ) : null}
+
+          {this.state.calculate
+            ? this.renderSwitchGraph(this.state.Eqns.length)
+            : null}
         </div>
       </div>
     );

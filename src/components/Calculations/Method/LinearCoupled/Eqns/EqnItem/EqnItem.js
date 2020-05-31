@@ -19,6 +19,10 @@ const EqnItem = (props) => {
         onClick={props.removeEqn}
       />
       </div>
+      <div className={classes.ErrorMsg}>
+      <p>{props.error}</p>
+
+      </div>
 
     </div>
   );

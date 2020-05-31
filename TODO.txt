@@ -20,6 +20,7 @@ Alternative chart libs
 error handling
 responsive designs
 change to pqrs
+delte the last eqn and watch
 
 
 

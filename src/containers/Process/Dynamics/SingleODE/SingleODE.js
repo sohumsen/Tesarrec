@@ -65,6 +65,8 @@ class SingleODE extends Component {
       <div className={classes.Container}>
         <div className={classes.Form}>
           <form onSubmit={this.handleMathQuillInputSubmit}>
+            <div className={classes.Eqn}>
+
             <MyMathQuill
               firstBit={this.state.DyByDxLatex}
               latex={this.state.SingleDiffChangeableLatex}
@@ -73,6 +75,8 @@ class SingleODE extends Component {
                 "SingleDiffChangeableText"
               )}
             />
+            </div>
+
             <div className={classes.ButtonPos}>
               <MyButton type="submit" value="Submit" displayValue="SUBMIT" />
               <MyButton
