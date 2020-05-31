@@ -14,16 +14,18 @@ const LinearCoupledDiffTwoEqn = (props) => {
 
   const simplified2 = simplify(parse(props.eqn2));
 
+  let line1=(props.LineNames[0])
+  let line2=(props.LineNames[1])
 
   const DyByDxLinearCoupled = (Y1Y2Y3Arr) => {
     const eqn1Results = simplified1.evaluate({
-      a: Y1Y2Y3Arr[0],
-      b: Y1Y2Y3Arr[1],
+      [line1]: Y1Y2Y3Arr[0],
+      [line2]: Y1Y2Y3Arr[1],
     });
     //console.log("eqn1Results "+eqn1Results,Y1Y2Y3Arr)
     const eqn2Results = simplified2.evaluate({
-      a: Y1Y2Y3Arr[0],
-      b: Y1Y2Y3Arr[1],
+      [line1]: Y1Y2Y3Arr[0],
+      [line2]: Y1Y2Y3Arr[1],
     });
     //console.log("eqn2Results "+eqn2Results,Y1Y2Y3Arr)
 

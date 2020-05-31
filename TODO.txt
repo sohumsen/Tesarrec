@@ -1,5 +1,8 @@
 
 make request to another carbon footprint page elexon or someone NOT NEEDED
+Steady State meanus as tabs NOT NEEDED
+Debug window for table NOT NEEDED
+
 
 get a better heat map package
 when all values are 0 the colours are still there so find a better normalisation
@@ -7,17 +10,16 @@ find a heatmap normalisation
 Write code to convert $data/xls/* xls to $data/json/*
 add the ui tabs
 enlarge pic on click
-Debug window for table
 
 
 
-Steady State meanus as tabs 
 make text field bg white with shadow when selected
 Variable Descfiption of a , b , c has default values from Mama but user can override
 ( when user presses submit )
 Alternative chart libs
-order the eqns by left part
 error handling
+responsive designs
+change to pqrs
 
 
 
@@ -54,3 +56,5 @@ move abc as legend to top DONE
 Reset Deafult DONE
 In the Coupled ODE solver , have a + sign to add new eqautions and a - sign to remove DONE
 cant delete last eqn DONE
+order the eqns by left part DONE
+breaks with 2 eqns DONE

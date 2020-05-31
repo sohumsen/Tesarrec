@@ -4,7 +4,7 @@ import MyMathQuill from '../../../../../UI/Math/MyMathQuill'
 import classes from './EqnItem.module.css'
 const EqnItem = (props) => {
   return (
-    <div className={classes.Container}>
+    <div key={props.id} className={classes.Container}>
       <MyMathQuill
         firstBit={props.DByDLatex}
         latex={props.LatexEqn}

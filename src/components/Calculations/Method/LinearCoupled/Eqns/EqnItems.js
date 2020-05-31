@@ -3,7 +3,7 @@ import EqnItem from "./EqnItem/EqnItem";
 
 const EqnItems = (props) => {
   const disabledRemoveButton = () => {
-    if (props.Eqns.length === 1) {
+    if (props.Eqns.length === 2) {
       return true;
     } else {
       return false;
@@ -20,16 +20,11 @@ const EqnItems = (props) => {
     });
   });
 
-  Eqns.sort((a,b)=>{
-    let keyA= a.line
-    let keyB=b.line
-    
-    return keyA.localeCompare(keyB)
-  })
 
-  return Eqns.map((Eqn) => {
+  return newEqns.map((Eqn) => {
     return (
       <EqnItem
+        id={Eqn.id}
         disabledRemoveButton={disabledRemoveButton()}
         removeEqn={() => props.removeEqn(Eqn.id)}
         DByDLatex={Eqn.DByDLatex}

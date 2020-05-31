@@ -6,7 +6,6 @@ import EqnItems from "../../../../components/Calculations/Method/LinearCoupled/E
 import { evaluate } from "mathjs";
 import MyButton from "../../../../components/UI/Button/GenericButton";
 import classes from "./LinearCoupled.module.css";
-import InteractiveTextBox from "../../../../components/UI/InteractiveTextBox/InteractiveTextBox";
 
 class LinearCoupled extends Component {
   /**
@@ -28,14 +27,14 @@ class LinearCoupled extends Component {
     Eqns: [
       {
         id: "qwert",
-        line:"a",
+        line: "a",
         DByDLatex: "\\frac{da}{dt}=",
         LatexEqn: "-\\frac{0.09ab}{0.103+a}-\\frac{0.84ac}{0.425+a}",
         TextEqn: "-(0.09*a*b)/(0.103+a)-(0.84*a*c)/(0.425+a)",
       },
       {
         id: "yuiop",
-        line:"b",
+        line: "b",
 
         DByDLatex: "\\frac{db}{dt}=",
         LatexEqn: "\\frac{7.1ab}{0.103+a}-0.142b",
@@ -43,7 +42,7 @@ class LinearCoupled extends Component {
       },
       {
         id: "asdfg",
-        line:"c",
+        line: "c",
 
         DByDLatex: "\\frac{dc}{dt}=",
         LatexEqn: "\\frac{0.6ac}{0.103+a}-0.0102c",
@@ -51,7 +50,7 @@ class LinearCoupled extends Component {
       },
       {
         id: "hjklz",
-        line:"d",
+        line: "d",
 
         DByDLatex: "\\frac{dd}{dt}=",
         LatexEqn: "-\\frac{0.09ab}{0.103+a}-\\frac{0.84ac}{0.425+a}",
@@ -74,8 +73,7 @@ class LinearCoupled extends Component {
   //\\frac{7.1 \\cdot a \\cdot b}{0.103+a}-(0.142 \\cdot b)
   //\\frac{0.6 \\cdot a \\cdot c}{0.103+a}-(0.0102 \\cdot c)
 
-  validateExpression = (expr) => {
-    console.log(this.state.Eqns.length);
+  validateExpression = (expr, line) => {
     if (this.state.Eqns.length === 4) {
       try {
         evaluate(expr, { a: 1, b: 1, c: 1, d: 1 });
@@ -85,21 +83,28 @@ class LinearCoupled extends Component {
       }
     } else if (this.state.Eqns.length === 3) {
       try {
-        evaluate(expr, { a: 1, b: 1, c: 1 });
+        evaluate(expr, {
+          [this.state.Eqns[0].line]: 1,
+          [this.state.Eqns[1].line]: 1,
+          [this.state.Eqns[2].line]: 1,
+        });
         return true;
       } catch (error) {
         return false;
       }
     } else if (this.state.Eqns.length === 2) {
       try {
-        evaluate(expr, { a: 1, b: 1 });
+        evaluate(expr, {
+          [this.state.Eqns[0].line]: 1,
+          [this.state.Eqns[1].line]: 1,
+        });
         return true;
       } catch (error) {
         return false;
       }
     } else if (this.state.Eqns.length === 1) {
       try {
-        evaluate(expr, { a: 1 });
+        evaluate(expr, { [this.state.Eqns[0].line]: 1 });
         return true;
       } catch (error) {
         return false;
@@ -128,17 +133,17 @@ class LinearCoupled extends Component {
   handleMathQuillInputSubmit = (event) => {
     event.preventDefault();
     this.state.Eqns.forEach((elementObj) => {
-      if (this.validateExpression(elementObj.TextEqn)) {
+      if (this.validateExpression(elementObj.TextEqn, elementObj.line)) {
         this.setState({ calculate: true });
       } else {
         alert("invalid equation");
+        this.setState({ calculate: false });
       }
     });
   };
 
   removeEqn = (id) => {
     this.setState((prevState) => {
-
       return {
         calculate: false,
         Eqns: prevState.Eqns.filter((element) => {
@@ -155,24 +160,31 @@ class LinearCoupled extends Component {
       Eqns: [
         {
           id: "qwert",
+          line: "a",
           DByDLatex: "\\frac{da}{dt}=",
           LatexEqn: "-\\frac{0.09ab}{0.103+a}-\\frac{0.84ac}{0.425+a}",
           TextEqn: "-(0.09*a*b)/(0.103+a)-(0.84*a*c)/(0.425+a)",
         },
         {
           id: "yuiop",
+          line: "b",
+
           DByDLatex: "\\frac{db}{dt}=",
           LatexEqn: "\\frac{7.1ab}{0.103+a}-0.142b",
           TextEqn: "(7.1*a*b)/(0.103+a)-0.142*b",
         },
         {
           id: "asdfg",
+          line: "c",
+
           DByDLatex: "\\frac{dc}{dt}=",
           LatexEqn: "\\frac{0.6ac}{0.103+a}-0.0102c",
           TextEqn: "(0.6*a*c)/(0.103+a)-0.0102*c",
         },
         {
           id: "hjklz",
+          line: "d",
+
           DByDLatex: "\\frac{dd}{dt}=",
           LatexEqn: "-\\frac{0.09ab}{0.103+a}-\\frac{0.84ac}{0.425+a}",
           TextEqn: "-(0.09*a*b)/(0.103+a)-(0.84*a*c)/(0.425+a)",
@@ -185,24 +197,31 @@ class LinearCoupled extends Component {
     let Eqns = [
       {
         id: "qwert",
+        line: "a",
         DByDLatex: "\\frac{da}{dt}=",
         LatexEqn: "-\\frac{0.09ab}{0.103+a}-\\frac{0.84ac}{0.425+a}",
         TextEqn: "-(0.09*a*b)/(0.103+a)-(0.84*a*c)/(0.425+a)",
       },
       {
         id: "yuiop",
+        line: "b",
+
         DByDLatex: "\\frac{db}{dt}=",
         LatexEqn: "\\frac{7.1ab}{0.103+a}-0.142b",
         TextEqn: "(7.1*a*b)/(0.103+a)-0.142*b",
       },
       {
         id: "asdfg",
+        line: "c",
+
         DByDLatex: "\\frac{dc}{dt}=",
         LatexEqn: "\\frac{0.6ac}{0.103+a}-0.0102c",
         TextEqn: "(0.6*a*c)/(0.103+a)-0.0102*c",
       },
       {
         id: "hjklz",
+        line: "d",
+
         DByDLatex: "\\frac{dd}{dt}=",
         LatexEqn: "-\\frac{0.09ab}{0.103+a}-\\frac{0.84ac}{0.425+a}",
         TextEqn: "-(0.09*a*b)/(0.103+a)-(0.84*a*c)/(0.425+a)",
@@ -233,26 +252,6 @@ class LinearCoupled extends Component {
         handleMathQuillInputChange={this.handleMathQuillInputChange}
       />
     );
-
-    // let ListItems = this.state.Eqns.map((element) => {
-    //   return (
-    //     <div key={element.id}>
-    //       <li>
-    //         <MyMathQuill
-    //           firstBit={element.DByDLatex}
-    //           latex={element.LatexEqn}
-    //           onInputChange={this.handleMathQuillInputChange( element.id)}
-    //         />
-    //         <MyButton
-    //           type="button"
-    //           value="removeEqn"
-    //           displayValue="REMOVEIT"
-    //           onClick={() => this.removeEqn(element.id)}
-    //         />
-    //       </li>
-    //     </div>
-    //   );
-    // });
 
     return (
       <div className={classes.Container}>
@@ -286,7 +285,7 @@ class LinearCoupled extends Component {
         </form>
 
         <div className={classes.Graph}>
-       {/*   <div className={classes.Legend}>
+          {/*   <div className={classes.Legend}>
             <InteractiveTextBox
               variableDescriptionObj={this.state.variableDescription}
             />
@@ -299,7 +298,12 @@ class LinearCoupled extends Component {
               eqn2={this.state.Eqns[1].TextEqn}
               eqn3={this.state.Eqns[2].TextEqn}
               eqn4={this.state.Eqns[3].TextEqn}
-              LineNames={["a", "b", "c", "d"]}
+              LineNames={[
+                this.state.Eqns[0].line,
+                this.state.Eqns[1].line,
+                this.state.Eqns[2].line,
+                this.state.Eqns[3].line,
+              ]}
               a={1}
               b={0.5}
               c={1}
@@ -311,7 +315,7 @@ class LinearCoupled extends Component {
               numberOfCycles={31}
               eqn1={this.state.Eqns[0].TextEqn}
               eqn2={this.state.Eqns[1].TextEqn}
-              LineNames={["a", "b"]}
+              LineNames={[this.state.Eqns[0].line, this.state.Eqns[1].line]}
               a={1}
               b={0.5}
             />
@@ -322,7 +326,11 @@ class LinearCoupled extends Component {
               eqn1={this.state.Eqns[0].TextEqn}
               eqn2={this.state.Eqns[1].TextEqn}
               eqn3={this.state.Eqns[2].TextEqn}
-              LineNames={["a", "b", "c"]}
+              LineNames={[
+                this.state.Eqns[0].line,
+                this.state.Eqns[1].line,
+                this.state.Eqns[2].line,
+              ]}
               a={1}
               b={0.5}
               c={0.75}
