@@ -1,8 +1,16 @@
+### React-tesarrec
+
+This is a webpage that was built in alliance with the University Of Surrey CES Department. It contains Microbial Fuel Cell calculations and graphs. It containes dynamic simulations involving single ODEs and linear coupled ODEs. Fundamentally this site allowed browser based modelling of a variety of scientific models including and not limited to models 
+
+1. Algebraic
+2. Linear ODE
+3. ODE Systems
+4. Differtial + Algebraic systems
+
+
+
+### SDLC = Software Development Life Cycle
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
-
-## Available Scripts
-
-In the project directory, you can run:
 
 ### `npm start`
 
@@ -67,6 +75,4 @@ This section has moved here: https://facebook.github.io/create-react-app/docs/de
 
 This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
 
-### React-tesarrec
 
-This is a webpage that was built in aliance with the University Of Surrey CES Department. It contains Microbial Fuel Cell calculations and graphs. It containes dynamic simulations involving single ODEs and linear coupled ODEs. In future versions, it may contained a infectious diseases related simulation. 

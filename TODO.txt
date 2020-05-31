@@ -1,9 +1,40 @@
 
 make request to another carbon footprint page elexon or someone NOT NEEDED
+
+
+A) 
 Steady State meanus as tabs NOT NEEDED
 Debug window for table NOT NEEDED
+B)
+MENU DESIGN 
+    STeadyState
+        MFC
+        MES
+    Dynamic
+        MFC
+        MES
+        Lab 
+            Single ODE
+            ODE Systems
+            Algebraic+ODEs
+C)
+UI DIV designs
+    GRAPH
+    MODEL
+     1xN column DIV
+     NxN coulumn DIV
+     3 SLIDER COLLECTION DIV
+     10 SLIDER COLLECTION DIVE
+D) Separate Math code from graph code
+E) replace array use with x_0, y_0 syntax
+F) Cover at least the mathmodule
 
-
+reset the error message when there is a good equnation
+chart properties should be a settings
+a) legend position
+b) rounding percision
+Tooltip show line name, round to N decimal 
+make dustmin in line with error message
 get a better heat map package
 when all values are 0 the colours are still there so find a better normalisation
 find a heatmap normalisation
@@ -28,14 +59,16 @@ Audit
 ========
 
 1. Cleanup Dead Files   DONE
-2. Cleanup Old Folders DONE
+2. Cleanup Old Folders  - TBD
+5. Github Commits  27/5 - Excellent
+
 3. WriteUp a project description in Readme.md  . 27/05 - 0/10 DONE
 4. Suggested Convention - https://google.github.io/styleguide/jsguide.html
-5. Github Commits  27/5 - Excellent
-6. Test Code - Key modules identified 
-src\components\Calculations\Method\LinearCoupled\Calcs\LinearCoupledDiffThreeEqn.js
-src\containers\Process\Dynamics\LinearCoupled\LinearCoupled.js
-src\components\Calculations\MFC\OverallReactionAnodeCathodeHeatMapMFC.js
+
+6. Test Code - Key modules identified *New Code Structure needed*
+    src\components\Calculations\Method\LinearCoupled\Calcs\LinearCoupledDiffThreeEqn.js
+    src\containers\Process\Dynamics\LinearCoupled\LinearCoupled.js
+    src\components\Calculations\MFC\OverallReactionAnodeCathodeHeatMapMFC.js
 
 
 DONE

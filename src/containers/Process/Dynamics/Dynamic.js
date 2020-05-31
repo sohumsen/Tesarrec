@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import SingleODE from './SingleODE/SingleODE'
-import LinearCoupled from './LinearCoupled/LinearCoupled'
+import LinearCoupled from './LinearCoupled/CoupledODE'
 import MyTabs from '../../../components/UI/MyTabs/MyTabs'
 
 

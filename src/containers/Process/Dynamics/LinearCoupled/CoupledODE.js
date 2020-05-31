@@ -5,7 +5,7 @@ import LinearCoupledDiffFourEqn from "../../../../components/Calculations/Method
 import EqnItems from "../../../../components/Calculations/Method/LinearCoupled/Eqns/EqnItems";
 import { evaluate } from "mathjs";
 import MyButton from "../../../../components/UI/Button/GenericButton";
-import classes from "./LinearCoupled.module.css";
+import classes from "./CoupledODE.module.css";
 
 class LinearCoupled extends Component {
   /**
