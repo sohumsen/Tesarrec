@@ -66,4 +66,7 @@ This section has moved here: https://facebook.github.io/create-react-app/docs/de
 ### `npm run build` fails to minify
 
 This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
-"# React-tesarrec" 
+
+### React-tesarrec
+
+This is a webpage that was built in aliance with the University Of Surrey CES Department. It contains Microbial Fuel Cell calculations and graphs. It containes dynamic simulations involving single ODEs and linear coupled ODEs. In future versions, it may contained a infectious diseases related simulation. 
