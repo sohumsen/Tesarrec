@@ -97,6 +97,7 @@ class SingleODE extends Component {
               numberOfCycles={50}
               eqn={this.state.SingleDiffChangeableText}
               LineNames={["Euler", "Midpoint", "Runge Kutta"]}
+
             />
           ) : null}
         </div>

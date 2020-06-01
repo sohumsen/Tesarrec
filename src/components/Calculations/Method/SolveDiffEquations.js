@@ -19,7 +19,6 @@ const SolveDiffEquations = (props) => {
     return simplifiedNormal.evaluate({ x: x, y: y });
   };
 
-  arr_0
 
   const SolveForRthMidpoint_READABLE = (x_0, y_0, h) => {
     let k1 = h * DyByDxFunc(x_0, y_0);

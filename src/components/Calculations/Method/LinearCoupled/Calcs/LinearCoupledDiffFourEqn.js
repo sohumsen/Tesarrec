@@ -120,6 +120,8 @@ const LinearCoupledDiffFourEqn = (props) => {
 
             LineNames={props.LineNames}
             axisNames={["t", ""]}
+            horizontalAlign={props.LegendHorizontal}
+            verticalAlign={props.LegendVertical}
           />
         </div>
       </div>

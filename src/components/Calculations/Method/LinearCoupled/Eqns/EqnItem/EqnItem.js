@@ -20,7 +20,7 @@ const EqnItem = (props) => {
       />
       </div>
       <div className={classes.ErrorMsg}>
-      <p>{props.error}</p>
+      {props.error}
 
       </div>
 

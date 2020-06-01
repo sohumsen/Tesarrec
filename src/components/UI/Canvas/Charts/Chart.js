@@ -18,7 +18,8 @@ class LineChart extends Component {
         title: this.props.axisNames[0],
       },
       legend:{
-        verticalAlign:"top"
+        verticalAlign:this.props.verticalAlign,
+        horizontalAlign:this.props.horizontalAlign
       },
       backgroundColor: "white",
       zoomEnabled: true,
@@ -28,7 +29,7 @@ class LineChart extends Component {
           name: this.props.LineNames[0],
           showInLegend: true,
 
-          toolTipContent: "{x}, {y}",
+          toolTipContent: this.props.LineNames[0]+ ": {x}, {y}",
           dataPoints: this.props.EulerData,
         },
         {
@@ -36,7 +37,7 @@ class LineChart extends Component {
           name: this.props.LineNames[1],
           showInLegend: true,
 
-          toolTipContent: "{x}, {y}",
+          toolTipContent: this.props.LineNames[1]+ ": {x}, {y}",
           dataPoints: this.props.MidpointData,
         },
         {
@@ -44,7 +45,7 @@ class LineChart extends Component {
           name: this.props.LineNames[2],
           showInLegend: true,
 
-          toolTipContent: "{x}, {y}",
+          toolTipContent: this.props.LineNames[2]+ ": {x}, {y}",
           dataPoints: this.props.RungeKuttaData,
         },
         {
@@ -52,7 +53,7 @@ class LineChart extends Component {
           name: this.props.LineNames[3],
           showInLegend: true,
 
-          toolTipContent: "{x}, {y}",
+          toolTipContent:this.props.LineNames[3]+ ":  {x}, {y}",
           dataPoints: this.props.Line4Data,
         },
       ],

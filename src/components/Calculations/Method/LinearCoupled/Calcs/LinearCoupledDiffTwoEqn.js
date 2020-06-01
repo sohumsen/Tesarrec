@@ -86,6 +86,8 @@ const LinearCoupledDiffTwoEqn = (props) => {
             MidpointData={eqn2}
             LineNames={props.LineNames}
             axisNames={["t", ""]}
+            horizontalAlign={props.LegendHorizontal}
+            verticalAlign={props.LegendVertical}
           />
         </div>
       </div>

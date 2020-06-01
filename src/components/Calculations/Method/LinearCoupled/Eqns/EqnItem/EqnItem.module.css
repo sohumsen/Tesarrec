@@ -1,15 +1,14 @@
-.RemoveButton{
-    float: right;
-
-
+.RemoveButton {
+  float: right;
+  position: relative;
+  top: -50px;
 }
 
-.Container{
-    margin-bottom: 10%;
+.Container {
+  margin-bottom: 10%;
 }
 
-.ErrorMsg{
-    color: red;
-    font-size: smaller;
-
+.ErrorMsg {
+  color: red;
+  font-size: smaller;
 }

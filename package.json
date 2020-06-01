@@ -5,6 +5,7 @@
   "dependencies": {
     "@material-ui/core": "^4.9.13",
     "@material-ui/icons": "^4.9.1",
+    "@material-ui/lab": "^4.0.0-alpha.54",
     "@nivo/line": "^0.61.1",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.5.0",
@@ -20,6 +21,7 @@
     "react": "^16.13.1",
     "react-chartjs-2": "^2.9.0",
     "react-charts": "^2.0.0-beta.6",
+    "react-device-detect": "^1.12.1",
     "react-dom": "^16.13.1",
     "react-heatmap-grid": "^0.8.1",
     "react-mathjax": "^1.0.1",

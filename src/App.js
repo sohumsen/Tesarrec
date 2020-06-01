@@ -6,7 +6,12 @@ import About from "./containers/About/About";
 import Reference from "./containers/Reference/Reference";
 import Mes from "./containers/Process/Mes/Mes";
 import Mfc from "./containers/Process/Mfc/Mfc";
-import Dynamic from './containers/Process/Dynamics/Dynamic'
+import Dynamic from "./containers/Process/Dynamics/Dynamic";
+import {
+  BrowserView,
+  MobileView,
+
+} from "react-device-detect";
 
 class App extends Component {
   render() {
@@ -24,7 +29,12 @@ class App extends Component {
 
     return (
       <div>
-        <Layout>{routes}</Layout>
+        <BrowserView>
+          <Layout>{routes}</Layout>
+        </BrowserView>
+        <MobileView>
+          <p> go on pc for it to work</p>
+        </MobileView>
       </div>
     );
   }

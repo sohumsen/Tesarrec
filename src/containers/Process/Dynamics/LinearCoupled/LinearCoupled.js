@@ -5,8 +5,9 @@ import LinearCoupledDiffFourEqn from "../../../../components/Calculations/Method
 import EqnItems from "../../../../components/Calculations/Method/LinearCoupled/Eqns/EqnItems";
 import { evaluate } from "mathjs";
 import MyButton from "../../../../components/UI/Button/GenericButton";
-import classes from "./CoupledODE.module.css";
-
+import classes from "./LinearCoupled.module.css";
+import MyErrorMessage from "../../../../../src/components/UI/MyErrorMessage/MyErrorMessage";
+import SettingButton from '../../../../components/UI/Button/SettingButton/SettingButton'
 class LinearCoupled extends Component {
   /**
    * Visual Component that contains the textbox for the equation and calculation outputs
@@ -23,6 +24,10 @@ class LinearCoupled extends Component {
       c: "this is some stuff",
       d: "this is some stuff",
     },
+    graphConfig: {
+      LegendHorizontal: "left",
+      LegendVertical: "top",
+    },
 
     Eqns: [
       {
@@ -31,7 +36,7 @@ class LinearCoupled extends Component {
         DByDLatex: "\\frac{da}{dt}=",
         LatexEqn: "-\\frac{0.09ab}{0.103+a}-\\frac{0.84ac}{0.425+a}",
         TextEqn: "-(0.09*a*b)/(0.103+a)-(0.84*a*c)/(0.425+a)",
-        errorMessage: "",
+        errorMessage: null,
       },
       {
         id: "yuiop",
@@ -40,7 +45,7 @@ class LinearCoupled extends Component {
         DByDLatex: "\\frac{db}{dt}=",
         LatexEqn: "\\frac{7.1ab}{0.103+a}-0.142b",
         TextEqn: "(7.1*a*b)/(0.103+a)-0.142*b",
-        errorMessage: "",
+        errorMessage: null,
       },
       {
         id: "asdfg",
@@ -49,7 +54,7 @@ class LinearCoupled extends Component {
         DByDLatex: "\\frac{dc}{dt}=",
         LatexEqn: "\\frac{0.6ac}{0.103+a}-0.0102c",
         TextEqn: "(0.6*a*c)/(0.103+a)-0.0102*c",
-        errorMessage: "",
+        errorMessage: null,
       },
       {
         id: "hjklz",
@@ -58,7 +63,7 @@ class LinearCoupled extends Component {
         DByDLatex: "\\frac{dd}{dt}=",
         LatexEqn: "-\\frac{0.09ab}{0.103+a}-\\frac{0.84ac}{0.425+a}",
         TextEqn: "-(0.09*a*b)/(0.103+a)-(0.84*a*c)/(0.425+a)",
-        errorMessage: "",
+        errorMessage: null,
       },
     ],
   };
@@ -119,6 +124,7 @@ class LinearCoupled extends Component {
 
     this.setState({ Eqns: Eqns, calculate: false });
   };
+  
 
   handleMathQuillInputSubmit = (event) => {
     let valid = [];
@@ -139,10 +145,26 @@ class LinearCoupled extends Component {
 
       this.setState({ calculate: false });
     } else {
+      this.removeAllErrorMessage();
       this.setState({ calculate: true });
     }
   };
+  removeAllErrorMessage = () => {
+    let Eqns = [...this.state.Eqns];
 
+    for (let i = 0; i < Eqns.length; i++) {
+      let Eqn = {
+        ...this.state.Eqns[i],
+      };
+      Eqn.errorMessage = null;
+
+      Eqns[i] = Eqn;
+    }
+
+    this.setState({ Eqns: Eqns }, () => {
+      console.log(this.state.Eqns);
+    });
+  };
   showErrorMessage = (arrEqnIndex) => {
     let Eqns = [...this.state.Eqns];
 
@@ -151,7 +173,7 @@ class LinearCoupled extends Component {
       let Eqn = {
         ...this.state.Eqns[EqnIndex],
       };
-      Eqn.errorMessage = "this one is bad";
+      Eqn.errorMessage = <MyErrorMessage />;
 
       Eqns[EqnIndex] = Eqn;
       console.log(Eqns);
@@ -171,10 +193,19 @@ class LinearCoupled extends Component {
       };
     });
   };
-
   resetForm = () => {
     this.setState({
       calculate: true,
+      variableDescription: {
+        a: "this is some stuff",
+        b: "this is some stuff",
+        c: "this is some stuff",
+        d: "this is some stuff",
+      },
+      graphConfig: {
+        LegendHorizontal: "left",
+        LegendVertical: "top",
+      },
 
       Eqns: [
         {
@@ -183,6 +214,7 @@ class LinearCoupled extends Component {
           DByDLatex: "\\frac{da}{dt}=",
           LatexEqn: "-\\frac{0.09ab}{0.103+a}-\\frac{0.84ac}{0.425+a}",
           TextEqn: "-(0.09*a*b)/(0.103+a)-(0.84*a*c)/(0.425+a)",
+          errorMessage: null,
         },
         {
           id: "yuiop",
@@ -191,6 +223,7 @@ class LinearCoupled extends Component {
           DByDLatex: "\\frac{db}{dt}=",
           LatexEqn: "\\frac{7.1ab}{0.103+a}-0.142b",
           TextEqn: "(7.1*a*b)/(0.103+a)-0.142*b",
+          errorMessage: null,
         },
         {
           id: "asdfg",
@@ -199,6 +232,7 @@ class LinearCoupled extends Component {
           DByDLatex: "\\frac{dc}{dt}=",
           LatexEqn: "\\frac{0.6ac}{0.103+a}-0.0102c",
           TextEqn: "(0.6*a*c)/(0.103+a)-0.0102*c",
+          errorMessage: null,
         },
         {
           id: "hjklz",
@@ -207,11 +241,11 @@ class LinearCoupled extends Component {
           DByDLatex: "\\frac{dd}{dt}=",
           LatexEqn: "-\\frac{0.09ab}{0.103+a}-\\frac{0.84ac}{0.425+a}",
           TextEqn: "-(0.09*a*b)/(0.103+a)-(0.84*a*c)/(0.425+a)",
+          errorMessage: null,
         },
       ],
     });
   };
-
   nextPossibleEqn = (prevState) => {
     let Eqns = [
       {
@@ -262,10 +296,10 @@ class LinearCoupled extends Component {
       };
     });
   };
-
+  configureChart = () => {
+    alert("does something");
+  };
   renderSwitchGraph = (length) => {
-
-
     switch (length) {
       case 2:
         return (
@@ -277,6 +311,8 @@ class LinearCoupled extends Component {
             LineNames={[this.state.Eqns[0].line, this.state.Eqns[1].line]}
             a={1}
             b={0.5}
+            LegendVertical={this.state.graphConfig.LegendVertical}
+            LegendHorizontal={this.state.graphConfig.LegendHorizontal}
           />
         );
       case 3:
@@ -295,6 +331,8 @@ class LinearCoupled extends Component {
             a={1}
             b={0.5}
             c={0.75}
+            LegendVertical={this.state.graphConfig.LegendVertical}
+            LegendHorizontal={this.state.graphConfig.LegendHorizontal}
           />
         );
       case 4:
@@ -316,6 +354,8 @@ class LinearCoupled extends Component {
             b={0.5}
             c={1}
             d={0.5}
+            LegendVertical={this.state.graphConfig.LegendVertical}
+            LegendHorizontal={this.state.graphConfig.LegendHorizontal}
           />
         );
     }
@@ -356,6 +396,14 @@ class LinearCoupled extends Component {
               <div className={classes.Button}>
                 <MyButton type="submit" value="Submit" displayValue="SUBMIT" />
               </div>
+              <div className={classes.Button}>
+                <SettingButton
+                  type="button"
+                  value="config"
+                  displayValue="CONFIG"
+                  onClick={this.configureChart}
+                />
+              </div>
             </div>
           </div>
         </form>
@@ -371,6 +419,7 @@ class LinearCoupled extends Component {
             ? this.renderSwitchGraph(this.state.Eqns.length)
             : null}
         </div>
+        
       </div>
     );
   }

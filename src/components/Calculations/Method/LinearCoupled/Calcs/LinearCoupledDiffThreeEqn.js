@@ -99,6 +99,8 @@ const LinearCoupledDiffThreeEqn = (props) => {
             RungeKuttaData={eqn3}
             LineNames={props.LineNames}
             axisNames={["t", ""]}
+            horizontalAlign={props.LegendHorizontal}
+            verticalAlign={props.LegendVertical}
           />
         </div>
       </div>

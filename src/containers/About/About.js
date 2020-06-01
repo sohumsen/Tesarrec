@@ -8,7 +8,7 @@ class About extends Component {
 
     return (
       <div>
-        <p>About Page</p>
+        <h1>About Page</h1>
         <p>Lorem ipsum dolor sit amet, te dolor homero eos, ea repudiare reprimique sea. Usu mandamus suscipiantur ne, ad sit audire praesent adolescens. Civibus appellantur per et, iudico quaeque consequat quo et, illum utinam persecuti eu est. Mel no viris euripidis.
 
 Ius cu aliquip aperiri nominati, eu sea prima accommodare, hinc dicunt iriure ad ius. Quod appellantur ne sit, at simul assentior vel. Vim in assum accusamus, id usu cetero insolens evertitur. Ne solum summo mea, eu velit nominati suavitate vis. Qui quot scaevola eu, eos ea possit eligendi, no dolor everti oblique mea.
