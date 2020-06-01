@@ -7,7 +7,11 @@ import { evaluate } from "mathjs";
 import MyButton from "../../../../components/UI/Button/GenericButton";
 import classes from "./LinearCoupled.module.css";
 import MyErrorMessage from "../../../../../src/components/UI/MyErrorMessage/MyErrorMessage";
-import SettingButton from '../../../../components/UI/Button/SettingButton/SettingButton'
+import SettingButton from "../../../../components/UI/Button/SettingButton/SettingButton";
+import GraphConfig from "../../../../components/UI/GraphConfig/GraphConfig";
+
+
+
 class LinearCoupled extends Component {
   /**
    * Visual Component that contains the textbox for the equation and calculation outputs
@@ -25,6 +29,7 @@ class LinearCoupled extends Component {
       d: "this is some stuff",
     },
     graphConfig: {
+      show: false,
       LegendHorizontal: "left",
       LegendVertical: "top",
     },
@@ -124,7 +129,6 @@ class LinearCoupled extends Component {
 
     this.setState({ Eqns: Eqns, calculate: false });
   };
-  
 
   handleMathQuillInputSubmit = (event) => {
     let valid = [];
@@ -297,7 +301,15 @@ class LinearCoupled extends Component {
     });
   };
   configureChart = () => {
-    alert("does something");
+    let graphConfig = { ...this.state.graphConfig };
+    graphConfig.show = !this.state.graphConfig.show;
+    this.setState({ graphConfig: graphConfig });
+  };
+  onGraphConfigChange = (name) => (event, value) => {
+    let graphConfig = { ...this.state.graphConfig };
+    graphConfig[name] = event.target.value;
+
+    this.setState({ graphConfig: graphConfig });
   };
   renderSwitchGraph = (length) => {
     switch (length) {
@@ -396,14 +408,6 @@ class LinearCoupled extends Component {
               <div className={classes.Button}>
                 <MyButton type="submit" value="Submit" displayValue="SUBMIT" />
               </div>
-              <div className={classes.Button}>
-                <SettingButton
-                  type="button"
-                  value="config"
-                  displayValue="CONFIG"
-                  onClick={this.configureChart}
-                />
-              </div>
             </div>
           </div>
         </form>
@@ -419,7 +423,21 @@ class LinearCoupled extends Component {
             ? this.renderSwitchGraph(this.state.Eqns.length)
             : null}
         </div>
-        
+        <div className={classes.Button}>
+          <SettingButton
+            type="button"
+            value="config"
+            displayValue="CONFIG"
+            onClick={this.configureChart}
+          />
+        </div>
+        {this.state.graphConfig.show ? (
+            <GraphConfig
+              LegendHorizontal={this.state.graphConfig.LegendHorizontal}
+              LegendVertical={this.state.graphConfig.LegendVertical}
+              onChange={(val) => this.onGraphConfigChange(val)}
+            />
+        ) : null}
       </div>
     );
   }

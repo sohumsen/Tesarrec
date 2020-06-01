@@ -91,6 +91,8 @@ const SolveDiffEquations = (props) => {
             RungeKuttaData={RungeKutta}
             eqn={props.eqn}
             axisNames={["x", "y"]}
+            horizontalAlign={props.LegendHorizontal}
+            verticalAlign={props.LegendVertical}
 
           />
         </div>

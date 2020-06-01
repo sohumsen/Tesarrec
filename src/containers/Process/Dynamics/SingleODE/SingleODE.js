@@ -5,6 +5,8 @@ import MyMathQuill from "../../../../components/UI/Math/MyMathQuill";
 import { evaluate } from "mathjs";
 import MyButton from "../../../../components/UI/Button/GenericButton";
 import classes from "./SingleODE.module.css";
+import GraphConfig from '../../../../components/UI/GraphConfig/GraphConfig'
+import SettingButton from '../../../../components/UI/Button/SettingButton/SettingButton'
 
 class SingleODE extends Component {
   /**
@@ -15,6 +17,11 @@ class SingleODE extends Component {
 
   //y1=a, y2=b,y3=c
   state = {
+    graphConfig: {
+      show: false,
+      LegendHorizontal: "left",
+      LegendVertical: "top",
+    },
     submitted: true,
     SingleDiffChangeableLatex: "e^x",
     SingleDiffChangeableText: "e^x",
@@ -59,6 +66,21 @@ class SingleODE extends Component {
     });
     console.log(this.state.submitted);
   };
+  configureChart = () => {
+    let graphConfig = { ...this.state.graphConfig };
+    graphConfig.show = !this.state.graphConfig.show;
+    console.log(graphConfig)
+
+    this.setState({ graphConfig: graphConfig });
+  };
+  onGraphConfigChange = (name) => (event, value) => {
+
+    let graphConfig = { ...this.state.graphConfig };
+    graphConfig[name] = event.target.value;
+    console.log(graphConfig)
+
+    this.setState({ graphConfig: graphConfig });
+  };
 
   render() {
     return (
@@ -97,10 +119,27 @@ class SingleODE extends Component {
               numberOfCycles={50}
               eqn={this.state.SingleDiffChangeableText}
               LineNames={["Euler", "Midpoint", "Runge Kutta"]}
+              LegendHorizontal={this.state.graphConfig.LegendHorizontal}
+              LegendVertical={this.state.graphConfig.LegendVertical}
 
             />
           ) : null}
         </div>
+        <div className={classes.Button}>
+                <SettingButton
+                  type="button"
+                  value="config"
+                  displayValue="CONFIG"
+                  onClick={this.configureChart}
+                />
+              </div>
+        {this.state.graphConfig.show ? (
+          <GraphConfig
+            LegendHorizontal={this.state.graphConfig.LegendHorizontal}
+            LegendVertical={this.state.graphConfig.LegendVertical}
+            onChange={(val) => this.onGraphConfigChange(val)}
+          />
+        ) : null}
       </div>
     );
   }
