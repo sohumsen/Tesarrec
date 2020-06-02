@@ -30,7 +30,7 @@ const InputSlider=(props)=>{
         </Grid>
         <Grid item xs>
           <Slider
-            style={{ color: "rgb(255, 255, 255)" }}
+            style={{ color: "black" }}
             value={props.value}
             onChange={props.SliderhandleChange}
             min= {props.lowestVal}
@@ -42,7 +42,7 @@ const InputSlider=(props)=>{
         </Grid>
         <Grid item>
           <Input
-            style={{ color: "rgb(255, 255, 255)" }}
+            style={{ color: "black" }}
 
             className={classes.input}
             value={props.value}

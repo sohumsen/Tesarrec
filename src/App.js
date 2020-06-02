@@ -7,6 +7,7 @@ import Reference from "./containers/Reference/Reference";
 import Mes from "./containers/Process/Mes/Mes";
 import Mfc from "./containers/Process/Mfc/Mfc";
 import Dynamic from "./containers/Process/Dynamics/Dynamic";
+import Cube from './assets/aboutpage/cube.gif'
 import {
   BrowserView,
   MobileView,
@@ -33,6 +34,8 @@ class App extends Component {
           <Layout>{routes}</Layout>
         </BrowserView>
         <MobileView>
+        <Cube/>
+
           <p> go on pc for it to work</p>
         </MobileView>
       </div>

@@ -15,7 +15,6 @@ const slider=(props)=>(
       <Grid item xs>
         <Slider
 
-          style={{ color: "rgb(255, 255, 255)" }}
           value={props.value}
           onChange={props.SliderhandleChange}
 
