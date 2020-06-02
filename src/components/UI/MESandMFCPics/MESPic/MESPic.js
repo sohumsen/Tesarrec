@@ -1,6 +1,6 @@
 import React from 'react'
 
-import MES from '../../../../assets/MES.jpg'
+import MES from '../../../../assets/MES.png'
 
 import classes from './MESPic.module.css'
 

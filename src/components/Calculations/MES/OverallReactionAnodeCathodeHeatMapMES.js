@@ -163,6 +163,9 @@ const OverallReactionAnodeCathode = (props) => {
           data={TwoDGibbsEnergyData}
           HeatMapChangedOnClick={props.HeatMapChangedOnClick}
         />
+        <br></br>
+        <br></br>
+
       </div>
 
       <div className={classes.HeatMapEnergyPerformance}>

@@ -16,9 +16,11 @@ import "semantic-ui-css/semantic.min.css";
 import buildingpic from "../../assets/aboutpage/buildingpic.jpg";
 import indiapic from "../../assets/aboutpage/indiapic.jpg";
 import mes from "../../assets/aboutpage/mes.jpg";
-import mfc from "../../assets/aboutpage/mfc.png";
+import mfc from "../../assets/aboutpage/mfc.jpg";
 import waste from "../../assets/aboutpage/waste.jpg";
-//import cube from "../../assets/aboutpage/cube.gif";
+import {NavLink} from 'react-router-dom'
+
+import cube from "../../assets/aboutpage/cube.gif";
 
 // Heads up!
 // We using React Static to prerender our docs with server side rendering, this is a quite simple solution.
@@ -34,7 +36,7 @@ const getWidth = () => {
  * such things.
  */
 const HomepageHeading = ({ mobile }) => (
-  <Container text >
+  <div>
 
     <Header
       as="h1"
@@ -44,6 +46,8 @@ const HomepageHeading = ({ mobile }) => (
         fontSize: mobile ? "2em" : "4em",
         fontWeight: "normal",
         marginBottom: 0,
+
+
         marginTop: mobile ? "1.5em" : "3em",
       }}
     />
@@ -57,12 +61,17 @@ const HomepageHeading = ({ mobile }) => (
         marginTop: mobile ? "0.5em" : "1.5em",
       }}
     />
+
+    <NavLink to={"/process/mes"} exact >
     <Button primary size="huge">
       Get Started
       <Icon name="right arrow" />
     </Button>
-  </Container>
-);
+        </NavLink>
+
+
+  </div>
+); 
 
 HomepageHeading.propTypes = {
   mobile: PropTypes.bool,
@@ -146,7 +155,7 @@ const HomepageLayout = () => (
 
           <Image bordered rounded size="medium" src={mes} />
           <Image bordered rounded size="medium" src={mfc} />
-          <Image bordered rounded size="medium" src={waste} />
+          <Image bordered rounded size="medium" src={cube}></Image>
 
         </Grid.Row>
       </Grid>

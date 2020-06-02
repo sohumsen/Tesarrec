@@ -6,6 +6,7 @@ class Layout extends Component {
     return (
       <div>
         <Toolbar />
+
         <main className={classes.centerContent}>{this.props.children}</main>
       </div>
     );

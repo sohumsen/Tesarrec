@@ -58,8 +58,6 @@ class HeatMapForm extends Component {
 
   componentDidMount() {
     //https://api.bmreports.com/BMRS/B1720/v1?APIKey=op174l2qrpu3s7t&SettlementDate=<SettlementDate>&Period=<Period>&ServiceType=<xml/csv>
-
-  
   }
 
   SliderhandleChange = (name) => (event, value) => {
@@ -67,21 +65,13 @@ class HeatMapForm extends Component {
   };
 
   InputhandleChange = (name) => (event) => {
-
-    let {value, min, max } = event.target;
+    let { value, min, max } = event.target;
     value = Math.max(Number(min), Math.min(Number(max), Number(value)));
 
-    console.log(value, min, max)
+    console.log(value, min, max);
 
-
-
-    this.setState({ [name]: value});
-
-    
+    this.setState({ [name]: value });
   };
-
-
-
 
   render() {
     return (
@@ -117,8 +107,8 @@ class HeatMapForm extends Component {
             cathodeProduct={this.state.CathodeProductChemical}
             anodeSubstrate={this.state.AnodeSubstrateChemical}
             concentration={this.state.AnodeSubstrateConcentration}
-            volume={this.state.Volume }
-            efficiency={this.state.efficiencyValue }
+            volume={this.state.Volume}
+            efficiency={this.state.efficiencyValue}
             heatMapContents={this.state.HeatMapState}
             HeatMapChangedOnClick={this.HeatMapChangedOnClick}
             CCGT={this.state.CCGT}
