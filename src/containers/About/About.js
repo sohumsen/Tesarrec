@@ -62,7 +62,7 @@ const HomepageHeading = ({ mobile }) => (
       }}
     />
 
-    <NavLink to={"/process/mes"} exact >
+    <NavLink to={"/sustainability/mes"} exact >
     <Button primary size="huge">
       Get Started
       <Icon name="right arrow" />

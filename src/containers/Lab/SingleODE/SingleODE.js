@@ -1,12 +1,13 @@
 import React, { Component } from "react";
 import SolveDiffEquations from "../../../components/Calculations/Method/SolveDiffEquations";
+import MyErrorMessage from "../../../components/UI/MyErrorMessage/MyErrorMessage";
 
 import MyMathQuill from "../../../components/UI/Math/MyMathQuill";
 import { evaluate } from "mathjs";
 import MyButton from "../../../components/UI/Button/GenericButton";
 import classes from "./SingleODE.module.css";
-import GraphConfig from '../../../components/UI/GraphConfig/GraphConfig'
-import SettingButton from '../../../components/UI/Button/SettingButton'
+import GraphConfig from "../../../components/UI/GraphConfig/GraphConfig";
+import SettingButton from "../../../components/UI/Button/SettingButton";
 
 class SingleODE extends Component {
   /**
@@ -25,6 +26,7 @@ class SingleODE extends Component {
     submitted: true,
     SingleDiffChangeableLatex: "e^x",
     SingleDiffChangeableText: "e^x",
+    error: false,
 
     DyByDxLatex: "\\frac{dy}{dx}=",
   };
@@ -54,7 +56,7 @@ class SingleODE extends Component {
     if (this.validateExpression(this.state.SingleDiffChangeableText)) {
       this.setState({ submitted: true });
     } else {
-      alert("invalid equation");
+      this.setState({ submitted: false, error: true });
     }
   };
 
@@ -69,15 +71,14 @@ class SingleODE extends Component {
   configureChart = () => {
     let graphConfig = { ...this.state.graphConfig };
     graphConfig.show = !this.state.graphConfig.show;
-    console.log(graphConfig)
+    console.log(graphConfig);
 
     this.setState({ graphConfig: graphConfig });
   };
   onGraphConfigChange = (name) => (event, value) => {
-
     let graphConfig = { ...this.state.graphConfig };
     graphConfig[name] = event.target.value;
-    console.log(graphConfig)
+    console.log(graphConfig);
 
     this.setState({ graphConfig: graphConfig });
   };
@@ -88,25 +89,31 @@ class SingleODE extends Component {
         <div className={classes.Form}>
           <form onSubmit={this.handleMathQuillInputSubmit}>
             <div className={classes.Eqn}>
-
-            <MyMathQuill
-              firstBit={this.state.DyByDxLatex}
-              latex={this.state.SingleDiffChangeableLatex}
-              onInputChange={this.handleMathQuillInputChange(
-                "SingleDiffChangeableLatex",
-                "SingleDiffChangeableText"
-              )}
-            />
+              <MyMathQuill
+                firstBit={this.state.DyByDxLatex}
+                latex={this.state.SingleDiffChangeableLatex}
+                onInputChange={this.handleMathQuillInputChange(
+                  "SingleDiffChangeableLatex",
+                  "SingleDiffChangeableText"
+                )}
+              />
+              {this.state.error ? <MyErrorMessage /> : null}
             </div>
 
-            <div className={classes.ButtonPos}>
+            <div className={classes.ButtonContainer}>
+              <div className={classes.ButtonPos}>
               <MyButton type="submit" value="Submit" displayValue="SUBMIT" />
-              <MyButton
-                type="reset"
-                value="Reset"
-                displayValue="RESET"
-                onClick={this.resetForm}
-              />
+
+              </div>
+              <div className={classes.ButtonPos}>
+                <MyButton
+                  type="reset"
+                  value="Reset"
+                  displayValue="RESET"
+                  onClick={this.resetForm}
+                />
+
+              </div>
             </div>
           </form>
         </div>
@@ -121,18 +128,17 @@ class SingleODE extends Component {
               LineNames={["Euler", "Midpoint", "Runge Kutta"]}
               LegendHorizontal={this.state.graphConfig.LegendHorizontal}
               LegendVertical={this.state.graphConfig.LegendVertical}
-
             />
           ) : null}
         </div>
         <div className={classes.Button}>
-                <SettingButton
-                  type="button"
-                  value="config"
-                  displayValue="CONFIG"
-                  onClick={this.configureChart}
-                />
-              </div>
+          <SettingButton
+            type="button"
+            value="config"
+            displayValue="CONFIG"
+            onClick={this.configureChart}
+          />
+        </div>
         {this.state.graphConfig.show ? (
           <GraphConfig
             LegendHorizontal={this.state.graphConfig.LegendHorizontal}

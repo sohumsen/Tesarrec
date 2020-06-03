@@ -16,10 +16,24 @@
   width: 50%;
 }
 
+.ButtonContainer {
+  background-color: violet;
+  margin: 0 auto;
+  position: relative;
+  left: 25%;
+  top: 200px;
+
+}
+
 .ButtonPos {
+  float: left;
+  margin-left: 5%;
+}
+.ButtodnPos {
   width: fit-content;
   display: table;
   margin: 0 auto;
+  position: absolute;
 }
 
 .Eqn {

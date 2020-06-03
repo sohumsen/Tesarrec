@@ -51,11 +51,9 @@ responsive designs
 change to pqrs
 change the favicon DONE BUT TEST
 plot graph under production rate
-foramt MES
 widen about page
 make sliders small
 1 heatmap per file
-error handlig in single ODE
 
 
 
@@ -108,6 +106,8 @@ production amount in g DONE
 cs=0-10 DONE
 change the menu headings DONE
 Delete energy perfomance Grid DONE
+foramt MES DONE
+error handlig in single ODE DONE
 
 
 
