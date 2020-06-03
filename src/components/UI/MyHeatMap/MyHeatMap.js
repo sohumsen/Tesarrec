@@ -32,7 +32,7 @@ const MyHeatMap = (props) => {
         xLabels={props.xLabels}
         yLabels={props.yLabels}
         yLabelWidth={100}
-        height={60}
+        height={100}
         xLabelWidth={100}
         xLabelsLocation={"bottom"}
         data={data}
@@ -40,7 +40,7 @@ const MyHeatMap = (props) => {
         cellStyle={(background, value, min, max, data, x, y) => ({
       
           background: `${props.color}, ${1 - (max - value) / (max - min)})`,
-          fontSize: "13px",
+          fontSize: "16px",
         })}
         
         //onClick={(x, y,value) => alert(`Clicked ${x}, ${y}, ${value}`)}

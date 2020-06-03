@@ -1,22 +1,24 @@
 
-make request to another carbon footprint page elexon or someone NOT NEEDED
 
 
-A) 
-Steady State meanus as tabs NOT NEEDED
-Debug window for table NOT NEEDED
 B)
 MENU DESIGN 
-    STeadyState
-        MFC
-        MES
+    Sustainability
+        MFC   - 3 * (1xN column) + 2 * (1xN column) + 1 graph + 3 sliders + 10 sliders
+        MES   - 3 * (3xN column) - 2 * (1xN column) + 1 graph + 3 sliders + 10 sliders
+    
     Dynamic
-        MFC
-        MES
-        Lab 
-            Single ODE
-            ODE Systems
-            Algebraic+ODEs
+        MFC   - 4 x 1 column + 1 graph
+        MES   - 4 x 1 column + 1 graph
+    Lab 
+        Single ODE
+            *Error Estimation*
+        ODE Systems
+        Algebraic+ODEs*
+        Samples
+         SEIR
+         Navier Stokes
+
 C)
 UI DIV designs
     GRAPH
@@ -30,15 +32,13 @@ E) replace array use with x_0, y_0 syntax
 F) Cover at least the mathmodule
 
 chart properties should be a settings
-a) legend position
-b) rounding percision
+    a) legend position DONE
+    b) rounding percision
 Tooltip show line name, round to N decimal 
 get a better heat map package
 when all values are 0 the colours are still there so find a better normalisation
 find a heatmap normalisation
 Write code to convert $data/xls/* xls to $data/json/*
-add the ui tabs
-enlarge pic on click
 
 
 
@@ -49,6 +49,13 @@ Alternative chart libs
 error handling
 responsive designs
 change to pqrs
+change the favicon DONE BUT TEST
+plot graph under production rate
+foramt MES
+widen about page
+make sliders small
+1 heatmap per file
+error handlig in single ODE
 
 
 
@@ -69,6 +76,7 @@ Audit
 
 
 DONE
+========
 
 volumes only go up in 10s DONE
 add tests DONE
@@ -95,4 +103,19 @@ breaks with 2 eqns DONE
 reset the error message when there is a good equnation DONE
 delte the last eqn and watch DONE
 make dustmin in line with error message DONE
+change the react app name DONE
+production amount in g DONE
+cs=0-10 DONE
+change the menu headings DONE
+Delete energy perfomance Grid DONE
 
+
+
+NOT NEEDED
+===========
+
+make request to another carbon footprint page elexon or someone NOT NEEDED
+Steady State meanus as tabs NOT NEEDED
+Debug window for table NOT NEEDED
+add the ui tabs NOT NEEDED
+enlarge pic on click NOT NEEDED

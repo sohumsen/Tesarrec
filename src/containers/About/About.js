@@ -17,7 +17,7 @@ import buildingpic from "../../assets/aboutpage/buildingpic.jpg";
 import indiapic from "../../assets/aboutpage/indiapic.jpg";
 import mes from "../../assets/aboutpage/mes.jpg";
 import mfc from "../../assets/aboutpage/mfc.jpg";
-import waste from "../../assets/aboutpage/waste.jpg";
+//import waste from "../../assets/aboutpage/waste.jpg";
 import {NavLink} from 'react-router-dom'
 
 import cube from "../../assets/aboutpage/cube.gif";

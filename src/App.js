@@ -4,9 +4,9 @@ import Layout from "./hoc/Layout/Layout";
 import { Route, Switch, withRouter, Redirect } from "react-router-dom";
 import About from "./containers/About/About";
 import Reference from "./containers/Reference/Reference";
-import Mes from "./containers/Process/Mes/Mes";
-import Mfc from "./containers/Process/Mfc/Mfc";
-import Dynamic from "./containers/Process/Dynamics/Dynamic";
+import Mes from "./containers/Sustainability/Mes/Mes";
+import Mfc from "./containers/Sustainability/Mfc/Mfc";
+import Dynamic from "./containers/Lab/Dynamic";
 import { BrowserView, MobileView } from "react-device-detect";
 import MyMobileView from "./hoc/MyMobileView/MyMobileView";
 class App extends Component {
@@ -15,8 +15,8 @@ class App extends Component {
       <Switch>
         <Route path="/dynamic" exact component={Dynamic} />
 
-        <Route path="/process/mfc" exact component={Mfc} />
-        <Route path="/process/mes" exact component={Mes} />
+        <Route path="/sustainability/mfc" exact component={Mfc} />
+        <Route path="/sustainability/mes" exact component={Mes} />
         <Route path="/reference" component={Reference} />
         <Route path="/" exact component={About} />
         <Redirect to="/" />

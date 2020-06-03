@@ -3,7 +3,7 @@ import React, { Component } from "react";
 import LeftContent from "../../../../../hoc/Layout/LeftContent/LeftContent";
 import RightContent from "../../../../../hoc/Layout/RightContent/RightContent";
 import classes from "./HeatMapFormMFC.module.css";
-import OverallReactionAnodeCathode from "../../../../../components/Calculations/MFC/OverallReactionAnodeCathodeHeatMapMFC";
+import OverallReactionAnodeCathode from "../../../../../components/Calculations/Sustainability/MFC/OverallReactionAnodeCathodeHeatMapMFC";
 
 class HeatMapFormMFC extends Component {
   state = {

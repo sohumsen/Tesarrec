@@ -3,8 +3,9 @@ import React, { Component } from "react";
 import LeftContent from "../../../../../hoc/Layout/LeftContent/LeftContent";
 import RightContent from "../../../../../hoc/Layout/RightContent/RightContent";
 import classes from "./HeatMapFormMES.module.css";
-import OverallReactionAnodeCathode from "../../../../../components/Calculations/MES/OverallReactionAnodeCathodeHeatMapMES";
-
+import OverallReactionAnodeCathode from "../../../../../components/Calculations/Sustainability/MES/OverallReactionAnodeCathodeHeatMapMES";
+import MESPic from '../../../../../assets/MES.png'
+import MyMathQuill from '../../../../../components/UI/Math/MyMathQuill'
 class HeatMapForm extends Component {
   state = {
     HeatMapState: {
@@ -101,6 +102,11 @@ class HeatMapForm extends Component {
           Other={this.state.Other}
           MES={true}
         />
+        <div>
+          <img src={MESPic} width="100%"></img>
+          <h2 style={{textAlign:"center"}}>x'C<sub>x</sub>H<sub>y</sub>O<sub>z</sub> +mH<sub>2</sub>O = C<sub>c</sub>H<sub>h</sub>O<sub>o</sub>+m'H<sub>2</sub></h2>
+
+        </div>
 
         <div className={classes.HeatMap}>
           <OverallReactionAnodeCathode

@@ -1,16 +1,14 @@
 import React, { Component } from "react";
-import LinearCoupledDiffThreeEqn from "../../../../components/Calculations/Method/LinearCoupled/Calcs/LinearCoupledDiffThreeEqn";
-import LinearCoupledDiffTwoEqn from "../../../../components/Calculations/Method/LinearCoupled/Calcs/LinearCoupledDiffTwoEqn";
-import LinearCoupledDiffFourEqn from "../../../../components/Calculations/Method/LinearCoupled/Calcs/LinearCoupledDiffFourEqn";
-import EqnItems from "../../../../components/Calculations/Method/LinearCoupled/Eqns/EqnItems";
+import LinearCoupledDiffThreeEqn from "../../../components/Calculations/Method/LinearCoupled/Calcs/LinearCoupledDiffThreeEqn";
+import LinearCoupledDiffTwoEqn from "../../../components/Calculations/Method/LinearCoupled/Calcs/LinearCoupledDiffTwoEqn";
+import LinearCoupledDiffFourEqn from "../../../components/Calculations/Method/LinearCoupled/Calcs/LinearCoupledDiffFourEqn";
+import EqnItems from "../../../components/Calculations/Method/LinearCoupled/Eqns/EqnItems";
 import { evaluate } from "mathjs";
-import MyButton from "../../../../components/UI/Button/GenericButton";
+import MyButton from "../../../components/UI/Button/GenericButton";
 import classes from "./LinearCoupled.module.css";
-import MyErrorMessage from "../../../../../src/components/UI/MyErrorMessage/MyErrorMessage";
-import SettingButton from "../../../../components/UI/Button/SettingButton/SettingButton";
-import GraphConfig from "../../../../components/UI/GraphConfig/GraphConfig";
-
-
+import MyErrorMessage from "../../../components/UI/MyErrorMessage/MyErrorMessage";
+import SettingButton from "../../../components/UI/Button/SettingButton";
+import GraphConfig from "../../../components/UI/GraphConfig/GraphConfig";
 
 class LinearCoupled extends Component {
   /**
@@ -370,6 +368,9 @@ class LinearCoupled extends Component {
             LegendHorizontal={this.state.graphConfig.LegendHorizontal}
           />
         );
+
+      default:
+        return null;
     }
   };
   render() {
@@ -432,11 +433,11 @@ class LinearCoupled extends Component {
           />
         </div>
         {this.state.graphConfig.show ? (
-            <GraphConfig
-              LegendHorizontal={this.state.graphConfig.LegendHorizontal}
-              LegendVertical={this.state.graphConfig.LegendVertical}
-              onChange={(val) => this.onGraphConfigChange(val)}
-            />
+          <GraphConfig
+            LegendHorizontal={this.state.graphConfig.LegendHorizontal}
+            LegendVertical={this.state.graphConfig.LegendVertical}
+            onChange={(val) => this.onGraphConfigChange(val)}
+          />
         ) : null}
       </div>
     );

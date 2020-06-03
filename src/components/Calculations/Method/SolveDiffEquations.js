@@ -20,13 +20,13 @@ const SolveDiffEquations = (props) => {
   };
 
 
-  const SolveForRthMidpoint_READABLE = (x_0, y_0, h) => {
-    let k1 = h * DyByDxFunc(x_0, y_0);
-    let k2 = h * DyByDxFunc(x_0 + h / 2, y_0 + k1 / 2);
-    let Y1 = y_0 + k2;
-    let X1 = x_0 + h;
-    return [X1, Y1, h];
-  };
+  // const SolveForRthMidpoint_READABLE = (x_0, y_0, h) => {
+  //   let k1 = h * DyByDxFunc(x_0, y_0);
+  //   let k2 = h * DyByDxFunc(x_0 + h / 2, y_0 + k1 / 2);
+  //   let Y1 = y_0 + k2;
+  //   let X1 = x_0 + h;
+  //   return [X1, Y1, h];
+  // };
 
 
   const SolveForRthMidpoint = (X0Y0hArr) => {

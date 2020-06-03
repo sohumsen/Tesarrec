@@ -1,10 +1,10 @@
 import React from "react";
 
-import ReadAnodeJSON from "../../Excel/Anode/ReadAndodeJSON";
+import ReadAnodeJSON from "../../../Excel/Anode/ReadAndodeJSON";
 //import ReadCathodeJSON from "../../Excel/Cathode/ReadCathodeJSON";
 
 
-import MyHeatMap from "../../UI/MyHeatMap/MyHeatMap";
+import MyHeatMap from "../../../UI/MyHeatMap/MyHeatMap";
 import classes from "./OverallReactionAnodeCathodeMFC.module.css";
 const OverallReactionAnodeCathode = (props) => {
   //console.log(props.anodeSubstrate)

@@ -1,10 +1,11 @@
 import React from "react";
 
-import ReadAnodeJSON from "../../Excel/Anode/ReadAndodeJSON";
-import ReadCathodeJSON from "../../Excel/Cathode/ReadCathodeJSON";
+import ReadAnodeJSON from "../../../Excel/Anode/ReadAndodeJSON";
+import ReadCathodeJSON from "../../../Excel/Cathode/ReadCathodeJSON";
 
-import MyHeatMap from "../../UI/MyHeatMap/MyHeatMap";
+import MyHeatMap from "../../../UI/MyHeatMap/MyHeatMap";
 import classes from "./OverallReactionAnodeCathodeMES.module.css";
+import MyMathQuill from '../../../UI/Math/MyMathQuill'
 const OverallReactionAnodeCathode = (props) => {
   //console.log(props.anodeSubstrate)
   //console.log(props.cathodeProduct)
@@ -66,8 +67,9 @@ const OverallReactionAnodeCathode = (props) => {
       //let mDash = 0.5 * (-h + (c * y) / x + 2 * o - (2 * c * z) / x);
 
       let StandardGibbsEnergyOfReactionProductkJMol =
-        GibbsProductInitial - xDash * GibbsSubstrateInitial - m * -237.13;
-
+        (GibbsProductInitial - xDash * GibbsSubstrateInitial - m * -237.13);
+        // let MaximumAppliedPotential =
+        // (GibbsProductInitial - xDash * GibbsSubstrateInitial - m * -237.13)*(1000/96485);
       //let StandardGibbsEnergyOfFormationOfWater = -237.13;
       //let StandardGibbsEnergyOfReactionSubstratekJMol =(1 / xDash) * StandardGibbsEnergyOfReactionProductkJMol;
 
@@ -143,7 +145,8 @@ const OverallReactionAnodeCathode = (props) => {
   return (
     <div className={classes.HeatMaps}>
       <div className={classes.HeatMapProductionRate}>
-        <h3>Production Rate in g</h3>
+        <h2>Production Amount in g</h2>
+        <MyMathQuill NoEdit firstBit={"production\\ Amount=\\frac{\\left(Substrate\\ Concentration\\left(\\frac{g}{L}\\right)\\cdot Volume\\ Of\\ Cell\\left(L\\right)\\cdot Efficiency\\cdot\\left(12c+h+16o\\right)\\right)}{x'\\left(12x+y+16z\\right)}"}/>
 
         <MyHeatMap
           xLabels={props.heatMapContents.xLabels}
@@ -154,7 +157,7 @@ const OverallReactionAnodeCathode = (props) => {
         />
       </div>
 
-      <div className={classes.HeatMapEnergyPerformance}>
+    {/*  <div className={classes.HeatMapEnergyPerformance}>
         <h3>Energy Performance in kJ</h3>
         <MyHeatMap
           xLabels={props.heatMapContents.xLabels}
@@ -166,7 +169,7 @@ const OverallReactionAnodeCathode = (props) => {
         <br></br>
         <br></br>
 
-      </div>
+  </div>*/}
 
       <div className={classes.HeatMapEnergyPerformance}>
         <h3 >Global Warming Potential saving g CO&#8322; eq.</h3>

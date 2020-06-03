@@ -1,12 +1,12 @@
 import React, { Component } from "react";
-import SolveDiffEquations from "../../../../components/Calculations/Method/SolveDiffEquations";
+import SolveDiffEquations from "../../../components/Calculations/Method/SolveDiffEquations";
 
-import MyMathQuill from "../../../../components/UI/Math/MyMathQuill";
+import MyMathQuill from "../../../components/UI/Math/MyMathQuill";
 import { evaluate } from "mathjs";
-import MyButton from "../../../../components/UI/Button/GenericButton";
+import MyButton from "../../../components/UI/Button/GenericButton";
 import classes from "./SingleODE.module.css";
-import GraphConfig from '../../../../components/UI/GraphConfig/GraphConfig'
-import SettingButton from '../../../../components/UI/Button/SettingButton/SettingButton'
+import GraphConfig from '../../../components/UI/GraphConfig/GraphConfig'
+import SettingButton from '../../../components/UI/Button/SettingButton'
 
 class SingleODE extends Component {
   /**

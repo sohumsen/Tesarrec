@@ -9,15 +9,14 @@ import Switch from "@material-ui/core/Switch";
 import { withStyles } from "@material-ui/core/styles";
 import SliderWithText from "../../../components/UI/SliderContainer/Slider/SliderWithText";
 
-
 const PurpleSwitch = withStyles({
   switchBase: {
-    color: "white",
+    color: "black",
     "&$checked": {
-      color: "white",
+      color: "black",
     },
     "&$checked + $track": {
-      backgroundColor: "white",
+      backgroundColor: "black",
     },
   },
   checked: {},
@@ -40,9 +39,7 @@ class RightContent extends Component {
 
     if (this.state.showEnergySliders) {
       environmentSliders = (
-
         <MySliderContainer>
-
           <SliderWithText
             displayCaption={"CCGT "}
             value={this.props.CCGT}
@@ -51,7 +48,6 @@ class RightContent extends Component {
             highestVal={100}
             SliderhandleChange={this.props.SliderhandleChange("CCGT")}
             InputhandleChange={this.props.InputhandleChange("CCGT")}
-
           />
           <SliderWithText
             displayCaption={"Nuclear "}
@@ -61,7 +57,6 @@ class RightContent extends Component {
             highestVal={100}
             SliderhandleChange={this.props.SliderhandleChange("Nuclear")}
             InputhandleChange={this.props.InputhandleChange("Nuclear")}
-
           />
           <SliderWithText
             displayCaption={"Biomass "}
@@ -71,7 +66,6 @@ class RightContent extends Component {
             highestVal={100}
             SliderhandleChange={this.props.SliderhandleChange("Biomass")}
             InputhandleChange={this.props.InputhandleChange("Biomass")}
-
           />
           <SliderWithText
             displayCaption={"Coal "}
@@ -80,9 +74,7 @@ class RightContent extends Component {
             lowestVal={0}
             highestVal={100}
             SliderhandleChange={this.props.SliderhandleChange("Coal")}
-
             InputhandleChange={this.props.InputhandleChange("Coal")}
-
           />
           <SliderWithText
             displayCaption={"Wind "}
@@ -92,7 +84,6 @@ class RightContent extends Component {
             highestVal={100}
             SliderhandleChange={this.props.SliderhandleChange("Wind")}
             InputhandleChange={this.props.InputhandleChange("Wind")}
-
           />
           <SliderWithText
             displayCaption={"Solar "}
@@ -102,7 +93,6 @@ class RightContent extends Component {
             highestVal={100}
             SliderhandleChange={this.props.SliderhandleChange("Solar")}
             InputhandleChange={this.props.InputhandleChange("Solar")}
-
           />
           <SliderWithText
             displayCaption={"Oil "}
@@ -112,7 +102,6 @@ class RightContent extends Component {
             highestVal={100}
             SliderhandleChange={this.props.SliderhandleChange("Oil")}
             InputhandleChange={this.props.InputhandleChange("Oil")}
-
           />
           <SliderWithText
             displayCaption={"OCGT "}
@@ -122,7 +111,6 @@ class RightContent extends Component {
             highestVal={100}
             SliderhandleChange={this.props.SliderhandleChange("OCGT")}
             InputhandleChange={this.props.InputhandleChange("CCGT")}
-
           />
           <SliderWithText
             displayCaption={"Hydroelectric "}
@@ -132,7 +120,6 @@ class RightContent extends Component {
             highestVal={100}
             SliderhandleChange={this.props.SliderhandleChange("Hydroelectric")}
             InputhandleChange={this.props.InputhandleChange("Hydroelectric")}
-
           />
           <SliderWithText
             displayCaption={"PumpedHydro "}
@@ -142,7 +129,6 @@ class RightContent extends Component {
             highestVal={100}
             SliderhandleChange={this.props.SliderhandleChange("PumpedHydro")}
             InputhandleChange={this.props.InputhandleChange("PumpedHydro")}
-
           />
           <SliderWithText
             displayCaption={"Other "}
@@ -152,17 +138,14 @@ class RightContent extends Component {
             highestVal={100}
             SliderhandleChange={this.props.SliderhandleChange("Other")}
             InputhandleChange={this.props.InputhandleChange("Other")}
-
           />
         </MySliderContainer>
       );
     }
     return (
       <div className={classes.RightContent}>
-
-        
-        {this.props.MES ? <MESPic height={200}/>:<MFCPic height={200}/>}
-
+        <h2>Settings</h2>
+        <br />
         <p>
           X-axis -<b>Anode Substrate:</b> {this.props.AnodeSubstrateChemical}
         </p>
@@ -177,13 +160,14 @@ class RightContent extends Component {
           <SliderWithText
             displayCaption={"Anode substrate concentration in g/L "}
             value={this.props.AnodeSubstrateConcentration}
-            InputhandleChange={this.props.InputhandleChange("AnodeSubstrateConcentration")}
+            InputhandleChange={this.props.InputhandleChange(
+              "AnodeSubstrateConcentration"
+            )}
             lowestVal={0}
-            highestVal={100}
+            highestVal={10}
             SliderhandleChange={this.props.SliderhandleChange(
               "AnodeSubstrateConcentration"
-            )
-          }
+            )}
           />
           <SliderWithText
             displayCaption={"Cell volume in L"}

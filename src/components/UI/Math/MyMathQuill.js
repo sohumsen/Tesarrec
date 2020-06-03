@@ -4,25 +4,24 @@ import { addStyles, EditableMathField, StaticMathField } from "react-mathquill";
 // You can skip this, if you want to do that by yourself.
 addStyles();
 
-export default class MyMathQuill extends React.Component {
-  state = {
-    DyByDxLatex: "\\frac{dy}{dx}=",
-    DaByDtLatex: "\\frac{da}{dt}=",
-    DbByDtLatex: "\\frac{db}{dt}=",
-    DcByDtLatex: "\\frac{dc}{dt}=",
+const MyMathQuill = (props) => {
+  console.log(props.firstBit)
+  console.log(props.NoEdit)
+  return (
+    <div>
+      <StaticMathField>{props.firstBit}</StaticMathField>
 
-  };
+      {!props.NoEdit?
+            <EditableMathField
+            latex={props.latex} // Initial latex value for the input field
+            onChange={(mathField) => props.onInputChange(mathField)}
+          />:
+          null
+    
+    }
 
-  render() {
-    return (
-      <div >
-        <StaticMathField>{this.props.firstBit}</StaticMathField>
-        <EditableMathField
-          latex={this.props.latex} // Initial latex value for the input field
-          onChange={(mathField) => this.props.onInputChange(mathField)}
-        
-        />
-      </div>
-    );
-  }
-}
+    </div>
+  );
+};
+
+export default MyMathQuill;

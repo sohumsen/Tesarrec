@@ -1,28 +1,28 @@
-import React from 'react'
-import classes from './NavigationItems.module.css'
-import NavigationItem from './NavigationItem/NavigationItem'
-import Dropdown from './Dropdown/Dropdown'
-const navigationItems=(props)=>(
+import React from "react";
+import classes from "./NavigationItems.module.css";
+import NavigationItem from "./NavigationItem/NavigationItem";
+import Dropdown from "./Dropdown/Dropdown";
+const navigationItems = (props) => (
+  <ul className={classes.NavigationItems}>
+    <NavigationItem link="/">About</NavigationItem>
 
-    <ul className={classes.NavigationItems}>
-        <NavigationItem link="/" >About</NavigationItem>
+    <Dropdown name="Sustainability">
+      <NavigationItem link="/sustainability/mfc">MFC</NavigationItem>
+      <NavigationItem link="/sustainability/mes">MES</NavigationItem>
+    </Dropdown>
 
+    <Dropdown name="Dynamic">
+      <NavigationItem link="/dynamic/mfc">MFC</NavigationItem>
+      <NavigationItem link="/dynamic/mes">MES</NavigationItem>
+    </Dropdown>
 
+    <Dropdown name="Lab">
+      <NavigationItem link="/dynamic">Dynamic</NavigationItem>
+    </Dropdown>
 
-        <Dropdown>
+    <NavigationItem link="/reference">Reference</NavigationItem>
+    <NavigationItem link="/contact">Contact</NavigationItem>
+  </ul>
+);
 
-            <NavigationItem link="/process/mfc">MFC</NavigationItem> 
-            <NavigationItem link="/process/mes">MES</NavigationItem> 
-        </Dropdown>
-        <NavigationItem link="/dynamic">Dynamic</NavigationItem> 
-
-        <NavigationItem link="/reference">Reference</NavigationItem> 
-        <NavigationItem link="/contact">Contact</NavigationItem> 
-
-
-
-    </ul>
-
-)
-
-export default navigationItems
+export default navigationItems;
