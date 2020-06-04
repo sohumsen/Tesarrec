@@ -7,16 +7,17 @@ import Input from '@material-ui/core/Input';
 
 const useStyles = makeStyles({
   root: {
-    padding:"10px",
-    width: 300,
+    width: props=>props.rootWidth,
+    float:"left",
+    margin: "10px",
   },
   input: {
-    width: 62,
+    width: props=>props.inputWidth,
   },
 });
 
 const InputSlider=(props)=>{
-  const classes = useStyles();
+  const classes = useStyles(props);
 
 
   return (

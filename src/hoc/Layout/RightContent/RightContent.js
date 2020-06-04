@@ -41,6 +41,8 @@ class RightContent extends Component {
       environmentSliders = (
         <MySliderContainer>
           <SliderWithText
+            rootWidth={"43%"}
+            inputWidth={52}
             displayCaption={"CCGT "}
             value={this.props.CCGT}
             displayValue={this.props.CCGT}
@@ -50,6 +52,8 @@ class RightContent extends Component {
             InputhandleChange={this.props.InputhandleChange("CCGT")}
           />
           <SliderWithText
+            rootWidth={"43%"}
+            inputWidth={52}
             displayCaption={"Nuclear "}
             value={this.props.Nuclear}
             displayValue={this.props.Nuclear}
@@ -59,6 +63,8 @@ class RightContent extends Component {
             InputhandleChange={this.props.InputhandleChange("Nuclear")}
           />
           <SliderWithText
+            rootWidth={"43%"}
+            inputWidth={52}
             displayCaption={"Biomass "}
             value={this.props.Biomass}
             displayValue={this.props.Biomass}
@@ -68,6 +74,8 @@ class RightContent extends Component {
             InputhandleChange={this.props.InputhandleChange("Biomass")}
           />
           <SliderWithText
+            rootWidth={"43%"}
+            inputWidth={52}
             displayCaption={"Coal "}
             value={this.props.Coal}
             displayValue={this.props.Coal}
@@ -77,6 +85,8 @@ class RightContent extends Component {
             InputhandleChange={this.props.InputhandleChange("Coal")}
           />
           <SliderWithText
+            rootWidth={"43%"}
+            inputWidth={52}
             displayCaption={"Wind "}
             value={this.props.Wind}
             displayValue={this.props.Wind}
@@ -86,6 +96,8 @@ class RightContent extends Component {
             InputhandleChange={this.props.InputhandleChange("Wind")}
           />
           <SliderWithText
+            rootWidth={"43%"}
+            inputWidth={52}
             displayCaption={"Solar "}
             value={this.props.Solar}
             displayValue={this.props.Solar}
@@ -95,6 +107,8 @@ class RightContent extends Component {
             InputhandleChange={this.props.InputhandleChange("Solar")}
           />
           <SliderWithText
+            rootWidth={"43%"}
+            inputWidth={52}
             displayCaption={"Oil "}
             value={this.props.Oil}
             displayValue={this.props.Oil}
@@ -104,6 +118,8 @@ class RightContent extends Component {
             InputhandleChange={this.props.InputhandleChange("Oil")}
           />
           <SliderWithText
+            rootWidth={"43%"}
+            inputWidth={52}
             displayCaption={"OCGT "}
             value={this.props.OCGT}
             displayValue={this.props.OCGT}
@@ -113,6 +129,8 @@ class RightContent extends Component {
             InputhandleChange={this.props.InputhandleChange("CCGT")}
           />
           <SliderWithText
+            rootWidth={"43%"}
+            inputWidth={52}
             displayCaption={"Hydroelectric "}
             value={this.props.Hydroelectric}
             displayValue={this.props.Hydroelectric}
@@ -122,6 +140,8 @@ class RightContent extends Component {
             InputhandleChange={this.props.InputhandleChange("Hydroelectric")}
           />
           <SliderWithText
+            rootWidth={"43%"}
+            inputWidth={52}
             displayCaption={"PumpedHydro "}
             value={this.props.PumpedHydro}
             displayValue={this.props.PumpedHydro}
@@ -131,6 +151,8 @@ class RightContent extends Component {
             InputhandleChange={this.props.InputhandleChange("PumpedHydro")}
           />
           <SliderWithText
+            rootWidth={"43%"}
+            inputWidth={52}
             displayCaption={"Other "}
             value={this.props.Other}
             displayValue={this.props.Other}
@@ -158,6 +180,8 @@ class RightContent extends Component {
 
         <MySliderContainer>
           <SliderWithText
+            rootWidth={"90%"}
+            inputWidth={42}
             displayCaption={"Anode substrate concentration in g/L "}
             value={this.props.AnodeSubstrateConcentration}
             InputhandleChange={this.props.InputhandleChange(
@@ -170,6 +194,8 @@ class RightContent extends Component {
             )}
           />
           <SliderWithText
+            rootWidth={"43%"}
+            inputWidth={52}
             displayCaption={"Cell volume in L"}
             value={this.props.Volume}
             InputhandleChange={this.props.InputhandleChange("Volume")}
@@ -178,6 +204,8 @@ class RightContent extends Component {
             SliderhandleChange={this.props.SliderhandleChange("Volume")}
           />
           <SliderWithText
+            rootWidth={"43%"}
+            inputWidth={52}
             displayCaption={"Efficiency "}
             value={this.props.efficiencyValue}
             InputhandleChange={this.props.InputhandleChange("efficiencyValue")}

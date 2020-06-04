@@ -18,7 +18,6 @@ class App extends Component {
         <Route path="/sustainability/mfc" exact component={Mfc} />
         <Route path="/sustainability/mes" exact component={Mes} />
         <Route path="/reference" component={Reference} />
-        <Route path="/" exact component={About} />
         <Redirect to="/" />
       </Switch>
     );
@@ -26,6 +25,8 @@ class App extends Component {
     return (
       <div>
         <BrowserView>
+        <Route path="/" exact component={About} />
+
           <Layout>{routes}</Layout>
         </BrowserView>
         <MobileView>

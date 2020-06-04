@@ -36,7 +36,10 @@ const getWidth = () => {
  * such things.
  */
 const HomepageHeading = ({ mobile }) => (
-  <div>
+  <Container text>
+
+
+
 
     <Header
       as="h1"
@@ -68,9 +71,8 @@ const HomepageHeading = ({ mobile }) => (
       <Icon name="right arrow" />
     </Button>
         </NavLink>
+        </Container>
 
-
-  </div>
 ); 
 
 HomepageHeading.propTypes = {

@@ -51,9 +51,9 @@ responsive designs
 change to pqrs
 change the favicon DONE BUT TEST
 plot graph under production rate
-widen about page
-make sliders small
 1 heatmap per file
+errors should go away individually
+setting button keeps moving
 
 
 
@@ -108,6 +108,8 @@ change the menu headings DONE
 Delete energy perfomance Grid DONE
 foramt MES DONE
 error handlig in single ODE DONE
+widen about page DONE
+make sliders small DONE
 
 
 
