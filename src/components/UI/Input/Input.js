@@ -11,13 +11,12 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Input() {
+export default function Input(props) {
   const classes = useStyles();
 
   return (
-    <form noValidate>
+    
  
-      <TextField id="outlined-basic" label="Outlined" variant="outlined" />
-    </form>
+      <TextField id="outlined-basic" label={props.label} variant={props.label} />
   );
 }

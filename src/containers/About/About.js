@@ -18,7 +18,7 @@ import indiapic from "../../assets/aboutpage/indiapic.jpg";
 import mes from "../../assets/aboutpage/mes.jpg";
 import mfc from "../../assets/aboutpage/mfc.jpg";
 //import waste from "../../assets/aboutpage/waste.jpg";
-import {NavLink} from 'react-router-dom'
+import { NavLink } from "react-router-dom";
 
 import cube from "../../assets/aboutpage/cube.gif";
 
@@ -37,10 +37,6 @@ const getWidth = () => {
  */
 const HomepageHeading = ({ mobile }) => (
   <Container text>
-
-
-
-
     <Header
       as="h1"
       content="Tesarrec"
@@ -49,7 +45,6 @@ const HomepageHeading = ({ mobile }) => (
         fontSize: mobile ? "2em" : "4em",
         fontWeight: "normal",
         marginBottom: 0,
-
 
         marginTop: mobile ? "1.5em" : "3em",
       }}
@@ -65,15 +60,14 @@ const HomepageHeading = ({ mobile }) => (
       }}
     />
 
-    <NavLink to={"/sustainability/mes"} exact >
-    <Button primary size="huge">
-      Get Started
-      <Icon name="right arrow" />
-    </Button>
-        </NavLink>
-        </Container>
-
-); 
+    <NavLink to={"/sustainability/mes"} exact>
+      <Button primary size="huge">
+        Get Started
+        <Icon name="right arrow" />
+      </Button>
+    </NavLink>
+  </Container>
+);
 
 HomepageHeading.propTypes = {
   mobile: PropTypes.bool,
@@ -158,7 +152,6 @@ const HomepageLayout = () => (
           <Image bordered rounded size="medium" src={mes} />
           <Image bordered rounded size="medium" src={mfc} />
           <Image bordered rounded size="medium" src={cube}></Image>
-
         </Grid.Row>
       </Grid>
     </Segment>
