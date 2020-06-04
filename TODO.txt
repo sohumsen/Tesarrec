@@ -1,123 +1,127 @@
 
+D) Separate Math code from graph code
+E) replace array use with x_0, y_0 syntax
+F) Cover at least the mathmodule
+
+chart properties should be a settings
+    b) rounding percision
+Tooltip show line name, round to N decimal 
+Variable Descfiption of a , b , c has default values from Mama but user can override
+( when user presses submit )
+change the favicon DONE BUT TEST
+plot graph under production rate
+for certain eqns ban negatives
 
 
-B)
-MENU DESIGN 
-    Sustainability
-        MFC   - 3 * (1xN column) + 2 * (1xN column) + 1 graph + 3 sliders + 10 sliders
-        MES   - 3 * (3xN column) - 2 * (1xN column) + 1 graph + 3 sliders + 10 sliders
-    
-    Dynamic
-        MFC   - 4 x 1 column + 1 graph
-        MES   - 4 x 1 column + 1 graph
-    Lab 
-        Single ODE
-            *Error Estimation*
-        ODE Systems
-        Algebraic+ODEs*
-        Samples
-         SEIR
-         Navier Stokes
+Audit
+========
 
-C)
-UI DIV designs
+    1. Cleanup Dead Files   DONE
+    2. Cleanup Old Folders  - TBD
+    5. Github Commits  27/5 - Excellent
+
+    3. WriteUp a project description in Readme.md  . 27/05 - 0/10 DONE
+    4. Suggested Convention - https://google.github.io/styleguide/jsguide.html
+
+    6. Test Code - Key modules identified *New Code Structure needed*
+        src\components\Calculations\Method\LinearCoupled\Calcs\LinearCoupledDiffThreeEqn.js
+        src\containers\Process\Dynamics\LinearCoupled\LinearCoupled.js
+        src\components\Calculations\MFC\OverallReactionAnodeCathodeHeatMapMFC.js
+
+
+DONE
+========
+
+    volumes only go up in 10s DONE
+    add tests DONE
+    link  the  references DONE
+    turn the heatmap around DONE
+    pass eqn from mfc DONE
+    add all the differential qn methods DONE
+    allow zooming into chart DONE
+    latex math DONE
+    logs and trig dont work DONE
+    alternative to eval DONE
+    input box for eqn DONE
+    Dynamic Sumultaion DONE
+    Grid Font size make it bigger DONE
+    Align dx/dt and = DONE
+    Single ODE vs Coupled ODE vs MFC Modelling vs MES vs COVID DONE
+    change X to t DONE
+    move abc as legend to top DONE
+    Reset Deafult DONE
+    In the Coupled ODE solver , have a + sign to add new eqautions and a - sign to remove DONE
+    cant delete last eqn DONE
+    order the eqns by left part DONE
+    breaks with 2 eqns DONE
+    reset the error message when there is a good equnation DONE
+    delte the last eqn and watch DONE
+    make dustmin in line with error message DONE
+    change the react app name DONE
+    production amount in g DONE
+    cs=0-10 DONE
+    change the menu headings DONE
+    Delete energy perfomance Grid DONE
+    foramt MES DONE
+    error handlig in single ODE DONE
+    widen about page DONE
+    make sliders small DONE
+    B)
+    MENU DESIGN 
+        Sustainability
+            MFC   - 3 * (1xN column) + 2 * (1xN column) + 1 graph + 3 sliders + 10 sliders
+            MES   - 3 * (3xN column) - 2 * (1xN column) + 1 graph + 3 sliders + 10 sliders
+        
+        Dynamic
+            MFC   - 4 x 1 column + 1 graph
+            MES   - 4 x 1 column + 1 graph
+        Lab 
+            Single ODE
+                *Error Estimation*
+            ODE Systems
+            Algebraic+ODEs*
+            Samples
+            SEIR
+            Navier Stokes
+    errors should go away individually DONE
+    setting button keeps moving DONE
+    move bins to left DONE
+        a) legend position DONE
+    error handling DONE
+
+
+NOT NEEDED
+===========
+
+    make request to another carbon footprint page elexon or someone NOT NEEDED
+    Steady State meanus as tabs NOT NEEDED
+    Debug window for table NOT NEEDED
+    add the ui tabs NOT NEEDED
+    enlarge pic on click NOT NEEDED
+    make text field bg white with shadow when selected NOT NEEDED
+    C)
+    UI DIV designs
     GRAPH
     MODEL
      1xN column DIV
      NxN coulumn DIV
      3 SLIDER COLLECTION DIV
      10 SLIDER COLLECTION DIVE
-D) Separate Math code from graph code
-E) replace array use with x_0, y_0 syntax
-F) Cover at least the mathmodule
 
-chart properties should be a settings
-    a) legend position DONE
-    b) rounding percision
-Tooltip show line name, round to N decimal 
-get a better heat map package
-when all values are 0 the colours are still there so find a better normalisation
-find a heatmap normalisation
-Write code to convert $data/xls/* xls to $data/json/*
+     make configs show up as modal NOT NEEEDED
 
 
-
-make text field bg white with shadow when selected
-Variable Descfiption of a , b , c has default values from Mama but user can override
-( when user presses submit )
-Alternative chart libs
-error handling
-responsive designs
-change to pqrs
-change the favicon DONE BUT TEST
-plot graph under production rate
-1 heatmap per file
-errors should go away individually
-setting button keeps moving
-
-
-
-Audit
+Clarify
 ========
-
-1. Cleanup Dead Files   DONE
-2. Cleanup Old Folders  - TBD
-5. Github Commits  27/5 - Excellent
-
-3. WriteUp a project description in Readme.md  . 27/05 - 0/10 DONE
-4. Suggested Convention - https://google.github.io/styleguide/jsguide.html
-
-6. Test Code - Key modules identified *New Code Structure needed*
-    src\components\Calculations\Method\LinearCoupled\Calcs\LinearCoupledDiffThreeEqn.js
-    src\containers\Process\Dynamics\LinearCoupled\LinearCoupled.js
-    src\components\Calculations\MFC\OverallReactionAnodeCathodeHeatMapMFC.js
+    change to pqrs
 
 
-DONE
+Themes
 ========
-
-volumes only go up in 10s DONE
-add tests DONE
-link  the  references DONE
-turn the heatmap around DONE
-pass eqn from mfc DONE
-add all the differential qn methods DONE
-allow zooming into chart DONE
-latex math DONE
-logs and trig dont work DONE
-alternative to eval DONE
-input box for eqn DONE
-Dynamic Sumultaion DONE
-Grid Font size make it bigger DONE
-Align dx/dt and = DONE
-Single ODE vs Coupled ODE vs MFC Modelling vs MES vs COVID DONE
-change X to t DONE
-move abc as legend to top DONE
-Reset Deafult DONE
-In the Coupled ODE solver , have a + sign to add new eqautions and a - sign to remove DONE
-cant delete last eqn DONE
-order the eqns by left part DONE
-breaks with 2 eqns DONE
-reset the error message when there is a good equnation DONE
-delte the last eqn and watch DONE
-make dustmin in line with error message DONE
-change the react app name DONE
-production amount in g DONE
-cs=0-10 DONE
-change the menu headings DONE
-Delete energy perfomance Grid DONE
-foramt MES DONE
-error handlig in single ODE DONE
-widen about page DONE
-make sliders small DONE
-
-
-
-NOT NEEDED
-===========
-
-make request to another carbon footprint page elexon or someone NOT NEEDED
-Steady State meanus as tabs NOT NEEDED
-Debug window for table NOT NEEDED
-add the ui tabs NOT NEEDED
-enlarge pic on click NOT NEEDED
+    Alternative chart libs
+    get a better heat map package
+    when all values are 0 the colours are still there so find a better normalisation
+    find a heatmap normalisation
+    Write code to convert $data/xls/* xls to $data/json/*
+    responsive designs
+    1 heatmap per file

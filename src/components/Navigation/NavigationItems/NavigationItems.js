@@ -17,7 +17,17 @@ const navigationItems = (props) => (
     </Dropdown>
 
     <Dropdown name="Lab">
-      <NavigationItem link="/dynamic">Dynamic</NavigationItem>
+    <NavigationItem link="/dynamic"> ALL</NavigationItem>
+
+      <NavigationItem link="/lab/singleode"> Single ODE</NavigationItem>
+      <NavigationItem link="/lab/systemsode"> ODE Systems</NavigationItem>
+      <NavigationItem link="/lab/algebraicode"> Algebraic+ODEs</NavigationItem>
+      <Dropdown name="Samples">
+      <NavigationItem link="/lab/samples/seir">SEIR</NavigationItem>
+      <NavigationItem link="/lab/samples/navierstokes">Navier Stokes</NavigationItem>
+
+
+      </Dropdown>
     </Dropdown>
 
     <NavigationItem link="/reference">Reference</NavigationItem>

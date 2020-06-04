@@ -5,6 +5,7 @@ import FormControlLabel from "@material-ui/core/FormControlLabel";
 import FormControl from "@material-ui/core/FormControl";
 import FormLabel from "@material-ui/core/FormLabel";
 import classes from "./GraphConfig.module.css";
+import Input from '../Input/Input'
 
 export default function FormControlLabelPlacement(props) {
   return (
@@ -67,6 +68,7 @@ export default function FormControlLabelPlacement(props) {
             labelPlacement="start"
           />
         </RadioGroup>
+
       </FormControl>
 
 

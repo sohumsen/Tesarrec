@@ -137,10 +137,10 @@ const LinearCoupledDiffFourEqn = (props) => {
 
     for (let i = 0; i < arr.length; i++) {
       const element = arr[i];
-      FirstEqnArr.push({ x: i * h, y: element[0] });
-      SecondEqnArr.push({ x: i * h, y: element[1] });
-      ThirdEqnArr.push({ x: i * h, y: element[2] });
-      FourthEqnArr.push({ x: i * h, y: element[3] });
+      FirstEqnArr.push({ x: parseFloat(((i * h).toFixed(props.DecimalPrecision))), y: parseFloat((element[0].toFixed(props.DecimalPrecision)) )});
+      SecondEqnArr.push({ x: parseFloat((i * h).toFixed(props.DecimalPrecision)), y: parseFloat(element[1].toFixed(props.DecimalPrecision)) });
+      ThirdEqnArr.push({ x: parseFloat((i * h).toFixed(props.DecimalPrecision)), y: parseFloat(element[2].toFixed(props.DecimalPrecision)) });
+      FourthEqnArr.push({ x: parseFloat((i * h).toFixed(props.DecimalPrecision)), y: parseFloat(element[3].toFixed(props.DecimalPrecision))});
 
     }
 

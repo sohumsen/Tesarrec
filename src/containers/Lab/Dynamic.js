@@ -10,7 +10,7 @@ class Dynamic extends Component {
    *
    */
   state = {
-    choiceValue: 0,
+    choiceValue: 1,
   };
   handleTabChange = (event, val) => {
     this.setState({ choiceValue: val });

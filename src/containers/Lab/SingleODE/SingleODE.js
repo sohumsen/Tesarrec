@@ -66,19 +66,16 @@ class SingleODE extends Component {
       SingleDiffChangeableLatex: "e^x",
       SingleDiffChangeableText: "e^x",
     });
-    console.log(this.state.submitted);
   };
   configureChart = () => {
     let graphConfig = { ...this.state.graphConfig };
     graphConfig.show = !this.state.graphConfig.show;
-    console.log(graphConfig);
 
     this.setState({ graphConfig: graphConfig });
   };
   onGraphConfigChange = (name) => (event, value) => {
     let graphConfig = { ...this.state.graphConfig };
     graphConfig[name] = event.target.value;
-    console.log(graphConfig);
 
     this.setState({ graphConfig: graphConfig });
   };
@@ -101,6 +98,15 @@ class SingleODE extends Component {
             </div>
 
             <div className={classes.ButtonContainer}>
+            <div className={classes.ButtonPos}>
+                <SettingButton
+                disabled={!this.state.submitted}
+                  type="button"
+                  value="config"
+                  displayValue="CONFIG"
+                  onClick={this.configureChart}
+                />
+              </div>
               <div className={classes.ButtonPos}>
               <MyButton type="submit" value="Submit" displayValue="SUBMIT" />
 
@@ -131,15 +137,8 @@ class SingleODE extends Component {
             />
           ) : null}
         </div>
-        <div className={classes.Button}>
-          <SettingButton
-            type="button"
-            value="config"
-            displayValue="CONFIG"
-            onClick={this.configureChart}
-          />
-        </div>
-        {this.state.graphConfig.show ? (
+       
+        {(this.state.graphConfig.show&&this.state.submitted) ? (
           <GraphConfig
             LegendHorizontal={this.state.graphConfig.LegendHorizontal}
             LegendVertical={this.state.graphConfig.LegendVertical}

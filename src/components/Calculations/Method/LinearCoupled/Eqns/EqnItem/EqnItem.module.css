@@ -1,7 +1,8 @@
 .RemoveButton {
-  float: right;
+  float: left;
   position: relative;
   top: -50px;
+  left: -50px;
 }
 
 .Container {

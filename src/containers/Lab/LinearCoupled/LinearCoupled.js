@@ -30,6 +30,7 @@ class LinearCoupled extends Component {
       show: false,
       LegendHorizontal: "left",
       LegendVertical: "top",
+      DecimalPrecision:2
     },
 
     Eqns: [
@@ -138,52 +139,38 @@ class LinearCoupled extends Component {
         valid.push("0");
       }
     });
-    if (valid.includes("0")) {
-      let validIndex = [];
-      for (let i = 0; i < valid.length; i++) {
-        if (valid[i] === "0") validIndex.push(i);
-      }
-      this.showErrorMessage(validIndex);
 
+    let validIndex = [];
+    for (let i = 0; i < valid.length; i++) {
+      if (valid[i] === "0") validIndex.push(i);
+    }
+
+    let newEqns = [];
+    for (let i = 0; i < valid.length; i++) {
+      const element = valid[i];
+      let Eqns = [...this.state.Eqns];
+
+      if (element === "0") {
+        newEqns.push(this.setErrorMessage(i, <MyErrorMessage />));
+      } else {
+        newEqns.push(this.setErrorMessage(i, null));
+      }
+    }
+    this.setState({ Eqns: newEqns });
+
+    if (valid.includes("0")) {
       this.setState({ calculate: false });
     } else {
-      this.removeAllErrorMessage();
       this.setState({ calculate: true });
     }
   };
-  removeAllErrorMessage = () => {
-    let Eqns = [...this.state.Eqns];
 
-    for (let i = 0; i < Eqns.length; i++) {
-      let Eqn = {
-        ...this.state.Eqns[i],
-      };
-      Eqn.errorMessage = null;
-
-      Eqns[i] = Eqn;
-    }
-
-    this.setState({ Eqns: Eqns }, () => {
-      console.log(this.state.Eqns);
-    });
-  };
-  showErrorMessage = (arrEqnIndex) => {
-    let Eqns = [...this.state.Eqns];
-
-    arrEqnIndex.forEach((EqnIndex) => {
-      console.log(EqnIndex);
-      let Eqn = {
-        ...this.state.Eqns[EqnIndex],
-      };
-      Eqn.errorMessage = <MyErrorMessage />;
-
-      Eqns[EqnIndex] = Eqn;
-      console.log(Eqns);
-    });
-
-    this.setState({ Eqns: Eqns }, () => {
-      console.log(this.state.Eqns);
-    });
+  setErrorMessage = (i, errorMessage) => {
+    let Eqn = {
+      ...this.state.Eqns[i],
+    };
+    Eqn.errorMessage = errorMessage;
+    return Eqn;
   };
   removeEqn = (id) => {
     this.setState((prevState) => {
@@ -205,8 +192,12 @@ class LinearCoupled extends Component {
         d: "this is some stuff",
       },
       graphConfig: {
+        show: false,
+
         LegendHorizontal: "left",
         LegendVertical: "top",
+        DecimalPrecision:2
+
       },
 
       Eqns: [
@@ -323,6 +314,7 @@ class LinearCoupled extends Component {
             b={0.5}
             LegendVertical={this.state.graphConfig.LegendVertical}
             LegendHorizontal={this.state.graphConfig.LegendHorizontal}
+            DecimalPrecision={this.state.graphConfig.DecimalPrecision}
           />
         );
       case 3:
@@ -343,6 +335,8 @@ class LinearCoupled extends Component {
             c={0.75}
             LegendVertical={this.state.graphConfig.LegendVertical}
             LegendHorizontal={this.state.graphConfig.LegendHorizontal}
+            DecimalPrecision={this.state.graphConfig.DecimalPrecision}
+
           />
         );
       case 4:
@@ -366,6 +360,8 @@ class LinearCoupled extends Component {
             d={0.5}
             LegendVertical={this.state.graphConfig.LegendVertical}
             LegendHorizontal={this.state.graphConfig.LegendHorizontal}
+            DecimalPrecision={this.state.graphConfig.DecimalPrecision}
+
           />
         );
 
@@ -388,6 +384,15 @@ class LinearCoupled extends Component {
           <div className={classes.Eqns}>
             {Eqns}
             <div className={classes.ButtonContainer}>
+              <div className={classes.Button}>
+                <SettingButton
+                disabled={!this.state.calculate}
+                  type="button"
+                  value="config"
+                  displayValue="CONFIG"
+                  onClick={this.configureChart}
+                />
+              </div>
               <div className={classes.Button}>
                 <MyButton
                   type="button"
@@ -424,18 +429,12 @@ class LinearCoupled extends Component {
             ? this.renderSwitchGraph(this.state.Eqns.length)
             : null}
         </div>
-        <div className={classes.Button}>
-          <SettingButton
-            type="button"
-            value="config"
-            displayValue="CONFIG"
-            onClick={this.configureChart}
-          />
-        </div>
-        {this.state.graphConfig.show ? (
+
+        {(this.state.graphConfig.show &&this.state.calculate)? (
           <GraphConfig
             LegendHorizontal={this.state.graphConfig.LegendHorizontal}
             LegendVertical={this.state.graphConfig.LegendVertical}
+            DecimalPrecision={this.state.graphConfig.DecimalPrecision}
             onChange={(val) => this.onGraphConfigChange(val)}
           />
         ) : null}

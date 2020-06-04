@@ -5,8 +5,7 @@ import { addStyles, EditableMathField, StaticMathField } from "react-mathquill";
 addStyles();
 
 const MyMathQuill = (props) => {
-  console.log(props.firstBit)
-  console.log(props.NoEdit)
+
   return (
     <div>
       <StaticMathField>{props.firstBit}</StaticMathField>
