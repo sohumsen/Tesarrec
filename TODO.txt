@@ -3,13 +3,11 @@ D) Separate Math code from graph code
 E) replace array use with x_0, y_0 syntax
 F) Cover at least the mathmodule
 
-chart properties should be a settings
-    b) rounding percision
-Tooltip show line name, round to N decimal 
+
 Variable Descfiption of a , b , c has default values from Mama but user can override( when user presses submit )
 plot graph under production rate
 for certain eqns ban negatives
-
+style the config popup
 
 Audit
 ========
@@ -87,7 +85,9 @@ DONE
         a) legend position DONE
     error handling DONE
     change the favicon DONE BUT TEST
-
+    chart properties should be a settings
+    b) rounding percision DONE
+    Tooltip show line name, round to N decimal DONE
 
 
 NOT NEEDED

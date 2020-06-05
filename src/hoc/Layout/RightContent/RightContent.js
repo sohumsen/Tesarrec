@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import classes from "./RightContent.module.css";
-import MESPic from "../../../components/UI/MESandMFCPics/MESPic/MESPic";
-import MFCPic from "../../../components/UI/MESandMFCPics/MFCPic/MFCPic";
+
 
 import MySliderContainer from "../../../components/UI/SliderContainer/SliderContainer";
 import FormControlLabel from "@material-ui/core/FormControlLabel";

@@ -148,7 +148,6 @@ class LinearCoupled extends Component {
     let newEqns = [];
     for (let i = 0; i < valid.length; i++) {
       const element = valid[i];
-      let Eqns = [...this.state.Eqns];
 
       if (element === "0") {
         newEqns.push(this.setErrorMessage(i, <MyErrorMessage />));

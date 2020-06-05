@@ -67,9 +67,10 @@ export default function FormControlLabelPlacement(props) {
             labelPlacement="start"
           />
         </RadioGroup>
-        <input
-          label="DecimalPrecision:"
+        <Input
+          label="Decimal Precision"
           type="text"
+          name="DecimalPrecision"
           value={props.DecimalPrecision}
           onChange={props.onChange("DecimalPrecision")}
         />

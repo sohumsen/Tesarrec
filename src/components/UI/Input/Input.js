@@ -1,12 +1,13 @@
-import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import TextField from '@material-ui/core/TextField';
+import React from "react";
+import { makeStyles } from "@material-ui/core/styles";
+import TextField from "@material-ui/core/TextField";
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    '& > *': {
+    "& > *": {
       margin: theme.spacing(1),
-      width: '25ch',
+
+      width: 100,
     },
   },
 }));
@@ -16,7 +17,14 @@ export default function Input(props) {
 
   return (
     
- 
-      <TextField id="outlined-basic" label={props.label} variant={props.label} />
+    <TextField className={classes.root}
+    size="small"
+
+      type={props.type}
+      value={props.value}
+      onChange={props.onChange}
+      label={props.label}
+      name={props.name}
+    />
   );
 }
