@@ -1,4 +1,5 @@
-import SettingsIcon from '@material-ui/icons/Settings';
+import CloseIcon from '@material-ui/icons/Close';
+
 
 import React from "react";
 
@@ -8,14 +9,14 @@ export default function SettingButton(props) {
   return (
     <div>
       <IconButton
-        aria-label="config"
+        aria-label="close"
         type={props.type}
         value={props.value}
         onClick={props.onClick}
         disabled={props.disabled}
         style={{ color: "rgb(0, 0, 105)" }}
       >
-        <SettingsIcon />
+        <CloseIcon />
       </IconButton>
     </div>
   );

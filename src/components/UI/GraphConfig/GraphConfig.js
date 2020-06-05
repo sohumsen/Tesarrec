@@ -6,10 +6,21 @@ import FormControl from "@material-ui/core/FormControl";
 import FormLabel from "@material-ui/core/FormLabel";
 import classes from "./GraphConfig.module.css";
 import Input from "../Input/Input";
+import CloseButton from "../Button/CloseButton";
 
 export default function FormControlLabelPlacement(props) {
   return (
     <div className={classes.RadioButtons}>
+      <h3>CONFIG</h3>
+      <div className={classes.CloseButton}>
+      <CloseButton
+        type="button"
+        value="Close"
+        displayValue="Close"
+        onClick={props.onClose}
+      />
+      </div>
+
       <FormControl component="fieldset">
         <FormLabel component="legend">Horizontal Align</FormLabel>
         <RadioGroup

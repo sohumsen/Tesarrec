@@ -22,6 +22,8 @@ class SingleODE extends Component {
       show: false,
       LegendHorizontal: "left",
       LegendVertical: "top",
+      DecimalPrecision:2
+
     },
     submitted: true,
     SingleDiffChangeableLatex: "e^x",
@@ -54,7 +56,7 @@ class SingleODE extends Component {
   handleMathQuillInputSubmit = (event) => {
     event.preventDefault();
     if (this.validateExpression(this.state.SingleDiffChangeableText)) {
-      this.setState({ submitted: true });
+      this.setState({ submitted: true , error:false});
     } else {
       this.setState({ submitted: false, error: true });
     }
@@ -67,7 +69,7 @@ class SingleODE extends Component {
       SingleDiffChangeableText: "e^x",
     });
   };
-  configureChart = () => {
+  toggleChartShow = () => {
     let graphConfig = { ...this.state.graphConfig };
     graphConfig.show = !this.state.graphConfig.show;
 
@@ -104,7 +106,7 @@ class SingleODE extends Component {
                   type="button"
                   value="config"
                   displayValue="CONFIG"
-                  onClick={this.configureChart}
+                  onClick={this.toggleChartShow}
                 />
               </div>
               <div className={classes.ButtonPos}>
@@ -134,6 +136,8 @@ class SingleODE extends Component {
               LineNames={["Euler", "Midpoint", "Runge Kutta"]}
               LegendHorizontal={this.state.graphConfig.LegendHorizontal}
               LegendVertical={this.state.graphConfig.LegendVertical}
+              DecimalPrecision={this.state.graphConfig.DecimalPrecision}
+
             />
           ) : null}
         </div>
@@ -142,6 +146,10 @@ class SingleODE extends Component {
           <GraphConfig
             LegendHorizontal={this.state.graphConfig.LegendHorizontal}
             LegendVertical={this.state.graphConfig.LegendVertical}
+            DecimalPrecision={this.state.graphConfig.DecimalPrecision}
+            onClose={this.toggleChartShow}
+            
+
             onChange={(val) => this.onGraphConfigChange(val)}
           />
         ) : null}

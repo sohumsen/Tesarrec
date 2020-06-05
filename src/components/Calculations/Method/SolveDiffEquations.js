@@ -117,7 +117,7 @@ const SolveDiffEquations = (props) => {
 
     arr.forEach((element) => {
       element.forEach((e) => {
-        newCompletedGid.push(e.toFixed(2));
+        newCompletedGid.push(parseFloat(e.toFixed(props.DecimalPrecision)));
       });
     });
 

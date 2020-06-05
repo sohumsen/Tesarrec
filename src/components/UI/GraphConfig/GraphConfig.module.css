@@ -1,11 +1,14 @@
-.RadioButtons{
-    color: black;
-    background-color: rgb(234, 238, 245);
+.RadioButtons {
+  color: black;
+  background-color: rgb(234, 238, 245);
+  position: absolute;
+  top: 25%;
+  right: -190px;
+  padding: 10px;
+}
+
+.CloseButton{
     position: absolute;
-    top: 78%;
-    left: 50%;
-
-    width: 43%;
-
-    text-align: center;
+    top: 0px;
+    right: 0px;
 }

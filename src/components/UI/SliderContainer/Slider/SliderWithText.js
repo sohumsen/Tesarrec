@@ -9,7 +9,7 @@ const useStyles = makeStyles({
   root: {
     width: props=>props.rootWidth,
     float:"left",
-    margin: "10px",
+    margin: "5px",
   },
   input: {
     width: props=>props.inputWidth,

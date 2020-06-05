@@ -288,7 +288,7 @@ class LinearCoupled extends Component {
       };
     });
   };
-  configureChart = () => {
+  toggleChartShow = () => {
     let graphConfig = { ...this.state.graphConfig };
     graphConfig.show = !this.state.graphConfig.show;
     this.setState({ graphConfig: graphConfig });
@@ -389,7 +389,7 @@ class LinearCoupled extends Component {
                   type="button"
                   value="config"
                   displayValue="CONFIG"
-                  onClick={this.configureChart}
+                  onClick={this.toggleChartShow}
                 />
               </div>
               <div className={classes.Button}>
@@ -434,6 +434,7 @@ class LinearCoupled extends Component {
             LegendHorizontal={this.state.graphConfig.LegendHorizontal}
             LegendVertical={this.state.graphConfig.LegendVertical}
             DecimalPrecision={this.state.graphConfig.DecimalPrecision}
+            onClose={this.toggleChartShow}
             onChange={(val) => this.onGraphConfigChange(val)}
           />
         ) : null}

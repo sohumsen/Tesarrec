@@ -1,13 +1,11 @@
 
-D) Separate Math code from graph code
-E) replace array use with x_0, y_0 syntax
-F) Cover at least the mathmodule
-
 
 Variable Descfiption of a , b , c has default values from Mama but user can override( when user presses submit )
 plot graph under production rate
 for certain eqns ban negatives
-style the config popup
+
+
+
 
 Audit
 ========
@@ -88,7 +86,9 @@ DONE
     chart properties should be a settings
     b) rounding percision DONE
     Tooltip show line name, round to N decimal DONE
-
+    style the config popup DONE
+    decimal presicion style DONE
+    decimal precision in single ODE DONE
 
 NOT NEEDED
 ===========
@@ -114,6 +114,11 @@ NOT NEEDED
 Clarify
 ========
     change to pqrs
+    
+    D) Separate Math code from graph code
+    E) replace array use with x_0, y_0 syntax
+    F) Cover at least the mathmodule
+
 
 
 Themes
@@ -125,3 +130,4 @@ Themes
     Write code to convert $data/xls/* xls to $data/json/*
     responsive designs
     1 heatmap per file
+    reformat Folders
