@@ -81,6 +81,11 @@ class SingleODE extends Component {
 
     this.setState({ graphConfig: graphConfig });
   };
+  _handleKeyDown = (e) => {
+    if (e.key === 'Enter') {
+      this.setState({submitted:true})
+    }
+  }
 
   render() {
     return (
@@ -95,6 +100,7 @@ class SingleODE extends Component {
                   "SingleDiffChangeableLatex",
                   "SingleDiffChangeableText"
                 )}
+                onKeyDown={this._handleKeyDown}
               />
               {this.state.error ? <MyErrorMessage /> : null}
             </div>

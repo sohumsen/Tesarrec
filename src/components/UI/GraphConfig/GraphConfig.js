@@ -7,6 +7,7 @@ import FormLabel from "@material-ui/core/FormLabel";
 import classes from "./GraphConfig.module.css";
 import Input from "../Input/Input";
 import CloseButton from "../Button/CloseButton";
+// import Paper from '../Paper/Paper'
 
 export default function FormControlLabelPlacement(props) {
   return (

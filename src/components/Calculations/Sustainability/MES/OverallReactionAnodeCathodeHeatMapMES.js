@@ -5,41 +5,40 @@ import ReadCathodeJSON from "../../../Excel/Cathode/ReadCathodeJSON";
 
 import MyHeatMap from "../../../UI/MyHeatMap/MyHeatMap";
 import classes from "./OverallReactionAnodeCathodeMES.module.css";
-import MyMathQuill from '../../../UI/Math/MyMathQuill'
+import MyMathQuill from "../../../UI/Math/MyMathQuill";
 const OverallReactionAnodeCathode = (props) => {
   //console.log(props.anodeSubstrate)
   //console.log(props.cathodeProduct)
 
-
-
   let CarbonEmmision =
-  (props.CCGT * 0.1386 +
-    props.Nuclear * 0.0081 +
-    props.Biomass * 0.0125 +
-    props.Coal * 0.2466 +
-    props.Wind * 0.0072 +
-    props.Solar * 0.02361 +
-    props.Oil * 0.20361 +
-    props.OCGT * 0.1386 +
-    props.Hydroelectric * 0.00722 +
-    props.PumpedHydro * 0.11527 +
-    props.Other * 0.07583) /
-  (props.CCGT +
-    props.Nuclear +
-    props.Biomass +
-    props.Coal +
-    props.Wind +
-    props.Solar +
-    props.Oil +
-    props.OCGT +
-    props.Hydroelectric +
-    props.PumpedHydro +
-    props.Other);  let ProductionRategData = [];
+    (props.CCGT * 0.1386 +
+      props.Nuclear * 0.0081 +
+      props.Biomass * 0.0125 +
+      props.Coal * 0.2466 +
+      props.Wind * 0.0072 +
+      props.Solar * 0.02361 +
+      props.Oil * 0.20361 +
+      props.OCGT * 0.1386 +
+      props.Hydroelectric * 0.00722 +
+      props.PumpedHydro * 0.11527 +
+      props.Other * 0.07583) /
+    (props.CCGT +
+      props.Nuclear +
+      props.Biomass +
+      props.Coal +
+      props.Wind +
+      props.Solar +
+      props.Oil +
+      props.OCGT +
+      props.Hydroelectric +
+      props.PumpedHydro +
+      props.Other);
+  let ProductionRategData = [];
   let GibbsEnergyData = [];
   let GWPSavingData = [];
+  let TheoreticalPotentialData = [];
   props.heatMapContents.yLabels.forEach((Yelement) => {
-  props.heatMapContents.xLabels.forEach((Xelement) => {
-    
+    props.heatMapContents.xLabels.forEach((Xelement) => {
       let AnodeData = ReadAnodeJSON(Xelement);
       //console.log(AnodeData)
       let x = parseInt(AnodeData.value.x);
@@ -64,14 +63,15 @@ const OverallReactionAnodeCathode = (props) => {
 
       let xDash = c / x;
       let m = o - (c * z) / x;
-      //let mDash = 0.5 * (-h + (c * y) / x + 2 * o - (2 * c * z) / x);
+      let mDash = 0.5 * (-h + (c * y) / x + 2 * o - (2 * c * z) / x);
 
       let StandardGibbsEnergyOfReactionProductkJMol =
-        (GibbsProductInitial - xDash * GibbsSubstrateInitial - m * -237.13);
-        // let MaximumAppliedPotential =
-        // (GibbsProductInitial - xDash * GibbsSubstrateInitial - m * -237.13)*(1000/96485);
+        GibbsProductInitial - xDash * GibbsSubstrateInitial - m * -237.13;
+      // let MaximumAppliedPotential =
+      // (GibbsProductInitial - xDash * GibbsSubstrateInitial - m * -237.13)*(1000/96485);
       //let StandardGibbsEnergyOfFormationOfWater = -237.13;
-      //let StandardGibbsEnergyOfReactionSubstratekJMol =(1 / xDash) * StandardGibbsEnergyOfReactionProductkJMol;
+      let StandardGibbsEnergyOfReactionSubstratekJMol =
+        (1 / xDash) * StandardGibbsEnergyOfReactionProductkJMol;
 
       let MolarMassOfProduct = 12 * c + h + 16 * o;
       let MolarMassOfSubstrate = 12 * x + y + 16 * z;
@@ -90,63 +90,57 @@ const OverallReactionAnodeCathode = (props) => {
           MolarMassOfProduct) /
         (MolarMassOfSubstrate * xDash);
 
-      //console.log(StandardGibbsEnergyOfReactionkJ)
+      let TheoreticalPotential =
+        StandardGibbsEnergyOfReactionSubstratekJMol *
+        (1000 / (96485 * (2 * mDash + h)));
+
+      let GWPSaving =
+        (GWPp *
+          props.concentration *
+          props.volume *
+          props.efficiency *
+          MolarMassOfProduct) /
+          (xDash * MolarMassOfSubstrate) -
+        StandardGibbsEnergyOfReactionkJ * CarbonEmmision;
 
       ProductionRategData.push(ProductionRateg.toFixed(2));
 
       GibbsEnergyData.push(StandardGibbsEnergyOfReactionkJ.toFixed(2));
 
-      //console.log( Xelement,Yelement)
-
-      //console.log((StandardGibbsEnergyOfReactionkJ.toFixed(2)))
-
-      let GWPSaving =
-(
-          (GWPp *
-            props.concentration *
-            props.volume *
-            props.efficiency *
-            MolarMassOfProduct) /
-            (xDash * MolarMassOfSubstrate) -
-            StandardGibbsEnergyOfReactionkJ * CarbonEmmision
-        );
+      TheoreticalPotentialData.push(TheoreticalPotential.toFixed(2));
 
       GWPSavingData.push(GWPSaving.toFixed(2));
-
     });
   });
 
+  const FormatArr = (Arr) => {
+    let TwoDArr = [];
 
-  let TwoDProductionRategData = [];
+    while (Arr.length)
+      TwoDArr.push(Arr.splice(0, props.heatMapContents.xLabels.length));
 
-  while (ProductionRategData.length)
-    TwoDProductionRategData.push(
-      ProductionRategData.splice(0, props.heatMapContents.xLabels.length)
-    );
+    return TwoDArr;
+  };
 
-  let TwoDGibbsEnergyData = [];
+  let TwoDProductionRategData = FormatArr(ProductionRategData);
 
-  while (GibbsEnergyData.length)
-    TwoDGibbsEnergyData.push(
-      GibbsEnergyData.splice(0, props.heatMapContents.xLabels.length)
-    );
+  //let TwoDGibbsEnergyData = FormatArr(GibbsEnergyData);
 
-  let TwoDGWPSavingyData = [];
+  let TwoDGWPSavingyData = FormatArr(GWPSavingData);
 
-  while (GWPSavingData.length)
-    TwoDGWPSavingyData.push(
-      GWPSavingData.splice(0, props.heatMapContents.xLabels.length)
-    );
+  let TwoDTheoreticalPotentialData = FormatArr(TheoreticalPotentialData);
 
-
-    //console.log(energyObj)
-
-  //console.log("heat map contents   "+ props.heatMapContents)
   return (
     <div className={classes.HeatMaps}>
       <div className={classes.HeatMapProductionRate}>
-        <h2>Production Amount in g</h2>
-        <MyMathQuill NoEdit firstBit={"production\\ Amount=\\frac{\\left(Substrate\\ Concentration\\left(\\frac{g}{L}\\right)\\cdot Volume\\ Of\\ Cell\\left(L\\right)\\cdot Efficiency\\cdot\\left(12c+h+16o\\right)\\right)}{x'\\left(12x+y+16z\\right)}"}/>
+        <h3>Production rate (g/h)</h3>
+        <MyMathQuill
+          style={{ fontSize: "100px" }}
+          NoEdit
+          firstBit={
+            "\\frac{\\left(Substrate\\ Concentration\\left(\\frac{g}{L}\\right)\\cdot Volumetric\\ flowrate\\left(L/h\\right)\\cdot Efficiency\\cdot\\left(12c+h+16o\\right)\\right)}{x'\\left(12x+y+16z\\right)}"
+          }
+        />
 
         <MyHeatMap
           xLabels={props.heatMapContents.xLabels}
@@ -157,7 +151,7 @@ const OverallReactionAnodeCathode = (props) => {
         />
       </div>
 
-    {/*  <div className={classes.HeatMapEnergyPerformance}>
+      {/*  <div className={classes.HeatMapEnergyPerformance}>
         <h3>Energy Performance in kJ</h3>
         <MyHeatMap
           xLabels={props.heatMapContents.xLabels}
@@ -172,12 +166,33 @@ const OverallReactionAnodeCathode = (props) => {
   </div>*/}
 
       <div className={classes.HeatMapEnergyPerformance}>
-        <h3 >Global Warming Potential saving g CO&#8322; eq.</h3>
+        <h3>Global Warming Potential saving g CO&#8322; eq.</h3>
+        <br /> <br />
+        <br />
         <MyHeatMap
           xLabels={props.heatMapContents.xLabels}
           yLabels={props.heatMapContents.yLabels}
           color={"rgba(0, 255, 255"}
           data={TwoDGWPSavingyData}
+          HeatMapChangedOnClick={props.HeatMapChangedOnClick}
+        />
+      </div>
+
+      <div className={classes.HeatMapEnergyPerformance}>
+        <h3>Heat map of Theoretical potential (V)</h3>
+        <MyMathQuill
+          style={{ fontSize: "100px" }}
+          NoEdit
+          firstBit={
+            "\\frac{\\left(Substrate\\ Concentration\\left(\\frac{g}{L}\\right)\\cdot Volume\\ Of\\ Cell\\left(L\\right)\\cdot Efficiency\\cdot\\left(12c+h+16o\\right)\\right)}{x'\\left(12x+y+16z\\right)}"
+          }
+        />
+
+        <MyHeatMap
+          xLabels={props.heatMapContents.xLabels}
+          yLabels={props.heatMapContents.yLabels}
+          color={"rgba(0, 255, 255"}
+          data={TwoDTheoreticalPotentialData}
           HeatMapChangedOnClick={props.HeatMapChangedOnClick}
         />
       </div>

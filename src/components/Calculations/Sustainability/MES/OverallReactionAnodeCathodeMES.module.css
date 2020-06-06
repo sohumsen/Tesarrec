@@ -1,22 +1,24 @@
 .HeatMaps{
     
-    width: 100%;
-    display:inline-block;
-    vertical-align: top;
+    float: left;
 
 }
 
 .HeatMapProductionRate{
     float: left;
-    width: 100%;
+    width: 50%;
     padding-top: 10%;
     text-align: center;
+    
 }
 
 .HeatMapEnergyPerformance{
     float: left;
-    width: 100%;
+    width: 50%;
+
     padding-top: 10%;
+    text-align: center;
+
 
 
 

@@ -75,7 +75,7 @@ class HeatMapForm extends Component {
 
   render() {
     return (
-      <div>
+      <div style={{width:"100%"}}>
         <LeftContent />
 
         <RightContent

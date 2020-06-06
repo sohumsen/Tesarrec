@@ -42,7 +42,7 @@ class RightContent extends Component {
           <SliderWithText
             rootWidth={"43%"}
             inputWidth={52}
-            
+
             displayCaption={"CCGT "}
             value={this.props.CCGT}
             displayValue={this.props.CCGT}
@@ -196,7 +196,7 @@ class RightContent extends Component {
           <SliderWithText
             rootWidth={"43%"}
             inputWidth={52}
-            displayCaption={"Cell volume in L"}
+            displayCaption={"Volumetric flowrate in L/h"}
             value={this.props.Volume}
             InputhandleChange={this.props.InputhandleChange("Volume")}
             lowestVal={0}
