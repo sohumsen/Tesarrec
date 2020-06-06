@@ -42,6 +42,7 @@ class RightContent extends Component {
           <SliderWithText
             rootWidth={"43%"}
             inputWidth={52}
+            
             displayCaption={"CCGT "}
             value={this.props.CCGT}
             displayValue={this.props.CCGT}
