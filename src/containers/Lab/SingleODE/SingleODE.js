@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import SolveDiffEquations from "../../../components/Calculations/Method/SolveDiffEquations";
 import MyErrorMessage from "../../../components/UI/MyErrorMessage/MyErrorMessage";
 
 import MyMathQuill from "../../../components/UI/Math/MyMathQuill";
@@ -8,6 +7,7 @@ import MyButton from "../../../components/UI/Button/GenericButton";
 import classes from "./SingleODE.module.css";
 import GraphConfig from "../../../components/UI/GraphConfig/GraphConfig";
 import SettingButton from "../../../components/UI/Button/SettingButton";
+import DiffEquationGrapher from "../../../components/Calculations/Method/DiffEquationGrapher";
 
 class SingleODE extends Component {
   /**
@@ -133,7 +133,7 @@ class SingleODE extends Component {
         </div>
         <div className={classes.Graph}>
           {this.state.submitted ? (
-            <SolveDiffEquations
+            <DiffEquationGrapher
               h={0.5}
               X0={-12.5}
               Y0={-12.5}

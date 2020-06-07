@@ -4,7 +4,7 @@ import LeftContent from "../../../../../hoc/Layout/LeftContent/LeftContent";
 import RightContent from "../../../../../hoc/Layout/RightContent/RightContent";
 import classes from "./HeatMapFormMES.module.css";
 import OverallReactionAnodeCathode from "../../../../../components/Calculations/Sustainability/MES/OverallReactionAnodeCathodeHeatMapMES";
-import MESPic from '../../../../../assets/MES.png'
+import MESPic from "../../../../../assets/MES.png";
 class HeatMapForm extends Component {
   state = {
     HeatMapState: {
@@ -46,6 +46,19 @@ class HeatMapForm extends Component {
     Hydroelectric: 100,
     PumpedHydro: 100,
     Other: 100,
+
+    AnodeCost: 15,
+    CathodeCost: 15,
+    MembraneCost: 440,
+    CurrentCollectorCost: 28,
+
+    AnolyteCost: 0.0012,
+    CatholyteCost: 0.5,
+    ExternalEnergyCost: 0.15,
+    LangFactorCost: 4.75,
+    ACCCost: 0.13,
+    ProductionPriceCost: 0.024,
+    IRRCost: 0.12,
   };
 
   HeatMapChangedOnClick = (x, y, value) => {
@@ -75,7 +88,7 @@ class HeatMapForm extends Component {
 
   render() {
     return (
-      <div style={{width:"100%"}}>
+      <div style={{ width: "100%" }}>
         <LeftContent />
 
         <RightContent
@@ -100,11 +113,24 @@ class HeatMapForm extends Component {
           PumpedHydro={this.state.PumpedHydro}
           Other={this.state.Other}
           MES={true}
+          AnodeCost={this.state.AnodeCost}
+          CathodeCost={this.state.CathodeCost}
+          MembraneCost={this.state.MembraneCost}
+          CurrentCollectorCost={this.state.CurrentCollectorCost}
+          AnolyteCost={this.state.AnolyteCost}
+          CatholyteCost={this.state.CatholyteCost}
+          ExternalEnergyCost={this.state.ExternalEnergyCost}
+          LangFactorCost={this.state.LangFactorCost}
+          ACCCost={this.state.ACCCost}
+          ProductionPriceCost={this.state.ProductionPriceCost}
+          IRRCost={this.state.IRRCost}
         />
         <div>
           <img src={MESPic} width="100%" alt="mes pic"></img>
-          <h2 style={{textAlign:"center"}}>x'C<sub>x</sub>H<sub>y</sub>O<sub>z</sub> +mH<sub>2</sub>O = C<sub>c</sub>H<sub>h</sub>O<sub>o</sub>+m'H<sub>2</sub></h2>
-
+          <h2 style={{ textAlign: "center" }}>
+            x'C<sub>x</sub>H<sub>y</sub>O<sub>z</sub> +mH<sub>2</sub>O = C
+            <sub>c</sub>H<sub>h</sub>O<sub>o</sub>+m'H<sub>2</sub>
+          </h2>
         </div>
 
         <div className={classes.HeatMap}>
@@ -127,6 +153,17 @@ class HeatMapForm extends Component {
             Hydroelectric={this.state.Hydroelectric}
             PumpedHydro={this.state.PumpedHydro}
             Other={this.state.Other}
+            AnodeCost={this.state.AnodeCost}
+            CathodeCost={this.state.CathodeCost}
+            MembraneCost={this.state.MembraneCost}
+            CurrentCollectorCost={this.state.CurrentCollectorCost}
+            AnolyteCost={this.state.AnolyteCost}
+            CatholyteCost={this.state.CatholyteCost}
+            ExternalEnergyCost={this.state.ExternalEnergyCost}
+            LangFactorCost={this.state.LangFactorCost}
+            ACCCost={this.state.ACCCost}
+            ProductionPriceCost={this.state.ProductionPriceCost}
+            IRRCost={this.state.IRRCost}
           />
         </div>
       </div>

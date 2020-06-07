@@ -18,7 +18,8 @@ Audit
     4. Suggested Convention - https://google.github.io/styleguide/jsguide.html
 
     6. Test Code - Key modules identified *New Code Structure needed*
-        src\components\Calculations\Method\LinearCoupled\Calcs\LinearCoupledDiffThreeEqn.js
+        EqnItem and EqnItems test coverage
+        condense src\components\Calculations\Method\LinearCoupled\Calcs\LinearCoupledDiffThreeEqn.js
         src\containers\Process\Dynamics\LinearCoupled\LinearCoupled.js
         src\components\Calculations\MFC\OverallReactionAnodeCathodeHeatMapMFC.js
 

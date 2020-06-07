@@ -37,6 +37,7 @@ const OverallReactionAnodeCathode = (props) => {
   let GibbsEnergyData = [];
   let GWPSavingData = [];
   let TheoreticalPotentialData = [];
+  let CapitalCostData=[]
   props.heatMapContents.yLabels.forEach((Yelement) => {
     props.heatMapContents.xLabels.forEach((Xelement) => {
       let AnodeData = ReadAnodeJSON(Xelement);
@@ -103,6 +104,8 @@ const OverallReactionAnodeCathode = (props) => {
           (xDash * MolarMassOfSubstrate) -
         StandardGibbsEnergyOfReactionkJ * CarbonEmmision;
 
+      let CapitalCost=((props.AnodeCost+props.CathodeCost+props.MembraneCost)*0.0016+props.CurrentCollectorCost*0.0005)*ProductionRateg*7.3*24*props.LangFactorCost
+
       ProductionRategData.push(ProductionRateg.toFixed(2));
 
       GibbsEnergyData.push(StandardGibbsEnergyOfReactionkJ.toFixed(2));
@@ -110,6 +113,8 @@ const OverallReactionAnodeCathode = (props) => {
       TheoreticalPotentialData.push(TheoreticalPotential.toFixed(2));
 
       GWPSavingData.push(GWPSaving.toFixed(2));
+
+      CapitalCostData.push(CapitalCost.toFixed(2))
     });
   });
 
@@ -130,9 +135,11 @@ const OverallReactionAnodeCathode = (props) => {
 
   let TwoDTheoreticalPotentialData = FormatArr(TheoreticalPotentialData);
 
+  let TwoDCapitalCostData=FormatArr(CapitalCostData)
+
   return (
     <div className={classes.HeatMaps}>
-      <div className={classes.HeatMapProductionRate}>
+      <div className={classes.HeatMapEnergyPerformance}>
         <h3>Production rate (g/h)</h3>
         <MyMathQuill
           style={{ fontSize: "100px" }}
@@ -180,19 +187,25 @@ const OverallReactionAnodeCathode = (props) => {
 
       <div className={classes.HeatMapEnergyPerformance}>
         <h3>Heat map of Theoretical potential (V)</h3>
-        <MyMathQuill
-          style={{ fontSize: "100px" }}
-          NoEdit
-          firstBit={
-            "\\frac{\\left(Substrate\\ Concentration\\left(\\frac{g}{L}\\right)\\cdot Volume\\ Of\\ Cell\\left(L\\right)\\cdot Efficiency\\cdot\\left(12c+h+16o\\right)\\right)}{x'\\left(12x+y+16z\\right)}"
-          }
-        />
+
 
         <MyHeatMap
           xLabels={props.heatMapContents.xLabels}
           yLabels={props.heatMapContents.yLabels}
           color={"rgba(0, 255, 255"}
           data={TwoDTheoreticalPotentialData}
+          HeatMapChangedOnClick={props.HeatMapChangedOnClick}
+        />
+      </div>
+      <div className={classes.HeatMapEnergyPerformance}>
+        <h3>Heat map of Capital Cost</h3>
+
+
+        <MyHeatMap
+          xLabels={props.heatMapContents.xLabels}
+          yLabels={props.heatMapContents.yLabels}
+          color={"rgba(0, 255, 255"}
+          data={TwoDCapitalCostData}
           HeatMapChangedOnClick={props.HeatMapChangedOnClick}
         />
       </div>

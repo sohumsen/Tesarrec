@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import classes from "./RightContent.module.css";
 
-
 import MySliderContainer from "../../../components/UI/SliderContainer/SliderContainer";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Switch from "@material-ui/core/Switch";
@@ -25,6 +24,7 @@ const PurpleSwitch = withStyles({
 class RightContent extends Component {
   state = {
     showEnergySliders: false,
+    showCostSliders: false,
   };
 
   showEnergySliderHandler = (event) => {
@@ -42,7 +42,6 @@ class RightContent extends Component {
           <SliderWithText
             rootWidth={"43%"}
             inputWidth={52}
-
             displayCaption={"CCGT "}
             value={this.props.CCGT}
             displayValue={this.props.CCGT}
@@ -164,6 +163,138 @@ class RightContent extends Component {
         </MySliderContainer>
       );
     }
+
+    let costSliders = null;
+
+    if (this.state.showCostSliders) {
+      costSliders = (
+        <MySliderContainer>
+          <h3>Capital Cost</h3>
+          <SliderWithText
+            rootWidth={"43%"}
+            inputWidth={52}
+            displayCaption={"Anode "}
+            value={this.props.AnodeCost}
+            displayValue={this.props.AnodeCost}
+            lowestVal={5}
+            highestVal={20}
+            SliderhandleChange={this.props.SliderhandleChange("AnodeCost")}
+            InputhandleChange={this.props.InputhandleChange("AnodeCost")}
+          />
+          <SliderWithText
+            rootWidth={"43%"}
+            inputWidth={52}
+            displayCaption={"Cathode "}
+            value={this.props.CathodeCost}
+            displayValue={this.props.CathodeCost}
+            lowestVal={5}
+            highestVal={20}
+            SliderhandleChange={this.props.SliderhandleChange("CathodeCost")}
+            InputhandleChange={this.props.InputhandleChange("CathodeCost")}
+          />
+          <SliderWithText
+            rootWidth={"43%"}
+            inputWidth={52}
+            displayCaption={"Membrane "}
+            value={this.props.MembraneCost}
+            displayValue={this.props.MembraneCost}
+            lowestVal={10}
+            highestVal={500}
+            SliderhandleChange={this.props.SliderhandleChange("MembraneCost")}
+            InputhandleChange={this.props.InputhandleChange("MembraneCost")}
+          />
+          <SliderWithText
+            rootWidth={"43%"}
+            inputWidth={52}
+            displayCaption={"Current Collector "}
+            value={this.props.CurrentCollectorCost}
+            displayValue={this.props.CurrentCollectorCost}
+            lowestVal={10}
+            highestVal={30}
+            SliderhandleChange={this.props.SliderhandleChange("CurrentCollectorCost")}
+            InputhandleChange={this.props.InputhandleChange("CurrentCollectorCost")}
+          />
+            <h3>Operating Cost</h3>
+          <SliderWithText
+            rootWidth={"43%"}
+            inputWidth={52}
+            displayCaption={"Anolyte "}
+            value={this.props.AnolyteCost}
+            displayValue={this.props.AnolyteCost}
+            lowestVal={0.001}
+            highestVal={0.002}
+            SliderhandleChange={this.props.SliderhandleChange("AnolyteCost")}
+            InputhandleChange={this.props.InputhandleChange("AnolyteCost")}
+          />
+          <SliderWithText
+            rootWidth={"43%"}
+            inputWidth={52}
+            displayCaption={"Catholyte "}
+            value={this.props.CatholyteCost}
+            displayValue={this.props.CatholyteCost}
+            lowestVal={0.1}
+            highestVal={1}
+            SliderhandleChange={this.props.SliderhandleChange("CatholyteCost")}
+            InputhandleChange={this.props.InputhandleChange("CatholyteCost")}
+          />
+          <SliderWithText
+            rootWidth={"43%"}
+            inputWidth={52}
+            displayCaption={"External Energy "}
+            value={this.props.ExternalEnergyCost}
+            displayValue={this.props.ExternalEnergyCost}
+            lowestVal={0.05}
+            highestVal={0.2}
+            SliderhandleChange={this.props.SliderhandleChange("ExternalEnergyCost")}
+            InputhandleChange={this.props.InputhandleChange("ExternalEnergyCost")}
+          />
+          <SliderWithText
+            rootWidth={"43%"}
+            inputWidth={52}
+            displayCaption={"Lang Factor "}
+            value={this.props.LangFactorCost}
+            displayValue={this.props.LangFactorCost}
+            lowestVal={1.5}
+            highestVal={5}
+            SliderhandleChange={this.props.SliderhandleChange("LangFactorCost")}
+            InputhandleChange={this.props.InputhandleChange("LangFactorCost")}
+          />
+                    <SliderWithText
+            rootWidth={"43%"}
+            inputWidth={52}
+            displayCaption={"ACC "}
+            value={this.props.ACCCost}
+            displayValue={this.props.ACCCost}
+            lowestVal={0.05}
+            highestVal={0.15}
+            SliderhandleChange={this.props.SliderhandleChange("ACCCost")}
+            InputhandleChange={this.props.InputhandleChange("ACCCost")}
+          />
+                    <SliderWithText
+            rootWidth={"43%"}
+            inputWidth={52}
+            displayCaption={"Production Price "}
+            value={this.props.ProductionPriceCost}
+            displayValue={this.props.ProductionPriceCost}
+            lowestVal={0.01}
+            highestVal={1}
+            SliderhandleChange={this.props.SliderhandleChange("ProductionPriceCost")}
+            InputhandleChange={this.props.InputhandleChange("ProductionPriceCost")}
+          />
+                    <SliderWithText
+            rootWidth={"43%"}
+            inputWidth={52}
+            displayCaption={"IRR "}
+            value={this.props.IRRCost}
+            displayValue={this.props.IRRCost}
+            lowestVal={0.05}
+            highestVal={0.15}
+            SliderhandleChange={this.props.SliderhandleChange("IRRCost")}
+            InputhandleChange={this.props.InputhandleChange("IRRCost")}
+          />
+        </MySliderContainer>
+      );
+    }
     return (
       <div className={classes.RightContent}>
         <h2>Settings</h2>
@@ -229,6 +360,19 @@ class RightContent extends Component {
           label="Show Environment"
         />
         {environmentSliders}
+
+        <FormControlLabel
+          control={
+            <PurpleSwitch
+              checked={this.state.showCostSliders}
+              onChange={this.showEnergySliderHandler}
+              name="showCostSliders"
+              color="primary"
+            />
+          }
+          label="Show Cost"
+        />
+        {costSliders}
       </div>
     );
   }

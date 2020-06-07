@@ -1,5 +1,5 @@
 import React from "react";
-import EqnItem from "./EqnItem/EqnItem";
+import EqnItem from "./EqnItem";
 
 const EqnItems = (props) => {
   const disabledRemoveButton = () => {
