@@ -1,4 +1,3 @@
-import React from "react";
 import { parse, simplify } from "mathjs";
 
 const DiffEquationSolver = (props) => {

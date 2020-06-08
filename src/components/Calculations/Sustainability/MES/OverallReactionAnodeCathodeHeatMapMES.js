@@ -6,6 +6,7 @@ import ReadCathodeJSON from "../../../Excel/Cathode/ReadCathodeJSON";
 import MyHeatMap from "../../../UI/MyHeatMap/MyHeatMap";
 import classes from "./OverallReactionAnodeCathodeMES.module.css";
 import MyMathQuill from "../../../UI/Math/MyMathQuill";
+import CashFlowGraph from "./CashFlowGraph";
 const OverallReactionAnodeCathode = (props) => {
   //console.log(props.anodeSubstrate)
   //console.log(props.cathodeProduct)
@@ -37,7 +38,7 @@ const OverallReactionAnodeCathode = (props) => {
   let GibbsEnergyData = [];
   let GWPSavingData = [];
   let TheoreticalPotentialData = [];
-  let CapitalCostData=[]
+  let CapitalCostData = [];
   props.heatMapContents.yLabels.forEach((Yelement) => {
     props.heatMapContents.xLabels.forEach((Xelement) => {
       let AnodeData = ReadAnodeJSON(Xelement);
@@ -104,7 +105,13 @@ const OverallReactionAnodeCathode = (props) => {
           (xDash * MolarMassOfSubstrate) -
         StandardGibbsEnergyOfReactionkJ * CarbonEmmision;
 
-      let CapitalCost=((props.AnodeCost+props.CathodeCost+props.MembraneCost)*0.0016+props.CurrentCollectorCost*0.0005)*ProductionRateg*7.3*24*props.LangFactorCost
+      let CapitalCost =
+        ((props.AnodeCost + props.CathodeCost + props.MembraneCost) * 0.0016 +
+          props.CurrentCollectorCost * 0.0005) *
+        ProductionRateg *
+        7.3 *
+        24 *
+        props.LangFactorCost;
 
       ProductionRategData.push(ProductionRateg.toFixed(2));
 
@@ -114,7 +121,7 @@ const OverallReactionAnodeCathode = (props) => {
 
       GWPSavingData.push(GWPSaving.toFixed(2));
 
-      CapitalCostData.push(CapitalCost.toFixed(2))
+      CapitalCostData.push(CapitalCost.toFixed(2));
     });
   });
 
@@ -129,13 +136,13 @@ const OverallReactionAnodeCathode = (props) => {
 
   let TwoDProductionRategData = FormatArr(ProductionRategData);
 
-  //let TwoDGibbsEnergyData = FormatArr(GibbsEnergyData);
+  let TwoDGibbsEnergyData = FormatArr(GibbsEnergyData);
 
   let TwoDGWPSavingyData = FormatArr(GWPSavingData);
 
   let TwoDTheoreticalPotentialData = FormatArr(TheoreticalPotentialData);
 
-  let TwoDCapitalCostData=FormatArr(CapitalCostData)
+  let TwoDCapitalCostData = FormatArr(CapitalCostData);
 
   return (
     <div className={classes.HeatMaps}>
@@ -188,7 +195,6 @@ const OverallReactionAnodeCathode = (props) => {
       <div className={classes.HeatMapEnergyPerformance}>
         <h3>Heat map of Theoretical potential (V)</h3>
 
-
         <MyHeatMap
           xLabels={props.heatMapContents.xLabels}
           yLabels={props.heatMapContents.yLabels}
@@ -200,7 +206,6 @@ const OverallReactionAnodeCathode = (props) => {
       <div className={classes.HeatMapEnergyPerformance}>
         <h3>Heat map of Capital Cost</h3>
 
-
         <MyHeatMap
           xLabels={props.heatMapContents.xLabels}
           yLabels={props.heatMapContents.yLabels}
@@ -209,6 +214,19 @@ const OverallReactionAnodeCathode = (props) => {
           HeatMapChangedOnClick={props.HeatMapChangedOnClick}
         />
       </div>
+
+
+      <CashFlowGraph
+        TwoDCapitalCostData={TwoDCapitalCostData}
+        ProductionPriceCost={props.ProductionPriceCost}
+        TwoDProductionRategData={TwoDProductionRategData}
+        ACCCost={props.ACCCost}
+        LangFactorCost={props.LangFactorCost}
+        AnolyteCost={props.AnolyteCost}
+        CatholyteCost={props.CatholyteCost}
+        ExternalEnergyCost={props.ExternalEnergyCost}
+        TwoDGibbsEnergyData={TwoDGibbsEnergyData}
+      />
     </div>
   );
 };
