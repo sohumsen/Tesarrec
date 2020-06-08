@@ -7,7 +7,7 @@ import MyButton from "../../../components/UI/Button/GenericButton";
 import classes from "./SingleODE.module.css";
 import GraphConfig from "../../../components/UI/GraphConfig/GraphConfig";
 import SettingButton from "../../../components/UI/Button/SettingButton";
-import DiffEquationGrapher from "../../../components/Calculations/Method/DiffEquationGrapher";
+import DiffEquationGrapher from "../../../components/Calculations/Method/DiffEquation/DiffEquationGrapher";
 
 class SingleODE extends Component {
   /**

@@ -1,5 +1,5 @@
 import React from "react" ;
-import LineChart from "../../UI/Canvas/Charts/Chart.js"
+import LineChart from "../../../UI/Canvas/Charts/Chart.js"
 import {configure, shallow} from 'enzyme'
 import Adapter from 'enzyme-adapter-react-16'
 
