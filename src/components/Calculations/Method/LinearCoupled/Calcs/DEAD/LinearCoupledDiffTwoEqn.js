@@ -14,8 +14,8 @@ const LinearCoupledDiffTwoEqn = (props) => {
 
   const simplified2 = simplify(parse(props.eqn2));
 
-  let line1=(props.LineNames[0])
-  let line2=(props.LineNames[1])
+  let line1 = props.LineNames[0];
+  let line2 = props.LineNames[1];
 
   const DyByDxLinearCoupled = (Y1Y2Y3Arr) => {
     const eqn1Results = simplified1.evaluate({
@@ -29,10 +29,9 @@ const LinearCoupledDiffTwoEqn = (props) => {
     });
     //console.log("eqn2Results "+eqn2Results,Y1Y2Y3Arr)
 
-
     //console.log("eqn3Results "+eqn3Results,Y1Y2Y3Arr)
 
-    let eqnResults = [eqn1Results, eqn2Results ];
+    let eqnResults = [eqn1Results, eqn2Results];
 
     return eqnResults;
   };
@@ -79,7 +78,7 @@ const LinearCoupledDiffTwoEqn = (props) => {
 
   const ShowLinearCoupledGraph = (eqn1, eqn2) => {
     return (
-      <div >
+      <div>
         <div>
           <MyChart
             EulerData={eqn1}
@@ -100,8 +99,14 @@ const LinearCoupledDiffTwoEqn = (props) => {
 
     for (let i = 0; i < arr.length; i++) {
       const element = arr[i];
-      FirstEqnArr.push({ x: parseFloat(((i * h).toFixed(props.DecimalPrecision))), y: parseFloat((element[0].toFixed(props.DecimalPrecision)) )});
-      SecondEqnArr.push({ x: parseFloat((i * h).toFixed(props.DecimalPrecision)), y: parseFloat(element[1].toFixed(props.DecimalPrecision)) });
+      FirstEqnArr.push({
+        x: parseFloat((i * h).toFixed(props.DecimalPrecision)),
+        y: parseFloat(element[0].toFixed(props.DecimalPrecision)),
+      });
+      SecondEqnArr.push({
+        x: parseFloat((i * h).toFixed(props.DecimalPrecision)),
+        y: parseFloat(element[1].toFixed(props.DecimalPrecision)),
+      });
     }
 
     return [FirstEqnArr, SecondEqnArr];
@@ -113,7 +118,6 @@ const LinearCoupledDiffTwoEqn = (props) => {
 
   let a = parseFloat(props.a);
   let b = parseFloat(props.b);
-
 
   let abcArr = [a, b];
 

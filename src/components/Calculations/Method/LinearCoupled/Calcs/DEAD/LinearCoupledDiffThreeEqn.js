@@ -5,7 +5,7 @@ import { parse, simplify } from "mathjs";
 
 //DyByDx= x+3y
 
-const LinearCoupledDiffFourEqn = (props) => {
+const LinearCoupledDiffThreeEqn = (props) => {
   /**
    * A method component that takes in a equation and outputs a chart
    */
@@ -16,45 +16,32 @@ const LinearCoupledDiffFourEqn = (props) => {
 
   const simplified3 = simplify(parse(props.eqn3));
 
-  const simplified4 = simplify(parse(props.eqn4));
-
+  let line1 = props.LineNames[0];
+  let line2 = props.LineNames[1];
+  let line3 = props.LineNames[2];
 
   const DyByDxLinearCoupled = (Y1Y2Y3Arr) => {
     const eqn1Results = simplified1.evaluate({
-      a: Y1Y2Y3Arr[0],
-      b: Y1Y2Y3Arr[1],
-      c: Y1Y2Y3Arr[2],
-      d: Y1Y2Y3Arr[3],
-
+      [line1]: Y1Y2Y3Arr[0],
+      [line2]: Y1Y2Y3Arr[1],
+      [line3]: Y1Y2Y3Arr[2],
     });
     //console.log("eqn1Results "+eqn1Results,Y1Y2Y3Arr)
     const eqn2Results = simplified2.evaluate({
-      a: Y1Y2Y3Arr[0],
-      b: Y1Y2Y3Arr[1],
-      c: Y1Y2Y3Arr[2],
-      d: Y1Y2Y3Arr[3],
-
+      [line1]: Y1Y2Y3Arr[0],
+      [line2]: Y1Y2Y3Arr[1],
+      [line3]: Y1Y2Y3Arr[2],
     });
     //console.log("eqn2Results "+eqn2Results,Y1Y2Y3Arr)
 
     const eqn3Results = simplified3.evaluate({
-      a: Y1Y2Y3Arr[0],
-      b: Y1Y2Y3Arr[1],
-      c: Y1Y2Y3Arr[2],
-      d: Y1Y2Y3Arr[3],
-
-    });
-
-    const eqn4Results = simplified4.evaluate({
-      a: Y1Y2Y3Arr[0],
-      b: Y1Y2Y3Arr[1],
-      c: Y1Y2Y3Arr[2],
-      d: Y1Y2Y3Arr[3],
-
+      [line1]: Y1Y2Y3Arr[0],
+      [line2]: Y1Y2Y3Arr[1],
+      [line3]: Y1Y2Y3Arr[2],
     });
     //console.log("eqn3Results "+eqn3Results,Y1Y2Y3Arr)
 
-    let eqnResults = [eqn1Results, eqn2Results, eqn3Results, eqn4Results];
+    let eqnResults = [eqn1Results, eqn2Results, eqn3Results];
 
     return eqnResults;
   };
@@ -66,26 +53,20 @@ const LinearCoupledDiffFourEqn = (props) => {
       Y1Y2Y3Arr[0] + (h / 2) * eqnResults1[0],
       Y1Y2Y3Arr[1] + (h / 2) * eqnResults1[1],
       Y1Y2Y3Arr[2] + (h / 2) * eqnResults1[2],
-      Y1Y2Y3Arr[3] + (h / 2) * eqnResults1[3],
-
     ]);
     let eqnResults3 = DyByDxLinearCoupled([
       Y1Y2Y3Arr[0] + (h / 2) * eqnResults2[0],
       Y1Y2Y3Arr[1] + (h / 2) * eqnResults2[1],
       Y1Y2Y3Arr[2] + (h / 2) * eqnResults2[2],
-      Y1Y2Y3Arr[3] + (h / 2) * eqnResults2[3],
-
     ]);
     let eqnResults4 = DyByDxLinearCoupled([
       Y1Y2Y3Arr[0] + h * eqnResults3[0],
       Y1Y2Y3Arr[1] + h * eqnResults3[1],
       Y1Y2Y3Arr[2] + h * eqnResults3[2],
-      Y1Y2Y3Arr[3] + h * eqnResults3[3],
-
     ]);
     let newY1Y2Y3Arr = [];
 
-    for (let i = 0; i < 4; i++) {
+    for (let i = 0; i < 3; i++) {
       newY1Y2Y3Arr.push(
         Y1Y2Y3Arr[i] +
           h *
@@ -108,16 +89,14 @@ const LinearCoupledDiffFourEqn = (props) => {
     return Arr;
   };
 
-  const ShowLinearCoupledGraph = (eqn1, eqn2, eqn3, eqn4) => {
+  const ShowLinearCoupledGraph = (eqn1, eqn2, eqn3) => {
     return (
-      <div >
+      <div>
         <div>
           <MyChart
             EulerData={eqn1}
             MidpointData={eqn2}
             RungeKuttaData={eqn3}
-            Line4Data={eqn4}
-
             LineNames={props.LineNames}
             axisNames={["t", ""]}
             horizontalAlign={props.LegendHorizontal}
@@ -132,19 +111,24 @@ const LinearCoupledDiffFourEqn = (props) => {
     let FirstEqnArr = [];
     let SecondEqnArr = [];
     let ThirdEqnArr = [];
-    let FourthEqnArr = [];
-
 
     for (let i = 0; i < arr.length; i++) {
       const element = arr[i];
-      FirstEqnArr.push({ x: parseFloat(((i * h).toFixed(props.DecimalPrecision))), y: parseFloat((element[0].toFixed(props.DecimalPrecision)) )});
-      SecondEqnArr.push({ x: parseFloat((i * h).toFixed(props.DecimalPrecision)), y: parseFloat(element[1].toFixed(props.DecimalPrecision)) });
-      ThirdEqnArr.push({ x: parseFloat((i * h).toFixed(props.DecimalPrecision)), y: parseFloat(element[2].toFixed(props.DecimalPrecision)) });
-      FourthEqnArr.push({ x: parseFloat((i * h).toFixed(props.DecimalPrecision)), y: parseFloat(element[3].toFixed(props.DecimalPrecision))});
-
+      FirstEqnArr.push({
+        x: parseFloat((i * h).toFixed(props.DecimalPrecision)),
+        y: parseFloat(element[0].toFixed(props.DecimalPrecision)),
+      });
+      SecondEqnArr.push({
+        x: parseFloat((i * h).toFixed(props.DecimalPrecision)),
+        y: parseFloat(element[1].toFixed(props.DecimalPrecision)),
+      });
+      ThirdEqnArr.push({
+        x: parseFloat((i * h).toFixed(props.DecimalPrecision)),
+        y: parseFloat(element[2].toFixed(props.DecimalPrecision)),
+      });
     }
 
-    return [FirstEqnArr, SecondEqnArr, ThirdEqnArr,FourthEqnArr];
+    return [FirstEqnArr, SecondEqnArr, ThirdEqnArr];
   };
 
   // starts at x0=0
@@ -155,10 +139,8 @@ const LinearCoupledDiffFourEqn = (props) => {
   let b = parseFloat(props.b);
 
   let c = parseFloat(props.c);
-  let d = parseFloat(props.d);
 
-
-  let abcArr = [a, b, c,d];
+  let abcArr = [a, b, c];
 
   let CompletedGridRungeKuttaLinearCoupled = [abcArr];
 
@@ -171,7 +153,7 @@ const LinearCoupledDiffFourEqn = (props) => {
 
   let EqnArr = FormatArrayLinearCoupled(CompletedGridRungeKuttaLinearCoupled);
 
-  return ShowLinearCoupledGraph(EqnArr[0], EqnArr[1], EqnArr[2], EqnArr[3]);
+  return ShowLinearCoupledGraph(EqnArr[0], EqnArr[1], EqnArr[2]);
 };
 
-export default LinearCoupledDiffFourEqn;
+export default LinearCoupledDiffThreeEqn;

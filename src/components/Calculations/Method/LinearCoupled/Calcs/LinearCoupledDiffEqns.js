@@ -18,7 +18,6 @@ const LinearCoupledDiffFourEqn = (props) => {
             eqns={[this.state.Eqns[0].TextEqn, this.state.Eqns[1].TextEqn]}
             LineNames={[this.state.Eqns[0].line, this.state.Eqns[1].line]}
             initialConditions={[1,2]}
-
             LegendVertical={this.state.graphConfig.LegendVertical}
             LegendHorizontal={this.state.graphConfig.LegendHorizontal}
             DecimalPrecision={this.state.graphConfig.DecimalPrecision}
@@ -28,17 +27,19 @@ const LinearCoupledDiffFourEqn = (props) => {
   const DyByDxLinearCoupled = (Y1Y2Y3Arr) => {
     let eqnResultsArr = [];
     let evalObj = {};
+    //generates the eval object
+    for (let i = 0; i < props.LineNames.length; i++) {
+      const letter = props.LineNames[i];
+      evalObj[letter] = Y1Y2Y3Arr[i];
+    }
 
     for (let i = 0; i < props.eqns.length; i++) {
       const eqn = props.eqns[i];
       var simplified = simplify(parse(eqn));
-    }
 
-    for (let i = 0; i < props.LineNames.length; i++) {
-      const letter = props.LineNames[i];
-      evalObj.letter = Y1Y2Y3Arr[i];
+      eqnResultsArr.push(simplified.evaluate(evalObj));
     }
-    eqnResultsArr.push(simplified.evaluate(evalObj));
+    // console.log(evalObj, simplified)
 
     return eqnResultsArr;
   };
@@ -46,7 +47,12 @@ const LinearCoupledDiffFourEqn = (props) => {
   const SolveLinearCoupledDifferentialEquationRungeKuttaForRth = (
     Y1Y2Y3Arr
   ) => {
-    let eqnResults1 = DyByDxLinearCoupled(Y1Y2Y3Arr);
+    //let eqnResults1 = DyByDxLinearCoupled(Y1Y2Y3Arr);
+    let eqnResults1_ = [];
+    for (let i = 0; i < props.LineNames.length; i++) {
+      eqnResults1_.push(Y1Y2Y3Arr[i]);
+    }
+    let eqnResults1 = DyByDxLinearCoupled(eqnResults1_);
 
     let eqnResults2_ = [];
     for (let i = 0; i < props.LineNames.length; i++) {
@@ -66,7 +72,6 @@ const LinearCoupledDiffFourEqn = (props) => {
     }
     let eqnResults4 = DyByDxLinearCoupled(eqnResults4_);
 
-
     let newY1Y2Y3Arr = [];
 
     for (let i = 0; i < props.LineNames.length; i++) {
@@ -80,27 +85,45 @@ const LinearCoupledDiffFourEqn = (props) => {
       );
     }
 
+    //console.log(newY1Y2Y3Arr)
+
     return newY1Y2Y3Arr;
   };
 
-  const recursive = (numberOfLoops, Arr, method) => {
+  const recursive = (numberOfLoops, Arr) => {
+    let allArrs = [abcArr];
     for (let i = 0; i < numberOfLoops; i++) {
-      if (method === "RungeKuttaLinearCoupled") {
-        Arr = SolveLinearCoupledDifferentialEquationRungeKuttaForRth(Arr);
-      }
+      Arr = SolveLinearCoupledDifferentialEquationRungeKuttaForRth(Arr);
+      allArrs.push(Arr);
     }
-    return Arr;
+    return allArrs;
+
+    // for (let i = 0; i < numberOfLoops; i++) {
+    //   if (method === "RungeKuttaLinearCoupled") {
+    //     //   console.log(Arr)
+
+    //     allArrs.push(Arr);
+    //     return SolveLinearCoupledDifferentialEquationRungeKuttaForRth(Arr);
+    //   }
+    // }
   };
 
-  const ShowLinearCoupledGraph = (eqn1, eqn2, eqn3, eqn4) => {
+  const ShowLinearCoupledGraph = (EqnArr) => {
+    // let DataNames=["EulerData", "MidpointData","RungeKuttaData","Line4Data"]
+
+    // for (let i = 0; i < EqnArr.length; i++) {
+    //     const Eqn = EqnArr[i];
+
+    // }
+
     return (
       <div>
         <div>
           <MyChart
-            EulerData={eqn1}
-            MidpointData={eqn2}
-            RungeKuttaData={eqn3}
-            Line4Data={eqn4}
+            EulerData={EqnArr[0]}
+            MidpointData={EqnArr[1]}
+            RungeKuttaData={EqnArr[2]}
+            Line4Data={EqnArr[3]}
             LineNames={props.LineNames}
             axisNames={["t", ""]}
             horizontalAlign={props.LegendHorizontal}
@@ -112,65 +135,134 @@ const LinearCoupledDiffFourEqn = (props) => {
   };
 
   const FormatArrayLinearCoupled = (arr) => {
-    let allEqnsArr=[]
+    // let FirstEqnArr = [];
+    // let SecondEqnArr = [];
 
-    for (let i = 0; i < arr.length; i++) {
+    // for (let i = 0; i < arr.length; i++) {
+    //   const element = arr[i];
+    //   FirstEqnArr.push({
+    //     x: parseFloat((i * h).toFixed(props.DecimalPrecision)),
+    //     y: parseFloat(element[0].toFixed(props.DecimalPrecision)),
+    //   });
+    //   SecondEqnArr.push({
+    //     x: parseFloat((i * h).toFixed(props.DecimalPrecision)),
+    //     y: parseFloat(element[1].toFixed(props.DecimalPrecision)),
+    //   });
+
+    if (props.LineNames.length === 2) {
+      let FirstEqnArr = [];
+      let SecondEqnArr = [];
+
+      for (let i = 0; i < arr.length; i++) {
         const element = arr[i];
-        let EqnArr=[]
-        EqnArr.push({
+        FirstEqnArr.push({
+          x: parseFloat((i * h).toFixed(props.DecimalPrecision)),
+          y: parseFloat((element[0]).toFixed(props.DecimalPrecision)),
+        });
+        SecondEqnArr.push({
+          x: parseFloat((i * h).toFixed(props.DecimalPrecision)),
+          y: parseFloat(element[1].toFixed(props.DecimalPrecision)),
+        });
+      }
+      return [FirstEqnArr,SecondEqnArr];
+
+    } else if (props.LineNames.length === 3) {
+        let FirstEqnArr = [];
+        let SecondEqnArr = [];
+        let ThirdEqnArr = [];
+    
+        for (let i = 0; i < arr.length; i++) {
+          const element = arr[i];
+          FirstEqnArr.push({
             x: parseFloat((i * h).toFixed(props.DecimalPrecision)),
             y: parseFloat(element[0].toFixed(props.DecimalPrecision)),
           });
+          SecondEqnArr.push({
+            x: parseFloat((i * h).toFixed(props.DecimalPrecision)),
+            y: parseFloat(element[1].toFixed(props.DecimalPrecision)),
+          });
+          ThirdEqnArr.push({
+            x: parseFloat((i * h).toFixed(props.DecimalPrecision)),
+            y: parseFloat(element[2].toFixed(props.DecimalPrecision)),
+          });
+        }
+        return [FirstEqnArr, SecondEqnArr, ThirdEqnArr];
+
+    }else if (props.LineNames.length === 4) {
+        let FirstEqnArr = [];
+        let SecondEqnArr = [];
+        let ThirdEqnArr = [];
+        let FourthEqnArr = [];
+    
+        for (let i = 0; i < arr.length; i++) {
+          const element = arr[i];
+          FirstEqnArr.push({
+            x: parseFloat((i * h).toFixed(props.DecimalPrecision)),
+            y: parseFloat(element[0].toFixed(props.DecimalPrecision)),
+          });
+          SecondEqnArr.push({
+            x: parseFloat((i * h).toFixed(props.DecimalPrecision)),
+            y: parseFloat(element[1].toFixed(props.DecimalPrecision)),
+          });
+          ThirdEqnArr.push({
+            x: parseFloat((i * h).toFixed(props.DecimalPrecision)),
+            y: parseFloat(element[2].toFixed(props.DecimalPrecision)),
+          });
+          FourthEqnArr.push({
+            x: parseFloat((i * h).toFixed(props.DecimalPrecision)),
+            y: parseFloat(element[3].toFixed(props.DecimalPrecision)),
+          });
+        }
+        return [FirstEqnArr, SecondEqnArr, ThirdEqnArr, FourthEqnArr];
+
     }
-    allEqnsArr.push(EqnArr)
 
-    let FirstEqnArr = [];
-    let SecondEqnArr = [];
-    let ThirdEqnArr = [];
-    let FourthEqnArr = [];
+    // let allEqnsArr = [];
+    // let EqnArr = [];
+    // console.log(arr);
 
-    for (let i = 0; i < arr.length; i++) {
-      const element = arr[i];
-      FirstEqnArr.push({
-        x: parseFloat((i * h).toFixed(props.DecimalPrecision)),
-        y: parseFloat(element[0].toFixed(props.DecimalPrecision)),
-      });
-      SecondEqnArr.push({
-        x: parseFloat((i * h).toFixed(props.DecimalPrecision)),
-        y: parseFloat(element[1].toFixed(props.DecimalPrecision)),
-      });
-      ThirdEqnArr.push({
-        x: parseFloat((i * h).toFixed(props.DecimalPrecision)),
-        y: parseFloat(element[2].toFixed(props.DecimalPrecision)),
-      });
-      FourthEqnArr.push({
-        x: parseFloat((i * h).toFixed(props.DecimalPrecision)),
-        y: parseFloat(element[3].toFixed(props.DecimalPrecision)),
-      });
-    }
+    // for (let i = 0; i < arr.length; i++) {
+    //   const element = arr[i];
+    //   for (let j = 0; j < 2; j++) {
+    //     EqnArr.push({
+    //       x: parseFloat((i * h).toFixed(props.DecimalPrecision)),
+    //       y: parseFloat(element[i][j].toFixed(props.DecimalPrecision)),
+    //     });
+    //     allEqnsArr.push(EqnArr);
+    //   }
+    // }
 
-    return [FirstEqnArr, SecondEqnArr, ThirdEqnArr, FourthEqnArr];
+    // for (let j = 0; j < arr.length; j++) {
+    //   let EqnArr = [];
+
+    //   for (let i = 0; i < props.LineNames.length; i++) {
+    //     const element = arr[j];
+    //     EqnArr.push({
+    //       x: parseFloat((j * h).toFixed(props.DecimalPrecision)),
+    //       y: parseFloat(element[i].toFixed(props.DecimalPrecision)),
+    //     });
+    //   }
+    //   allEqnsArr.push(EqnArr);
+    // }
+
   };
 
   // starts at x0=0
 
   let h = parseFloat(props.h);
 
-
   let abcArr = props.initialConditions;
 
-  let CompletedGridRungeKuttaLinearCoupled = [abcArr];
+  let CompletedGridRungeKuttaLinearCoupled = [];
 
   //SolveForRth(SolveForRth(Y0,h,X0))
-  for (let i = 1; i <= props.numberOfCycles; i++) {
-    CompletedGridRungeKuttaLinearCoupled.push(
-      recursive(i, abcArr, "RungeKuttaLinearCoupled")
-    );
-  }
+  CompletedGridRungeKuttaLinearCoupled.push(recursive(props.numberOfCycles, abcArr));
 
-  let EqnArr = FormatArrayLinearCoupled(CompletedGridRungeKuttaLinearCoupled);
+  let EqnArr = FormatArrayLinearCoupled(CompletedGridRungeKuttaLinearCoupled[0]);
+  //return null;
+  console.log(EqnArr)
 
-  return ShowLinearCoupledGraph(EqnArr[0], EqnArr[1], EqnArr[2], EqnArr[3]);
+  return ShowLinearCoupledGraph(EqnArr);
 };
 
 export default LinearCoupledDiffFourEqn;

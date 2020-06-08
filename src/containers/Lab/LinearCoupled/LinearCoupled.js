@@ -1,7 +1,5 @@
 import React, { Component } from "react";
-import LinearCoupledDiffThreeEqn from "../../../components/Calculations/Method/LinearCoupled/Calcs/LinearCoupledDiffThreeEqn";
-import LinearCoupledDiffTwoEqn from "../../../components/Calculations/Method/LinearCoupled/Calcs/LinearCoupledDiffTwoEqn";
-import LinearCoupledDiffFourEqn from "../../../components/Calculations/Method/LinearCoupled/Calcs/LinearCoupledDiffFourEqn";
+
 import EqnItems from "../../../components/Calculations/Method/LinearCoupled/Eqns/EqnItems";
 import { evaluate } from "mathjs";
 import MyButton from "../../../components/UI/Button/GenericButton";
@@ -9,7 +7,7 @@ import classes from "./LinearCoupled.module.css";
 import MyErrorMessage from "../../../components/UI/MyErrorMessage/MyErrorMessage";
 import SettingButton from "../../../components/UI/Button/SettingButton";
 import GraphConfig from "../../../components/UI/GraphConfig/GraphConfig";
-
+import LinearCoupledDiffEqns from "../../../components/Calculations/Method/LinearCoupled/Calcs/LinearCoupledDiffEqns";
 class LinearCoupled extends Component {
   /**
    * Visual Component that contains the textbox for the equation and calculation outputs
@@ -30,7 +28,7 @@ class LinearCoupled extends Component {
       show: false,
       LegendHorizontal: "left",
       LegendVertical: "top",
-      DecimalPrecision:2
+      DecimalPrecision: 2,
     },
 
     Eqns: [
@@ -195,8 +193,7 @@ class LinearCoupled extends Component {
 
         LegendHorizontal: "left",
         LegendVertical: "top",
-        DecimalPrecision:2
-
+        DecimalPrecision: 2,
       },
 
       Eqns: [
@@ -303,7 +300,8 @@ class LinearCoupled extends Component {
     switch (length) {
       case 2:
         return (
-          <LinearCoupledDiffTwoEqn
+          <div>
+            {/*<LinearCoupledDiffTwoEqn
             h={0.05}
             numberOfCycles={31}
             eqn1={this.state.Eqns[0].TextEqn}
@@ -314,59 +312,91 @@ class LinearCoupled extends Component {
             LegendVertical={this.state.graphConfig.LegendVertical}
             LegendHorizontal={this.state.graphConfig.LegendHorizontal}
             DecimalPrecision={this.state.graphConfig.DecimalPrecision}
-          />
+/>*/}
+          </div>
         );
-      case 3:
-        return (
-          <LinearCoupledDiffThreeEqn
-            h={0.05}
-            numberOfCycles={31}
-            eqn1={this.state.Eqns[0].TextEqn}
-            eqn2={this.state.Eqns[1].TextEqn}
-            eqn3={this.state.Eqns[2].TextEqn}
-            LineNames={[
-              this.state.Eqns[0].line,
-              this.state.Eqns[1].line,
-              this.state.Eqns[2].line,
-            ]}
-            a={1}
-            b={0.5}
-            c={0.75}
-            LegendVertical={this.state.graphConfig.LegendVertical}
-            LegendHorizontal={this.state.graphConfig.LegendHorizontal}
-            DecimalPrecision={this.state.graphConfig.DecimalPrecision}
+      // case 3:
+      //   return (
+      //     <LinearCoupledDiffThreeEqn
+      //       h={0.05}
+      //       numberOfCycles={31}
+      //       eqn1={this.state.Eqns[0].TextEqn}
+      //       eqn2={this.state.Eqns[1].TextEqn}
+      //       eqn3={this.state.Eqns[2].TextEqn}
+      //       LineNames={[
+      //         this.state.Eqns[0].line,
+      //         this.state.Eqns[1].line,
+      //         this.state.Eqns[2].line,
+      //       ]}
+      //       a={1}
+      //       b={0.5}
+      //       c={0.75}
+      //       LegendVertical={this.state.graphConfig.LegendVertical}
+      //       LegendHorizontal={this.state.graphConfig.LegendHorizontal}
+      //       DecimalPrecision={this.state.graphConfig.DecimalPrecision}
 
-          />
-        );
-      case 4:
-        return (
-          <LinearCoupledDiffFourEqn
-            h={0.05}
-            numberOfCycles={31}
-            eqn1={this.state.Eqns[0].TextEqn}
-            eqn2={this.state.Eqns[1].TextEqn}
-            eqn3={this.state.Eqns[2].TextEqn}
-            eqn4={this.state.Eqns[3].TextEqn}
-            LineNames={[
-              this.state.Eqns[0].line,
-              this.state.Eqns[1].line,
-              this.state.Eqns[2].line,
-              this.state.Eqns[3].line,
-            ]}
-            a={1}
-            b={0.5}
-            c={1}
-            d={0.5}
-            LegendVertical={this.state.graphConfig.LegendVertical}
-            LegendHorizontal={this.state.graphConfig.LegendHorizontal}
-            DecimalPrecision={this.state.graphConfig.DecimalPrecision}
+      //     />
+      //   );
+      // case 4:
+      //   return (
+      //     <LinearCoupledDiffFourEqn
+      //       h={0.05}
+      //       numberOfCycles={31}
+      //       eqn1={this.state.Eqns[0].TextEqn}
+      //       eqn2={this.state.Eqns[1].TextEqn}
+      //       eqn3={this.state.Eqns[2].TextEqn}
+      //       eqn4={this.state.Eqns[3].TextEqn}
+      //       LineNames={[
+      //         this.state.Eqns[0].line,
+      //         this.state.Eqns[1].line,
+      //         this.state.Eqns[2].line,
+      //         this.state.Eqns[3].line,
+      //       ]}
+      //       a={1}
+      //       b={0.5}
+      //       c={1}
+      //       d={0.5}
+      //       LegendVertical={this.state.graphConfig.LegendVertical}
+      //       LegendHorizontal={this.state.graphConfig.LegendHorizontal}
+      //       DecimalPrecision={this.state.graphConfig.DecimalPrecision}
 
-          />
-        );
+      //     />
+      //   );
 
       default:
         return null;
     }
+  };
+
+  renderGraph = () => {
+    let eqns = [];
+    this.state.Eqns.forEach((eqn) => {
+      eqns.push(eqn.TextEqn);
+    });
+
+    let LineNames = [];
+    this.state.Eqns.forEach((eqn) => {
+      LineNames.push(eqn.line);
+    });
+    let initialConditions=[]
+    for (let i = 1; i <= this.state.Eqns.length; i++) {
+      initialConditions.push(i/10)
+      
+    }
+    return(
+
+      <LinearCoupledDiffEqns
+      h={0.05}
+      numberOfCycles={31}
+      eqns={eqns}
+      LineNames={LineNames}
+      initialConditions={initialConditions}
+      LegendVertical={this.state.graphConfig.LegendVertical}
+      LegendHorizontal={this.state.graphConfig.LegendHorizontal}
+      DecimalPrecision={this.state.graphConfig.DecimalPrecision}
+    />
+    )
+
   };
   render() {
     let Eqns = (
@@ -385,7 +415,7 @@ class LinearCoupled extends Component {
             <div className={classes.ButtonContainer}>
               <div className={classes.Button}>
                 <SettingButton
-                disabled={!this.state.calculate}
+                  disabled={!this.state.calculate}
                   type="button"
                   value="config"
                   displayValue="CONFIG"
@@ -424,12 +454,12 @@ class LinearCoupled extends Component {
             />
     </div>*/}
 
-          {this.state.calculate
-            ? this.renderSwitchGraph(this.state.Eqns.length)
-            : null}
+          {this.state.calculate ? this.renderGraph() : null}
+
+       
         </div>
 
-        {(this.state.graphConfig.show &&this.state.calculate)? (
+        {this.state.graphConfig.show && this.state.calculate ? (
           <GraphConfig
             LegendHorizontal={this.state.graphConfig.LegendHorizontal}
             LegendVertical={this.state.graphConfig.LegendVertical}

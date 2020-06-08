@@ -40,7 +40,6 @@ const DiffEquationGrapher = (props) => {
   };
 
   const FormatArray = (arr) => {
-      console.log(arr);
 
     let newCompletedGid = [];
 
@@ -63,7 +62,6 @@ const DiffEquationGrapher = (props) => {
     return GraphDataXY;
   };
 
-  console.log(solver.RungaKutta)
   return ShowGraph(
     FormatArray(solver.Euler),
     FormatArray(solver.MidPoint),
