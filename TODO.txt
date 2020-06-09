@@ -4,6 +4,32 @@ Variable Descfiption of a , b , c has default values from Mama but user can over
 plot graph under production rate
 for certain eqns ban negatives
 allow initial conditions input
+turn l/h into fraction
+right content of mfc needs to have electricity instead of acetic acid
+
+order MES
+======
+diagram        potential   
+production     gwp        
+captial Cost  dcf graph
+
+word doc download in left content
+
+organise MFC
+=============
+diagram     electricity
+        gwp
+captialcost dcf
+
+ <p>Schematic</p>
+                <p>Electricity</p>
+                <p>GWP</p>
+                <p>Capital Cost</p>
+                <p>DCF</p>
+
+
+                <p>Equations</p>
+
 
 
 

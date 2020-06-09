@@ -110,7 +110,7 @@ const OverallReactionAnodeCathode = (props) => {
           props.CurrentCollectorCost * 0.0005) *
         ProductionRateg *
         7.3 *
-        24 *
+        
         props.LangFactorCost;
 
       ProductionRategData.push(ProductionRateg.toFixed(2));
@@ -180,7 +180,7 @@ const OverallReactionAnodeCathode = (props) => {
   </div>*/}
 
       <div className={classes.HeatMapEnergyPerformance}>
-        <h3>Global Warming Potential saving g CO&#8322; eq.</h3>
+        <h3>Global Warming Potential saving (g CO&#8322; eq./h)</h3>
         <br /> <br />
         <br />
         <MyHeatMap

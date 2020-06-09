@@ -10,6 +10,17 @@ class LeftContent extends Component{
         return(
             <div className={classes.LeftContent}>
                 <p>Left Content</p>
+                <p>Schematic</p>
+                <p>Potential</p>
+                <p>Production</p>
+                <p>GWP</p>
+                <p>Capital Cost</p>
+                <p>DCF</p>
+
+
+                <p>Equations</p>
+
+
             </div>
 
         )

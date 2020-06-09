@@ -57,7 +57,7 @@ const OverallReactionAnodeCathode = (props) => {
 
     //console.log(StandardGibbsEnergyOfReactionkJ)
 
-    GibbsEnergyData.push(StandardGibbsEnergyOfReactionkJ.toFixed(2));
+    GibbsEnergyData.push((-StandardGibbsEnergyOfReactionkJ/3.6).toFixed(2));
 
 
 
@@ -90,7 +90,7 @@ const OverallReactionAnodeCathode = (props) => {
   return (
     <div className={classes.HeatMaps}>
       <div className={classes.HeatMapEnergyPerformance}>
-        <h3>Energy Performance in kJ</h3>
+        <h3>Electricity Generation (Watt)</h3>
         <MyHeatMap
           xLabels={props.heatMapContents.xLabels}
           yLabels={["Electricity"]}
@@ -101,7 +101,7 @@ const OverallReactionAnodeCathode = (props) => {
       </div>
 
       <div className={classes.HeatMapEnergyPerformance}>
-        <h3>Global Warming Potential saving g CO&#8322; eq.</h3>
+        <h3>Global Warming Potential saving (g CO&#8322; eq./h)</h3>
         <MyHeatMap
           xLabels={props.heatMapContents.xLabels}
           yLabels={["GWP"]}
