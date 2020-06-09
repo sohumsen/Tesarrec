@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 
-import LeftContent from "../../../../../hoc/Layout/LeftContent/LeftContent";
-import RightContent from "../../../../../hoc/Layout/RightContent/RightContent";
+import LeftContent from "../LeftContent/LeftContent";
+import RightContent from "../RightContent/RightContent";
 import classes from "./HeatMapFormMES.module.css";
 import OverallReactionAnodeCathode from "../../../../../components/Calculations/Sustainability/MES/OverallReactionAnodeCathodeHeatMapMES";
 import MESPic from "../../../../../assets/MES.png";
@@ -29,6 +29,8 @@ class HeatMapForm extends Component {
 
     AnodeSubstrateChemical: "Acetate",
     CathodeProductChemical: "Acetic acid",
+    xCoordAnode:0,
+    yCoordCathode:0,
     chosenValue: "",
 
     AnodeSubstrateConcentration: 10,
@@ -63,6 +65,8 @@ class HeatMapForm extends Component {
 
   HeatMapChangedOnClick = (x, y, value) => {
     this.setState({
+      xCoordAnode:x.x,
+      yCoordCathode:y.y,
       AnodeSubstrateChemical: this.state.HeatMapState.xLabels[x.x],
       CathodeProductChemical: this.state.HeatMapState.yLabels[y.y],
       chosenValue: value[y.y][x.x],
@@ -125,13 +129,7 @@ class HeatMapForm extends Component {
           ProductionPriceCost={this.state.ProductionPriceCost}
           IRRCost={this.state.IRRCost}
         />
-        <div>
-          <img src={MESPic} width="100%" alt="mes pic"></img>
-          <h2 style={{ textAlign: "center" }}>
-            x'C<sub>x</sub>H<sub>y</sub>O<sub>z</sub> +mH<sub>2</sub>O = C
-            <sub>c</sub>H<sub>h</sub>O<sub>o</sub>+m'H<sub>2</sub>
-          </h2>
-        </div>
+
 
         <div className={classes.HeatMap}>
           <OverallReactionAnodeCathode
@@ -164,7 +162,9 @@ class HeatMapForm extends Component {
             ACCCost={this.state.ACCCost}
             ProductionPriceCost={this.state.ProductionPriceCost}
             IRRCost={this.state.IRRCost}
-          />
+            xCoordAnode={this.state.xCoordAnode}
+            yCoordCathode={this.state.yCoordCathode}
+            />
         </div>
       </div>
     );

@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 
-import LeftContent from "../../../../../hoc/Layout/LeftContent/LeftContent";
-import RightContent from "../../../../../hoc/Layout/RightContent/RightContent";
+import LeftContent from "../LeftContent/LeftContent";
+import RightContent from "../RightContent/RightContent";
 import classes from "./HeatMapFormMFC.module.css";
 import OverallReactionAnodeCathode from "../../../../../components/Calculations/Sustainability/MFC/OverallReactionAnodeCathodeHeatMapMFC";
 

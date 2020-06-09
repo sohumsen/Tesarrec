@@ -6,6 +6,7 @@ import ReadCathodeJSON from "../../../Excel/Cathode/ReadCathodeJSON";
 import MyHeatMap from "../../../UI/MyHeatMap/MyHeatMap";
 import classes from "./OverallReactionAnodeCathodeMES.module.css";
 import MyMathQuill from "../../../UI/Math/MyMathQuill";
+import MESPic from '../../../../assets/MES.png'
 import CashFlowGraph from "./CashFlowGraph";
 const OverallReactionAnodeCathode = (props) => {
   //console.log(props.anodeSubstrate)
@@ -110,7 +111,6 @@ const OverallReactionAnodeCathode = (props) => {
           props.CurrentCollectorCost * 0.0005) *
         ProductionRateg *
         7.3 *
-        
         props.LangFactorCost;
 
       ProductionRategData.push(ProductionRateg.toFixed(2));
@@ -146,15 +146,34 @@ const OverallReactionAnodeCathode = (props) => {
 
   return (
     <div className={classes.HeatMaps}>
+
+<div className={classes.HeatMapEnergyPerformance}>
+          <img src={MESPic} width="100%" alt="mes pic"></img>
+          <h2 style={{ textAlign: "center" }}>
+            x'C<sub>x</sub>H<sub>y</sub>O<sub>z</sub> +mH<sub>2</sub>O = C
+            <sub>c</sub>H<sub>h</sub>O<sub>o</sub>+m'H<sub>2</sub>
+          </h2>
+        </div>
+      <div className={classes.HeatMapEnergyPerformance}>
+        <h3>Heat map of Theoretical potential (V)</h3>
+
+        <MyHeatMap
+          xLabels={props.heatMapContents.xLabels}
+          yLabels={props.heatMapContents.yLabels}
+          color={"rgba(0, 255, 255"}
+          data={TwoDTheoreticalPotentialData}
+          HeatMapChangedOnClick={props.HeatMapChangedOnClick}
+        />
+      </div>
       <div className={classes.HeatMapEnergyPerformance}>
         <h3>Production rate (g/h)</h3>
-        <MyMathQuill
+        {/*      <MyMathQuill
           style={{ fontSize: "100px" }}
           NoEdit
           firstBit={
-            "\\frac{\\left(Substrate\\ Concentration\\left(\\frac{g}{L}\\right)\\cdot Volumetric\\ flowrate\\left(L/h\\right)\\cdot Efficiency\\cdot\\left(12c+h+16o\\right)\\right)}{x'\\left(12x+y+16z\\right)}"
+            "\\frac{\\left(Substrate\\ Concentration\\left(\\frac{g}{L}\\right)\\cdot Volumetric\\ flowrate\\left(\\frac{L}{h}\\right)\\cdot Efficiency\\cdot\\left(12c+h+16o\\right)\\right)}{x'\\left(12x+y+16z\\right)}"
           }
-        />
+        />*/}
 
         <MyHeatMap
           xLabels={props.heatMapContents.xLabels}
@@ -181,8 +200,7 @@ const OverallReactionAnodeCathode = (props) => {
 
       <div className={classes.HeatMapEnergyPerformance}>
         <h3>Global Warming Potential saving (g CO&#8322; eq./h)</h3>
-        <br /> <br />
-        <br />
+
         <MyHeatMap
           xLabels={props.heatMapContents.xLabels}
           yLabels={props.heatMapContents.yLabels}
@@ -192,17 +210,6 @@ const OverallReactionAnodeCathode = (props) => {
         />
       </div>
 
-      <div className={classes.HeatMapEnergyPerformance}>
-        <h3>Heat map of Theoretical potential (V)</h3>
-
-        <MyHeatMap
-          xLabels={props.heatMapContents.xLabels}
-          yLabels={props.heatMapContents.yLabels}
-          color={"rgba(0, 255, 255"}
-          data={TwoDTheoreticalPotentialData}
-          HeatMapChangedOnClick={props.HeatMapChangedOnClick}
-        />
-      </div>
       <div className={classes.HeatMapEnergyPerformance}>
         <h3>Heat map of Capital Cost</h3>
 
@@ -215,18 +222,25 @@ const OverallReactionAnodeCathode = (props) => {
         />
       </div>
 
-
-      <CashFlowGraph
-        TwoDCapitalCostData={TwoDCapitalCostData}
-        ProductionPriceCost={props.ProductionPriceCost}
-        TwoDProductionRategData={TwoDProductionRategData}
-        ACCCost={props.ACCCost}
-        LangFactorCost={props.LangFactorCost}
-        AnolyteCost={props.AnolyteCost}
-        CatholyteCost={props.CatholyteCost}
-        ExternalEnergyCost={props.ExternalEnergyCost}
-        TwoDGibbsEnergyData={TwoDGibbsEnergyData}
-      />
+      <div className={classes.HeatMapEnergyPerformance}>
+        <CashFlowGraph
+          TwoDCapitalCostData={TwoDCapitalCostData}
+          ProductionPriceCost={props.ProductionPriceCost}
+          TwoDProductionRategData={TwoDProductionRategData}
+          ACCCost={props.ACCCost}
+          LangFactorCost={props.LangFactorCost}
+          AnolyteCost={props.AnolyteCost}
+          CatholyteCost={props.CatholyteCost}
+          ExternalEnergyCost={props.ExternalEnergyCost}
+          TwoDGibbsEnergyData={TwoDGibbsEnergyData}
+          IRRCost={props.IRRCost}
+          chosenValue={props.chosenValue}
+          anodeSubstrate={props.anodeSubstrate}
+          cathodeProduct={props.cathodeProduct}
+          xCoordAnode={props.xCoordAnode}
+          yCoordCathode={props.yCoordCathode}
+        />
+      </div>
     </div>
   );
 };

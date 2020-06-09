@@ -1,11 +1,11 @@
 import React, { Component } from "react";
 import classes from "./RightContent.module.css";
 
-import MySliderContainer from "../../../components/UI/SliderContainer/SliderContainer";
+import MySliderContainer from "../../../../../components/UI/SliderContainer/SliderContainer";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Switch from "@material-ui/core/Switch";
 import { withStyles } from "@material-ui/core/styles";
-import SliderWithText from "../../../components/UI/SliderContainer/Slider/SliderWithText";
+import SliderWithText from "../../../../../components/UI/SliderContainer/Slider/SliderWithText";
 
 const PurpleSwitch = withStyles({
   switchBase: {
@@ -211,10 +211,14 @@ class RightContent extends Component {
             displayValue={this.props.CurrentCollectorCost}
             lowestVal={10}
             highestVal={30}
-            SliderhandleChange={this.props.SliderhandleChange("CurrentCollectorCost")}
-            InputhandleChange={this.props.InputhandleChange("CurrentCollectorCost")}
+            SliderhandleChange={this.props.SliderhandleChange(
+              "CurrentCollectorCost"
+            )}
+            InputhandleChange={this.props.InputhandleChange(
+              "CurrentCollectorCost"
+            )}
           />
-            <h3>Operating Cost</h3>
+          <h3>Operating Cost</h3>
           <SliderWithText
             rootWidth={"43%"}
             inputWidth={52}
@@ -245,8 +249,12 @@ class RightContent extends Component {
             displayValue={this.props.ExternalEnergyCost}
             lowestVal={0.05}
             highestVal={0.2}
-            SliderhandleChange={this.props.SliderhandleChange("ExternalEnergyCost")}
-            InputhandleChange={this.props.InputhandleChange("ExternalEnergyCost")}
+            SliderhandleChange={this.props.SliderhandleChange(
+              "ExternalEnergyCost"
+            )}
+            InputhandleChange={this.props.InputhandleChange(
+              "ExternalEnergyCost"
+            )}
           />
           <SliderWithText
             rootWidth={"43%"}
@@ -259,7 +267,7 @@ class RightContent extends Component {
             SliderhandleChange={this.props.SliderhandleChange("LangFactorCost")}
             InputhandleChange={this.props.InputhandleChange("LangFactorCost")}
           />
-                    <SliderWithText
+          <SliderWithText
             rootWidth={"43%"}
             inputWidth={52}
             displayCaption={"ACC "}
@@ -270,7 +278,7 @@ class RightContent extends Component {
             SliderhandleChange={this.props.SliderhandleChange("ACCCost")}
             InputhandleChange={this.props.InputhandleChange("ACCCost")}
           />
-                    <SliderWithText
+          <SliderWithText
             rootWidth={"43%"}
             inputWidth={52}
             displayCaption={"Production Price "}
@@ -278,10 +286,14 @@ class RightContent extends Component {
             displayValue={this.props.ProductionPriceCost}
             lowestVal={0.01}
             highestVal={1}
-            SliderhandleChange={this.props.SliderhandleChange("ProductionPriceCost")}
-            InputhandleChange={this.props.InputhandleChange("ProductionPriceCost")}
+            SliderhandleChange={this.props.SliderhandleChange(
+              "ProductionPriceCost"
+            )}
+            InputhandleChange={this.props.InputhandleChange(
+              "ProductionPriceCost"
+            )}
           />
-                    <SliderWithText
+          <SliderWithText
             rootWidth={"43%"}
             inputWidth={52}
             displayCaption={"IRR "}
@@ -303,7 +315,7 @@ class RightContent extends Component {
           X-axis -<b>Anode Substrate:</b> {this.props.AnodeSubstrateChemical}
         </p>
         <p>
-          Y-axis -<b>Cathode Product :</b> {this.props.CathodeProductChemical}
+          Y-axis -<b>Electricity</b>
         </p>
         <p>
           <b>Value :</b> {this.props.chosenValue}
