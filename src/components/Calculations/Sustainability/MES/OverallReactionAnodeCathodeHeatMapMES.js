@@ -5,7 +5,7 @@ import ReadCathodeJSON from "../../../Excel/Cathode/ReadCathodeJSON";
 
 import MyHeatMap from "../../../UI/MyHeatMap/MyHeatMap";
 import classes from "./OverallReactionAnodeCathodeMES.module.css";
-import MyMathQuill from "../../../UI/Math/MyMathQuill";
+// import MyMathQuill from "../../../UI/Math/MyMathQuill";
 import MESPic from '../../../../assets/MES.png'
 import CashFlowGraph from "./CashFlowGraph";
 const OverallReactionAnodeCathode = (props) => {

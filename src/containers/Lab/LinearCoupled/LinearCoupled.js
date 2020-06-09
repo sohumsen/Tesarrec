@@ -387,7 +387,7 @@ class LinearCoupled extends Component {
 
       <LinearCoupledDiffEqns
       h={0.05}
-      numberOfCycles={31}
+      numberOfCycles={20}
       eqns={eqns}
       LineNames={LineNames}
       initialConditions={initialConditions}

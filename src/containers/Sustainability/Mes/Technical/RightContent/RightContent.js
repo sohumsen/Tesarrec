@@ -4,6 +4,8 @@ import classes from "./RightContent.module.css";
 import MySliderContainer from "../../../../../components/UI/SliderContainer/SliderContainer";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Switch from "@material-ui/core/Switch";
+import FormGroup from "@material-ui/core/FormGroup";
+
 import { withStyles } from "@material-ui/core/styles";
 import SliderWithText from "../../../../../components/UI/SliderContainer/Slider/SliderWithText";
 
@@ -337,9 +339,9 @@ class RightContent extends Component {
             )}
           />
           <SliderWithText
-            rootWidth={"43%"}
+            rootWidth={"53%"}
             inputWidth={52}
-            displayCaption={"Volumetric flowrate in L/h"}
+            displayCaption={"Volumetric flowrate L/h"}
             value={this.props.Volume}
             InputhandleChange={this.props.InputhandleChange("Volume")}
             lowestVal={0}
@@ -347,7 +349,7 @@ class RightContent extends Component {
             SliderhandleChange={this.props.SliderhandleChange("Volume")}
           />
           <SliderWithText
-            rootWidth={"43%"}
+            rootWidth={"40%"}
             inputWidth={52}
             displayCaption={"Efficiency "}
             value={this.props.efficiencyValue}
@@ -360,31 +362,38 @@ class RightContent extends Component {
           />
         </MySliderContainer>
 
-        <FormControlLabel
-          control={
-            <PurpleSwitch
-              checked={this.state.showEnergySliders}
-              onChange={this.showEnergySliderHandler}
-              name="showEnergySliders"
-              color="primary"
+        <div className={classes.toggleSlider}>
+          <FormGroup row>
+            <FormControlLabel
+              control={
+                <PurpleSwitch
+                  checked={this.state.showEnergySliders}
+                  onChange={this.showEnergySliderHandler}
+                  name="showEnergySliders"
+                  color="primary"
+                />
+              }
+              label="Environment"
+              labelPlacement="start"
             />
-          }
-          label="Show Environment"
-        />
-        {environmentSliders}
 
-        <FormControlLabel
-          control={
-            <PurpleSwitch
-              checked={this.state.showCostSliders}
-              onChange={this.showEnergySliderHandler}
-              name="showCostSliders"
-              color="primary"
+            <FormControlLabel
+              control={
+                <PurpleSwitch
+                  checked={this.state.showCostSliders}
+                  onChange={this.showEnergySliderHandler}
+                  name="showCostSliders"
+                  color="primary"
+                />
+              }
+              label="Cost"
+              labelPlacement="start"
             />
-          }
-          label="Show Cost"
-        />
-        {costSliders}
+            {environmentSliders}
+
+            {costSliders}
+          </FormGroup>
+        </div>
       </div>
     );
   }

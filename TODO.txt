@@ -3,14 +3,9 @@
 Variable Descfiption of a , b , c has default values from Mama but user can override( when user presses submit )
 for certain eqns ban negatives
 allow initial conditions input in ode
+format right content
 
-order MES
-======
-diagram        potential   
-production     gwp        
-captial Cost  dcf graph
 
-word doc download in left content
 
 organise MFC
 =============
@@ -85,6 +80,12 @@ DONE
     widen about page DONE
     make sliders small DONE
     plot graph under production rate DONE
+    order MES
+    ======
+    diagram        potential   
+    production     gwp        
+    captial Cost  dcf graph
+
 
     B)
     MENU DESIGN 
@@ -117,6 +118,7 @@ DONE
     decimal precision in single ODE DONE
     right content of mfc needs to have electricity instead of acetic acid DONE
     turn l/h into fraction DONE
+    word doc download in left content DONE
 
 
 NOT NEEDED

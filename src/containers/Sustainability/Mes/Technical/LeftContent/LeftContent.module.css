@@ -1,9 +1,9 @@
 .LeftContent{
-    width: 10%;
-    position: absolute;
-    top: 0;
-    left: -19%;
+
 
     text-align: center;
+    position: fixed;
+    top: 0px;
+    left: 0px;
 }
 

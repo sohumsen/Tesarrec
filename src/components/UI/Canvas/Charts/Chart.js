@@ -31,6 +31,7 @@ class LineChart extends Component {
 
           toolTipContent: this.props.LineNames[0]+ ": {x}, {y}",
           dataPoints: this.props.EulerData,
+          markerType: "none",
         },
         {
           type: "line",
@@ -39,6 +40,7 @@ class LineChart extends Component {
 
           toolTipContent: this.props.LineNames[1]+ ": {x}, {y}",
           dataPoints: this.props.MidpointData,
+          markerType: "none",
         },
         {
           type: "line",
@@ -47,6 +49,7 @@ class LineChart extends Component {
 
           toolTipContent: this.props.LineNames[2]+ ": {x}, {y}",
           dataPoints: this.props.RungeKuttaData,
+          markerType: "none",
         },
         {
           type: "line",
@@ -55,6 +58,7 @@ class LineChart extends Component {
 
           toolTipContent:this.props.LineNames[3]+ ":  {x}, {y}",
           dataPoints: this.props.Line4Data,
+          markerType: "none",
         },
       ],
     };
