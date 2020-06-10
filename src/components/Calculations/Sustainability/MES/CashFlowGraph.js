@@ -2,26 +2,59 @@ import React from "react";
 import MyChart from "../../../UI/Canvas/Charts/Chart";
 
 const CashFlowGraph = (props) => {
-  
-  console.log(props.yCoordCathode)
-  let i = props.xCoordAnode,
-    j = props.yCoordCathode;
+  let j = props.xCoordAnode,
+    i = props.yCoordCathode;
   // convert all to float
-  let data = [];
 
   let ProductValue =
-    props.ProductionPriceCost * props.TwoDProductionRategData[i][j] * 24 * 365;
-  let Capex = props.TwoDCapitalCostData[i][j] * props.ACCCost;
+    props.ProductionPriceCost *
+    parseFloat(props.TwoDProductionRategData[i][j]) *
+    24 *
+    365;
+
+  let Capex = parseFloat(props.TwoDCapitalCostData[i][j]) * props.ACCCost;
   let Opex =
     1.3 *
     ((0.189 * Capex) / props.LangFactorCost +
       ((((props.AnolyteCost + props.CatholyteCost) * 0.29) / 1000) *
-        props.TwoDProductionRategData[i][j] *
+        parseFloat(props.TwoDProductionRategData[i][j]) *
         24 *
         365) /
+        1000 /
         0.1 +
-      ((1.71 * 52033) / 1000000) * props.TwoDProductionRategData[i][j] +
-      props.ExternalEnergyCost * props.TwoDGibbsEnergyData[i][j]);
+      ((1.71 * 52033) / 1000000) *
+        parseFloat(props.TwoDProductionRategData[i][j]) +
+      props.ExternalEnergyCost *
+        2.43 *
+        parseFloat(props.TwoDGibbsEnergyData[i][j]));
+  console.log(
+    "i= ",
+    i,
+    "j= ",
+    j,
+    "(0.189 * Capex) / props.LangFactorCost",
+    ((((props.AnolyteCost + props.CatholyteCost) * 0.29) / 1000) *
+      parseFloat(props.TwoDProductionRategData[i][j]) *
+      24 *
+      365) /
+      1000,
+    "ProductionPriceCost= ",
+    props.ProductionPriceCost,
+    "props.TwoDCapitalCostData[i][j]",
+    props.TwoDCapitalCostData[i][j],
+    "ProductionRateData= ",
+    props.TwoDProductionRategData[i][j],
+    "props.TwoDGibbsEnergyData[i][j]",
+    props.TwoDGibbsEnergyData[i][j],
+    "Capex",
+    Capex,
+    "PrdocutValue= ",
+    ProductValue,
+    "Capex= ",
+    Capex,
+    "Opex= ",
+    Opex
+  );
 
   let k = ProductValue - Opex - Capex;
   // let CC0 = props.TwoDCapitalCostData[i][j];
@@ -29,13 +62,18 @@ const CashFlowGraph = (props) => {
   // let CC2 = CC1 - k / (1 + props.IRRCost) ** 2;
   // let CC3 = CC2 - k / (1 + props.IRRCost) ** 3;
 
-  let dataArr = [parseFloat(props.TwoDCapitalCostData[i][j])];
+  let dataArr = [-1 * parseFloat(props.TwoDCapitalCostData[i][j])];
   for (let t = 1; t < 11; t++) {
-    dataArr[t] = dataArr[t - 1] - k / (1 + props.IRRCost) ** t;
+    dataArr[t] = dataArr[t - 1] + k / (1 + props.IRRCost) ** t;
   }
-  console.log(dataArr);
+  // console.log(dataArr);
 
-  console.log(ProductValue, Capex, Opex);
+  let data = [
+    { x: -3, y: 0 },
+    { x: -2, y: dataArr[0] / 3 },
+    { x: -1, y: 2*dataArr[0] / 3 },
+  ];
+
   for (let l = 0; l < dataArr.length; l++) {
     data.push({
       x: l,
@@ -47,10 +85,10 @@ const CashFlowGraph = (props) => {
   return (
     <div>
       <MyChart
-        axisNames={["yr", "dcf"]}
+        axisNames={["Year", "Discounted cash flow (€)"]}
         verticalAlign={"top"}
         horizontalAlign={"center"}
-        LineNames={["dcf"]}
+        LineNames={["Discounted cash flow analysis"]}
         EulerData={data}
       />
     </div>
