@@ -47,7 +47,18 @@ class HeatMapFormMFC extends Component {
     PumpedHydro: 100,
     Other: 100,
 
+    AnodeCost: 15,
+    CathodeCost: 15,
+    MembraneCost: 440,
+    CurrentCollectorCost: 28,
 
+    AnolyteCost: 0.0012,
+    CatholyteCost: 0.5,
+    ExternalEnergyCost: 0.15,
+    LangFactorCost: 4.75,
+    ACCCost: 0.13,
+    ProductionPriceCost: 0.024,
+    IRRCost: 0.12,
   };
 
   HeatMapChangedOnClick = (x, y, value) => {
@@ -57,7 +68,6 @@ class HeatMapFormMFC extends Component {
       chosenValue: value[y.y][x.x],
     });
   };
-
 
   SliderhandleChange = (name) => (event, value) => {
     this.setState({ [name]: value });
@@ -69,7 +79,6 @@ class HeatMapFormMFC extends Component {
 
     this.setState({ [name]: value });
   };
- 
 
   render() {
     return (
@@ -85,7 +94,6 @@ class HeatMapFormMFC extends Component {
           efficiencyValue={this.state.efficiencyValue}
           SliderhandleChange={(val) => this.SliderhandleChange(val)}
           InputhandleChange={(val) => this.InputhandleChange(val)}
-          handleBlur={(val) => this.handleBlur(val)}
           CCGT={this.state.CCGT}
           Nuclear={this.state.Nuclear}
           Biomass={this.state.Biomass}
@@ -97,6 +105,17 @@ class HeatMapFormMFC extends Component {
           Hydroelectric={this.state.Hydroelectric}
           PumpedHydro={this.state.PumpedHydro}
           Other={this.state.Other}
+          AnodeCost={this.state.AnodeCost}
+          CathodeCost={this.state.CathodeCost}
+          MembraneCost={this.state.MembraneCost}
+          CurrentCollectorCost={this.state.CurrentCollectorCost}
+          AnolyteCost={this.state.AnolyteCost}
+          CatholyteCost={this.state.CatholyteCost}
+          ExternalEnergyCost={this.state.ExternalEnergyCost}
+          LangFactorCost={this.state.LangFactorCost}
+          ACCCost={this.state.ACCCost}
+          ProductionPriceCost={this.state.ProductionPriceCost}
+          IRRCost={this.state.IRRCost}
         />
 
         <div className={classes.HeatMap}>
@@ -120,7 +139,6 @@ class HeatMapFormMFC extends Component {
             PumpedHydro={this.state.PumpedHydro}
             Other={this.state.Other}
           />
-        
         </div>
       </div>
     );

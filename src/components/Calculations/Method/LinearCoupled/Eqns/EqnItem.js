@@ -4,13 +4,13 @@ import MyMathQuill from '../../../../UI/Math/MyMathQuill'
 import classes from './EqnItem.module.css'
 const EqnItem = (props) => {
   return (
-    <div key={props.id} className={classes.Container}>
+    <li key={props.id} className={classes.Container} style={{listStyleType:"none"}}>
       <MyMathQuill
         firstBit={props.DByDLatex}
         latex={props.LatexEqn}
         onInputChange={props.handleMathQuillInputChange}
       />
-      <div className={classes.RemoveButton}>
+      <li className={classes.RemoveButton}>
       <RemoveButton
       disabled={props.disabledRemoveButton}
         type="button"
@@ -18,13 +18,13 @@ const EqnItem = (props) => {
         displayValue="REMOVEIT"
         onClick={props.removeEqn}
       />
-      </div>
+      </li>
       <div className={classes.ErrorMsg}>
       {props.error}
 
       </div>
 
-    </div>
+    </li>
   );
 };
 

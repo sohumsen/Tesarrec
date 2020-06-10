@@ -6,7 +6,7 @@ import ReadCathodeJSON from "../../../Excel/Cathode/ReadCathodeJSON";
 import MyHeatMap from "../../../UI/MyHeatMap/MyHeatMap";
 import classes from "./OverallReactionAnodeCathodeMES.module.css";
 // import MyMathQuill from "../../../UI/Math/MyMathQuill";
-import MESPic from '../../../../assets/MES.png'
+import MESPic from "../../../../assets/MES.png";
 import CashFlowGraph from "./CashFlowGraph";
 const OverallReactionAnodeCathode = (props) => {
   //console.log(props.anodeSubstrate)
@@ -146,14 +146,10 @@ const OverallReactionAnodeCathode = (props) => {
 
   return (
     <div className={classes.HeatMaps}>
+      <div className={classes.HeatMapEnergyPerformance}>
+        <img src={MESPic} width="110%" alt="mes pic"></img>
 
-<div className={classes.HeatMapEnergyPerformance}>
-          <img src={MESPic} width="100%" alt="mes pic"></img>
-          <h2 style={{ textAlign: "center" }}>
-            x'C<sub>x</sub>H<sub>y</sub>O<sub>z</sub> +mH<sub>2</sub>O = C
-            <sub>c</sub>H<sub>h</sub>O<sub>o</sub>+m'H<sub>2</sub>
-          </h2>
-        </div>
+      </div>
       <div className={classes.HeatMapEnergyPerformance}>
         <h3>Heat map of Theoretical potential (V)</h3>
 

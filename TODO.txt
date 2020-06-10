@@ -4,7 +4,8 @@ Variable Descfiption of a , b , c has default values from Mama but user can over
 for certain eqns ban negatives
 allow initial conditions input in ode
 format right content
-
+mfc dowsnt update slider DONE
+maybe speed up dynamic
 
 
 organise MFC
@@ -22,6 +23,8 @@ captialcost dcf
 
                 <p>Equations</p>
 
+use only one heatmap form perhaps
+remove eqn from mes pic
 
 
 

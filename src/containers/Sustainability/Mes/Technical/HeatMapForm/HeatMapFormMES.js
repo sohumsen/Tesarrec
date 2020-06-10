@@ -72,9 +72,7 @@ class HeatMapForm extends Component {
     });
   };
 
-  componentDidMount() {
-    //https://api.bmreports.com/BMRS/B1720/v1?APIKey=op174l2qrpu3s7t&SettlementDate=<SettlementDate>&Period=<Period>&ServiceType=<xml/csv>
-  }
+
 
   SliderhandleChange = (name) => (event, value) => {
     this.setState({ [name]: value });
@@ -84,7 +82,6 @@ class HeatMapForm extends Component {
     let { value, min, max } = event.target;
     value = Math.max(Number(min), Math.min(Number(max), Number(value)));
 
-    console.log(value, min, max);
 
     this.setState({ [name]: value });
   };
@@ -103,7 +100,6 @@ class HeatMapForm extends Component {
           efficiencyValue={this.state.efficiencyValue}
           SliderhandleChange={(val) => this.SliderhandleChange(val)}
           InputhandleChange={(val) => this.InputhandleChange(val)}
-          handleBlur={(val) => this.handleBlur(val)}
           CCGT={this.state.CCGT}
           Nuclear={this.state.Nuclear}
           Biomass={this.state.Biomass}
