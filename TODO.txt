@@ -4,16 +4,14 @@ Variable Descfiption of a , b , c has default values from Mama but user can over
 for certain eqns ban negatives
 allow initial conditions input in ode
 format right content
-mfc dowsnt update slider DONE
+
 maybe speed up dynamic
 show title in dcf graph with chemical
-fix slider position DONE
-units on sliders
+
 remove line from inut box
 remove left contenet
-download button next to title
+
 readme links
-heatamp opex e/yr, product value e/yr DONE
 euro next to title on heatamp
 move opex and product value to main file
 canvas js add 0 axis lines
@@ -137,7 +135,11 @@ DONE
     right content of mfc needs to have electricity instead of acetic acid DONE
     turn l/h into fraction DONE
     word doc download in left content DONE
-
+    mfc dowsnt update slider DONE
+    fix slider position DONE
+    download button next to title DONE
+    heatamp opex e/yr, product value e/yr DONE
+    units on sliders DONE
 
 NOT NEEDED
 ===========

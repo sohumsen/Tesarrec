@@ -154,9 +154,9 @@ const OverallReactionAnodeCathode = (props) => {
 
       GibbsEnergyData.push(StandardGibbsEnergyOfReactionkJ.toFixed(2));
 
-      TheoreticalPotentialData.push(TheoreticalPotential.toFixed(2));
+      TheoreticalPotentialData.push((TheoreticalPotential).toFixed(2));
 
-      GWPSavingData.push(GWPSaving.toFixed(2));
+      GWPSavingData.push((GWPSaving*8.76).toFixed(2));
 
       CapitalCostData.push(CapitalCost.toFixed(2));
 
@@ -222,7 +222,7 @@ const OverallReactionAnodeCathode = (props) => {
 
 
       <div className={classes.HeatMapEnergyPerformance}>
-        <h3>Global Warming Potential saving (g CO&#8322; eq./h)</h3>
+        <h3>Global Warming Potential saving (kg CO&#8322; eq./year)</h3>
 
         <MyHeatMap
           xLabels={props.heatMapContents.xLabels}
@@ -246,7 +246,7 @@ const OverallReactionAnodeCathode = (props) => {
       </div>
 
       <div className={classes.HeatMapEnergyPerformance}>
-        <h3>Heat map of Operating Cost (&euro;/h)</h3>
+        <h3>Heat map of Operating Cost (&euro;/year)</h3>
 
         <MyHeatMap
           xLabels={props.heatMapContents.xLabels}
@@ -258,7 +258,7 @@ const OverallReactionAnodeCathode = (props) => {
       </div>
 
       <div className={classes.HeatMapEnergyPerformance}>
-        <h3>Heat map of Product Value (&euro;/h)</h3>
+        <h3>Heat map of Product Value (&euro;/year)</h3>
 
         <MyHeatMap
           xLabels={props.heatMapContents.xLabels}

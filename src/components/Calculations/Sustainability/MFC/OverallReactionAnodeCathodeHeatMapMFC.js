@@ -53,7 +53,7 @@ const OverallReactionAnodeCathode = (props) => {
     let StandardGibbsEnergyOfReactionkJ =
       ((props.concentration * props.volume * props.efficiency) /
         (xDash * MolarMassOfSubstrate)) *
-      (-394.36 - xDash * GibbsSubstrateInitial - nDash * -237.13);
+      (-394.36 - xDash * GibbsSubstrateInitial + nDash * -237.13);
 
     //console.log(StandardGibbsEnergyOfReactionkJ)
 

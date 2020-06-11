@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 
+import WordDoc from '../../../assets/MES download.docx'
 
 import classes from './Mes.module.css'
 //import Economic from './Economic/Economic'
@@ -13,6 +14,7 @@ class Mes extends Component {
     return (
       <div className={classes.parentContainer}>
         <h1>Microbial Electrosynthesis</h1>
+        <a href={WordDoc} download>Click to download paper</a>
 
         <HeatMapForm/>
 

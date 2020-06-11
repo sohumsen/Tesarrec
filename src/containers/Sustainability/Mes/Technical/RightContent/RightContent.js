@@ -175,7 +175,7 @@ class RightContent extends Component {
           <SliderWithText
             rootWidth={"43%"}
             inputWidth={52}
-            displayCaption={"Anode "}
+            displayCaption={"Anode €/m³"}
             value={this.props.AnodeCost}
             displayValue={this.props.AnodeCost}
             lowestVal={5}
@@ -186,7 +186,7 @@ class RightContent extends Component {
           <SliderWithText
             rootWidth={"43%"}
             inputWidth={52}
-            displayCaption={"Cathode "}
+            displayCaption={"Cathode €/m³"}
             value={this.props.CathodeCost}
             displayValue={this.props.CathodeCost}
             lowestVal={5}
@@ -224,7 +224,7 @@ class RightContent extends Component {
           <SliderWithText
             rootWidth={"43%"}
             inputWidth={52}
-            displayCaption={"Anolyte "}
+            displayCaption={"Anolyte €/m³"}
             value={this.props.AnolyteCost}
             displayValue={this.props.AnolyteCost}
             lowestVal={0.001}
@@ -235,7 +235,7 @@ class RightContent extends Component {
           <SliderWithText
             rootWidth={"43%"}
             inputWidth={52}
-            displayCaption={"Catholyte "}
+            displayCaption={"Catholyte €/m³"}
             value={this.props.CatholyteCost}
             displayValue={this.props.CatholyteCost}
             lowestVal={0.1}
@@ -246,7 +246,7 @@ class RightContent extends Component {
           <SliderWithText
             rootWidth={"43%"}
             inputWidth={52}
-            displayCaption={"External Energy "}
+            displayCaption={"Electricity €/kWh"}
             value={this.props.ExternalEnergyCost}
             displayValue={this.props.ExternalEnergyCost}
             lowestVal={0.05}
