@@ -7,16 +7,17 @@ format right content
 mfc dowsnt update slider DONE
 maybe speed up dynamic
 show title in dcf graph with chemical
-fix slider position
+fix slider position DONE
 units on sliders
 remove line from inut box
 remove left contenet
 download button next to title
 readme links
-heatamp opex e/yr, product value e/yr
+heatamp opex e/yr, product value e/yr DONE
 euro next to title on heatamp
 move opex and product value to main file
 canvas js add 0 axis lines
+remove default 0 on slider
 
 capex   opex
 productvalue dcf
