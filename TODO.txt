@@ -4,35 +4,14 @@ Variable Descfiption of a , b , c has default values from Mama but user can over
 for certain eqns ban negatives
 allow initial conditions input in ode
 format right content
-
 maybe speed up dynamic
 show title in dcf graph with chemical
-
 remove line from inut box
 remove left contenet
 canvas js add 0 axis lines
 remove default 0 on slider
 readme links
-
-
 clean mes heatmap
-
-
-organise MFC
-=============
-diagram     electricity
-        gwp
-captialcost dcf
-
- <p>Schematic</p>
-                <p>Electricity</p>
-                <p>GWP</p>
-                <p>Capital Cost</p>
-                <p>DCF</p>
-
-
-                <p>Equations</p>
-
 use only one heatmap form perhaps
 remove eqn from mes pic
 
@@ -141,6 +120,21 @@ DONE
     move opex and product value to main file DONE
     capex   opex DONE
     productvalue dcf DONE
+    organise MFC
+    =============
+    diagram     electricity
+            gwp
+    captialcost dcf
+
+    <p>Schematic</p>
+                    <p>Electricity</p>
+                    <p>GWP</p>
+                    <p>Capital Cost</p>
+                    <p>DCF</p>
+
+
+                    <p>Equations</p>
+
 
 NOT NEEDED
 ===========

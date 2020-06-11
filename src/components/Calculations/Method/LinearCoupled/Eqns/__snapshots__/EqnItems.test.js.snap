@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<LinearCoupledDiffEqns/> should solve on differential eqn and presnet a chart 1`] = `
+<EqnItem
+  DByDLatex="\\\\frac{da}{dt}="
+  LatexEqn="-\\\\frac{0.09ab}{0.103+a}-\\\\frac{0.84ac}{0.425+a}"
+  disabledRemoveButton={false}
+  error={null}
+  handleMathQuillInputChange={[Function]}
+  id="qwert"
+  removeEqn={[Function]}
+/>
+`;
