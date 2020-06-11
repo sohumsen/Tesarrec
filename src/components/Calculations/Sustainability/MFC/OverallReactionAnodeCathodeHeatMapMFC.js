@@ -2,7 +2,8 @@ import React from "react";
 
 import ReadAnodeJSON from "../../../Excel/Anode/ReadAndodeJSON";
 //import ReadCathodeJSON from "../../Excel/Cathode/ReadCathodeJSON";
-
+import CashFlowGraph from './CashFlowGraph'
+import MFCPic from "../../../../assets/MFC.png";
 
 import MyHeatMap from "../../../UI/MyHeatMap/MyHeatMap";
 import classes from "./OverallReactionAnodeCathodeMFC.module.css";
@@ -33,9 +34,12 @@ const OverallReactionAnodeCathode = (props) => {
       props.Hydroelectric +
       props.PumpedHydro +
       props.Other);
-  let GibbsEnergyData = [];
+  let ElectricityGenerationData = [];
   let GWPSavingData = [];
-
+  let CapitalCostData=[]
+  let ProductValueData=[]
+  let OpexData=[]
+  let CapexData=[]
   props.heatMapContents.xLabels.forEach((Xelement) => {
     let AnodeData = ReadAnodeJSON(Xelement);
     //console.log(AnodeData)
@@ -50,18 +54,37 @@ const OverallReactionAnodeCathode = (props) => {
 
     let MolarMassOfSubstrate = 12 * x + y + 16 * z;
 
-    let StandardGibbsEnergyOfReactionkJ =
-      ((props.concentration * props.volume * props.efficiency) /
+
+
+    let ElectricityGeneration =
+      -1*(((props.concentration * props.volume * props.efficiency) /
         (xDash * MolarMassOfSubstrate)) *
-      (-394.36 - xDash * GibbsSubstrateInitial + nDash * -237.13);
+      (-394.36 - xDash * GibbsSubstrateInitial + nDash * -237.13))/3.6;
 
-    //console.log(StandardGibbsEnergyOfReactionkJ)
+    let CapitalCost =
+      ((props.AnodeCost + props.CathodeCost) *
+      ElectricityGeneration*
+        props.LangFactorCost) /
+      10.84;
 
-    GibbsEnergyData.push((-StandardGibbsEnergyOfReactionkJ/3.6).toFixed(2));
+    let ProductValue =
+    ElectricityGeneration * props.ElectricityPriceCost * 8.76;
 
+    let Capex=CapitalCost*props.AnnualCapitalChargeCost
 
+    let Opex = 1.3*(0.189*Capex/props.LangFactorCost+(props.AnolyteCost+props.CatholyteCost)*0.0167*ElectricityGeneration+0.09*props.concentration*props.volume)
 
-    let GWPsaving= -StandardGibbsEnergyOfReactionkJ*CarbonEmmision
+    let GWPsaving = -ElectricityGeneration * CarbonEmmision*8.76;
+
+    CapexData.push(Capex.toFixed(2))
+
+    ElectricityGenerationData.push((ElectricityGeneration).toFixed(2));
+
+    CapitalCostData.push(CapitalCost.toFixed(2));
+
+    ProductValueData.push(ProductValue.toFixed(2));
+
+    OpexData.push(Opex.toFixed(2));
 
     GWPSavingData.push(GWPsaving.toFixed(2));
 
@@ -70,19 +93,26 @@ const OverallReactionAnodeCathode = (props) => {
     //console.log((StandardGibbsEnergyOfReactionkJ.toFixed(2)))
   });
 
-  let TwoDGibbsEnergyData = [];
+  const FormatArr = (Arr) => {
+    let TwoDArr = [];
 
-  while (GibbsEnergyData.length)
-    TwoDGibbsEnergyData.push(
-      GibbsEnergyData.splice(0, props.heatMapContents.xLabels.length)
-    );
+    while (Arr.length)
+      TwoDArr.push(Arr.splice(0, props.heatMapContents.xLabels.length));
 
-  let TwoDGWPSavingyData = [];
+    return TwoDArr;
+  };
 
-  while (GWPSavingData.length)
-    TwoDGWPSavingyData.push(
-      GWPSavingData.splice(0, props.heatMapContents.xLabels.length)
-    );
+  let TwoDElectricityGeneration = FormatArr(ElectricityGenerationData);
+
+  let TwoDGWPSavingyData = FormatArr(GWPSavingData);
+
+  let TwoDCapitalCostData=FormatArr(CapitalCostData)
+
+  let TwoDProductValueData=FormatArr(ProductValueData)
+
+  let TwoDOpexData=FormatArr(OpexData)
+
+  let TwoDCapexData=FormatArr(CapexData)
 
   //console.log(energyObj)
 
@@ -90,18 +120,21 @@ const OverallReactionAnodeCathode = (props) => {
   return (
     <div className={classes.HeatMaps}>
       <div className={classes.HeatMapEnergyPerformance}>
+        <img src={MFCPic} width="100%" alt="MFC Pic "></img>
+      </div>
+      <div className={classes.HeatMapEnergyPerformance}>
         <h3>Electricity Generation (Watt)</h3>
         <MyHeatMap
           xLabels={props.heatMapContents.xLabels}
           yLabels={["Electricity"]}
           color={"rgba(0, 255, 255"}
-          data={TwoDGibbsEnergyData}
+          data={TwoDElectricityGeneration}
           HeatMapChangedOnClick={props.HeatMapChangedOnClick}
         />
       </div>
 
       <div className={classes.HeatMapEnergyPerformance}>
-        <h3>Global Warming Potential saving (g CO&#8322; eq./h)</h3>
+        <h3>Global Warming Potential saving (kg CO&#8322; eq./year)</h3>
         <MyHeatMap
           xLabels={props.heatMapContents.xLabels}
           yLabels={["GWP"]}
@@ -110,6 +143,53 @@ const OverallReactionAnodeCathode = (props) => {
           HeatMapChangedOnClick={props.HeatMapChangedOnClick}
         />
       </div>
+      <div className={classes.HeatMapEnergyPerformance}>
+        <h3>Heat map of Capital Cost (&euro;)</h3>
+        <MyHeatMap
+          xLabels={props.heatMapContents.xLabels}
+          yLabels={["GWP"]}
+          color={"rgba(0, 255, 255"}
+          data={TwoDCapitalCostData}
+          HeatMapChangedOnClick={props.HeatMapChangedOnClick}
+        />
+      </div>
+
+      <div className={classes.HeatMapEnergyPerformance}>
+        <h3>Heat map of Operating Cost (&euro;/year)</h3>
+        <MyHeatMap
+          xLabels={props.heatMapContents.xLabels}
+          yLabels={["GWP"]}
+          color={"rgba(0, 255, 255"}
+          data={TwoDOpexData}
+          HeatMapChangedOnClick={props.HeatMapChangedOnClick}
+        />
+      </div>
+      <div className={classes.HeatMapEnergyPerformance}>
+        <h3>Heat map of Product Value (&euro;/year)</h3>
+        <MyHeatMap
+          xLabels={props.heatMapContents.xLabels}
+          yLabels={["GWP"]}
+          color={"rgba(0, 255, 255"}
+          data={TwoDProductValueData}
+          HeatMapChangedOnClick={props.HeatMapChangedOnClick}
+        />
+      </div>
+
+      <div className={classes.HeatMapEnergyPerformance}>
+        <CashFlowGraph
+          TwoDCapitalCostData={TwoDCapitalCostData}
+          TwoDProductValueData={TwoDProductValueData}
+          TwoDOpexData={TwoDOpexData}
+          TwoDCapexData={TwoDCapexData}
+          IRRCost={props.IRRCost}
+        
+          anodeSubstrate={props.anodeSubstrate}
+          cathodeProduct={props.cathodeProduct}
+          xCoordAnode={props.xCoordAnode}
+          yCoordCathode={props.yCoordCathode}
+        />
+      </div>
+
     </div>
   );
 };

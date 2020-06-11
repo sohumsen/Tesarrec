@@ -29,6 +29,8 @@ class HeatMapFormMFC extends Component {
 
     AnodeSubstrateChemical: "Acetate",
     CathodeProductChemical: "Acetic acid",
+    xCoordAnode:0,
+    yCoordCathode:0,
     chosenValue: "",
 
     AnodeSubstrateConcentration: 10,
@@ -49,20 +51,20 @@ class HeatMapFormMFC extends Component {
 
     AnodeCost: 15,
     CathodeCost: 15,
-    MembraneCost: 440,
-    CurrentCollectorCost: 28,
+    LangFactorCost: 1.5,
+
+    AnnualCapitalChargeCost: 0.13,
+    IRRCost: 0.12,
 
     AnolyteCost: 0.0012,
     CatholyteCost: 0.5,
-    ExternalEnergyCost: 0.15,
-    LangFactorCost: 4.75,
-    ACCCost: 0.13,
-    ProductionPriceCost: 0.024,
-    IRRCost: 0.12,
+    ElectricityPriceCost: 0.15,
   };
 
   HeatMapChangedOnClick = (x, y, value) => {
     this.setState({
+      xCoordAnode:x.x,
+      yCoordCathode:y.y,
       AnodeSubstrateChemical: this.state.HeatMapState.xLabels[x.x],
       CathodeProductChemical: this.state.HeatMapState.yLabels[y.y],
       chosenValue: value[y.y][x.x],
@@ -107,14 +109,11 @@ class HeatMapFormMFC extends Component {
           Other={this.state.Other}
           AnodeCost={this.state.AnodeCost}
           CathodeCost={this.state.CathodeCost}
-          MembraneCost={this.state.MembraneCost}
-          CurrentCollectorCost={this.state.CurrentCollectorCost}
+          LangFactorCost={this.state.LangFactorCost}
           AnolyteCost={this.state.AnolyteCost}
           CatholyteCost={this.state.CatholyteCost}
-          ExternalEnergyCost={this.state.ExternalEnergyCost}
-          LangFactorCost={this.state.LangFactorCost}
-          ACCCost={this.state.ACCCost}
-          ProductionPriceCost={this.state.ProductionPriceCost}
+          ElectricityPriceCost={this.state.ElectricityPriceCost}
+          AnnualCapitalChargeCost={this.state.AnnualCapitalChargeCost}
           IRRCost={this.state.IRRCost}
         />
 
@@ -138,6 +137,16 @@ class HeatMapFormMFC extends Component {
             Hydroelectric={this.state.Hydroelectric}
             PumpedHydro={this.state.PumpedHydro}
             Other={this.state.Other}
+            AnodeCost={this.state.AnodeCost}
+            CathodeCost={this.state.CathodeCost}
+            LangFactorCost={this.state.LangFactorCost}
+            AnolyteCost={this.state.AnolyteCost}
+            CatholyteCost={this.state.CatholyteCost}
+            ElectricityPriceCost={this.state.ElectricityPriceCost}
+            AnnualCapitalChargeCost={this.state.AnnualCapitalChargeCost}
+            IRRCost={this.state.IRRCost}
+            xCoordAnode={this.state.xCoordAnode}
+            yCoordCathode={this.state.yCoordCathode}
           />
         </div>
       </div>

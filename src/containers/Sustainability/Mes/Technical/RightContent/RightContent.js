@@ -175,7 +175,7 @@ class RightContent extends Component {
           <SliderWithText
             rootWidth={"43%"}
             inputWidth={52}
-            displayCaption={"Anode €/m³"}
+            displayCaption={"Anode €/m²"}
             value={this.props.AnodeCost}
             displayValue={this.props.AnodeCost}
             lowestVal={5}
@@ -186,7 +186,7 @@ class RightContent extends Component {
           <SliderWithText
             rootWidth={"43%"}
             inputWidth={52}
-            displayCaption={"Cathode €/m³"}
+            displayCaption={"Cathode €/m²"}
             value={this.props.CathodeCost}
             displayValue={this.props.CathodeCost}
             lowestVal={5}
@@ -197,7 +197,7 @@ class RightContent extends Component {
           <SliderWithText
             rootWidth={"43%"}
             inputWidth={52}
-            displayCaption={"Membrane "}
+            displayCaption={"Membrane €/m²"}
             value={this.props.MembraneCost}
             displayValue={this.props.MembraneCost}
             lowestVal={10}
@@ -208,7 +208,7 @@ class RightContent extends Component {
           <SliderWithText
             rootWidth={"43%"}
             inputWidth={52}
-            displayCaption={"Current Collector "}
+            displayCaption={"Current Collector €/m²"}
             value={this.props.CurrentCollectorCost}
             displayValue={this.props.CurrentCollectorCost}
             lowestVal={10}
@@ -246,7 +246,7 @@ class RightContent extends Component {
           <SliderWithText
             rootWidth={"43%"}
             inputWidth={52}
-            displayCaption={"Electricity €/kWh"}
+            displayCaption={"External Energy €/kWh"}
             value={this.props.ExternalEnergyCost}
             displayValue={this.props.ExternalEnergyCost}
             lowestVal={0.05}
@@ -283,7 +283,7 @@ class RightContent extends Component {
           <SliderWithText
             rootWidth={"43%"}
             inputWidth={52}
-            displayCaption={"Production Price "}
+            displayCaption={"Production Price €/g"}
             value={this.props.ProductionPriceCost}
             displayValue={this.props.ProductionPriceCost}
             lowestVal={0.01}

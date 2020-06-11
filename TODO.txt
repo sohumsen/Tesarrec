@@ -10,15 +10,12 @@ show title in dcf graph with chemical
 
 remove line from inut box
 remove left contenet
-
-readme links
-euro next to title on heatamp
-move opex and product value to main file
 canvas js add 0 axis lines
 remove default 0 on slider
+readme links
 
-capex   opex
-productvalue dcf
+
+clean mes heatmap
 
 
 organise MFC
@@ -140,6 +137,10 @@ DONE
     download button next to title DONE
     heatamp opex e/yr, product value e/yr DONE
     units on sliders DONE
+    euro next to title on heatamp DONE
+    move opex and product value to main file DONE
+    capex   opex DONE
+    productvalue dcf DONE
 
 NOT NEEDED
 ===========
