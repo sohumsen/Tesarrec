@@ -260,7 +260,6 @@ const LinearCoupledDiffFourEqn = (props) => {
 
   let EqnArr = FormatArrayLinearCoupled(CompletedGridRungeKuttaLinearCoupled[0]);
   //return null;
-  console.log(EqnArr)
 
   return ShowLinearCoupledGraph(EqnArr);
 };

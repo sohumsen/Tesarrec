@@ -77,7 +77,13 @@ class HeatMapFormMFC extends Component {
 
   InputhandleChange = (name) => (event) => {
     let { value, min, max } = event.target;
-    value = Math.max(Number(min), Math.min(Number(max), Number(value)));
+    console.log(name, value, min, max);
+
+    if (value !== "") {
+      value = Math.max(Number(min), Math.min(Number(max), Number(value)));
+    }
+
+    console.log(name, value, min, max);
 
     this.setState({ [name]: value });
   };

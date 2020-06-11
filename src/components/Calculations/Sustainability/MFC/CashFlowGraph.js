@@ -5,7 +5,6 @@ const CashFlowGraph = (props) => {
   let j = props.xCoordAnode,
     i = props.yCoordCathode;
   // convert all to float
-  console.log()
   let CapitalCostData=parseFloat(props.TwoDCapitalCostData[i][j])
   let ProductValueData=parseFloat(props.TwoDProductValueData[i][j])
   let OpexData=parseFloat(props.TwoDOpexData[i][j])

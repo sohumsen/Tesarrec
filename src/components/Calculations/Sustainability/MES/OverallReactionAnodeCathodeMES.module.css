@@ -1,25 +1,12 @@
-.HeatMaps{
-    
-    float: left;
-
+.HeatMaps {
+  float: left;
+  width: 120%;
 }
 
-.HeatMapProductionRate{
-    float: left;
-    width: 40%;
-    padding-top: 10%;
-    text-align: center;
-    
-}
+.HeatMapEnergyPerformance {
+  float: left;
+  width: 50%;
 
-.HeatMapEnergyPerformance{
-    float: left;
-    width: 50%;
-
-    padding-top: 10%;
-    text-align: center;
-
-
-
-
+  padding-top: 5%;
+  text-align: center;
 }

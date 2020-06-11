@@ -1,24 +1,20 @@
+.RightContent {
+  width: 28%;
 
+  top: 60px;
+  bottom: 0;
+  right: 0px;
 
+  text-align: center;
+  padding: 5px;
 
-.RightContent{
-    width: 21%;
-
-    top: 60px;
-    bottom:0;
-    right: 0px;
-
-    border-radius: 10px;
-    text-align: center;
-    padding: 5px;
-
-
-    position:fixed;
-    overflow-y:scroll;
-    overflow-x:hidden;
+  position: fixed;
+  overflow-y: scroll;
+  overflow-x: hidden;
 }
 
-.toggleSlider{
-    position: absolute;
-    top: 45%;
+.toggleSlider {
+  position: absolute;
+  top: 47%;
+  left: 15%;;
 }

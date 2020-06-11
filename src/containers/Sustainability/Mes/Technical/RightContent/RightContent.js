@@ -30,7 +30,6 @@ class RightContent extends Component {
   };
 
   showEnergySliderHandler = (event) => {
-    console.log(event.target.checked);
 
     this.setState({ [event.target.name]: event.target.checked });
   };

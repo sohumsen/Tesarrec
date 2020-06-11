@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import SingleODE from "./SingleODE/SingleODE";
 import LinearCoupled from "./LinearCoupled/LinearCoupled";
 import MyTabs from "../../components/UI/MyTabs/MyTabs";
-
+import classes from './Dynamic.module.css'
 class Dynamic extends Component {
   /**
    * Visual Component that contains the textbox for the equation and calculation outputs
@@ -18,7 +18,7 @@ class Dynamic extends Component {
 
   render() {
     return (
-      <div>
+      <div className={classes.DynamicContainer}>
         <h1>Dynamic </h1>
         <MyTabs
           value={this.state.choiceValue}

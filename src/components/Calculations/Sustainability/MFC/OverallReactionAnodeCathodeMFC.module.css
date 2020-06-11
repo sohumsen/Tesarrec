@@ -1,20 +1,13 @@
 .HeatMaps{
     
+    float: left;
     width: 100%;
-    display:inline-block;
-    vertical-align: top;
-
 }
 
-.HeatMapProductionRate{
+.HeatMapEnergyPerformance {
     float: left;
     width: 50%;
-    color: rgb(208, 226, 226);
-}
-
-.HeatMapEnergyPerformance{
-    float: left;
-    width: 50%;
-
-
-}
+  
+    padding-top: 3%;
+    text-align: center;
+  }

@@ -1,8 +1,9 @@
 .parentContainer {
-  position: relative;
+  position: absolute;
 
-  width: 90%;
 
   float: left;
   align-items: center;
+  width: 70%;
+  margin: 30px;
 }

@@ -147,7 +147,7 @@ const OverallReactionAnodeCathode = (props) => {
         <h3>Heat map of Capital Cost (&euro;)</h3>
         <MyHeatMap
           xLabels={props.heatMapContents.xLabels}
-          yLabels={["GWP"]}
+          yLabels={["Capital Cost"]}
           color={"rgba(0, 255, 255"}
           data={TwoDCapitalCostData}
           HeatMapChangedOnClick={props.HeatMapChangedOnClick}
@@ -158,7 +158,7 @@ const OverallReactionAnodeCathode = (props) => {
         <h3>Heat map of Operating Cost (&euro;/year)</h3>
         <MyHeatMap
           xLabels={props.heatMapContents.xLabels}
-          yLabels={["GWP"]}
+          yLabels={["Operating Cost"]}
           color={"rgba(0, 255, 255"}
           data={TwoDOpexData}
           HeatMapChangedOnClick={props.HeatMapChangedOnClick}
@@ -168,7 +168,7 @@ const OverallReactionAnodeCathode = (props) => {
         <h3>Heat map of Product Value (&euro;/year)</h3>
         <MyHeatMap
           xLabels={props.heatMapContents.xLabels}
-          yLabels={["GWP"]}
+          yLabels={["Product Value"]}
           color={"rgba(0, 255, 255"}
           data={TwoDProductValueData}
           HeatMapChangedOnClick={props.HeatMapChangedOnClick}

@@ -27,34 +27,34 @@ const CashFlowGraph = (props) => {
       props.ExternalEnergyCost *
         2.43 *
         parseFloat(props.TwoDGibbsEnergyData[i][j]));
-  console.log(
-    "i= ",
-    i,
-    "j= ",
-    j,
-    "(0.189 * Capex) / props.LangFactorCost",
-    ((((props.AnolyteCost + props.CatholyteCost) * 0.29) / 1000) *
-      parseFloat(props.TwoDProductionRategData[i][j]) *
-      24 *
-      365) /
-      1000,
-    "ProductionPriceCost= ",
-    props.ProductionPriceCost,
-    "props.TwoDCapitalCostData[i][j]",
-    props.TwoDCapitalCostData[i][j],
-    "ProductionRateData= ",
-    props.TwoDProductionRategData[i][j],
-    "props.TwoDGibbsEnergyData[i][j]",
-    props.TwoDGibbsEnergyData[i][j],
-    "Capex",
-    Capex,
-    "PrdocutValue= ",
-    ProductValue,
-    "Capex= ",
-    Capex,
-    "Opex= ",
-    Opex
-  );
+  // console.log(
+  //   "i= ",
+  //   i,
+  //   "j= ",
+  //   j,
+  //   "(0.189 * Capex) / props.LangFactorCost",
+  //   ((((props.AnolyteCost + props.CatholyteCost) * 0.29) / 1000) *
+  //     parseFloat(props.TwoDProductionRategData[i][j]) *
+  //     24 *
+  //     365) /
+  //     1000,
+  //   "ProductionPriceCost= ",
+  //   props.ProductionPriceCost,
+  //   "props.TwoDCapitalCostData[i][j]",
+  //   props.TwoDCapitalCostData[i][j],
+  //   "ProductionRateData= ",
+  //   props.TwoDProductionRategData[i][j],
+  //   "props.TwoDGibbsEnergyData[i][j]",
+  //   props.TwoDGibbsEnergyData[i][j],
+  //   "Capex",
+  //   Capex,
+  //   "PrdocutValue= ",
+  //   ProductValue,
+  //   "Capex= ",
+  //   Capex,
+  //   "Opex= ",
+  //   Opex
+  // );
 
   let k = ProductValue - Opex - Capex;
   // let CC0 = props.TwoDCapitalCostData[i][j];
@@ -80,7 +80,6 @@ const CashFlowGraph = (props) => {
       y: dataArr[l],
     });
   }
-  console.log(data);
 
   return (
     <div>

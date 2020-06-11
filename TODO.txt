@@ -3,17 +3,12 @@
 Variable Descfiption of a , b , c has default values from Mama but user can override( when user presses submit )
 for certain eqns ban negatives
 allow initial conditions input in ode
-format right content
 maybe speed up dynamic
 show title in dcf graph with chemical
-remove line from inut box
-remove left contenet
 canvas js add 0 axis lines
-remove default 0 on slider
-readme links
-clean mes heatmap
+make toggles tabs
+
 use only one heatmap form perhaps
-remove eqn from mes pic
 
 
 
@@ -36,7 +31,7 @@ Audit
 
 DONE
 ========
-
+    remove eqn from mes pic DONE
     volumes only go up in 10s DONE
     add tests DONE
     link  the  references DONE
@@ -134,6 +129,15 @@ DONE
 
 
                     <p>Equations</p>
+
+
+                    remove line from inut box DONE
+    remove default 0 on slider DONE
+    remove gap in mes DONE
+    readme links DONE
+    clean mes heatmap DONE
+    format right content DONE
+    remove left contenet DONE
 
 
 NOT NEEDED

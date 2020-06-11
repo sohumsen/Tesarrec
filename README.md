@@ -28,6 +28,8 @@ Lead academic: Dr Jhuma Sadhukhan
 Other Academic: Dr Siddharth Gadkari
 IT Analyst: Sohum Sen
 
+Download Paper from
+https://tesarrec.web.app/static/media/MES%20download.2608cd29.docx
 
 ### SDLC = Software Development Life Cycle
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

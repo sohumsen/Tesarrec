@@ -28,8 +28,8 @@ class HeatMapForm extends Component {
 
     AnodeSubstrateChemical: "Acetate",
     CathodeProductChemical: "Acetic acid",
-    xCoordAnode:0,
-    yCoordCathode:0,
+    xCoordAnode: 0,
+    yCoordCathode: 0,
     chosenValue: "",
 
     AnodeSubstrateConcentration: 10,
@@ -64,15 +64,13 @@ class HeatMapForm extends Component {
 
   HeatMapChangedOnClick = (x, y, value) => {
     this.setState({
-      xCoordAnode:x.x,
-      yCoordCathode:y.y,
+      xCoordAnode: x.x,
+      yCoordCathode: y.y,
       AnodeSubstrateChemical: this.state.HeatMapState.xLabels[x.x],
       CathodeProductChemical: this.state.HeatMapState.yLabels[y.y],
       chosenValue: value[y.y][x.x],
     });
   };
-
-
 
   SliderhandleChange = (name) => (event, value) => {
     this.setState({ [name]: value });
@@ -80,16 +78,20 @@ class HeatMapForm extends Component {
 
   InputhandleChange = (name) => (event) => {
     let { value, min, max } = event.target;
-    value = Math.max(Number(min), Math.min(Number(max), Number(value)));
+    console.log(name, value, min, max);
 
+    if (value !== "") {
+      value = Math.max(Number(min), Math.min(Number(max), Number(value)));
+    }
+
+    console.log(name, value, min, max);
 
     this.setState({ [name]: value });
   };
 
   render() {
     return (
-      <div style={{ width: "100%" }}>
-        <LeftContent />
+      <div >
 
         <RightContent
           AnodeSubstrateChemical={this.state.AnodeSubstrateChemical}
@@ -125,7 +127,6 @@ class HeatMapForm extends Component {
           IRRCost={this.state.IRRCost}
         />
 
-
         <div className={classes.HeatMap}>
           <OverallReactionAnodeCathode
             cathodeProduct={this.state.CathodeProductChemical}
@@ -159,7 +160,7 @@ class HeatMapForm extends Component {
             IRRCost={this.state.IRRCost}
             xCoordAnode={this.state.xCoordAnode}
             yCoordCathode={this.state.yCoordCathode}
-            />
+          />
         </div>
       </div>
     );
