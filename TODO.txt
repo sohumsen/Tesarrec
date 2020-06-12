@@ -8,6 +8,9 @@ show title in dcf graph with chemical
 canvas js add 0 axis lines
 make toggles tabs
 
+send colour from props
+
+fill about page
 use only one heatmap form perhaps
 
 

@@ -6,7 +6,8 @@ import ReadCathodeJSON from "../../../Excel/Cathode/ReadCathodeJSON";
 import MyHeatMap from "../../../UI/MyHeatMap/MyHeatMap";
 import classes from "./OverallReactionAnodeCathodeMES.module.css";
 // import MyMathQuill from "../../../UI/Math/MyMathQuill";
-import {abs} from 'mathjs'
+import {abs,random} from 'mathjs'
+
 import MESPic from "../../../../assets/MES.png";
 import CashFlowGraph from "./CashFlowGraph";
 const OverallReactionAnodeCathode = (props) => {
@@ -190,6 +191,13 @@ const OverallReactionAnodeCathode = (props) => {
 
   let TwoOpexData=FormatArr(OpexData)
 
+  let colourArr=[]
+  for (let i = 0; i < 6; i++) {
+    let colour=("rgba("+ random()*255+","+random()*255+","+random()*255)
+    colourArr.push(colour)
+    
+  }
+
   return (
     <div className={classes.HeatMaps}>
       <div className={classes.HeatMapEnergyPerformance}>
@@ -202,7 +210,7 @@ const OverallReactionAnodeCathode = (props) => {
         <MyHeatMap
           xLabels={props.heatMapContents.xLabels}
           yLabels={props.heatMapContents.yLabels}
-          color={"rgba(0, 255, 255"}
+          color={colourArr[0]}
           data={TwoDTheoreticalPotentialData}
           HeatMapChangedOnClick={props.HeatMapChangedOnClick}
         />
@@ -215,7 +223,7 @@ const OverallReactionAnodeCathode = (props) => {
           xLabels={props.heatMapContents.xLabels}
           yLabels={props.heatMapContents.yLabels}
           data={TwoDProductionRategData}
-          color={"rgba(255, 0, 255"}
+          color={colourArr[1]}
           HeatMapChangedOnClick={props.HeatMapChangedOnClick}
         />
       </div>
@@ -227,7 +235,7 @@ const OverallReactionAnodeCathode = (props) => {
         <MyHeatMap
           xLabels={props.heatMapContents.xLabels}
           yLabels={props.heatMapContents.yLabels}
-          color={"rgba(0, 255, 255"}
+          color={colourArr[2]}
           data={TwoDGWPSavingyData}
           HeatMapChangedOnClick={props.HeatMapChangedOnClick}
         />
@@ -239,7 +247,7 @@ const OverallReactionAnodeCathode = (props) => {
         <MyHeatMap
           xLabels={props.heatMapContents.xLabels}
           yLabels={props.heatMapContents.yLabels}
-          color={"rgba(0, 255, 255"}
+          color={colourArr[3]}
           data={TwoDCapitalCostData}
           HeatMapChangedOnClick={props.HeatMapChangedOnClick}
         />
@@ -251,7 +259,7 @@ const OverallReactionAnodeCathode = (props) => {
         <MyHeatMap
           xLabels={props.heatMapContents.xLabels}
           yLabels={props.heatMapContents.yLabels}
-          color={"rgba(0, 255, 255"}
+          color={colourArr[4]}
           data={TwoOpexData}
           HeatMapChangedOnClick={props.HeatMapChangedOnClick}
         />
@@ -263,7 +271,7 @@ const OverallReactionAnodeCathode = (props) => {
         <MyHeatMap
           xLabels={props.heatMapContents.xLabels}
           yLabels={props.heatMapContents.yLabels}
-          color={"rgba(0, 255, 255"}
+          color={colourArr[5]}
           data={TwoDProductValueData}
           HeatMapChangedOnClick={props.HeatMapChangedOnClick}
         />

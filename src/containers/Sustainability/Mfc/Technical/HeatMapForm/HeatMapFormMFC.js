@@ -153,6 +153,7 @@ class HeatMapFormMFC extends Component {
             IRRCost={this.state.IRRCost}
             xCoordAnode={this.state.xCoordAnode}
             yCoordCathode={this.state.yCoordCathode}
+            
           />
         </div>
       </div>
