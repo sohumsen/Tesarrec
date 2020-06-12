@@ -1,7 +1,7 @@
 /* Three columns side by side */
 .column {
     float: left;
-    width: 31.3%;
+    width: 31.9%;
     margin-bottom: 16px;
     padding: 0 8px;
   }
@@ -31,6 +31,13 @@
     display: table;
   }
   
+  .row{
+    text-align: center;
+      height: 100vh;
+      background-color: rgba(219, 107, 107, 0.397);
+      color: white;
+      padding: 5%;
+  }
   .title {
     color: grey;
   }

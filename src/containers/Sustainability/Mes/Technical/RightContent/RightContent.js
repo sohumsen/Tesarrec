@@ -325,7 +325,7 @@ class RightContent extends Component {
         <MySliderContainer>
           <SliderWithText
             rootWidth={"90%"}
-            inputWidth={42}
+            inputWidth={52}
             displayCaption={"Anode substrate concentration in g/L "}
             value={this.props.AnodeSubstrateConcentration}
             InputhandleChange={this.props.InputhandleChange(
@@ -349,7 +349,7 @@ class RightContent extends Component {
           />
           <SliderWithText
             rootWidth={"40%"}
-            inputWidth={52}
+            inputWidth={62}
             displayCaption={"Efficiency "}
             value={this.props.efficiencyValue}
             InputhandleChange={this.props.InputhandleChange("efficiencyValue")}

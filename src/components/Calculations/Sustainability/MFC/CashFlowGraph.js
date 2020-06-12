@@ -19,7 +19,7 @@ const CashFlowGraph = (props) => {
   // let CC3 = CC2 - k / (1 + props.IRRCost) ** 3;
 
   let dataArr = [-1 * CapitalCostData];
-  for (let t = 1; t < 11; t++) {
+  for (let t = 1; t < 15; t++) {
     dataArr[t] = dataArr[t - 1] + k / (1 + props.IRRCost) ** t;
   }
   // console.log(dataArr);
@@ -36,7 +36,7 @@ const CashFlowGraph = (props) => {
       y: dataArr[l],
     });
   }
-
+  console.log(data)
   return (
     <div>
       <MyChart

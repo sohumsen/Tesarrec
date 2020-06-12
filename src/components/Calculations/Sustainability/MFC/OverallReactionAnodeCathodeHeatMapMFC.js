@@ -2,9 +2,9 @@ import React from "react";
 
 import ReadAnodeJSON from "../../../Excel/Anode/ReadAndodeJSON";
 //import ReadCathodeJSON from "../../Excel/Cathode/ReadCathodeJSON";
-import CashFlowGraph from './CashFlowGraph'
+import CashFlowGraph from "./CashFlowGraph";
 import MFCPic from "../../../../assets/MFC.png";
-import {random} from 'mathjs'
+import { random } from "mathjs";
 import MyHeatMap from "../../../UI/MyHeatMap/MyHeatMap";
 import classes from "./OverallReactionAnodeCathodeMFC.module.css";
 const OverallReactionAnodeCathode = (props) => {
@@ -36,10 +36,10 @@ const OverallReactionAnodeCathode = (props) => {
       props.Other);
   let ElectricityGenerationData = [];
   let GWPSavingData = [];
-  let CapitalCostData=[]
-  let ProductValueData=[]
-  let OpexData=[]
-  let CapexData=[]
+  let CapitalCostData = [];
+  let ProductValueData = [];
+  let OpexData = [];
+  let CapexData = [];
   props.heatMapContents.xLabels.forEach((Xelement) => {
     let AnodeData = ReadAnodeJSON(Xelement);
     //console.log(AnodeData)
@@ -54,31 +54,37 @@ const OverallReactionAnodeCathode = (props) => {
 
     let MolarMassOfSubstrate = 12 * x + y + 16 * z;
 
-
-
     let ElectricityGeneration =
-      -1*(((props.concentration * props.volume * props.efficiency) /
-        (xDash * MolarMassOfSubstrate)) *
-      (-394.36 - xDash * GibbsSubstrateInitial + nDash * -237.13))/3.6;
+      (-1 *
+        (((props.concentration * props.volume * props.efficiency) /
+          (xDash * MolarMassOfSubstrate)) *
+          (-394.36 - xDash * GibbsSubstrateInitial + nDash * -237.13))) /
+      3.6;
 
     let CapitalCost =
       ((props.AnodeCost + props.CathodeCost) *
-      ElectricityGeneration*
+        ElectricityGeneration *
         props.LangFactorCost) /
       10.84;
 
     let ProductValue =
-    ElectricityGeneration * props.ElectricityPriceCost * 8.76;
+      ElectricityGeneration * props.ElectricityPriceCost * 8.76;
 
-    let Capex=CapitalCost*props.AnnualCapitalChargeCost
+    let Capex = CapitalCost * props.AnnualCapitalChargeCost;
 
-    let Opex = 1.3*(0.189*Capex/props.LangFactorCost+(props.AnolyteCost+props.CatholyteCost)*0.0167*ElectricityGeneration+0.09*props.concentration*props.volume)
+    let Opex =
+      1.3 *
+      ((0.189 * Capex) / props.LangFactorCost +
+        (props.AnolyteCost + props.CatholyteCost) *
+          0.0167 *
+          ElectricityGeneration +
+        0.09 * props.concentration * props.volume);
+    
 
-    let GWPsaving = ElectricityGeneration * CarbonEmmision*8.76;
+    let GWPsaving = ElectricityGeneration * 3.6 * CarbonEmmision * 8.76;
+    CapexData.push(Capex.toFixed(2));
 
-    CapexData.push(Capex.toFixed(2))
-
-    ElectricityGenerationData.push((ElectricityGeneration).toFixed(2));
+    ElectricityGenerationData.push(ElectricityGeneration.toFixed(2));
 
     CapitalCostData.push(CapitalCost.toFixed(2));
 
@@ -106,23 +112,21 @@ const OverallReactionAnodeCathode = (props) => {
 
   let TwoDGWPSavingyData = FormatArr(GWPSavingData);
 
-  let TwoDCapitalCostData=FormatArr(CapitalCostData)
+  let TwoDCapitalCostData = FormatArr(CapitalCostData);
 
-  let TwoDProductValueData=FormatArr(ProductValueData)
+  let TwoDProductValueData = FormatArr(ProductValueData);
 
-  let TwoDOpexData=FormatArr(OpexData)
+  let TwoDOpexData = FormatArr(OpexData);
 
-  let TwoDCapexData=FormatArr(CapexData)
+  let TwoDCapexData = FormatArr(CapexData);
 
-  let colourArr=[]
-
+  let colourArr = [];
 
   for (let i = 0; i < 6; i++) {
-    let colour=("rgba("+ random()*255+","+random()*255+","+random()*255)
-    colourArr.push(colour)
-    
+    let colour =
+      "rgba(" + random() * 255 + "," + random() * 255 + "," + random() * 255;
+    colourArr.push(colour);
   }
-
 
   //console.log(energyObj)
 
@@ -192,14 +196,12 @@ const OverallReactionAnodeCathode = (props) => {
           TwoDOpexData={TwoDOpexData}
           TwoDCapexData={TwoDCapexData}
           IRRCost={props.IRRCost}
-        
           anodeSubstrate={props.anodeSubstrate}
           cathodeProduct={props.cathodeProduct}
           xCoordAnode={props.xCoordAnode}
           yCoordCathode={props.yCoordCathode}
         />
       </div>
-
     </div>
   );
 };

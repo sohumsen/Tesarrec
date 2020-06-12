@@ -1,0 +1,9 @@
+.header {
+    text-align: center;
+    background: #596cc5;
+    color: white;
+    font-size: 30px;
+    max-width: 100%;
+    height: 100vh;
+    overflow-x:hidden
+  }
