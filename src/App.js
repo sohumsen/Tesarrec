@@ -9,6 +9,7 @@ import Mfc from "./containers/Sustainability/Mfc/Mfc";
 import Dynamic from "./containers/Lab/Dynamic";
 import { BrowserView, MobileView } from "react-device-detect";
 import MyMobileView from "./hoc/MyMobileView/MyMobileView";
+import Contact from "./containers/Contact/Contact";
 class App extends Component {
   render() {
     let routes = (
@@ -18,6 +19,8 @@ class App extends Component {
         <Route path="/sustainability/mfc" exact component={Mfc} />
         <Route path="/sustainability/mes" exact component={Mes} />
         <Route path="/reference" component={Reference} />
+        <Route path="/contact" component={Contact} />
+
         <Redirect to="/" />
       </Switch>
     );

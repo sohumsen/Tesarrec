@@ -12,7 +12,8 @@ send colour from props
 
 fill about page
 use only one heatmap form perhaps
-
+left allign about page
+ban scroll on dynamic
 
 
 Audit

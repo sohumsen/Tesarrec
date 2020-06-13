@@ -378,25 +378,22 @@ class LinearCoupled extends Component {
     this.state.Eqns.forEach((eqn) => {
       LineNames.push(eqn.line);
     });
-    let initialConditions=[]
+    let initialConditions = [];
     for (let i = 1; i <= this.state.Eqns.length; i++) {
-      initialConditions.push(i/10)
-      
+      initialConditions.push(i / 10);
     }
-    return(
-
+    return (
       <LinearCoupledDiffEqns
-      h={0.05}
-      numberOfCycles={20}
-      eqns={eqns}
-      LineNames={LineNames}
-      initialConditions={initialConditions}
-      LegendVertical={this.state.graphConfig.LegendVertical}
-      LegendHorizontal={this.state.graphConfig.LegendHorizontal}
-      DecimalPrecision={this.state.graphConfig.DecimalPrecision}
-    />
-    )
-
+        h={0.05}
+        numberOfCycles={30}
+        eqns={eqns}
+        LineNames={LineNames}
+        initialConditions={initialConditions}
+        LegendVertical={this.state.graphConfig.LegendVertical}
+        LegendHorizontal={this.state.graphConfig.LegendHorizontal}
+        DecimalPrecision={this.state.graphConfig.DecimalPrecision}
+      />
+    );
   };
   render() {
     let Eqns = (
@@ -455,8 +452,6 @@ class LinearCoupled extends Component {
     </div>*/}
 
           {this.state.calculate ? this.renderGraph() : null}
-
-       
         </div>
 
         {this.state.graphConfig.show && this.state.calculate ? (
@@ -470,6 +465,7 @@ class LinearCoupled extends Component {
         ) : null}
       </div>
     );
+
   }
 }
 

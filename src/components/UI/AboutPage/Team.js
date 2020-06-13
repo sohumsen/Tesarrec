@@ -35,7 +35,7 @@ const Team = (props) => {
           />
           <div className={classes.container}>
             <h2>Dr Siddharth Gadkari</h2>
-            <p className={classes.title}>Other Academic</p>
+            <p className={classes.title}>NERC-UKRI Industrial Innovation Fellow</p>
             <a
               href="https://www.surrey.ac.uk/people/siddharth-gadkari"
               target="_blank"
