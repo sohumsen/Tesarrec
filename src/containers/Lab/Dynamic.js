@@ -19,7 +19,6 @@ class Dynamic extends Component {
   render() {
     return (
       <div className={classes.DynamicContainer}>
-        <h1>Dynamic </h1>
         <MyTabs
           value={this.state.choiceValue}
           handleChange={this.handleTabChange}

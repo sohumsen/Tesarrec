@@ -1,10 +1,10 @@
 .RadioButtons {
   color: black;
   position: absolute;
-  top: 25%;
-  right: -190px;
   padding: 10px;
+  right: 0px;
   border-width: 5px;
+  overflow-x: hidden;
 }
 
 .CloseButton{

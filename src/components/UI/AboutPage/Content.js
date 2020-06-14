@@ -8,6 +8,7 @@ const Content = (props) => {
         New gen engineered technologies and solutions for sustainability and
         circular economy
       </h2>
+      
       <p>
         We develop computer software for use in:
         <ol>

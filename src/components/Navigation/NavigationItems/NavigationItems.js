@@ -15,12 +15,7 @@ const navigationItems = (props) => {
         <NavigationItem link="/sustainability/mes">MES</NavigationItem>
       </Dropdown>
 
-      <Dropdown name="Dynamic">
-        <NavigationItem link="/dynamic/mfc">MFC</NavigationItem>
-        <NavigationItem link="/dynamic/mes">MES</NavigationItem>
-      </Dropdown>
-
-      <Dropdown name="Lab">
+      <Dropdown name="Model Bench">
         <NavigationItem link="/dynamic"> ALL</NavigationItem>
 
         <NavigationItem link="/lab/singleode"> Single ODE</NavigationItem>
