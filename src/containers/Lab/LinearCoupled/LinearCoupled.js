@@ -26,9 +26,11 @@ class LinearCoupled extends Component {
     },
     graphConfig: {
       show: false,
+      submitted:true,
       LegendHorizontal: "left",
       LegendVertical: "top",
       DecimalPrecision: 2,
+      initialConditions:[0.5,0.5,0.5,0.5]
     },
 
     Eqns: [
@@ -184,19 +186,20 @@ class LinearCoupled extends Component {
   resetForm = () => {
     this.setState({
       calculate: true,
-      variableDescription: {
-        a: "this is some stuff",
-        b: "this is some stuff",
-        c: "this is some stuff",
-        d: "this is some stuff",
-      },
-      graphConfig: {
-        show: false,
-
-        LegendHorizontal: "left",
-        LegendVertical: "top",
-        DecimalPrecision: 2,
-      },
+    variableDescription: {
+      a: "this is some stuff",
+      b: "this is some stuff",
+      c: "this is some stuff",
+      d: "this is some stuff",
+    },
+    graphConfig: {
+      show: false,
+      submitted:true,
+      LegendHorizontal: "left",
+      LegendVertical: "top",
+      DecimalPrecision: 2,
+      initialConditions:[0.5,0.5,0.5,0.5]
+    },
 
       Eqns: [
         {
@@ -294,10 +297,55 @@ class LinearCoupled extends Component {
   };
   onGraphConfigChange = (name) => (event, value) => {
     let graphConfig = { ...this.state.graphConfig };
-    graphConfig[name] = event.target.value;
+
+    if (name==="initialConditions"){
+
+      let arr = event.target.value.split(",")
+      // let newarr=[]
+      // arr.forEach(element => {
+      //   newarr.push(parseFloat(element).toFixed(2))
+
+        
+      // });
+      // console.log(arr,newarr,event.target.value)
+      graphConfig.initialConditions=arr
+
+    }else{
+      graphConfig[name] = event.target.value;
+
+    }
+
+    graphConfig.submitted=false
+
+
 
     this.setState({ graphConfig: graphConfig });
   };
+
+  onGraphConfigSubmit=()=>{
+    let graphConfig={...this.state.graphConfig}
+
+      // let newarr=[]
+      // arr.forEach(element => {
+      //   newarr.push(parseFloat(element).toFixed(2))
+
+        
+      // });
+      // console.log(arr,newarr,event.target.value)
+    console.log(graphConfig.initialConditions)
+    let newInitialConditions = graphConfig.initialConditions.map(Number);
+    if (newInitialConditions.length===this.state.Eqns.length){
+      graphConfig.initialConditions=newInitialConditions
+      graphConfig.submitted=true
+
+    }else{
+      graphConfig.submitted=false
+
+    }
+
+
+    this.setState({graphConfig:graphConfig})
+  }
   renderSwitchGraph = (length) => {
     switch (length) {
       case 2:
@@ -384,17 +432,24 @@ class LinearCoupled extends Component {
     for (let i = 1; i <= this.state.Eqns.length; i++) {
       initialConditions.push(0.5);
     }
+
+    let newInitialConditions=[]
+    for (let i = 0; i < this.state.graphConfig.initialConditions.length; i++) {
+      newInitialConditions.push()
+      
+    }
+    console.log(initialConditions, this.state.graphConfig.initialConditions)
     return (
-      <LinearCoupledDiffEqns
+      this.state.graphConfig.submitted?<LinearCoupledDiffEqns
         h={0.05}
         numberOfCycles={30}
         eqns={eqns}
         LineNames={LineNames}
-        initialConditions={initialConditions}
+        initialConditions={this.state.graphConfig.initialConditions}
         LegendVertical={this.state.graphConfig.LegendVertical}
         LegendHorizontal={this.state.graphConfig.LegendHorizontal}
         DecimalPrecision={this.state.graphConfig.DecimalPrecision}
-      />
+      />:null
     );
   };
   render() {
@@ -461,8 +516,10 @@ class LinearCoupled extends Component {
             LegendHorizontal={this.state.graphConfig.LegendHorizontal}
             LegendVertical={this.state.graphConfig.LegendVertical}
             DecimalPrecision={this.state.graphConfig.DecimalPrecision}
+            initialConditions={this.state.graphConfig.initialConditions}
             onClose={this.toggleChartShow}
             onChange={(val) => this.onGraphConfigChange(val)}
+            onSubmit={this.onGraphConfigSubmit}
           />
         ) : null}
       </div>

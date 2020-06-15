@@ -120,13 +120,7 @@ const OverallReactionAnodeCathode = (props) => {
 
   let TwoDCapexData = FormatArr(CapexData);
 
-  let colourArr = [];
 
-  for (let i = 0; i < 6; i++) {
-    let colour =
-      "rgba(" + random() * 255 + "," + random() * 255 + "," + random() * 255;
-    colourArr.push(colour);
-  }
 
   //console.log(energyObj)
 
@@ -141,7 +135,7 @@ const OverallReactionAnodeCathode = (props) => {
         <MyHeatMap
           xLabels={props.heatMapContents.xLabels}
           yLabels={["Electricity"]}
-          color={colourArr[0]}
+          color={"rgba(33, 236, 52"}
           data={TwoDElectricityGeneration}
           HeatMapChangedOnClick={props.HeatMapChangedOnClick}
         />
@@ -152,7 +146,7 @@ const OverallReactionAnodeCathode = (props) => {
         <MyHeatMap
           xLabels={props.heatMapContents.xLabels}
           yLabels={["GWP"]}
-          color={colourArr[1]}
+          color={"rgba(8, 82, 210"}
           data={TwoDGWPSavingyData}
           HeatMapChangedOnClick={props.HeatMapChangedOnClick}
         />
@@ -162,7 +156,7 @@ const OverallReactionAnodeCathode = (props) => {
         <MyHeatMap
           xLabels={props.heatMapContents.xLabels}
           yLabels={["Capital Cost"]}
-          color={colourArr[2]}
+          color={"rgba(127, 96, 169"}
           data={TwoDCapitalCostData}
           HeatMapChangedOnClick={props.HeatMapChangedOnClick}
         />
@@ -173,7 +167,7 @@ const OverallReactionAnodeCathode = (props) => {
         <MyHeatMap
           xLabels={props.heatMapContents.xLabels}
           yLabels={["Operating Cost"]}
-          color={colourArr[3]}
+          color={"rgba(251, 57, 80"}
           data={TwoDOpexData}
           HeatMapChangedOnClick={props.HeatMapChangedOnClick}
         />
@@ -183,7 +177,7 @@ const OverallReactionAnodeCathode = (props) => {
         <MyHeatMap
           xLabels={props.heatMapContents.xLabels}
           yLabels={["Product Value"]}
-          color={colourArr[4]}
+          color={"rgba(19, 96, 82"}
           data={TwoDProductValueData}
           HeatMapChangedOnClick={props.HeatMapChangedOnClick}
         />

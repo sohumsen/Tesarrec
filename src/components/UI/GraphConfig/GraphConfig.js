@@ -7,6 +7,7 @@ import FormLabel from "@material-ui/core/FormLabel";
 import classes from "./GraphConfig.module.css";
 import Input from "../Input/Input";
 import CloseButton from "../Button/CloseButton";
+import GenericButton from '../Button/GenericButton'
 // import Paper from '../Paper/Paper'
 
 export default function FormControlLabelPlacement(props) {
@@ -14,12 +15,12 @@ export default function FormControlLabelPlacement(props) {
     <div className={classes.RadioButtons}>
       <h3>CONFIG</h3>
       <div className={classes.CloseButton}>
-      <CloseButton
-        type="button"
-        value="Close"
-        displayValue="Close"
-        onClick={props.onClose}
-      />
+        <CloseButton
+          type="button"
+          value="Close"
+          displayValue="Close"
+          onClick={props.onClose}
+        />
       </div>
 
       <FormControl component="fieldset">
@@ -86,7 +87,15 @@ export default function FormControlLabelPlacement(props) {
           value={props.DecimalPrecision}
           onChange={props.onChange("DecimalPrecision")}
         />
+        <Input
+          label="initialConditions"
+          name="initialConditions"
+          value={props.initialConditions}
+          onChange={props.onChange("initialConditions")}
+        />
       </FormControl>
+
+      <GenericButton value="Submit" type="submit" displayValue="SUBMIT"  onClick={props.onSubmit}/>
     </div>
   );
 }

@@ -5,7 +5,10 @@ import ForwardButton from "../Button/ForwardButton";
 const Header = (props) => {
   return (
     <div className={classes.header}>
+      <div className={classes.title}>
       <h1>Tesarrec™</h1>
+
+      </div>
       <p>
         <b>T</b>ool for techno-
         <br />
@@ -15,9 +18,10 @@ const Header = (props) => {
         <b>R</b>esource <br />
         <b>R</b>ecovery <br />
         <b>E</b>ngineering solutions for <br />
-        <b>C</b>ircular economy
+        <b>C</b>ircular renewable and bio economy
         <br />
       </p>
+      <div className={classes.links}>
       <p>
         For steady state sensitivity analysis go to Sustainabilty{" "}
         <a
@@ -34,6 +38,7 @@ const Header = (props) => {
           <ForwardButton />
         </a>
       </p>
+      </div>
     </div>
   );
 };

@@ -2,18 +2,14 @@
 
 Variable Descfiption of a , b , c has default values from Mama but user can override( when user presses submit )
 for certain eqns ban negatives
-allow initial conditions input in ode
-maybe speed up dynamic
+
 show title in dcf graph with chemical
 canvas js add 0 axis lines
 make toggles tabs
-double check if t is valid
-send colour from props
+double check if t is valid always 
+allow db/dt as input on right side
 
-fill about page
-use only one heatmap form perhaps
-left allign about page
-ban scroll on dynamic
+
 
 
 Audit
@@ -142,6 +138,14 @@ DONE
     clean mes heatmap DONE
     format right content DONE
     remove left contenet DONE
+    send colour from props in mes DONE
+    fill about page DONE
+    allow initial conditions input in ode DONE
+    maybe speed up dynamic DONE
+    add word docs DONE
+    add sids pic DONE
+    left allign about page DONE
+    ban scroll on dynamic deal with multiline dynmaic DONE
 
 
 NOT NEEDED
@@ -185,3 +189,4 @@ Themes
     responsive designs
     1 heatmap per file
     reformat Folders
+    use only one heatmap form perhaps

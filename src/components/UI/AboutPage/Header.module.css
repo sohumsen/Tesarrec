@@ -1,5 +1,4 @@
 .header {
-    text-align: center;
     background: #596cc5;
     color: white;
     font-size: 30px;
@@ -7,8 +6,19 @@
     height: 100vh;
     overflow-x:hidden;
     align-items: center;
+    padding-left: 40vw;
   }
 
 .anchor{
   position: absolute;
+}
+
+.links{
+  margin-left:  -50vw;
+  text-align: center;
+}
+
+.title{
+  margin-left: -50vw;
+  text-align: center;
 }

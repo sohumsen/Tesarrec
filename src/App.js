@@ -2,7 +2,7 @@ import React, { Component } from "react";
 
 import Layout from "./hoc/Layout/Layout";
 import { Route, Switch, withRouter, Redirect } from "react-router-dom";
-import About from "./containers/About/newAbout";
+import About from "./containers/About/About";
 import Reference from "./containers/Reference/Reference";
 import Mes from "./containers/Sustainability/Mes/Mes";
 import Mfc from "./containers/Sustainability/Mfc/Mfc";
