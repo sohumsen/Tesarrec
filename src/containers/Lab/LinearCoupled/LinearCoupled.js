@@ -73,7 +73,7 @@ class LinearCoupled extends Component {
   validateExpression = (expr, line) => {
     if (this.state.Eqns.length === 4) {
       try {
-        evaluate(expr, { a: 1, b: 1, c: 1, d: 1 });
+        evaluate(expr, { a: 1, b: 1, c: 1, d: 1,t:1 });
         return true;
       } catch (error) {
         return false;
@@ -84,6 +84,7 @@ class LinearCoupled extends Component {
           [this.state.Eqns[0].line]: 1,
           [this.state.Eqns[1].line]: 1,
           [this.state.Eqns[2].line]: 1,
+          t:1 
         });
         return true;
       } catch (error) {
@@ -94,6 +95,7 @@ class LinearCoupled extends Component {
         evaluate(expr, {
           [this.state.Eqns[0].line]: 1,
           [this.state.Eqns[1].line]: 1,
+          t:1 
         });
         return true;
       } catch (error) {
@@ -101,7 +103,7 @@ class LinearCoupled extends Component {
       }
     } else if (this.state.Eqns.length === 1) {
       try {
-        evaluate(expr, { [this.state.Eqns[0].line]: 1 });
+        evaluate(expr, { [this.state.Eqns[0].line]: 1 ,t:1 });
         return true;
       } catch (error) {
         return false;
@@ -380,7 +382,7 @@ class LinearCoupled extends Component {
     });
     let initialConditions = [];
     for (let i = 1; i <= this.state.Eqns.length; i++) {
-      initialConditions.push(i / 10);
+      initialConditions.push(0.5);
     }
     return (
       <LinearCoupledDiffEqns

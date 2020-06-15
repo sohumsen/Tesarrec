@@ -19,9 +19,8 @@ const LinearCoupledDiffFourEqn = (props) => {
   }
 
   const calcValueAt = (initialValues) => { // { 1 , 2, 3}
-    const t0 = performance.now()
     let eqnResultsArr = [];
-    let coordinate = {};
+    let coordinate = {t:1}; //t initial value
     
     //generates the eval object
     for (let i = 0; i < props.LineNames.length; i++) {
@@ -32,16 +31,13 @@ const LinearCoupledDiffFourEqn = (props) => {
     for (let idx = 0; idx < parsedEquations.length; idx++) {
       eqnResultsArr.push(parsedEquations[idx].evaluate(coordinate));// { a :1 , b: 3.3}
     }
-    const t4 = performance.now()
     
-    console.log(t4-t0 , 'BBB')
     return eqnResultsArr;
   };
 
   const SolveLinearCoupledDifferentialEquationRungeKuttaForRth = (
     initialValues
   ) => {
-    let t0 = performance.now();
 
     //var varCoords = {};
     //props.LineNames.forEach(function(item, index) {
@@ -86,21 +82,17 @@ const LinearCoupledDiffFourEqn = (props) => {
       );
     }
 
-    let t1 = performance.now();
-    console.log("SolveLinearCoupledDifferentialEquationRungeKuttaForRth render", t1 - t0);
     return newY1Y2Y3Arr;
   };
 
   const recursive = (numberOfLoops, Arr) => {
-    let t0 = performance.now();
 
     let allArrs = [abcArr];
     for (let i = 0; i < numberOfLoops; i++) {
       Arr = SolveLinearCoupledDifferentialEquationRungeKuttaForRth(Arr);
       allArrs.push(Arr);
     }
-    let t1 = performance.now();
-    console.log("recursive render", t1 - t0);
+
     return allArrs;
 
     // for (let i = 0; i < numberOfLoops; i++) {
@@ -153,7 +145,6 @@ const LinearCoupledDiffFourEqn = (props) => {
     //     x: parseFloat((i * h).toFixed(props.DecimalPrecision)),
     //     y: parseFloat(element[1].toFixed(props.DecimalPrecision)),
     //   });
-    let t0=performance.now()
     if (props.LineNames.length === 2) {
       let FirstEqnArr = [];
       let SecondEqnArr = [];
@@ -221,8 +212,7 @@ const LinearCoupledDiffFourEqn = (props) => {
         return [FirstEqnArr, SecondEqnArr, ThirdEqnArr, FourthEqnArr];
 
     }
-    let t1 = performance.now();
-    console.log("FormatArrayLinearCoupled render", t1 - t0);
+
     // let allEqnsArr = [];
     // let EqnArr = [];
     // console.log(arr);
@@ -254,7 +244,6 @@ const LinearCoupledDiffFourEqn = (props) => {
   };
 
   // starts at x0=0
-  let t0 = performance.now();
 
   let h = parseFloat(props.h);
 
@@ -267,8 +256,7 @@ const LinearCoupledDiffFourEqn = (props) => {
 
   let EqnArr = FormatArrayLinearCoupled(CompletedGridRungeKuttaLinearCoupled[0]);
   //return null;
-  let t1 = performance.now();
-  console.log("CompletedGridRungeKuttaLinearCoupled render", t1 - t0);
+
   return ShowLinearCoupledGraph(EqnArr);
 };
 

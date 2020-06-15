@@ -7,7 +7,7 @@ maybe speed up dynamic
 show title in dcf graph with chemical
 canvas js add 0 axis lines
 make toggles tabs
-
+double check if t is valid
 send colour from props
 
 fill about page
