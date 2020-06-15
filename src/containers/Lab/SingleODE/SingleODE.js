@@ -20,10 +20,10 @@ class SingleODE extends Component {
   state = {
     graphConfig: {
       show: false,
+      submitted: true,
       LegendHorizontal: "left",
       LegendVertical: "top",
-      DecimalPrecision:2
-
+      DecimalPrecision: 2,
     },
     submitted: true,
     SingleDiffChangeableLatex: "e^x",
@@ -56,7 +56,7 @@ class SingleODE extends Component {
   handleMathQuillInputSubmit = (event) => {
     event.preventDefault();
     if (this.validateExpression(this.state.SingleDiffChangeableText)) {
-      this.setState({ submitted: true , error:false});
+      this.setState({ submitted: true, error: false });
     } else {
       this.setState({ submitted: false, error: true });
     }
@@ -81,11 +81,12 @@ class SingleODE extends Component {
 
     this.setState({ graphConfig: graphConfig });
   };
+
   _handleKeyDown = (e) => {
-    if (e.key === 'Enter') {
-      this.setState({submitted:true})
+    if (e.key === "Enter") {
+      this.setState({ submitted: true });
     }
-  }
+  };
 
   render() {
     return (
@@ -106,9 +107,9 @@ class SingleODE extends Component {
             </div>
 
             <div className={classes.ButtonContainer}>
-            <div className={classes.ButtonPos}>
+              <div className={classes.ButtonPos}>
                 <SettingButton
-                disabled={!this.state.submitted}
+                  disabled={!this.state.submitted}
                   type="button"
                   value="config"
                   displayValue="CONFIG"
@@ -116,8 +117,7 @@ class SingleODE extends Component {
                 />
               </div>
               <div className={classes.ButtonPos}>
-              <MyButton type="submit" value="Submit" displayValue="SUBMIT" />
-
+                <MyButton type="submit" value="Submit" displayValue="SUBMIT" />
               </div>
               <div className={classes.ButtonPos}>
                 <MyButton
@@ -126,7 +126,6 @@ class SingleODE extends Component {
                   displayValue="RESET"
                   onClick={this.resetForm}
                 />
-
               </div>
             </div>
           </form>
@@ -143,19 +142,16 @@ class SingleODE extends Component {
               LegendHorizontal={this.state.graphConfig.LegendHorizontal}
               LegendVertical={this.state.graphConfig.LegendVertical}
               DecimalPrecision={this.state.graphConfig.DecimalPrecision}
-
             />
           ) : null}
         </div>
-       
-        {(this.state.graphConfig.show&&this.state.submitted) ? (
+
+        {this.state.graphConfig.show && this.state.submitted ? (
           <GraphConfig
             LegendHorizontal={this.state.graphConfig.LegendHorizontal}
             LegendVertical={this.state.graphConfig.LegendVertical}
             DecimalPrecision={this.state.graphConfig.DecimalPrecision}
             onClose={this.toggleChartShow}
-            
-
             onChange={(val) => this.onGraphConfigChange(val)}
           />
         ) : null}

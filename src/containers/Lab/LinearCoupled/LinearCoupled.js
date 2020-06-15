@@ -26,11 +26,11 @@ class LinearCoupled extends Component {
     },
     graphConfig: {
       show: false,
-      submitted:true,
+      submitted: true,
       LegendHorizontal: "left",
       LegendVertical: "top",
       DecimalPrecision: 2,
-      initialConditions:[0.5,0.5,0.5,0.5]
+      initialConditions: [0.5, 0.5, 0.5, 0.5],
     },
 
     Eqns: [
@@ -75,7 +75,7 @@ class LinearCoupled extends Component {
   validateExpression = (expr, line) => {
     if (this.state.Eqns.length === 4) {
       try {
-        evaluate(expr, { a: 1, b: 1, c: 1, d: 1,t:1 });
+        evaluate(expr, { a: 1, b: 1, c: 1, d: 1, t: 1 });
         return true;
       } catch (error) {
         return false;
@@ -86,7 +86,7 @@ class LinearCoupled extends Component {
           [this.state.Eqns[0].line]: 1,
           [this.state.Eqns[1].line]: 1,
           [this.state.Eqns[2].line]: 1,
-          t:1 
+          t: 1,
         });
         return true;
       } catch (error) {
@@ -97,7 +97,7 @@ class LinearCoupled extends Component {
         evaluate(expr, {
           [this.state.Eqns[0].line]: 1,
           [this.state.Eqns[1].line]: 1,
-          t:1 
+          t: 1,
         });
         return true;
       } catch (error) {
@@ -105,7 +105,7 @@ class LinearCoupled extends Component {
       }
     } else if (this.state.Eqns.length === 1) {
       try {
-        evaluate(expr, { [this.state.Eqns[0].line]: 1 ,t:1 });
+        evaluate(expr, { [this.state.Eqns[0].line]: 1, t: 1 });
         return true;
       } catch (error) {
         return false;
@@ -186,20 +186,20 @@ class LinearCoupled extends Component {
   resetForm = () => {
     this.setState({
       calculate: true,
-    variableDescription: {
-      a: "this is some stuff",
-      b: "this is some stuff",
-      c: "this is some stuff",
-      d: "this is some stuff",
-    },
-    graphConfig: {
-      show: false,
-      submitted:true,
-      LegendHorizontal: "left",
-      LegendVertical: "top",
-      DecimalPrecision: 2,
-      initialConditions:[0.5,0.5,0.5,0.5]
-    },
+      variableDescription: {
+        a: "this is some stuff",
+        b: "this is some stuff",
+        c: "this is some stuff",
+        d: "this is some stuff",
+      },
+      graphConfig: {
+        show: false,
+        submitted: true,
+        LegendHorizontal: "left",
+        LegendVertical: "top",
+        DecimalPrecision: 2,
+        initialConditions: [0.5, 0.5, 0.5, 0.5],
+      },
 
       Eqns: [
         {
@@ -298,54 +298,32 @@ class LinearCoupled extends Component {
   onGraphConfigChange = (name) => (event, value) => {
     let graphConfig = { ...this.state.graphConfig };
 
-    if (name==="initialConditions"){
+    if (name === "initialConditions") {
+      let arr = event.target.value.split(",");
 
-      let arr = event.target.value.split(",")
-      // let newarr=[]
-      // arr.forEach(element => {
-      //   newarr.push(parseFloat(element).toFixed(2))
-
-        
-      // });
-      // console.log(arr,newarr,event.target.value)
-      graphConfig.initialConditions=arr
-
-    }else{
+      graphConfig.initialConditions = arr;
+    } else {
       graphConfig[name] = event.target.value;
-
     }
 
-    graphConfig.submitted=false
-
-
+    graphConfig.submitted = false;
 
     this.setState({ graphConfig: graphConfig });
   };
 
-  onGraphConfigSubmit=()=>{
-    let graphConfig={...this.state.graphConfig}
+  onGraphConfigSubmit = () => {
+    let graphConfig = { ...this.state.graphConfig };
 
-      // let newarr=[]
-      // arr.forEach(element => {
-      //   newarr.push(parseFloat(element).toFixed(2))
-
-        
-      // });
-      // console.log(arr,newarr,event.target.value)
-    console.log(graphConfig.initialConditions)
     let newInitialConditions = graphConfig.initialConditions.map(Number);
-    if (newInitialConditions.length===this.state.Eqns.length){
-      graphConfig.initialConditions=newInitialConditions
-      graphConfig.submitted=true
-
-    }else{
-      graphConfig.submitted=false
-
+    if (newInitialConditions.length === this.state.Eqns.length) {
+      graphConfig.initialConditions = newInitialConditions;
+      graphConfig.submitted = true;
+    } else {
+      graphConfig.submitted = false;
     }
 
-
-    this.setState({graphConfig:graphConfig})
-  }
+    this.setState({ graphConfig: graphConfig });
+  };
   renderSwitchGraph = (length) => {
     switch (length) {
       case 2:
@@ -428,19 +406,9 @@ class LinearCoupled extends Component {
     this.state.Eqns.forEach((eqn) => {
       LineNames.push(eqn.line);
     });
-    let initialConditions = [];
-    for (let i = 1; i <= this.state.Eqns.length; i++) {
-      initialConditions.push(0.5);
-    }
-
-    let newInitialConditions=[]
-    for (let i = 0; i < this.state.graphConfig.initialConditions.length; i++) {
-      newInitialConditions.push()
-      
-    }
-    console.log(initialConditions, this.state.graphConfig.initialConditions)
-    return (
-      this.state.graphConfig.submitted?<LinearCoupledDiffEqns
+   
+    return this.state.graphConfig.submitted ? (
+      <LinearCoupledDiffEqns
         h={0.05}
         numberOfCycles={30}
         eqns={eqns}
@@ -449,8 +417,8 @@ class LinearCoupled extends Component {
         LegendVertical={this.state.graphConfig.LegendVertical}
         LegendHorizontal={this.state.graphConfig.LegendHorizontal}
         DecimalPrecision={this.state.graphConfig.DecimalPrecision}
-      />:null
-    );
+      />
+    ) : null;
   };
   render() {
     let Eqns = (
@@ -513,6 +481,7 @@ class LinearCoupled extends Component {
 
         {this.state.graphConfig.show && this.state.calculate ? (
           <GraphConfig
+            errorMessage={!this.state.graphConfig.submitted}
             LegendHorizontal={this.state.graphConfig.LegendHorizontal}
             LegendVertical={this.state.graphConfig.LegendVertical}
             DecimalPrecision={this.state.graphConfig.DecimalPrecision}
@@ -524,7 +493,6 @@ class LinearCoupled extends Component {
         ) : null}
       </div>
     );
-
   }
 }
 

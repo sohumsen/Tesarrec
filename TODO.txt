@@ -8,6 +8,8 @@ canvas js add 0 axis lines
 make toggles tabs
 double check if t is valid always 
 allow db/dt as input on right side
+single ode use initial conditions DONE
+show error for graph config DONE
 
 
 

@@ -17,6 +17,7 @@ const Team = (props) => {
             <a
               href="https://www.surrey.ac.uk/people/jhuma-sadhukhan"
               target="_blank"
+              rel="noopener noreferrer"
             >
               https://www.surrey.ac.uk/people/jhuma-sadhukhan
             </a>
@@ -39,6 +40,7 @@ const Team = (props) => {
             <a
               href="https://www.surrey.ac.uk/people/siddharth-gadkari"
               target="_blank"
+              rel="noopener noreferrer"
             >
               https://www.surrey.ac.uk/people/siddharth-gadkari
             </a>
@@ -55,7 +57,7 @@ const Team = (props) => {
           <div className={classes.container}>
             <h2>Sohum Sen</h2>
             <p className={classes.title}>IT Analyst </p>
-            <a href="https://github.com/sohumsen" target="_blank">
+            <a href="https://github.com/sohumsen" target="_blank" rel="noopener noreferrer">
               https://github.com/sohumsen
             </a>
 

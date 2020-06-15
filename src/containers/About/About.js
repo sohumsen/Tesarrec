@@ -14,10 +14,10 @@ class About extends Component {
         <h1 style={{display:"inline"}}>
           The research is supported by the{" "}
           <br/>
-          <a href="https://www.britishcouncil.org/" target="_blank">
+          <a href="https://www.britishcouncil.org/" target="_blank" rel="noopener noreferrer">
             British Council{" "}
           </a><br/>
-          <a href="https://www.ukri.org/" target="_blank">
+          <a href="https://www.ukri.org/" target="_blank" rel="noopener noreferrer">
             {" "}
             UKRI
           </a>

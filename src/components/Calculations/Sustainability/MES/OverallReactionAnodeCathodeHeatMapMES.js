@@ -6,7 +6,7 @@ import ReadCathodeJSON from "../../../Excel/Cathode/ReadCathodeJSON";
 import MyHeatMap from "../../../UI/MyHeatMap/MyHeatMap";
 import classes from "./OverallReactionAnodeCathodeMES.module.css";
 // import MyMathQuill from "../../../UI/Math/MyMathQuill";
-import {abs,random} from 'mathjs'
+import {abs} from 'mathjs'
 
 import MESPic from "../../../../assets/MES.png";
 import CashFlowGraph from "./CashFlowGraph";
@@ -97,15 +97,16 @@ const OverallReactionAnodeCathode = (props) => {
           props.efficiency *
           MolarMassOfProduct) /
         (MolarMassOfSubstrate * xDash);
-
+      
+        let TheoreticalPotential=0
       if ((2*mDash+h)===0){
-        var TheoreticalPotential =
+        TheoreticalPotential =
         abs(
           StandardGibbsEnergyOfReactionSubstratekJMol *
           (1000 / (96485 * (2)))
         ) 
       }else{
-        var TheoreticalPotential =
+        TheoreticalPotential =
         abs(
           StandardGibbsEnergyOfReactionSubstratekJMol *
           (1000 / (96485 * (2 * mDash + h)))

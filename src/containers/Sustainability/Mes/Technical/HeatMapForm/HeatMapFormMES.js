@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 
-import LeftContent from "../LeftContent/LeftContent";
 import RightContent from "../RightContent/RightContent";
 import classes from "./HeatMapFormMES.module.css";
 import OverallReactionAnodeCathode from "../../../../../components/Calculations/Sustainability/MES/OverallReactionAnodeCathodeHeatMapMES";

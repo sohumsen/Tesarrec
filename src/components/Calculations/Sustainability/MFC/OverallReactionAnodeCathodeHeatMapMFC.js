@@ -4,7 +4,6 @@ import ReadAnodeJSON from "../../../Excel/Anode/ReadAndodeJSON";
 //import ReadCathodeJSON from "../../Excel/Cathode/ReadCathodeJSON";
 import CashFlowGraph from "./CashFlowGraph";
 import MFCPic from "../../../../assets/MFC.png";
-import { random } from "mathjs";
 import MyHeatMap from "../../../UI/MyHeatMap/MyHeatMap";
 import classes from "./OverallReactionAnodeCathodeMFC.module.css";
 const OverallReactionAnodeCathode = (props) => {

@@ -8,11 +8,12 @@ import classes from "./GraphConfig.module.css";
 import Input from "../Input/Input";
 import CloseButton from "../Button/CloseButton";
 import GenericButton from '../Button/GenericButton'
+import MyErrorMessage from '../MyErrorMessage/MyErrorMessage'
 // import Paper from '../Paper/Paper'
 
 export default function FormControlLabelPlacement(props) {
   return (
-    <div className={classes.RadioButtons}>
+    <div className={classes.Container}>
       <h3>CONFIG</h3>
       <div className={classes.CloseButton}>
         <CloseButton
@@ -96,6 +97,9 @@ export default function FormControlLabelPlacement(props) {
       </FormControl>
 
       <GenericButton value="Submit" type="submit" displayValue="SUBMIT"  onClick={props.onSubmit}/>
+
+
+      {props.errorMessage ?<MyErrorMessage/>:null}
     </div>
   );
 }
