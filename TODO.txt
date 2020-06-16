@@ -9,6 +9,11 @@ allow db/dt as input on right side
 make toggles tabs 
 update y axis mfc
 
+Add text eqn to mes dynamic
+Add hover button to eqn for description
+add ode to mes DONE
+make x range wider
+reset mes DONE
 
 
 
@@ -151,7 +156,9 @@ DONE
     single ode use initial conditions DONE
     show error for graph config DONE
     double check if t is valid always DONE
-
+    create n seperate graph plots DONE
+    create mes differential with 10 eqns maxs , 8 default DONE
+    fix t values DONE
 NOT NEEDED
 ===========
 

@@ -11,7 +11,7 @@ const EqnItems = (props) => {
   };
   let Eqns = props.Eqns;
   let newEqns = [];
-  let order = ["a", "b", "c", "d"];
+  let order = ["a", "b", "c", "d","e","f","g","h","i","j","k"];
   order.forEach((letter) => {
     Eqns.forEach((obj) => {
       if (obj.line === letter) {

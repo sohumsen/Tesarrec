@@ -20,14 +20,14 @@ const LinearCoupledDiffFourEqn = (props) => {
   const calcValueAt = (initialValues) => {
     // { 1 , 2, 3}
     let eqnResultsArr = [];
-    let coordinate = { t: 1 }; //t initial value
-
+    let coordinate = {}; //t initial value
     //generates the eval object
     for (let i = 0; i < props.LineNames.length; i++) {
       const dependentVariable = props.LineNames[i]; // { a, b , c}
       coordinate[dependentVariable] = initialValues[i];
     }
-
+    coordinate["t"] = initialValues[initialValues.length - 1];
+    console.log(coordinate)
     for (let idx = 0; idx < parsedEquations.length; idx++) {
       eqnResultsArr.push(parsedEquations[idx].evaluate(coordinate)); // { a :1 , b: 3.3}
     }
@@ -42,24 +42,31 @@ const LinearCoupledDiffFourEqn = (props) => {
     for (let i = 0; i < props.LineNames.length; i++) {
       eqnResults1_.push(initialValues[i]);
     }
+    eqnResults1_.push(initialValues[initialValues.length - 1]);
     let eqnResults1 = calcValueAt(eqnResults1_);
 
     let eqnResults2_ = [];
     for (let i = 0; i < props.LineNames.length; i++) {
       eqnResults2_.push(initialValues[i] + (h / 2) * eqnResults1[i]);
     }
+    eqnResults2_.push(initialValues[initialValues.length - 1] + h / 2);
+
     let eqnResults2 = calcValueAt(eqnResults2_);
 
     let eqnResults3_ = [];
     for (let i = 0; i < props.LineNames.length; i++) {
       eqnResults3_.push(initialValues[i] + (h / 2) * eqnResults2[i]);
     }
+    eqnResults3_.push(initialValues[initialValues.length - 1] + h / 2);
+
     let eqnResults3 = calcValueAt(eqnResults3_);
 
     let eqnResults4_ = [];
     for (let i = 0; i < props.LineNames.length; i++) {
       eqnResults4_.push(initialValues[i] + (h / 2) * eqnResults3[i]);
     }
+    eqnResults4_.push(initialValues[initialValues.length - 1] + h);
+
     let eqnResults4 = calcValueAt(eqnResults4_);
 
     let newY1Y2Y3Arr = [];
@@ -75,11 +82,12 @@ const LinearCoupledDiffFourEqn = (props) => {
       );
     }
 
+
     return newY1Y2Y3Arr;
   };
 
   const recursive = (numberOfLoops, Arr) => {
-    let allArrs = [abcArr];
+    let allArrs = [initialConditions.slice(0, -1)];
     for (let i = 0; i < numberOfLoops; i++) {
       Arr = SolveLinearCoupledDifferentialEquationRungeKuttaForRth(Arr);
       allArrs.push(Arr);
@@ -90,23 +98,19 @@ const LinearCoupledDiffFourEqn = (props) => {
 
   const ShowLinearCoupledGraph = (EqnArr) => {
 
-
-    return (
-      <div>
-        <div>
-          <MyChart
-            EulerData={EqnArr[0]}
-            MidpointData={EqnArr[1]}
-            RungeKuttaData={EqnArr[2]}
-            Line4Data={EqnArr[3]}
-            LineNames={props.LineNames}
-            axisNames={["t", ""]}
-            horizontalAlign={props.LegendHorizontal}
-            verticalAlign={props.LegendVertical}
-          />
-        </div>
-      </div>
-    );
+    let i = -1;
+    return EqnArr.map((Eqn) => {
+      i = i + 1;
+      return (
+        <MyChart
+          EulerData={Eqn}
+          LineNames={props.LineNames[i]}
+          axisNames={["t", ""]}
+          horizontalAlign={props.LegendHorizontal}
+          verticalAlign={props.LegendVertical}
+        />
+      );
+    });
   };
 
   const FormatArrayLinearCoupled = (arr) => {
@@ -121,28 +125,23 @@ const LinearCoupledDiffFourEqn = (props) => {
         });
       }
       returnedArr.push(EqnArr);
-      console.log(returnedArr);
     }
     return returnedArr;
   };
 
   // starts at x0=0
-
   let h = parseFloat(props.h);
-
-  let abcArr = props.initialConditions;
-
+  let initialConditions = props.initialConditions;
   let CompletedGridRungeKuttaLinearCoupled = [];
 
-  //SolveForRth(SolveForRth(Y0,h,X0))
+
   CompletedGridRungeKuttaLinearCoupled.push(
-    recursive(props.numberOfCycles, abcArr)
+    recursive(props.numberOfCycles, initialConditions) //recursive(10,[1,2,3,4,5])
   );
 
   let EqnArr = FormatArrayLinearCoupled(
     CompletedGridRungeKuttaLinearCoupled[0]
   );
-  //return null;
 
   return ShowLinearCoupledGraph(EqnArr);
 };
