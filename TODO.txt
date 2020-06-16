@@ -2,14 +2,14 @@
 
 Variable Descfiption of a , b , c has default values from Mama but user can override( when user presses submit )
 for certain eqns ban negatives
-
 show title in dcf graph with chemical
 canvas js add 0 axis lines
-make toggles tabs
-double check if t is valid always 
+
 allow db/dt as input on right side
-single ode use initial conditions DONE
-show error for graph config DONE
+make toggles tabs 
+update y axis mfc
+
+
 
 
 
@@ -148,7 +148,9 @@ DONE
     add sids pic DONE
     left allign about page DONE
     ban scroll on dynamic deal with multiline dynmaic DONE
-
+    single ode use initial conditions DONE
+    show error for graph config DONE
+    double check if t is valid always DONE
 
 NOT NEEDED
 ===========
