@@ -405,6 +405,18 @@ class LinearCoupled extends Component {
       />
     ) : null;
   };
+
+  copyAllEqnsText = () => {
+    var allTextEqns = [];
+
+    for (let i = 0; i < this.state.Eqns.length; i++) {
+      let Eqn = {
+        ...this.state.Eqns[i],
+      };
+      allTextEqns.push(Eqn.TextEqn);
+    }
+    navigator.clipboard.writeText(allTextEqns);
+  };
   render() {
     let Eqns = (
       <EqnItems
@@ -449,6 +461,14 @@ class LinearCoupled extends Component {
 
               <div className={classes.Button}>
                 <MyButton type="submit" value="Submit" displayValue="SUBMIT" />
+              </div>
+              <div className={classes.Button}>
+                <MyButton
+                  type="button"
+                  value="Copy"
+                  displayValue="COPY"
+                  onClick={this.copyAllEqnsText}
+                />
               </div>
             </div>
           </div>

@@ -10,11 +10,20 @@ import Dynamic from "./containers/Lab/Dynamic";
 import { BrowserView, MobileView } from "react-device-detect";
 import MyMobileView from "./hoc/MyMobileView/MyMobileView";
 import Contact from "./containers/Contact/Contact";
+import SignIn from './containers/Authenticate/SignIn/SignIn'
+import SignUp from './containers/Authenticate/SignUp/SignUp'
 class App extends Component {
   render() {
+    let localhost = false;
+    if (window.location.hostname === "localhost") {
+      localhost = true;
+    }
     let routes = (
       <Switch>
-        <Route path="/dynamic" exact component={Dynamic} />
+        {localhost ? <Route path="/dynamic" exact component={Dynamic} /> : null}
+        <Route path="/signin" exact component={SignIn} />
+        <Route path="/signup" exact component={SignUp} />
+
 
         <Route path="/sustainability/mfc" exact component={Mfc} />
         <Route path="/sustainability/mes" exact component={Mes} />
@@ -28,7 +37,7 @@ class App extends Component {
     return (
       <div>
         <BrowserView>
-        <Route path="/" exact component={About} />
+          <Route path="/" exact component={About} />
 
           <Layout>{routes}</Layout>
         </BrowserView>

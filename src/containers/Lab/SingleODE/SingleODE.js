@@ -127,6 +127,14 @@ class SingleODE extends Component {
                   onClick={this.resetForm}
                 />
               </div>
+              <div className={classes.ButtonPos}>
+                <MyButton
+                  type="button"
+                  value="Copy"
+                  displayValue="COPY"
+                  onClick={() => {navigator.clipboard.writeText(this.state.SingleDiffChangeableText)}}
+                  />
+              </div>
             </div>
           </form>
         </div>

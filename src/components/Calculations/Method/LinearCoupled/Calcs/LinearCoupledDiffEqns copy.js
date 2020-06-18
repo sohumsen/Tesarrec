@@ -27,7 +27,6 @@ const LinearCoupledDiffFourEqn = (props) => {
       coordinate[dependentVariable] = initialValues[i];
     }
     coordinate["t"] = initialValues[initialValues.length - 1];
-    console.log(coordinate)
     for (let idx = 0; idx < parsedEquations.length; idx++) {
       eqnResultsArr.push(parsedEquations[idx].evaluate(coordinate)); // { a :1 , b: 3.3}
     }
