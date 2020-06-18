@@ -17,9 +17,8 @@ export default function CenteredTabs(props) {
       >
         <Tab label="Single ODE" />
         <Tab label="Coupled ODE" />
-        <Tab label="MFC Modelling" />
+        <Tab label="MFC " />
         <Tab label="MES" />
-        <Tab label="COVID" />
 
 
 
