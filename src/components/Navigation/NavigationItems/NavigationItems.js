@@ -33,6 +33,8 @@ const navigationItems = (props) => {
       </Dropdown>
 
       <NavigationItem link="/reference">Reference</NavigationItem>
+      <NavigationItem link="/signin">Sign In</NavigationItem>
+
       <NavigationItem link="/contact">Contact</NavigationItem>
     </ul>
   );
