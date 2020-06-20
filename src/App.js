@@ -12,7 +12,7 @@ import MyMobileView from "./hoc/MyMobileView/MyMobileView";
 import Contact from "./containers/Contact/Contact";
 import SignIn from "./containers/Authenticate/SignIn/SignIn";
 import SignUp from "./containers/Authenticate/SignUp/SignUp";
-import Logout from './containers/Authenticate/Logout/Logout'
+import Logout from "./containers/Authenticate/Logout/Logout";
 class App extends Component {
   state = {
     isLoggedIn: false,
@@ -23,90 +23,43 @@ class App extends Component {
   };
   onLoginHandler = () => {
     this.setState({ isLoggedIn: true });
-    console.log("5")
+    this.props.history.push("/dynamic");
+    console.log("5");
   };
   onLogoutHandler = () => {
     this.setState({ isLoggedIn: false });
     localStorage.removeItem("token");
     localStorage.removeItem("expirationDate");
     localStorage.removeItem("userId");
-    console.log("4")
+    console.log("4");
   };
 
-  // authSuccess = (idToken, localId) => {
+  checkAuthTimeout = (expirationTime) => {
+    setTimeout(() => {
+      this.onLogoutHandler();
+    }, expirationTime * 1000);
+  };
 
-  //   this.setState(
-  //     {
-  //       token: idToken,
-  //       userId: localId,
-  //       error: null,
-  //       loading: false,
-  //     },
-  //     () => {
-  //       console.log(this.state);
-  //     }
-  //   );
-  //   this.onLoginHandler();
-
-
-  // };
-
-  // authFail = (error) => {
-  //   this.setState(
-  //     {
-  //       error: error,
-  //       loading: false,
-  //     },
-  //     () => {
-  //       console.log(this.state);
-  //     }
-  //   );
-  // };
-  // checkAuthTimeout = (expirationTime) => {
-  //   setTimeout(() => {
-  //     this.logout();
-  //   }, expirationTime * 1000);
-  // };
-  // logout = () => {
-  //   this.onLogoutHandler();
-  //   // localStorage.removeItem("token");
-  //   // localStorage.removeItem("expirationDate");
-  //   // localStorage.removeItem("userId");
-
-  //   this.setState({
-  //     token: null,
-  //     userId: null,
-  //   });
-  // };
   componentDidMount() {
     const token = localStorage.getItem("token");
     if (!token) {
-      this.onLogoutHandler()
-      console.log("1")
+      this.onLogoutHandler();
     } else {
       const expirationDate = new Date(localStorage.getItem("expirationDate"));
       if (expirationDate <= new Date()) {
         this.onLogoutHandler();
-        console.log("2")
-
       } else {
-        const userId = localStorage.getItem("userId");
+        //const userId = localStorage.getItem("userId");
         //this.authSuccess(token, userId);
-        //this.checkAuthTimeout(
-        //  (expirationDate.getTime() - new Date().getTime()) / 1000
-        //);
-        this.onLoginHandler()
-        console.log("3")
-
-
+        this.checkAuthTimeout(
+          (expirationDate.getTime() - new Date().getTime()) / 1000
+        );
+        this.onLoginHandler();
       }
     }
-  };
+  }
 
   render() {
-
-
-
     let dynamicRoutes = this.state.isLoggedIn ? (
       <Switch>
         <Route path="/dynamic" exact component={Dynamic} />
@@ -114,10 +67,7 @@ class App extends Component {
           path="/logout"
           exact
           render={(props) => (
-            <Logout
-              {...props}
-              onLogoutHandler={this.onLogoutHandler}
-            />
+            <Logout {...props} onLogoutHandler={this.onLogoutHandler} />
           )}
         />
 
@@ -151,7 +101,6 @@ class App extends Component {
         <Redirect to="/" />
       </Switch>
     );
-    
 
     return (
       <div>
