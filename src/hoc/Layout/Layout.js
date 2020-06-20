@@ -5,7 +5,7 @@ class Layout extends Component {
   render() {
     return (
       <div>
-        <Toolbar />
+        <Toolbar isLoggedIn={this.props.isLoggedIn}/>
 
         <main className={classes.centerContent}>{this.props.children}</main>
       </div>

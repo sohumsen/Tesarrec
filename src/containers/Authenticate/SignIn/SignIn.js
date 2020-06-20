@@ -60,12 +60,16 @@ class SignIn extends Component {
     error: null,
     loading: false,
   };
-
+  componentDidMount(){
+    console.log("6")
+    this.authCheckState()
+  }
   onChange = (e) => {
     this.setState({ [e.target.name]: e.target.value });
   };
 
   authSuccess = (idToken, localId) => {
+
     this.setState(
       {
         token: idToken,
@@ -77,6 +81,9 @@ class SignIn extends Component {
         console.log(this.state);
       }
     );
+    this.props.onLoginHandler();
+
+
   };
   authFail = (error) => {
     this.setState(
@@ -93,15 +100,45 @@ class SignIn extends Component {
   checkAuthTimeout = (expirationTime) => {
     setTimeout(() => {
       this.logout();
-    }, expirationTime*1000);
+    }, expirationTime * 1000);
   };
 
   logout = () => {
+    this.props.onLogoutHandler();
+    // localStorage.removeItem("token");
+    // localStorage.removeItem("expirationDate");
+    // localStorage.removeItem("userId");
+
     this.setState({
       token: null,
       userId: null,
     });
   };
+  authCheckState = () => {
+    const token = localStorage.getItem("token");
+    if (!token) {
+      this.props.onLogoutHandler();
+      console.log("1")
+    } else {
+      const expirationDate = new Date(localStorage.getItem("expirationDate"));
+      if (expirationDate <= new Date()) {
+        this.props.onLogoutHandler();
+        console.log("2")
+
+      } else {
+        const userId = localStorage.getItem("userId");
+        console.log(token,userId)
+        this.authSuccess(token, userId);
+        this.checkAuthTimeout(
+          (expirationDate.getTime() - new Date().getTime()) / 1000
+        );
+        console.log("3")
+
+
+      }
+    }
+  };
+
   sendToServer = () => {
     const authData = {
       email: this.state.email,
@@ -124,8 +161,15 @@ class SignIn extends Component {
       .then((data) => {
         if (!data.error) {
           console.log("its fine");
+          const expirationDate = new Date(
+            new Date().getTime() + data.expiresIn * 1000
+          );
+          localStorage.setItem("token", data.idToken);
+          localStorage.setItem("expirationDate", expirationDate);
+          localStorage.setItem("userId", data.localId);
+
           this.authSuccess(data.idToken, data.localId);
-          this.checkTimeout(data.expiresIn);
+          this.checkAuthTimeout(data.expiresIn);
         } else {
           console.log("its not fine");
           this.authFail(data.error.message);
@@ -144,6 +188,7 @@ class SignIn extends Component {
   };
   render() {
     const { classes } = this.props;
+    console.log(this.state);
     return (
       <Container component="main" maxWidth="xs">
         <CssBaseline />

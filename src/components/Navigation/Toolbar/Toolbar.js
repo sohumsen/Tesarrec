@@ -5,11 +5,7 @@ import NavigationItems from '../NavigationItems/NavigationItems'
 import {NavLink} from 'react-router-dom'
  
 const toolbar=(props)=>{
-    let localhost=false
-    if (window.location.hostname==="localhost"){
-        localhost=true
 
-     }
     return(
         <header className={classes.Toolbar}> 
         <div className={classes.Logo}>
@@ -19,7 +15,7 @@ const toolbar=(props)=>{
         </div>
 
         <nav className={classes.DesktopOnly} >
-            <NavigationItems localhost={localhost}/>
+            <NavigationItems isLoggedIn={props.isLoggedIn}/>
         </nav>
 
     </header>

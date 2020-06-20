@@ -1,8 +1,8 @@
 
 
-Variable Descfiption of a , b , c has default values from Mama but user can override( when user presses submit )
+Variable Descfiption of a , b , c has default values from Mama but user can override( when user presses submit ) NOT NEEDED
 for certain eqns ban negatives
-show title in dcf graph with chemical
+show title in dcf graph with chemical CLARIFY
 canvas js add 0 axis lines
 
 allow db/dt as input on right side
@@ -12,6 +12,12 @@ update y axis mfc
 Add text eqn to mes dynamic 
 Add hover button to eqn for description NOT NEEDED
 make x range wider
+remove api key from github
+move all token states to app or execute authsuccess and timeout
+align eqns
+
+Dynamic=>MES,MFC
+MODEL Bench=>save, list of models(show mfc, mes here), remove dropdown from model bench
 
 
 
@@ -33,133 +39,27 @@ Audit
         condense src\components\Calculations\Method\LinearCoupled\Calcs\LinearCoupledDiffThreeEqn.js
         src\containers\Process\Dynamics\LinearCoupled\LinearCoupled.js
         src\components\Calculations\MFC\OverallReactionAnodeCathodeHeatMapMFC.js
-
+    B)
+        MENU DESIGN 
+            Sustainability
+                MFC   - 3 * (1xN column) + 2 * (1xN column) + 1 graph + 3 sliders + 10 sliders
+                MES   - 3 * (3xN column) - 2 * (1xN column) + 1 graph + 3 sliders + 10 sliders
+            
+            Dynamic
+                MFC   - 4 x 1 column + 1 graph
+                MES   - 4 x 1 column + 1 graph
+            MODEL Bench 
+                Single ODE
+                    *Error Estimation*
+                ODE Systems
+                Algebraic+ODEs*
+                Samples
+                SEIR
+                Navier Stokes
 
 DONE
 ========
-    remove eqn from mes pic DONE
-    volumes only go up in 10s DONE
-    add tests DONE
-    link  the  references DONE
-    turn the heatmap around DONE
-    pass eqn from mfc DONE
-    add all the differential qn methods DONE
-    allow zooming into chart DONE
-    latex math DONE
-    logs and trig dont work DONE
-    alternative to eval DONE
-    input box for eqn DONE
-    Dynamic Sumultaion DONE
-    Grid Font size make it bigger DONE
-    Align dx/dt and = DONE
-    Single ODE vs Coupled ODE vs MFC Modelling vs MES vs COVID DONE
-    change X to t DONE
-    move abc as legend to top DONE
-    Reset Deafult DONE
-    In the Coupled ODE solver , have a + sign to add new eqautions and a - sign to remove DONE
-    cant delete last eqn DONE
-    order the eqns by left part DONE
-    breaks with 2 eqns DONE
-    reset the error message when there is a good equnation DONE
-    delte the last eqn and watch DONE
-    make dustmin in line with error message DONE
-    change the react app name DONE
-    production amount in g DONE
-    cs=0-10 DONE
-    change the menu headings DONE
-    Delete energy perfomance Grid DONE
-    foramt MES DONE
-    error handlig in single ODE DONE
-    widen about page DONE
-    make sliders small DONE
-    plot graph under production rate DONE
-    order MES
-    ======
-    diagram        potential   
-    production     gwp        
-    captial Cost  dcf graph
-
-
-    B)
-    MENU DESIGN 
-        Sustainability
-            MFC   - 3 * (1xN column) + 2 * (1xN column) + 1 graph + 3 sliders + 10 sliders
-            MES   - 3 * (3xN column) - 2 * (1xN column) + 1 graph + 3 sliders + 10 sliders
-        
-        Dynamic
-            MFC   - 4 x 1 column + 1 graph
-            MES   - 4 x 1 column + 1 graph
-        Lab 
-            Single ODE
-                *Error Estimation*
-            ODE Systems
-            Algebraic+ODEs*
-            Samples
-            SEIR
-            Navier Stokes
-    errors should go away individually DONE
-    setting button keeps moving DONE
-    move bins to left DONE
-        a) legend position DONE
-    error handling DONE
-    change the favicon DONE BUT TEST
-    chart properties should be a settings
-    b) rounding percision DONE
-    Tooltip show line name, round to N decimal DONE
-    style the config popup DONE
-    decimal presicion style DONE
-    decimal precision in single ODE DONE
-    right content of mfc needs to have electricity instead of acetic acid DONE
-    turn l/h into fraction DONE
-    word doc download in left content DONE
-    mfc dowsnt update slider DONE
-    fix slider position DONE
-    download button next to title DONE
-    heatamp opex e/yr, product value e/yr DONE
-    units on sliders DONE
-    euro next to title on heatamp DONE
-    move opex and product value to main file DONE
-    capex   opex DONE
-    productvalue dcf DONE
-    organise MFC
-    =============
-    diagram     electricity
-            gwp
-    captialcost dcf
-
-    <p>Schematic</p>
-                    <p>Electricity</p>
-                    <p>GWP</p>
-                    <p>Capital Cost</p>
-                    <p>DCF</p>
-
-
-                    <p>Equations</p>
-
-
-                    remove line from inut box DONE
-    remove default 0 on slider DONE
-    remove gap in mes DONE
-    readme links DONE
-    clean mes heatmap DONE
-    format right content DONE
-    remove left contenet DONE
-    send colour from props in mes DONE
-    fill about page DONE
-    allow initial conditions input in ode DONE
-    maybe speed up dynamic DONE
-    add word docs DONE
-    add sids pic DONE
-    left allign about page DONE
-    ban scroll on dynamic deal with multiline dynmaic DONE
-    single ode use initial conditions DONE
-    show error for graph config DONE
-    double check if t is valid always DONE
-    create n seperate graph plots DONE
-    create mes differential with 10 eqns maxs , 8 default DONE
-    fix t values DONE   
-    add ode to mes DONE
-    reset mes DONE
+   
 NOT NEEDED
 ===========
 
