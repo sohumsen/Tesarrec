@@ -13,6 +13,8 @@ import Typography from "@material-ui/core/Typography";
 import { makeStyles, withStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import { NavLink } from "react-router-dom";
+import FIREBASE_KEY from "../../../firebasekey"
+
 function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
@@ -93,7 +95,7 @@ class SignUp extends Component {
     };
 
     fetch(
-      "https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyB-28kEeQ_LCcp4FQpMHZmzgROyTd8b_4Y",
+      "https://identitytoolkit.googleapis.com/v1/accounts:signUp?key="+FIREBASE_KEY,
       {
         method: "post",
         headers: {

@@ -1,3 +1,17 @@
+
+# What is the Application About
+
+# Application Manual 
+
+# How to develop on it 
+
+## Application Design
+## How to check for test coverage
+## How to deploy and run on Firebase
+## How to deploy and run locally
+
+
+
 ### React-tesarrec
 
 This is a webpage that was built in alliance with the University Of Surrey CES Department. It contains Microbial Fuel Cell calculations and graphs. It containes dynamic simulations involving single ODEs and linear coupled ODEs. Fundamentally this site allowed browser based modelling of a variety of scientific models including and not limited to models 
@@ -36,7 +50,7 @@ Create a file called src/firebasekey.js with the following contents
 const FIREBASE_KEY = "<Put Your Key here from Google Firebase>"
 export default FIREBASE_KEY 
 
-# Check test coverage using
+
 
 
 ### SDLC = Software Development Life Cycle
