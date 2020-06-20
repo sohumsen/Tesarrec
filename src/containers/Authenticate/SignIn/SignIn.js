@@ -13,6 +13,9 @@ import Typography from "@material-ui/core/Typography";
 import { ThemeProvider } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import { withStyles } from "@material-ui/core/styles";
+import FIREBASE_KEY from "../../../firebasekey"
+
+
 // import classes from './SignIn.module.css'
 // import { createMuiTheme, withTheme } from "@material-ui/core/styles";
 
@@ -79,10 +82,10 @@ class SignIn extends Component {
     );
     this.props.onLoginHandler();
   };
-  authFail = (error) => {
+  authFail = (errorMsg) => {
     this.setState(
       {
-        error: error,
+        error: errorMsg,
         loading: false,
       },
       () => {
@@ -114,7 +117,8 @@ class SignIn extends Component {
     };
 
     fetch(
-      "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyB-28kEeQ_LCcp4FQpMHZmzgROyTd8b_4Y",
+       
+      "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=" + FIREBASE_KEY,
       {
         method: "post",
         headers: {
@@ -138,7 +142,7 @@ class SignIn extends Component {
           this.authSuccess(data.idToken, data.localId);
           this.checkAuthTimeout(data.expiresIn);
         } else {
-          console.log("its not fine");
+          console.log("its not fine" + data.error.message );
           this.authFail(data.error.message);
         }
       })
@@ -204,6 +208,7 @@ class SignIn extends Component {
             >
               Sign In
             </Button>
+            {this.state.error}
             <Grid container>
               <Grid item xs>
                 <Link href="#" variant="body2">

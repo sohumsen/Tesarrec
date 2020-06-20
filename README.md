@@ -31,6 +31,14 @@ IT Analyst: Sohum Sen
 Download Paper from
 https://tesarrec.web.app/static/media/MES%20download.2608cd29.docx
 
+### Deployment to Firebase
+Create a file called src/firebasekey.js with the following contents
+const FIREBASE_KEY = "<Put Your Key here from Google Firebase>"
+export default FIREBASE_KEY 
+
+# Check test coverage using
+
+
 ### SDLC = Software Development Life Cycle
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
