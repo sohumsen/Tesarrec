@@ -13,7 +13,7 @@ import Typography from "@material-ui/core/Typography";
 import { makeStyles, withStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import { NavLink } from "react-router-dom";
-import FIREBASE_KEY from "../../../firebasekey"
+import FIREBASE_KEY from "../../../firebasekey";
 
 function Copyright() {
   return (
@@ -54,39 +54,11 @@ class SignUp extends Component {
     lastName: "",
     email: "",
     password: "",
-    token: null,
-    userId: null,
-    error: null,
-    loading: false,
   };
   onChange = (e) => {
     this.setState({ [e.target.name]: e.target.value });
   };
 
-  authSuccess = (idToken, localId) => {
-    this.setState(
-      {
-        token: idToken,
-        userId: localId,
-        error: null,
-        loading: false,
-      },
-      () => {
-        console.log(this.state);
-      }
-    );
-  };
-  authFail = (error) => {
-    this.setState(
-      {
-        error: error,
-        loading: false,
-      },
-      () => {
-        console.log(this.state);
-      }
-    );
-  };
   sendToServer = () => {
     const authData = {
       email: this.state.email,
@@ -95,7 +67,8 @@ class SignUp extends Component {
     };
 
     fetch(
-      "https://identitytoolkit.googleapis.com/v1/accounts:signUp?key="+FIREBASE_KEY,
+      "https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=" +
+        FIREBASE_KEY,
       {
         method: "post",
         headers: {
@@ -109,14 +82,23 @@ class SignUp extends Component {
         console.log(data);
         if (!data.error) {
           console.log("its fine");
-          this.authSuccess(data.idToken, data.localId);
+          const expirationDate = new Date(
+            new Date().getTime() + data.expiresIn * 1000
+          );
+          localStorage.setItem("token", data.idToken);
+          localStorage.setItem("expirationDate", expirationDate);
+          localStorage.setItem("userId", data.localId);
+
+          this.props.authSuccess(data.idToken, data.localId);
+          this.props.checkAuthTimeout(data.expiresIn);
         } else {
-          console.log("its not fine");
-          this.authFail(data.error.message);
+          console.log("its not fine" + data.error.message);
+          this.props.authFail(data.error.message);
         }
       })
       .catch((error) => {
-        console.error("Error", error);
+        console.log("Error", error);
+        this.props.authFail(error);
       });
 
     //
@@ -208,7 +190,7 @@ class SignUp extends Component {
             >
               Sign Up
             </Button>
-            {this.state.error}
+            {this.props.error}
             <Grid container justify="flex-end">
               <Grid item>
                 <NavLink to="/signin" exact variant="body2">

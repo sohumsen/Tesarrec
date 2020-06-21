@@ -13,8 +13,7 @@ import Typography from "@material-ui/core/Typography";
 import { ThemeProvider } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import { withStyles } from "@material-ui/core/styles";
-import FIREBASE_KEY from "../../../firebasekey"
-
+import FIREBASE_KEY from "../../../firebasekey";
 
 // import classes from './SignIn.module.css'
 // import { createMuiTheme, withTheme } from "@material-ui/core/styles";
@@ -58,55 +57,10 @@ class SignIn extends Component {
   state = {
     email: "",
     password: "",
-    token: null,
-    userId: null,
-    error: null,
-    loading: false,
   };
 
   onChange = (e) => {
     this.setState({ [e.target.name]: e.target.value });
-  };
-
-  authSuccess = (idToken, localId) => {
-    this.setState(
-      {
-        token: idToken,
-        userId: localId,
-        error: null,
-        loading: false,
-      },
-      () => {
-        console.log(this.state);
-      }
-    );
-    this.props.onLoginHandler();
-  };
-  authFail = (errorMsg) => {
-    this.setState(
-      {
-        error: errorMsg,
-        loading: false,
-      },
-      () => {
-        console.log(this.state);
-      }
-    );
-  };
-
-  checkAuthTimeout = (expirationTime) => {
-    setTimeout(() => {
-      this.logout();
-    }, expirationTime * 1000);
-  };
-
-  logout = () => {
-    this.props.onLogoutHandler();
-
-    this.setState({
-      token: null,
-      userId: null,
-    });
   };
 
   sendToServer = () => {
@@ -117,8 +71,8 @@ class SignIn extends Component {
     };
 
     fetch(
-       
-      "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=" + FIREBASE_KEY,
+      "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=" +
+        FIREBASE_KEY,
       {
         method: "post",
         headers: {
@@ -139,16 +93,16 @@ class SignIn extends Component {
           localStorage.setItem("expirationDate", expirationDate);
           localStorage.setItem("userId", data.localId);
 
-          this.authSuccess(data.idToken, data.localId);
-          this.checkAuthTimeout(data.expiresIn);
+          this.props.authSuccess(data.idToken, data.localId);
+          this.props.checkAuthTimeout(data.expiresIn);
         } else {
-          console.log("its not fine" + data.error.message );
-          this.authFail(data.error.message);
+          console.log("its not fine" + data.error.message);
+          this.props.authFail(data.error.message);
         }
       })
       .catch((error) => {
         console.log("Error", error);
-        this.authFail(error);
+        this.props.authFail(error);
       });
 
     //
@@ -208,7 +162,7 @@ class SignIn extends Component {
             >
               Sign In
             </Button>
-            {this.state.error}
+            {this.props.error}
             <Grid container>
               <Grid item xs>
                 <Link href="#" variant="body2">

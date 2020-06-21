@@ -21,13 +21,13 @@ class App extends Component {
     error: null,
     loading: false,
   };
-  onLoginHandler = () => {
-    this.setState({ isLoggedIn: true });
-    this.props.history.push("/dynamic");
-    console.log("5");
-  };
+  // onLoginHandler = () => {
+  //   this.setState({ isLoggedIn: true });
+  //   this.props.history.push("/modelbench");
+  //   console.log("5");
+  // };
   onLogoutHandler = () => {
-    this.setState({ isLoggedIn: false });
+    this.setState({ isLoggedIn: false, token: null, userId: null });
     localStorage.removeItem("token");
     localStorage.removeItem("expirationDate");
     localStorage.removeItem("userId");
@@ -39,6 +39,36 @@ class App extends Component {
       this.onLogoutHandler();
     }, expirationTime * 1000);
   };
+  authSuccess = (idToken, localId) => {
+    this.setState({
+      token: idToken,
+      userId: localId,
+      error: null,
+      loading: false,
+      isLoggedIn: true,
+    });
+    this.props.history.push("/modelbench");
+    //this.onLoginHandler();
+  };
+  authFail = (errorMsg) => {
+    this.setState({
+      error: errorMsg,
+      loading: false,
+      isLoggedIn: false,
+    });
+    localStorage.removeItem("token");
+    localStorage.removeItem("expirationDate");
+    localStorage.removeItem("userId");
+  };
+
+  // logout = () => {
+  //   this.props.onLogoutHandler();
+
+  //   this.setState({
+  //     token: null,
+  //     userId: null,
+  //   });
+  // };
 
   componentDidMount() {
     const token = localStorage.getItem("token");
@@ -49,20 +79,20 @@ class App extends Component {
       if (expirationDate <= new Date()) {
         this.onLogoutHandler();
       } else {
-        //const userId = localStorage.getItem("userId");
-        //this.authSuccess(token, userId);
+        const userId = localStorage.getItem("userId");
+        this.authSuccess(token, userId);
         this.checkAuthTimeout(
           (expirationDate.getTime() - new Date().getTime()) / 1000
         );
-        this.onLoginHandler();
+        // this.onLoginHandler();
       }
     }
   }
 
   render() {
-    let dynamicRoutes = this.state.isLoggedIn ? (
-      <Switch>
-        <Route path="/dynamic" exact component={Dynamic} />
+    let ifLoggedIn = (
+      <div>
+        <Route path="/modelbench" exact component={Dynamic} />
         <Route
           path="/logout"
           exact
@@ -70,44 +100,60 @@ class App extends Component {
             <Logout {...props} onLogoutHandler={this.onLogoutHandler} />
           )}
         />
-
         <Route path="/sustainability/mfc" exact component={Mfc} />
         <Route path="/sustainability/mes" exact component={Mes} />
         <Route path="/reference" component={Reference} />
         <Route path="/contact" component={Contact} />
 
         <Redirect to="/" />
-      </Switch>
-    ) : (
-      <Switch>
+      </div>
+    );
+    let ifNotLoggedIn = (
+      <div>
         <Route
           path="/signin"
           exact
           render={(props) => (
             <SignIn
               {...props}
-              onLoginHandler={this.onLoginHandler}
-              onLogoutHandler={this.onLogoutHandler}
+              error={this.state.error}
+              checkAuthTimeout={this.checkAuthTimeout}
+              authFail={this.authFail}
+              authSuccess={this.authSuccess}
             />
           )}
         />
-        <Route path="/signup" exact component={SignUp} />
-
+        <Route
+          path="/signup"
+          exact
+          render={(props) => (
+            <SignUp
+              {...props}
+              error={this.state.error}
+              checkAuthTimeout={this.checkAuthTimeout}
+              authFail={this.authFail}
+              authSuccess={this.authSuccess}
+            />
+          )}
+        />
         <Route path="/sustainability/mfc" exact component={Mfc} />
         <Route path="/sustainability/mes" exact component={Mes} />
         <Route path="/reference" component={Reference} />
         <Route path="/contact" component={Contact} />
 
         <Redirect to="/" />
-      </Switch>
+      </div>
     );
+    let dynamicRoutes = this.state.isLoggedIn ? ifLoggedIn : ifNotLoggedIn;
 
     return (
       <div>
         <BrowserView>
           <Route path="/" exact component={About} />
 
-          <Layout isLoggedIn={this.state.isLoggedIn}>{dynamicRoutes}</Layout>
+          <Layout isLoggedIn={this.state.isLoggedIn}>
+            <Switch>{dynamicRoutes}</Switch>
+          </Layout>
         </BrowserView>
         <MobileView>
           <MyMobileView />

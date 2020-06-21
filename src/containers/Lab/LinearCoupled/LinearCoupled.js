@@ -381,6 +381,73 @@ class LinearCoupled extends Component {
     }
   };
 
+  componentDidMount(){
+    fetch(
+       
+      "https://tesarrec.firebaseio.com/eqns.json"
+,
+      {
+        method: "get",
+        headers: {
+          Accept: "application/json, text/plain, */*",
+          "Content-Type": "application/json",
+        },
+      }
+    )
+      .then((response) => response.json())
+      .then((data) => {
+        if (!data.error) {
+          console.log("its fine");
+          console.log(data)
+          // this.setState({Eqns:data.Eqns})
+         
+        } else {
+          console.log("its not fine" + data.error.message );
+          console.log(data)
+
+        }
+      })
+      .catch((error) => {
+        console.log("Error", error);
+      });
+  }
+
+  saveAllEqnsToDb=()=>{
+
+    const Eqns={
+      Eqns:this.state.Eqns
+    }
+    fetch(
+       
+      "https://tesarrec.firebaseio.com/eqns.json"
+,
+      {
+        method: "post",
+        headers: {
+          Accept: "application/json, text/plain, */*",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(Eqns),
+      }
+    )
+      .then((response) => response.json())
+      .then((data) => {
+        if (!data.error) {
+          console.log("its fine");
+          console.log(data)
+         
+        } else {
+          console.log("its not fine" + data.error.message );
+          console.log(data)
+
+        }
+      })
+      .catch((error) => {
+        console.log("Error", error);
+      });
+
+  }
+
   renderGraph = () => {
     let eqns = [];
     this.state.Eqns.forEach((eqn) => {
@@ -468,6 +535,14 @@ class LinearCoupled extends Component {
                   value="Copy"
                   displayValue="COPY"
                   onClick={this.copyAllEqnsText}
+                />
+              </div>
+              <div className={classes.Button}>
+                <MyButton
+                  type="button"
+                  value="Save"
+                  displayValue="SAVE"
+                  onClick={this.saveAllEqnsToDb}
                 />
               </div>
             </div>
