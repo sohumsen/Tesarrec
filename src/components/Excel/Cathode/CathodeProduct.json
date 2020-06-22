@@ -1,52 +1,52 @@
 {
-    "Sheet1": [
-        {
-            "Cathode Product (p)": "Acetic acid",
-            "c": "2",
-            "h": "4",
-            "o": "2",
-            "∆Gf°(p) (kJ/mol)": "-299.78",
-            "GWP(p) from fossil resource kgCO2eq./kg": "1.7"
-        },
-        {
-            "Cathode Product (p)": "Butyric acid",
-            "c": "4",
-            "h": "8",
-            "o": "2",
-            "∆Gf°(p) (kJ/mol)": "-282.94",
-            "GWP(p) from fossil resource kgCO2eq./kg": "2.88"
-        },
-        {
-            "Cathode Product (p)": "Caproic acid",
-            "c": "6",
-            "h": "12",
-            "o": "2",
-            "∆Gf°(p) (kJ/mol)": "-266.1",
-            "GWP(p) from fossil resource kgCO2eq./kg": "2"
-        },
-        {
-            "Cathode Product (p)": "Formic acid",
-            "c": "1",
-            "h": "2",
-            "o": "2",
-            "∆Gf°(p) (kJ/mol)": "-278.8",
-            "GWP(p) from fossil resource kgCO2eq./kg": "2.8"
-        },
-        {
-            "Cathode Product (p)": "Propionic acid",
-            "c": "3",
-            "h": "6",
-            "o": "2",
-            "∆Gf°(p) (kJ/mol)": "-291.36",
-            "GWP(p) from fossil resource kgCO2eq./kg": "2"
-        },
-        {
-            "Cathode Product (p)": "Valeric acid",
-            "c": "5",
-            "h": "10",
-            "o": "2",
-            "∆Gf°(p) (kJ/mol)": "-344.2",
-            "GWP(p) from fossil resource kgCO2eq./kg": "2"
-        }
-    ]
+  "Sheet1": [
+    {
+      "Cathode Product (p)": "Acetic acid",
+      "c": "2",
+      "h": "4",
+      "o": "2",
+      "∆Gf°(p) (kJ/mol)": "-299.78",
+      "GWP(p) from fossil resource kgCO2eq./kg": "1.7"
+    },
+    {
+      "Cathode Product (p)": "Butyric acid",
+      "c": "4",
+      "h": "8",
+      "o": "2",
+      "∆Gf°(p) (kJ/mol)": "-282.94",
+      "GWP(p) from fossil resource kgCO2eq./kg": "2.88"
+    },
+    {
+      "Cathode Product (p)": "Caproic acid",
+      "c": "6",
+      "h": "12",
+      "o": "2",
+      "∆Gf°(p) (kJ/mol)": "-266.1",
+      "GWP(p) from fossil resource kgCO2eq./kg": "2"
+    },
+    {
+      "Cathode Product (p)": "Formic acid",
+      "c": "1",
+      "h": "2",
+      "o": "2",
+      "∆Gf°(p) (kJ/mol)": "-278.8",
+      "GWP(p) from fossil resource kgCO2eq./kg": "2.8"
+    },
+    {
+      "Cathode Product (p)": "Propionic acid",
+      "c": "3",
+      "h": "6",
+      "o": "2",
+      "∆Gf°(p) (kJ/mol)": "-291.36",
+      "GWP(p) from fossil resource kgCO2eq./kg": "2"
+    },
+    {
+      "Cathode Product (p)": "Valeric acid",
+      "c": "5",
+      "h": "10",
+      "o": "2",
+      "∆Gf°(p) (kJ/mol)": "-344.2",
+      "GWP(p) from fossil resource kgCO2eq./kg": "2"
+    }
+  ]
 }

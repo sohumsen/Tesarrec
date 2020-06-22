@@ -1,8 +1,7 @@
 import React, { Component } from "react";
-import SingleODE from "./SingleODE/SingleODE";
-import LinearCoupled from "./LinearCoupled/LinearCoupled";
 import MyTabs from "../../components/UI/MyTabs/MyTabs";
 import classes from "./Dynamic.module.css";
+import Mes from "./Mes/Mes";
 class Dynamic extends Component {
   /**
    * Visual Component that contains the textbox for the equation and calculation outputs
@@ -10,7 +9,7 @@ class Dynamic extends Component {
    *
    */
   state = {
-    choiceValue: 1,
+    choiceValue: 0,
   };
   handleTabChange = (event, val) => {
     console.log(val);
@@ -23,14 +22,12 @@ class Dynamic extends Component {
         <MyTabs
           value={this.state.choiceValue}
           handleChange={this.handleTabChange}
-          labels={["Single ODE", "Coupled ODE"]}
+          labels={["MES","MFC"]}
         />
 
-        {this.state.choiceValue === 0 ? (
-          <SingleODE />
-        ) : this.state.choiceValue === 1 ? (
-          <LinearCoupled userId={this.props.userId} token={this.props.token} />
-        ) : null}
+        {this.state.choiceValue === 0 ? 
+          <Mes />
+       : null}
       </div>
     );
   }

@@ -12,11 +12,11 @@ update y axis mfc
 Add text eqn to mes dynamic 
 Add hover button to eqn for description NOT NEEDED
 make x range wider
-remove api key from github
-move all token states to app or execute authsuccess and timeout
 align eqns
 
-Dynamic=>MES,MFC
+
+
+
 MODEL Bench=>save, list of models(show mfc, mes here), remove dropdown from model bench
 
 
@@ -59,6 +59,9 @@ Audit
 
 DONE
 ========
+    Dynamic=>MES,MFC  DONE
+    move all token states to app or execute authsuccess and timeout DONE
+    remove api key from github DONE
    
 NOT NEEDED
 ===========

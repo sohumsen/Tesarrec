@@ -1,25 +1,15 @@
+import myData from "./CathodeProduct.json";
 
-import myData from './CathodeProduct.json';
+const ReadCathodeJSON = (chemicalName) => {
+  for (let index = 0; index < myData.Sheet1.length; index++) {
+    const element = myData.Sheet1[index];
 
-
-const ReadCathodeJSON=(chemicalName)=>{
-    for (let index = 0; index < myData.Sheet1.length; index++) {
-        const element = myData.Sheet1[index];
-        
-        if (element["Cathode Product (p)"]===chemicalName){
-            
-
-            return (
-                {value:element}
-
-            )
-        }
-        
+    if (element["Cathode Product (p)"] === chemicalName) {
+      return { value: element };
     }
-    
+  }
 
-    return false
+  return false;
+};
 
-}
-
-export default ReadCathodeJSON
+export default ReadCathodeJSON;

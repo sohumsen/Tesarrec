@@ -5,8 +5,9 @@ import { Route, Switch, withRouter, Redirect } from "react-router-dom";
 import About from "./containers/About/About";
 import Reference from "./containers/Reference/Reference";
 import Mes from "./containers/Sustainability/Mes/Mes";
+import DynamicMes from "./containers/Dynamic/Mes/Mes";
 import Mfc from "./containers/Sustainability/Mfc/Mfc";
-import Dynamic from "./containers/Lab/Dynamic";
+import ModelBench from "./containers/Lab/Dynamic";
 import { BrowserView, MobileView } from "react-device-detect";
 import MyMobileView from "./hoc/MyMobileView/MyMobileView";
 import Contact from "./containers/Contact/Contact";
@@ -82,7 +83,11 @@ class App extends Component {
           path="/modelbench"
           exact
           render={(props) => (
-            <Dynamic {...props} userId={this.state.userId} token={this.state.token} />
+            <ModelBench
+              {...props}
+              userId={this.state.userId}
+              token={this.state.token}
+            />
           )}
         />
         <Route
@@ -92,6 +97,8 @@ class App extends Component {
             <Logout {...props} onLogoutHandler={this.onLogoutHandler} />
           )}
         />
+        <Route path="/dynamic/mfc" exact component={DynamicMes} />
+
         <Route path="/sustainability/mfc" exact component={Mfc} />
         <Route path="/sustainability/mes" exact component={Mes} />
         <Route path="/reference" component={Reference} />
@@ -128,6 +135,7 @@ class App extends Component {
             />
           )}
         />
+
         <Route path="/sustainability/mfc" exact component={Mfc} />
         <Route path="/sustainability/mes" exact component={Mes} />
         <Route path="/reference" component={Reference} />

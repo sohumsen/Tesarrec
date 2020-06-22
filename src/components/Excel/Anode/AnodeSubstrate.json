@@ -1,74 +1,74 @@
 {
-    "Sheet1": [
-        {
-            "Anode substrate (s)": "Acetate",
-            "x": "2",
-            "y": "3",
-            "z": "2",
-            "∆Gf°(s) (kJ/mol)": "-369.31"
-        },
-        {
-            "Anode substrate (s)": "Ethanol",
-            "x": "2",
-            "y": "6",
-            "z": "1",
-            "∆Gf°(s) (kJ/mol)": "-174.78"
-        },
-        {
-            "Anode substrate (s)": "Glucose",
-            "x": "6",
-            "y": "12",
-            "z": "6",
-            "∆Gf°(s) (kJ/mol)": "-910"
-        },
-        {
-            "Anode substrate (s)": "Lactate",
-            "x": "3",
-            "y": "5",
-            "z": "3",
-            "∆Gf°(s) (kJ/mol)": "-516.6"
-        },
-        {
-            "Anode substrate (s)": "Methane",
-            "x": "1",
-            "y": "4",
-            "z": "0",
-            "∆Gf°(s) (kJ/mol)": "-50.72"
-        },
-        {
-            "Anode substrate (s)": "Methanol",
-            "x": "1",
-            "y": "4",
-            "z": "1",
-            "∆Gf°(s) (kJ/mol)": "-166.27"
-        },
-        {
-            "Anode substrate (s)": "Propionate",
-            "x": "3",
-            "y": "5",
-            "z": "2",
-            "∆Gf°(s) (kJ/mol)": "-360"
-        },
-        {
-            "Anode substrate (s)": "Pyruvate",
-            "x": "3",
-            "y": "3",
-            "z": "3",
-            "∆Gf°(s) (kJ/mol)": "-474.5"
-        },
-        {
-            "Anode substrate (s)": "Sorbitol",
-            "x": "6",
-            "y": "14",
-            "z": "6",
-            "∆Gf°(s) (kJ/mol)": "-942.7"
-        },
-        {
-            "Anode substrate (s)": "Sucrose",
-            "x": "12",
-            "y": "22",
-            "z": "11",
-            "∆Gf°(s) (kJ/mol)": "-1551.8"
-        }
-    ]
+  "Sheet1": [
+    {
+      "Anode substrate (s)": "Acetate",
+      "x": "2",
+      "y": "3",
+      "z": "2",
+      "∆Gf°(s) (kJ/mol)": "-369.31"
+    },
+    {
+      "Anode substrate (s)": "Ethanol",
+      "x": "2",
+      "y": "6",
+      "z": "1",
+      "∆Gf°(s) (kJ/mol)": "-174.78"
+    },
+    {
+      "Anode substrate (s)": "Glucose",
+      "x": "6",
+      "y": "12",
+      "z": "6",
+      "∆Gf°(s) (kJ/mol)": "-910"
+    },
+    {
+      "Anode substrate (s)": "Lactate",
+      "x": "3",
+      "y": "5",
+      "z": "3",
+      "∆Gf°(s) (kJ/mol)": "-516.6"
+    },
+    {
+      "Anode substrate (s)": "Methane",
+      "x": "1",
+      "y": "4",
+      "z": "0",
+      "∆Gf°(s) (kJ/mol)": "-50.72"
+    },
+    {
+      "Anode substrate (s)": "Methanol",
+      "x": "1",
+      "y": "4",
+      "z": "1",
+      "∆Gf°(s) (kJ/mol)": "-166.27"
+    },
+    {
+      "Anode substrate (s)": "Propionate",
+      "x": "3",
+      "y": "5",
+      "z": "2",
+      "∆Gf°(s) (kJ/mol)": "-360"
+    },
+    {
+      "Anode substrate (s)": "Pyruvate",
+      "x": "3",
+      "y": "3",
+      "z": "3",
+      "∆Gf°(s) (kJ/mol)": "-474.5"
+    },
+    {
+      "Anode substrate (s)": "Sorbitol",
+      "x": "6",
+      "y": "14",
+      "z": "6",
+      "∆Gf°(s) (kJ/mol)": "-942.7"
+    },
+    {
+      "Anode substrate (s)": "Sucrose",
+      "x": "12",
+      "y": "22",
+      "z": "11",
+      "∆Gf°(s) (kJ/mol)": "-1551.8"
+    }
+  ]
 }

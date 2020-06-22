@@ -1,27 +1,15 @@
+import myData from "./AnodeSubstrate.json";
 
-import myData from './AnodeSubstrate.json';
+const ReadAndodeJSON = (chemicalName) => {
+  for (let index = 0; index < myData.Sheet1.length; index++) {
+    const element = myData.Sheet1[index];
 
-
-const ReadAndodeJSON=(chemicalName)=>{
-    for (let index = 0; index < myData.Sheet1.length; index++) {
-        const element = myData.Sheet1[index];
-        
-        if (element["Anode substrate (s)"]===chemicalName){
-            
-
-            return (
-
-                {value:element}
-                
-
-            )
-        }
-        
+    if (element["Anode substrate (s)"] === chemicalName) {
+      return { value: element };
     }
-    
+  }
 
-    return false
+  return false;
+};
 
-}
-
-export default ReadAndodeJSON
+export default ReadAndodeJSON;
