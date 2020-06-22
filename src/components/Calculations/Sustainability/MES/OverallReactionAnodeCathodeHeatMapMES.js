@@ -193,7 +193,21 @@ const OverallReactionAnodeCathode = (props) => {
   let TwoOpexData=FormatArr(OpexData)
 
 
-
+  console.log( TwoDCapitalCostData,
+props.ProductionPriceCost,
+ TwoDProductionRategData,
+props.ACCCost,
+props.LangFactorCost,
+props.AnolyteCost,
+props.CatholyteCost,
+props.ExternalEnergyCost,
+TwoDGibbsEnergyData,
+props.IRRCost,
+props.chosenValue,
+props.anodeSubstrate,
+props.cathodeProduct,
+props.xCoordAnode,
+props.yCoordCathode)
   return (
     <div className={classes.HeatMaps}>
       <div className={classes.HeatMapEnergyPerformance}>

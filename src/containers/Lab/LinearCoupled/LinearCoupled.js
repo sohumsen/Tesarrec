@@ -8,6 +8,7 @@ import MyErrorMessage from "../../../components/UI/MyErrorMessage/MyErrorMessage
 import SettingButton from "../../../components/UI/Button/SettingButton";
 import GraphConfig from "../../../components/UI/GraphConfig/GraphConfig";
 import LinearCoupledDiffEqns from "../../../components/Calculations/Method/LinearCoupled/Calcs/LinearCoupledDiffEqns copy";
+import FileController from "../FileController/FileController";
 class LinearCoupled extends Component {
   /**
    * Visual Component that contains the textbox for the equation and calculation outputs
@@ -18,6 +19,7 @@ class LinearCoupled extends Component {
   //y1=a, y2=b,y3=c
   state = {
     calculate: true,
+    pageId: "",
     variableDescription: {
       a: "this is some stuff",
       b: "this is some stuff",
@@ -164,6 +166,7 @@ class LinearCoupled extends Component {
   resetForm = () => {
     this.setState({
       calculate: true,
+      pageId: "",
       variableDescription: {
         a: "this is some stuff",
         b: "this is some stuff",
@@ -309,95 +312,41 @@ class LinearCoupled extends Component {
 
     this.setState({ graphConfig: graphConfig });
   };
-  renderSwitchGraph = (length) => {
-    switch (length) {
-      case 2:
-        return (
-          <div>
-            {/*<LinearCoupledDiffTwoEqn
-            h={0.05}
-            numberOfCycles={31}
-            eqn1={this.state.Eqns[0].TextEqn}
-            eqn2={this.state.Eqns[1].TextEqn}
-            LineNames={[this.state.Eqns[0].line, this.state.Eqns[1].line]}
-            a={1}
-            b={0.5}
-            LegendVertical={this.state.graphConfig.LegendVertical}
-            LegendHorizontal={this.state.graphConfig.LegendHorizontal}
-            DecimalPrecision={this.state.graphConfig.DecimalPrecision}
-/>*/}
-          </div>
-        );
-      // case 3:
-      //   return (
-      //     <LinearCoupledDiffThreeEqn
-      //       h={0.05}
-      //       numberOfCycles={31}
-      //       eqn1={this.state.Eqns[0].TextEqn}
-      //       eqn2={this.state.Eqns[1].TextEqn}
-      //       eqn3={this.state.Eqns[2].TextEqn}
-      //       LineNames={[
-      //         this.state.Eqns[0].line,
-      //         this.state.Eqns[1].line,
-      //         this.state.Eqns[2].line,
-      //       ]}
-      //       a={1}
-      //       b={0.5}
-      //       c={0.75}
-      //       LegendVertical={this.state.graphConfig.LegendVertical}
-      //       LegendHorizontal={this.state.graphConfig.LegendHorizontal}
-      //       DecimalPrecision={this.state.graphConfig.DecimalPrecision}
 
-      //     />
-      //   );
-      // case 4:
-      //   return (
-      //     <LinearCoupledDiffFourEqn
-      //       h={0.05}
-      //       numberOfCycles={31}
-      //       eqn1={this.state.Eqns[0].TextEqn}
-      //       eqn2={this.state.Eqns[1].TextEqn}
-      //       eqn3={this.state.Eqns[2].TextEqn}
-      //       eqn4={this.state.Eqns[3].TextEqn}
-      //       LineNames={[
-      //         this.state.Eqns[0].line,
-      //         this.state.Eqns[1].line,
-      //         this.state.Eqns[2].line,
-      //         this.state.Eqns[3].line,
-      //       ]}
-      //       a={1}
-      //       b={0.5}
-      //       c={1}
-      //       d={0.5}
-      //       LegendVertical={this.state.graphConfig.LegendVertical}
-      //       LegendHorizontal={this.state.graphConfig.LegendHorizontal}
-      //       DecimalPrecision={this.state.graphConfig.DecimalPrecision}
-
-      //     />
-      //   );
-
-      default:
-        return null;
-    }
-  };
 
   componentDidMount() {
-    const queryParams='?auth='+this.props.token//+'&orderBy="userId"&equalTo="'+this.props.userId+'"'
-    fetch('https://tesarrec.firebaseio.com/eqns/'+this.props.userId+'.json'+queryParams, {
-      method: "get",
-      headers: {
-        Accept: "application/json, text/plain, */*",
-        "Content-Type": "application/json",
-      },
-    })
+    this.getAllFiles() //get
+    this.createNewFile() //post
+    this.getDataFromDb(this.state.pageId); //get
+    console.log(this.state.pageId)
+  }
+
+  
+  getDataFromDb = (pageId) => {
+    const queryParams = "?auth=" + this.props.token; //+'&orderBy="userId"&equalTo="'+this.props.userId+'"'
+    fetch(
+      "https://tesarrec.firebaseio.com/eqns/" +
+        this.props.userId +
+        "/" +
+        pageId +
+        ".json" +
+        queryParams,
+      {
+        method: "get",
+        headers: {
+          Accept: "application/json, text/plain, */*",
+          "Content-Type": "application/json",
+        },
+      }
+    )
       .then((response) => response.json())
       .then((data) => {
         if (!data.error) {
           console.log("its fine");
-          console.log(data.Eqns)
+          console.log(data.Eqns);
           // console.log(Object.values(data)[0].Eqns);
           //this.setState({Eqns:Object.values(data)[0].Eqns,calculate:false})
-          this.setState({Eqns:data.Eqns,calculate:false})
+          this.setState({ Eqns: data.Eqns, calculate: false });
         } else {
           console.log("its not fine" + data.error.message);
           console.log(data);
@@ -406,21 +355,138 @@ class LinearCoupled extends Component {
       .catch((error) => {
         console.log("Error", error);
       });
-  }
+  };
 
-  saveAllEqnsToDb = () => {
+  createNewFile = () => {
+    this.setState({
+      Eqns: [
+        {
+          id: "qwert",
+          line: "a",
+          DByDLatex: "\\frac{da}{dt}=",
+          LatexEqn: "-\\frac{0.09ab}{0.103+a}-\\frac{0.84ac}{0.425+a}",
+          TextEqn: "-(0.09*a*b)/(0.103+a)-(0.84*a*c)/(0.425+a)",
+          errorMessage: null,
+        },
+        {
+          id: "yuiop",
+          line: "b",
+
+          DByDLatex: "\\frac{db}{dt}=",
+          LatexEqn: "\\frac{7.1ab}{0.103+a}-0.142b",
+          TextEqn: "(7.1*a*b)/(0.103+a)-0.142*b",
+          errorMessage: null,
+        },
+        {
+          id: "asdfg",
+          line: "c",
+
+          DByDLatex: "\\frac{dc}{dt}=",
+          LatexEqn: "\\frac{0.6ac}{0.103+a}-0.0102c",
+          TextEqn: "(0.6*a*c)/(0.103+a)-0.0102*c",
+          errorMessage: null,
+        },
+        {
+          id: "hjklz",
+          line: "d",
+
+          DByDLatex: "\\frac{dd}{dt}=",
+          LatexEqn: "-\\frac{0.09ab}{0.103+a}-\\frac{0.84ac}{0.425+a}",
+          TextEqn: "-(0.09*a*b)/(0.103+a)-(0.84*a*c)/(0.425+a)",
+          errorMessage: null,
+        },
+      ],
+    })
     const Eqns = {
       Eqns: this.state.Eqns,
       // userId:this.props.userId
     };
-    fetch("https://tesarrec.firebaseio.com/eqns/" +this.props.userId+".json?auth="+this.props.token, {
-      method: "put",
-      headers: {
-        Accept: "application/json, text/plain, */*",
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(Eqns),
-    })
+    fetch(
+      "https://tesarrec.firebaseio.com/eqns/" +
+        this.props.userId +
+        ".json?auth=" +
+        this.props.token,
+      {
+        method: "post",
+        headers: {
+          Accept: "application/json, text/plain, */*",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(Eqns),
+      }
+    )
+      .then((response) => response.json())
+      .then((data) => {
+        if (!data.error) {
+          console.log("its fine");
+          console.log(data);
+          this.setState({ pageId: data.name });
+        } else {
+          console.log("its not fine" + data.error.message);
+          console.log(data);
+        }
+      })
+      .catch((error) => {
+        console.log("Error", error);
+      });
+  };
+
+  getAllFiles = () => {
+    const queryParams = "?auth=" + this.props.token; //+'&orderBy="userId"&equalTo="'+this.props.userId+'"'
+    fetch(
+      "https://tesarrec.firebaseio.com/eqns/" +
+        this.props.userId +
+        ".json" +
+        queryParams,
+      {
+        method: "get",
+        headers: {
+          Accept: "application/json, text/plain, */*",
+          "Content-Type": "application/json",
+        },
+      }
+    )
+      .then((response) => response.json())
+      .then((data) => {
+        if (!data.error) {
+          console.log("its fine");
+          console.log(data);
+          // console.log(Object.values(data)[0].Eqns);
+          //this.setState({Eqns:Object.values(data)[0].Eqns,calculate:false})
+        } else {
+          console.log("its not fine" + data.error.message);
+          console.log(data);
+        }
+      })
+      .catch((error) => {
+        console.log("Error", error);
+      });
+  };
+
+  saveFileToDb = () => {
+    const Eqns = {
+      Eqns: this.state.Eqns,
+      // userId:this.props.userId
+    };
+    console.log(this.state);
+    //https://tesarrec.firebaseio.com/eqns/QXVRwu8vuHRTsLST6wMWOA9jt3b2/-MAQkzE9AFzlCAuvn6hs
+    //https://tesarrec.firebaseio.com/eqns/QXVRwu8vuHRTsLST6wMWOA9jt3b2/-MAR6iLb8WpOpXylIzfW.json?auth=eyJhbGciOiJSUzI1NiIsImtpZCI6ImMzZjI3NjU0MmJmZmU0NWU5OGMyMGQ2MDNlYmUyYmExMTc2ZWRhMzMiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJodHRwczovL3NlY3VyZXRva2VuLmdvb2dsZS5jb20vdGVzYXJyZWMiLCJhdWQiOiJ0ZXNhcnJlYyIsImF1dGhfdGltZSI6MTU5MjgzMDc0NywidXNlcl9pZCI6IlFYVlJ3dTh2dUhSVHNMU1Q2d01XT0E5anQzYjIiLCJzdWIiOiJRWFZSd3U4dnVIUlRzTFNUNndNV09BOWp0M2IyIiwiaWF0IjoxNTkyODMwNzQ3LCJleHAiOjE1OTI4MzQzNDcsImVtYWlsIjoidGVzdEB0ZXN0LmNvbSIsImVtYWlsX3ZlcmlmaWVkIjpmYWxzZSwiZmlyZWJhc2UiOnsiaWRlbnRpdGllcyI6eyJlbWFpbCI6WyJ0ZXN0QHRlc3QuY29tIl19LCJzaWduX2luX3Byb3ZpZGVyIjoicGFzc3dvcmQifX0.Hz_kxHOryao7zmRcEfrEEtM-sbZpPsnWBiLwLlhK2bOW27BloKRcIY_FLW87zhZj6OkCmSWn-LlZik3cqgfmEI5tOE474k0Wgr1HW2f_CU9-TvVdfqnzbYqs8PlAn0XSF2WfjubOLI9EHitEQxYn_7SNYATLJSJrti6gvfAQVZ-JG7eDlMQLbR3P6FBq3yCFPhepCCH5O4RnQKKqjPPKjZapf6ugZYrsS8mTP98U8bSHXLRCyg3nlMGrwdDlZigzZamiUQpXXi6hdrVx8cK2Bv1W0d4J8UWF73PtRlmFKYAIPpcvE7s4S9acfUS2WqVbL984ihS8kU3o_TNUymsGwQ
+    fetch(
+      "https://tesarrec.firebaseio.com/eqns/" +
+        this.props.userId +
+        "/" +
+        this.state.pageId +
+        ".json?auth=" +
+        this.props.token,
+      {
+        method: "put",
+        headers: {
+          Accept: "application/json, text/plain, */*",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(Eqns),
+      }
+    )
       .then((response) => response.json())
       .then((data) => {
         if (!data.error) {
@@ -483,6 +549,7 @@ class LinearCoupled extends Component {
 
     return (
       <div className={classes.Container}>
+        <FileController />
         <form onSubmit={this.handleMathQuillInputSubmit}>
           <div className={classes.Eqns}>
             {Eqns}
@@ -530,7 +597,15 @@ class LinearCoupled extends Component {
                   type="button"
                   value="Save"
                   displayValue="SAVE"
-                  onClick={this.saveAllEqnsToDb}
+                  onClick={this.saveFileToDb}
+                />
+              </div>
+              <div className={classes.Button}>
+                <MyButton
+                  type="button"
+                  value="Create"
+                  displayValue="CREATE"
+                  onClick={this.createNewFile}
                 />
               </div>
             </div>

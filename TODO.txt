@@ -1,22 +1,13 @@
 
 
-Variable Descfiption of a , b , c has default values from Mama but user can override( when user presses submit ) NOT NEEDED
 for certain eqns ban negatives
 show title in dcf graph with chemical CLARIFY
 canvas js add 0 axis lines
-
 allow db/dt as input on right side
 make toggles tabs 
 update y axis mfc
-
-Add text eqn to mes dynamic 
-Add hover button to eqn for description NOT NEEDED
 make x range wider
 align eqns
-
-
-
-
 MODEL Bench=>save, list of models(show mfc, mes here), remove dropdown from model bench
 
 
@@ -32,7 +23,7 @@ Audit
     5. Github Commits  27/5 - Excellent
 
     3. WriteUp a project description in Readme.md  . 27/05 - 0/10 DONE
-    4. Suggested Convention - https://google.github.io/styleguide/jsguide.html
+    4. Suggested Convention - https://google.github.io/styleguide/jsguide.html DONE
 
     6. Test Code - Key modules identified *New Code Structure needed*
         EqnItem and EqnItems test coverage
@@ -82,6 +73,9 @@ NOT NEEDED
      10 SLIDER COLLECTION DIVE
 
      make configs show up as modal NOT NEEEDED
+     Add text eqn to mes dynamic NOT NEEDED
+    Variable Descfiption of a , b , c has default values from Mama but user can override( when user presses submit ) NOT NEEDED
+    Add hover button to eqn for description NOT NEEDED
 
 
 Clarify

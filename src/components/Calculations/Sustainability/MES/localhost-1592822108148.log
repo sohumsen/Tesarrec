@@ -1,0 +1,83 @@
+log.js:24 [HMR] Waiting for update signal from WDS...
+index.js:1 Warning: validateDOMNesting(...): <div> cannot appear as a descendant of <p>.
+    in div (at ForwardButton.js:9)
+    in SettingButton (at Header.js:31)
+    in a (at Header.js:27)
+    in p (at Header.js:25)
+    in div (at Header.js:24)
+    in div (at Header.js:7)
+    in Header (at About.js:10)
+    in div (at About.js:9)
+    in About (created by Context.Consumer)
+    in Route (at App.js:150)
+    in div (created by BrowserView)
+    in BrowserView (at App.js:149)
+    in div (at App.js:148)
+    in App (created by Context.Consumer)
+    in withRouter(App) (at src/index.js:11)
+    in StrictMode (at src/index.js:10)
+    in Router (created by BrowserRouter)
+    in BrowserRouter (at src/index.js:9)
+console.<computed> @ index.js:1
+index.js:1 Warning: validateDOMNesting(...): <div> cannot appear as a descendant of <p>.
+    in div (at ForwardButton.js:9)
+    in SettingButton (at Header.js:38)
+    in a (at Header.js:37)
+    in p (at Header.js:35)
+    in div (at Header.js:24)
+    in div (at Header.js:7)
+    in Header (at About.js:10)
+    in div (at About.js:9)
+    in About (created by Context.Consumer)
+    in Route (at App.js:150)
+    in div (created by BrowserView)
+    in BrowserView (at App.js:149)
+    in div (at App.js:148)
+    in App (created by Context.Consumer)
+    in withRouter(App) (at src/index.js:11)
+    in StrictMode (at src/index.js:10)
+    in Router (created by BrowserRouter)
+    in BrowserRouter (at src/index.js:9)
+console.<computed> @ index.js:1
+index.js:1 Warning: validateDOMNesting(...): <ol> cannot appear as a descendant of <p>.
+    in ol (at Content.js:14)
+    in p (at Content.js:12)
+    in div (at Content.js:6)
+    in Content (at About.js:11)
+    in div (at About.js:9)
+    in About (created by Context.Consumer)
+    in Route (at App.js:150)
+    in div (created by BrowserView)
+    in BrowserView (at App.js:149)
+    in div (at App.js:148)
+    in App (created by Context.Consumer)
+    in withRouter(App) (at src/index.js:11)
+    in StrictMode (at src/index.js:10)
+    in Router (created by BrowserRouter)
+    in BrowserRouter (at src/index.js:9)
+console.<computed> @ index.js:1
+index.js:1 Warning: React does not recognize the `computedMatch` prop on a DOM element. If you intentionally want it to appear in the DOM as a custom attribute, spell it as lowercase `computedmatch` instead. If you accidentally passed it from a parent component, remove it from the DOM element.
+    in div (at App.js:110)
+    in Switch (at App.js:153)
+    in main (at Layout.js:10)
+    in div (at Layout.js:7)
+    in Layout (at App.js:152)
+    in div (created by BrowserView)
+    in BrowserView (at App.js:149)
+    in div (at App.js:148)
+    in App (created by Context.Consumer)
+    in withRouter(App) (at src/index.js:11)
+    in StrictMode (at src/index.js:10)
+    in Router (created by BrowserRouter)
+    in BrowserRouter (at src/index.js:9)
+console.<computed> @ index.js:1
+App.js:31 4
+webpackHotDevClient.js:138 ./src/App.js
+  Line 4:37:  'Redirect' is defined but never used  no-unused-vars
+printWarnings @ webpackHotDevClient.js:138
+Grammarly.js:2 [DEFAULT]: WARN : Using DEFAULT root logger
+t.printToConsole @ Grammarly.js:2
+Grammarly.js:2 [WARNING] Using default timeseries implementation.
+e.getRootMetric @ Grammarly.js:2
+:3000/:1 Error while trying to use the following icon from the Manifest: http://localhost:3000/logo192.png (Download error or resource isn't a valid image)
+OverallReactionAnodeCathodeHeatMapMES.js:196 Array(6)0: (6) ["64826.97", "63746.52", "64462.77", "78591.60", "65944.68", "67101.60"]1: (6) ["47539.78", "46747.45", "47272.70", "57633.84", "48359.43", "49207.84"]2: (6) ["41777.38", "41081.09", "41542.68", "50647.92", "42497.68", "43243.25"]0: "41777.38"1: "41081.09"2: "41542.68"3: "50647.92"4: "42497.68"5: "43243.25"length: 6__proto__: Array(0)3: (6) ["99401.35", "97744.66", "98842.92", "120507.12", "101115.17", "102889.12"]4: (6) ["53302.17", "52413.81", "53002.72", "64619.76", "54221.18", "55172.43"]5: (6) ["44082.34", "43347.63", "43834.69", "53442.29", "44842.38", "45629.09"]length: 6__proto__: Array(0) 0.024 Array(6) 0.13 4.75 0.0012 0.5 0.15 Array(6) 0.12 undefined "Acetate" "Acetic acid" 0 0

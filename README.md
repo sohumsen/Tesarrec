@@ -1,18 +1,41 @@
 
-# What is the Application About
 
 # Application Manual 
 
 # How to develop on it 
 
 ## Application Design
+
+Uses container vs component folder structure
+Container= statefull 
+Component= stateless
+group js css test files together
+
+
+
 ## How to check for test coverage
+npm run test= npm test (to test all files)
+
+npm test -- --coverage (for files changed since last commit)
+npm test -- --coverage --watchAll=false (for all files )
+
 ## How to deploy and run on Firebase
+
+npm run build
+then follow https://firebase.google.com/docs/hosting
+
+for future updates run:
+npm run build
+firebase deploy
 ## How to deploy and run locally
+npm install (to install 3rd party packages)
+npm start
 
 
 
 ### React-tesarrec
+
+# What is the Application About
 
 This is a webpage that was built in alliance with the University Of Surrey CES Department. It contains Microbial Fuel Cell calculations and graphs. It containes dynamic simulations involving single ODEs and linear coupled ODEs. Fundamentally this site allowed browser based modelling of a variety of scientific models including and not limited to models 
 

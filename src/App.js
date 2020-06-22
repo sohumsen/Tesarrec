@@ -104,7 +104,6 @@ class App extends Component {
         <Route path="/reference" component={Reference} />
         <Route path="/contact" component={Contact} />
 
-        <Redirect to="/" />
       </div>
     );
     let ifNotLoggedIn = (
@@ -141,7 +140,6 @@ class App extends Component {
         <Route path="/reference" component={Reference} />
         <Route path="/contact" component={Contact} />
 
-        <Redirect to="/" />
       </div>
     );
     let dynamicRoutes = this.state.isLoggedIn ? ifLoggedIn : ifNotLoggedIn;

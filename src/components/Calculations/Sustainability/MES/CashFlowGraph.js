@@ -71,7 +71,7 @@ const CashFlowGraph = (props) => {
   let data = [
     { x: -3, y: 0 },
     { x: -2, y: dataArr[0] / 3 },
-    { x: -1, y: 2*dataArr[0] / 3 },
+    { x: -1, y: (2 * dataArr[0]) / 3 },
   ];
 
   for (let l = 0; l < dataArr.length; l++) {
