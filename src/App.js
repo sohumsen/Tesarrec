@@ -21,11 +21,7 @@ class App extends Component {
     error: null,
     loading: false,
   };
-  // onLoginHandler = () => {
-  //   this.setState({ isLoggedIn: true });
-  //   this.props.history.push("/modelbench");
-  //   console.log("5");
-  // };
+
   onLogoutHandler = () => {
     this.setState({ isLoggedIn: false, token: null, userId: null });
     localStorage.removeItem("token");
@@ -48,7 +44,6 @@ class App extends Component {
       isLoggedIn: true,
     });
     this.props.history.push("/modelbench");
-    //this.onLoginHandler();
   };
   authFail = (errorMsg) => {
     this.setState({
@@ -60,15 +55,6 @@ class App extends Component {
     localStorage.removeItem("expirationDate");
     localStorage.removeItem("userId");
   };
-
-  // logout = () => {
-  //   this.props.onLogoutHandler();
-
-  //   this.setState({
-  //     token: null,
-  //     userId: null,
-  //   });
-  // };
 
   componentDidMount() {
     const token = localStorage.getItem("token");
@@ -92,7 +78,13 @@ class App extends Component {
   render() {
     let ifLoggedIn = (
       <div>
-        <Route path="/modelbench" exact component={Dynamic} />
+        <Route
+          path="/modelbench"
+          exact
+          render={(props) => (
+            <Dynamic {...props} userId={this.state.userId} token={this.state.token} />
+          )}
+        />
         <Route
           path="/logout"
           exact

@@ -381,30 +381,26 @@ class LinearCoupled extends Component {
     }
   };
 
-  componentDidMount(){
-    fetch(
-       
-      "https://tesarrec.firebaseio.com/eqns.json"
-,
-      {
-        method: "get",
-        headers: {
-          Accept: "application/json, text/plain, */*",
-          "Content-Type": "application/json",
-        },
-      }
-    )
+  componentDidMount() {
+    const queryParams='?auth='+this.props.token//+'&orderBy="userId"&equalTo="'+this.props.userId+'"'
+    fetch('https://tesarrec.firebaseio.com/eqns/'+this.props.userId+'.json'+queryParams, {
+      method: "get",
+      headers: {
+        Accept: "application/json, text/plain, */*",
+        "Content-Type": "application/json",
+      },
+    })
       .then((response) => response.json())
       .then((data) => {
         if (!data.error) {
           console.log("its fine");
-          console.log(data)
-          // this.setState({Eqns:data.Eqns})
-         
+          console.log(data.Eqns)
+          // console.log(Object.values(data)[0].Eqns);
+          //this.setState({Eqns:Object.values(data)[0].Eqns,calculate:false})
+          this.setState({Eqns:data.Eqns,calculate:false})
         } else {
-          console.log("its not fine" + data.error.message );
-          console.log(data)
-
+          console.log("its not fine" + data.error.message);
+          console.log(data);
         }
       })
       .catch((error) => {
@@ -412,41 +408,33 @@ class LinearCoupled extends Component {
       });
   }
 
-  saveAllEqnsToDb=()=>{
-
-    const Eqns={
-      Eqns:this.state.Eqns
-    }
-    fetch(
-       
-      "https://tesarrec.firebaseio.com/eqns.json"
-,
-      {
-        method: "post",
-        headers: {
-          Accept: "application/json, text/plain, */*",
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(Eqns),
-      }
-    )
+  saveAllEqnsToDb = () => {
+    const Eqns = {
+      Eqns: this.state.Eqns,
+      // userId:this.props.userId
+    };
+    fetch("https://tesarrec.firebaseio.com/eqns/" +this.props.userId+".json?auth="+this.props.token, {
+      method: "put",
+      headers: {
+        Accept: "application/json, text/plain, */*",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(Eqns),
+    })
       .then((response) => response.json())
       .then((data) => {
         if (!data.error) {
           console.log("its fine");
-          console.log(data)
-         
+          console.log(data);
         } else {
-          console.log("its not fine" + data.error.message );
-          console.log(data)
-
+          console.log("its not fine" + data.error.message);
+          console.log(data);
         }
       })
       .catch((error) => {
         console.log("Error", error);
       });
-
-  }
+  };
 
   renderGraph = () => {
     let eqns = [];
