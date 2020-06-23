@@ -1,0 +1,16 @@
+.RemoveButton {
+  float: left;
+  position: relative;
+  top: -50PX;
+  left: -50px;
+
+}
+
+.Container {
+  margin-bottom: 8%;
+}
+
+.ErrorMsg {
+  color: red;
+  font-size: smaller;
+}

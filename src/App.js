@@ -7,7 +7,7 @@ import Reference from "./containers/Reference/Reference";
 import Mes from "./containers/Sustainability/Mes/Mes";
 import DynamicMes from "./containers/Dynamic/Mes/Mes";
 import Mfc from "./containers/Sustainability/Mfc/Mfc";
-import ModelBench from "./containers/Lab/Dynamic";
+import ModelBench from "./containers/Lab/ModelBench";
 import { BrowserView, MobileView } from "react-device-detect";
 import MyMobileView from "./hoc/MyMobileView/MyMobileView";
 import Contact from "./containers/Contact/Contact";

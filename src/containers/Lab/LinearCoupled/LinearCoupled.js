@@ -8,7 +8,7 @@ import MyErrorMessage from "../../../components/UI/MyErrorMessage/MyErrorMessage
 import SettingButton from "../../../components/UI/Button/SettingButton";
 import GraphConfig from "../../../components/UI/GraphConfig/GraphConfig";
 import LinearCoupledDiffEqns from "../../../components/Calculations/Method/LinearCoupled/Calcs/LinearCoupledDiffEqns copy";
-import FileController from "../FileController/FileController";
+import FileController from "../../../components/Calculations/Method/FileController/FileController";
 class LinearCoupled extends Component {
   /**
    * Visual Component that contains the textbox for the equation and calculation outputs
@@ -18,8 +18,9 @@ class LinearCoupled extends Component {
 
   //y1=a, y2=b,y3=c
   state = {
-    calculate: true,
+    calculate: false,
     pageId: "",
+    allPageId: {},
     variableDescription: {
       a: "this is some stuff",
       b: "this is some stuff",
@@ -313,15 +314,14 @@ class LinearCoupled extends Component {
     this.setState({ graphConfig: graphConfig });
   };
 
-
   componentDidMount() {
-    this.getAllFiles() //get
-    this.createNewFile() //post
-    this.getDataFromDb(this.state.pageId); //get
-    console.log(this.state.pageId)
+    this.createNewFile(); //post, stores a page and recieves its id
+    this.getAllFiles(); //get, gets page id of all files
+
+    //this.getDataFromDb(this.state.pageId); //get, gets eqns given page id
+    console.log(this.state.pageId);
   }
 
-  
   getDataFromDb = (pageId) => {
     const queryParams = "?auth=" + this.props.token; //+'&orderBy="userId"&equalTo="'+this.props.userId+'"'
     fetch(
@@ -343,10 +343,13 @@ class LinearCoupled extends Component {
       .then((data) => {
         if (!data.error) {
           console.log("its fine");
-          console.log(data.Eqns);
+          console.log(data);
           // console.log(Object.values(data)[0].Eqns);
           //this.setState({Eqns:Object.values(data)[0].Eqns,calculate:false})
-          this.setState({ Eqns: data.Eqns, calculate: false });
+          this.setState({
+            Eqns: data.Eqns,
+            calculate: false,
+          });
         } else {
           console.log("its not fine" + data.error.message);
           console.log(data);
@@ -396,7 +399,7 @@ class LinearCoupled extends Component {
           errorMessage: null,
         },
       ],
-    })
+    });
     const Eqns = {
       Eqns: this.state.Eqns,
       // userId:this.props.userId
@@ -420,7 +423,9 @@ class LinearCoupled extends Component {
         if (!data.error) {
           console.log("its fine");
           console.log(data);
-          this.setState({ pageId: data.name });
+          this.setState({ pageId: data.name }, () => {
+            console.log(this.state);
+          });
         } else {
           console.log("its not fine" + data.error.message);
           console.log(data);
@@ -451,6 +456,7 @@ class LinearCoupled extends Component {
         if (!data.error) {
           console.log("its fine");
           console.log(data);
+          this.setState({ allPageId: data });
           // console.log(Object.values(data)[0].Eqns);
           //this.setState({Eqns:Object.values(data)[0].Eqns,calculate:false})
         } else {
@@ -502,6 +508,14 @@ class LinearCoupled extends Component {
       });
   };
 
+  onClickFileLink = (pageId) => {
+    console.log(pageId)
+    this.getDataFromDb(pageId);
+  };
+
+  onRemoveFileLink=(pageId)=>{
+
+  }
   renderGraph = () => {
     let eqns = [];
     this.state.Eqns.forEach((eqn) => {
@@ -546,10 +560,24 @@ class LinearCoupled extends Component {
         handleMathQuillInputChange={this.handleMathQuillInputChange}
       />
     );
+    let Files = null;
+    //console.log("dfkjgkdfjgkfdjjgfdkljgfd"+Object.keys(this.state.allPageId))
+
+    // this.state.allPageId.length !== 0
+    //   ? (Files = (
+    //       <FileController
+    //         onRemoveFileLink={this.onRemoveFileLink}
+    //         allPageId={this.state.allPageId}
+    //         onClick={this.onClickFileLink}
+    //       />
+    //     ))
+    //   : (Files = null);
 
     return (
       <div className={classes.Container}>
-        <FileController />
+        <p>files herre</p>
+                        {Files}
+
         <form onSubmit={this.handleMathQuillInputSubmit}>
           <div className={classes.Eqns}>
             {Eqns}
@@ -588,7 +616,7 @@ class LinearCoupled extends Component {
                 <MyButton
                   type="button"
                   value="Copy"
-                  displayValue="COPY"
+                  displayValue="COPY model"
                   onClick={this.copyAllEqnsText}
                 />
               </div>
@@ -596,7 +624,7 @@ class LinearCoupled extends Component {
                 <MyButton
                   type="button"
                   value="Save"
-                  displayValue="SAVE"
+                  displayValue="SAVE eqn"
                   onClick={this.saveFileToDb}
                 />
               </div>
@@ -604,7 +632,7 @@ class LinearCoupled extends Component {
                 <MyButton
                   type="button"
                   value="Create"
-                  displayValue="CREATE"
+                  displayValue="CREATE model"
                   onClick={this.createNewFile}
                 />
               </div>
