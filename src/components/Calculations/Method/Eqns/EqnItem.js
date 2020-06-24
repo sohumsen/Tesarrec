@@ -1,6 +1,6 @@
 import React from "react";
-import RemoveButton from '../../../../UI/Button/RemoveButton'
-import MyMathQuill from '../../../../UI/Math/MyMathQuill'
+import RemoveButton from '../../../UI/Button/RemoveButton'
+import MyMathQuill from '../../../UI/Math/MyMathQuill'
 import classes from './EqnItem.module.css'
 const EqnItem = (props) => {
   return (

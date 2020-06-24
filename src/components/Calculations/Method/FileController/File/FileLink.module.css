@@ -1,16 +1,15 @@
 .RemoveButton {
-  float: left;
-  position: relative;
-  top: -50PX;
-  left: -50px;
-
+background-color: aliceblue;
+flex-grow: 1;
 }
 
 .Container {
-  margin-bottom: 8%;
+  position: relative;
+  display: flex;
+  flex-direction: column;
 }
 
-.ErrorMsg {
-  color: red;
-  font-size: smaller;
+.Link{
+  flex-grow: 1;
+  font-size: xx-small;
 }

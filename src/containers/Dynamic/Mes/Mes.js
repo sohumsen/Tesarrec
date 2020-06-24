@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import WordDoc from "../../../assets/MES download.docx";
 import DonwloadButton from '../../../components/UI/Button/DownloadButton'
-import EqnItems from "../../../components/Calculations/Method/LinearCoupled/Eqns/EqnItems";
+import EqnItems from "../../../components/Calculations/Method/Eqns/EqnItems";
 import { evaluate } from "mathjs";
 import MyButton from "../../../components/UI/Button/GenericButton";
 import classes from "./Mes.module.css";

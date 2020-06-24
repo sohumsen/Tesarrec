@@ -1,9 +1,15 @@
 
 
 .ModelBenchContainer{
-  margin-left: 5%;
-  margin-right: 5%;
-  width: 90vw;
-  height: 90vh;
-
+  display: flex;
 }
+.ModelBenchItemLeft {
+  background-color: aqua;
+  width: 20%;
+}
+
+.ModelBenchItemCenter {
+  background-color: orange;
+  width: 80%;
+}
+
