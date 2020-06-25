@@ -2,7 +2,6 @@
   display: inline-block;
   width: 90%;
   margin: 5%;
-
 }
 
 .Eqns {
@@ -20,17 +19,17 @@
   background-color: turquoise;
 }
 
-.Button{
-    float: left;
-    margin-left: 5%;
+.Button {
+  float: left;
+  margin-left: 5%;
 }
 
-.Legend{
-    display: inline-block;
-    line-height: 5px;
+.Legend {
+  display: inline-block;
+  line-height: 5px;
 }
 
-@media screen and (min-width: 415px){
+@media screen and (min-width: 415px) {
   .Legend {
     padding: 0 1em 0 0;
   }

@@ -35,26 +35,13 @@ class LinearCoupled extends Component {
       initialConditions: [0.5, 0.5, 0.5, 0.5, 0.5],
     },
 
-    Eqns: []
+    Eqns: [],
   };
-  // static getDerivedStateFromProps(props, state) {
-  //   console.log(props, state)
-  //   console.log(props.Eqns)
-  //   if (props.Eqns.length!==0){
-  //     return {
-  //       Eqns: props.Eqns,
-  //     };
-  //   }
-   
-  //   // Return null to indicate no change to state.
-  //   return null;
-  // }
 
-  componentWillReceiveProps(nextProps){
-    if (nextProps.modelid!==this.state.modelid){
-      this.setState({Eqns:nextProps.Eqns})
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.modelid !== this.state.modelid) {
+      this.setState({ Eqns: nextProps.Eqns });
     }
-
   }
 
   validateExpression = (expr, line) => {
@@ -286,7 +273,6 @@ class LinearCoupled extends Component {
 
     let newInitialConditions = graphConfig.initialConditions.map(Number);
     if (newInitialConditions.length === this.state.Eqns.length + 1) {
-      console.log("valid");
       graphConfig.initialConditions = newInitialConditions;
       graphConfig.submitted = true;
     } else {
@@ -333,7 +319,6 @@ class LinearCoupled extends Component {
     navigator.clipboard.writeText(allTextEqns);
   };
   render() {
-    console.log(this.state.Eqns)
     let Eqns = (
       <EqnItems
         Eqns={this.state.Eqns}
@@ -341,17 +326,6 @@ class LinearCoupled extends Component {
         handleMathQuillInputChange={this.handleMathQuillInputChange}
       />
     );
-    //console.log("dfkjgkdfjgkfdjjgfdkljgfd"+Object.keys(this.state.allPageId))
-
-    // this.state.allPageId.length !== 0
-    //   ? (Files = (
-    //       <FileController
-    //         onRemoveFileLink={this.onRemoveFileLink}
-    //         allPageId={this.state.allPageId}
-    //         onClick={this.onClickFileLink}
-    //       />
-    //     ))
-    //   : (Files = null);
 
     return (
       <div className={classes.Container}>
@@ -372,7 +346,9 @@ class LinearCoupled extends Component {
                 <MyButton
                   type="button"
                   value="addODE"
-                  disabled={this.state.Eqns.length === 4}
+                  disabled={
+                    this.state.Eqns.length === 4 || this.state.Eqns.length === 0
+                  }
                   displayValue="Add ODE"
                   onClick={this.onIncrementEqn}
                 />
@@ -382,18 +358,25 @@ class LinearCoupled extends Component {
                   type="reset"
                   value="Reset"
                   displayValue="RESET"
+                  disabled={this.state.Eqns.length === 0}
                   onClick={this.resetForm}
                 />
               </div>
 
               <div className={classes.Button}>
-                <MyButton type="submit" value="Submit" displayValue="SUBMIT" />
+                <MyButton
+                  type="submit"
+                  value="Submit"
+                  displayValue="SUBMIT"
+                  disabled={this.state.Eqns.length === 0}
+                />
               </div>
               <div className={classes.Button}>
                 <MyButton
                   type="button"
                   value="Copy"
                   displayValue="COPY model"
+                  disabled={this.state.Eqns.length === 0}
                   onClick={this.copyAllEqnsText}
                 />
               </div>
@@ -402,10 +385,10 @@ class LinearCoupled extends Component {
                   type="button"
                   value="Save"
                   displayValue="SAVE eqn"
-                  onClick={()=>this.props.saveEquation(this.state.Eqns)}
+                  disabled={this.state.Eqns.length === 0}
+                  onClick={() => this.props.saveEquation(this.state.Eqns)}
                 />
               </div>
-            
             </div>
           </div>
         </form>

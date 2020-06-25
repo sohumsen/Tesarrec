@@ -1,19 +1,31 @@
 import React, { Component } from "react";
 import FileLink from "./File/FileLink";
-import ListItems from '../../../UI/ListItems/ListItems'
+import ListItems from "../../../UI/ListItems/ListItems";
 
-const FileController = (props) => {
-  return Object.keys(props.allModelId).map((ModelId) => {
-    return (
-      <ul style={{listStyle:"none"}}>
+class FileController extends Component {
+  state = {
+    selected: null,
+  };
+  updateSelected(selectedIndex) {
 
-      <ListItems
-              onExpandFileLink={() => props.onExpandFileLink(ModelId)}
-              ModelId={ModelId}
-              onRemoveFileLink={()=>props.onRemoveFileLink(ModelId)}/>
-      </ul>
-    );
-  });
-};
+    this.setState({ selected: selectedIndex });
+  }
+
+  render() {
+    return Object.keys(this.props.allModelId).map((ModelId) => {
+      return (
+        <ul style={{ listStyle: "none" }}>
+          <ListItems
+            updateSelected={() => this.updateSelected(ModelId)}
+            ModelId={ModelId}
+            selected={this.state.selected}
+            onExpandFileLink={() => this.props.onExpandFileLink(ModelId)}
+            onRemoveFileLink={() => this.props.onRemoveFileLink(ModelId)}
+          />
+        </ul>
+      );
+    });
+  }
+}
 
 export default FileController;

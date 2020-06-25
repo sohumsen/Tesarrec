@@ -7,8 +7,12 @@ allow db/dt as input on right side
 make toggles tabs 
 update y axis mfc
 make x range wider
-align eqns
-MODEL Bench=>save, list of models(show mfc, mes here), remove dropdown from model bench
+align eqns DONE
+
+edit names of models
+move single ode and linear ode selections to bottom Left 
+
+
 
 
 
@@ -53,6 +57,9 @@ DONE
     Dynamic=>MES,MFC  DONE
     move all token states to app or execute authsuccess and timeout DONE
     remove api key from github DONE
+    Eqns file keeps showing DONE
+    highlight file when selected DONE
+    MODEL Bench=>save, list of models(show mfc, mes here), remove dropdown from model bench DONE
    
 NOT NEEDED
 ===========
