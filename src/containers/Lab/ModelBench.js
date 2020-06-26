@@ -3,7 +3,9 @@ import SingleODE from "./SingleODE/SingleODE";
 import LinearCoupled from "./LinearCoupled/LinearCoupled";
 import FileController from "../../components/Calculations/Method/FileController/FileController";
 import classes from "./ModelBench.module.css";
-import GenericButton from "../../components/UI/Button/GenericButton";
+import MyTabs from "../../components/UI/MyTabs/MyTabs";
+import AddButton from "../../components/UI/Button/AddButton";
+import Skeleton from '../../components/UI/Skeleton/Skeleton'
 class Dynamic extends Component {
   /**
    * Visual Component that contains the textbox for the equation and calculation outputs
@@ -16,9 +18,12 @@ class Dynamic extends Component {
     Eqns: [],
     calculate: false,
     error: true,
+    tabChoiceValue: 0,
+    loading:false
   };
 
   componentDidMount() {
+    this.setState({loading:true})
     this.getAllFiles();
   }
 
@@ -111,10 +116,10 @@ class Dynamic extends Component {
           this.props.userId +
           "/" +
           this.state.modelId +
-          ".json?auth=" +
+          "/.json?auth=" +
           this.props.token,
         {
-          method: "put",
+          method: "PATCH",
           headers: {
             Accept: "application/json, text/plain, */*",
             "Content-Type": "application/json",
@@ -149,18 +154,18 @@ class Dynamic extends Component {
     });
   };
 
-  onEditFileLinkName = () => {
+  onEditFileLinkName = (newFileName) => {
     // curl -X PUT -d '{ "first": "Jack", "last": "Sparrow" }' \
     // 'https://[PROJECT_ID].firebaseio.com/users/jack/name.json'
 
     //     curl -X PATCH -d '{"last":"Jones"}' \
     //  'https://[PROJECT_ID].firebaseio.com/users/jack/name/.json'
     const Name = {
-      Name: "somethifn",
+      Name: newFileName,
       // userId:this.props.userId
     };
     // https://tesarrec.firebaseio.com/eqns/QXVRwu8vuHRTsLST6wMWOA9jt3b2/-MAeganGABPemhDxtCc_/Name
-    
+    console.log(newFileName);
 
     if (this.state.modelId !== "") {
       fetch(
@@ -175,8 +180,8 @@ class Dynamic extends Component {
           headers: {
             Accept: "application/json, text/plain, */*",
             "Content-Type": "application/json",
-            "type": 'patch',
-            "dataType": 'json'
+            type: "patch",
+            dataType: "json",
           },
 
           body: JSON.stringify(Name),
@@ -189,6 +194,7 @@ class Dynamic extends Component {
             //   this.getAllFiles();
             // });
             console.log(data);
+            this.getAllFiles();
           } else {
             console.log(data);
 
@@ -255,7 +261,7 @@ class Dynamic extends Component {
       .then((response) => response.json())
       .then((data) => {
         if (!data.error) {
-          this.setState({ allModelId: data, error: false });
+          this.setState({ allModelId: data, error: false,loading:false });
         } else {
           this.setState({ error: true });
         }
@@ -265,7 +271,9 @@ class Dynamic extends Component {
       });
   };
   //        <TemplateController/>
-
+  handleTabChange = (event, val) => {
+    this.setState({ tabChoiceValue: val });
+  };
   render() {
     let modelLinks = null;
     Object.keys(this.state.allModelId).length !== 0
@@ -274,6 +282,8 @@ class Dynamic extends Component {
             onRemoveFileLink={this.onRemoveFileLink}
             allModelId={this.state.allModelId}
             onExpandFileLink={this.onExpandFileLink}
+            onEditFileLinkName={this.onEditFileLinkName}
+            selectedModelId={this.state.modelId}
           />
         ))
       : (modelLinks = null);
@@ -281,30 +291,40 @@ class Dynamic extends Component {
       // can u inject a background-color: ranmdom lookup color if DEVMODE=TRUE
       <div className={classes.ModelBenchContainer}>
         <div className={classes.ModelBenchItemLeft}>
-          <h2>Files</h2>
-          {modelLinks}
-          <br />
-          <GenericButton
-            type="button"
-            value="Create"
-            displayValue="CREATE model"
-            onClick={this.createNewFile}
-          />
-          <GenericButton
-            type="button"
-            value="Rename"
-            displayValue="Rename model"
-            onClick={this.onEditFileLinkName}
-          />
+          <div className={classes.FileNav}>
+            <div className={classes.AddButton}>
+              <AddButton
+                type="button"
+                value="Create"
+                displayValue="CREATE model"
+                onClick={this.createNewFile}
+              />
+            </div>
+            <h2>Files </h2>
+            {this.state.loading?<Skeleton/>:null}
+
+            {modelLinks}
+          </div>
+          <div className={classes.EqnNav}>
+            <MyTabs
+              value={this.state.tabChoiceValue}
+              handleChange={this.handleTabChange}
+              labels={["Single ODE", "Coupled ODE"]}
+            />
+          </div>
         </div>
         <div className={classes.ModelBenchItemCenter}>
-          <LinearCoupled
-            userId={this.props.userId}
-            token={this.props.token}
-            modelId={this.state.modelId}
-            Eqns={this.state.Eqns}
-            saveEquation={this.saveEquation}
-          />
+          {this.state.tabChoiceValue === 0 ? (
+            <SingleODE />
+          ) : (
+            <LinearCoupled
+              userId={this.props.userId}
+              token={this.props.token}
+              modelId={this.state.modelId}
+              Eqns={this.state.Eqns}
+              saveEquation={this.saveEquation}
+            />
+          )}
         </div>
       </div>
     );

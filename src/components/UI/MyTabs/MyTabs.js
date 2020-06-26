@@ -11,7 +11,7 @@ export default function CenteredTabs(props) {
   return (
     <div>
       <Paper>
-        <Tabs
+        <Tabs orientation="vertical"
           value={props.value}
           onChange={props.handleChange}
           indicatorColor="primary"

@@ -5,8 +5,26 @@
 }
 .ModelBenchItemLeft {
   width: 20%;
+  text-align: center;
+  background-color: snow;
+  
 }
 
+.AddButton{
+  float: right;
+  
+}
+.EqnNav{
+  margin-top: 30px;
+  padding: 5px;
+  border-width: 5px;
+
+}
+.FileNav{
+ 
+  border-color: blue;
+
+}
 .ModelBenchItemCenter {
   width: 80%;
 }

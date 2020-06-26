@@ -9,8 +9,10 @@ update y axis mfc
 make x range wider
 align eqns DONE
 
-edit names of models
-move single ode and linear ode selections to bottom Left 
+
+when edit eqn name and select other it breaks
+move save eqns and copy model to file toolbar
+move all buttons to file toolbar
 
 
 
@@ -60,6 +62,10 @@ DONE
     Eqns file keeps showing DONE
     highlight file when selected DONE
     MODEL Bench=>save, list of models(show mfc, mes here), remove dropdown from model bench DONE
+    edit names of models DONE
+    move single ode and linear ode selections to bottom Left  DONE
+    when editting a file button edit the current name DONE
+    when create new file select it DONE
    
 NOT NEEDED
 ===========

@@ -25,6 +25,7 @@ export default function Input(props) {
       onChange={props.onChange}
       label={props.label}
       name={props.name}
+      onKeyDown={props.onKeyDown}
     />
   );
 }

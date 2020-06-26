@@ -27,7 +27,7 @@ class Dynamic extends Component {
 
         {this.state.choiceValue === 0 ? 
           <Mes />
-       : null}
+       : <p>hi</p>}
       </div>
     );
   }
