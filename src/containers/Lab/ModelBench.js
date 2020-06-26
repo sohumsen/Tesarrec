@@ -1,11 +1,11 @@
 import React, { Component } from "react";
 import SingleODE from "./SingleODE/SingleODE";
 import LinearCoupled from "./LinearCoupled/LinearCoupled";
-import FileController from "../../components/Calculations/Method/FileController/FileController";
+import FileController from "../../components/Calculations/Method/FileController/FileGenerator";
 import classes from "./ModelBench.module.css";
 import MyTabs from "../../components/UI/MyTabs/MyTabs";
 import AddButton from "../../components/UI/Button/AddButton";
-import Skeleton from '../../components/UI/Skeleton/Skeleton'
+import Skeleton from "../../components/UI/Skeleton/Skeleton";
 class Dynamic extends Component {
   /**
    * Visual Component that contains the textbox for the equation and calculation outputs
@@ -19,11 +19,11 @@ class Dynamic extends Component {
     calculate: false,
     error: true,
     tabChoiceValue: 0,
-    loading:false
+    loading: false,
   };
 
   componentDidMount() {
-    this.setState({loading:true})
+    this.setState({ loading: true });
     this.getAllFiles();
   }
 
@@ -105,9 +105,15 @@ class Dynamic extends Component {
     );
   };
 
-  saveEquation = (eqns) => {
+  sendToParent = (eqns) => {
+    console.log(eqns);
+    this.setState({ Eqns: eqns });
+  };
+
+  saveEquation = () => {
+    console.log(this.state.Eqns);
     const Eqns = {
-      Eqns: eqns,
+      Eqns: this.state.Eqns,
     };
 
     if (this.state.modelId !== "") {
@@ -209,9 +215,9 @@ class Dynamic extends Component {
     }
   };
 
-  onRemoveFileLink = (modelId) => {
+  onRemoveFileLink = () => {
     let allModelId = { ...this.state.allModelId };
-    delete allModelId[modelId];
+    delete allModelId[this.state.modelId];
 
     this.setState({ modelId: null, Eqns: [], allModelId: allModelId });
 
@@ -219,7 +225,7 @@ class Dynamic extends Component {
       "https://tesarrec.firebaseio.com/eqns/" +
         this.props.userId +
         "/" +
-        modelId +
+        this.state.modelId +
         ".json?auth=" +
         this.props.token,
       {
@@ -261,7 +267,7 @@ class Dynamic extends Component {
       .then((response) => response.json())
       .then((data) => {
         if (!data.error) {
-          this.setState({ allModelId: data, error: false,loading:false });
+          this.setState({ allModelId: data, error: false, loading: false });
         } else {
           this.setState({ error: true });
         }
@@ -270,23 +276,41 @@ class Dynamic extends Component {
         this.setState({ error: true });
       });
   };
+
+  copyAllEqnsText = () => {
+    console.log("now");
+    var allTextEqns = [];
+
+    for (let i = 0; i < this.state.Eqns.length; i++) {
+      let Eqn = {
+        ...this.state.Eqns[i],
+      };
+      allTextEqns.push(Eqn.TextEqn);
+    }
+    navigator.clipboard.writeText(allTextEqns);
+  };
   //        <TemplateController/>
   handleTabChange = (event, val) => {
     this.setState({ tabChoiceValue: val });
   };
+
   render() {
     let modelLinks = null;
     Object.keys(this.state.allModelId).length !== 0
       ? (modelLinks = (
           <FileController
-            onRemoveFileLink={this.onRemoveFileLink}
             allModelId={this.state.allModelId}
-            onExpandFileLink={this.onExpandFileLink}
-            onEditFileLinkName={this.onEditFileLinkName}
             selectedModelId={this.state.modelId}
+            onExpandFileLink={this.onExpandFileLink}
+            onRemoveFileLink={this.onRemoveFileLink}
+            onEditFileLinkName={this.onEditFileLinkName}
+            saveEquation={this.saveEquation}
+            copyAllEqnsText={this.copyAllEqnsText}
+            createNewFile={this.createNewFile}
           />
         ))
       : (modelLinks = null);
+    console.log(this.state.Eqns);
     return (
       // can u inject a background-color: ranmdom lookup color if DEVMODE=TRUE
       <div className={classes.ModelBenchContainer}>
@@ -301,7 +325,7 @@ class Dynamic extends Component {
               />
             </div>
             <h2>Files </h2>
-            {this.state.loading?<Skeleton/>:null}
+            {this.state.loading ? <Skeleton /> : null}
 
             {modelLinks}
           </div>
@@ -318,11 +342,9 @@ class Dynamic extends Component {
             <SingleODE />
           ) : (
             <LinearCoupled
-              userId={this.props.userId}
-              token={this.props.token}
               modelId={this.state.modelId}
               Eqns={this.state.Eqns}
-              saveEquation={this.saveEquation}
+              sendToParent={this.sendToParent}
             />
           )}
         </div>

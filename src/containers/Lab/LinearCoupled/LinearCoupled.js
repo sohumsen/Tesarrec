@@ -18,7 +18,7 @@ class LinearCoupled extends Component {
   //y1=a, y2=b,y3=c
   state = {
     calculate: false,
-    modelid: "",
+    modelId: "",
 
     variableDescription: {
       a: "this is some stuff",
@@ -38,12 +38,26 @@ class LinearCoupled extends Component {
     Eqns: [],
   };
 
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.modelid !== this.state.modelid) {
-      this.setState({ Eqns: nextProps.Eqns });
+  // componentWillReceiveProps(nextProps) {
+  //   if (nextProps.modelid !== this.state.modelid) {
+  //     this.setState({ Eqns: nextProps.Eqns });
+  //   }
+  // }
+
+  static getDerivedStateFromProps(props, state) {
+    if (props.modelId !== state.modelId) {
+      //NEW MODEL
+      return {
+        modelId: props.modelId,
+        Eqns: props.Eqns,
+      };
     }
   }
-
+  componentDidUpdate() {
+    if (this.state.Eqns !== this.props.Eqns) {
+      this.props.sendToParent(this.state.Eqns);
+    }
+  }
   validateExpression = (expr, line) => {
     let lineNames = { t: 1 };
 
@@ -307,17 +321,6 @@ class LinearCoupled extends Component {
     ) : null;
   };
 
-  copyAllEqnsText = () => {
-    var allTextEqns = [];
-
-    for (let i = 0; i < this.state.Eqns.length; i++) {
-      let Eqn = {
-        ...this.state.Eqns[i],
-      };
-      allTextEqns.push(Eqn.TextEqn);
-    }
-    navigator.clipboard.writeText(allTextEqns);
-  };
   render() {
     let Eqns = (
       <EqnItems
@@ -369,24 +372,6 @@ class LinearCoupled extends Component {
                   value="Submit"
                   displayValue="SUBMIT"
                   disabled={this.state.Eqns.length === 0}
-                />
-              </div>
-              <div className={classes.Button}>
-                <MyButton
-                  type="button"
-                  value="Copy"
-                  displayValue="COPY model"
-                  disabled={this.state.Eqns.length === 0}
-                  onClick={this.copyAllEqnsText}
-                />
-              </div>
-              <div className={classes.Button}>
-                <MyButton
-                  type="button"
-                  value="Save"
-                  displayValue="SAVE eqn"
-                  disabled={this.state.Eqns.length === 0}
-                  onClick={() => this.props.saveEquation(this.state.Eqns)}
                 />
               </div>
             </div>

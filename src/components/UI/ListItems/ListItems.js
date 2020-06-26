@@ -8,7 +8,7 @@ import IconButton from "@material-ui/core/IconButton";
 
 import FolderIcon from "@material-ui/icons/Folder";
 import DeleteIcon from "@material-ui/icons/Delete";
-import SaveIcon from '@material-ui/icons/Save';
+import SaveIcon from "@material-ui/icons/Save";
 import { MenuItem, withStyles } from "@material-ui/core";
 import EditIcon from "@material-ui/icons/Edit";
 import Input from "../Input/Input";
@@ -29,16 +29,15 @@ const styles = (theme) => ({
 
 class FileLink extends Component {
   state = {
-    showInputField: false,
     newFileName: "",
+    showInputField: false,
   };
-
   onShowInputField = () => {
     console.log(this.state.showInputField);
     this.setState((prevState) => {
       return {
         showInputField: !prevState.showInputField,
-        newFileName:this.props.fileName
+        // newFileName:this.props.fileName
       };
     });
   };
@@ -94,26 +93,14 @@ class FileLink extends Component {
           )}
 
           <ListItemSecondaryAction classes={{ primary: classes.removeIcon }}>
-          <IconButton
-              edge="end"
-              aria-label="delete"
-            >
-              <SaveIcon />
-            </IconButton>
+          
             <IconButton
-              edge="end"
-              aria-label="edit"
-              onClick={this.onShowInputField}
-            >
-              <EditIcon />
-            </IconButton>
-            <IconButton
-              edge="end"
-              aria-label="delete"
-              onClick={this.props.onRemoveFileLink}
-            >
-              <DeleteIcon />
-            </IconButton>
+            edge="end"
+            aria-label="edit"
+            onClick={this.onShowInputField}
+          >
+            <EditIcon />
+          </IconButton>
           </ListItemSecondaryAction>
         </MenuItem>
       </div>

@@ -13,6 +13,10 @@ align eqns DONE
 when edit eqn name and select other it breaks
 move save eqns and copy model to file toolbar
 move all buttons to file toolbar
+on logout goto home page
+move line 80 "send to parent" LinearCoupled 
+darker selection shade
+disable if no file present
 
 
 
