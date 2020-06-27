@@ -25,6 +25,8 @@ const styles = (theme) => ({
   editIcon: {
     margin: 20,
   },
+  selected:{
+  }
 });
 
 class FileLink extends Component {
@@ -37,7 +39,7 @@ class FileLink extends Component {
     this.setState((prevState) => {
       return {
         showInputField: !prevState.showInputField,
-        // newFileName:this.props.fileName
+        newFileName:this.props.fileName
       };
     });
   };
@@ -55,11 +57,14 @@ class FileLink extends Component {
 
   _handleKeyDown = (e) => {
     if (e.key === "Enter") {
+      console.log("fhdsjfkd")
       this.props.onEditFileLinkName(this.state.newFileName);
-      this.setState({showInputField:false})
+      this.setState({showInputField:false,newFileName:""})
     }
   };
   render() {
+    console.log(this.props.ModelId, this.props.selectedModelId)
+
     const { classes } = this.props;
 
     return (
@@ -70,6 +75,9 @@ class FileLink extends Component {
             this.props.onExpandFileLink();
           }}
           selected={this.props.ModelId === this.props.selectedModelId}
+          classes={{ selected: classes.selected }}
+
+
         >
           <ListItemAvatar>
             <Avatar>

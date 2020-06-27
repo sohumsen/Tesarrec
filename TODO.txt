@@ -10,13 +10,11 @@ make x range wider
 align eqns DONE
 
 
-when edit eqn name and select other it breaks
-move save eqns and copy model to file toolbar
-move all buttons to file toolbar
-on logout goto home page
-move line 80 "send to parent" LinearCoupled 
+when edit eqn name and select other it breaks 
 darker selection shade
-disable if no file present
+disable buttons if no file present DONE
+move files around
+
 
 
 
@@ -70,7 +68,11 @@ DONE
     move single ode and linear ode selections to bottom Left  DONE
     when editting a file button edit the current name DONE
     when create new file select it DONE
-   
+    move save eqns and copy model to file toolbar DONE
+    move all buttons to file toolbar DONE
+    on logout goto home page DONE
+    move line 80 "send to parent" LinearCoupled  DONE
+    
 NOT NEEDED
 ===========
 

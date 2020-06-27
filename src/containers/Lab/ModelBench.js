@@ -161,6 +161,7 @@ class Dynamic extends Component {
   };
 
   onEditFileLinkName = (newFileName) => {
+    console.log("here")
     // curl -X PUT -d '{ "first": "Jack", "last": "Sparrow" }' \
     // 'https://[PROJECT_ID].firebaseio.com/users/jack/name.json'
 
@@ -316,14 +317,6 @@ class Dynamic extends Component {
       <div className={classes.ModelBenchContainer}>
         <div className={classes.ModelBenchItemLeft}>
           <div className={classes.FileNav}>
-            <div className={classes.AddButton}>
-              <AddButton
-                type="button"
-                value="Create"
-                displayValue="CREATE model"
-                onClick={this.createNewFile}
-              />
-            </div>
             <h2>Files </h2>
             {this.state.loading ? <Skeleton /> : null}
 

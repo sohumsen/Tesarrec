@@ -18,6 +18,8 @@ import AddBoxIcon from "@material-ui/icons/AddBox";
 
 class FileGenerator extends Component {
   render() {
+    console.log(this.props.selectedModelId)
+    
     let fileLinks = Object.keys(this.props.allModelId).map((ModelId) => {
       return (
         <ul style={{ listStyle: "none" }}>
@@ -26,12 +28,6 @@ class FileGenerator extends Component {
             selectedModelId={this.props.selectedModelId} //
             onExpandFileLink={() => this.props.onExpandFileLink(ModelId)} //
             onEditFileLinkName={this.props.onEditFileLinkName}
-            // onChangeFileName={this.onChangeFileName}
-            // onShowInputField={this.onShowInputField}
-            // _handleKeyDown={this._handleKeyDown}
-            // showInputField={this.state.showInputField}
-            // newFileName={this.state.newFileName}
-
             fileName={this.props.allModelId[ModelId].Name} //
           />
         </ul>
@@ -43,13 +39,6 @@ class FileGenerator extends Component {
         <div>
           <IconButton
             edge="end"
-            aria-label="save"
-            onClick={this.props.saveEquation}
-          >
-            <SaveIcon />
-          </IconButton>
-          <IconButton
-            edge="end"
             aria-label="create"
             onClick={this.props.createNewFile}
           >
@@ -57,8 +46,18 @@ class FileGenerator extends Component {
           </IconButton>
           <IconButton
             edge="end"
-            aria-label="edit"
+            aria-label="save"
+            onClick={this.props.saveEquation}
+            disabled={this.props.selectedModelId === ""}
+          >
+            <SaveIcon />
+          </IconButton>
+
+          <IconButton
+            edge="end"
+            aria-label="copy"
             onClick={this.props.copyAllEqnsText}
+            disabled={this.props.selectedModelId === ""}
           >
             <ImportExportIcon />
           </IconButton>
@@ -66,6 +65,7 @@ class FileGenerator extends Component {
             edge="end"
             aria-label="delete"
             onClick={this.props.onRemoveFileLink}
+            disabled={this.props.selectedModelId === ""}
           >
             <DeleteIcon />
           </IconButton>
