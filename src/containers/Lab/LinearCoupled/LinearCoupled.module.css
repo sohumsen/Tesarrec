@@ -1,18 +1,31 @@
 .Container {
   display: inline-block;
-  width: 90%;
-  margin: 5%;
+  width: 98%;
+  background-color: blanchedalmond;
+  margin: 1%;
+
+  border-width: 2px;
+  border-color: rgb(156, 122, 12);
+  border-style: solid;
 }
 
 .Eqns {
-  font-size: x-large;
-  width: 50%;
+  font-size: large;
+  width: 40%;
   float: left;
+
+  border-width: 2px;
+  border-color: rgb(56, 122, 122);
+  border-style: solid;
 }
 
 .Graph {
-  float: left;
-  width: 50%;
+  float: right;
+  width: 59%;
+  background-color: bisque; 
+  border-width: 2px;
+  border-color: rgb(21, 8, 99);
+  border-style: solid;
 }
 
 .ButtonContainer {

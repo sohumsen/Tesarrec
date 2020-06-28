@@ -48,6 +48,7 @@ class LinearCoupled extends Component {
     if (props.modelId !== state.modelId) {
       //NEW MODEL
       return {
+        calculate:props.calculate,
         modelId: props.modelId,
         Eqns: props.Eqns,
       };

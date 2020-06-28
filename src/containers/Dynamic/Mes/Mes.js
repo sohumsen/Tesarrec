@@ -487,7 +487,7 @@ class LinearCoupled extends Component {
     return this.state.graphConfig.submitted ? (
       <LinearCoupledDiffEqns
         h={0.01}
-        numberOfCycles={50}
+        numberOfCycles={100}
         eqns={eqns}
         LineNames={LineNames}
         initialConditions={this.state.graphConfig.initialConditions}

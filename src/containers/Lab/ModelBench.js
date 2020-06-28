@@ -6,7 +6,7 @@ import classes from "./ModelBench.module.css";
 import MyTabs from "../../components/UI/MyTabs/MyTabs";
 import AddButton from "../../components/UI/Button/AddButton";
 import Skeleton from "../../components/UI/Skeleton/Skeleton";
-class Dynamic extends Component {
+class ModelBench extends Component {
   /**
    * Visual Component that contains the textbox for the equation and calculation outputs
    * plus some equation labels
@@ -18,7 +18,7 @@ class Dynamic extends Component {
     Eqns: [],
     calculate: false,
     error: true,
-    tabChoiceValue: 0,
+    tabChoiceValue: 1,
     loading: false,
   };
 
@@ -155,6 +155,7 @@ class Dynamic extends Component {
     //sets model id and eqns
 
     this.setState({
+      calculate:false,
       modelId: modelId,
       Eqns: this.state.allModelId[modelId].Eqns,
     });
@@ -296,10 +297,12 @@ class Dynamic extends Component {
   };
 
   render() {
+
     let modelLinks = null;
     Object.keys(this.state.allModelId).length !== 0
       ? (modelLinks = (
           <FileController
+          
             allModelId={this.state.allModelId}
             selectedModelId={this.state.modelId}
             onExpandFileLink={this.onExpandFileLink}
@@ -314,15 +317,17 @@ class Dynamic extends Component {
     console.log(this.state.Eqns);
     return (
       // can u inject a background-color: ranmdom lookup color if DEVMODE=TRUE
+
+      
       <div className={classes.ModelBenchContainer}>
         <div className={classes.ModelBenchItemLeft}>
-          <div className={classes.FileNav}>
+          <div className={classes.ModelBenchItemLeftFileNav}>
             <h2>Files </h2>
             {this.state.loading ? <Skeleton /> : null}
 
             {modelLinks}
           </div>
-          <div className={classes.EqnNav}>
+          <div className={classes.ModelBenchItemLeftEqnNav}>
             <MyTabs
               value={this.state.tabChoiceValue}
               handleChange={this.handleTabChange}
@@ -335,6 +340,7 @@ class Dynamic extends Component {
             <SingleODE />
           ) : (
             <LinearCoupled
+            calculate={this.state.calculate}
               modelId={this.state.modelId}
               Eqns={this.state.Eqns}
               sendToParent={this.sendToParent}
@@ -346,4 +352,4 @@ class Dynamic extends Component {
   }
 }
 
-export default Dynamic;
+export default ModelBench;

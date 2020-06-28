@@ -4,7 +4,7 @@ import MyErrorMessage from "../../../components/UI/MyErrorMessage/MyErrorMessage
 import MyMathQuill from "../../../components/UI/Math/MyMathQuill";
 import { evaluate } from "mathjs";
 import MyButton from "../../../components/UI/Button/GenericButton";
-import classes from "./SingleODE.module.css";
+import classes from "../LinearCoupled/LinearCoupled.module.css";
 import GraphConfig from "../../../components/UI/GraphConfig/GraphConfig";
 import SettingButton from "../../../components/UI/Button/SettingButton";
 import DiffEquationGrapher from "../../../components/Calculations/Method/DiffEquation/DiffEquationGrapher";

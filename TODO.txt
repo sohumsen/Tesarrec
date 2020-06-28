@@ -7,13 +7,17 @@ allow db/dt as input on right side
 make toggles tabs 
 update y axis mfc
 make x range wider
-align eqns DONE
 
 
 when edit eqn name and select other it breaks 
-darker selection shade
-disable buttons if no file present DONE
+darker selection shade 
 move files around
+on hover show caption for buttons 
+publish only updated Sustainability
+
+
+
+
 
 
 
@@ -72,6 +76,9 @@ DONE
     move all buttons to file toolbar DONE
     on logout goto home page DONE
     move line 80 "send to parent" LinearCoupled  DONE
+    edit on double click DONE
+    disable buttons if no file present DONE
+    align eqns DONE
     
 NOT NEEDED
 ===========

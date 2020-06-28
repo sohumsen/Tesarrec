@@ -63,7 +63,7 @@ class LineChart extends Component {
       ],
     };
     return (
-      <div style={{ width: "500px" }}>
+      <div style={{ width: "100%" }}>
         <CanvasJSChart
           options={options}
           /* onRef={ref => this.chart = ref} */

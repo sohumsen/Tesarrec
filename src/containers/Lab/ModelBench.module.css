@@ -1,28 +1,28 @@
-
-
-.ModelBenchContainer{
+.ModelBenchContainer {
   display: flex;
+  /*background-color: aqua;*/
 }
 .ModelBenchItemLeft {
-  width: 20%;
-  text-align: center;
-  background-color: rgb(253, 253, 253);
+  width: 15%;
   
+  background-color: blue;
+  border-width: 5px;
+  border-color: red;
+  border-style: solid;
 }
 
-
-.EqnNav{
+.ModelBenchItemLeftEqnNav {
   margin-top: 30px;
   padding: 5px;
   border-width: 5px;
-
 }
-.FileNav{
- 
+.ModelBenchItemLeftFileNav {
   border-color: blue;
-
+  background-color: blueviolet;
 }
 .ModelBenchItemCenter {
-  width: 80%;
-}
+  flex-grow: 1;
 
+  width: 52%;
+  background-color: brown;
+}

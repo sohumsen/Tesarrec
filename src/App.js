@@ -99,7 +99,7 @@ class App extends Component {
             <Logout {...props} onLogoutHandler={this.onLogoutHandler} />
           )}
         />
-        <Route path="/dynamic/mfc" exact component={DynamicMes} />
+        <Route path="/dynamic/mes" exact component={DynamicMes} />
 
         <Route path="/sustainability/mfc" exact component={Mfc} />
         <Route path="/sustainability/mes" exact component={Mes} />

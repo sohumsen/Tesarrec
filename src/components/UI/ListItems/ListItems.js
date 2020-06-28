@@ -74,8 +74,10 @@ class FileLink extends Component {
           onClick={() => {
             this.props.onExpandFileLink();
           }}
+          
           selected={this.props.ModelId === this.props.selectedModelId}
           classes={{ selected: classes.selected }}
+          onDoubleClick={this.onShowInputField}
 
 
         >
