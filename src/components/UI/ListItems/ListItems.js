@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import ListItem from "@material-ui/core/ListItem";
 import ListItemAvatar from "@material-ui/core/ListItemAvatar";
 import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
 import ListItemText from "@material-ui/core/ListItemText";
@@ -7,9 +6,9 @@ import Avatar from "@material-ui/core/Avatar";
 import IconButton from "@material-ui/core/IconButton";
 
 import FolderIcon from "@material-ui/icons/Folder";
-import DeleteIcon from "@material-ui/icons/Delete";
-import SaveIcon from "@material-ui/icons/Save";
-import { MenuItem, withStyles } from "@material-ui/core";
+import ClickAwayListener from "@material-ui/core/ClickAwayListener";
+
+import { MenuItem, withStyles, Tooltip } from "@material-ui/core";
 import EditIcon from "@material-ui/icons/Edit";
 import Input from "../Input/Input";
 const styles = (theme) => ({
@@ -25,8 +24,7 @@ const styles = (theme) => ({
   editIcon: {
     margin: 20,
   },
-  selected:{
-  }
+  selected: {},
 });
 
 class FileLink extends Component {
@@ -34,86 +32,85 @@ class FileLink extends Component {
     newFileName: "",
     showInputField: false,
   };
+
   onShowInputField = () => {
-    console.log(this.state.showInputField);
     this.setState((prevState) => {
       return {
         showInputField: !prevState.showInputField,
-        newFileName:this.props.fileName
+        newFileName: this.props.fileName,
       };
     });
   };
 
   onChangeFileName = (e) => {
-    this.setState(
-      {
-        [e.target.name]: e.target.value,
-      },
-      () => {
-        console.log(this.state.newFileName);
-      }
-    );
+    this.setState({
+      [e.target.name]: e.target.value,
+    });
   };
 
   _handleKeyDown = (e) => {
     if (e.key === "Enter") {
-      console.log("fhdsjfkd")
       this.props.onEditFileLinkName(this.state.newFileName);
-      this.setState({showInputField:false,newFileName:""})
+      this.setState({ showInputField: false, newFileName: "" });
     }
   };
-  render() {
-    console.log(this.props.ModelId, this.props.selectedModelId)
 
+  handleClickAway = () => {
+    console.log(this.state.newFileName, this.props.fileName);
+
+    // this.props.onEditFileLinkName(this.state.newFileName);
+    // this.setState({ showInputField: false });
+  };
+  render() {
     const { classes } = this.props;
 
     return (
-      <div className={classes.root}>
-        <MenuItem
-          button
-          onClick={() => {
-            this.props.onExpandFileLink();
-          }}
-          
-          selected={this.props.ModelId === this.props.selectedModelId}
-          classes={{ selected: classes.selected }}
-          onDoubleClick={this.onShowInputField}
-
-
-        >
-          <ListItemAvatar>
-            <Avatar>
-              <FolderIcon />
-            </Avatar>
-          </ListItemAvatar>
-
-          {!this.state.showInputField ? (
-            <ListItemText
-              classes={{ primary: classes.listItemText }}
-              primary={this.props.fileName}
-            />
-          ) : (
-            <Input
-              type={"input"}
-              value={this.state.newFileName}
-              onChange={this.onChangeFileName}
-              name={"newFileName"}
-              onKeyDown={this._handleKeyDown}
-            />
-          )}
-
-          <ListItemSecondaryAction classes={{ primary: classes.removeIcon }}>
-          
-            <IconButton
-            edge="end"
-            aria-label="edit"
-            onClick={this.onShowInputField}
+      <ClickAwayListener onClickAway={this.handleClickAway}>
+        {/*onClickAway={this.handleClickAway}*/}
+        <div className={classes.root}>
+          <MenuItem
+            button
+            onClick={() => {
+              this.props.onExpandFileLink();
+            }}
+            selected={this.props.ModelId === this.props.selectedModelId}
+            classes={{ selected: classes.selected }}
           >
-            <EditIcon />
-          </IconButton>
-          </ListItemSecondaryAction>
-        </MenuItem>
-      </div>
+            <ListItemAvatar>
+              <Avatar>
+                <FolderIcon />
+              </Avatar>
+            </ListItemAvatar>
+
+            {!this.state.showInputField ? (
+              <ListItemText
+                classes={{ primary: classes.listItemText }}
+                primary={this.props.fileName}
+              />
+            ) : (
+              <Input
+                type={"input"}
+                value={this.state.newFileName}
+                onChange={this.onChangeFileName}
+                name={"newFileName"}
+                onKeyDown={this._handleKeyDown}
+              />
+            )}
+
+            <ListItemSecondaryAction classes={{ primary: classes.removeIcon }}>
+              <Tooltip title="Edit name" placement="right" arrow>
+                <IconButton
+                  edge="end"
+                  aria-label="edit"
+                  onClick={this.onShowInputField}
+                >
+                  <EditIcon />
+                </IconButton>
+              </Tooltip>
+            </ListItemSecondaryAction>
+          </MenuItem>
+        </div>
+      </ClickAwayListener>
     );
   }
 }

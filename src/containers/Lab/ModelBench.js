@@ -4,7 +4,6 @@ import LinearCoupled from "./LinearCoupled/LinearCoupled";
 import FileController from "../../components/Calculations/Method/FileController/FileGenerator";
 import classes from "./ModelBench.module.css";
 import MyTabs from "../../components/UI/MyTabs/MyTabs";
-import AddButton from "../../components/UI/Button/AddButton";
 import Skeleton from "../../components/UI/Skeleton/Skeleton";
 class ModelBench extends Component {
   /**
@@ -106,12 +105,10 @@ class ModelBench extends Component {
   };
 
   sendToParent = (eqns) => {
-    console.log(eqns);
     this.setState({ Eqns: eqns });
   };
 
   saveEquation = () => {
-    console.log(this.state.Eqns);
     const Eqns = {
       Eqns: this.state.Eqns,
     };
@@ -162,7 +159,6 @@ class ModelBench extends Component {
   };
 
   onEditFileLinkName = (newFileName) => {
-    console.log("here")
     // curl -X PUT -d '{ "first": "Jack", "last": "Sparrow" }' \
     // 'https://[PROJECT_ID].firebaseio.com/users/jack/name.json'
 
@@ -173,7 +169,6 @@ class ModelBench extends Component {
       // userId:this.props.userId
     };
     // https://tesarrec.firebaseio.com/eqns/QXVRwu8vuHRTsLST6wMWOA9jt3b2/-MAeganGABPemhDxtCc_/Name
-    console.log(newFileName);
 
     if (this.state.modelId !== "") {
       fetch(
@@ -201,10 +196,8 @@ class ModelBench extends Component {
             // this.setState({ Eqns: data.Eqns, error: false }, () => {
             //   this.getAllFiles();
             // });
-            console.log(data);
             this.getAllFiles();
           } else {
-            console.log(data);
 
             this.setState({ error: true });
           }
@@ -280,7 +273,6 @@ class ModelBench extends Component {
   };
 
   copyAllEqnsText = () => {
-    console.log("now");
     var allTextEqns = [];
 
     for (let i = 0; i < this.state.Eqns.length; i++) {
@@ -314,7 +306,6 @@ class ModelBench extends Component {
           />
         ))
       : (modelLinks = null);
-    console.log(this.state.Eqns);
     return (
       // can u inject a background-color: ranmdom lookup color if DEVMODE=TRUE
 

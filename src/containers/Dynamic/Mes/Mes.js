@@ -482,12 +482,11 @@ class LinearCoupled extends Component {
       LineNames.push(eqn.line);
     });
 
-    console.log(eqns, LineNames, this.state.graphConfig.initialConditions);
 
     return this.state.graphConfig.submitted ? (
       <LinearCoupledDiffEqns
         h={0.01}
-        numberOfCycles={100}
+        numberOfCycles={50}
         eqns={eqns}
         LineNames={LineNames}
         initialConditions={this.state.graphConfig.initialConditions}

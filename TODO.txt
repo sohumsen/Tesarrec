@@ -12,9 +12,14 @@ make x range wider
 when edit eqn name and select other it breaks 
 darker selection shade 
 move files around
-on hover show caption for buttons 
+when edit file name and select it again it breaks
+on hover show caption for buttons DONE
 publish only updated Sustainability
-
+remove on double click perhaps DONE
+make clickaway work
+remove file lag
+show table of a,b,c,d,t... and plot against each other on select
+make only one request per load perhaps
 
 
 

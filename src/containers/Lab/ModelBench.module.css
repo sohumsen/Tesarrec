@@ -5,10 +5,10 @@
 .ModelBenchItemLeft {
   width: 15%;
   
-  background-color: blue;
+  /*background-color: blue;
   border-width: 5px;
   border-color: red;
-  border-style: solid;
+  border-style: solid;*/
 }
 
 .ModelBenchItemLeftEqnNav {
@@ -17,12 +17,14 @@
   border-width: 5px;
 }
 .ModelBenchItemLeftFileNav {
-  border-color: blue;
-  background-color: blueviolet;
+ /* border-color: blue;
+  background-color: blueviolet;*/
+  width:auto;
+
 }
 .ModelBenchItemCenter {
   flex-grow: 1;
 
   width: 52%;
-  background-color: brown;
+  /*background-color: brown;*/
 }

@@ -80,7 +80,7 @@ class App extends Component {
 
   render() {
     let ifLoggedIn = (
-      <div>
+      <Switch>
         <Route
           path="/modelbench"
           exact
@@ -106,10 +106,12 @@ class App extends Component {
         <Route path="/reference" component={Reference} />
         <Route path="/contact" component={Contact} />
 
-      </div>
+        <Redirect to="/"/>
+
+      </Switch>
     );
     let ifNotLoggedIn = (
-      <div>
+      <Switch>
         <Route
           path="/signin"
           exact
@@ -141,8 +143,10 @@ class App extends Component {
         <Route path="/sustainability/mes" exact component={Mes} />
         <Route path="/reference" component={Reference} />
         <Route path="/contact" component={Contact} />
+        <Redirect to="/"/>
 
-      </div>
+
+      </Switch>
     );
     let dynamicRoutes = this.state.isLoggedIn ? ifLoggedIn : ifNotLoggedIn;
 
@@ -152,7 +156,7 @@ class App extends Component {
           <Route path="/" exact component={About} />
 
           <Layout isLoggedIn={this.state.isLoggedIn}>
-            <Switch>{dynamicRoutes}</Switch>
+            {dynamicRoutes}
           </Layout>
         </BrowserView>
         <MobileView>

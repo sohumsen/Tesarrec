@@ -53,6 +53,8 @@ class LinearCoupled extends Component {
         Eqns: props.Eqns,
       };
     }
+
+    return null
   }
   componentDidUpdate() {
     if (this.state.Eqns !== this.props.Eqns) {
