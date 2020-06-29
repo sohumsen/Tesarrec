@@ -7,7 +7,7 @@ import classes from "./LinearCoupled.module.css";
 import MyErrorMessage from "../../../components/UI/MyErrorMessage/MyErrorMessage";
 import SettingButton from "../../../components/UI/Button/SettingButton";
 import GraphConfig from "../../../components/UI/GraphConfig/GraphConfig";
-import LinearCoupledDiffEqns from "../../../components/Calculations/Method/LinearCoupled/Calcs/LinearCoupledDiffEqns copy";
+import LinearCoupledDiffEqns from "../../../components/Calculations/Method/LinearCoupled/Calcs/LinearCoupledDiffEqns";
 class LinearCoupled extends Component {
   /**
    * Visual Component that contains the textbox for the equation and calculation outputs
@@ -20,19 +20,13 @@ class LinearCoupled extends Component {
     calculate: false,
     modelId: "",
 
-    variableDescription: {
-      a: "this is some stuff",
-      b: "this is some stuff",
-      c: "this is some stuff",
-      d: "this is some stuff",
-    },
     graphConfig: {
       show: false,
       submitted: true,
       LegendHorizontal: "left",
       LegendVertical: "top",
       DecimalPrecision: 2,
-      initialConditions: [0.5, 0.5, 0.5, 0.5, 0.5],
+      initialConditions: [0.5, 0.5, 0.5, 0.5,0.5],
     },
 
     Eqns: [],
@@ -48,13 +42,13 @@ class LinearCoupled extends Component {
     if (props.modelId !== state.modelId) {
       //NEW MODEL
       return {
-        calculate:props.calculate,
+        calculate: props.calculate,
         modelId: props.modelId,
         Eqns: props.Eqns,
       };
     }
 
-    return null
+    return null;
   }
   componentDidUpdate() {
     if (this.state.Eqns !== this.props.Eqns) {
@@ -316,7 +310,8 @@ class LinearCoupled extends Component {
         numberOfCycles={30}
         eqns={eqns}
         LineNames={LineNames}
-        initialConditions={this.state.graphConfig.initialConditions}
+        axis={["t","b"]}
+        initialConditions={this.state.graphConfig.initialConditions} //includes t
         LegendVertical={this.state.graphConfig.LegendVertical}
         LegendHorizontal={this.state.graphConfig.LegendHorizontal}
         DecimalPrecision={this.state.graphConfig.DecimalPrecision}

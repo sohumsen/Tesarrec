@@ -14,6 +14,7 @@ import { withStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import { NavLink } from "react-router-dom";
 import FIREBASE_KEY from "../../../firebasekey";
+import CustomizedErrorMessage from "../../../components/UI/MyErrorMessage/CustomizedErrorMessage";
 
 function Copyright() {
   return (
@@ -190,7 +191,9 @@ class SignUp extends Component {
             >
               Sign Up
             </Button>
-            {this.props.error}
+            {this.props.error !== null ? (
+              <CustomizedErrorMessage msg={this.props.error} />
+            ) : null}
             <Grid container justify="flex-end">
               <Grid item>
                 <NavLink to="/signin" exact variant="body2">

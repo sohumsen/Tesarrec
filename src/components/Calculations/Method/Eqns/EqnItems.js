@@ -24,6 +24,7 @@ const EqnItems = (props) => {
   return newEqns.map((Eqn) => {
     return (
       <EqnItem
+      key={Eqn.id}
         error={Eqn.errorMessage}
         id={Eqn.id}
         disabledRemoveButton={disabledRemoveButton()}

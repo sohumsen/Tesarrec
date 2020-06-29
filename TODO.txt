@@ -10,8 +10,8 @@ make x range wider
 
 
 when edit eqn name and select other it breaks 
-darker selection shade 
-move files around
+darker selection shade DONE
+move files around NOT NEEDED
 when edit file name and select it again it breaks
 on hover show caption for buttons DONE
 publish only updated Sustainability

@@ -5,6 +5,8 @@ import FileController from "../../components/Calculations/Method/FileController/
 import classes from "./ModelBench.module.css";
 import MyTabs from "../../components/UI/MyTabs/MyTabs";
 import Skeleton from "../../components/UI/Skeleton/Skeleton";
+import MyErrorMessage from "../../components/UI/MyErrorMessage/MyErrorMessage";
+
 class ModelBench extends Component {
   /**
    * Visual Component that contains the textbox for the equation and calculation outputs
@@ -152,7 +154,7 @@ class ModelBench extends Component {
     //sets model id and eqns
 
     this.setState({
-      calculate:false,
+      calculate: false,
       modelId: modelId,
       Eqns: this.state.allModelId[modelId].Eqns,
     });
@@ -198,7 +200,6 @@ class ModelBench extends Component {
             // });
             this.getAllFiles();
           } else {
-
             this.setState({ error: true });
           }
         })
@@ -289,12 +290,10 @@ class ModelBench extends Component {
   };
 
   render() {
-
     let modelLinks = null;
     Object.keys(this.state.allModelId).length !== 0
       ? (modelLinks = (
           <FileController
-          
             allModelId={this.state.allModelId}
             selectedModelId={this.state.modelId}
             onExpandFileLink={this.onExpandFileLink}
@@ -309,7 +308,6 @@ class ModelBench extends Component {
     return (
       // can u inject a background-color: ranmdom lookup color if DEVMODE=TRUE
 
-      
       <div className={classes.ModelBenchContainer}>
         <div className={classes.ModelBenchItemLeft}>
           <div className={classes.ModelBenchItemLeftFileNav}>
@@ -331,13 +329,14 @@ class ModelBench extends Component {
             <SingleODE />
           ) : (
             <LinearCoupled
-            calculate={this.state.calculate}
+              calculate={this.state.calculate}
               modelId={this.state.modelId}
               Eqns={this.state.Eqns}
               sendToParent={this.sendToParent}
             />
           )}
         </div>
+        {this.state.error ? <MyErrorMessage /> : null}
       </div>
     );
   }

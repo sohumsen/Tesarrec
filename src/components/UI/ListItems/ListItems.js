@@ -24,7 +24,9 @@ const styles = (theme) => ({
   editIcon: {
     margin: 20,
   },
-  selected: {},
+  selected: {
+    color:"green"
+  },
 });
 
 class FileLink extends Component {
@@ -32,12 +34,15 @@ class FileLink extends Component {
     newFileName: "",
     showInputField: false,
   };
+  componentDidMount(){
+    this.setState({newFileName:this.props.fileName})
+  }
 
   onShowInputField = () => {
+
     this.setState((prevState) => {
       return {
         showInputField: !prevState.showInputField,
-        newFileName: this.props.fileName,
       };
     });
   };
@@ -50,8 +55,13 @@ class FileLink extends Component {
 
   _handleKeyDown = (e) => {
     if (e.key === "Enter") {
+
+      this.setState((prevState) => {
+        return {
+          showInputField: !prevState.showInputField,
+        };
+      });
       this.props.onEditFileLinkName(this.state.newFileName);
-      this.setState({ showInputField: false, newFileName: "" });
     }
   };
 
@@ -63,11 +73,11 @@ class FileLink extends Component {
   };
   render() {
     const { classes } = this.props;
-
     return (
-      <ClickAwayListener onClickAway={this.handleClickAway}>
-        {/*onClickAway={this.handleClickAway}*/}
+      
         <div className={classes.root}>
+                  {/*<ClickAwayListener onClickAway={this.handleClickAway}>*/}
+
           <MenuItem
             button
             onClick={() => {
@@ -110,7 +120,6 @@ class FileLink extends Component {
             </ListItemSecondaryAction>
           </MenuItem>
         </div>
-      </ClickAwayListener>
     );
   }
 }

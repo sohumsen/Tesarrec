@@ -18,6 +18,7 @@ import FIREBASE_KEY from "../../../firebasekey";
 // import { createMuiTheme, withTheme } from "@material-ui/core/styles";
 
 import { NavLink } from "react-router-dom";
+import CustomizedErrorMessage from "../../../components/UI/MyErrorMessage/CustomizedErrorMessage";
 
 function Copyright() {
   return (
@@ -84,7 +85,6 @@ class SignIn extends Component {
       .then((response) => response.json())
       .then((data) => {
         if (!data.error) {
-          console.log("its fine");
           const expirationDate = new Date(
             new Date().getTime() + data.expiresIn * 1000
           );
@@ -95,12 +95,10 @@ class SignIn extends Component {
           this.props.authSuccess(data.idToken, data.localId);
           this.props.checkAuthTimeout(data.expiresIn);
         } else {
-          console.log("its not fine" + data.error.message);
           this.props.authFail(data.error.message);
         }
       })
       .catch((error) => {
-        console.log("Error", error);
         this.props.authFail(error);
       });
 
@@ -112,7 +110,7 @@ class SignIn extends Component {
   };
   render() {
     const { classes } = this.props;
-    console.log(this.state);
+
     return (
       <Container component="main" maxWidth="xs">
         <CssBaseline />
@@ -161,7 +159,9 @@ class SignIn extends Component {
             >
               Sign In
             </Button>
-            {this.props.error}
+            {this.props.error !== null ? (
+              <CustomizedErrorMessage msg={this.props.error} />
+            ) : null}
             <Grid container>
               <Grid item xs>
                 <Link href="#" variant="body2">

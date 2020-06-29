@@ -5,7 +5,7 @@ import { parse, simplify } from "mathjs";
 
 //DyByDx= x+3y
 
-const LinearCoupledDiffFourEqn = (props) => {
+const LinearCoupledDiffEqns = (props) => {
   /**
    * A method component that takes in a equation and outputs a chart
    */
@@ -81,12 +81,12 @@ const LinearCoupledDiffFourEqn = (props) => {
       );
     }
 
-
     return newY1Y2Y3Arr;
   };
 
   const recursive = (numberOfLoops, Arr) => {
     let allArrs = [initialConditions.slice(0, -1)];
+
     for (let i = 0; i < numberOfLoops; i++) {
       Arr = SolveLinearCoupledDifferentialEquationRungeKuttaForRth(Arr);
       allArrs.push(Arr);
@@ -96,20 +96,73 @@ const LinearCoupledDiffFourEqn = (props) => {
   };
 
   const ShowLinearCoupledGraph = (EqnArr) => {
-
     let i = -1;
-    return EqnArr.map((Eqn) => {
-      i = i + 1;
-      return (
+    let axis = props.axis //x,y
+
+    let allData = [];
+    for (let index = 0; index < props.LineNames.length; index++) {
+      let yData = [];
+      EqnArr[index].forEach((coord) => {
+        yData.push(coord.y);
+      });
+      allData.push(yData);
+    }
+    let tData = [];
+    EqnArr[0].forEach((coord) => {
+      tData.push(coord.x);
+    });
+    allData.push(tData);
+    let xCoord = [];
+    let yCoord = [];
+    if (axis[0] === "t") {
+      xCoord = allData[allData.length - 1]; //t coord
+      yCoord = allData[props.LineNames.indexOf(axis[1])];
+    } else if (axis[1] === "t") {
+      xCoord = allData[props.LineNames.indexOf(axis[0])];
+      yCoord = allData[allData.length - 1]; //t coord
+    } else {
+      xCoord = allData[props.LineNames.indexOf(axis[0])];
+      yCoord = allData[props.LineNames.indexOf(axis[1])];
+    }
+    console.log(xCoord, yCoord);
+    console.log(FormatTwoArraysIntoCoordObject(xCoord, yCoord));
+
+    // let allGraphs = EqnArr.map((Eqn) => {
+    //   i = i + 1;
+    //   return (
+    //     <MyChart
+    //       EulerData={Eqn}
+    //       LineNames={props.LineNames[i]}
+    //       axisNames={["t", props.LineNames[i]]}
+    //       horizontalAlign={props.LegendHorizontal}
+    //       verticalAlign={props.LegendVertical}
+    //     />
+    //   );
+    // });
+    return (
+      <div>
         <MyChart
-          EulerData={Eqn}
-          LineNames={props.LineNames[i]}
-          axisNames={["t", ""]}
+          EulerData={FormatTwoArraysIntoCoordObject(xCoord, yCoord)}
+          LineNames={axis[1]}
+          axisNames={axis}
           horizontalAlign={props.LegendHorizontal}
           verticalAlign={props.LegendVertical}
         />
-      );
-    });
+      </div>
+    );
+  };
+
+  const FormatTwoArraysIntoCoordObject = (arr1, arr2) => {
+    let returnedArr = [];
+    for (let i = 0; i < arr1.length; i++) {
+      let xCoord = arr1[i];
+      let yCoord = arr2[i];
+      returnedArr.push({
+        x: xCoord,
+        y: yCoord,
+      });
+    }
+    return returnedArr;
   };
 
   const FormatArrayLinearCoupled = (arr) => {
@@ -133,7 +186,6 @@ const LinearCoupledDiffFourEqn = (props) => {
   let initialConditions = props.initialConditions;
   let CompletedGridRungeKuttaLinearCoupled = [];
 
-
   CompletedGridRungeKuttaLinearCoupled.push(
     recursive(props.numberOfCycles, initialConditions) //recursive(10,[1,2,3,4,5])
   );
@@ -145,4 +197,4 @@ const LinearCoupledDiffFourEqn = (props) => {
   return ShowLinearCoupledGraph(EqnArr);
 };
 
-export default LinearCoupledDiffFourEqn;
+export default LinearCoupledDiffEqns;

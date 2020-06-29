@@ -4,14 +4,15 @@ import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 
 export default function CenteredTabs(props) {
-  let tabs = props.labels.map((label) => {
-    return <Tab label={label} />;
+  let tabs = props.labels.map((label, i) => {
+    return <Tab key={i} label={label} />;
   });
 
   return (
     <div>
       <Paper>
-        <Tabs orientation="vertical"
+        <Tabs
+          orientation="vertical"
           value={props.value}
           onChange={props.handleChange}
           indicatorColor="primary"
