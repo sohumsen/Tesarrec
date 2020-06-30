@@ -14,18 +14,18 @@ import Input from "../Input/Input";
 const styles = (theme) => ({
   root: {
     flexGrow: 1,
-    maxWidth: 500,
-    margin: -20,
+    margin: 0,
+    listStyle:"none"
   },
 
   listItemText: {
     fontSize: 10, //Insert your required size
   },
   editIcon: {
-    margin: 20,
+    margin: 0,
   },
   selected: {
-    color:"green"
+    color: "black",
   },
 });
 
@@ -34,12 +34,11 @@ class FileLink extends Component {
     newFileName: "",
     showInputField: false,
   };
-  componentDidMount(){
-    this.setState({newFileName:this.props.fileName})
+  componentDidMount() {
+    this.setState({ newFileName: this.props.fileName });
+  
   }
-
   onShowInputField = () => {
-
     this.setState((prevState) => {
       return {
         showInputField: !prevState.showInputField,
@@ -55,18 +54,28 @@ class FileLink extends Component {
 
   _handleKeyDown = (e) => {
     if (e.key === "Enter") {
-
-      this.setState((prevState) => {
-        return {
-          showInputField: !prevState.showInputField,
-        };
-      });
-      this.props.onEditFileLinkName(this.state.newFileName);
+      this.setState(
+        (prevState) => {
+          return {
+            showInputField: !prevState.showInputField,
+          };
+        },
+        () => {
+          this.props.onEditFileLinkName(this.state.newFileName);
+        }
+      );
     }
   };
 
+  // onSelectHandler = () => {
+  //   console.log(this.props.selectedModelId,this.props.ModelId)
+  //   if (this.props.selectedModelId === this.props.ModelId) {
+  //     this.setState({ selected: true });
+  //   }
+  // };
+
   handleClickAway = () => {
-    console.log(this.state.newFileName, this.props.fileName);
+    //console.log(this.state.newFileName, this.props.fileName);
 
     // this.props.onEditFileLinkName(this.state.newFileName);
     // this.setState({ showInputField: false });
@@ -74,52 +83,51 @@ class FileLink extends Component {
   render() {
     const { classes } = this.props;
     return (
-      
-        <div className={classes.root}>
-                  {/*<ClickAwayListener onClickAway={this.handleClickAway}>*/}
+      <div className={classes.root} >
+        {/*<ClickAwayListener onClickAway={this.handleClickAway}>*/}
 
-          <MenuItem
-            button
-            onClick={() => {
-              this.props.onExpandFileLink();
-            }}
-            selected={this.props.ModelId === this.props.selectedModelId}
-            classes={{ selected: classes.selected }}
-          >
-            <ListItemAvatar>
-              <Avatar>
-                <FolderIcon />
-              </Avatar>
-            </ListItemAvatar>
+        <MenuItem
+          button
+          onClick={() => {
+            this.props.onExpandFileLink();
+          }}
+          selected={this.props.selectedModelId === this.props.ModelId}
+          classes={{ selected: classes.selected }}
+        >
+          <ListItemAvatar>
+            <Avatar>
+              <FolderIcon />
+            </Avatar>
+          </ListItemAvatar>
 
-            {!this.state.showInputField ? (
-              <ListItemText
-                classes={{ primary: classes.listItemText }}
-                primary={this.props.fileName}
-              />
-            ) : (
-              <Input
-                type={"input"}
-                value={this.state.newFileName}
-                onChange={this.onChangeFileName}
-                name={"newFileName"}
-                onKeyDown={this._handleKeyDown}
-              />
-            )}
+          {!this.state.showInputField ? (
+            <ListItemText
+              classes={{ primary: classes.listItemText }}
+              primary={this.props.fileName}
+            />
+          ) : (
+            <Input
+              type={"input"}
+              value={this.state.newFileName}
+              onChange={this.onChangeFileName}
+              name={"newFileName"}
+              onKeyDown={this._handleKeyDown}
+            />
+          )}
 
-            <ListItemSecondaryAction classes={{ primary: classes.removeIcon }}>
-              <Tooltip title="Edit name" placement="right" arrow>
-                <IconButton
-                  edge="end"
-                  aria-label="edit"
-                  onClick={this.onShowInputField}
-                >
-                  <EditIcon />
-                </IconButton>
-              </Tooltip>
-            </ListItemSecondaryAction>
-          </MenuItem>
-        </div>
+          <ListItemSecondaryAction classes={{ primary: classes.removeIcon }}>
+            <Tooltip title="Edit name" placement="right" arrow>
+              <IconButton
+                edge="end"
+                aria-label="edit"
+                onClick={this.onShowInputField}
+              >
+                <EditIcon />
+              </IconButton>
+            </Tooltip>
+          </ListItemSecondaryAction>
+        </MenuItem>
+      </div>
     );
   }
 }

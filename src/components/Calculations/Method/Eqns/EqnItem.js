@@ -5,7 +5,6 @@ import classes from "./EqnItem.module.css";
 const EqnItem = (props) => {
   return (
     <li
-      key={props.key}
       className={classes.Container}
       style={{ listStyleType: "none" }}
     >

@@ -461,7 +461,6 @@ class LinearCoupled extends Component {
 
     let newInitialConditions = graphConfig.initialConditions.map(Number);
     if (newInitialConditions.length === this.state.Eqns.length + 1) {
-      console.log("valid");
       graphConfig.initialConditions = newInitialConditions;
       graphConfig.submitted = true;
     } else {

@@ -8,6 +8,7 @@ import MyErrorMessage from "../../../components/UI/MyErrorMessage/MyErrorMessage
 import SettingButton from "../../../components/UI/Button/SettingButton";
 import GraphConfig from "../../../components/UI/GraphConfig/GraphConfig";
 import LinearCoupledDiffEqns from "../../../components/Calculations/Method/LinearCoupled/Calcs/LinearCoupledDiffEqns";
+import { Paper } from "@material-ui/core";
 class LinearCoupled extends Component {
   /**
    * Visual Component that contains the textbox for the equation and calculation outputs
@@ -26,7 +27,7 @@ class LinearCoupled extends Component {
       LegendHorizontal: "left",
       LegendVertical: "top",
       DecimalPrecision: 2,
-      initialConditions: [0.5, 0.5, 0.5, 0.5,0.5],
+      initialConditions: [0.5, 0.5, 0.5, 0.5, 0.5],
     },
 
     Eqns: [],
@@ -310,7 +311,7 @@ class LinearCoupled extends Component {
         numberOfCycles={30}
         eqns={eqns}
         LineNames={LineNames}
-        axis={["t","b"]}
+        axis={["t", "b"]}
         initialConditions={this.state.graphConfig.initialConditions} //includes t
         LegendVertical={this.state.graphConfig.LegendVertical}
         LegendHorizontal={this.state.graphConfig.LegendHorizontal}
@@ -332,57 +333,53 @@ class LinearCoupled extends Component {
       <div className={classes.Container}>
         <form onSubmit={this.handleMathQuillInputSubmit}>
           <div className={classes.Eqns}>
-            {Eqns}
-            <div className={classes.ButtonContainer}>
-              <div className={classes.Button}>
-                <SettingButton
-                  disabled={!this.state.calculate}
-                  type="button"
-                  value="config"
-                  displayValue="CONFIG"
-                  onClick={this.toggleChartShow}
-                />
-              </div>
-              <div className={classes.Button}>
-                <MyButton
-                  type="button"
-                  value="addODE"
-                  disabled={
-                    this.state.Eqns.length === 4 || this.state.Eqns.length === 0
-                  }
-                  displayValue="Add ODE"
-                  onClick={this.onIncrementEqn}
-                />
-              </div>
-              <div className={classes.Button}>
-                <MyButton
-                  type="reset"
-                  value="Reset"
-                  displayValue="RESET"
-                  disabled={this.state.Eqns.length === 0}
-                  onClick={this.resetForm}
-                />
-              </div>
+              {Eqns}
 
-              <div className={classes.Button}>
-                <MyButton
-                  type="submit"
-                  value="Submit"
-                  displayValue="SUBMIT"
-                  disabled={this.state.Eqns.length === 0}
-                />
+              <div className={classes.ButtonContainer}>
+                <div className={classes.Button}>
+                  <SettingButton
+                    disabled={!this.state.calculate}
+                    type="button"
+                    value="config"
+                    displayValue="CONFIG"
+                    onClick={this.toggleChartShow}
+                  />
+                </div>
+                <div className={classes.Button}>
+                  <MyButton
+                    type="button"
+                    value="addODE"
+                    disabled={
+                      this.state.Eqns.length === 4 ||
+                      this.state.Eqns.length === 0
+                    }
+                    displayValue="Add ODE"
+                    onClick={this.onIncrementEqn}
+                  />
+                </div>
+                <div className={classes.Button}>
+                  <MyButton
+                    type="reset"
+                    value="Reset"
+                    displayValue="RESET"
+                    disabled={this.state.Eqns.length === 0}
+                    onClick={this.resetForm}
+                  />
+                </div>
+
+                <div className={classes.Button}>
+                  <MyButton
+                    type="submit"
+                    value="Submit"
+                    displayValue="SUBMIT"
+                    disabled={this.state.Eqns.length === 0}
+                  />
+                </div>
               </div>
-            </div>
           </div>
         </form>
 
         <div className={classes.Graph}>
-          {/*   <div className={classes.Legend}>
-            <InteractiveTextBox
-              variableDescriptionObj={this.state.variableDescription}
-            />
-    </div>*/}
-
           {this.state.calculate ? this.renderGraph() : null}
         </div>
 

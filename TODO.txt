@@ -7,19 +7,19 @@ allow db/dt as input on right side
 make toggles tabs 
 update y axis mfc
 make x range wider
-
+add another heatmap
 
 when edit eqn name and select other it breaks 
-darker selection shade DONE
-move files around NOT NEEDED
 when edit file name and select it again it breaks
-on hover show caption for buttons DONE
-publish only updated Sustainability
-remove on double click perhaps DONE
 make clickaway work
-remove file lag
+
+publish only updated Sustainability
 show table of a,b,c,d,t... and plot against each other on select
 make only one request per load perhaps
+
+
+
+
 
 
 
@@ -84,7 +84,10 @@ DONE
     edit on double click DONE
     disable buttons if no file present DONE
     align eqns DONE
-    
+    darker selection shade DONE
+    on hover show caption for buttons DONE
+    remove on double click perhaps DONE
+    remove file lag DONE
 NOT NEEDED
 ===========
 
@@ -107,6 +110,8 @@ NOT NEEDED
      Add text eqn to mes dynamic NOT NEEDED
     Variable Descfiption of a , b , c has default values from Mama but user can override( when user presses submit ) NOT NEEDED
     Add hover button to eqn for description NOT NEEDED
+    move files around NOT NEEDED
+
 
 
 Clarify

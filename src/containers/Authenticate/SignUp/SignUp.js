@@ -80,9 +80,7 @@ class SignUp extends Component {
     )
       .then((response) => response.json())
       .then((data) => {
-        console.log(data);
         if (!data.error) {
-          console.log("its fine");
           const expirationDate = new Date(
             new Date().getTime() + data.expiresIn * 1000
           );
@@ -93,12 +91,10 @@ class SignUp extends Component {
           this.props.authSuccess(data.idToken, data.localId);
           this.props.checkAuthTimeout(data.expiresIn);
         } else {
-          console.log("its not fine" + data.error.message);
           this.props.authFail(data.error.message);
         }
       })
       .catch((error) => {
-        console.log("Error", error);
         this.props.authFail(error);
       });
 

@@ -6,6 +6,7 @@ import classes from "./ModelBench.module.css";
 import MyTabs from "../../components/UI/MyTabs/MyTabs";
 import Skeleton from "../../components/UI/Skeleton/Skeleton";
 import MyErrorMessage from "../../components/UI/MyErrorMessage/MyErrorMessage";
+import { Paper } from "@material-ui/core";
 
 class ModelBench extends Component {
   /**
@@ -198,6 +199,7 @@ class ModelBench extends Component {
             // this.setState({ Eqns: data.Eqns, error: false }, () => {
             //   this.getAllFiles();
             // });
+            console.log(this.state.modelId);
             this.getAllFiles();
           } else {
             this.setState({ error: true });
@@ -311,19 +313,21 @@ class ModelBench extends Component {
       <div className={classes.ModelBenchContainer}>
         <div className={classes.ModelBenchItemLeft}>
           <div className={classes.ModelBenchItemLeftFileNav}>
-            <h2>Files </h2>
             {this.state.loading ? <Skeleton /> : null}
 
             {modelLinks}
           </div>
-          <div className={classes.ModelBenchItemLeftEqnNav}>
-            <MyTabs
-              value={this.state.tabChoiceValue}
-              handleChange={this.handleTabChange}
-              labels={["Single ODE", "Coupled ODE"]}
-            />
-          </div>
+          <Paper elevation={3}>
+            <div className={classes.ModelBenchItemLeftEqnNav}>
+              <MyTabs
+                value={this.state.tabChoiceValue}
+                handleChange={this.handleTabChange}
+                labels={["Single ODE", "Coupled ODE"]}
+              />
+            </div>
+          </Paper>
         </div>
+
         <div className={classes.ModelBenchItemCenter}>
           {this.state.tabChoiceValue === 0 ? (
             <SingleODE />
@@ -336,6 +340,7 @@ class ModelBench extends Component {
             />
           )}
         </div>
+
         {this.state.error ? <MyErrorMessage /> : null}
       </div>
     );
