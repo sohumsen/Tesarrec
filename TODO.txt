@@ -17,6 +17,13 @@ publish only updated Sustainability
 show table of a,b,c,d,t... and plot against each other on select
 make only one request per load perhaps
 
+export results as csv
+reset all pos
+same width textbox
+config graph on graph
+slection of axis is a dropdown
+format config
+
 
 
 

@@ -2,19 +2,21 @@
   display: inline-block;
   width: 98%;
   margin: 1%;
-/*
+  /*
   background-color: blanchedalmond;
   border-width: 2px;
   border-color: rgb(156, 122, 12);
   border-style: solid;
   */
 }
-
+.delete {
+  padding: 1%;
+}
 .Eqns {
-  font-size: large;
-  width: 40%;
+  font-size: medium;
+  width: 30%;
   float: left;
-/*
+  /*
   border-width: 2px;
   border-color: rgb(56, 122, 122);
   border-style: solid;
@@ -32,25 +34,3 @@
   */
 }
 
-.ButtonContainer {
-  width: auto;
-  /*
-  background-color: turquoise;
-  */
-}
-
-.Button {
-  float: left;
-  margin-left: 5%;
-}
-
-.Legend {
-  display: inline-block;
-  line-height: 5px;
-}
-
-@media screen and (min-width: 415px) {
-  .Legend {
-    padding: 0 1em 0 0;
-  }
-}

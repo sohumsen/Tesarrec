@@ -66,7 +66,7 @@ class FileLink extends Component {
       );
     }
   };
-
+ 
   // onSelectHandler = () => {
   //   console.log(this.props.selectedModelId,this.props.ModelId)
   //   if (this.props.selectedModelId === this.props.ModelId) {

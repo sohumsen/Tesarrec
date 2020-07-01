@@ -27,9 +27,9 @@ class FileGenerator extends Component {
       );
     });
     return (
-      <Paper elevation={3}>
+        <Paper elevation={3}>
+        <Paper elevation={3}>
 
-        <div>
           <Tooltip title="Create model" placement="top" arrow>
             <span>
               <IconButton
@@ -78,9 +78,11 @@ class FileGenerator extends Component {
               </IconButton>
             </span>
           </Tooltip>
-        </div>
+        </Paper>
+
         {fileLinks}
-      </Paper>
+
+        </Paper>
     );
   }
 }

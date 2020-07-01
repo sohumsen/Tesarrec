@@ -1,14 +1,11 @@
 .Container {
-  color: black;
-  position: absolute;
-  padding: 10px;
-  right: 0px;
-  overflow-x: hidden;
-  height: 70%;
+  width: 25%;
+  text-align: center;
+  display: grid;
 }
 
 .CloseButton{
-    position: absolute;
-    top: 0px;
-    right: 0px;
+  position: absolute;
+  top: 0;
+  right:  0;
 }

@@ -8,7 +8,11 @@ import MyErrorMessage from "../../../components/UI/MyErrorMessage/MyErrorMessage
 import SettingButton from "../../../components/UI/Button/SettingButton";
 import GraphConfig from "../../../components/UI/GraphConfig/GraphConfig";
 import LinearCoupledDiffEqns from "../../../components/Calculations/Method/LinearCoupled/Calcs/LinearCoupledDiffEqns";
-import { Paper } from "@material-ui/core";
+import { Paper, Tooltip, IconButton } from "@material-ui/core";
+import AddButton from "../../../components/UI/Button/AddButton";
+import LinearCoupledButtonContainer from "../../../components/UI/ButtonContainer/LinearCoupledButtonContainer";
+import Draggable from "react-draggable";
+import ResizeableWrapper from "../../../components/UI/ResizableWrapper/ResizableWrapper";
 class LinearCoupled extends Component {
   /**
    * Visual Component that contains the textbox for the equation and calculation outputs
@@ -306,17 +310,19 @@ class LinearCoupled extends Component {
     });
 
     return this.state.graphConfig.submitted ? (
-      <LinearCoupledDiffEqns
-        h={0.05}
-        numberOfCycles={30}
-        eqns={eqns}
-        LineNames={LineNames}
-        axis={["t", "b"]}
-        initialConditions={this.state.graphConfig.initialConditions} //includes t
-        LegendVertical={this.state.graphConfig.LegendVertical}
-        LegendHorizontal={this.state.graphConfig.LegendHorizontal}
-        DecimalPrecision={this.state.graphConfig.DecimalPrecision}
-      />
+      <Paper elevation={3}>
+        <LinearCoupledDiffEqns
+          h={0.05}
+          numberOfCycles={30}
+          eqns={eqns}
+          LineNames={LineNames}
+          axis={["t", "b"]}
+          initialConditions={this.state.graphConfig.initialConditions} //includes t
+          LegendVertical={this.state.graphConfig.LegendVertical}
+          LegendHorizontal={this.state.graphConfig.LegendHorizontal}
+          DecimalPrecision={this.state.graphConfig.DecimalPrecision}
+        />
+      </Paper>
     ) : null;
   };
 
@@ -331,57 +337,28 @@ class LinearCoupled extends Component {
 
     return (
       <div className={classes.Container}>
-        <form onSubmit={this.handleMathQuillInputSubmit}>
-          <div className={classes.Eqns}>
-              {Eqns}
-
-              <div className={classes.ButtonContainer}>
-                <div className={classes.Button}>
-                  <SettingButton
-                    disabled={!this.state.calculate}
-                    type="button"
-                    value="config"
-                    displayValue="CONFIG"
-                    onClick={this.toggleChartShow}
-                  />
-                </div>
-                <div className={classes.Button}>
-                  <MyButton
-                    type="button"
-                    value="addODE"
-                    disabled={
-                      this.state.Eqns.length === 4 ||
-                      this.state.Eqns.length === 0
-                    }
-                    displayValue="Add ODE"
-                    onClick={this.onIncrementEqn}
-                  />
-                </div>
-                <div className={classes.Button}>
-                  <MyButton
-                    type="reset"
-                    value="Reset"
-                    displayValue="RESET"
-                    disabled={this.state.Eqns.length === 0}
-                    onClick={this.resetForm}
-                  />
-                </div>
-
-                <div className={classes.Button}>
-                  <MyButton
-                    type="submit"
-                    value="Submit"
-                    displayValue="SUBMIT"
-                    disabled={this.state.Eqns.length === 0}
-                  />
-                </div>
-              </div>
+        <Draggable>
+          <Paper elevation={3}>
+            <div className={classes.Eqns}>
+              <LinearCoupledButtonContainer
+                calculate={this.state.calculate}
+                toggleChartShow={this.toggleChartShow}
+                Eqns={this.state.Eqns}
+                onIncrementEqn={this.onIncrementEqn}
+                resetForm={this.resetForm}
+                handleMathQuillInputSubmit={this.handleMathQuillInputSubmit}
+              />
+              <Paper elevation={3}>
+                <div className={classes.delete}>{Eqns}</div>
+              </Paper>
+            </div>
+          </Paper>
+        </Draggable>
+        <Draggable>
+          <div className={classes.Graph}>
+            {this.state.calculate ? this.renderGraph() : null}
           </div>
-        </form>
-
-        <div className={classes.Graph}>
-          {this.state.calculate ? this.renderGraph() : null}
-        </div>
+        </Draggable>
 
         {this.state.graphConfig.show && this.state.calculate ? (
           <GraphConfig

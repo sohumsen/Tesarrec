@@ -7,6 +7,7 @@ import MyTabs from "../../components/UI/MyTabs/MyTabs";
 import Skeleton from "../../components/UI/Skeleton/Skeleton";
 import MyErrorMessage from "../../components/UI/MyErrorMessage/MyErrorMessage";
 import { Paper } from "@material-ui/core";
+import Draggable from "react-draggable";
 
 class ModelBench extends Component {
   /**
@@ -19,9 +20,10 @@ class ModelBench extends Component {
     allModelId: {},
     Eqns: [],
     calculate: false,
-    error: true,
+    error: false,
     tabChoiceValue: 1,
     loading: false,
+    defaultPositionFileExplorer: { x: 0, y: 0 },
   };
 
   componentDidMount() {
@@ -311,13 +313,14 @@ class ModelBench extends Component {
       // can u inject a background-color: ranmdom lookup color if DEVMODE=TRUE
 
       <div className={classes.ModelBenchContainer}>
-        <div className={classes.ModelBenchItemLeft}>
-          <div className={classes.ModelBenchItemLeftFileNav}>
-            {this.state.loading ? <Skeleton /> : null}
+        <Draggable defaultPosition={this.state.defaultPositionFileExplorer}>
+          <div className={classes.ModelBenchItemLeft}>
+            <div className={classes.ModelBenchItemLeftFileNav}>
+              {this.state.loading ? <Skeleton /> : null}
 
-            {modelLinks}
-          </div>
-          <Paper elevation={3}>
+              {modelLinks}
+            </div>
+
             <div className={classes.ModelBenchItemLeftEqnNav}>
               <MyTabs
                 value={this.state.tabChoiceValue}
@@ -325,8 +328,17 @@ class ModelBench extends Component {
                 labels={["Single ODE", "Coupled ODE"]}
               />
             </div>
-          </Paper>
-        </div>
+            <button
+              onClick={() => {
+                this.setState({
+                  defaultPositionFileExplorer: { x: -100, y: 0 },
+                });
+              }}
+            >
+              Reset Pos
+            </button>
+          </div>
+        </Draggable>
 
         <div className={classes.ModelBenchItemCenter}>
           {this.state.tabChoiceValue === 0 ? (
