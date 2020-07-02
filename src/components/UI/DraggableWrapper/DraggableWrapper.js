@@ -7,6 +7,7 @@ class DraggableWrapper extends Component {
     eqnEditorPos: { x: 0, y: 0 },
     graphPos: { x: 0, y: 0 },
     configPos: { x: 0, y: 0 },
+    resetAllPos:false,
   };
 
   onStop = (e, data) => {
@@ -29,7 +30,21 @@ class DraggableWrapper extends Component {
       configPos: { x: 0, y: 0 },
     });
   };
-//   componentWillReceiveProps(){
+  static getDerivedStateFromProps(props, state) {
+    if( props.resetAllPos){
+      //NEW MODEL
+      return {
+        fileExplorerPos: { x: 0, y: 0 },
+        eqnEditorPos: { x: 0, y: 0 },
+        graphPos: { x: 0, y: 0 },
+        configPos: { x: 0, y: 0 },
+      };
+    }
+
+    return null;
+  }
+ 
+  //   componentWillReceiveProps(){
 //     if (this.props.resetAllPos){
 //         this.onSetInitialState()
 //     }

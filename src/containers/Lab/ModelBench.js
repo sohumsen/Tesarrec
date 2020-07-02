@@ -6,8 +6,10 @@ import classes from "./ModelBench.module.css";
 import MyTabs from "../../components/UI/MyTabs/MyTabs";
 import Skeleton from "../../components/UI/Skeleton/Skeleton";
 import MyErrorMessage from "../../components/UI/MyErrorMessage/MyErrorMessage";
-import { Paper } from "@material-ui/core";
+import { Paper, Tooltip, IconButton } from "@material-ui/core";
 import Draggable from "react-draggable";
+import RestoreIcon from "@material-ui/icons/Restore";
+
 import DraggableWrapper from "../../components/UI/DraggableWrapper/DraggableWrapper";
 
 class ModelBench extends Component {
@@ -24,8 +26,11 @@ class ModelBench extends Component {
     error: false,
     tabChoiceValue: 1,
     loading: false,
-    defaultPositionFileExplorer: { x: 0, y: 0 },
-    resetAllPos:false
+    fileExplorerPos: { x: 0, y: 0 },
+    eqnEditorPos: { x: 0, y: 0 },
+    graphPos: { x: 0, y: 0 },
+    configPos: { x: 0, y: 0 },
+    resetAllPos: false,
   };
 
   componentDidMount() {
@@ -203,7 +208,6 @@ class ModelBench extends Component {
             // this.setState({ Eqns: data.Eqns, error: false }, () => {
             //   this.getAllFiles();
             // });
-            console.log(this.state.modelId);
             this.getAllFiles();
           } else {
             this.setState({ error: true });
@@ -295,6 +299,26 @@ class ModelBench extends Component {
     this.setState({ tabChoiceValue: val });
   };
 
+  onStop = (e, data, name) => {
+    let changed = {
+      ...this.state[name],
+    };
+    changed.x = data.x;
+    changed.y = data.y;
+
+    this.setState({
+      [name]: changed,
+    });
+  };
+
+  resetAllPos = () => {
+    this.setState({
+      fileExplorerPos: { x: 0, y: 0 },
+      eqnEditorPos: { x: 0, y: 0 },
+      graphPos: { x: 0, y: 0 },
+      configPos: { x: 0, y: 0 },
+    });
+  };
   render() {
     let modelLinks = null;
     Object.keys(this.state.allModelId).length !== 0
@@ -315,7 +339,22 @@ class ModelBench extends Component {
       // can u inject a background-color: ranmdom lookup color if DEVMODE=TRUE
 
       <div className={classes.ModelBenchContainer}>
-        <DraggableWrapper name={"fileExplorerPos"} resetAllPos={this.state.resetAllPos}>
+        <Tooltip title="Reset all Positions" placement="top" arrow>
+        <span>
+          <IconButton
+            edge="end"
+            aria-label="Reset"
+            onClick={this.resetAllPos}
+          >
+            <RestoreIcon />
+          </IconButton>
+        </span>
+      </Tooltip>
+
+        <Draggable
+          position={this.state.fileExplorerPos}
+          onStop={(e, data) => this.onStop(e, data, "fileExplorerPos")}
+        >
           <div className={classes.ModelBenchItemLeft}>
             <div className={classes.ModelBenchItemLeftFileNav}>
               {this.state.loading ? <Skeleton /> : null}
@@ -330,9 +369,8 @@ class ModelBench extends Component {
               />
             </div>
           </div>
-        </DraggableWrapper>
+        </Draggable>
 
-        <button onClick={()=>{this.setState({resetAllPos:true})}}>Reset Pos</button>
         <div className={classes.ModelBenchItemCenter}>
           {this.state.tabChoiceValue === 0 ? (
             <SingleODE />
@@ -342,6 +380,10 @@ class ModelBench extends Component {
               modelId={this.state.modelId}
               Eqns={this.state.Eqns}
               sendToParent={this.sendToParent}
+              eqnEditorPos={this.state.eqnEditorPos}
+              graphPos={this.state.graphPos}
+              configPos={this.state.configPos}
+              onStop={this.onStop}
             />
           )}
         </div>

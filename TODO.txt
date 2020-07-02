@@ -8,19 +8,22 @@ make toggles tabs
 update y axis mfc
 make x range wider
 add another heatmap
+publish only updated Sustainability
+
 
 when edit eqn name and select other it breaks 
 when edit file name and select it again it breaks
 make clickaway work
 
-publish only updated Sustainability
 make only one request per load perhaps 
-reset all pos
-same width textbox
+
 format graph config
 refresh token
-perhaps place config button in chart
+on double click text select all
+perhaps place config button in chart DONE
 on close graph config, dont close graph
+change to react grid
+reset not working because of component did update
 
 
 
@@ -99,6 +102,8 @@ DONE
     export results as csv DONE
     slection of axis is a dropdown DONE
     show table of a,b,c,d,t... and plot against each other on select DONE
+    reset all pos DONE
+    same width textbox DONE
 NOT NEEDED
 ===========
 

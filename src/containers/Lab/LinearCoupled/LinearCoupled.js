@@ -35,18 +35,50 @@ class LinearCoupled extends Component {
       LegendVertical: "top",
       DecimalPrecision: 2,
       initialConditions: [0.5, 0.5, 0.5, 0.5, 0.5],
-      xAxis:"t",//x,y,
-      yAxis:"a"
+      xAxis: "t", //x,y,
+      yAxis: "a",
     },
 
     Eqns: [],
   };
 
-  // componentWillReceiveProps(nextProps) {
-  //   if (nextProps.modelid !== this.state.modelid) {
-  //     this.setState({ Eqns: nextProps.Eqns });
-  //   }
-  // }
+  defaultEqns = [
+    {
+      id: "qwert",
+      line: "a",
+      DByDLatex: "\\frac{da}{dt}=",
+      LatexEqn: "-\\frac{0.09ab}{0.103+a}-\\frac{0.84ac}{0.425+a}",
+      TextEqn: "-(0.09*a*b)/(0.103+a)-(0.84*a*c)/(0.425+a)",
+      errorMessage: null,
+    },
+    {
+      id: "yuiop",
+      line: "b",
+
+      DByDLatex: "\\frac{db}{dt}=",
+      LatexEqn: "\\frac{7.1ab}{0.103+a}-0.142b",
+      TextEqn: "(7.1*a*b)/(0.103+a)-0.142*b",
+      errorMessage: null,
+    },
+    {
+      id: "asdfg",
+      line: "c",
+
+      DByDLatex: "\\frac{dc}{dt}=",
+      LatexEqn: "\\frac{0.6ac}{0.103+a}-0.0102c",
+      TextEqn: "(0.6*a*c)/(0.103+a)-0.0102*c",
+      errorMessage: null,
+    },
+    {
+      id: "hjklz",
+      line: "d",
+
+      DByDLatex: "\\frac{dd}{dt}=",
+      LatexEqn: "-\\frac{0.09ab}{0.103+a}-\\frac{0.84ac}{0.425+a}",
+      TextEqn: "-(0.09*a*b)/(0.103+a)-(0.84*a*c)/(0.425+a)",
+      errorMessage: null,
+    },
+  ];
 
   static getDerivedStateFromProps(props, state) {
     if (props.modelId !== state.modelId) {
@@ -155,15 +187,12 @@ class LinearCoupled extends Component {
     });
   };
   resetForm = () => {
+    this.props.sendToParent(this.defaultEqns);
+
     this.setState({
-      calculate: true,
-      pageId: "",
-      variableDescription: {
-        a: "this is some stuff",
-        b: "this is some stuff",
-        c: "this is some stuff",
-        d: "this is some stuff",
-      },
+      calculate: false,
+      modelId: "",
+  
       graphConfig: {
         show: false,
         submitted: true,
@@ -171,83 +200,14 @@ class LinearCoupled extends Component {
         LegendVertical: "top",
         DecimalPrecision: 2,
         initialConditions: [0.5, 0.5, 0.5, 0.5, 0.5],
-        xAxis:"t",//x,y,
-        yAxis:"a"
+        xAxis: "t", //x,y,
+        yAxis: "a",
       },
-
-      Eqns: [
-        {
-          id: "qwert",
-          line: "a",
-          DByDLatex: "\\frac{da}{dt}=",
-          LatexEqn: "-\\frac{0.09ab}{0.103+a}-\\frac{0.84ac}{0.425+a}",
-          TextEqn: "-(0.09*a*b)/(0.103+a)-(0.84*a*c)/(0.425+a)",
-          errorMessage: null,
-        },
-        {
-          id: "yuiop",
-          line: "b",
-
-          DByDLatex: "\\frac{db}{dt}=",
-          LatexEqn: "\\frac{7.1ab}{0.103+a}-0.142b",
-          TextEqn: "(7.1*a*b)/(0.103+a)-0.142*b",
-          errorMessage: null,
-        },
-        {
-          id: "asdfg",
-          line: "c",
-
-          DByDLatex: "\\frac{dc}{dt}=",
-          LatexEqn: "\\frac{0.6ac}{0.103+a}-0.0102c",
-          TextEqn: "(0.6*a*c)/(0.103+a)-0.0102*c",
-          errorMessage: null,
-        },
-        {
-          id: "hjklz",
-          line: "d",
-
-          DByDLatex: "\\frac{dd}{dt}=",
-          LatexEqn: "-\\frac{0.09ab}{0.103+a}-\\frac{0.84ac}{0.425+a}",
-          TextEqn: "-(0.09*a*b)/(0.103+a)-(0.84*a*c)/(0.425+a)",
-          errorMessage: null,
-        },
-      ],
-    });
+     
+    })
   };
   nextPossibleEqn = (prevState) => {
-    let Eqns = [
-      {
-        id: "qwert",
-        line: "a",
-        DByDLatex: "\\frac{da}{dt}=",
-        LatexEqn: "-\\frac{0.09ab}{0.103+a}-\\frac{0.84ac}{0.425+a}",
-        TextEqn: "-(0.09*a*b)/(0.103+a)-(0.84*a*c)/(0.425+a)",
-      },
-      {
-        id: "yuiop",
-        line: "b",
-
-        DByDLatex: "\\frac{db}{dt}=",
-        LatexEqn: "\\frac{7.1ab}{0.103+a}-0.142b",
-        TextEqn: "(7.1*a*b)/(0.103+a)-0.142*b",
-      },
-      {
-        id: "asdfg",
-        line: "c",
-
-        DByDLatex: "\\frac{dc}{dt}=",
-        LatexEqn: "\\frac{0.6ac}{0.103+a}-0.0102c",
-        TextEqn: "(0.6*a*c)/(0.103+a)-0.0102*c",
-      },
-      {
-        id: "hjklz",
-        line: "d",
-
-        DByDLatex: "\\frac{dd}{dt}=",
-        LatexEqn: "-\\frac{0.09ab}{0.103+a}-\\frac{0.84ac}{0.425+a}",
-        TextEqn: "-(0.09*a*b)/(0.103+a)-(0.84*a*c)/(0.425+a)",
-      },
-    ];
+    let Eqns = this.defaultEqns;
 
     const results = Eqns.filter(
       ({ id: id1 }) => !prevState.Eqns.some(({ id: id2 }) => id2 === id1)
@@ -283,9 +243,7 @@ class LinearCoupled extends Component {
     graphConfig.show = !this.state.graphConfig.show;
     graphConfig.submitted = true;
 
-    console.log(this.state.calculate);
-
-    this.setState({ graphConfig: graphConfig, calculate: false });
+    this.setState({ graphConfig: graphConfig, calculate: true });
   };
   onGraphConfigChange = (name) => (event, value) => {
     let graphConfig = { ...this.state.graphConfig };
@@ -327,7 +285,6 @@ class LinearCoupled extends Component {
     this.state.Eqns.forEach((eqn) => {
       LineNames.push(eqn.line);
     });
-    console.log(this.state.calculate);
     return (
       <Paper elevation={3}>
         <LinearCoupledDiffEqns
@@ -335,9 +292,8 @@ class LinearCoupled extends Component {
           numberOfCycles={30}
           eqns={eqns}
           LineNames={LineNames}
-          axis={[this.state.graphConfig.xAxis,this.state.graphConfig.yAxis]}
+          axis={[this.state.graphConfig.xAxis, this.state.graphConfig.yAxis]}
           initialConditions={this.state.graphConfig.initialConditions} //includes t
-
           LegendVertical={this.state.graphConfig.LegendVertical}
           LegendHorizontal={this.state.graphConfig.LegendHorizontal}
           DecimalPrecision={this.state.graphConfig.DecimalPrecision}
@@ -354,10 +310,13 @@ class LinearCoupled extends Component {
         handleMathQuillInputChange={this.handleMathQuillInputChange}
       />
     );
-  
+
     return (
       <div className={classes.Container}>
-        <DraggableWrapper name={"eqnEditorPos"}>
+        <Draggable
+          position={this.props.eqnEditorPos}
+          onStop={(e, data) => this.props.onStop(e, data, "eqnEditorPos")}
+        >
           <Paper elevation={3}>
             <div className={classes.Eqns}>
               <LinearCoupledButtonContainer
@@ -372,8 +331,11 @@ class LinearCoupled extends Component {
               </Paper>
             </div>
           </Paper>
-        </DraggableWrapper>
-        <DraggableWrapper name={"graphPos"}>
+        </Draggable>
+        <Draggable
+          position={this.props.graphPos}
+          onStop={(e, data) => this.props.onStop(e, data, "graphPos")}
+        >
           <div className={classes.Graph}>
             {this.state.calculate ? (
               <Tooltip title="Config Equations" placement="top" arrow>
@@ -393,23 +355,26 @@ class LinearCoupled extends Component {
               ? this.renderGraph()
               : null}
           </div>
-        </DraggableWrapper>
+        </Draggable>
 
         {this.state.graphConfig.show && this.state.calculate ? (
-          <GraphConfig
-            errorMessage={!this.state.graphConfig.submitted}
-            LegendHorizontal={this.state.graphConfig.LegendHorizontal}
-            LegendVertical={this.state.graphConfig.LegendVertical}
-            DecimalPrecision={this.state.graphConfig.DecimalPrecision}
-            initialConditions={this.state.graphConfig.initialConditions}
-            xAxis={this.state.graphConfig.xAxis}
-            yAxis={this.state.graphConfig.yAxis}
-            Eqns={this.state.Eqns}
-
-            onClose={this.onGraphConfigClose}
-            onChange={(val) => this.onGraphConfigChange(val)}
-            onSubmit={this.onGraphConfigSubmit}
-          />
+          <div className={classes.graphConfig}>
+            <GraphConfig
+              configPos={this.props.configPos}
+              onStop={this.props.onStop}
+              errorMessage={!this.state.graphConfig.submitted}
+              LegendHorizontal={this.state.graphConfig.LegendHorizontal}
+              LegendVertical={this.state.graphConfig.LegendVertical}
+              DecimalPrecision={this.state.graphConfig.DecimalPrecision}
+              initialConditions={this.state.graphConfig.initialConditions}
+              xAxis={this.state.graphConfig.xAxis}
+              yAxis={this.state.graphConfig.yAxis}
+              Eqns={this.state.Eqns}
+              onClose={this.onGraphConfigClose}
+              onChange={(val) => this.onGraphConfigChange(val)}
+              onSubmit={this.onGraphConfigSubmit}
+            />
+          </div>
         ) : null}
       </div>
     );

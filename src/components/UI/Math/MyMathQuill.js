@@ -5,21 +5,20 @@ import { addStyles, EditableMathField, StaticMathField } from "react-mathquill";
 addStyles();
 
 const MyMathQuill = (props) => {
-
   return (
     <div>
+
       <StaticMathField>{props.firstBit}</StaticMathField>
 
-      {!props.NoEdit?
-            <EditableMathField
-            onKeyDown={props.onKeyDown}
-            latex={props.latex} // Initial latex value for the input field
-            onChange={(mathField) => props.onInputChange(mathField)}
-          />:
-          null
-    
-    }
+      {!props.NoEdit ? (
+        <EditableMathField
 
+          style={{ width: "60%" }}
+          onKeyDown={props.onKeyDown}
+          latex={props.latex} // Initial latex value for the input field
+          onChange={(mathField) => props.onInputChange(mathField)}
+        />
+      ) : null}
     </div>
   );
 };

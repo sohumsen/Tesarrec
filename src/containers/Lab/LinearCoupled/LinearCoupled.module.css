@@ -1,5 +1,4 @@
 .Container {
-  display: inline-block;
   width: 98%;
   margin: 1%;
   /*
@@ -26,6 +25,9 @@
 .Graph {
   float: right;
   width: 59%;
+  position: absolute;
+  right: 5%;
+  width: 50%;
   /*
   background-color: bisque; 
   border-width: 2px;
@@ -34,3 +36,8 @@
   */
 }
 
+.graphConfig{
+  background-color: aquamarine;
+
+  
+}

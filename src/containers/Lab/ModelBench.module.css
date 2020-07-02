@@ -1,13 +1,15 @@
 .ModelBenchContainer {
   display: flex;
   background-color: rgb(240, 240, 240);
-  height: 91vh; 
-  overflow-y: hidden;
-  overflow-x: hidden;
+  width: 99vw;
+  height: 90vh;
+  overflow: hidden;
   /*background-color: aqua;*/
 }
 .ModelBenchItemLeft {
   width: 15%;
+  padding-top: 1%;
+
 
   /*background-color: blue;
   border-width: 5px;
@@ -17,11 +19,10 @@
 
 .ModelBenchItemLeftEqnNav {
   padding: 5px;
-  border-width: 5px;
-  margin-top: 5%;
+  padding-top: 5%;
+
 }
 .ModelBenchItemLeftFileNav {
-  margin-top: 5%;
 
   /* border-color: blue;
   background-color: blueviolet;*/

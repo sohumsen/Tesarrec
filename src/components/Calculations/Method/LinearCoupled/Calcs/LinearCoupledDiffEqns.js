@@ -135,7 +135,6 @@ const LinearCoupledDiffEqns = (props) => {
     for (let i = 0; i < xCoord.length; i++) {
       csvData.push([xCoord[i], yCoord[i]]);
     }
-    console.log(csvData);
 
     return (
       <div>

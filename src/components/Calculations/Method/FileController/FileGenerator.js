@@ -27,6 +27,7 @@ class FileGenerator extends Component {
     });
     return (
         <Paper elevation={3}>
+
         <Paper elevation={3}>
 
           <Tooltip title="Create model" placement="top" arrow>
@@ -78,7 +79,6 @@ class FileGenerator extends Component {
             </span>
           </Tooltip>
         </Paper>
-
         {fileLinks}
 
         </Paper>
