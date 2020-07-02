@@ -14,16 +14,13 @@ when edit file name and select it again it breaks
 make clickaway work
 
 publish only updated Sustainability
-show table of a,b,c,d,t... and plot against each other on select
-make only one request per load perhaps
-
-export results as csv
+make only one request per load perhaps 
 reset all pos
 same width textbox
-config graph on graph
-slection of axis is a dropdown
-format config
-
+format graph config
+refresh token
+perhaps place config button in chart
+on close graph config, dont close graph
 
 
 
@@ -95,6 +92,13 @@ DONE
     on hover show caption for buttons DONE
     remove on double click perhaps DONE
     remove file lag DONE
+    format config DONE
+    on close graph config cannot submit DONE
+    config graph on graph DONE
+    error handling graph config DONE
+    export results as csv DONE
+    slection of axis is a dropdown DONE
+    show table of a,b,c,d,t... and plot against each other on select DONE
 NOT NEEDED
 ===========
 

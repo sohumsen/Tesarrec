@@ -13,6 +13,9 @@ import AddButton from "../../../components/UI/Button/AddButton";
 import LinearCoupledButtonContainer from "../../../components/UI/ButtonContainer/LinearCoupledButtonContainer";
 import Draggable from "react-draggable";
 import ResizeableWrapper from "../../../components/UI/ResizableWrapper/ResizableWrapper";
+import SettingsIcon from "@material-ui/icons/Settings";
+import DraggableWrapper from "../../../components/UI/DraggableWrapper/DraggableWrapper";
+
 class LinearCoupled extends Component {
   /**
    * Visual Component that contains the textbox for the equation and calculation outputs
@@ -32,6 +35,8 @@ class LinearCoupled extends Component {
       LegendVertical: "top",
       DecimalPrecision: 2,
       initialConditions: [0.5, 0.5, 0.5, 0.5, 0.5],
+      xAxis:"t",//x,y,
+      yAxis:"a"
     },
 
     Eqns: [],
@@ -166,6 +171,8 @@ class LinearCoupled extends Component {
         LegendVertical: "top",
         DecimalPrecision: 2,
         initialConditions: [0.5, 0.5, 0.5, 0.5, 0.5],
+        xAxis:"t",//x,y,
+        yAxis:"a"
       },
 
       Eqns: [
@@ -263,10 +270,22 @@ class LinearCoupled extends Component {
       };
     });
   };
-  toggleChartShow = () => {
+
+  onGraphConfigOpen = () => {
     let graphConfig = { ...this.state.graphConfig };
     graphConfig.show = !this.state.graphConfig.show;
+    graphConfig.submitted = true;
+
     this.setState({ graphConfig: graphConfig });
+  };
+  onGraphConfigClose = () => {
+    let graphConfig = { ...this.state.graphConfig };
+    graphConfig.show = !this.state.graphConfig.show;
+    graphConfig.submitted = true;
+
+    console.log(this.state.calculate);
+
+    this.setState({ graphConfig: graphConfig, calculate: false });
   };
   onGraphConfigChange = (name) => (event, value) => {
     let graphConfig = { ...this.state.graphConfig };
@@ -308,22 +327,23 @@ class LinearCoupled extends Component {
     this.state.Eqns.forEach((eqn) => {
       LineNames.push(eqn.line);
     });
-
-    return this.state.graphConfig.submitted ? (
+    console.log(this.state.calculate);
+    return (
       <Paper elevation={3}>
         <LinearCoupledDiffEqns
           h={0.05}
           numberOfCycles={30}
           eqns={eqns}
           LineNames={LineNames}
-          axis={["t", "b"]}
+          axis={[this.state.graphConfig.xAxis,this.state.graphConfig.yAxis]}
           initialConditions={this.state.graphConfig.initialConditions} //includes t
+
           LegendVertical={this.state.graphConfig.LegendVertical}
           LegendHorizontal={this.state.graphConfig.LegendHorizontal}
           DecimalPrecision={this.state.graphConfig.DecimalPrecision}
         />
       </Paper>
-    ) : null;
+    );
   };
 
   render() {
@@ -334,15 +354,14 @@ class LinearCoupled extends Component {
         handleMathQuillInputChange={this.handleMathQuillInputChange}
       />
     );
-
+  
     return (
       <div className={classes.Container}>
-        <Draggable>
+        <DraggableWrapper name={"eqnEditorPos"}>
           <Paper elevation={3}>
             <div className={classes.Eqns}>
               <LinearCoupledButtonContainer
                 calculate={this.state.calculate}
-                toggleChartShow={this.toggleChartShow}
                 Eqns={this.state.Eqns}
                 onIncrementEqn={this.onIncrementEqn}
                 resetForm={this.resetForm}
@@ -353,12 +372,28 @@ class LinearCoupled extends Component {
               </Paper>
             </div>
           </Paper>
-        </Draggable>
-        <Draggable>
+        </DraggableWrapper>
+        <DraggableWrapper name={"graphPos"}>
           <div className={classes.Graph}>
-            {this.state.calculate ? this.renderGraph() : null}
+            {this.state.calculate ? (
+              <Tooltip title="Config Equations" placement="top" arrow>
+                <span>
+                  <IconButton
+                    disabled={!this.state.calculate}
+                    edge="end"
+                    aria-label="config"
+                    onClick={this.onGraphConfigOpen}
+                  >
+                    <SettingsIcon />
+                  </IconButton>
+                </span>
+              </Tooltip>
+            ) : null}
+            {this.state.calculate && this.state.graphConfig.submitted
+              ? this.renderGraph()
+              : null}
           </div>
-        </Draggable>
+        </DraggableWrapper>
 
         {this.state.graphConfig.show && this.state.calculate ? (
           <GraphConfig
@@ -367,7 +402,11 @@ class LinearCoupled extends Component {
             LegendVertical={this.state.graphConfig.LegendVertical}
             DecimalPrecision={this.state.graphConfig.DecimalPrecision}
             initialConditions={this.state.graphConfig.initialConditions}
-            onClose={this.toggleChartShow}
+            xAxis={this.state.graphConfig.xAxis}
+            yAxis={this.state.graphConfig.yAxis}
+            Eqns={this.state.Eqns}
+
+            onClose={this.onGraphConfigClose}
             onChange={(val) => this.onGraphConfigChange(val)}
             onSubmit={this.onGraphConfigSubmit}
           />

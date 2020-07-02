@@ -8,6 +8,7 @@ import Skeleton from "../../components/UI/Skeleton/Skeleton";
 import MyErrorMessage from "../../components/UI/MyErrorMessage/MyErrorMessage";
 import { Paper } from "@material-ui/core";
 import Draggable from "react-draggable";
+import DraggableWrapper from "../../components/UI/DraggableWrapper/DraggableWrapper";
 
 class ModelBench extends Component {
   /**
@@ -24,6 +25,7 @@ class ModelBench extends Component {
     tabChoiceValue: 1,
     loading: false,
     defaultPositionFileExplorer: { x: 0, y: 0 },
+    resetAllPos:false
   };
 
   componentDidMount() {
@@ -313,11 +315,10 @@ class ModelBench extends Component {
       // can u inject a background-color: ranmdom lookup color if DEVMODE=TRUE
 
       <div className={classes.ModelBenchContainer}>
-        <Draggable defaultPosition={this.state.defaultPositionFileExplorer}>
+        <DraggableWrapper name={"fileExplorerPos"} resetAllPos={this.state.resetAllPos}>
           <div className={classes.ModelBenchItemLeft}>
             <div className={classes.ModelBenchItemLeftFileNav}>
               {this.state.loading ? <Skeleton /> : null}
-
               {modelLinks}
             </div>
 
@@ -328,18 +329,10 @@ class ModelBench extends Component {
                 labels={["Single ODE", "Coupled ODE"]}
               />
             </div>
-            <button
-              onClick={() => {
-                this.setState({
-                  defaultPositionFileExplorer: { x: -100, y: 0 },
-                });
-              }}
-            >
-              Reset Pos
-            </button>
           </div>
-        </Draggable>
+        </DraggableWrapper>
 
+        <button onClick={()=>{this.setState({resetAllPos:true})}}>Reset Pos</button>
         <div className={classes.ModelBenchItemCenter}>
           {this.state.tabChoiceValue === 0 ? (
             <SingleODE />
@@ -352,7 +345,6 @@ class ModelBench extends Component {
             />
           )}
         </div>
-
         {this.state.error ? <MyErrorMessage /> : null}
       </div>
     );

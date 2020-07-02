@@ -1,7 +1,7 @@
 .ModelBenchContainer {
   display: flex;
   background-color: rgb(240, 240, 240);
-  height: 90vh; 
+  height: 91vh; 
   overflow-y: hidden;
   overflow-x: hidden;
   /*background-color: aqua;*/
@@ -29,7 +29,7 @@
 }
 .ModelBenchItemCenter {
   flex-grow: 1;
-  margin-left: 2%;
+  margin-left: 1%;
 
   /*background-color: brown;*/
 }

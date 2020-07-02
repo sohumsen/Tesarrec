@@ -1,7 +1,11 @@
 import React from "react";
 import MyChart from "../../../../UI/Canvas/Charts/Chart";
+import { CSVLink, CSVDownload } from "react-csv";
 
 import { parse, simplify } from "mathjs";
+import { Tooltip, IconButton } from "@material-ui/core";
+import ImportExportIcon from "@material-ui/icons/ImportExport";
+
 
 //DyByDx= x+3y
 
@@ -96,8 +100,7 @@ const LinearCoupledDiffEqns = (props) => {
   };
 
   const ShowLinearCoupledGraph = (EqnArr) => {
-    let i = -1;
-    let axis = props.axis //x,y
+    let axis = props.axis; //x,y
 
     let allData = [];
     for (let index = 0; index < props.LineNames.length; index++) {
@@ -120,27 +123,35 @@ const LinearCoupledDiffEqns = (props) => {
     } else if (axis[1] === "t") {
       xCoord = allData[props.LineNames.indexOf(axis[0])];
       yCoord = allData[allData.length - 1]; //t coord
+    } else if (axis[0] === "t" && axis[1] === "t") {
+      //fix this
+      xCoord = allData[allData.length - 1]; //t coord
+      yCoord = allData[allData.length - 1]; //t coord
     } else {
       xCoord = allData[props.LineNames.indexOf(axis[0])];
       yCoord = allData[props.LineNames.indexOf(axis[1])];
     }
-    console.log(xCoord, yCoord);
-    console.log(FormatTwoArraysIntoCoordObject(xCoord, yCoord));
+    let csvData = [["x", "y"]];
+    for (let i = 0; i < xCoord.length; i++) {
+      csvData.push([xCoord[i], yCoord[i]]);
+    }
+    console.log(csvData);
 
-    // let allGraphs = EqnArr.map((Eqn) => {
-    //   i = i + 1;
-    //   return (
-    //     <MyChart
-    //       EulerData={Eqn}
-    //       LineNames={props.LineNames[i]}
-    //       axisNames={["t", props.LineNames[i]]}
-    //       horizontalAlign={props.LegendHorizontal}
-    //       verticalAlign={props.LegendVertical}
-    //     />
-    //   );
-    // });
     return (
       <div>
+        <CSVLink data={csvData}>
+          <Tooltip title="Download model" placement="top">
+            <span>
+              <IconButton
+                edge="end"
+                aria-label="Download"
+              >
+                <ImportExportIcon />
+              </IconButton>
+            </span>
+          </Tooltip>
+        </CSVLink>
+        
         <MyChart
           EulerData={FormatTwoArraysIntoCoordObject(xCoord, yCoord)}
           LineNames={axis[1]}

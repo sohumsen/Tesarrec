@@ -10,17 +10,39 @@ import CloseButton from "../Button/CloseButton";
 import GenericButton from "../Button/GenericButton";
 import MyErrorMessage from "../MyErrorMessage/MyErrorMessage";
 import Draggable from "react-draggable";
-import { Paper } from "@material-ui/core";
+import {
+  Paper,
+  InputLabel,
+  Select,
+  MenuItem,
+  makeStyles,
+} from "@material-ui/core";
 
 // import Paper from '../Paper/Paper'
-
+const useStyles = makeStyles((theme) => ({
+  formControl: {
+    margin: theme.spacing(1),
+    minWidth: 120,
+  },
+  selectEmpty: {
+    marginTop: theme.spacing(2),
+  },
+}));
 export default function FormControlLabelPlacement(props) {
+  let axisMenuItemsList = [];
+  props.Eqns.map((Eqn) => {
+    axisMenuItemsList.push(Eqn.line);
+  });
+  axisMenuItemsList.push("t");
+  let menuItemsList = axisMenuItemsList.map((menuItem) => {
+    return <MenuItem value={menuItem}>{menuItem}</MenuItem>;
+  });
+
+  console.log(menuItemsList);
   return (
     <Draggable>
-        <div className={classes.Container}>
-        <Paper>
-
-          <h3>CONFIG</h3>
+      <div className={classes.Container}>
+        <Paper elevation={3}>
           <div className={classes.CloseButton}>
             <CloseButton
               type="button"
@@ -100,6 +122,20 @@ export default function FormControlLabelPlacement(props) {
               value={props.initialConditions}
               onChange={props.onChange("initialConditions")}
             />
+            <div className={classes.formControlParent}>
+              <div className={classes.formControl}>
+                <p>X axis</p>
+                <Select value={props.xAxis} onChange={props.onChange("xAxis")}>
+                  {menuItemsList}
+                </Select>
+              </div>
+              <div className={classes.formControl}>
+                <p>Y axis</p>
+                <Select value={props.yAxis} onChange={props.onChange("yAxis")}>
+                  {menuItemsList}
+                </Select>
+              </div>
+            </div>
           </FormControl>
 
           <GenericButton
@@ -110,9 +146,8 @@ export default function FormControlLabelPlacement(props) {
           />
 
           {props.errorMessage ? <MyErrorMessage /> : null}
-          </Paper>
-
-        </div>
+        </Paper>
+      </div>
     </Draggable>
   );
 }

@@ -1,11 +1,24 @@
 .Container {
-  width: 25%;
+  position: absolute;
+  top: 50%;
+  width: 20%;
   text-align: center;
-  display: grid;
 }
 
-.CloseButton{
+.CloseButton {
   position: absolute;
   top: 0;
-  right:  0;
+  right: 0;
+}
+
+.formControl{
+
+  float: left;
+  margin-left: 5px;
+
+}
+
+.formControlParent{
+  
+background-color: aqua;
 }
