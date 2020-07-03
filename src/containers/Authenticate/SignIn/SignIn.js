@@ -26,9 +26,8 @@ function Copyright() {
       {"Copyright © "}
       <Link color="inherit" href="https://material-ui.com/">
         Tesarrec™
-      </Link>{" "}
+      </Link>
       {new Date().getFullYear()}
-      {"."}
     </Typography>
   );
 }
@@ -91,6 +90,8 @@ class SignIn extends Component {
           localStorage.setItem("token", data.idToken);
           localStorage.setItem("expirationDate", expirationDate);
           localStorage.setItem("userId", data.localId);
+          localStorage.setItem("refreshToken", data.refreshToken);
+
 
           this.props.authSuccess(data.idToken, data.localId);
           this.props.checkAuthTimeout(data.expiresIn);

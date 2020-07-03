@@ -335,27 +335,30 @@ class ModelBench extends Component {
           />
         ))
       : (modelLinks = null);
+
+    const nodeRef = React.createRef(null);
     return (
       // can u inject a background-color: ranmdom lookup color if DEVMODE=TRUE
 
       <div className={classes.ModelBenchContainer}>
         <Tooltip title="Reset all Positions" placement="top" arrow>
-        <span>
-          <IconButton
-            edge="end"
-            aria-label="Reset"
-            onClick={this.resetAllPos}
-          >
-            <RestoreIcon />
-          </IconButton>
-        </span>
-      </Tooltip>
+          <span>
+            <IconButton
+              edge="end"
+              aria-label="Reset"
+              onClick={this.resetAllPos}
+            >
+              <RestoreIcon />
+            </IconButton>
+          </span>
+        </Tooltip>
 
         <Draggable
           position={this.state.fileExplorerPos}
           onStop={(e, data) => this.onStop(e, data, "fileExplorerPos")}
+          nodeRef={nodeRef}
         >
-          <div className={classes.ModelBenchItemLeft}>
+          <div ref={nodeRef} className={classes.ModelBenchItemLeft}>
             <div className={classes.ModelBenchItemLeftFileNav}>
               {this.state.loading ? <Skeleton /> : null}
               {modelLinks}
@@ -380,6 +383,7 @@ class ModelBench extends Component {
               modelId={this.state.modelId}
               Eqns={this.state.Eqns}
               sendToParent={this.sendToParent}
+              nodeRef={nodeRef}
               eqnEditorPos={this.state.eqnEditorPos}
               graphPos={this.state.graphPos}
               configPos={this.state.configPos}

@@ -14,6 +14,8 @@ import Contact from "./containers/Contact/Contact";
 import SignIn from "./containers/Authenticate/SignIn/SignIn";
 import SignUp from "./containers/Authenticate/SignUp/SignUp";
 import Logout from "./containers/Authenticate/Logout/Logout";
+import FIREBASE_KEY from "./firebasekey";
+
 class App extends Component {
   state = {
     isLoggedIn: false,
@@ -32,6 +34,48 @@ class App extends Component {
 
     console.log("4");
   };
+
+  refreshSession=(refreshToken)=>{
+
+    const authData={
+      grant_type:"refresh_token",
+      refresh_token:refreshToken
+    }
+    fetch(
+      "https://securetoken.googleapis.com/v1/token?key=" +
+        FIREBASE_KEY,
+      {
+        method: "post",
+        headers: {
+          Accept: "application/json, text/plain, */*",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(authData),
+      }
+    )
+      .then((response) => response.json())
+      .then((data) => {
+        if (!data.error) {
+          const expirationDate = new Date(
+            new Date().getTime() + data.expires_in * 1000
+          );
+          localStorage.setItem("token", data.id_token);
+          localStorage.setItem("expirationDate", expirationDate);
+          localStorage.setItem("userId", data.user_id);
+          localStorage.setItem("refreshToken", data.refresh_token);
+
+
+          this.props.authSuccess(data.id_token, data.user_id);
+          this.props.checkAuthTimeout(data.expires_in);
+        } else {
+          this.props.authFail(data.error.message);
+        }
+      })
+      .catch((error) => {
+        this.props.authFail(error);
+      });
+
+  }
 
   checkAuthTimeout = (expirationTime) => {
     setTimeout(() => {
@@ -62,14 +106,15 @@ class App extends Component {
   componentDidMount() {
     const token = localStorage.getItem("token");
     if (!token) {
-      this.onLogoutHandler();
+      this.onLogoutHandler();//no token
     } else {
       const expirationDate = new Date(localStorage.getItem("expirationDate"));
+      const refreshToken=localStorage.getItem("refreshToken")
       if (expirationDate <= new Date()) {
-        this.onLogoutHandler();
+        this.onLogoutHandler(); //token expired
       } else {
         const userId = localStorage.getItem("userId");
-        this.authSuccess(token, userId);
+        this.authSuccess(token, userId);//theyre in
         this.checkAuthTimeout(
           (expirationDate.getTime() - new Date().getTime()) / 1000
         );

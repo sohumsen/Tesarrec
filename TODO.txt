@@ -1,9 +1,10 @@
+format graph config CLARIFY
+show title in dcf graph with chemical CLARIFY
+allow db/dt as input on right side CLARIFY
 
 
 for certain eqns ban negatives
-show title in dcf graph with chemical CLARIFY
 canvas js add 0 axis lines
-allow db/dt as input on right side
 make toggles tabs 
 update y axis mfc
 make x range wider
@@ -17,13 +18,11 @@ make clickaway work
 
 make only one request per load perhaps 
 
-format graph config
-refresh token
+refresh token DONE
 on double click text select all
-perhaps place config button in chart DONE
-on close graph config, dont close graph
+
+
 change to react grid
-reset not working because of component did update
 
 
 
@@ -104,6 +103,9 @@ DONE
     show table of a,b,c,d,t... and plot against each other on select DONE
     reset all pos DONE
     same width textbox DONE
+    perhaps place config button in chart DONE
+    on close graph config, dont close graph DONE
+    reset not working because of component did update DONE
 NOT NEEDED
 ===========
 

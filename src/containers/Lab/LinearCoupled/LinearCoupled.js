@@ -192,7 +192,7 @@ class LinearCoupled extends Component {
     this.setState({
       calculate: false,
       modelId: "",
-  
+
       graphConfig: {
         show: false,
         submitted: true,
@@ -203,8 +203,7 @@ class LinearCoupled extends Component {
         xAxis: "t", //x,y,
         yAxis: "a",
       },
-     
-    })
+    });
   };
   nextPossibleEqn = (prevState) => {
     let Eqns = this.defaultEqns;
@@ -316,8 +315,10 @@ class LinearCoupled extends Component {
         <Draggable
           position={this.props.eqnEditorPos}
           onStop={(e, data) => this.props.onStop(e, data, "eqnEditorPos")}
+          nodeRef={this.props.nodeRef}
+          enableUserSelectHack={false}
         >
-          <Paper elevation={3}>
+          <Paper ref={this.props.nodeRef} elevation={3}>
             <div className={classes.Eqns}>
               <LinearCoupledButtonContainer
                 calculate={this.state.calculate}
@@ -327,16 +328,17 @@ class LinearCoupled extends Component {
                 handleMathQuillInputSubmit={this.handleMathQuillInputSubmit}
               />
               <Paper elevation={3}>
-                <div className={classes.delete}>{Eqns}</div>
+                <div className={classes.delete}  >{Eqns}</div>
               </Paper>
             </div>
           </Paper>
         </Draggable>
         <Draggable
+          nodeRef={this.props.nodeRef}
           position={this.props.graphPos}
           onStop={(e, data) => this.props.onStop(e, data, "graphPos")}
         >
-          <div className={classes.Graph}>
+          <div ref={this.props.nodeRef} className={classes.Graph}>
             {this.state.calculate ? (
               <Tooltip title="Config Equations" placement="top" arrow>
                 <span>
