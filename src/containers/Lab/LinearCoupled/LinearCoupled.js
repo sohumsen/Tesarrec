@@ -327,6 +327,7 @@ class LinearCoupled extends Component {
                 resetForm={this.resetForm}
                 handleMathQuillInputSubmit={this.handleMathQuillInputSubmit}
               />
+              
               <Paper elevation={3}>
                 <div className={classes.delete}  >{Eqns}</div>
               </Paper>
