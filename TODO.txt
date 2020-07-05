@@ -20,9 +20,13 @@ make only one request per load perhaps
 
 refresh token DONE
 on double click text select all
-
+submit graph config doesnt work
+format graph config
 
 change to react grid
+format Variable form
+
+When ediiting equaltions allow only the variables declared and numericals
 
 
 
