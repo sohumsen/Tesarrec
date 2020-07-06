@@ -82,16 +82,12 @@ class HeatMapForm extends Component {
       value = Math.max(Number(min), Math.min(Number(max), Number(value)));
     }
 
-
     this.setState({ [name]: value });
   };
 
- 
-
   render() {
     return (
-      <div >
-
+      <div>
         <RightContent
           AnodeSubstrateChemical={this.state.AnodeSubstrateChemical}
           CathodeProductChemical={this.state.CathodeProductChemical}

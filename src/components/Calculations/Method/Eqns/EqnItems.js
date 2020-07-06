@@ -24,14 +24,14 @@ const EqnItems = (props) => {
   return newEqns.map((Eqn) => {
     return (
       <EqnItem
-      key={Eqn.id}
+        key={Eqn.id}
         error={Eqn.errorMessage}
         id={Eqn.id}
         disabledRemoveButton={disabledRemoveButton()}
-        removeEqn={() => props.removeEqn(Eqn.id)}
+        removeItem={() => props.removeItem(Eqn.id, "Eqns")}
         DByDLatex={Eqn.DByDLatex}
         LatexEqn={Eqn.LatexEqn}
-        handleMathQuillInputChange={props.handleMathQuillInputChange(Eqn.id)}
+        handleMathQuillInputChange={props.handleMathQuillInputChange(Eqn.id, "Eqns")}
       />
     );
   });

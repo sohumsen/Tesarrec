@@ -27,13 +27,10 @@ change to react grid
 format Variable form
 
 When ediiting equaltions allow only the variables declared and numericals
-
-
-
-
-
-
-
+move file nac ro top left corner
+change dustbin to cross at top right in variable part
+reformat variable widget
+initial load loads incorrect eqns
 
 
 

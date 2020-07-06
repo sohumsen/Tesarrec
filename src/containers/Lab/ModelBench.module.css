@@ -3,11 +3,10 @@
   background-color: rgb(240, 240, 240);
   width: 99vw;
   height: 90vh;
-  overflow: hidden;
   /*background-color: aqua;*/
 }
 .ModelBenchItemLeft {
-  width: 15%;
+  width: 10%;
   padding-top: 1%;
 
 

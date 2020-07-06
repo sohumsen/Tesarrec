@@ -5,7 +5,7 @@ import IconButton from "@material-ui/core/IconButton";
 import { Tooltip, Menu, Paper } from "@material-ui/core";
 import RestoreIcon from "@material-ui/icons/Restore";
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
-const LinearCoupledButtonContainer = (props) => {
+const LinearCoupledButtonEqnsContainer = (props) => {
   return (
     <Paper >
     
@@ -52,4 +52,4 @@ const LinearCoupledButtonContainer = (props) => {
   );
 };
 
-export default LinearCoupledButtonContainer;
+export default LinearCoupledButtonEqnsContainer;

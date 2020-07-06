@@ -32,7 +32,6 @@ class App extends Component {
     localStorage.removeItem("userId");
     this.props.history.push("/");
 
-    console.log("4");
   };
 
   refreshSession=(refreshToken)=>{

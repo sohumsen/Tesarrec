@@ -11,6 +11,7 @@ import Draggable from "react-draggable";
 import RestoreIcon from "@material-ui/icons/Restore";
 
 import DraggableWrapper from "../../components/UI/DraggableWrapper/DraggableWrapper";
+import DEFAULTEQNS from "./DefaultEqns";
 
 class ModelBench extends Component {
   /**
@@ -41,43 +42,7 @@ class ModelBench extends Component {
   createNewFile = () => {
     this.setState(
       {
-        Eqns: [
-          {
-            id: "qwert",
-            line: "a",
-            DByDLatex: "\\frac{da}{dt}=",
-            LatexEqn: "-\\frac{0.09ab}{0.103+a}-\\frac{0.84ac}{0.425+a}",
-            TextEqn: "-(0.09*a*b)/(0.103+a)-(0.84*a*c)/(0.425+a)",
-            errorMessage: null,
-          },
-          {
-            id: "yuiop",
-            line: "b",
-
-            DByDLatex: "\\frac{db}{dt}=",
-            LatexEqn: "\\frac{7.1ab}{0.103+a}-0.142b",
-            TextEqn: "(7.1*a*b)/(0.103+a)-0.142*b",
-            errorMessage: null,
-          },
-          {
-            id: "asdfg",
-            line: "c",
-
-            DByDLatex: "\\frac{dc}{dt}=",
-            LatexEqn: "\\frac{0.6ac}{0.103+a}-0.0102c",
-            TextEqn: "(0.6*a*c)/(0.103+a)-0.0102*c",
-            errorMessage: null,
-          },
-          {
-            id: "hjklz",
-            line: "d",
-
-            DByDLatex: "\\frac{dd}{dt}=",
-            LatexEqn: "-\\frac{0.09ab}{0.103+a}-\\frac{0.84ac}{0.425+a}",
-            TextEqn: "-(0.09*a*b)/(0.103+a)-(0.84*a*c)/(0.425+a)",
-            errorMessage: null,
-          },
-        ],
+        Eqns: DEFAULTEQNS,
       },
       () => {
         const Eqns = {
@@ -85,6 +50,7 @@ class ModelBench extends Component {
           Name: "Untitled",
           // userId:this.props.userId
         };
+        
         fetch(
           "https://tesarrec.firebaseio.com/eqns/" +
             this.props.userId +

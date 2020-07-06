@@ -8,10 +8,20 @@
   border-style: solid;
   */
 }
-.delete {
+.Vars{
+  width: 100%;
+  
+}
+.VarContainer{
+  width: 37%;
+  float: left;
+  margin-left: 1%;
+
+}
+.singleItem {
   padding: 1%;
 }
-.Eqns {
+.EqnContainer {
   font-size: medium;
   width: 30%;
   float: left;

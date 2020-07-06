@@ -14,15 +14,16 @@ const EqnItem = (props) => {
         <RemoveButton
           disabled={props.disabledRemoveButton}
           type="button"
-          value="removeEqn"
+          value="removeItem"
           displayValue="REMOVEIT"
-          onClick={props.removeEqn}
+          onClick={props.removeItem}
         />
       </div>
       <MyMathQuill
         firstBit={props.DByDLatex}
         latex={props.LatexEqn}
         onInputChange={props.handleMathQuillInputChange}
+        width="60%"
       />
       <div className={classes.ErrorMsg}>{props.error}</div>
     </li>

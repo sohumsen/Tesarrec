@@ -84,7 +84,6 @@ const LinearCoupledDiffFourEqn = (props) => {
       Arr = SolveLinearCoupledDifferentialEquationRungeKuttaForRth(Arr);
       allArrs.push(Arr);
     }
-    console.log(allArrs);
     
     return allArrs;
   };

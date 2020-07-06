@@ -19,7 +19,7 @@ const styles = (theme) => ({
   },
 
   listItemText: {
-    fontSize: 10, //Insert your required size
+    fontSize: 12, //Insert your required size
   },
   editIcon: {
     margin: 0,
@@ -94,12 +94,7 @@ class FileLink extends Component {
           selected={this.props.selectedModelId === this.props.ModelId}
           classes={{ selected: classes.selected }}
         >
-          <ListItemAvatar>
-            <Avatar>
-              <FolderIcon />
-            </Avatar>
-          </ListItemAvatar>
-
+         
           {!this.state.showInputField ? (
             <ListItemText
               classes={{ primary: classes.listItemText }}

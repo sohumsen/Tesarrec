@@ -11,7 +11,6 @@ class DraggableWrapper extends Component {
   };
 
   onStop = (e, data) => {
-    console.log(this.state[this.props.name]);
     let changed = {
       ...this.state[this.props.name],
     };

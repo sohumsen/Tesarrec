@@ -5,7 +5,9 @@ import { addStyles, EditableMathField, StaticMathField } from "react-mathquill";
 addStyles();
 
 const MyMathQuill = (props) => {
+
   return (
+    
     <div>
 
       <StaticMathField>{props.firstBit}</StaticMathField>
@@ -13,9 +15,10 @@ const MyMathQuill = (props) => {
       {!props.NoEdit ? (
         <EditableMathField
 
-          style={{ width: "60%" }}
+          style={{ width: props.width }}
           onKeyDown={props.onKeyDown}
           latex={props.latex} // Initial latex value for the input field
+         
           onChange={(mathField) => props.onInputChange(mathField)}
         />
       ) : null}

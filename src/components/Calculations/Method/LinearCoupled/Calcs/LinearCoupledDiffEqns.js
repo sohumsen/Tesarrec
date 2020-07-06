@@ -13,13 +13,15 @@ const LinearCoupledDiffEqns = (props) => {
   /**
    * A method component that takes in a equation and outputs a chart
    */
-
+  
   let parsedEquations = [];
   for (let i = 0; i < props.eqns.length; i++) {
     const eqn = props.eqns[i];
     var parsed = simplify(parse(eqn));
     parsedEquations.push(parsed);
   }
+  console.log(props.eqns)
+
 
   const calcValueAt = (initialValues) => {
     // { 1 , 2, 3}
@@ -31,8 +33,17 @@ const LinearCoupledDiffEqns = (props) => {
       coordinate[dependentVariable] = initialValues[i];
     }
     coordinate["t"] = initialValues[initialValues.length - 1];
+    
+    const accumulative = {
+      ...coordinate,
+      ...props.vars
+    }
+    console.log(accumulative)
+   
+    
+
     for (let idx = 0; idx < parsedEquations.length; idx++) {
-      eqnResultsArr.push(parsedEquations[idx].evaluate(coordinate)); // { a :1 , b: 3.3}
+      eqnResultsArr.push(parsedEquations[idx].evaluate(accumulative)); // { a :1 , b: 3.3}
     }
 
     return eqnResultsArr;

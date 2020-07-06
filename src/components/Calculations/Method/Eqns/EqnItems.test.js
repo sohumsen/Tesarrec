@@ -36,7 +36,7 @@ describe("<LinearCoupledDiffEqns/>", () => {
             errorMessage: null,
           },
         ]}
-        removeEqn={null}
+        removeItem={null, "Eqns"}
         handleMathQuillInputChange={handleMathQuillInputChange}
       />
     );

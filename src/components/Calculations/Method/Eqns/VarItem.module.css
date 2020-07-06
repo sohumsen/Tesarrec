@@ -1,0 +1,58 @@
+
+
+
+.Independent{
+  /*background-color: aqua;*/
+  float: left;
+  width: 45%;
+  margin: 1%;
+  padding: 1%;
+}
+.Dependent{
+  /*background-color: rgb(126, 126, 177);*/
+  background-color: rgb(250, 235, 215);
+  float: left;
+  width: 45%;
+  margin: 1%;
+  padding: 1%;
+
+}
+.Constant{
+  background-color: beige;
+  float: left;
+  width: 45%;
+  padding: 1%;
+  margin: 1%;
+}
+.RemoveButton {
+  float: left;
+  position: relative;
+}
+.slider{
+  /*background-color: rgb(173, 172, 211);*/
+  width: 100%;
+
+  float: left;
+  margin-top: -20px;
+
+}
+.mathQuill{
+  /*background-color: rgb(255, 196, 196);*/
+  float: left;
+  height: 60px
+
+}
+
+.input{
+  /*background-color: rgb(165, 208, 247);*/
+  float: left;
+  font-size: smaller;
+
+
+}
+.inputs{
+  /*background-color: blueviolet;*/
+  width: fit-content;
+  float: left;
+
+}
