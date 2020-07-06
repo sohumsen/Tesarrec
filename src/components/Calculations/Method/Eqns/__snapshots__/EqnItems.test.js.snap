@@ -8,6 +8,6 @@ exports[`<LinearCoupledDiffEqns/> should solve on differential eqn and presnet a
   error={null}
   handleMathQuillInputChange={[Function]}
   id="qwert"
-  removeEqn={[Function]}
+  removeItem={[Function]}
 />
 `;
