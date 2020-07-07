@@ -39,6 +39,7 @@ const OverallReactionAnodeCathode = (props) => {
   let ProductValueData = [];
   let OpexData = [];
   let CapexData = [];
+  let MinimumProductSellingPriceData=[]
   props.heatMapContents.xLabels.forEach((Xelement) => {
     let AnodeData = ReadAnodeJSON(Xelement);
     //console.log(AnodeData)
@@ -78,7 +79,8 @@ const OverallReactionAnodeCathode = (props) => {
           0.0167 *
           ElectricityGeneration +
         0.09 * props.concentration * props.volume);
-    
+    let MinimumProductSellingPrice=(Capex)+(Opex/ElectricityGeneration)*24*0.365
+
 
     let GWPsaving = ElectricityGeneration * 3.6 * CarbonEmmision * 8.76;
     CapexData.push(Capex.toFixed(2));
@@ -92,6 +94,8 @@ const OverallReactionAnodeCathode = (props) => {
     OpexData.push(Opex.toFixed(2));
 
     GWPSavingData.push(GWPsaving.toFixed(2));
+
+    MinimumProductSellingPriceData.push(MinimumProductSellingPrice.toFixed(2))
 
     //console.log( Xelement,Yelement)
 
@@ -119,7 +123,7 @@ const OverallReactionAnodeCathode = (props) => {
 
   let TwoDCapexData = FormatArr(CapexData);
 
-
+  let TwoDMinimumProductSellingPrice=FormatArr(MinimumProductSellingPriceData)
 
   //console.log(energyObj)
 
@@ -181,7 +185,16 @@ const OverallReactionAnodeCathode = (props) => {
           HeatMapChangedOnClick={props.HeatMapChangedOnClick}
         />
       </div>
-
+      <div className={classes.HeatMapEnergyPerformance}>
+        <h3>Heat map of Minimum Electricity Selling Price (&euro;/kWh)</h3>
+        <MyHeatMap
+          xLabels={props.heatMapContents.xLabels}
+          yLabels={["Product Value"]}
+          color={"rgba(200, 96, 30"}
+          data={TwoDMinimumProductSellingPrice}
+          HeatMapChangedOnClick={props.HeatMapChangedOnClick}
+        />
+      </div>
       <div className={classes.HeatMapEnergyPerformance}>
         <CashFlowGraph
           TwoDCapitalCostData={TwoDCapitalCostData}

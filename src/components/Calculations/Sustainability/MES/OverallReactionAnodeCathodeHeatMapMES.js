@@ -6,7 +6,7 @@ import ReadCathodeJSON from "../../../Excel/Cathode/ReadCathodeJSON";
 import MyHeatMap from "../../../UI/MyHeatMap/MyHeatMap";
 import classes from "./OverallReactionAnodeCathodeMES.module.css";
 // import MyMathQuill from "../../../UI/Math/MyMathQuill";
-import {abs} from 'mathjs'
+import { abs } from "mathjs";
 
 import MESPic from "../../../../assets/MES.png";
 import CashFlowGraph from "./CashFlowGraph";
@@ -42,8 +42,9 @@ const OverallReactionAnodeCathode = (props) => {
   let GWPSavingData = [];
   let TheoreticalPotentialData = [];
   let CapitalCostData = [];
-  let OpexData=[]
-  let ProductValueData=[]
+  let OpexData = [];
+  let ProductValueData = [];
+  let MinimumProductSellingPriceData=[]
   props.heatMapContents.yLabels.forEach((Yelement) => {
     props.heatMapContents.xLabels.forEach((Xelement) => {
       let AnodeData = ReadAnodeJSON(Xelement);
@@ -91,29 +92,23 @@ const OverallReactionAnodeCathode = (props) => {
         props.concentration *
         StandardGibbsEnergyOfReactionProductkJMol;
       let ProductionRateg =
-        (props.concentration * 
-
+        (props.concentration *
           props.volume *
           props.efficiency *
           MolarMassOfProduct) /
         (MolarMassOfSubstrate * xDash);
-      
-        let TheoreticalPotential=0
-      if ((2*mDash+h)===0){
-        TheoreticalPotential =
-        abs(
-          StandardGibbsEnergyOfReactionSubstratekJMol *
-          (1000 / (96485 * (2)))
-        ) 
-      }else{
-        TheoreticalPotential =
-        abs(
-          StandardGibbsEnergyOfReactionSubstratekJMol *
-          (1000 / (96485 * (2 * mDash + h)))
-        ) 
 
+      let TheoreticalPotential = 0;
+      if (2 * mDash + h === 0) {
+        TheoreticalPotential = abs(
+          StandardGibbsEnergyOfReactionSubstratekJMol * (1000 / (96485 * 2))
+        );
+      } else {
+        TheoreticalPotential = abs(
+          StandardGibbsEnergyOfReactionSubstratekJMol *
+            (1000 / (96485 * (2 * mDash + h)))
+        );
       }
-      
 
       let GWPSaving =
         (GWPp *
@@ -129,14 +124,12 @@ const OverallReactionAnodeCathode = (props) => {
           props.CurrentCollectorCost * 0.0005) *
         ProductionRateg *
         7.3 *
-        props.LangFactorCost*24;
+        props.LangFactorCost *
+        24;
 
       let ProductValue =
-        props.ProductionPriceCost *
-        parseFloat(ProductionRateg) *
-        24 *
-        365;
-    
+        props.ProductionPriceCost * parseFloat(ProductionRateg) * 24 * 365;
+
       let Opex =
         1.3 *
         ((0.189 * CapitalCost) / props.LangFactorCost +
@@ -146,26 +139,28 @@ const OverallReactionAnodeCathode = (props) => {
             365) /
             1000 /
             0.1 +
-          ((1.71 * 52033) / 1000000) *
-            parseFloat(ProductionRateg) +
+          ((1.71 * 52033) / 1000000) * parseFloat(ProductionRateg) +
           props.ExternalEnergyCost *
             2.43 *
             parseFloat(StandardGibbsEnergyOfReactionkJ));
+      
+      let MinimumProductSellingPrice=(CapitalCost*props.ACCCost)+Opex/ProductionRateg*24*365
 
       ProductionRategData.push(ProductionRateg.toFixed(2));
 
       GibbsEnergyData.push(StandardGibbsEnergyOfReactionkJ.toFixed(2));
 
-      TheoreticalPotentialData.push((TheoreticalPotential).toFixed(2));
+      TheoreticalPotentialData.push(TheoreticalPotential.toFixed(2));
 
-      GWPSavingData.push((GWPSaving*8.76).toFixed(2));
+      GWPSavingData.push((GWPSaving * 8.76).toFixed(2));
 
       CapitalCostData.push(CapitalCost.toFixed(2));
 
-      ProductValueData.push(ProductValue.toFixed(2))
+      ProductValueData.push(ProductValue.toFixed(2));
 
-      OpexData.push(Opex.toFixed(2))
+      OpexData.push(Opex.toFixed(2));
 
+      MinimumProductSellingPriceData.push(MinimumProductSellingPrice.toFixed(2))
     });
   });
 
@@ -188,31 +183,33 @@ const OverallReactionAnodeCathode = (props) => {
 
   let TwoDCapitalCostData = FormatArr(CapitalCostData);
 
-  let TwoDProductValueData=FormatArr(ProductValueData)
+  let TwoDProductValueData = FormatArr(ProductValueData);
 
-  let TwoOpexData=FormatArr(OpexData)
+  let TwoDOpexData = FormatArr(OpexData);
 
+  let TwoDMinimumProductSellingPriceData=FormatArr(MinimumProductSellingPriceData)
 
-  console.log( TwoDCapitalCostData,
-props.ProductionPriceCost,
- TwoDProductionRategData,
-props.ACCCost,
-props.LangFactorCost,
-props.AnolyteCost,
-props.CatholyteCost,
-props.ExternalEnergyCost,
-TwoDGibbsEnergyData,
-props.IRRCost,
-props.chosenValue,
-props.anodeSubstrate,
-props.cathodeProduct,
-props.xCoordAnode,
-props.yCoordCathode)
+  // console.log(
+  //   TwoDCapitalCostData,
+  //   props.ProductionPriceCost,
+  //   TwoDProductionRategData,
+  //   props.ACCCost,
+  //   props.LangFactorCost,
+  //   props.AnolyteCost,
+  //   props.CatholyteCost,
+  //   props.ExternalEnergyCost,
+  //   TwoDGibbsEnergyData,
+  //   props.IRRCost,
+  //   props.chosenValue,
+  //   props.anodeSubstrate,
+  //   props.cathodeProduct,
+  //   props.xCoordAnode,
+  //   props.yCoordCathode
+  // );
   return (
     <div className={classes.HeatMaps}>
       <div className={classes.HeatMapEnergyPerformance}>
         <img src={MESPic} width="110%" alt="mes pic"></img>
-
       </div>
       <div className={classes.HeatMapEnergyPerformance}>
         <h3>Heat map of Theoretical potential (V)</h3>
@@ -228,7 +225,6 @@ props.yCoordCathode)
       <div className={classes.HeatMapEnergyPerformance}>
         <h3>Production rate (g/h)</h3>
 
-
         <MyHeatMap
           xLabels={props.heatMapContents.xLabels}
           yLabels={props.heatMapContents.yLabels}
@@ -237,7 +233,6 @@ props.yCoordCathode)
           HeatMapChangedOnClick={props.HeatMapChangedOnClick}
         />
       </div>
-
 
       <div className={classes.HeatMapEnergyPerformance}>
         <h3>Global Warming Potential saving (kg CO&#8322; eq./year)</h3>
@@ -270,7 +265,7 @@ props.yCoordCathode)
           xLabels={props.heatMapContents.xLabels}
           yLabels={props.heatMapContents.yLabels}
           color={"rgba(138, 235, 79"}
-          data={TwoOpexData}
+          data={TwoDOpexData}
           HeatMapChangedOnClick={props.HeatMapChangedOnClick}
         />
       </div>
@@ -283,6 +278,18 @@ props.yCoordCathode)
           yLabels={props.heatMapContents.yLabels}
           color={"rgba(23, 92, 132"}
           data={TwoDProductValueData}
+          HeatMapChangedOnClick={props.HeatMapChangedOnClick}
+        />
+      </div>
+
+      <div className={classes.HeatMapEnergyPerformance}>
+        <h3>Heat map of Minimum Product Selling Price (&euro;/g)</h3>
+
+        <MyHeatMap
+          xLabels={props.heatMapContents.xLabels}
+          yLabels={props.heatMapContents.yLabels}
+          color={"rgba(23, 23, 79"}
+          data={TwoDMinimumProductSellingPriceData}
           HeatMapChangedOnClick={props.HeatMapChangedOnClick}
         />
       </div>

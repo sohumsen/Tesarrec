@@ -8,7 +8,7 @@ import classes from "./Mes.module.css";
 import MyErrorMessage from "../../../components/UI/MyErrorMessage/MyErrorMessage";
 import SettingButton from "../../../components/UI/Button/SettingButton";
 import GraphConfig from "../../../components/UI/GraphConfig/GraphConfig";
-import LinearCoupledDiffEqns from "../../../components/Calculations/Method/LinearCoupled/Calcs/LinearCoupledDiffEqns";
+import LinearCoupledDiffEqns from "../../../components/Calculations/Method/LinearCoupled/Calcs/MesDiffEqns";
 class LinearCoupled extends Component {
   /**
    * Visual Component that contains the textbox for the equation and calculation outputs
@@ -487,6 +487,7 @@ class LinearCoupled extends Component {
         h={0.01}
         numberOfCycles={50}
         eqns={eqns}
+        axis={["a","t"]}
         LineNames={LineNames}
         initialConditions={this.state.graphConfig.initialConditions}
         LegendVertical={this.state.graphConfig.LegendVertical}

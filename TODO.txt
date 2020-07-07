@@ -18,19 +18,17 @@ make clickaway work
 
 make only one request per load perhaps 
 
-refresh token DONE
-on double click text select all
-submit graph config doesnt work
+refresh token broken
+
+close graph button
+make graph buttons toolbar
 format graph config
+save variables to db
 
 change to react grid
-format Variable form
 
-When ediiting equaltions allow only the variables declared and numericals
-move file nac ro top left corner
-change dustbin to cross at top right in variable part
-reformat variable widget
-initial load loads incorrect eqns
+move file nav to top left corner
+
 
 
 
@@ -107,6 +105,17 @@ DONE
     perhaps place config button in chart DONE
     on close graph config, dont close graph DONE
     reset not working because of component did update DONE
+    change dustbin to cross at top right in variable part DONE
+    reformat variable widget DONE
+    initial load loads incorrect eqns DONE
+    When ediiting equaltions allow only the variables declared and numericals DONE
+    format Variable form DONE
+    on double click text select all DONE
+    submit graph config doesnt work DONE
+    order the variables  DONE
+
+
+
 NOT NEEDED
 ===========
 

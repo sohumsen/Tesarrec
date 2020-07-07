@@ -11,7 +11,7 @@ import Draggable from "react-draggable";
 import RestoreIcon from "@material-ui/icons/Restore";
 
 import DraggableWrapper from "../../components/UI/DraggableWrapper/DraggableWrapper";
-import DEFAULTEQNS from "./DefaultEqns";
+import DEFAULTEQNS from "./DefaultStates/DefaultEqns";
 
 class ModelBench extends Component {
   /**
@@ -33,6 +33,8 @@ class ModelBench extends Component {
     configPos: { x: 0, y: 0 },
     resetAllPos: false,
   };
+
+
 
   componentDidMount() {
     this.setState({ loading: true });

@@ -11,23 +11,44 @@ const VarItems = (props) => {
   };
   let Vars = props.Vars;
   let newVars = [];
-  console.log(props.Vars)
+
+
+  // let order = ["a", "b", "c", "d","e","f","g","h","i","j","k"];
+  // order.forEach((letter) => {
+  //   Eqns.forEach((obj) => {
+  //     if (obj.line === letter) {
+  //       newEqns.push(obj);
+  //     }
+  //   });
+  // });
+
+  Vars.sort((a, b) =>
+    a.LatexForm.slice(2, a.LatexForm.length) >
+    b.LatexForm.slice(2, b.LatexForm.length)
+      ? 1
+      : -1
+  );
 
   Vars.forEach((Var) => {
     if (Var.VarType === "Dependent") {
       newVars.push(Var);
     }
   });
+  
   Vars.forEach((Var) => {
     if (Var.VarType === "Independent") {
       newVars.push(Var);
     }
   });
+
   Vars.forEach((Var) => {
     if (Var.VarType === "Constant") {
       newVars.push(Var);
     }
   });
+
+
+
 
 
   return newVars.map((Var) => {
@@ -50,7 +71,6 @@ const VarItems = (props) => {
         )}
         handleVariableInputChange={props.handleVariableInputChange(Var.id)}
         SliderHandleChange={props.SliderHandleChange}
-
         SliderTextHandleChange={props.SliderTextHandleChange}
       />
     );

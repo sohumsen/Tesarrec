@@ -8,15 +8,17 @@
   border-style: solid;
   */
 }
-.Vars{
+.Vars {
   width: 100%;
-  
-}
-.VarContainer{
-  width: 37%;
-  float: left;
-  margin-left: 1%;
 
+
+}
+.VarContainer {
+  width: 160%;
+  display: flex;
+  flex-direction: column;
+  margin-top: 2%;
+  float: left;
 }
 .singleItem {
   padding: 1%;
@@ -34,10 +36,10 @@
 
 .Graph {
   float: right;
-  width: 59%;
+  width: 43%;
   position: absolute;
-  right: 5%;
-  width: 50%;
+  right: 1%;
+  top: 0;
   /*
   background-color: bisque; 
   border-width: 2px;
@@ -46,8 +48,6 @@
   */
 }
 
-.graphConfig{
+.graphConfig {
   background-color: aquamarine;
-
-  
 }

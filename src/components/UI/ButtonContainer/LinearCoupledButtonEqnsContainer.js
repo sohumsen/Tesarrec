@@ -5,6 +5,8 @@ import IconButton from "@material-ui/core/IconButton";
 import { Tooltip, Menu, Paper } from "@material-ui/core";
 import RestoreIcon from "@material-ui/icons/Restore";
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+import { green } from '@material-ui/core/colors';
+
 const LinearCoupledButtonEqnsContainer = (props) => {
   return (
     <Paper >
@@ -44,7 +46,7 @@ const LinearCoupledButtonEqnsContainer = (props) => {
             aria-label="Submit"
             onClick={props.handleMathQuillInputSubmit}
           >
-            <PlayCircleOutlineIcon />
+            <PlayCircleOutlineIcon style={{ color: green[500] }} />
           </IconButton>
         </span>
       </Tooltip>

@@ -16,8 +16,8 @@ import Draggable from "react-draggable";
 import ResizeableWrapper from "../../../components/UI/ResizableWrapper/ResizableWrapper";
 import SettingsIcon from "@material-ui/icons/Settings";
 import DraggableWrapper from "../../../components/UI/DraggableWrapper/DraggableWrapper";
-import DEFAULTEQNS from "../DefaultEqns";
-import DEFAULTVARS from "../DefaultVars";
+import DEFAULTEQNS from '../DefaultStates/DefaultEqns';
+import DEFAULTVARS from "../DefaultStates/DefaultVars";
 import LinearCoupledButtonVariablesContainer from "../../../components/UI/ButtonContainer/LinearCoupledButtonVariablesContainer";
 
 class LinearCoupled extends Component {
@@ -220,6 +220,8 @@ class LinearCoupled extends Component {
         xAxis: "t", //x,y,
         yAxis: "a",
       },
+
+      Vars:this.defaultVars
     });
   };
   nextPossibleEqn = (prevState) => {
@@ -292,7 +294,6 @@ class LinearCoupled extends Component {
   };
 
   sliderHandleChange = (name, id) => (event, value) => {
-    console.log("Now");
 
     let items = this.state.Vars;
 
@@ -304,7 +305,6 @@ class LinearCoupled extends Component {
       ...items[idx],
     };
     item[name] = value;
-    console.log(name, value);
 
     const deepItems = [...this.state.Vars];
     deepItems[idx] = item;
@@ -314,6 +314,7 @@ class LinearCoupled extends Component {
 
   sliderTextHandleChange = (name, id) => (event) => {
     let { value, min, max } = event.target;
+    console.log(value,min,max)
 
     if (value !== "") {
       value = Math.max(Number(min), Math.min(Number(max), Number(value)));
@@ -430,7 +431,6 @@ class LinearCoupled extends Component {
     );
 
     let Vars = (
-      <Paper>
       <VarItems
         Vars={this.state.Vars}
         handleVariableInputChange={this.handleVariableInputChange}
@@ -439,7 +439,6 @@ class LinearCoupled extends Component {
         SliderHandleChange={this.sliderHandleChange}
         SliderTextHandleChange={this.sliderTextHandleChange}
       />
-      </Paper>
     );
 
     return (
@@ -456,11 +455,7 @@ class LinearCoupled extends Component {
             <Paper elevation={3}>
               <div className={classes.singleItem}>{Eqns}</div>
             </Paper>
-          </div>
-        </Paper>
-
-        <Paper ref={this.props.nodeRef} elevation={3}>
-          <div className={classes.VarContainer}>
+            <div className={classes.VarContainer}>
             <LinearCoupledButtonVariablesContainer
               calculate={this.state.calculate}
               onIncrementVariable={this.onIncrementVariable}
@@ -471,6 +466,12 @@ class LinearCoupled extends Component {
               <div className={classes.Vars}>{Vars}</div>
             </Paper>
           </div>
+          </div>
+          
+        </Paper>
+
+        <Paper ref={this.props.nodeRef} elevation={3}>
+          
         </Paper>
 
         <Draggable
