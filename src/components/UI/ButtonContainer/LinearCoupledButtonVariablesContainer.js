@@ -13,6 +13,7 @@ const LinearCoupledButtonVariablesContainer = (props) => {
       <Tooltip title="Add Constant" placement="top" arrow>
         <span>
           <IconButton
+            
             edge="end"
             aria-label="add"
             onClick={()=>props.onIncrementVariable("Constant")}

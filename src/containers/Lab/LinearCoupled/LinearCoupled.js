@@ -19,7 +19,7 @@ import DraggableWrapper from "../../../components/UI/DraggableWrapper/DraggableW
 import DEFAULTEQNS from '../DefaultStates/DefaultEqns';
 import DEFAULTVARS from "../DefaultStates/DefaultVars";
 import LinearCoupledButtonVariablesContainer from "../../../components/UI/ButtonContainer/LinearCoupledButtonVariablesContainer";
-
+import LinearCoupledButtonGraphContainer from '../../../components/UI/ButtonContainer/LinearCoupledButtonGraphContainer'
 class LinearCoupled extends Component {
   /**
    * Visual Component that contains the textbox for the equation and calculation outputs
@@ -50,9 +50,9 @@ class LinearCoupled extends Component {
   defaultEqns = DEFAULTEQNS;
   defaultVars = DEFAULTVARS;
 
-  componentDidMount() {
-    this.setState({ Vars: this.defaultVars });
-  }
+  // componentDidMount() {
+  //   this.setState({ Vars: this.defaultVars });
+  // }
   static getDerivedStateFromProps(props, state) {
     if (props.modelId !== state.modelId) {
       //NEW MODEL
@@ -60,14 +60,15 @@ class LinearCoupled extends Component {
         calculate: props.calculate,
         modelId: props.modelId,
         Eqns: props.Eqns,
+        Vars:props.Vars
       };
     }
 
     return null;
   }
   componentDidUpdate() {
-    if (this.state.Eqns !== this.props.Eqns) {
-      this.props.sendToParent(this.state.Eqns);
+    if (this.state.Eqns !== this.props.Eqns || this.state.Vars !== this.props.Vars) {
+      this.props.sendToParent(this.state.Eqns,this.state.Vars);
     }
   }
   validateExpression = (expr, line) => {
@@ -362,9 +363,9 @@ class LinearCoupled extends Component {
 
       numbers.splice(index, 1);
     }
-
+    console.log(numbers,numbers[0])
     let VariableObj = {
-      id: type + numbers[0],
+      id: type + numbers[0]+ new Date().getTime(),
       LatexForm: letter + "_" + numbers[0],
       errorMessage: null,
       VarType: type,
@@ -386,7 +387,7 @@ class LinearCoupled extends Component {
       };
     });
   };
-
+  
   renderGraph = () => {
     let eqns = [];
     this.state.Eqns.forEach((eqn) => {
@@ -481,18 +482,14 @@ class LinearCoupled extends Component {
         >
           <div ref={this.props.nodeRef} className={classes.Graph}>
             {this.state.calculate ? (
-              <Tooltip title="Config Equations" placement="top" arrow>
-                <span>
-                  <IconButton
-                    disabled={!this.state.calculate}
-                    edge="end"
-                    aria-label="config"
-                    onClick={this.onGraphConfigOpen}
-                  >
-                    <SettingsIcon />
-                  </IconButton>
-                </span>
-              </Tooltip>
+              <LinearCoupledButtonGraphContainer
+                calculate={this.state.calculate}
+                onGraphConfigOpen={this.onGraphConfigOpen}
+                onGraphClose={()=>{
+                  this.setState({calculate:false})
+                }}
+              />
+             
             ) : null}
             {this.state.calculate && this.state.graphConfig.submitted
               ? this.renderGraph()

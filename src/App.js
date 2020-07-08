@@ -31,27 +31,21 @@ class App extends Component {
     localStorage.removeItem("expirationDate");
     localStorage.removeItem("userId");
     this.props.history.push("/");
-
   };
 
-  refreshSession=(refreshToken)=>{
-
-    const authData={
-      grant_type:"refresh_token",
-      refresh_token:refreshToken
-    }
-    fetch(
-      "https://securetoken.googleapis.com/v1/token?key=" +
-        FIREBASE_KEY,
-      {
-        method: "post",
-        headers: {
-          Accept: "application/json, text/plain, */*",
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(authData),
-      }
-    )
+  refreshSession = (refreshToken) => {
+    const authData = {
+      grant_type: "refresh_token",
+      refresh_token: refreshToken,
+    };
+    fetch("https://securetoken.googleapis.com/v1/token?key=" + FIREBASE_KEY, {
+      method: "post",
+      headers: {
+        Accept: "application/json, text/plain, */*",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(authData),
+    })
       .then((response) => response.json())
       .then((data) => {
         if (!data.error) {
@@ -63,22 +57,22 @@ class App extends Component {
           localStorage.setItem("userId", data.user_id);
           localStorage.setItem("refreshToken", data.refresh_token);
 
-
-          this.props.authSuccess(data.id_token, data.user_id);
-          this.props.checkAuthTimeout(data.expires_in);
+          this.authSuccess(data.id_token, data.user_id);
+          this.checkAuthTimeout(data.expires_in);
         } else {
-          this.props.authFail(data.error.message);
+          this.authFail(data.error.message);
         }
       })
       .catch((error) => {
-        this.props.authFail(error);
+        this.authFail(error);
       });
-
-  }
+  };
 
   checkAuthTimeout = (expirationTime) => {
     setTimeout(() => {
-      this.onLogoutHandler();
+      const refreshToken = localStorage.getItem("refreshToken");
+
+      this.refreshSession(refreshToken);
     }, expirationTime * 1000);
   };
   authSuccess = (idToken, localId) => {
@@ -105,15 +99,16 @@ class App extends Component {
   componentDidMount() {
     const token = localStorage.getItem("token");
     if (!token) {
-      this.onLogoutHandler();//no token
+      this.onLogoutHandler(); //no token
     } else {
       const expirationDate = new Date(localStorage.getItem("expirationDate"));
-      const refreshToken=localStorage.getItem("refreshToken")
+      const refreshToken = localStorage.getItem("refreshToken");
       if (expirationDate <= new Date()) {
-        this.onLogoutHandler(); //token expired
+        this.refreshSession(refreshToken)
+        //this.onLogoutHandler(); //token expired
       } else {
         const userId = localStorage.getItem("userId");
-        this.authSuccess(token, userId);//theyre in
+        this.authSuccess(token, userId); //theyre in
         this.checkAuthTimeout(
           (expirationDate.getTime() - new Date().getTime()) / 1000
         );
@@ -150,8 +145,7 @@ class App extends Component {
         <Route path="/reference" component={Reference} />
         <Route path="/contact" component={Contact} />
 
-        <Redirect to="/"/>
-
+        <Redirect to="/" />
       </Switch>
     );
     let ifNotLoggedIn = (
@@ -187,9 +181,7 @@ class App extends Component {
         <Route path="/sustainability/mes" exact component={Mes} />
         <Route path="/reference" component={Reference} />
         <Route path="/contact" component={Contact} />
-        <Redirect to="/"/>
-
-
+        <Redirect to="/" />
       </Switch>
     );
     let dynamicRoutes = this.state.isLoggedIn ? ifLoggedIn : ifNotLoggedIn;
@@ -199,9 +191,7 @@ class App extends Component {
         <BrowserView>
           <Route path="/" exact component={About} />
 
-          <Layout isLoggedIn={this.state.isLoggedIn}>
-            {dynamicRoutes}
-          </Layout>
+          <Layout isLoggedIn={this.state.isLoggedIn}>{dynamicRoutes}</Layout>
         </BrowserView>
         <MobileView>
           <MyMobileView />

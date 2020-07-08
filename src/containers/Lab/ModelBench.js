@@ -12,6 +12,7 @@ import RestoreIcon from "@material-ui/icons/Restore";
 
 import DraggableWrapper from "../../components/UI/DraggableWrapper/DraggableWrapper";
 import DEFAULTEQNS from "./DefaultStates/DefaultEqns";
+import DEFAULTVARS from "./DefaultStates/DefaultVars";
 
 class ModelBench extends Component {
   /**
@@ -23,6 +24,7 @@ class ModelBench extends Component {
     modelId: "",
     allModelId: {},
     Eqns: [],
+    Vars:[],
     calculate: false,
     error: false,
     tabChoiceValue: 1,
@@ -45,10 +47,12 @@ class ModelBench extends Component {
     this.setState(
       {
         Eqns: DEFAULTEQNS,
+        Vars:DEFAULTVARS
       },
       () => {
-        const Eqns = {
+        const payload = {
           Eqns: this.state.Eqns,
+          Vars:this.state.Vars,
           Name: "Untitled",
           // userId:this.props.userId
         };
@@ -64,12 +68,13 @@ class ModelBench extends Component {
               Accept: "application/json, text/plain, */*",
               "Content-Type": "application/json",
             },
-            body: JSON.stringify(Eqns),
+            body: JSON.stringify(payload),
           }
         )
           .then((response) => response.json())
           .then((data) => {
             if (!data.error) {
+              console.log(data)
               this.setState({ modelId: data.name, error: false }, () => {
                 this.getAllFiles();
               });
@@ -84,13 +89,14 @@ class ModelBench extends Component {
     );
   };
 
-  sendToParent = (eqns) => {
-    this.setState({ Eqns: eqns });
+  sendToParent = (eqns,vars) => {
+    this.setState({ Eqns: eqns ,Vars:vars});
   };
 
   saveEquation = () => {
-    const Eqns = {
+    const payload = {
       Eqns: this.state.Eqns,
+      Vars:this.state.Vars
     };
 
     if (this.state.modelId !== "") {
@@ -107,13 +113,13 @@ class ModelBench extends Component {
             Accept: "application/json, text/plain, */*",
             "Content-Type": "application/json",
           },
-          body: JSON.stringify(Eqns),
+          body: JSON.stringify(payload),
         }
       )
         .then((response) => response.json())
         .then((data) => {
           if (!data.error) {
-            this.setState({ Eqns: data.Eqns, error: false }, () => {
+            this.setState({ Eqns: data.Eqns,Vars:data.Vars, error: false }, () => {
               this.getAllFiles();
             });
           } else {
@@ -135,6 +141,8 @@ class ModelBench extends Component {
       calculate: false,
       modelId: modelId,
       Eqns: this.state.allModelId[modelId].Eqns,
+      Vars: this.state.allModelId[modelId].Vars,
+
     });
   };
 
@@ -193,7 +201,7 @@ class ModelBench extends Component {
     let allModelId = { ...this.state.allModelId };
     delete allModelId[this.state.modelId];
 
-    this.setState({ modelId: null, Eqns: [], allModelId: allModelId });
+    this.setState({ modelId: null, Eqns: [], allModelId: allModelId,Vars:[] });
 
     fetch(
       "https://tesarrec.firebaseio.com/eqns/" +
@@ -262,6 +270,7 @@ class ModelBench extends Component {
     }
     navigator.clipboard.writeText(allTextEqns);
   };
+  
   //        <TemplateController/>
   handleTabChange = (event, val) => {
     this.setState({ tabChoiceValue: val });
@@ -356,6 +365,7 @@ class ModelBench extends Component {
               graphPos={this.state.graphPos}
               configPos={this.state.configPos}
               onStop={this.onStop}
+              Vars={this.state.Vars}
             />
           )}
         </div>

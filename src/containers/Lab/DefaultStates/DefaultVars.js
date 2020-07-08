@@ -6,7 +6,6 @@ const DEFAULTVARS = [
       Unit: "cm",
       VarType: "Independent",
       VarLow:0,
-      VarCurrent:50,
       VarHigh:100,
     },
     {
@@ -56,7 +55,6 @@ const DEFAULTVARS = [
       Unit: "cm",
       VarType: "Dependent",
       VarLow:0,
-      VarCurrent:50,
       VarHigh:100,
       
     },
@@ -67,7 +65,6 @@ const DEFAULTVARS = [
       Unit: "cm",
       VarType: "Dependent",
       VarLow:0,
-      VarCurrent:50,
       VarHigh:100,
       
     },
