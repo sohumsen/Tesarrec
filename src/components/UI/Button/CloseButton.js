@@ -16,7 +16,7 @@ export default function SettingButton(props) {
         disabled={props.disabled}
         style={{ color: "rgb(0, 0, 105)" }}
       >
-        <CloseIcon />
+        <CloseIcon style={{ fontSize: 15 }}/>
       </IconButton>
     </div>
   );

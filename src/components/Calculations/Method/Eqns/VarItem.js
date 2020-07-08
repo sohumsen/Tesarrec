@@ -8,6 +8,7 @@ import OutlinedInput from "../../../UI/Input/OutlinedInput";
 import { Paper } from "@material-ui/core";
 import MinMaxSlider from "../../../UI/SliderContainer/MinMaxSlider/MinMaxSlider";
 import CloseButton from "../../../UI/Button/CloseButton";
+import ErrorMessage from '../../../UI/MyErrorMessage/CustomizedErrorMessage'
 /**
  *
  *
@@ -16,12 +17,13 @@ import CloseButton from "../../../UI/Button/CloseButton";
 const VarItem = (props) => {
   return (
     <li className={classes.Container} style={{ listStyleType: "none" }}>
+     
       {props.VarType == "Independent" ? (
         <Paper
           className={classes.Independent}
           style={{ backgroundColor: "rgb(250, 250, 230)" }}
         >
-          <div className={classes.RemoveButton}>
+           <div className={classes.RemoveButton}>
             <CloseButton
               disabled={props.disabledRemoveButton}
               type="button"
@@ -173,7 +175,7 @@ const VarItem = (props) => {
         </Paper>
       ) : null}
 
-      <div className={classes.ErrorMsg}>{props.error}</div>
+      <div className={classes.ErrorMsg}>{props.error?<ErrorMessage/>:null}</div>
     </li>
   );
 };

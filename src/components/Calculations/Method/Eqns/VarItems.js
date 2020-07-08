@@ -2,25 +2,8 @@ import React from "react";
 import VarItem from "./VarItem";
 
 const VarItems = (props) => {
-  const disabledRemoveButton = () => {
-    if (props.Vars.length === 2) {
-      return true;
-    } else {
-      return false;
-    }
-  };
   let Vars = props.Vars;
   let newVars = [];
-
-
-  // let order = ["a", "b", "c", "d","e","f","g","h","i","j","k"];
-  // order.forEach((letter) => {
-  //   Eqns.forEach((obj) => {
-  //     if (obj.line === letter) {
-  //       newEqns.push(obj);
-  //     }
-  //   });
-  // });
 
   Vars.sort((a, b) =>
     a.LatexForm.slice(2, a.LatexForm.length) >
@@ -29,27 +12,16 @@ const VarItems = (props) => {
       : -1
   );
 
-  Vars.forEach((Var) => {
-    if (Var.VarType === "Dependent") {
-      newVars.push(Var);
-    }
-  });
-  
-  Vars.forEach((Var) => {
-    if (Var.VarType === "Independent") {
-      newVars.push(Var);
-    }
-  });
+  let order = ["Dependent", "Independent", "Constant"];
 
-  Vars.forEach((Var) => {
-    if (Var.VarType === "Constant") {
-      newVars.push(Var);
-    }
-  });
-
-
-
-
+  for (let i = 0; i < order.length; i++) {
+    let type = order[i];
+    Vars.forEach((Var) => {
+      if (Var.VarType === type) {
+        newVars.push(Var);
+      }
+    });
+  }
 
   return newVars.map((Var) => {
     return (
@@ -57,7 +29,6 @@ const VarItems = (props) => {
         key={Var.id}
         error={Var.errorMessage}
         id={Var.id}
-        disabledRemoveButton={disabledRemoveButton()}
         removeItem={() => props.removeItem(Var.id, "Vars")}
         LatexForm={Var.LatexForm}
         Unit={Var.Unit}
@@ -71,7 +42,6 @@ const VarItems = (props) => {
         )}
         handleVariableInputChange={props.handleVariableInputChange(Var.id)}
         SliderHandleChange={props.SliderHandleChange}
-        SliderTextHandleChange={props.SliderTextHandleChange}
       />
     );
   });

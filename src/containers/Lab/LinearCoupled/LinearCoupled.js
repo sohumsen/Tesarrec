@@ -16,10 +16,10 @@ import Draggable from "react-draggable";
 import ResizeableWrapper from "../../../components/UI/ResizableWrapper/ResizableWrapper";
 import SettingsIcon from "@material-ui/icons/Settings";
 import DraggableWrapper from "../../../components/UI/DraggableWrapper/DraggableWrapper";
-import DEFAULTEQNS from '../DefaultStates/DefaultEqns';
+import DEFAULTEQNS from "../DefaultStates/DefaultEqns";
 import DEFAULTVARS from "../DefaultStates/DefaultVars";
 import LinearCoupledButtonVariablesContainer from "../../../components/UI/ButtonContainer/LinearCoupledButtonVariablesContainer";
-import LinearCoupledButtonGraphContainer from '../../../components/UI/ButtonContainer/LinearCoupledButtonGraphContainer'
+import LinearCoupledButtonGraphContainer from "../../../components/UI/ButtonContainer/LinearCoupledButtonGraphContainer";
 class LinearCoupled extends Component {
   /**
    * Visual Component that contains the textbox for the equation and calculation outputs
@@ -60,15 +60,18 @@ class LinearCoupled extends Component {
         calculate: props.calculate,
         modelId: props.modelId,
         Eqns: props.Eqns,
-        Vars:props.Vars
+        Vars: props.Vars,
       };
     }
 
     return null;
   }
   componentDidUpdate() {
-    if (this.state.Eqns !== this.props.Eqns || this.state.Vars !== this.props.Vars) {
-      this.props.sendToParent(this.state.Eqns,this.state.Vars);
+    if (
+      this.state.Eqns !== this.props.Eqns ||
+      this.state.Vars !== this.props.Vars
+    ) {
+      this.props.sendToParent(this.state.Eqns, this.state.Vars);
     }
   }
   validateExpression = (expr, line) => {
@@ -98,13 +101,38 @@ class LinearCoupled extends Component {
     const item = {
       ...items[idx],
     };
+
     if (itemType === "Eqns") {
       //Parse mathField.latex() and only allow ur vars
       //replace mathField.latex() with another version which is the VarRange
       item.TextEqn = mathField.text();
       item.LatexEqn = mathField.latex();
     } else {
-      item.LatexForm = mathField.latex();
+      // items.splice(idx,1)
+
+      //console.log(items.find(o => o.LatexForm === mathField.latex()))
+      // if(items.find(o => o.LatexForm === mathField.latex())!==null){
+      //   console.log("not allowed")
+
+      //  }{
+        item.LatexForm = mathField.latex();
+
+      // var valueArr = items.map(function (item) {
+      //   return item.LatexForm;
+      // });
+      // var isDuplicate = valueArr.some(function (item, idx) {
+      //   return valueArr.indexOf(item) != idx;
+      // });
+
+      // if (isDuplicate) {
+      //   item.errorMessage = "doesnt work";
+      // } else {
+      //   item.errorMessage = null;
+
+      // }
+
+
+      //  }
     }
 
     const deepItems = [...this.state[itemType]];
@@ -203,9 +231,8 @@ class LinearCoupled extends Component {
       }
     });
   };
-
-  resetForm = () => {
-    this.props.sendToParent(this.defaultEqns);
+  resetVars = () => {
+    this.props.sendToParent(this.state.Eqns, this.defaultVars);
 
     this.setState({
       calculate: false,
@@ -221,8 +248,25 @@ class LinearCoupled extends Component {
         xAxis: "t", //x,y,
         yAxis: "a",
       },
+    });
+  };
+  resetEqns = () => {
+    this.props.sendToParent(this.defaultEqns, this.state.Vars);
 
-      Vars:this.defaultVars
+    this.setState({
+      calculate: false,
+      modelId: "",
+
+      graphConfig: {
+        show: false,
+        submitted: true,
+        LegendHorizontal: "left",
+        LegendVertical: "top",
+        DecimalPrecision: 2,
+        initialConditions: [0.5, 0.5, 0.5, 0.5, 0.5],
+        xAxis: "t", //x,y,
+        yAxis: "a",
+      },
     });
   };
   nextPossibleEqn = (prevState) => {
@@ -295,7 +339,6 @@ class LinearCoupled extends Component {
   };
 
   sliderHandleChange = (name, id) => (event, value) => {
-
     let items = this.state.Vars;
 
     const idx = items.findIndex((e) => {
@@ -313,30 +356,6 @@ class LinearCoupled extends Component {
     this.setState({ Vars: deepItems });
   };
 
-  sliderTextHandleChange = (name, id) => (event) => {
-    let { value, min, max } = event.target;
-    console.log(value,min,max)
-
-    if (value !== "") {
-      value = Math.max(Number(min), Math.min(Number(max), Number(value)));
-    }
-
-    let items = this.state.Vars;
-
-    const idx = items.findIndex((e) => {
-      return e.id === id;
-    });
-
-    const item = {
-      ...items[idx],
-    };
-    item[name] = value;
-
-    const deepItems = [...this.state.Vars];
-    deepItems[idx] = item;
-
-    this.setState({ Vars: deepItems });
-  };
   nextPossibleVariable = (prevState, type) => {
     let typeArr = prevState.Vars.filter((Var) => {
       return Var.VarType === type;
@@ -363,9 +382,9 @@ class LinearCoupled extends Component {
 
       numbers.splice(index, 1);
     }
-    console.log(numbers,numbers[0])
+    console.log(numbers, numbers[0]);
     let VariableObj = {
-      id: type + numbers[0]+ new Date().getTime(),
+      id: type + numbers[0] + new Date().getTime(),
       LatexForm: letter + "_" + numbers[0],
       errorMessage: null,
       VarType: type,
@@ -387,7 +406,7 @@ class LinearCoupled extends Component {
       };
     });
   };
-  
+
   renderGraph = () => {
     let eqns = [];
     this.state.Eqns.forEach((eqn) => {
@@ -438,7 +457,6 @@ class LinearCoupled extends Component {
         removeItem={this.removeItem}
         handleMathQuillInputChange={this.handleMathQuillInputChange}
         SliderHandleChange={this.sliderHandleChange}
-        SliderTextHandleChange={this.sliderTextHandleChange}
       />
     );
 
@@ -449,7 +467,7 @@ class LinearCoupled extends Component {
             <LinearCoupledButtonEqnsContainer
               Eqns={this.state.Eqns}
               onIncrementEqn={this.onIncrementEqn}
-              resetForm={this.resetForm}
+              resetForm={this.resetEqns}
               handleMathQuillInputSubmit={this.handleMathQuillInputSubmit}
             />
 
@@ -457,23 +475,20 @@ class LinearCoupled extends Component {
               <div className={classes.singleItem}>{Eqns}</div>
             </Paper>
             <div className={classes.VarContainer}>
-            <LinearCoupledButtonVariablesContainer
-              calculate={this.state.calculate}
-              onIncrementVariable={this.onIncrementVariable}
-              resetForm={this.resetForm}
-            />
+              <LinearCoupledButtonVariablesContainer
+                Vars={this.state.Vars}
+                onIncrementVariable={this.onIncrementVariable}
+                resetForm={this.resetVars}
+              />
 
-            <Paper elevation={3}>
-              <div className={classes.Vars}>{Vars}</div>
-            </Paper>
+              <Paper elevation={3}>
+                <div className={classes.Vars}>{Vars}</div>
+              </Paper>
+            </div>
           </div>
-          </div>
-          
         </Paper>
 
-        <Paper ref={this.props.nodeRef} elevation={3}>
-          
-        </Paper>
+        <Paper ref={this.props.nodeRef} elevation={3}></Paper>
 
         <Draggable
           nodeRef={this.props.nodeRef}
@@ -485,11 +500,10 @@ class LinearCoupled extends Component {
               <LinearCoupledButtonGraphContainer
                 calculate={this.state.calculate}
                 onGraphConfigOpen={this.onGraphConfigOpen}
-                onGraphClose={()=>{
-                  this.setState({calculate:false})
+                onGraphClose={() => {
+                  this.setState({ calculate: false });
                 }}
               />
-             
             ) : null}
             {this.state.calculate && this.state.graphConfig.submitted
               ? this.renderGraph()

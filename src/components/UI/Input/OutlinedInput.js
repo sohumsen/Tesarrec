@@ -16,6 +16,18 @@ export default function BasicTextFields(props) {
   return (
     <form className={classes.root} noValidate autoComplete="off">
       <TextField
+        InputLabelProps={{
+          style: {
+            height: 25,
+            ...{ top: `-9px` },
+          },
+        }}
+        inputProps={{
+          style: {
+            height: 25,
+            padding: "0 14px",
+          },
+        }}
         size="small"
         type={props.type}
         value={props.value}
@@ -23,7 +35,8 @@ export default function BasicTextFields(props) {
         label={props.label}
         name={props.name}
         onKeyDown={props.onKeyDown}
-        variant="outlined"      />
+        variant="outlined"
+      />
     </form>
   );
 }
