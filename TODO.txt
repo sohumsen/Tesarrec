@@ -21,7 +21,7 @@ make only one request per load perhaps
 refresh token broken
 
 format graph config
-save variables to db DONE
+only allow unique variables
 breaks over 10 variables
 change to react grid
 
@@ -113,6 +113,8 @@ DONE
     order the variables  DONE
     close graph button DONE
     make graph buttons toolbar DONE
+    save variables to db DONE
+
 
 
 NOT NEEDED

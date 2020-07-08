@@ -15,7 +15,7 @@ import SignIn from "./containers/Authenticate/SignIn/SignIn";
 import SignUp from "./containers/Authenticate/SignUp/SignUp";
 import Logout from "./containers/Authenticate/Logout/Logout";
 import FIREBASE_KEY from "./firebasekey";
-
+import Chp from './containers/Sustainability/Chp/Chp'
 class App extends Component {
   state = {
     isLoggedIn: false,
@@ -139,6 +139,7 @@ class App extends Component {
           )}
         />
         <Route path="/dynamic/mes" exact component={DynamicMes} />
+        <Route path="/sustainability/chp" exact component={Chp} />
 
         <Route path="/sustainability/mfc" exact component={Mfc} />
         <Route path="/sustainability/mes" exact component={Mes} />
@@ -176,6 +177,7 @@ class App extends Component {
             />
           )}
         />
+        <Route path="/sustainability/chp" exact component={Chp} />
 
         <Route path="/sustainability/mfc" exact component={Mfc} />
         <Route path="/sustainability/mes" exact component={Mes} />
