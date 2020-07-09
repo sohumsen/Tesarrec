@@ -25,6 +25,8 @@
 }
 .RemoveButton {
   float: right;
+  width: 30px;
+  height: 30px;
 }
 .slider {
   /*background-color: rgb(173, 172, 211);*/

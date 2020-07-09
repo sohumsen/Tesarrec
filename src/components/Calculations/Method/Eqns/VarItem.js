@@ -8,7 +8,7 @@ import OutlinedInput from "../../../UI/Input/OutlinedInput";
 import { Paper } from "@material-ui/core";
 import MinMaxSlider from "../../../UI/SliderContainer/MinMaxSlider/MinMaxSlider";
 import CloseButton from "../../../UI/Button/CloseButton";
-import ErrorMessage from '../../../UI/MyErrorMessage/CustomizedErrorMessage'
+import ErrorMessage from "../../../UI/MyErrorMessage/CustomizedErrorMessage";
 /**
  *
  *
@@ -17,21 +17,11 @@ import ErrorMessage from '../../../UI/MyErrorMessage/CustomizedErrorMessage'
 const VarItem = (props) => {
   return (
     <li className={classes.Container} style={{ listStyleType: "none" }}>
-     
       {props.VarType == "Independent" ? (
         <Paper
-          className={classes.Independent}
+          className={classes.Dependent}
           style={{ backgroundColor: "rgb(250, 250, 230)" }}
         >
-           <div className={classes.RemoveButton}>
-            <CloseButton
-              disabled={props.disabledRemoveButton}
-              type="button"
-              value="removeItem"
-              displayValue="REMOVEIT"
-              onClick={props.removeItem}
-            />
-          </div>
           <div className={classes.mathQuill}>
             <MyMathQuill
               latex={props.LatexForm}
@@ -67,6 +57,25 @@ const VarItem = (props) => {
                 name={"VarHigh"}
               />
             </div>
+          </div>
+          <div className={classes.RemoveButton}>
+            <CloseButton
+              disabled={props.disabledRemoveButton}
+              type="button"
+              value="removeItem"
+              displayValue="REMOVEIT"
+              onClick={props.removeItem}
+            />
+          </div>
+          <div className={classes.input}>
+            <OutlinedInput
+              width={105}
+              type={"text"}
+              value={props.VarDescription}
+              onChange={props.handleVariableInputChange}
+              label={"Description"}
+              name={"VarDescription"}
+            />
           </div>
         </Paper>
       ) : null}
@@ -121,6 +130,16 @@ const VarItem = (props) => {
               onClick={props.removeItem}
             />
           </div>
+          <div className={classes.input}>
+            <OutlinedInput
+              width={105}
+              type={"text"}
+              value={props.VarDescription}
+              onChange={props.handleVariableInputChange}
+              label={"Description"}
+              name={"VarDescription"}
+            />
+          </div>
         </Paper>
       ) : null}
 
@@ -136,6 +155,7 @@ const VarItem = (props) => {
             />
           </div>
           <div className={classes.inputs}>
+         
             <div className={classes.input}>
               <OutlinedInput
                 type={"text"}
@@ -145,8 +165,18 @@ const VarItem = (props) => {
                 name={"VarCurrent"}
               />
             </div>
-
+            <div className={classes.input}>
+              <OutlinedInput
+                width={70}
+                type={"text"}
+                value={props.VarDescription}
+                onChange={props.handleVariableInputChange}
+                label={"Description"}
+                name={"VarDescription"}
+              />
+            </div>
            
+          
           </div>
           <div className={classes.RemoveButton}>
             <CloseButton
@@ -157,6 +187,8 @@ const VarItem = (props) => {
               onClick={props.removeItem}
             />
           </div>
+          
+         
 
           <div className={classes.slider}>
             <MinMaxSlider
@@ -175,7 +207,9 @@ const VarItem = (props) => {
         </Paper>
       ) : null}
 
-      <div className={classes.ErrorMsg}>{props.error?<ErrorMessage/>:null}</div>
+      <div className={classes.ErrorMsg}>
+        {props.error ? <ErrorMessage /> : null}
+      </div>
     </li>
   );
 };

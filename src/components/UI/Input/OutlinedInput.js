@@ -1,11 +1,12 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
+import { TextareaAutosize } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
   root: {
     "& > *": {
-      width: "8ch",
+      width: "4ch",
     },
   },
 }));
@@ -15,7 +16,9 @@ export default function BasicTextFields(props) {
 
   return (
     <form className={classes.root} noValidate autoComplete="off">
-      <TextField
+      <input
+      style={{width:props.width}}
+
         InputLabelProps={{
           style: {
             height: 25,
@@ -35,6 +38,7 @@ export default function BasicTextFields(props) {
         label={props.label}
         name={props.name}
         onKeyDown={props.onKeyDown}
+        placeholder={props.label}
         variant="outlined"
       />
     </form>

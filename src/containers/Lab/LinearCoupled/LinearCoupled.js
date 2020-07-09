@@ -115,7 +115,7 @@ class LinearCoupled extends Component {
       //   console.log("not allowed")
 
       //  }{
-        item.LatexForm = mathField.latex();
+      item.LatexForm = mathField.latex();
 
       // var valueArr = items.map(function (item) {
       //   return item.LatexForm;
@@ -130,7 +130,6 @@ class LinearCoupled extends Component {
       //   item.errorMessage = null;
 
       // }
-
 
       //  }
     }
@@ -187,11 +186,9 @@ class LinearCoupled extends Component {
     const item = {
       ...items[idx],
     };
-    if (event.target.value !== "") {
-      item[event.target.name] = parseFloat(event.target.value);
-    } else {
-      item[event.target.name] = "";
-    }
+
+    item[event.target.name] = event.target.value;
+
     const deepItems = [...this.state.Vars];
     deepItems[idx] = item;
 
@@ -387,6 +384,7 @@ class LinearCoupled extends Component {
       id: type + numbers[0] + new Date().getTime(),
       LatexForm: letter + "_" + numbers[0],
       errorMessage: null,
+      VarDescription:"",
       VarType: type,
       VarLow: 0,
       VarCurrent: 50,

@@ -29,6 +29,7 @@
     "react-device-detect": "^1.12.1",
     "react-dom": "^16.13.1",
     "react-draggable": "^4.4.3",
+    "react-grid-layout": "^0.18.3",
     "react-heatmap-grid": "^0.8.2",
     "react-mathjax": "^1.0.1",
     "react-mathquill": "^0.2.6",

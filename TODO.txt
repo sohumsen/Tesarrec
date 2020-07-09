@@ -23,9 +23,10 @@ format graph config
 only allow unique variables
 change file nav format
 change to react grid
-shrink right contenet chp
+shrink right contenet chp DONE
 fix all values to 2dp
 fix dynamic mes
+
 
 move file nav to top left corner
 
@@ -118,7 +119,9 @@ DONE
     save variables to db DONE
     breaks over 10 variables DONE
     refresh token broken DONE
-
+    make variables smaller DONE
+    unit boxes dont change DONE
+    add variable descriptions DONE
 
 
 

@@ -32,7 +32,7 @@ class RightContent extends Component {
         <MySliderContainer>
           <SliderWithText
             rootWidth={"90%"}
-            inputWidth={52}
+            inputWidth={72}
             displayCaption={"Biomass moisture content wt% "}
             value={this.props.BiomassMoistureContent}
             InputhandleChange={this.props.InputhandleChange(
@@ -45,8 +45,8 @@ class RightContent extends Component {
             )}
           />
           <SliderWithText
-            rootWidth={"53%"}
-            inputWidth={52}
+            rootWidth={"90%"}
+            inputWidth={72}
             displayCaption={"Biomass carbon content (dry basis)"}
             value={this.props.BiomassCarbonContent}
             InputhandleChange={this.props.InputhandleChange(
@@ -59,8 +59,8 @@ class RightContent extends Component {
             )}
           />
           <SliderWithText
-            rootWidth={"40%"}
-            inputWidth={62}
+            rootWidth={"90%"}
+            inputWidth={72}
             displayCaption={"Biomass hydrogen content (dry basis) wt% "}
             value={this.props.BiomassHydrogenContent}
             InputhandleChange={this.props.InputhandleChange(
@@ -74,7 +74,7 @@ class RightContent extends Component {
           />
           <SliderWithText
             rootWidth={"90%"}
-            inputWidth={52}
+            inputWidth={72}
             displayCaption={"Biomass calorific value (wet basis) MJ/kg "}
             value={this.props.BiomassCalorificValue}
             InputhandleChange={this.props.InputhandleChange(
@@ -88,7 +88,7 @@ class RightContent extends Component {
           />
           <SliderWithText
             rootWidth={"90%"}
-            inputWidth={52}
+            inputWidth={72}
             displayCaption={"Boiler efficiency "}
             value={this.props.BoilerEfficiency}
             InputhandleChange={this.props.InputhandleChange("BoilerEfficiency")}
@@ -100,7 +100,7 @@ class RightContent extends Component {
           />
           <SliderWithText
             rootWidth={"90%"}
-            inputWidth={52}
+            inputWidth={72}
             displayCaption={
               "Isentropic efficiency of back pressure steam turbine "
             }
@@ -116,7 +116,7 @@ class RightContent extends Component {
           />
           <SliderWithText
             rootWidth={"90%"}
-            inputWidth={52}
+            inputWidth={72}
             displayCaption={
               "Mechanical efficiency of back pressure steam turbine"
             }
@@ -132,7 +132,7 @@ class RightContent extends Component {
           />
           <SliderWithText
             rootWidth={"90%"}
-            inputWidth={52}
+            inputWidth={72}
             displayCaption={"Electricity demand GWh/year "}
             value={this.props.ElectricityDemand}
             InputhandleChange={this.props.InputhandleChange(
@@ -146,7 +146,7 @@ class RightContent extends Component {
           />
           <SliderWithText
             rootWidth={"90%"}
-            inputWidth={52}
+            inputWidth={72}
             displayCaption={"Lang factor"}
             value={this.props.LangFactor}
             InputhandleChange={this.props.InputhandleChange("LangFactor")}
@@ -156,7 +156,7 @@ class RightContent extends Component {
           />
           <SliderWithText
             rootWidth={"90%"}
-            inputWidth={52}
+            inputWidth={72}
             displayCaption={"Annual capital charge "}
             value={this.props.AnnualCapitalCharge}
             InputhandleChange={this.props.InputhandleChange(
@@ -170,7 +170,7 @@ class RightContent extends Component {
           />
           <SliderWithText
             rootWidth={"90%"}
-            inputWidth={52}
+            inputWidth={72}
             displayCaption={"Electricity price (Euro/kWh) "}
             value={this.props.ElectricityPrice}
             InputhandleChange={this.props.InputhandleChange("ElectricityPrice")}
@@ -182,7 +182,7 @@ class RightContent extends Component {
           />
           <SliderWithText
             rootWidth={"90%"}
-            inputWidth={52}
+            inputWidth={72}
             displayCaption={"Steam price (Euro/tonne)"}
             value={this.props.SteamPrice}
             InputhandleChange={this.props.InputhandleChange("SteamPrice")}
@@ -193,7 +193,7 @@ class RightContent extends Component {
 
           <SliderWithText
             rootWidth={"90%"}
-            inputWidth={52}
+            inputWidth={72}
             displayCaption={"IRR "}
             value={this.props.IRRCost}
             lowestVal={0.05}

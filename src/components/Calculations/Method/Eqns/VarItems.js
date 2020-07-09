@@ -36,6 +36,7 @@ const VarItems = (props) => {
         VarLow={Var.VarLow} // low, current, high
         VarCurrent={Var.VarCurrent} // low, current, high
         VarHigh={Var.VarHigh} // low, current, high
+        VarDescription={Var.VarDescription}
         handleMathQuillInputChange={props.handleMathQuillInputChange(
           Var.id,
           "Vars"
