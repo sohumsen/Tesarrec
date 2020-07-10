@@ -39,10 +39,7 @@ export default function FormControlLabelPlacement(props) {
   });
 
   return (
-    <Draggable
-    position={props.configPos}
-    onStop={(e, data) => props.onStop(e, data, "configPos")}
-  >
+
       <div className={classes.Container}>
         <Paper elevation={3}>
           <div className={classes.CloseButton}>
@@ -150,7 +147,6 @@ export default function FormControlLabelPlacement(props) {
           {props.errorMessage ? <MyErrorMessage /> : null}
         </Paper>
       </div>
-      </Draggable>
 
   );
 }

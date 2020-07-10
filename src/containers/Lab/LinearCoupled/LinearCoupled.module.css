@@ -1,6 +1,5 @@
 .Container {
   width: 98%;
-  margin: 1%;
   /*
   background-color: blanchedalmond;
   border-width: 2px;
@@ -14,19 +13,16 @@
 
 }
 .VarContainer {
-  width: 100%;
   display: flex;
   flex-direction: column;
-  margin-top: 2%;
-  float: left;
 }
 .singleItem {
   padding: 1%;
 }
 .EqnContainer {
-  font-size: medium;
   width: 30%;
-  float: left;
+  display: flex;
+  flex-direction: column;
   /*
   border-width: 2px;
   border-color: rgb(56, 122, 122);
@@ -37,9 +33,6 @@
 .Graph {
   float: right;
   width: 43%;
-  position: absolute;
-  right: 1%;
-  top: 0;
   /*
   background-color: bisque; 
   border-width: 2px;

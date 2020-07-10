@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import GridLayout from "react-grid-layout";
+import "../../../../node_modules/react-grid-layout/css/styles.css";
 
 import EqnItems from "../../../components/Calculations/Method/Eqns/EqnItems";
 import VarItems from "../../../components/Calculations/Method/Eqns/VarItems";
@@ -384,7 +386,7 @@ class LinearCoupled extends Component {
       id: type + numbers[0] + new Date().getTime(),
       LatexForm: letter + "_" + numbers[0],
       errorMessage: null,
-      VarDescription:"",
+      VarDescription: "",
       VarType: type,
       VarLow: 0,
       VarCurrent: 50,
@@ -422,7 +424,7 @@ class LinearCoupled extends Component {
       VarObj[VarElement.LatexForm] = VarElement.VarCurrent;
     });
     return (
-      <Paper elevation={3}>
+      <Paper elevation={3} key="Graph">
         <LinearCoupledDiffEqns
           h={0.05}
           numberOfCycles={30}
@@ -457,59 +459,79 @@ class LinearCoupled extends Component {
         SliderHandleChange={this.sliderHandleChange}
       />
     );
-
+    const layout = [
+      { i: "Eqns", x: 0, y: 0, w: 3, h: 1.5 + this.state.Eqns.length * 1.8 ,isResizable:false},
+      { i: "Vars", x: 3, y: 0, w: 2, h: 1.5 + this.state.Vars.length * 1.85,isResizable:false },
+      { i: "GraphButtons", x: 5, y: 0, w: 7, h: 1.5,isResizable:false },
+      { i: "Graph", x: 5, y: 1.5, w: 7, h: 12.5,isResizable:false },
+      { i: "GraphConfig", x: 0, y: 1.5 + this.state.Eqns.length * 1.8, w: 3, h: 17.5-(1.5 + this.state.Eqns.length * 1.8),isResizable:false },
+    ];
     return (
-      <div className={classes.Container}>
-        <Paper ref={this.props.nodeRef} elevation={3}>
-          <div className={classes.EqnContainer}>
-            <LinearCoupledButtonEqnsContainer
-              Eqns={this.state.Eqns}
-              onIncrementEqn={this.onIncrementEqn}
-              resetForm={this.resetEqns}
-              handleMathQuillInputSubmit={this.handleMathQuillInputSubmit}
-            />
+      <GridLayout
+        className={classes.Container}
+        layout={layout}
+        cols={12}
+        rowHeight={30}
+        width={1300}
+        style={{ position: "relative" }}
+        autoSize
+      >
+        <Paper
+          key="Eqns"
+          className={classes.EqnContainer}
+          elevation={3}
+        >
+          <LinearCoupledButtonEqnsContainer
+            Eqns={this.state.Eqns}
+            onIncrementEqn={this.onIncrementEqn}
+            resetForm={this.resetEqns}
+            handleMathQuillInputSubmit={this.handleMathQuillInputSubmit}
+          />
 
-            <Paper elevation={3}>
-              <div className={classes.singleItem}>{Eqns}</div>
-            </Paper>
-            <div className={classes.VarContainer}>
-              <LinearCoupledButtonVariablesContainer
-                Vars={this.state.Vars}
-                onIncrementVariable={this.onIncrementVariable}
-                resetForm={this.resetVars}
-              />
-
-              <Paper elevation={3}>
-                <div className={classes.Vars}>{Vars}</div>
-              </Paper>
-            </div>
-          </div>
+          {Eqns}
         </Paper>
 
-        <Paper ref={this.props.nodeRef} elevation={3}></Paper>
-
-        <Draggable
-          nodeRef={this.props.nodeRef}
-          position={this.props.graphPos}
-          onStop={(e, data) => this.props.onStop(e, data, "graphPos")}
+        <Paper
+          key="Vars"
+          className={classes.VarContainer}
+          elevation={3}
         >
-          <div ref={this.props.nodeRef} className={classes.Graph}>
-            {this.state.calculate ? (
-              <LinearCoupledButtonGraphContainer
-                calculate={this.state.calculate}
-                onGraphConfigOpen={this.onGraphConfigOpen}
-                onGraphClose={() => {
-                  this.setState({ calculate: false });
-                }}
-              />
-            ) : null}
-            {this.state.calculate && this.state.graphConfig.submitted
-              ? this.renderGraph()
-              : null}
+          <LinearCoupledButtonVariablesContainer
+            Vars={this.state.Vars}
+            onIncrementVariable={this.onIncrementVariable}
+            resetForm={this.resetVars}
+          />
+          <Paper onMouseDown={(e) => e.stopPropagation()}>{Vars}</Paper>
+        </Paper>
+
+        {this.state.calculate ? (
+          <div
+            key="GraphButtons"
+            className={classes.Graph}
+          >
+            <LinearCoupledButtonGraphContainer
+              calculate={this.state.calculate}
+              onGraphConfigOpen={this.onGraphConfigOpen}
+              onGraphClose={() => {
+                this.setState({ calculate: false });
+              }}
+            />
           </div>
-        </Draggable>
+        ) : (
+          <div key="GraphButtons" />
+        )}
+
+        {this.state.calculate && this.state.graphConfig.submitted ? (
+          this.renderGraph()
+        ) : (
+          <div key="Graph" />
+        )}
+
         {this.state.graphConfig.show && this.state.calculate ? (
-          <div className={classes.graphConfig}>
+          <div
+            className={classes.graphConfig}
+            key="GraphConfig"
+          >
             <GraphConfig
               configPos={this.props.configPos}
               onStop={this.props.onStop}
@@ -526,8 +548,10 @@ class LinearCoupled extends Component {
               onSubmit={this.onGraphConfigSubmit}
             />
           </div>
-        ) : null}
-      </div>
+        ) : (
+          <div key="GraphConfig" />
+        )}
+      </GridLayout>
     );
   }
 }

@@ -22,11 +22,10 @@ make only one request per load perhaps
 format graph config
 only allow unique variables
 change file nav format
-change to react grid
-shrink right contenet chp DONE
+
 fix all values to 2dp
 fix dynamic mes
-
+reset all react grid pos
 
 move file nav to top left corner
 
@@ -122,6 +121,8 @@ DONE
     make variables smaller DONE
     unit boxes dont change DONE
     add variable descriptions DONE
+    change to react grid DONE
+    shrink right contenet chp DONE
 
 
 

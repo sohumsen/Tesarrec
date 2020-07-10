@@ -26,6 +26,7 @@ const VarItems = (props) => {
   return newVars.map((Var) => {
     return (
       <VarItem
+
         key={Var.id}
         error={Var.errorMessage}
         id={Var.id}

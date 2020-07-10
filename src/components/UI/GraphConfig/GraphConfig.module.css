@@ -1,14 +1,9 @@
 .Container {
-  position: absolute;
-  width: 24%;
-  bottom: 0px;
   text-align: center;
 }
 
 .CloseButton {
-  position: absolute;
-  top: 0;
-  right: 0;
+  float: right;
 }
 
 .formControl{

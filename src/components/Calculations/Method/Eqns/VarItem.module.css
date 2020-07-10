@@ -2,31 +2,31 @@
   /*background-color: aqua;*/
   float: left;
   margin: 1%;
-  width: 46%;
+  width: auto;
+  height: 70px;
 
-  padding: 1%;
 }
 .Dependent {
   /*background-color: rgb(126, 126, 177);*/
   background-color: rgb(250, 235, 215);
   float: left;
+  width: auto;
   margin: 1%;
-  width: 46%;
+  height: 70px;
 
-  padding: 1%;
 }
+
 .Constant {
   background-color: beige;
   float: left;
-  padding: 1%;
-  width: 46%;
+  width: auto;
+  height: 70px;
 
   margin: 1%;
 }
 .RemoveButton {
   float: right;
-  width: 30px;
-  height: 30px;
+
 }
 .slider {
   /*background-color: rgb(173, 172, 211);*/

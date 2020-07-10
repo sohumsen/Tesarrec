@@ -13,6 +13,7 @@ import RestoreIcon from "@material-ui/icons/Restore";
 import DraggableWrapper from "../../components/UI/DraggableWrapper/DraggableWrapper";
 import DEFAULTEQNS from "./DefaultStates/DefaultEqns";
 import DEFAULTVARS from "./DefaultStates/DefaultVars";
+import GridLayout from "react-grid-layout";
 
 class ModelBench extends Component {
   /**
@@ -24,7 +25,7 @@ class ModelBench extends Component {
     modelId: "",
     allModelId: {},
     Eqns: [],
-    Vars:[],
+    Vars: [],
     calculate: false,
     error: false,
     tabChoiceValue: 1,
@@ -36,8 +37,6 @@ class ModelBench extends Component {
     resetAllPos: false,
   };
 
-
-
   componentDidMount() {
     this.setState({ loading: true });
     this.getAllFiles();
@@ -47,16 +46,16 @@ class ModelBench extends Component {
     this.setState(
       {
         Eqns: DEFAULTEQNS,
-        Vars:DEFAULTVARS
+        Vars: DEFAULTVARS,
       },
       () => {
         const payload = {
           Eqns: this.state.Eqns,
-          Vars:this.state.Vars,
+          Vars: this.state.Vars,
           Name: "Untitled",
           // userId:this.props.userId
         };
-        
+
         fetch(
           "https://tesarrec.firebaseio.com/eqns/" +
             this.props.userId +
@@ -74,7 +73,7 @@ class ModelBench extends Component {
           .then((response) => response.json())
           .then((data) => {
             if (!data.error) {
-              console.log(data)
+              console.log(data);
               this.setState({ modelId: data.name, error: false }, () => {
                 this.getAllFiles();
               });
@@ -89,14 +88,14 @@ class ModelBench extends Component {
     );
   };
 
-  sendToParent = (eqns,vars) => {
-    this.setState({ Eqns: eqns ,Vars:vars});
+  sendToParent = (eqns, vars) => {
+    this.setState({ Eqns: eqns, Vars: vars });
   };
 
   saveEquation = () => {
     const payload = {
       Eqns: this.state.Eqns,
-      Vars:this.state.Vars
+      Vars: this.state.Vars,
     };
 
     if (this.state.modelId !== "") {
@@ -119,9 +118,12 @@ class ModelBench extends Component {
         .then((response) => response.json())
         .then((data) => {
           if (!data.error) {
-            this.setState({ Eqns: data.Eqns,Vars:data.Vars, error: false }, () => {
-              this.getAllFiles();
-            });
+            this.setState(
+              { Eqns: data.Eqns, Vars: data.Vars, error: false },
+              () => {
+                this.getAllFiles();
+              }
+            );
           } else {
             this.setState({ error: true });
           }
@@ -142,7 +144,6 @@ class ModelBench extends Component {
       modelId: modelId,
       Eqns: this.state.allModelId[modelId].Eqns,
       Vars: this.state.allModelId[modelId].Vars,
-
     });
   };
 
@@ -201,7 +202,12 @@ class ModelBench extends Component {
     let allModelId = { ...this.state.allModelId };
     delete allModelId[this.state.modelId];
 
-    this.setState({ modelId: null, Eqns: [], allModelId: allModelId,Vars:[] });
+    this.setState({
+      modelId: null,
+      Eqns: [],
+      allModelId: allModelId,
+      Vars: [],
+    });
 
     fetch(
       "https://tesarrec.firebaseio.com/eqns/" +
@@ -270,7 +276,7 @@ class ModelBench extends Component {
     }
     navigator.clipboard.writeText(allTextEqns);
   };
-  
+
   //        <TemplateController/>
   handleTabChange = (event, val) => {
     this.setState({ tabChoiceValue: val });
@@ -314,62 +320,63 @@ class ModelBench extends Component {
       : (modelLinks = null);
 
     const nodeRef = React.createRef(null);
+
     return (
       // can u inject a background-color: ranmdom lookup color if DEVMODE=TRUE
 
       <div className={classes.ModelBenchContainer}>
-        <Tooltip title="Reset all Positions" placement="top" arrow>
-          <span>
-            <IconButton
-              edge="end"
-              aria-label="Reset"
-              onClick={this.resetAllPos}
-            >
-              <RestoreIcon />
-            </IconButton>
-          </span>
-        </Tooltip>
+          {/*<Tooltip title="Reset all Positions" placement="top" arrow>
+            <span>
+              <IconButton
+                edge="end"
+                aria-label="Reset"
+                onClick={this.resetAllPos}
+              >
+                <RestoreIcon />
+              </IconButton>
+            </span>
+    </Tooltip>*/}
 
-        <Draggable
-          position={this.state.fileExplorerPos}
-          onStop={(e, data) => this.onStop(e, data, "fileExplorerPos")}
-          nodeRef={nodeRef}
-        >
-          <div ref={nodeRef} className={classes.ModelBenchItemLeft}>
-            <div className={classes.ModelBenchItemLeftFileNav}>
-              {this.state.loading ? <Skeleton /> : null}
-              {modelLinks}
+          <Draggable
+            position={this.state.fileExplorerPos}
+            onStop={(e, data) => this.onStop(e, data, "fileExplorerPos")}
+            nodeRef={nodeRef}
+          >
+            <div ref={nodeRef} className={classes.ModelBenchItemLeft}>
+              <div className={classes.ModelBenchItemLeftFileNav}>
+                {this.state.loading ? <Skeleton /> : null}
+                {modelLinks}
+              </div>
+
+              <div className={classes.ModelBenchItemLeftEqnNav}>
+                <MyTabs
+                  value={this.state.tabChoiceValue}
+                  handleChange={this.handleTabChange}
+                  labels={["Single ODE", "Coupled ODE"]}
+                />
+              </div>
             </div>
+          </Draggable>
 
-            <div className={classes.ModelBenchItemLeftEqnNav}>
-              <MyTabs
-                value={this.state.tabChoiceValue}
-                handleChange={this.handleTabChange}
-                labels={["Single ODE", "Coupled ODE"]}
+          <div className={classes.ModelBenchItemCenter}>
+            {this.state.tabChoiceValue === 0 ? (
+              <SingleODE />
+            ) : (
+              <LinearCoupled
+                calculate={this.state.calculate}
+                modelId={this.state.modelId}
+                Eqns={this.state.Eqns}
+                sendToParent={this.sendToParent}
+                nodeRef={nodeRef}
+                eqnEditorPos={this.state.eqnEditorPos}
+                graphPos={this.state.graphPos}
+                configPos={this.state.configPos}
+                onStop={this.onStop}
+                Vars={this.state.Vars}
               />
-            </div>
+            )}
           </div>
-        </Draggable>
-
-        <div className={classes.ModelBenchItemCenter}>
-          {this.state.tabChoiceValue === 0 ? (
-            <SingleODE />
-          ) : (
-            <LinearCoupled
-              calculate={this.state.calculate}
-              modelId={this.state.modelId}
-              Eqns={this.state.Eqns}
-              sendToParent={this.sendToParent}
-              nodeRef={nodeRef}
-              eqnEditorPos={this.state.eqnEditorPos}
-              graphPos={this.state.graphPos}
-              configPos={this.state.configPos}
-              onStop={this.onStop}
-              Vars={this.state.Vars}
-            />
-          )}
-        </div>
-        {this.state.error ? <MyErrorMessage /> : null}
+          {this.state.error ? <MyErrorMessage /> : null}
       </div>
     );
   }
