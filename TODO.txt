@@ -19,7 +19,6 @@ make clickaway work
 make only one request per load perhaps 
 
 
-format graph config
 only allow unique variables
 change file nav format
 

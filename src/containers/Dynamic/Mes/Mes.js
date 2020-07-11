@@ -1,14 +1,14 @@
 import React, { Component } from "react";
 import WordDoc from "../../../assets/MES download.docx";
 import DonwloadButton from '../../../components/UI/Button/DownloadButton'
-import EqnItems from "../../../components/Calculations/Method/Eqns/EqnItems";
+import EqnItems from "../../../components/Calculations/Dynamic/Eqns/EqnItems";
 import { evaluate } from "mathjs";
 import MyButton from "../../../components/UI/Button/GenericButton";
 import classes from "./Mes.module.css";
 import MyErrorMessage from "../../../components/UI/MyErrorMessage/MyErrorMessage";
 import SettingButton from "../../../components/UI/Button/SettingButton";
 import GraphConfig from "../../../components/UI/GraphConfig/GraphConfig";
-import LinearCoupledDiffEqns from "../../../components/Calculations/Method/LinearCoupled/Calcs/MesDiffEqns";
+import LinearCoupledDiffEqns from "../../../components/Calculations/Dynamic/LinearCoupled/MesDiffEqns";
 class LinearCoupled extends Component {
   /**
    * Visual Component that contains the textbox for the equation and calculation outputs

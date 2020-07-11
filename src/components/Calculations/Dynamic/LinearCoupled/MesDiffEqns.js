@@ -1,5 +1,5 @@
 import React from "react";
-import MyChart from "../../../../UI/Canvas/Charts/Chart";
+import MyChart from "../../../UI/Canvas/Charts/Chart";
 import { CSVLink, CSVDownload } from "react-csv";
 
 import { parse, simplify } from "mathjs";

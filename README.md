@@ -4,6 +4,9 @@
 
 # How to develop on it 
 
+To test a single test do 
+npm run test LinearCoupledDiffEqns
+
 ## Application Design
 
 Uses container vs component folder structure

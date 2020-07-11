@@ -2,15 +2,15 @@ import React, { Component } from "react";
 import GridLayout from "react-grid-layout";
 import "../../../../node_modules/react-grid-layout/css/styles.css";
 
-import EqnItems from "../../../components/Calculations/Method/Eqns/EqnItems";
-import VarItems from "../../../components/Calculations/Method/Eqns/VarItems";
+import EqnItems from "../../../components/Calculations/Dynamic/Eqns/EqnItems";
+import VarItems from "../../../components/Calculations/Dynamic/Eqns/VarItems";
 import { evaluate } from "mathjs";
 import MyButton from "../../../components/UI/Button/GenericButton";
 import classes from "./LinearCoupled.module.css";
 import MyErrorMessage from "../../../components/UI/MyErrorMessage/MyErrorMessage";
 import SettingButton from "../../../components/UI/Button/SettingButton";
 import GraphConfig from "../../../components/UI/GraphConfig/GraphConfig";
-import LinearCoupledDiffEqns from "../../../components/Calculations/Method/LinearCoupled/Calcs/LinearCoupledDiffEqns";
+import LinearCoupledDiffEquationGrapher from "../../../components/Calculations/Dynamic/LinearCoupled/LinearCoupledDiffEquationGrapher";
 import { Paper, Tooltip, IconButton } from "@material-ui/core";
 import AddButton from "../../../components/UI/Button/AddButton";
 import LinearCoupledButtonEqnsContainer from "../../../components/UI/ButtonContainer/LinearCoupledButtonEqnsContainer";
@@ -425,7 +425,7 @@ class LinearCoupled extends Component {
     });
     return (
       <Paper elevation={3} key="Graph">
-        <LinearCoupledDiffEqns
+        <LinearCoupledDiffEquationGrapher
           h={0.05}
           numberOfCycles={30}
           eqns={eqns}
