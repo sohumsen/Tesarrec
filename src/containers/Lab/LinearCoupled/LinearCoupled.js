@@ -47,6 +47,10 @@ class LinearCoupled extends Component {
 
     Eqns: [],
     Vars: [],
+
+    myReactGridLayout: [
+    
+    ],
   };
 
   defaultEqns = DEFAULTEQNS;
@@ -68,12 +72,42 @@ class LinearCoupled extends Component {
 
     return null;
   }
+ 
   componentDidUpdate() {
     if (
       this.state.Eqns !== this.props.Eqns ||
       this.state.Vars !== this.props.Vars
     ) {
+ 
       this.props.sendToParent(this.state.Eqns, this.state.Vars);
+      this.setState({myReactGridLayout: [
+        {
+          i: "Eqns",
+          x: 0,
+          y: 0,
+          w: 3,
+          h: 1.5 + this.state.Eqns.length * 1.8,
+          isResizable: false,
+        },
+        {
+          i: "Vars",
+          x: 3,
+          y: 0,
+          w: 2,
+          h: 1.5 + this.state.Vars.length * 1.85,
+          isResizable: false,
+        },
+        { i: "GraphButtons", x: 5, y: 0, w: 7, h: 1.5, isResizable: false },
+        { i: "Graph", x: 5, y: 1.5, w: 7, h: 12.5, isResizable: false },
+        {
+          i: "GraphConfig",
+          x: 0,
+          y: 1.5 + this.state.Eqns.length * 1.8,
+          w: 3,
+          h: 17.5 - (1.5 + this.state.Eqns.length * 1.8),
+          isResizable: false,
+        },
+      ],})
     }
   }
   validateExpression = (expr, line) => {
@@ -459,28 +493,18 @@ class LinearCoupled extends Component {
         SliderHandleChange={this.sliderHandleChange}
       />
     );
-    const layout = [
-      { i: "Eqns", x: 0, y: 0, w: 3, h: 1.5 + this.state.Eqns.length * 1.8 ,isResizable:false},
-      { i: "Vars", x: 3, y: 0, w: 2, h: 1.5 + this.state.Vars.length * 1.85,isResizable:false },
-      { i: "GraphButtons", x: 5, y: 0, w: 7, h: 1.5,isResizable:false },
-      { i: "Graph", x: 5, y: 1.5, w: 7, h: 12.5,isResizable:false },
-      { i: "GraphConfig", x: 0, y: 1.5 + this.state.Eqns.length * 1.8, w: 3, h: 17.5-(1.5 + this.state.Eqns.length * 1.8),isResizable:false },
-    ];
+
     return (
       <GridLayout
         className={classes.Container}
-        layout={layout}
+        layout={this.state.myReactGridLayout}
         cols={12}
         rowHeight={30}
         width={1300}
         style={{ position: "relative" }}
         autoSize
       >
-        <Paper
-          key="Eqns"
-          className={classes.EqnContainer}
-          elevation={3}
-        >
+        <Paper key="Eqns" className={classes.EqnContainer} elevation={3}>
           <LinearCoupledButtonEqnsContainer
             Eqns={this.state.Eqns}
             onIncrementEqn={this.onIncrementEqn}
@@ -491,11 +515,7 @@ class LinearCoupled extends Component {
           {Eqns}
         </Paper>
 
-        <Paper
-          key="Vars"
-          className={classes.VarContainer}
-          elevation={3}
-        >
+        <Paper key="Vars" className={classes.VarContainer} elevation={3}>
           <LinearCoupledButtonVariablesContainer
             Vars={this.state.Vars}
             onIncrementVariable={this.onIncrementVariable}
@@ -505,10 +525,7 @@ class LinearCoupled extends Component {
         </Paper>
 
         {this.state.calculate ? (
-          <div
-            key="GraphButtons"
-            className={classes.Graph}
-          >
+          <div key="GraphButtons" className={classes.Graph}>
             <LinearCoupledButtonGraphContainer
               calculate={this.state.calculate}
               onGraphConfigOpen={this.onGraphConfigOpen}
@@ -528,10 +545,7 @@ class LinearCoupled extends Component {
         )}
 
         {this.state.graphConfig.show && this.state.calculate ? (
-          <div
-            className={classes.graphConfig}
-            key="GraphConfig"
-          >
+          <div className={classes.graphConfig} key="GraphConfig">
             <GraphConfig
               configPos={this.props.configPos}
               onStop={this.props.onStop}

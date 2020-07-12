@@ -83,7 +83,7 @@ class App extends Component {
       loading: false,
       isLoggedIn: true,
     });
-    //this.props.history.push("/modelbench");
+    this.props.history.push("/modelbench");
   };
   authFail = (errorMsg) => {
     this.setState({

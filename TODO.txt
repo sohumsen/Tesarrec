@@ -25,6 +25,7 @@ change file nav format
 fix all values to 2dp
 fix dynamic mes
 reset all react grid pos
+make solver more efficient
 
 move file nav to top left corner
 
