@@ -97,6 +97,7 @@ class LinearCoupled extends Component {
           h: 1.5 + this.state.Vars.length * 1.85,
           isResizable: false,
         },
+        
         { i: "GraphButtons", x: 5, y: 0, w: 7, h: 1.5, isResizable: false },
         { i: "Graph", x: 5, y: 1.5, w: 7, h: 12.5, isResizable: false },
         {
