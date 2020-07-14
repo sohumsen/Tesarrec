@@ -15,13 +15,14 @@ const EqnItem = (props) => {
           onClick={props.removeItem}
         />
       </div>
+      <div className={classes.ErrorMsg}>{props.error}</div>
+
       <MyMathQuill
         firstBit={props.DByDLatex}
         latex={props.LatexEqn}
         onInputChange={props.handleMathQuillInputChange}
-        width="60%"
+        width="auto"
       />
-      <div className={classes.ErrorMsg}>{props.error}</div>
     </li>
   );
 };

@@ -30,11 +30,7 @@ class ModelBench extends Component {
     error: false,
     tabChoiceValue: 1,
     loading: false,
-    fileExplorerPos: { x: 0, y: 0 },
-    eqnEditorPos: { x: 0, y: 0 },
-    graphPos: { x: 0, y: 0 },
-    configPos: { x: 0, y: 0 },
-    resetAllPos: false,
+ 
   };
 
   componentDidMount() {
@@ -185,6 +181,8 @@ class ModelBench extends Component {
             // this.setState({ Eqns: data.Eqns, error: false }, () => {
             //   this.getAllFiles();
             // });
+            console.log(this.state.modelId)
+            this.setState({modelId:""})
             this.getAllFiles();
           } else {
             this.setState({ error: true });
@@ -276,32 +274,12 @@ class ModelBench extends Component {
     }
     navigator.clipboard.writeText(allTextEqns);
   };
-
   //        <TemplateController/>
   handleTabChange = (event, val) => {
     this.setState({ tabChoiceValue: val });
   };
 
-  onStop = (e, data, name) => {
-    let changed = {
-      ...this.state[name],
-    };
-    changed.x = data.x;
-    changed.y = data.y;
 
-    this.setState({
-      [name]: changed,
-    });
-  };
-
-  resetAllPos = () => {
-    this.setState({
-      fileExplorerPos: { x: 0, y: 0 },
-      eqnEditorPos: { x: 0, y: 0 },
-      graphPos: { x: 0, y: 0 },
-      configPos: { x: 0, y: 0 },
-    });
-  };
   render() {
     let modelLinks = null;
     Object.keys(this.state.allModelId).length !== 0
@@ -325,18 +303,7 @@ class ModelBench extends Component {
       // can u inject a background-color: ranmdom lookup color if DEVMODE=TRUE
 
       <div className={classes.ModelBenchContainer}>
-          {/*<Tooltip title="Reset all Positions" placement="top" arrow>
-            <span>
-              <IconButton
-                edge="end"
-                aria-label="Reset"
-                onClick={this.resetAllPos}
-              >
-                <RestoreIcon />
-              </IconButton>
-            </span>
-    </Tooltip>*/}
-
+     
         
             <div ref={nodeRef} className={classes.ModelBenchItemLeft}>
               <div className={classes.ModelBenchItemLeftFileNav}>

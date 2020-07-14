@@ -11,7 +11,7 @@ const DEFAULTLAYOUT = (props)=> [
       i: "Vars",
       x: 3,
       y: 0,
-      w: 2,
+      w: 1.5,
       h: 1.5 + props.Vars.length * 1.85,
       isResizable: false,
     },

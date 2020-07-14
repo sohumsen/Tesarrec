@@ -1,31 +1,25 @@
 format graph config CLARIFY
 show title in dcf graph with chemical CLARIFY
 allow db/dt as input on right side CLARIFY
+change file nav format
 
 
-for certain eqns ban negatives
+for certain eqns ban negative initials
 canvas js add 0 axis lines
+make "t" work in eqn properly
 make toggles tabs 
-update y axis mfc
-make x range wider
-add another heatmap
-publish only updated Sustainability
 
+publish only updated Sustainability
 
 when edit eqn name and select other it breaks 
 when edit file name and select it again it breaks
 make clickaway work
 
-make only one request per load perhaps 
 
 
-only allow unique variables
-change file nav format
 
 fix dynamic mes
-make solver more efficient
 
-move file nav to top left corner DONE
 
 
 
@@ -123,8 +117,14 @@ DONE
     shrink right contenet chp DONE
     reset all react grid pos DONE
     fix all values to 2dp DONE
-
-
+    make solver more efficient DONE
+    move file nav to top left corner DONE
+    update y axis mfc DONE
+    make x range wider DONE
+    add another heatmap DONE
+    only allow unique variables DONE
+    pass in parsed Eqns from parent on change sliders DONE
+    shrink eqn errors and move to side DONE
 
 
 NOT NEEDED

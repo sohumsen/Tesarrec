@@ -8,7 +8,7 @@ const MyMathQuill = (props) => {
 
   return (
     
-    <div>
+    <div >
 
       <StaticMathField>{props.firstBit}</StaticMathField>
 
@@ -18,7 +18,7 @@ const MyMathQuill = (props) => {
           style={{ width: props.width }}
           onKeyDown={props.onKeyDown}
           latex={props.latex} // Initial latex value for the input field
-         
+        
           onChange={(mathField) => props.onInputChange(mathField)}
         />
       ) : null}

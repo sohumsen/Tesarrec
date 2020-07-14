@@ -12,6 +12,9 @@
 .ErrorMsg {
   color: red;
   font-size: smaller;
+  width: 50px;
+  float: right;
+  height: 50px;
 }
 
 

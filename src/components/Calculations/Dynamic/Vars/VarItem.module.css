@@ -47,3 +47,11 @@
   /*background-color: blueviolet;*/
   float: left;
 }
+
+.ErrorMsg{
+  float: right;
+  height: 0px;
+  width: 0px;
+  color: red;
+
+}

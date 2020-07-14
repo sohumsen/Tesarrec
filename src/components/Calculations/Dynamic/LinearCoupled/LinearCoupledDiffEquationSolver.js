@@ -84,19 +84,19 @@ const LinearCoupledDiffEquationSolver = (props) => {
   const t0 = performance.now();
 
   // only changes when eqns are edited
-  let parsedEquations = [];
-  for (let i = 0; i < props.eqns.length; i++) {
-    const eqn = props.eqns[i];
-    var parsed = simplify(parse(eqn));
-    parsedEquations.push(parsed);
-  }
-
+  // let parsedEquations = [];
+  // for (let i = 0; i < props.eqns.length; i++) {
+  //   const eqn = props.eqns[i];
+  //   var parsed = simplify(parse(eqn));
+  //   parsedEquations.push(parsed);
+  // }
+  let parsedEquations=props.eqns
   // starts at x0=0
-  const t1 = performance.now();
 
   let h = parseFloat(props.h);
   let initialConditions = props.initialConditions;
   let CompletedGridRungeKuttaLinearCoupled = [];
+  const t1 = performance.now();
 
   CompletedGridRungeKuttaLinearCoupled.push(
     solveRecursively(props.numberOfCycles, initialConditions) //recursive(10,[1,2,3,4,5])

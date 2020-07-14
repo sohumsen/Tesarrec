@@ -67,7 +67,7 @@ const VarItem = (props) => {
               onClick={props.removeItem}
             />
           </div>
-          <div className={classes.input}>
+         { /*<div className={classes.input}>
             <OutlinedInput
               width={105}
               type={"text"}
@@ -76,7 +76,12 @@ const VarItem = (props) => {
               label={"Description"}
               name={"VarDescription"}
             />
-          </div>
+      </div>*/}
+          {props.error ? (
+              <div className={classes.ErrorMsg}>
+                <p>error</p>
+              </div>
+            ) : null}
         </Paper>
       ) : null}
 
@@ -130,7 +135,7 @@ const VarItem = (props) => {
               onClick={props.removeItem}
             />
           </div>
-          <div className={classes.input}>
+         {/* <div className={classes.input}>
             <OutlinedInput
               width={105}
               type={"text"}
@@ -139,7 +144,12 @@ const VarItem = (props) => {
               label={"Description"}
               name={"VarDescription"}
             />
-          </div>
+      </div>*/}
+          {props.error ? (
+              <div className={classes.ErrorMsg}>
+                <p>error</p>
+              </div>
+            ) : null}
         </Paper>
       ) : null}
 
@@ -155,7 +165,6 @@ const VarItem = (props) => {
             />
           </div>
           <div className={classes.inputs}>
-         
             <div className={classes.input}>
               <OutlinedInput
                 type={"text"}
@@ -165,18 +174,8 @@ const VarItem = (props) => {
                 name={"VarCurrent"}
               />
             </div>
-            <div className={classes.input}>
-              <OutlinedInput
-                width={70}
-                type={"text"}
-                value={props.VarDescription}
-                onChange={props.handleVariableInputChange}
-                label={"Description"}
-                name={"VarDescription"}
-              />
-            </div>
+
            
-          
           </div>
           <div className={classes.RemoveButton}>
             <CloseButton
@@ -187,9 +186,11 @@ const VarItem = (props) => {
               onClick={props.removeItem}
             />
           </div>
-          
-         
-
+          {props.error ? (
+              <div className={classes.ErrorMsg}>
+                <p>error</p>
+              </div>
+            ) : null}
           <div className={classes.slider}>
             <MinMaxSlider
               rootWidth={"100%"}
@@ -204,12 +205,9 @@ const VarItem = (props) => {
               )}
             />
           </div>
+         
         </Paper>
       ) : null}
-
-      <div className={classes.ErrorMsg}>
-        {props.error ? <ErrorMessage /> : null}
-      </div>
     </li>
   );
 };

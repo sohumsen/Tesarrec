@@ -5,12 +5,12 @@ const VarItems = (props) => {
   let Vars = props.Vars;
   let newVars = [];
 
-  Vars.sort((a, b) =>
-    a.LatexForm.slice(2, a.LatexForm.length) >
-    b.LatexForm.slice(2, b.LatexForm.length)
-      ? 1
-      : -1
-  );
+  // Vars.sort((a, b) =>
+  //   a.LatexForm.slice(2, a.LatexForm.length) >
+  //   b.LatexForm.slice(2, b.LatexForm.length)
+  //     ? 1
+  //     : -1
+  // );
 
   let order = ["Dependent", "Independent", "Constant"];
 
@@ -37,7 +37,7 @@ const VarItems = (props) => {
         VarLow={Var.VarLow} // low, current, high
         VarCurrent={Var.VarCurrent} // low, current, high
         VarHigh={Var.VarHigh} // low, current, high
-        VarDescription={Var.VarDescription}
+        // VarDescription={Var.VarDescription}
         handleMathQuillInputChange={props.handleMathQuillInputChange(
           Var.id,
           "Vars"

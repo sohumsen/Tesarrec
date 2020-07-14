@@ -3,11 +3,11 @@ import GridLayout from "react-grid-layout";
 import "../../../../node_modules/react-grid-layout/css/styles.css";
 
 import EqnItems from "../../../components/Calculations/Dynamic/Eqns/EqnItems";
-import VarItems from "../../../components/Calculations/Dynamic/Eqns/VarItems";
-import { evaluate } from "mathjs";
+import VarItems from "../../../components/Calculations/Dynamic/Vars/VarItems";
+import { evaluate, simplify, parse } from "mathjs";
 import MyButton from "../../../components/UI/Button/GenericButton";
 import classes from "./LinearCoupled.module.css";
-import MyErrorMessage from "../../../components/UI/MyErrorMessage/MyErrorMessage";
+import MyErrorMessage from "../../../components/UI/MyErrorMessage/CustomizedErrorMessage";
 import SettingButton from "../../../components/UI/Button/SettingButton";
 import GraphConfig from "../../../components/UI/GraphConfig/GraphConfig";
 import LinearCoupledDiffEquationGrapher from "../../../components/Calculations/Dynamic/LinearCoupled/LinearCoupledDiffEquationGrapher";
@@ -115,36 +115,34 @@ class LinearCoupled extends Component {
       item.TextEqn = mathField.text();
       item.LatexEqn = mathField.latex();
     } else {
-      // items.splice(idx,1)
 
-      //console.log(items.find(o => o.LatexForm === mathField.latex()))
-      // if(items.find(o => o.LatexForm === mathField.latex())!==null){
-      //   console.log("not allowed")
-
-      //  }{
       item.LatexForm = mathField.latex();
+      items[idx] = item;
 
-      // var valueArr = items.map(function (item) {
-      //   return item.LatexForm;
-      // });
-      // var isDuplicate = valueArr.some(function (item, idx) {
-      //   return valueArr.indexOf(item) != idx;
-      // });
+      var valueArr = items.map(function (item) {
+        return item.LatexForm;
+      });
 
-      // if (isDuplicate) {
-      //   item.errorMessage = "doesnt work";
-      // } else {
-      //   item.errorMessage = null;
+      for (let i = 0; i < valueArr.length; i++) {
+        const latex = valueArr[i];
+        if (valueArr.indexOf(latex) === i) {
+          items.forEach((item) => (item.errorMessage = null));
+        }
+      }
+      var isDuplicate = valueArr.some(function (item, idx) {
+        //console.log(item,idx)
+        return valueArr.indexOf(item) != idx;
+      });
 
-      // }
-
-      //  }
+      if (isDuplicate) {
+        item.errorMessage = "doesnt work";
+      } else {
+        item.errorMessage = null;
+      }
     }
 
-    const deepItems = [...this.state[itemType]];
-    deepItems[idx] = item;
-
-    this.setState({ [itemType]: deepItems, calculate: false });
+    items[idx] = item;
+    this.setState({ [itemType]: items, calculate: false });
   };
 
   handleMathQuillInputSubmit = (event) => {
@@ -174,7 +172,15 @@ class LinearCoupled extends Component {
         newEqns.push(this.setErrorMessage(i, null));
       }
     }
-    this.setState({ Eqns: newEqns });
+    const deepItems = [...this.state.Eqns];
+
+    for (let i = 0; i < newEqns.length; i++) {
+      const eqn = { ...newEqns[i] };
+      eqn.ParsedEqn = simplify(parse(eqn.TextEqn));
+
+      deepItems[i] = eqn;
+    }
+    this.setState({ Eqns: deepItems });
 
     if (valid.includes("0")) {
       this.setState({ calculate: false });
@@ -391,7 +397,6 @@ class LinearCoupled extends Component {
       id: type + numbers[0] + new Date().getTime(),
       LatexForm: letter + "_" + numbers[0],
       errorMessage: null,
-      VarDescription: "",
       VarType: type,
       VarLow: 0,
       VarCurrent: 50,
@@ -422,8 +427,9 @@ class LinearCoupled extends Component {
 
   renderGraph = () => {
     let eqns = [];
+
     this.state.Eqns.forEach((eqn) => {
-      eqns.push(eqn.TextEqn);
+      eqns.push(eqn.ParsedEqn);
     });
 
     let LineNames = [];
@@ -441,7 +447,7 @@ class LinearCoupled extends Component {
         <LinearCoupledDiffEquationGrapher
           h={0.05}
           numberOfCycles={30}
-          eqns={eqns}
+          eqns={eqns} //send in parsed eqns
           vars={VarObj} // { K_1=0.27}
           LineNames={LineNames}
           axis={[this.state.graphConfig.xAxis, this.state.graphConfig.yAxis]}

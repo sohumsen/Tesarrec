@@ -4,7 +4,6 @@ const DEFAULTVARS = [
       LatexForm: "X_1",
       errorMessage: null,
       Unit: "cm",
-      VarDescription:"",
       VarType: "Independent",
       VarLow:0,
       VarHigh:100,
@@ -14,7 +13,6 @@ const DEFAULTVARS = [
       LatexForm: "K_1",
       errorMessage: null,
       VarType: "Constant",
-      VarDescription:"",
 
       VarLow:0,
       VarCurrent:50,
@@ -26,7 +24,6 @@ const DEFAULTVARS = [
       LatexForm: "K_2",
       errorMessage: null,
       VarType: "Constant",
-      VarDescription:"",
 
       VarLow:0,
       VarCurrent:50,
@@ -37,7 +34,6 @@ const DEFAULTVARS = [
       id: "Constant3",
       LatexForm: "K_3",
       errorMessage: null,
-      VarDescription:"",
 
       VarType: "Constant",
       VarLow:0,
@@ -50,7 +46,6 @@ const DEFAULTVARS = [
       LatexForm: "K_4",
       errorMessage: null,
       VarType: "Constant",
-      VarDescription:"",
 
       VarLow:0,
       VarCurrent:50,
@@ -63,7 +58,6 @@ const DEFAULTVARS = [
       errorMessage: null,
       Unit: "cm",
       VarType: "Dependent",
-      VarDescription:"",
 
       VarLow:0,
       VarHigh:100,
@@ -74,7 +68,6 @@ const DEFAULTVARS = [
       LatexForm: "Y_2",
       errorMessage: null,
       Unit: "cm",
-      VarDescription:"",
 
       VarType: "Dependent",
       VarLow:0,

@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import ListItems from "../../../UI/ListItems/ListItems";
+import ListItems from "./File/FileLink";
 
 import IconButton from "@material-ui/core/IconButton";
 import ImportExportIcon from "@material-ui/icons/ImportExport";
