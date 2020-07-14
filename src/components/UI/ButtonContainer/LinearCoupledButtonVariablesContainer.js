@@ -53,7 +53,7 @@ const LinearCoupledButtonVariablesContainer = (props) => {
           </IconButton>
         </span>
       </Tooltip>
-      <Tooltip title="Reset Equations" placement="top" arrow>
+      <Tooltip title="Reset Variables" placement="top" arrow>
         <span>
           <IconButton
             edge="end"

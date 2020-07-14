@@ -337,11 +337,7 @@ class ModelBench extends Component {
             </span>
     </Tooltip>*/}
 
-          <Draggable
-            position={this.state.fileExplorerPos}
-            onStop={(e, data) => this.onStop(e, data, "fileExplorerPos")}
-            nodeRef={nodeRef}
-          >
+        
             <div ref={nodeRef} className={classes.ModelBenchItemLeft}>
               <div className={classes.ModelBenchItemLeftFileNav}>
                 {this.state.loading ? <Skeleton /> : null}
@@ -356,7 +352,6 @@ class ModelBench extends Component {
                 />
               </div>
             </div>
-          </Draggable>
 
           <div className={classes.ModelBenchItemCenter}>
             {this.state.tabChoiceValue === 0 ? (

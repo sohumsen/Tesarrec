@@ -73,13 +73,14 @@ const CashFlowGraph = (props) => {
     { x: -2, y: dataArr[0] / 3 },
     { x: -1, y: (2 * dataArr[0]) / 3 },
   ];
-
+  console.log(dataArr)
   for (let l = 0; l < dataArr.length; l++) {
     data.push({
       x: l,
-      y: dataArr[l],
+      y: parseFloat(dataArr[l].toFixed(2)),
     });
   }
+  console.log(data)
 
   return (
     <div>

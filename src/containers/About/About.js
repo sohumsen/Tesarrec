@@ -18,7 +18,6 @@ class About extends Component {
             British Council{" "}
           </a><br/>
           <a href="https://www.ukri.org/" target="_blank" rel="noopener noreferrer">
-            {" "}
             UKRI
           </a>
         </h1>

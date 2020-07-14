@@ -22,12 +22,10 @@ make only one request per load perhaps
 only allow unique variables
 change file nav format
 
-fix all values to 2dp
 fix dynamic mes
-reset all react grid pos
 make solver more efficient
 
-move file nav to top left corner
+move file nav to top left corner DONE
 
 
 
@@ -123,6 +121,8 @@ DONE
     add variable descriptions DONE
     change to react grid DONE
     shrink right contenet chp DONE
+    reset all react grid pos DONE
+    fix all values to 2dp DONE
 
 
 

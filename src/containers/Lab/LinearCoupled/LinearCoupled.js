@@ -22,6 +22,7 @@ import DEFAULTEQNS from "../DefaultStates/DefaultEqns";
 import DEFAULTVARS from "../DefaultStates/DefaultVars";
 import LinearCoupledButtonVariablesContainer from "../../../components/UI/ButtonContainer/LinearCoupledButtonVariablesContainer";
 import LinearCoupledButtonGraphContainer from "../../../components/UI/ButtonContainer/LinearCoupledButtonGraphContainer";
+import DEFAULTLAYOUT from "../DefaultStates/DefaultLayout";
 class LinearCoupled extends Component {
   /**
    * Visual Component that contains the textbox for the equation and calculation outputs
@@ -48,17 +49,12 @@ class LinearCoupled extends Component {
     Eqns: [],
     Vars: [],
 
-    myReactGridLayout: [
-    
-    ],
+    myReactGridLayout: [],
   };
 
   defaultEqns = DEFAULTEQNS;
   defaultVars = DEFAULTVARS;
 
-  // componentDidMount() {
-  //   this.setState({ Vars: this.defaultVars });
-  // }
   static getDerivedStateFromProps(props, state) {
     if (props.modelId !== state.modelId) {
       //NEW MODEL
@@ -67,48 +63,22 @@ class LinearCoupled extends Component {
         modelId: props.modelId,
         Eqns: props.Eqns,
         Vars: props.Vars,
+        myReactGridLayout: DEFAULTLAYOUT(props),
       };
     }
 
     return null;
   }
- 
+
   componentDidUpdate() {
     if (
       this.state.Eqns !== this.props.Eqns ||
       this.state.Vars !== this.props.Vars
     ) {
- 
       this.props.sendToParent(this.state.Eqns, this.state.Vars);
-      this.setState({myReactGridLayout: [
-        {
-          i: "Eqns",
-          x: 0,
-          y: 0,
-          w: 3,
-          h: 1.5 + this.state.Eqns.length * 1.8,
-          isResizable: false,
-        },
-        {
-          i: "Vars",
-          x: 3,
-          y: 0,
-          w: 2,
-          h: 1.5 + this.state.Vars.length * 1.85,
-          isResizable: false,
-        },
-        
-        { i: "GraphButtons", x: 5, y: 0, w: 7, h: 1.5, isResizable: false },
-        { i: "Graph", x: 5, y: 1.5, w: 7, h: 12.5, isResizable: false },
-        {
-          i: "GraphConfig",
-          x: 0,
-          y: 1.5 + this.state.Eqns.length * 1.8,
-          w: 3,
-          h: 17.5 - (1.5 + this.state.Eqns.length * 1.8),
-          isResizable: false,
-        },
-      ],})
+      this.setState({
+        myReactGridLayout: DEFAULTLAYOUT(this.state),
+      });
     }
   }
   validateExpression = (expr, line) => {
@@ -441,6 +411,14 @@ class LinearCoupled extends Component {
       };
     });
   };
+  onLayoutChange(layout) {
+    this.setState({ myReactGridLayout: layout });
+  }
+  onResetLayout = () => {
+    this.setState({
+      myReactGridLayout: DEFAULTLAYOUT(this.state),
+    });
+  };
 
   renderGraph = () => {
     let eqns = [];
@@ -504,6 +482,9 @@ class LinearCoupled extends Component {
         width={1300}
         style={{ position: "relative" }}
         autoSize
+        onLayoutChange={(layout, layouts) =>
+          this.onLayoutChange(layout, layouts)
+        }
       >
         <Paper key="Eqns" className={classes.EqnContainer} elevation={3}>
           <LinearCoupledButtonEqnsContainer
@@ -511,6 +492,7 @@ class LinearCoupled extends Component {
             onIncrementEqn={this.onIncrementEqn}
             resetForm={this.resetEqns}
             handleMathQuillInputSubmit={this.handleMathQuillInputSubmit}
+            onResetLayout={this.onResetLayout}
           />
 
           {Eqns}

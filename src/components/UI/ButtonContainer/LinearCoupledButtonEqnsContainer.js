@@ -1,17 +1,15 @@
 import React from "react";
-import PlayCircleOutlineIcon from '@material-ui/icons/PlayCircleOutline';
+import PlayCircleOutlineIcon from "@material-ui/icons/PlayCircleOutline";
 import AddBoxIcon from "@material-ui/icons/AddBox";
 import IconButton from "@material-ui/core/IconButton";
 import { Tooltip, Menu, Paper } from "@material-ui/core";
 import RestoreIcon from "@material-ui/icons/Restore";
-import ExitToAppIcon from '@material-ui/icons/ExitToApp';
-import { green } from '@material-ui/core/colors';
-
+import ExitToAppIcon from "@material-ui/icons/ExitToApp";
+import { green } from "@material-ui/core/colors";
+import RestorePageIcon from "@material-ui/icons/RestorePage";
 const LinearCoupledButtonEqnsContainer = (props) => {
   return (
-    <Paper >
-    
-
+    <Paper>
       <Tooltip title="Add Equations" placement="top" arrow>
         <span>
           <IconButton
@@ -47,6 +45,23 @@ const LinearCoupledButtonEqnsContainer = (props) => {
             onClick={props.handleMathQuillInputSubmit}
           >
             <PlayCircleOutlineIcon style={{ color: green[500] }} />
+          </IconButton>
+        </span>
+      </Tooltip>
+
+      <Tooltip
+        style={{ float: "right" }}
+        title="Reset Layout"
+        placement="top"
+        arrow
+      >
+        <span>
+          <IconButton
+            edge="start"
+            aria-label="Reset"
+            onClick={props.onResetLayout}
+          >
+            <RestorePageIcon />
           </IconButton>
         </span>
       </Tooltip>
