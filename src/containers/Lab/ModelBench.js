@@ -279,6 +279,51 @@ class ModelBench extends Component {
     this.setState({ tabChoiceValue: val });
   };
 
+  publishModelToWebsite=()=>{
+    const payload = {
+      Eqns: this.state.Eqns,
+      Vars: this.state.Vars,
+    };
+
+    if (this.state.modelId !== "") {
+      fetch(
+        "https://tesarrec.firebaseio.com/published/" +
+          this.props.userId +
+          "/" +
+          this.state.modelId +
+          "/.json?auth=" +
+          this.props.token,
+        {
+          method: "PATCH",
+          headers: {
+            Accept: "application/json, text/plain, */*",
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(payload),
+        }
+      )
+        .then((response) => response.json())
+        .then((data) => {
+          if (!data.error) {
+            this.setState(
+              { Eqns: data.Eqns, Vars: data.Vars, error: false },
+              () => {
+                this.getAllFiles();
+              }
+            );
+          } else {
+            this.setState({ error: true });
+          }
+        })
+        .catch((error) => {
+          this.setState({ error: true });
+        });
+    } else {
+      this.setState({ error: true });
+    }
+  
+  }
+
 
   render() {
     let modelLinks = null;

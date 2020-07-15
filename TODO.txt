@@ -1,7 +1,7 @@
 format graph config CLARIFY
 show title in dcf graph with chemical CLARIFY
 allow db/dt as input on right side CLARIFY
-change file nav format
+change file nav format CLARIFY
 
 
 for certain eqns ban negative initials
@@ -11,16 +11,11 @@ make toggles tabs
 
 publish only updated Sustainability
 
-when edit eqn name and select other it breaks 
-when edit file name and select it again it breaks
-make clickaway work
-
-
-
-
+on double click eqns select all
+allow eqns to be exported to website
 fix dynamic mes
-
-
+slider doesnt change if changing max and min
+chp slider is broken
 
 
 
@@ -125,6 +120,9 @@ DONE
     only allow unique variables DONE
     pass in parsed Eqns from parent on change sliders DONE
     shrink eqn errors and move to side DONE
+    when edit eqn name and select other it breaks DONE
+    when edit file name and select it again it breaks DONE
+    make clickaway work DONE
 
 
 NOT NEEDED

@@ -31,6 +31,8 @@ const EqnItems = (props) => {
         removeItem={() => props.removeItem(Eqn.id, "Eqns")}
         DByDLatex={Eqn.DByDLatex}
         LatexEqn={Eqn.LatexEqn}
+        //onDoubleClick={props.onDoubleClickMathQuill(Eqn.id)}
+
         handleMathQuillInputChange={props.handleMathQuillInputChange(Eqn.id, "Eqns")}
       />
     );

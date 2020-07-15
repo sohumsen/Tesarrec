@@ -114,8 +114,9 @@ class LinearCoupled extends Component {
       //replace mathField.latex() with another version which is the VarRange
       item.TextEqn = mathField.text();
       item.LatexEqn = mathField.latex();
+      //console.log(mathField);
+      //mathField.select();
     } else {
-
       item.LatexForm = mathField.latex();
       items[idx] = item;
 
@@ -144,6 +145,11 @@ class LinearCoupled extends Component {
     items[idx] = item;
     this.setState({ [itemType]: items, calculate: false });
   };
+
+  // onDoubleClickMathQuill = (id)=>(mathField) => {
+  //   console.log(mathField,id)
+  // //mathField.select();
+  // };
 
   handleMathQuillInputSubmit = (event) => {
     let valid = [];
@@ -466,6 +472,7 @@ class LinearCoupled extends Component {
         Eqns={this.state.Eqns}
         removeItem={this.removeItem}
         handleMathQuillInputChange={this.handleMathQuillInputChange}
+        //onDoubleClickMathQuill={this.onDoubleClickMathQuill}
       />
     );
 

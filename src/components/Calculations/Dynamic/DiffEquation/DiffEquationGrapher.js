@@ -1,5 +1,5 @@
 import React from "react";
-import MyChart from "../../../UI/Canvas/Charts/Chart";
+import MyChart from "../../../UI/Canvas/LineChart";
 import DiffEquationSolver from "./DiffEquationSolver";
 
 const DiffEquationGrapher = (props) => {

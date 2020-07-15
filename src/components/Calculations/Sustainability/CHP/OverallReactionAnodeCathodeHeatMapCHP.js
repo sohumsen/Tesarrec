@@ -6,6 +6,9 @@ import CashFlowGraph from "./CashFlowGraph";
 import CHPPic from "../../../../assets/CHP.png";
 import MyHeatMap from "../../../UI/MyHeatMap/MyHeatMap";
 import classes from "./OverallReactionAnodeCathodeCHP.module.css";
+import ColumnChart from "../../../UI/Canvas/ColumnChart";
+import StackedColumnChart from "../../../UI/Canvas/StackedColumnChart";
+
 const OverallReactionAnodeCathode = (props) => {
   //console.log(props.anodeSubstrate)
   //console.log(props.cathodeProduct)
@@ -26,6 +29,8 @@ const OverallReactionAnodeCathode = (props) => {
 
     ElectricityPrice,
     SteamPrice,
+
+    BiomassCost,
     IRRCost,
   } = props;
 
@@ -54,7 +59,11 @@ const OverallReactionAnodeCathode = (props) => {
     BiomassNeeded /
     BiomassCalorificValue;
 
-  let GlobalWarmingPotentialSaving = 454 * ElectricityDemand;
+  let BiomassGWPSaving = 454 * ElectricityDemand;
+
+  let SolarGWPSaving = 414 * ElectricityDemand;
+
+  let PumpedHydroGWPSaving = 84 * ElectricityDemand;
 
   let CapitalCost =
     (0.00174 * BiomassNeeded ** 0.7 + 0.1942 * ElectricityDemand ** 0.7) *
@@ -64,8 +73,9 @@ const OverallReactionAnodeCathode = (props) => {
 
   let Opex =
     1.3 *
-    ((0.19 * CapitalCost * AnnualCapitalCharge) / LangFactor +
-      (0.09 * BiomassNeeded) / 1000);
+      ((0.19 * CapitalCost * AnnualCapitalCharge) / LangFactor +
+        (0.09 * BiomassNeeded) / 1000) +
+    BiomassNeeded * BiomassCost * 0.000009;
 
   let CostOfChpProduction =
     (Capex + Opex) /
@@ -84,13 +94,64 @@ const OverallReactionAnodeCathode = (props) => {
       <p> SteamGeneration={SteamGeneration}</p>
       <p> ElectricityGenerationEfficiency={ElectricityGenerationEfficiency}</p>
       <p> ChpGenerationEfficiency={ChpGenerationEfficiency}</p>
-      <p> GlobalWarmingPotentialSaving={GlobalWarmingPotentialSaving}</p>
+      <p> GlobalWarmingPotentialSaving={BiomassGWPSaving}</p>
       <p> CapitalCost={CapitalCost}</p>
       <p> Capex={Capex}</p>
       <p> Opex={Opex}</p>
       <p> CostOfChpProduction={CostOfChpProduction}</p>
       <p> ProductValue={ProductValue}</p>
+      <div className={classes.HeatMapEnergyPerformance}>
+        <ColumnChart
+          labelData1={[
+            { label: "Biomass needed", y: BiomassNeeded },
+            { label: "Steam Generation", y: SteamGeneration },
+          ]}
+          type={"column"}
+        />
+      </div>
+      <div className={classes.HeatMapEnergyPerformance}>
+        <ColumnChart
+          labelData1={[
+            { label: "Heat Generation Efficiency", y: ChpGenerationEfficiency-ElectricityGenerationEfficiency },
+            { label: "Electricity Generation Efficiency", y: ElectricityGenerationEfficiency },
+          ]}
+          type={"doughnut"}
+        />
+      </div>
 
+      <div className={classes.HeatMapEnergyPerformance}>
+        <ColumnChart
+          labelData1={[
+            { label: "Pumped Hydro", y: PumpedHydroGWPSaving },
+            { label: "Solar", y: SolarGWPSaving },
+            { label: "Biomass", y: BiomassGWPSaving },
+
+          ]}
+          type={"bar"}
+        />
+      </div>
+      <div className={classes.HeatMapEnergyPerformance}>
+        <ColumnChart
+          labelData1={[
+            { label: "Cost Of Chp Production", y: CostOfChpProduction },
+            { label: "Electricity Price", y: ElectricityPrice },
+          ]}
+          type={"column"}
+        />
+      </div>
+      <div className={classes.HeatMapEnergyPerformance}>
+        <StackedColumnChart
+          labelData1={[
+            { label: "Capex", y: Capex },
+            { label: "Opex", y: Opex },
+            { label: "Product Value", y: ProductValue },
+
+          ]}
+        
+          type1={"doughnut"}
+
+        />
+      </div>
       <div className={classes.HeatMapEnergyPerformance}>
         <CashFlowGraph
           CapitalCost={CapitalCost}

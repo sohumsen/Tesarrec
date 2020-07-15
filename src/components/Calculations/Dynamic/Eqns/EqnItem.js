@@ -20,6 +20,7 @@ const EqnItem = (props) => {
       <MyMathQuill
         firstBit={props.DByDLatex}
         latex={props.LatexEqn}
+        //onDoubleClick={props.onDoubleClick}
         onInputChange={props.handleMathQuillInputChange}
         width="auto"
       />

@@ -24,6 +24,8 @@ class HeatMapFormMFC extends Component {
     ElectricityPrice: 0.07,
     SteamPrice: 22,
 
+    BiomassCost:40,
+
     IRRCost: 0.12,
 
   };
@@ -66,6 +68,7 @@ class HeatMapFormMFC extends Component {
          
              ElectricityPrice={this.state.ElectricityPrice}
              SteamPrice={this.state.SteamPrice}
+             BiomassCost={this.state.BiomassCost}
 
              IRRCost={this.state.IRRCost}
              InputhandleChange={this.InputhandleChange}
@@ -90,6 +93,8 @@ class HeatMapFormMFC extends Component {
          
              ElectricityPrice={this.state.ElectricityPrice}
              SteamPrice={this.state.SteamPrice}
+
+             BiomassCost={this.state.BiomassCost}
 
              IRRCost={this.state.IRRCost}
 

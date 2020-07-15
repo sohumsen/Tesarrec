@@ -37,7 +37,7 @@ export default function BasicTextFields(props) {
         onChange={props.onChange}
         label={props.label}
         name={props.name}
-        onKeyPress={props.onKeyDown}
+        onKeyDown={props.onKeyDown}
         placeholder={props.label}
         variant="outlined"
       />

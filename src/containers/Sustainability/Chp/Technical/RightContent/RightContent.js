@@ -194,6 +194,16 @@ class RightContent extends Component {
           <SliderWithText
             rootWidth={"90%"}
             inputWidth={72}
+            displayCaption={"Biomass Cost (Euro/tonne)"}
+            value={this.props.BiomassCost}
+            lowestVal={0}
+            highestVal={100}
+            SliderhandleChange={this.props.SliderhandleChange("BiomassCost")}
+            InputhandleChange={this.props.InputhandleChange("BiomassCost")}
+          />
+          <SliderWithText
+            rootWidth={"90%"}
+            inputWidth={72}
             displayCaption={"IRR "}
             value={this.props.IRRCost}
             lowestVal={0.05}

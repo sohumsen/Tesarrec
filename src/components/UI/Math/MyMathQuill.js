@@ -16,9 +16,9 @@ const MyMathQuill = (props) => {
         <EditableMathField
 
           style={{ width: props.width }}
-          onKeyDown={props.onKeyDown}
           latex={props.latex} // Initial latex value for the input field
-        
+          //mathquillDidMount={(mathField) => props.onDoubleClick(mathField)}
+          //onKeyDown={(mathField)=>{console.log(mathField)}}
           onChange={(mathField) => props.onInputChange(mathField)}
         />
       ) : null}

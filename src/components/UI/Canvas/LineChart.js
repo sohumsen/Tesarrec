@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import CanvasJSReact from "../../../../assets/canvasjs.react";
+import CanvasJSReact from "../../../assets/canvasjs.react";
 //import classes from './Chart.module.css';
 //import FractionDisplay from '../../Math/Math'
 var CanvasJSChart = CanvasJSReact.CanvasJSChart;

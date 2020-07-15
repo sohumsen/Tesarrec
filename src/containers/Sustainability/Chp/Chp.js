@@ -2,7 +2,7 @@ import React, { Component } from "react";
 
 
 import classes from './Chp.module.css'
-import WordDoc from "../../../assets/MFC discussion.docx";
+import WordDoc from "../../../assets/CHP discussion.docx";
 import DonwloadButton from "../../../components/UI/Button/DownloadButton";
 
 import HeatMapForm from './Technical/HeatMapForm/HeatMapFormCHP'
