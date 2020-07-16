@@ -1,14 +1,10 @@
 import React from "react";
-import RemoveButton from "../../../UI/Button/RemoveButton";
 import MyMathQuill from "../../../UI/Math/MyMathQuill";
 import classes from "./VarItem.module.css";
-import SliderWithText from "../../../UI/SliderContainer/Slider/SliderWithText";
-import Input from "../../../UI/Input/Input";
 import OutlinedInput from "../../../UI/Input/OutlinedInput";
 import { Paper } from "@material-ui/core";
 import MinMaxSlider from "../../../UI/SliderContainer/MinMaxSlider/MinMaxSlider";
 import CloseButton from "../../../UI/Button/CloseButton";
-import ErrorMessage from "../../../UI/MyErrorMessage/CustomizedErrorMessage";
 /**
  *
  *
@@ -17,7 +13,7 @@ import ErrorMessage from "../../../UI/MyErrorMessage/CustomizedErrorMessage";
 const VarItem = (props) => {
   return (
     <li className={classes.Container} style={{ listStyleType: "none" }}>
-      {props.VarType == "Independent" ? (
+      {props.VarType === "Independent" ? (
         <Paper
           className={classes.Dependent}
           style={{ backgroundColor: "rgb(250, 250, 230)" }}
@@ -67,7 +63,7 @@ const VarItem = (props) => {
               onClick={props.removeItem}
             />
           </div>
-         { /*<div className={classes.input}>
+          {/*<div className={classes.input}>
             <OutlinedInput
               width={105}
               type={"text"}
@@ -78,14 +74,14 @@ const VarItem = (props) => {
             />
       </div>*/}
           {props.error ? (
-              <div className={classes.ErrorMsg}>
-                <p>error</p>
-              </div>
-            ) : null}
+            <div className={classes.ErrorMsg}>
+              <p>error</p>
+            </div>
+          ) : null}
         </Paper>
       ) : null}
 
-      {props.VarType == "Dependent" ? (
+      {props.VarType === "Dependent" ? (
         <Paper
           className={classes.Dependent}
           style={{ backgroundColor: "rgb(230, 250, 250)" }}
@@ -135,7 +131,7 @@ const VarItem = (props) => {
               onClick={props.removeItem}
             />
           </div>
-         {/* <div className={classes.input}>
+          {/* <div className={classes.input}>
             <OutlinedInput
               width={105}
               type={"text"}
@@ -146,14 +142,14 @@ const VarItem = (props) => {
             />
       </div>*/}
           {props.error ? (
-              <div className={classes.ErrorMsg}>
-                <p>error</p>
-              </div>
-            ) : null}
+            <div className={classes.ErrorMsg}>
+              <p>error</p>
+            </div>
+          ) : null}
         </Paper>
       ) : null}
 
-      {props.VarType == "Constant" ? (
+      {props.VarType === "Constant" ? (
         <Paper
           className={classes.Constant}
           style={{ backgroundColor: "rgb(250, 230, 250)" }}
@@ -174,8 +170,6 @@ const VarItem = (props) => {
                 name={"VarCurrent"}
               />
             </div>
-
-           
           </div>
           <div className={classes.RemoveButton}>
             <CloseButton
@@ -187,10 +181,10 @@ const VarItem = (props) => {
             />
           </div>
           {props.error ? (
-              <div className={classes.ErrorMsg}>
-                <p>error</p>
-              </div>
-            ) : null}
+            <div className={classes.ErrorMsg}>
+              <p>error</p>
+            </div>
+          ) : null}
           <div className={classes.slider}>
             <MinMaxSlider
               rootWidth={"100%"}
@@ -205,7 +199,6 @@ const VarItem = (props) => {
               )}
             />
           </div>
-         
         </Paper>
       ) : null}
     </li>

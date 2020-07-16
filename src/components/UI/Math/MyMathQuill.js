@@ -5,16 +5,34 @@ import { addStyles, EditableMathField, StaticMathField } from "react-mathquill";
 addStyles();
 
 const MyMathQuill = (props) => {
-
   return (
-    
-    <div >
-
+    <div>
       <StaticMathField>{props.firstBit}</StaticMathField>
 
       {!props.NoEdit ? (
         <EditableMathField
+          // config={{
+          //   substituteTextarea: function () {
+          //     console.log("substituteTextarea");
+          //     return document.createElement("textarea");
+          //   },
+          //   handlers: {
+          //     edit: (mathField) => console.log("edit"),
+          //     upOutOf: (mathField) => {
+          //       console.log("upOutOf");
+          //     },
+          //     selectOutOf: (direction,mathField) => {
+          //       console.log("selectOutOf");
+          //     },
+          //     moveOutOf: (mathField, dir, MQ) => {
+          //       console.log("moveOutOf");
 
+          //       if (dir === MQ.L) {
+          //         return null;
+          //       }
+          //     },
+          //   },
+          // }}
           style={{ width: props.width }}
           latex={props.latex} // Initial latex value for the input field
           //mathquillDidMount={(mathField) => props.onDoubleClick(mathField)}

@@ -12,7 +12,7 @@ const DEFAULTLAYOUT = (props)=> [
       x: 3,
       y: 0,
       w: 1.5,
-      h: 1.5 + props.Vars.length * 1.85,
+      h: 1.5 + props.Vars.length * 1.8,
       isResizable: false,
     },
 
@@ -23,7 +23,7 @@ const DEFAULTLAYOUT = (props)=> [
       x: 0,
       y: 1.5 + props.Eqns.length * 1.8,
       w: 3,
-      h: 17.5 - (1.5 + props.Eqns.length * 1.8),
+      h: 8.8,
       isResizable: false,
     },
   ]

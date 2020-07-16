@@ -76,7 +76,7 @@ class HeatMapFormMFC extends Component {
   };
 
   InputhandleChange = (name) => (event) => {
-    let { value, min, max } = event.target;
+    let { value,  max } = event.target;
 
     if (value > max) {
       value = max;

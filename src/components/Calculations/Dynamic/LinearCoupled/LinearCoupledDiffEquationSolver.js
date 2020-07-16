@@ -1,5 +1,3 @@
-import { parse, simplify } from "mathjs";
-
 //DyByDx= x+3y
 
 const LinearCoupledDiffEquationSolver = (props) => {
@@ -17,7 +15,7 @@ const LinearCoupledDiffEquationSolver = (props) => {
       coordinate[dependentVariable] = initialValues[i];
     }
 
-    coordinate["t"] = initialValues[initialValues.length - 1];
+    coordinate["t"] = initialValues[initialValues.length - 1]; // { a, b , c, t}
 
     const accumulative = {
       ...coordinate,
@@ -25,7 +23,7 @@ const LinearCoupledDiffEquationSolver = (props) => {
     };
 
     for (let idx = 0; idx < parsedEquations.length; idx++) {
-      eqnResultsArr.push(parsedEquations[idx].evaluate(accumulative)); // { a :1 , b: 3.3}
+      eqnResultsArr.push(parsedEquations[idx].evaluate(accumulative)); // { a :1 , b: 3.3,t:3}
     }
 
     return eqnResultsArr;
@@ -36,12 +34,13 @@ const LinearCoupledDiffEquationSolver = (props) => {
 
     let eqnResults2_ = [];
     for (let i = 0; i < props.LineNames.length; i++) {
+      //for each line name
       eqnResults2_.push(Y_n[i] + (h / 2) * K1[i]);
     }
     // Add the T
     eqnResults2_.push(Y_n[Y_n.length - 1] + h / 2);
 
-    let K2 = calcValueAt(eqnResults2_);
+    let K2 = calcValueAt(eqnResults2_); //calcValueAt requires 1 more than the number of line names
 
     let eqnResults3_ = [];
     for (let i = 0; i < props.LineNames.length; i++) {
@@ -67,21 +66,23 @@ const LinearCoupledDiffEquationSolver = (props) => {
       let Y_n1 = Y_n[i] + h * (K1[i] / 6 + K2[i] / 3 + K3[i] / 3 + K4[i] / 6);
       finalResults.push(Y_n1);
     }
+    //
+    finalResults.push(Y_n[Y_n.length - 1] + h);
+    //
 
     return finalResults;
   };
 
   const solveRecursively = (numberOfLoops, Arr) => {
-    let allArrs = [initialConditions.slice(0, -1)];
+    let allArrs = [initialConditions];
 
     for (let i = 0; i < numberOfLoops; i++) {
       Arr = SolveLinearCoupledDifferentialEquationRungeKuttaForRth(Arr);
       allArrs.push(Arr);
     }
-
     return allArrs;
   };
-  const t0 = performance.now();
+  // const t0 = performance.now();
 
   // only changes when eqns are edited
   // let parsedEquations = [];
@@ -90,22 +91,22 @@ const LinearCoupledDiffEquationSolver = (props) => {
   //   var parsed = simplify(parse(eqn));
   //   parsedEquations.push(parsed);
   // }
-  let parsedEquations=props.eqns
+  let parsedEquations = props.eqns;
   // starts at x0=0
 
   let h = parseFloat(props.h);
   let initialConditions = props.initialConditions;
   let CompletedGridRungeKuttaLinearCoupled = [];
-  const t1 = performance.now();
+  // const t1 = performance.now();
 
   CompletedGridRungeKuttaLinearCoupled.push(
     solveRecursively(props.numberOfCycles, initialConditions) //recursive(10,[1,2,3,4,5])
   );
-  const t2 = performance.now();
-  const t3 = performance.now();
+  // const t2 = performance.now();
+  // const t3 = performance.now();
 
-  console.log(`Call to end took ${(t3 - t0)/1000} milliseconds.`);
-  console.log(`Call to parse took ${(t2 - t1)/1000} milliseconds.`);
+  // console.log(`Call to end took ${(t3 - t0)/1000} milliseconds.`);
+  // console.log(`Call to parse took ${(t2 - t1)/1000} milliseconds.`);
 
   return CompletedGridRungeKuttaLinearCoupled;
 };

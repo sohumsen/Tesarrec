@@ -3,7 +3,7 @@ import EqnItem from "./EqnItem";
 
 const EqnItems = (props) => {
   const disabledRemoveButton = () => {
-    if (props.Eqns.length === 2) {
+    if (props.Eqns.length === 1) {
       return true;
     } else {
       return false;

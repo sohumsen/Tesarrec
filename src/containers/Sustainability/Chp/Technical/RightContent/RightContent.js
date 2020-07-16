@@ -2,25 +2,9 @@ import React, { Component } from "react";
 import classes from "./RightContent.module.css";
 
 import MySliderContainer from "../../../../../components/UI/SliderContainer/SliderContainer";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import Switch from "@material-ui/core/Switch";
-import { withStyles } from "@material-ui/core/styles";
-import SliderWithText from "../../../../../components/UI/SliderContainer/Slider/SliderWithText";
-import FormGroup from "@material-ui/core/FormGroup";
 
-const PurpleSwitch = withStyles({
-  switchBase: {
-    color: "black",
-    "&$checked": {
-      color: "black",
-    },
-    "&$checked + $track": {
-      backgroundColor: "black",
-    },
-  },
-  checked: {},
-  track: {},
-})(Switch);
+import SliderWithText from "../../../../../components/UI/SliderContainer/Slider/SliderWithText";
+
 
 class RightContent extends Component {
   render() {

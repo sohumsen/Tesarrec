@@ -6,14 +6,10 @@ import classes from "./ModelBench.module.css";
 import MyTabs from "../../components/UI/MyTabs/MyTabs";
 import Skeleton from "../../components/UI/Skeleton/Skeleton";
 import MyErrorMessage from "../../components/UI/MyErrorMessage/MyErrorMessage";
-import { Paper, Tooltip, IconButton } from "@material-ui/core";
-import Draggable from "react-draggable";
-import RestoreIcon from "@material-ui/icons/Restore";
 
-import DraggableWrapper from "../../components/UI/DraggableWrapper/DraggableWrapper";
+
 import DEFAULTEQNS from "./DefaultStates/DefaultEqns";
 import DEFAULTVARS from "./DefaultStates/DefaultVars";
-import GridLayout from "react-grid-layout";
 
 class ModelBench extends Component {
   /**

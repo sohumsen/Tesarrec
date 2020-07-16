@@ -1,6 +1,6 @@
 import React from "react";
 import MyChart from "../../../UI/Canvas/LineChart";
-import { CSVLink, CSVDownload } from "react-csv";
+import { CSVLink } from "react-csv";
 
 import { parse, simplify } from "mathjs";
 import { Tooltip, IconButton } from "@material-ui/core";

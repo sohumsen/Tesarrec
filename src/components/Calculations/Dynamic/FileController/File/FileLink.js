@@ -1,16 +1,12 @@
 import React, { Component } from "react";
-import ListItemAvatar from "@material-ui/core/ListItemAvatar";
 import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
 import ListItemText from "@material-ui/core/ListItemText";
-import Avatar from "@material-ui/core/Avatar";
 import IconButton from "@material-ui/core/IconButton";
 
-import FolderIcon from "@material-ui/icons/Folder";
 import ClickAwayListener from "@material-ui/core/ClickAwayListener";
 import DoneIcon from "@material-ui/icons/Done";
 import { MenuItem, withStyles, Tooltip } from "@material-ui/core";
 import EditIcon from "@material-ui/icons/Edit";
-import Input from "../../../../UI/Input/Input";
 import OutlinedInput from "../../../../UI/Input/OutlinedInput";
 
 const styles = (theme) => ({
@@ -35,7 +31,6 @@ class FileLink extends Component {
   state = {
     newFileName: "",
     showInputField: false,
-  
   };
   componentDidMount() {
     this.setState({ newFileName: this.props.fileName });
@@ -66,19 +61,16 @@ class FileLink extends Component {
     );
   };
 
-
   handleClickAway = () => {
-    this.setState({showInputField:false,newFileName: this.props.fileName})
-
+    this.setState({ showInputField: false, newFileName: this.props.fileName });
   };
 
-  onKeyDown=(e)=>{
-    if (e.key==="Enter"){
-      e.preventDefault()
+  onKeyDown = (e) => {
+    if (e.key === "Enter") {
+      e.preventDefault();
     }
-  }
+  };
 
-  
   render() {
     const { classes } = this.props;
     return (
@@ -117,6 +109,7 @@ class FileLink extends Component {
                     edge="end"
                     aria-label="edit"
                     onClick={this.onShowInputField}
+                    disabled={this.props.selectedModelId !==this.props.ModelId}
                   >
                     <EditIcon />
                   </IconButton>

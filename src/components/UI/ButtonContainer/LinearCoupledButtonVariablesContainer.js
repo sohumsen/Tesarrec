@@ -1,10 +1,8 @@
 import React from "react";
-import PlayCircleOutlineIcon from "@material-ui/icons/PlayCircleOutline";
 import AddBoxIcon from "@material-ui/icons/AddBox";
 import IconButton from "@material-ui/core/IconButton";
-import { Tooltip, Menu, Paper } from "@material-ui/core";
+import { Tooltip, Paper } from "@material-ui/core";
 import RestoreIcon from "@material-ui/icons/Restore";
-import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import { blue,yellow,pink } from '@material-ui/core/colors';
 
 const LinearCoupledButtonVariablesContainer = (props) => {

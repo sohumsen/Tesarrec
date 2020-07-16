@@ -1,11 +1,9 @@
 import React from "react";
-import PlayCircleOutlineIcon from "@material-ui/icons/PlayCircleOutline";
-import AddBoxIcon from "@material-ui/icons/AddBox";
+
 import IconButton from "@material-ui/core/IconButton";
-import { Tooltip, Menu, Paper } from "@material-ui/core";
-import RestoreIcon from "@material-ui/icons/Restore";
-import ExitToAppIcon from "@material-ui/icons/ExitToApp";
-import { blue, yellow, pink, red } from "@material-ui/core/colors";
+import { Tooltip, Paper } from "@material-ui/core";
+
+import { red } from "@material-ui/core/colors";
 import CloseIcon from "@material-ui/icons/Close";
 import SettingsIcon from "@material-ui/icons/Settings";
 

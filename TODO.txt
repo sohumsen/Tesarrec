@@ -6,7 +6,6 @@ change file nav format CLARIFY
 
 for certain eqns ban negative initials
 canvas js add 0 axis lines
-make "t" work in eqn properly
 make toggles tabs 
 
 publish only updated Sustainability
@@ -14,8 +13,10 @@ publish only updated Sustainability
 on double click eqns select all
 allow eqns to be exported to website
 fix dynamic mes
+generalise differentials to greater than 4
 
-select file, select another icon, submit
+da/dt=b is valid
+
 
 
 
@@ -125,6 +126,9 @@ DONE
     make clickaway work DONE
     chp slider is broken DONE
     slider doesnt change if changing max and min DONE
+    select file, select another icon, submit DONE
+    make "t" work in eqn properly DONE
+
 
 NOT NEEDED
 ===========

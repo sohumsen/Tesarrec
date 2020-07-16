@@ -1,10 +1,8 @@
 import React from "react";
 
-import ReadAnodeJSON from "../../../Excel/Anode/ReadAndodeJSON";
 //import ReadCathodeJSON from "../../Excel/Cathode/ReadCathodeJSON";
 import CashFlowGraph from "./CashFlowGraph";
 import CHPPic from "../../../../assets/CHP.png";
-import MyHeatMap from "../../../UI/MyHeatMap/MyHeatMap";
 import classes from "./OverallReactionAnodeCathodeCHP.module.css";
 import ColumnChart from "../../../UI/Canvas/ColumnChart";
 import StackedColumnChart from "../../../UI/Canvas/StackedColumnChart";

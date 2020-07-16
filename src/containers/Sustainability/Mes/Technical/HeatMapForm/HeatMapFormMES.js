@@ -71,12 +71,12 @@ class HeatMapForm extends Component {
     });
   };
 
-  SliderhandleChange = (name) => (event, value) => {
+  SliderhandleChange = (name) => ( event,value) => {
     this.setState({ [name]: value });
   };
 
   InputhandleChange = (name) => (event) => {
-    let { value, min, max } = event.target;
+    let { value,  max } = event.target;
 
     if (value > max) {
       value = max;

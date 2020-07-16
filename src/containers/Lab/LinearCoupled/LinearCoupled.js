@@ -5,19 +5,13 @@ import "../../../../node_modules/react-grid-layout/css/styles.css";
 import EqnItems from "../../../components/Calculations/Dynamic/Eqns/EqnItems";
 import VarItems from "../../../components/Calculations/Dynamic/Vars/VarItems";
 import { evaluate, simplify, parse } from "mathjs";
-import MyButton from "../../../components/UI/Button/GenericButton";
 import classes from "./LinearCoupled.module.css";
 import MyErrorMessage from "../../../components/UI/MyErrorMessage/CustomizedErrorMessage";
-import SettingButton from "../../../components/UI/Button/SettingButton";
 import GraphConfig from "../../../components/UI/GraphConfig/GraphConfig";
 import LinearCoupledDiffEquationGrapher from "../../../components/Calculations/Dynamic/LinearCoupled/LinearCoupledDiffEquationGrapher";
-import { Paper, Tooltip, IconButton } from "@material-ui/core";
-import AddButton from "../../../components/UI/Button/AddButton";
+import { Paper } from "@material-ui/core";
 import LinearCoupledButtonEqnsContainer from "../../../components/UI/ButtonContainer/LinearCoupledButtonEqnsContainer";
-import Draggable from "react-draggable";
-import ResizeableWrapper from "../../../components/UI/ResizableWrapper/ResizableWrapper";
-import SettingsIcon from "@material-ui/icons/Settings";
-import DraggableWrapper from "../../../components/UI/DraggableWrapper/DraggableWrapper";
+
 import DEFAULTEQNS from "../DefaultStates/DefaultEqns";
 import DEFAULTVARS from "../DefaultStates/DefaultVars";
 import LinearCoupledButtonVariablesContainer from "../../../components/UI/ButtonContainer/LinearCoupledButtonVariablesContainer";
@@ -58,12 +52,22 @@ class LinearCoupled extends Component {
   static getDerivedStateFromProps(props, state) {
     if (props.modelId !== state.modelId) {
       //NEW MODEL
+
+      let graphConfig = { ...state.graphConfig };
+      let arr = [];
+      for (let i = 0; i <= props.Eqns.length; i++) {
+        //generates array of a,b,t 0.5 initial conditions
+        arr.push(0.5);
+      }
+
+      graphConfig.initialConditions = arr;
       return {
         calculate: props.calculate,
         modelId: props.modelId,
         Eqns: props.Eqns,
         Vars: props.Vars,
         myReactGridLayout: DEFAULTLAYOUT(props),
+        graphConfig: graphConfig,
       };
     }
 
@@ -83,17 +87,24 @@ class LinearCoupled extends Component {
   }
   validateExpression = (expr, line) => {
     let lineNames = { t: 1 };
-
+    console.log(this.state.Eqns);
     this.state.Eqns.forEach((Eqn) => {
       lineNames[Eqn.line] = 1;
     });
     this.state.Vars.forEach((Var) => {
       lineNames[Var.LatexForm] = 1;
     });
+    console.log(expr, lineNames);
+    evaluate(expr, lineNames);
+
+    console.log(evaluate(expr, lineNames));
     try {
       evaluate(expr, lineNames);
+      console.log("valid");
       return true;
     } catch (error) {
+      console.log("invalid");
+
       return false;
     }
   };
@@ -131,7 +142,7 @@ class LinearCoupled extends Component {
       }
       var isDuplicate = valueArr.some(function (item, idx) {
         //console.log(item,idx)
-        return valueArr.indexOf(item) != idx;
+        return valueArr.indexOf(item) !== idx;
       });
 
       if (isDuplicate) {
@@ -194,20 +205,6 @@ class LinearCoupled extends Component {
     }
   };
 
-  InputhandleChange = (name) => (event) => {
-    let { value, min, max } = event.target;
-
-    // if (value !== "") {
-    //   value = Math.max(Number(min), Math.min(Number(max), Number(value)));
-    // }
-
-    if (value > max) {
-      value = max;
-    }
-
-    this.setState({ [name]: value });
-  };
-
   handleVariableInputChange = (id) => (event) => {
     let items = this.state.Vars;
 
@@ -218,8 +215,8 @@ class LinearCoupled extends Component {
     const item = {
       ...items[idx],
     };
-    console.log(event.target.name,event.target.value)
-   
+    console.log(event.target.name, event.target.value);
+
     item[event.target.name] = event.target.value;
 
     const deepItems = [...this.state.Vars];
@@ -229,7 +226,7 @@ class LinearCoupled extends Component {
   };
 
   sliderHandleChange = (name, id) => (event, value) => {
-    console.log("jdkfskd")
+    console.log("jdkfskd");
     let items = this.state.Vars;
 
     const idx = items.findIndex((e) => {
@@ -240,7 +237,7 @@ class LinearCoupled extends Component {
       ...items[idx],
     };
     item[name] = value;
-    console.log(value)
+    console.log(value);
 
     const deepItems = [...this.state.Vars];
     deepItems[idx] = item;
@@ -257,7 +254,6 @@ class LinearCoupled extends Component {
 
   removeItem = (id, itemType) => {
     this.setState((prevState) => {
-      let newGraphConfig = null;
       if (itemType === "Eqns") {
         // Line up the initial Condition corresponding to the vars
         let newGraphConfig = { ...prevState.graphConfig };
@@ -388,8 +384,6 @@ class LinearCoupled extends Component {
     this.setState({ graphConfig: graphConfig });
   };
 
-
-
   nextPossibleVariable = (prevState, type) => {
     let typeArr = prevState.Vars.filter((Var) => {
       return Var.VarType === type;
@@ -440,9 +434,9 @@ class LinearCoupled extends Component {
       };
     });
   };
-  onLayoutChange=(layout)=> {
+  onLayoutChange = (layout) => {
     this.setState({ myReactGridLayout: layout });
-  }
+  };
   onResetLayout = () => {
     this.setState({
       myReactGridLayout: DEFAULTLAYOUT(this.state),
