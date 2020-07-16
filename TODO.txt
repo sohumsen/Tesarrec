@@ -14,8 +14,8 @@ publish only updated Sustainability
 on double click eqns select all
 allow eqns to be exported to website
 fix dynamic mes
-slider doesnt change if changing max and min
-chp slider is broken
+
+select file, select another icon, submit
 
 
 
@@ -123,7 +123,8 @@ DONE
     when edit eqn name and select other it breaks DONE
     when edit file name and select it again it breaks DONE
     make clickaway work DONE
-
+    chp slider is broken DONE
+    slider doesnt change if changing max and min DONE
 
 NOT NEEDED
 ===========

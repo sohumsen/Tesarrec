@@ -108,7 +108,6 @@ class LinearCoupled extends Component {
     const item = {
       ...items[idx],
     };
-
     if (itemType === "Eqns") {
       //Parse mathField.latex() and only allow ur vars
       //replace mathField.latex() with another version which is the VarRange
@@ -195,6 +194,20 @@ class LinearCoupled extends Component {
     }
   };
 
+  InputhandleChange = (name) => (event) => {
+    let { value, min, max } = event.target;
+
+    // if (value !== "") {
+    //   value = Math.max(Number(min), Math.min(Number(max), Number(value)));
+    // }
+
+    if (value > max) {
+      value = max;
+    }
+
+    this.setState({ [name]: value });
+  };
+
   handleVariableInputChange = (id) => (event) => {
     let items = this.state.Vars;
 
@@ -205,13 +218,34 @@ class LinearCoupled extends Component {
     const item = {
       ...items[idx],
     };
-
+    console.log(event.target.name,event.target.value)
+   
     item[event.target.name] = event.target.value;
 
     const deepItems = [...this.state.Vars];
     deepItems[idx] = item;
 
     this.setState({ Vars: deepItems, calculate: false });
+  };
+
+  sliderHandleChange = (name, id) => (event, value) => {
+    console.log("jdkfskd")
+    let items = this.state.Vars;
+
+    const idx = items.findIndex((e) => {
+      return e.id === id;
+    });
+
+    const item = {
+      ...items[idx],
+    };
+    item[name] = value;
+    console.log(value)
+
+    const deepItems = [...this.state.Vars];
+    deepItems[idx] = item;
+
+    this.setState({ Vars: deepItems });
   };
   setErrorMessage = (i, errorMessage) => {
     let Eqn = {
@@ -354,23 +388,7 @@ class LinearCoupled extends Component {
     this.setState({ graphConfig: graphConfig });
   };
 
-  sliderHandleChange = (name, id) => (event, value) => {
-    let items = this.state.Vars;
 
-    const idx = items.findIndex((e) => {
-      return e.id === id;
-    });
-
-    const item = {
-      ...items[idx],
-    };
-    item[name] = value;
-
-    const deepItems = [...this.state.Vars];
-    deepItems[idx] = item;
-
-    this.setState({ Vars: deepItems });
-  };
 
   nextPossibleVariable = (prevState, type) => {
     let typeArr = prevState.Vars.filter((Var) => {
@@ -422,7 +440,7 @@ class LinearCoupled extends Component {
       };
     });
   };
-  onLayoutChange(layout) {
+  onLayoutChange=(layout)=> {
     this.setState({ myReactGridLayout: layout });
   }
   onResetLayout = () => {

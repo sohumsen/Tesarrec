@@ -78,8 +78,8 @@ class HeatMapForm extends Component {
   InputhandleChange = (name) => (event) => {
     let { value, min, max } = event.target;
 
-    if (value !== "") {
-      value = Math.max(Number(min), Math.min(Number(max), Number(value)));
+    if (value > max) {
+      value = max;
     }
 
     this.setState({ [name]: value });

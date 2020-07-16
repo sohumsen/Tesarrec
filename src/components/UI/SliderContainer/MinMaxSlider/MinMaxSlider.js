@@ -17,6 +17,8 @@ const useStyles = makeStyles({
 const InputSlider = (props) => {
   const classes = useStyles(props);
 
+  console.log(props.lowestVal)
+
   return (
     <div className={classes.root}>
       <Grid container spacing={1} >

@@ -21,7 +21,6 @@ const CashFlowGraph = (props) => {
       y: parseFloat(dataArr[l].toFixed(2)),
     });
   }
-  console.log(data);
   return (
     <div>
       <MyChart

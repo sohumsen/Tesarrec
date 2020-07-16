@@ -196,7 +196,7 @@ const VarItem = (props) => {
               rootWidth={"100%"}
               inputWidth={32}
               value={props.VarCurrent}
-              lowestVal={props.VarLow}
+              lowestVal={parseFloat(props.VarLow)}
               highestVal={props.VarHigh}
               handleVariableInputChange={props.handleVariableInputChange}
               SliderhandleChange={props.SliderHandleChange(
