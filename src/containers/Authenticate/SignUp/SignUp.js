@@ -14,7 +14,7 @@ import { withStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import { NavLink } from "react-router-dom";
 import FIREBASE_KEY from "../../../firebasekey";
-import CustomizedErrorMessage from "../../../components/UI/MyErrorMessage/CustomizedErrorMessage";
+import CustomizedErrorMessage from "../../../components/UI/MyErrorMessage/AuthenticateError";
 
 function Copyright() {
   return (

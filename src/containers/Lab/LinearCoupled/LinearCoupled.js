@@ -547,13 +547,13 @@ class LinearCoupled extends Component {
             />
           </div>
         ) : (
-          <div key="GraphButtons" />
+          <div />
         )}
 
         {this.state.calculate && this.state.graphConfig.submitted ? (
           this.renderGraph()
         ) : (
-          <div key="Graph" />
+          <div />
         )}
 
         {this.state.graphConfig.show && this.state.calculate ? (
@@ -575,7 +575,7 @@ class LinearCoupled extends Component {
             />
           </div>
         ) : (
-          <div key="GraphConfig" />
+          <div  />
         )}
       </GridLayout>
     );

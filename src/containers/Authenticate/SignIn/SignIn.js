@@ -18,7 +18,7 @@ import FIREBASE_KEY from "../../../firebasekey";
 // import { createMuiTheme, withTheme } from "@material-ui/core/styles";
 
 import { NavLink } from "react-router-dom";
-import CustomizedErrorMessage from "../../../components/UI/MyErrorMessage/CustomizedErrorMessage";
+import CustomizedErrorMessage from "../../../components/UI/MyErrorMessage/AuthenticateError";
 
 function Copyright() {
   return (

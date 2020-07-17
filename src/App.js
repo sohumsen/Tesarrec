@@ -120,7 +120,7 @@ class App extends Component {
   render() {
     let ifLoggedIn = (
       <Switch>
-        <Route
+       <Route
           path="/modelbench"
           exact
           render={(props) => (
@@ -138,7 +138,9 @@ class App extends Component {
             <Logout {...props} onLogoutHandler={this.onLogoutHandler} />
           )}
         />
-        <Route path="/dynamic/mes" exact component={DynamicMes} />
+          <Route path="/dynamic/mes" exact component={DynamicMes} />
+
+
         <Route path="/sustainability/chp" exact component={Chp} />
 
         <Route path="/sustainability/mfc" exact component={Mfc} />
@@ -151,7 +153,7 @@ class App extends Component {
     );
     let ifNotLoggedIn = (
       <Switch>
-        <Route
+       <Route
           path="/signin"
           exact
           render={(props) => (
@@ -176,7 +178,7 @@ class App extends Component {
               authSuccess={this.authSuccess}
             />
           )}
-        />
+          />
         <Route path="/sustainability/chp" exact component={Chp} />
 
         <Route path="/sustainability/mfc" exact component={Mfc} />

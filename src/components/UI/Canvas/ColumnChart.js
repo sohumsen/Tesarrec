@@ -10,7 +10,11 @@ class ColumnChart extends Component {
       animationEnabled: true,
       exportEnabled: true,
       theme: "light2", // "light1", "dark1", "dark2"
-
+      title:{
+        text: this.props.title,
+        fontSize: 15,
+       // more attributes 
+    },
    
       backgroundColor: "white",
       zoomEnabled: true,

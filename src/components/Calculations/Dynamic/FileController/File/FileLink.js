@@ -48,7 +48,7 @@ class FileLink extends Component {
       [e.target.name]: e.target.value,
     });
   };
-  onButtonPress = () => {
+  onButtonPress = (e) => {
     this.setState(
       (prevState) => {
         return {

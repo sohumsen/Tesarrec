@@ -14,6 +14,20 @@ class RightContent extends Component {
         <br />
 
         <MySliderContainer>
+        <SliderWithText
+            rootWidth={"90%"}
+            inputWidth={72}
+            displayCaption={"Electricity demand GWh/year "}
+            value={this.props.ElectricityDemand}
+            InputhandleChange={this.props.InputhandleChange(
+              "ElectricityDemand"
+            )}
+            lowestVal={1}
+            highestVal={10}
+            SliderhandleChange={this.props.SliderhandleChange(
+              "ElectricityDemand"
+            )}
+          />
           <SliderWithText
             rootWidth={"90%"}
             inputWidth={72}
@@ -114,20 +128,7 @@ class RightContent extends Component {
               "MechanicalEfficiency"
             )}
           />
-          <SliderWithText
-            rootWidth={"90%"}
-            inputWidth={72}
-            displayCaption={"Electricity demand GWh/year "}
-            value={this.props.ElectricityDemand}
-            InputhandleChange={this.props.InputhandleChange(
-              "ElectricityDemand"
-            )}
-            lowestVal={1}
-            highestVal={10}
-            SliderhandleChange={this.props.SliderhandleChange(
-              "ElectricityDemand"
-            )}
-          />
+        
           <SliderWithText
             rootWidth={"90%"}
             inputWidth={72}

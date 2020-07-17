@@ -1,11 +1,10 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 
-
 const useStyles = makeStyles((theme) => ({
   root: {
     "& > *": {
-      width: "4ch",
+      width: "4.2ch",
     },
   },
 }));
@@ -16,20 +15,7 @@ export default function BasicTextFields(props) {
   return (
     <form className={classes.root} noValidate autoComplete="off">
       <input
-      style={{width:props.width}}
-
-        InputLabelProps={{
-          style: {
-            height: 25,
-            ...{ top: `-9px` },
-          },
-        }}
-        inputProps={{
-          style: {
-            height: 25,
-            padding: "0 14px",
-          },
-        }}
+        style={{ width: props.width }}
         size="small"
         type={props.type}
         value={props.value}

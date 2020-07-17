@@ -109,6 +109,7 @@ const OverallReactionAnodeCathode = (props) => {
 
       <div className={classes.HeatMapEnergyPerformance}>
         <ColumnChart
+        title={"Global Warming Potential Saving"}
           labelData1={[
             { label: "Pumped Hydro (tonne CO2 eq.)/year", y: parseFloat(PumpedHydroGWPSaving.toFixed(2)) },
             { label: "Solar (tonne CO2  eq.)/year", y: parseFloat(SolarGWPSaving.toFixed(2)) },
@@ -121,7 +122,7 @@ const OverallReactionAnodeCathode = (props) => {
       <div className={classes.HeatMapEnergyPerformance}>
         <ColumnChart
           labelData1={[
-            { label: "Cost Of Chp Production €/kWh", y: parseFloat(CostOfChpProduction.toFixed(2)) },
+            { label: "Cost Of CHP Production €/kWh", y: parseFloat(CostOfChpProduction.toFixed(2)) },
             { label: "Electricity Price €/kWh", y: parseFloat(ElectricityPrice.toFixed(2)) },
           ]}
           type={"column"}

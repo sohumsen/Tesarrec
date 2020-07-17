@@ -6,6 +6,7 @@ const DEFAULTLAYOUT = (props)=> [
       w: 3,
       h: 1.5 + props.Eqns.length * 1.8,
       isResizable: false,
+      static: true
     },
     {
       i: "Vars",

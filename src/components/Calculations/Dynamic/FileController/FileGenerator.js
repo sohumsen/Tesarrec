@@ -8,43 +8,66 @@ import SaveIcon from "@material-ui/icons/Save";
 import PublishIcon from "@material-ui/icons/Publish";
 import { Tooltip, Paper } from "@material-ui/core";
 import AddBoxIcon from "@material-ui/icons/AddBox";
+import TreeView from "@material-ui/lab/TreeView";
+import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
+import ChevronRightIcon from "@material-ui/icons/ChevronRight";
+import TreeItem from "@material-ui/lab/TreeItem";
+import StyledTreeItem from "./File/StyledTreeItem";
+import EditIcon from "@material-ui/icons/Edit";
 
 class FileGenerator extends Component {
   render() {
-    let publicFileLinks = Object.keys(this.props.allPublicId).map((ModelId) => {
-      return (
-        <FileLink
-          key={ModelId}
-          ModelId={ModelId} //
-          selectedModelId={this.props.selectedModelId} //
-          disabledEdit={this.props.selectedModelId in this.props.allPublicId}
-          onExpandFileLink={() => this.props.onSelectModelLink(ModelId)} //
-          onEditFileLinkName={this.props.onEditModelName}
-          fileName={
-            this.props.allPublicId[ModelId].Name
-              ? this.props.allPublicId[ModelId].Name
-              : "Junk"
-          } //
-        />
-      );
-    });
+    let publicFileLinks = Object.keys(this.props.allPublicId).map(
+      (ModelId, i) => {
+        return (
+          <StyledTreeItem
+            nodeId={i + 1}
+            labelText={this.props.allPublicId[ModelId].Name} //
+            ModelId={ModelId}
+            selectedModelId={this.props.selectedModelId}
+            disabledEdit={this.props.selectedModelId in this.props.allPublicId}
+            onExpandFileLink={() => this.props.onSelectModelLink(ModelId)} //
+            onEditFileLinkName={this.props.onEditModelName}
+          />
+        );
+      }
+    );
 
-    let privateFileLinks = Object.keys(this.props.allModelId).map((ModelId) => {
-      return (
-        <FileLink
-          key={ModelId}
-          ModelId={ModelId} //
-          selectedModelId={this.props.selectedModelId} //
-          onExpandFileLink={() => this.props.onSelectModelLink(ModelId)} //
-          onEditFileLinkName={this.props.onEditModelName}
-          fileName={
-            this.props.allModelId[ModelId].Name
-              ? this.props.allModelId[ModelId].Name
-              : "Junk"
-          } //
-        />
-      );
-    });
+    let privateFileLinks = Object.keys(this.props.allModelId).map(
+      (ModelId, i) => {
+        return (
+          <StyledTreeItem
+            nodeId={i + Object.keys(this.props.allPublicId).length + 2}
+            labelText={this.props.allModelId[ModelId].Name} //
+            key={ModelId}
+            ModelId={ModelId} //
+            selectedModelId={this.props.selectedModelId} //
+            onExpandFileLink={() => this.props.onSelectModelLink(ModelId)} //
+            onEditFileLinkName={this.props.onEditModelName}
+            fileName={
+              this.props.allModelId[ModelId].Name
+                ? this.props.allModelId[ModelId].Name
+                : "Junk"
+            } //
+          />
+        );
+      }
+    );
+
+    //   <FileLink
+    //   key={ModelId}
+    //   ModelId={ModelId} //
+    //   selectedModelId={this.props.selectedModelId} //
+    //   disabledEdit={this.props.selectedModelId in this.props.allPublicId}
+    //   onExpandFileLink={() => this.props.onSelectModelLink(ModelId)} //
+    //   onEditFileLinkName={this.props.onEditModelName}
+    //   fileName={
+    //     this.props.allPublicId[ModelId].Name
+    //       ? this.props.allPublicId[ModelId].Name
+    //       : "Junk"
+    //   } //
+    // />
+    console.log(this.props.allPublicId)
 
     return (
       <Paper elevation={3}>
@@ -119,11 +142,20 @@ class FileGenerator extends Component {
             </span>
           </Tooltip>
         </Paper>
-        <p>Public</p>
-        {publicFileLinks}
-        <p>Private</p>
 
-        {privateFileLinks}
+        <TreeView
+          defaultCollapseIcon={<ExpandMoreIcon />}
+          defaultExpandIcon={<ChevronRightIcon />}
+          defaultExpanded={(Object.keys(this.props.allPublicId).length+1).toString()!==0?(Object.keys(this.props.allPublicId).length+1).toString():"0"}
+        >
+          <TreeItem nodeId="0" label={"Public"}>
+            {publicFileLinks}
+          </TreeItem>
+
+          <TreeItem nodeId={(Object.keys(this.props.allPublicId).length+1).toString()} label={"Private"}>
+            {privateFileLinks}
+          </TreeItem>
+        </TreeView>
       </Paper>
     );
   }

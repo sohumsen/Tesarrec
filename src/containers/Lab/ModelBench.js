@@ -270,7 +270,7 @@ class ModelBench extends Component {
 
   getPublicModels = () => {
     const queryParams = "?auth=" + this.props.token; //+'&orderBy="userId"&equalTo="'+this.props.userId+'"'
-    fetch("https://tesarrec.firebaseio.com/public/" + ".json" + queryParams, {
+    fetch("https://tesarrec.firebaseio.com/public.json" + queryParams, {
       method: "get",
       headers: {
         Accept: "application/json, text/plain, */*",

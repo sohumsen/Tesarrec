@@ -8,10 +8,9 @@ for certain eqns ban negative initials
 canvas js add 0 axis lines
 make toggles tabs 
 
-publish only updated Sustainability
 
 on double click eqns select all
-allow eqns to be exported to website
+
 fix dynamic mes
 
 da/dt=b is valid
@@ -128,6 +127,10 @@ DONE
     select file, select another icon, submit DONE
     make "t" work in eqn properly DONE
     generalise differentials to greater than 4 DONE
+    allow eqns to be exported to website DONE
+    use tree view files DONE
+    remove red background divs DONE
+    publish only updated Sustainability DONE
 
 
 NOT NEEDED
