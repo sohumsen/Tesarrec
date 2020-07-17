@@ -1,15 +1,5 @@
-import React from 'react';
-import { Alert, AlertTitle } from '@material-ui/lab';
-
+import React from "react";
+import ErrorOutlineIcon from "@material-ui/icons/ErrorOutline";
 export default function CustomizedErrorMessage(props) {
-
-  return (
-      <div >
-      <Alert severity="error">
-        <AlertTitle>{props.msg}</AlertTitle>
-      </Alert>
-      </div>
-
-    
-  );
+  return <ErrorOutlineIcon />;
 }

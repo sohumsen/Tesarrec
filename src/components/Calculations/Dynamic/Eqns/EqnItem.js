@@ -21,7 +21,7 @@ const EqnItem = (props) => {
         latex={props.LatexEqn}
         //onDoubleClick={props.onDoubleClick}
         onInputChange={props.handleMathQuillInputChange}
-        width="auto"
+        width="60%"
       />
     </li>
   );

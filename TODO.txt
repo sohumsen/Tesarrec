@@ -13,7 +13,6 @@ publish only updated Sustainability
 on double click eqns select all
 allow eqns to be exported to website
 fix dynamic mes
-generalise differentials to greater than 4
 
 da/dt=b is valid
 
@@ -128,6 +127,7 @@ DONE
     slider doesnt change if changing max and min DONE
     select file, select another icon, submit DONE
     make "t" work in eqn properly DONE
+    generalise differentials to greater than 4 DONE
 
 
 NOT NEEDED

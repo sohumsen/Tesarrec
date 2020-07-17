@@ -1,6 +1,7 @@
 .RemoveButton {
   position: relative;
   float: right;
+
 }
 
 
@@ -12,9 +13,10 @@
 .ErrorMsg {
   color: red;
   font-size: smaller;
-  width: 50px;
+  width: 30px;
   float: right;
-  height: 50px;
+  height: 30px;
+
 }
 
 

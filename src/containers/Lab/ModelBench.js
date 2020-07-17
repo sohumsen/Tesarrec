@@ -7,7 +7,6 @@ import MyTabs from "../../components/UI/MyTabs/MyTabs";
 import Skeleton from "../../components/UI/Skeleton/Skeleton";
 import MyErrorMessage from "../../components/UI/MyErrorMessage/MyErrorMessage";
 
-
 import DEFAULTEQNS from "./DefaultStates/DefaultEqns";
 import DEFAULTVARS from "./DefaultStates/DefaultVars";
 
@@ -18,35 +17,40 @@ class ModelBench extends Component {
    *
    */
   state = {
-    modelId: "",
     allModelId: {},
-    Eqns: [],
-    Vars: [],
+    allPublicId: {},
+
+    selectedModelId: "",
+    selectedModel: "",
+
     calculate: false,
     error: false,
     tabChoiceValue: 1,
     loading: false,
- 
   };
 
   componentDidMount() {
     this.setState({ loading: true });
-    this.getAllFiles();
+    this.getPrivateModels();
+    this.getPublicModels();
   }
 
   createNewFile = () => {
+    let aNewModel = {
+      Eqns: DEFAULTEQNS,
+      Vars: DEFAULTVARS,
+      Name: "Untitled",
+      Description: "Please add Description",
+      ActualSolution: "",
+      SolutionTechnique: "RK4",
+    };
+
     this.setState(
       {
-        Eqns: DEFAULTEQNS,
-        Vars: DEFAULTVARS,
+        selectedModel: aNewModel,
       },
       () => {
-        const payload = {
-          Eqns: this.state.Eqns,
-          Vars: this.state.Vars,
-          Name: "Untitled",
-          // userId:this.props.userId
-        };
+        const payload = this.state.selectedModel;
 
         fetch(
           "https://tesarrec.firebaseio.com/eqns/" +
@@ -65,10 +69,12 @@ class ModelBench extends Component {
           .then((response) => response.json())
           .then((data) => {
             if (!data.error) {
-              console.log(data);
-              this.setState({ modelId: data.name, error: false }, () => {
-                this.getAllFiles();
-              });
+              this.setState(
+                { selectedModelId: data.name, error: false },
+                () => {
+                  this.getPrivateModels();
+                }
+              );
             } else {
               this.setState({ error: true });
             }
@@ -81,21 +87,21 @@ class ModelBench extends Component {
   };
 
   sendToParent = (eqns, vars) => {
-    this.setState({ Eqns: eqns, Vars: vars });
+    let selectedModel = { ...this.state.selectedModel };
+    selectedModel.Eqns = eqns;
+    selectedModel.Vars = vars;
+    this.setState({ selectedModel: selectedModel });
   };
 
   saveEquation = () => {
-    const payload = {
-      Eqns: this.state.Eqns,
-      Vars: this.state.Vars,
-    };
+    const payload = this.state.selectedModel;
 
-    if (this.state.modelId !== "") {
+    if (this.state.selectedModelId !== "") {
       fetch(
         "https://tesarrec.firebaseio.com/eqns/" +
           this.props.userId +
           "/" +
-          this.state.modelId +
+          this.state.selectedModelId +
           "/.json?auth=" +
           this.props.token,
         {
@@ -110,12 +116,9 @@ class ModelBench extends Component {
         .then((response) => response.json())
         .then((data) => {
           if (!data.error) {
-            this.setState(
-              { Eqns: data.Eqns, Vars: data.Vars, error: false },
-              () => {
-                this.getAllFiles();
-              }
-            );
+            this.setState({ error: false }, () => {
+              this.getPrivateModels();
+            });
           } else {
             this.setState({ error: true });
           }
@@ -128,35 +131,70 @@ class ModelBench extends Component {
     }
   };
 
-  onExpandFileLink = (modelId) => {
+  publishEquation = () => {
+    const payload = { ...this.state.selectedModel, SavedBy: this.props.userId };
+
+    if (this.state.selectedModelId !== "") {
+      fetch(
+        "https://tesarrec.firebaseio.com/public" +
+          ".json?auth=" +
+          this.props.token,
+        {
+          method: "POST",
+          headers: {
+            Accept: "application/json, text/plain, */*",
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(payload),
+        }
+      )
+        .then((response) => response.json())
+        .then((data) => {
+          if (!data.error) {
+            this.setState({ error: false }, () => {
+              this.getPublicModels();
+            });
+          } else {
+            this.setState({ error: true });
+          }
+        })
+        .catch((error) => {
+          this.setState({ error: true });
+        });
+    } else {
+      this.setState({ error: true });
+    }
+  };
+
+  onSelectModelLink = (modelId) => {
     //sets model id and eqns
+    let allModels = { ...this.state.allModelId, ...this.state.allPublicId };
 
     this.setState({
       calculate: false,
-      modelId: modelId,
-      Eqns: this.state.allModelId[modelId].Eqns,
-      Vars: this.state.allModelId[modelId].Vars,
+      selectedModel: allModels[modelId],
+      selectedModelId: modelId,
     });
   };
 
-  onEditFileLinkName = (newFileName) => {
+  onEditModelName = (newModelName) => {
     // curl -X PUT -d '{ "first": "Jack", "last": "Sparrow" }' \
     // 'https://[PROJECT_ID].firebaseio.com/users/jack/name.json'
 
     //     curl -X PATCH -d '{"last":"Jones"}' \
     //  'https://[PROJECT_ID].firebaseio.com/users/jack/name/.json'
     const Name = {
-      Name: newFileName,
+      Name: newModelName,
       // userId:this.props.userId
     };
     // https://tesarrec.firebaseio.com/eqns/QXVRwu8vuHRTsLST6wMWOA9jt3b2/-MAeganGABPemhDxtCc_/Name
 
-    if (this.state.modelId !== "") {
+    if (this.state.selectedModelId !== "") {
       fetch(
         "https://tesarrec.firebaseio.com/eqns/" +
           this.props.userId +
           "/" +
-          this.state.modelId +
+          this.state.selectedModelId +
           "/.json?auth=" +
           this.props.token,
         {
@@ -174,12 +212,9 @@ class ModelBench extends Component {
         .then((response) => response.json())
         .then((data) => {
           if (!data.error) {
-            // this.setState({ Eqns: data.Eqns, error: false }, () => {
-            //   this.getAllFiles();
-            // });
-            console.log(this.state.modelId)
-            this.setState({modelId:""})
-            this.getAllFiles();
+            this.setState({ selectedModelId: "" });
+            this.getPrivateModels();
+            this.getPublicModels();
           } else {
             this.setState({ error: true });
           }
@@ -192,22 +227,24 @@ class ModelBench extends Component {
     }
   };
 
-  onRemoveFileLink = () => {
+  onRemoveModel = () => {
     let allModelId = { ...this.state.allModelId };
-    delete allModelId[this.state.modelId];
+    delete allModelId[this.state.selectedModelId];
+    let selectedModel = { ...this.state.selectedModel };
+    selectedModel.Eqns = [];
+    selectedModel.Vars = [];
 
     this.setState({
-      modelId: null,
-      Eqns: [],
+      selectedModelId: null,
+      selectedModel: selectedModel,
       allModelId: allModelId,
-      Vars: [],
     });
 
     fetch(
       "https://tesarrec.firebaseio.com/eqns/" +
         this.props.userId +
         "/" +
-        this.state.modelId +
+        this.state.selectedModelId +
         ".json?auth=" +
         this.props.token,
       {
@@ -231,7 +268,29 @@ class ModelBench extends Component {
       });
   };
 
-  getAllFiles = () => {
+  getPublicModels = () => {
+    const queryParams = "?auth=" + this.props.token; //+'&orderBy="userId"&equalTo="'+this.props.userId+'"'
+    fetch("https://tesarrec.firebaseio.com/public/" + ".json" + queryParams, {
+      method: "get",
+      headers: {
+        Accept: "application/json, text/plain, */*",
+        "Content-Type": "application/json",
+      },
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        if (!data.error) {
+          this.setState({ allPublicId: data, error: false, loading: false });
+        } else {
+          this.setState({ error: true });
+        }
+      })
+      .catch((error) => {
+        this.setState({ error: true });
+      });
+  };
+
+  getPrivateModels = () => {
     const queryParams = "?auth=" + this.props.token; //+'&orderBy="userId"&equalTo="'+this.props.userId+'"'
     fetch(
       "https://tesarrec.firebaseio.com/eqns/" +
@@ -262,9 +321,9 @@ class ModelBench extends Component {
   copyAllEqnsText = () => {
     var allTextEqns = [];
 
-    for (let i = 0; i < this.state.Eqns.length; i++) {
+    for (let i = 0; i < this.state.selectedModel.Eqns.length; i++) {
       let Eqn = {
-        ...this.state.Eqns[i],
+        ...this.state.selectedModel.Eqns[i],
       };
       allTextEqns.push(Eqn.TextEqn);
     }
@@ -275,63 +334,19 @@ class ModelBench extends Component {
     this.setState({ tabChoiceValue: val });
   };
 
-  publishModelToWebsite=()=>{
-    const payload = {
-      Eqns: this.state.Eqns,
-      Vars: this.state.Vars,
-    };
-
-    if (this.state.modelId !== "") {
-      fetch(
-        "https://tesarrec.firebaseio.com/published/" +
-          this.props.userId +
-          "/" +
-          this.state.modelId +
-          "/.json?auth=" +
-          this.props.token,
-        {
-          method: "PATCH",
-          headers: {
-            Accept: "application/json, text/plain, */*",
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(payload),
-        }
-      )
-        .then((response) => response.json())
-        .then((data) => {
-          if (!data.error) {
-            this.setState(
-              { Eqns: data.Eqns, Vars: data.Vars, error: false },
-              () => {
-                this.getAllFiles();
-              }
-            );
-          } else {
-            this.setState({ error: true });
-          }
-        })
-        .catch((error) => {
-          this.setState({ error: true });
-        });
-    } else {
-      this.setState({ error: true });
-    }
-  
-  }
-
-
   render() {
     let modelLinks = null;
-    Object.keys(this.state.allModelId).length !== 0
+    Object.keys(this.state.allModelId + this.state.allPublicId).length !== 0
       ? (modelLinks = (
           <FileController
             allModelId={this.state.allModelId}
-            selectedModelId={this.state.modelId}
-            onExpandFileLink={this.onExpandFileLink}
-            onRemoveFileLink={this.onRemoveFileLink}
-            onEditFileLinkName={this.onEditFileLinkName}
+            allPublicId={this.state.allPublicId}
+            selectedModelId={this.state.selectedModelId}
+            onSelectModelLink={this.onSelectModelLink}
+            onRemoveModel={this.onRemoveModel}
+            onEditModelName={this.onEditModelName}
             saveEquation={this.saveEquation}
+            publishEquation={this.publishEquation}
             copyAllEqnsText={this.copyAllEqnsText}
             createNewFile={this.createNewFile}
           />
@@ -344,42 +359,40 @@ class ModelBench extends Component {
       // can u inject a background-color: ranmdom lookup color if DEVMODE=TRUE
 
       <div className={classes.ModelBenchContainer}>
-     
-        
-            <div ref={nodeRef} className={classes.ModelBenchItemLeft}>
-              <div className={classes.ModelBenchItemLeftFileNav}>
-                {this.state.loading ? <Skeleton /> : null}
-                {modelLinks}
-              </div>
-
-              <div className={classes.ModelBenchItemLeftEqnNav}>
-                <MyTabs
-                  value={this.state.tabChoiceValue}
-                  handleChange={this.handleTabChange}
-                  labels={["Single ODE", "Coupled ODE"]}
-                />
-              </div>
-            </div>
-
-          <div className={classes.ModelBenchItemCenter}>
-            {this.state.tabChoiceValue === 0 ? (
-              <SingleODE />
-            ) : (
-              <LinearCoupled
-                calculate={this.state.calculate}
-                modelId={this.state.modelId}
-                Eqns={this.state.Eqns}
-                sendToParent={this.sendToParent}
-                nodeRef={nodeRef}
-                eqnEditorPos={this.state.eqnEditorPos}
-                graphPos={this.state.graphPos}
-                configPos={this.state.configPos}
-                onStop={this.onStop}
-                Vars={this.state.Vars}
-              />
-            )}
+        <div ref={nodeRef} className={classes.ModelBenchItemLeft}>
+          <div className={classes.ModelBenchItemLeftFileNav}>
+            {this.state.loading ? <Skeleton /> : null}
+            {modelLinks}
           </div>
-          {this.state.error ? <MyErrorMessage /> : null}
+
+          <div className={classes.ModelBenchItemLeftEqnNav}>
+            <MyTabs
+              value={this.state.tabChoiceValue}
+              handleChange={this.handleTabChange}
+              labels={["Single ODE", "Coupled ODE"]}
+            />
+          </div>
+        </div>
+
+        <div className={classes.ModelBenchItemCenter}>
+          {this.state.tabChoiceValue === 0 ? (
+            <SingleODE />
+          ) : (
+            <LinearCoupled
+              calculate={this.state.calculate}
+              modelId={this.state.selectedModelId}
+              Eqns={this.state.selectedModel.Eqns}
+              Vars={this.state.selectedModel.Vars}
+              sendToParent={this.sendToParent}
+              nodeRef={nodeRef}
+              eqnEditorPos={this.state.eqnEditorPos}
+              graphPos={this.state.graphPos}
+              configPos={this.state.configPos}
+              onStop={this.onStop}
+            />
+          )}
+        </div>
+        {this.state.error ? <MyErrorMessage /> : null}
       </div>
     );
   }

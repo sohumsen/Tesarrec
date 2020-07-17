@@ -155,7 +155,7 @@ class RightContent extends Component {
           <SliderWithText
             rootWidth={"90%"}
             inputWidth={72}
-            displayCaption={"Electricity price (Euro/kWh) "}
+            displayCaption={"Electricity price (€/kWh) "}
             value={this.props.ElectricityPrice}
             InputhandleChange={this.props.InputhandleChange("ElectricityPrice")}
             lowestVal={0.05}
@@ -167,7 +167,7 @@ class RightContent extends Component {
           <SliderWithText
             rootWidth={"90%"}
             inputWidth={72}
-            displayCaption={"Steam price (Euro/tonne)"}
+            displayCaption={"Steam price (€/tonne)"}
             value={this.props.SteamPrice}
             InputhandleChange={this.props.InputhandleChange("SteamPrice")}
             lowestVal={20}
@@ -178,7 +178,7 @@ class RightContent extends Component {
           <SliderWithText
             rootWidth={"90%"}
             inputWidth={72}
-            displayCaption={"Biomass Cost (Euro/tonne)"}
+            displayCaption={"Biomass Cost (€/tonne)"}
             value={this.props.BiomassCost}
             lowestVal={0}
             highestVal={100}

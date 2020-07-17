@@ -17,7 +17,6 @@ class ColumnChart extends Component {
       data: [
         {
           type: this.props.type,
-          showInLegend: true,
 
           dataPoints: this.props.labelData1,
           markerType: "none",

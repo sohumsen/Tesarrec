@@ -95,9 +95,18 @@ class LinearCoupled extends Component {
       lineNames[Var.LatexForm] = 1;
     });
     console.log(expr, lineNames);
-    evaluate(expr, lineNames);
+    console.log(typeof(expr))
 
-    console.log(evaluate(expr, lineNames));
+    //console.log(evaluate(expr, lineNames));
+    // console.log(
+    //   evaluate("b+1", {
+    //     t: 1,
+    //     a: 1,
+    //     Y_1: 1,
+    //     Y_2: 1,
+    //   })
+    // );
+
     try {
       evaluate(expr, lineNames);
       console.log("valid");
@@ -155,11 +164,6 @@ class LinearCoupled extends Component {
     items[idx] = item;
     this.setState({ [itemType]: items, calculate: false });
   };
-
-  // onDoubleClickMathQuill = (id)=>(mathField) => {
-  //   console.log(mathField,id)
-  // //mathField.select();
-  // };
 
   handleMathQuillInputSubmit = (event) => {
     let valid = [];

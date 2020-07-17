@@ -5,6 +5,7 @@ import OutlinedInput from "../../../UI/Input/OutlinedInput";
 import { Paper } from "@material-ui/core";
 import MinMaxSlider from "../../../UI/SliderContainer/MinMaxSlider/MinMaxSlider";
 import CloseButton from "../../../UI/Button/CloseButton";
+import CustomizedErrorMessage from '../../../UI/MyErrorMessage/CustomizedErrorMessage'
 /**
  *
  *
@@ -75,7 +76,7 @@ const VarItem = (props) => {
       </div>*/}
           {props.error ? (
             <div className={classes.ErrorMsg}>
-              <p>error</p>
+              <CustomizedErrorMessage/>
             </div>
           ) : null}
         </Paper>
@@ -143,7 +144,7 @@ const VarItem = (props) => {
       </div>*/}
           {props.error ? (
             <div className={classes.ErrorMsg}>
-              <p>error</p>
+              <CustomizedErrorMessage/>
             </div>
           ) : null}
         </Paper>
@@ -182,7 +183,7 @@ const VarItem = (props) => {
           </div>
           {props.error ? (
             <div className={classes.ErrorMsg}>
-              <p>error</p>
+              <CustomizedErrorMessage/>
             </div>
           ) : null}
           <div className={classes.slider}>

@@ -12,7 +12,7 @@ const LinearCoupledButtonEqnsContainer = (props) => {
       <Tooltip title="Add Equations" placement="top" arrow>
         <span>
           <IconButton
-            disabled={props.Eqns.length === 4 || props.Eqns.length === 0}
+            disabled={props.Eqns.length === 9 || props.Eqns.length === 0}
             edge="end"
             aria-label="add"
             onClick={props.onIncrementEqn}

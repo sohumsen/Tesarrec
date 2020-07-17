@@ -11,9 +11,8 @@ const navigationItems = (props) => {
         <NavigationItem link="/sustainability/mfc">MFC</NavigationItem>
         <NavigationItem link="/sustainability/mes">MES</NavigationItem>
         <NavigationItem link="/sustainability/chp">CHP</NavigationItem>
-
       </Dropdown>
-
+      
 
       {props.isLoggedIn ? (
         <Dropdown name="Dynamic">

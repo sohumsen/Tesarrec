@@ -5,7 +5,6 @@ import CashFlowGraph from "./CashFlowGraph";
 import CHPPic from "../../../../assets/CHP.png";
 import classes from "./OverallReactionAnodeCathodeCHP.module.css";
 import ColumnChart from "../../../UI/Canvas/ColumnChart";
-import StackedColumnChart from "../../../UI/Canvas/StackedColumnChart";
 
 const OverallReactionAnodeCathode = (props) => {
   //console.log(props.anodeSubstrate)
@@ -88,21 +87,12 @@ const OverallReactionAnodeCathode = (props) => {
       <div className={classes.HeatMapEnergyPerformance}>
         <img src={CHPPic} width="100%" alt="MFC Pic "></img>
       </div>
-      <p> BiomassNeeded={BiomassNeeded}</p>
-      <p> SteamGeneration={SteamGeneration}</p>
-      <p> ElectricityGenerationEfficiency={ElectricityGenerationEfficiency}</p>
-      <p> ChpGenerationEfficiency={ChpGenerationEfficiency}</p>
-      <p> GlobalWarmingPotentialSaving={BiomassGWPSaving}</p>
-      <p> CapitalCost={CapitalCost}</p>
-      <p> Capex={Capex}</p>
-      <p> Opex={Opex}</p>
-      <p> CostOfChpProduction={CostOfChpProduction}</p>
-      <p> ProductValue={ProductValue}</p>
+    
       <div className={classes.HeatMapEnergyPerformance}>
         <ColumnChart
           labelData1={[
-            { label: "Biomass needed", y: BiomassNeeded },
-            { label: "Steam Generation", y: SteamGeneration },
+            { label: "Biomass needed kg/hour", y: parseFloat(BiomassNeeded.toFixed(2)) },
+            { label: "Steam Generation kg/hour", y: parseFloat(SteamGeneration.toFixed(2)) },
           ]}
           type={"column"}
         />
@@ -110,19 +100,19 @@ const OverallReactionAnodeCathode = (props) => {
       <div className={classes.HeatMapEnergyPerformance}>
         <ColumnChart
           labelData1={[
-            { label: "Heat Generation Efficiency", y: ChpGenerationEfficiency-ElectricityGenerationEfficiency },
-            { label: "Electricity Generation Efficiency", y: ElectricityGenerationEfficiency },
+            { label: "Heat Generation Efficiency", y: parseFloat((ChpGenerationEfficiency-ElectricityGenerationEfficiency).toFixed(2)) },
+            { label: "Electricity Generation Efficiency", y: parseFloat(ElectricityGenerationEfficiency.toFixed(2)) },
           ]}
-          type={"doughnut"}
+          type={"bar"}
         />
       </div>
 
       <div className={classes.HeatMapEnergyPerformance}>
         <ColumnChart
           labelData1={[
-            { label: "Pumped Hydro", y: PumpedHydroGWPSaving },
-            { label: "Solar", y: SolarGWPSaving },
-            { label: "Biomass", y: BiomassGWPSaving },
+            { label: "Pumped Hydro (tonne CO2 eq.)/year", y: parseFloat(PumpedHydroGWPSaving.toFixed(2)) },
+            { label: "Solar (tonne CO2  eq.)/year", y: parseFloat(SolarGWPSaving.toFixed(2)) },
+            { label: "Biomass (tonne CO2  eq.)/year", y: parseFloat(BiomassGWPSaving.toFixed(2)) },
 
           ]}
           type={"bar"}
@@ -131,32 +121,32 @@ const OverallReactionAnodeCathode = (props) => {
       <div className={classes.HeatMapEnergyPerformance}>
         <ColumnChart
           labelData1={[
-            { label: "Cost Of Chp Production", y: CostOfChpProduction },
-            { label: "Electricity Price", y: ElectricityPrice },
+            { label: "Cost Of Chp Production €/kWh", y: parseFloat(CostOfChpProduction.toFixed(2)) },
+            { label: "Electricity Price €/kWh", y: parseFloat(ElectricityPrice.toFixed(2)) },
           ]}
           type={"column"}
         />
       </div>
       <div className={classes.HeatMapEnergyPerformance}>
-        <StackedColumnChart
+        <ColumnChart
           labelData1={[
-            { label: "Capex", y: Capex },
-            { label: "Opex", y: Opex },
-            { label: "Product Value", y: ProductValue },
+            { label: "Capex million €/y", y: Capex.toFixed(2) },
+            { label: "Opex million €/y", y: Opex.toFixed(2) },
+            { label: "Product Value million €/y", y: ProductValue.toFixed(2) },
 
           ]}
         
-          type1={"doughnut"}
+          type={"doughnut"}
 
         />
       </div>
       <div className={classes.HeatMapEnergyPerformance}>
         <CashFlowGraph
-          CapitalCost={CapitalCost}
-          Capex={Capex}
-          Opex={Opex}
-          ProductValue={ProductValue}
-          IRRCost={IRRCost}
+          CapitalCost={parseFloat(CapitalCost.toFixed(2))}
+          Capex={parseFloat(Capex.toFixed(2))}
+          Opex={parseFloat(Opex.toFixed(2))}
+          ProductValue={parseFloat(ProductValue.toFixed(2))}
+          IRRCost={parseFloat(IRRCost.toFixed(2))}
         />
       </div>
     </div>

@@ -109,7 +109,7 @@ class FileLink extends Component {
                     edge="end"
                     aria-label="edit"
                     onClick={this.onShowInputField}
-                    disabled={this.props.selectedModelId !==this.props.ModelId}
+                    disabled={this.props.selectedModelId !==this.props.ModelId || this.props.disabledEdit}
                   >
                     <EditIcon />
                   </IconButton>
