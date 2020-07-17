@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import SingleODE from "./SingleODE/SingleODE";
 import LinearCoupled from "./LinearCoupled/LinearCoupled";
-import FileController from "../../components/Calculations/Dynamic/FileController/FileGenerator";
+import FileController from "../../components/UI/FileController/FileGenerator";
 import classes from "./ModelBench.module.css";
 import MyTabs from "../../components/UI/MyTabs/MyTabs";
 import Skeleton from "../../components/UI/Skeleton/Skeleton";

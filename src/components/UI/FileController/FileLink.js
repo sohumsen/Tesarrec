@@ -7,7 +7,7 @@ import ClickAwayListener from "@material-ui/core/ClickAwayListener";
 import DoneIcon from "@material-ui/icons/Done";
 import { MenuItem, withStyles, Tooltip } from "@material-ui/core";
 import EditIcon from "@material-ui/icons/Edit";
-import OutlinedInput from "../../../../UI/Input/OutlinedInput";
+import OutlinedInput from "../Input/OutlinedInput";
 
 const styles = (theme) => ({
   root: {

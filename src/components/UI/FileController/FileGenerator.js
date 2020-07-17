@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import FileLink from "./File/FileLink";
+import FileLink from "./FileLink";
 
 import IconButton from "@material-ui/core/IconButton";
 import ImportExportIcon from "@material-ui/icons/ImportExport";
@@ -12,7 +12,7 @@ import TreeView from "@material-ui/lab/TreeView";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import ChevronRightIcon from "@material-ui/icons/ChevronRight";
 import TreeItem from "@material-ui/lab/TreeItem";
-import StyledTreeItem from "./File/StyledTreeItem";
+import StyledTreeItem from "./StyledTreeItem";
 import EditIcon from "@material-ui/icons/Edit";
 
 class FileGenerator extends Component {

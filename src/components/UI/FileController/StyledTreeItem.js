@@ -23,7 +23,7 @@ import IconButton from "@material-ui/core/IconButton";
 import ClickAwayListener from "@material-ui/core/ClickAwayListener";
 import DoneIcon from "@material-ui/icons/Done";
 import { MenuItem, Tooltip } from "@material-ui/core";
-import OutlinedInput from "../../../../UI/Input/OutlinedInput";
+import OutlinedInput from "../Input/OutlinedInput";
 const styles = (theme) => ({
   root: {
     color: "grey",

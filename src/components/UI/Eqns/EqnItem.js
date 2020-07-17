@@ -1,7 +1,7 @@
 import React from "react";
-import MyMathQuill from "../../../UI/Math/MyMathQuill";
+import MyMathQuill from "../Math/MyMathQuill";
 import classes from "./EqnItem.module.css";
-import CloseButton from "../../../UI/Button/CloseButton";
+import CloseButton from "../Button/CloseButton";
 const EqnItem = (props) => {
   return (
     <li className={classes.Container} style={{ listStyleType: "none" }}>

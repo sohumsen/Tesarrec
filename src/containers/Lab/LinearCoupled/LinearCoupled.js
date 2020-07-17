@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import GridLayout from "react-grid-layout";
 import "../../../../node_modules/react-grid-layout/css/styles.css";
 
-import EqnItems from "../../../components/Calculations/Dynamic/Eqns/EqnItems";
+import EqnItems from "../../../components/UI/Eqns/EqnItems";
 import VarItems from "../../../components/Calculations/Dynamic/Vars/VarItems";
 import { evaluate, simplify, parse } from "mathjs";
 import classes from "./LinearCoupled.module.css";
