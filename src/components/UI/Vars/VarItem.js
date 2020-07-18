@@ -1,11 +1,11 @@
 import React from "react";
-import MyMathQuill from "../../../UI/Math/MyMathQuill";
+import MyMathQuill from "../Math/MyMathQuill";
 import classes from "./VarItem.module.css";
-import OutlinedInput from "../../../UI/Input/OutlinedInput";
+import OutlinedInput from "../Input/OutlinedInput";
 import { Paper } from "@material-ui/core";
-import MinMaxSlider from "../../../UI/SliderContainer/MinMaxSlider/MinMaxSlider";
-import CloseButton from "../../../UI/Button/CloseButton";
-import CustomizedErrorMessage from '../../../UI/MyErrorMessage/CustomizedErrorMessage'
+import MinMaxSlider from "../SliderContainer/MinMaxSlider/MinMaxSlider";
+import CloseButton from "../Button/CloseButton";
+import CustomizedErrorMessage from '../MyErrorMessage/CustomizedErrorMessage'
 /**
  *
  *

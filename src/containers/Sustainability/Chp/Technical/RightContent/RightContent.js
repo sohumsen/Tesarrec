@@ -132,7 +132,7 @@ class RightContent extends Component {
           <SliderWithText
             rootWidth={"90%"}
             inputWidth={72}
-            displayCaption={"Lang factor"}
+            displayCaption={"Installation factor"}
             value={this.props.LangFactor}
             InputhandleChange={this.props.InputhandleChange("LangFactor")}
             lowestVal={1}
