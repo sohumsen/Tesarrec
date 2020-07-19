@@ -144,7 +144,7 @@ const OverallReactionAnodeCathode = (props) => {
             2.43 *
             parseFloat(StandardGibbsEnergyOfReactionkJ));
       
-      let MinimumProductSellingPrice=(CapitalCost*props.ACCCost)+Opex/ProductionRateg*24*365
+      let MinimumProductSellingPrice=((CapitalCost*props.ACCCost)+Opex)/ProductionRateg*24*365/1000
 
       ProductionRategData.push(ProductionRateg.toFixed(2));
 
@@ -283,7 +283,7 @@ const OverallReactionAnodeCathode = (props) => {
       </div>
 
       <div className={classes.HeatMapEnergyPerformance}>
-        <h3>Heat map of Minimum Product Selling Price (&euro;/g)</h3>
+        <h3>Heat map of Minimum Product Selling Price (&euro;/kg)</h3>
 
         <MyHeatMap
           xLabels={props.heatMapContents.xLabels}

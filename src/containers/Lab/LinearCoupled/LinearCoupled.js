@@ -560,7 +560,6 @@ class LinearCoupled extends Component {
           <div className={classes.graphConfig} key="GraphConfig">
             <GraphConfig
               configPos={this.props.configPos}
-              onStop={this.props.onStop}
               errorMessage={!this.state.graphConfig.submitted}
               LegendHorizontal={this.state.graphConfig.LegendHorizontal}
               LegendVertical={this.state.graphConfig.LegendVertical}

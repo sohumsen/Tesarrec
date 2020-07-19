@@ -29,7 +29,6 @@ class RightContent extends Component {
   };
 
   showEnergySliderHandler = (event) => {
-
     this.setState({ [event.target.name]: event.target.checked });
   };
 
@@ -328,38 +327,35 @@ class RightContent extends Component {
           />
         </MySliderContainer>
 
-        <div className={classes.toggleSlider}>
-          <FormGroup row>
-            <FormControlLabel
-              control={
-                <PurpleSwitch
-                  checked={this.state.showEnergySliders}
-                  onChange={this.showEnergySliderHandler}
-                  name="showEnergySliders"
-                  color="primary"
-                />
-              }
-              label="Environment"
-              labelPlacement="start"
+        <FormControlLabel
+          control={
+            <PurpleSwitch
+              checked={this.state.showEnergySliders}
+              onChange={this.showEnergySliderHandler}
+              name="showEnergySliders"
+              color="primary"
             />
+          }
+          label="Environment"
+          labelPlacement="start"
+        />
 
-            <FormControlLabel
-              control={
-                <PurpleSwitch
-                  checked={this.state.showCostSliders}
-                  onChange={this.showEnergySliderHandler}
-                  name="showCostSliders"
-                  color="primary"
-                />
-              }
-              label="Cost"
-              labelPlacement="start"
+        <FormControlLabel
+          control={
+            <PurpleSwitch
+              checked={this.state.showCostSliders}
+              onChange={this.showEnergySliderHandler}
+              name="showCostSliders"
+              color="primary"
             />
-            {environmentSliders}
+          }
+          label="Cost"
+          labelPlacement="start"
+        />
 
-            {costSliders}
-          </FormGroup>
-        </div>
+        {environmentSliders}
+
+        {costSliders}
       </div>
     );
   }

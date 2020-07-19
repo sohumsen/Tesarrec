@@ -78,7 +78,8 @@ class HeatMapForm extends Component {
   InputhandleChange = (name) => (event) => {
     let { value,  max } = event.target;
 
-    if (value > max) {
+
+    if (+value > +max) {
       value = max;
     }
 

@@ -11,7 +11,8 @@ make toggles tabs
 
 on double click eqns select all
 
-fix dynamic mes
+fix dynamic mes 
+fix stacked bar in chp
 
 da/dt=b is valid
 
@@ -131,6 +132,8 @@ DONE
     use tree view files DONE
     remove red background divs DONE
     publish only updated Sustainability DONE
+    move toglle sliders down DONE
+    fix chp sliders DONE
 
 
 NOT NEEDED

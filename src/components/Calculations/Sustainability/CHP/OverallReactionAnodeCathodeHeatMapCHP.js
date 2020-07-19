@@ -5,6 +5,7 @@ import CashFlowGraph from "./CashFlowGraph";
 import CHPPic from "../../../../assets/CHP.png";
 import classes from "./OverallReactionAnodeCathodeCHP.module.css";
 import ColumnChart from "../../../UI/Canvas/ColumnChart";
+import StackedChart from "../../../UI/Canvas/StackedChart";
 
 const OverallReactionAnodeCathode = (props) => {
   //console.log(props.anodeSubstrate)
@@ -62,17 +63,28 @@ const OverallReactionAnodeCathode = (props) => {
 
   let PumpedHydroGWPSaving = 84 * ElectricityDemand;
 
+  let BiomassGWPPotential = 45 * ElectricityDemand;
+
+  let SolarGWPPotentail = 85 * ElectricityDemand;
+
+  let PumpedHydroGWPPotential = 415 * ElectricityDemand;
+
+  let NaturalGasGWPPotential = 499 * ElectricityDemand;
+
   let CapitalCost =
     (0.00174 * BiomassNeeded ** 0.7 + 0.1942 * ElectricityDemand ** 0.7) *
     LangFactor;
 
   let Capex = CapitalCost * AnnualCapitalCharge;
 
-  let Opex =
+  let FixedOpex =
     1.3 *
-      ((0.19 * CapitalCost * AnnualCapitalCharge) / LangFactor +
-        (0.09 * BiomassNeeded) / 1000) +
-    BiomassNeeded * BiomassCost * 0.000009;
+    ((0.19 * CapitalCost * AnnualCapitalCharge) / LangFactor +
+      (0.09 * BiomassNeeded) / 1000);
+
+  let FeedStockCost = BiomassNeeded * BiomassCost * 0.000009;
+
+  let Opex = FixedOpex + FeedStockCost;
 
   let CostOfChpProduction =
     (Capex + Opex) /
@@ -87,21 +99,60 @@ const OverallReactionAnodeCathode = (props) => {
       <div className={classes.HeatMapEnergyPerformance}>
         <img src={CHPPic} width="100%" alt="MFC Pic "></img>
       </div>
-    
+
       <div className={classes.HeatMapEnergyPerformance}>
         <ColumnChart
           labelData1={[
-            { label: "Biomass needed kg/hour", y: parseFloat(BiomassNeeded.toFixed(2)) },
-            { label: "Steam Generation kg/hour", y: parseFloat(SteamGeneration.toFixed(2)) },
+            {
+              label: "Biomass needed kg/hour",
+              y: parseFloat(BiomassNeeded.toFixed(2)),
+            },
+            {
+              label: "Steam Generation kg/hour",
+              y: parseFloat(SteamGeneration.toFixed(2)),
+            },
           ]}
           type={"column"}
         />
       </div>
       <div className={classes.HeatMapEnergyPerformance}>
+        <StackedChart
+          name1={"Heat Generation Efficiency"}
+          data1={[
+            {
+              x: 1,
+              y: parseFloat(
+                (
+                  ChpGenerationEfficiency - ElectricityGenerationEfficiency
+                ).toFixed(2)
+              ),
+            },
+          ]}
+          name2={"Electricity Generation Efficiency"}
+          data2={[
+            {
+              x: 1,
+              y: parseFloat(ElectricityGenerationEfficiency.toFixed(2)),
+            },
+          ]}
+          title={""}
+        />
+      </div>
+      <div className={classes.HeatMapEnergyPerformance}>
         <ColumnChart
+          title={"Global Warming Potential (t CO2 eq.)/year"}
           labelData1={[
-            { label: "Heat Generation Efficiency", y: parseFloat((ChpGenerationEfficiency-ElectricityGenerationEfficiency).toFixed(2)) },
-            { label: "Electricity Generation Efficiency", y: parseFloat(ElectricityGenerationEfficiency.toFixed(2)) },
+            {
+              label: "Natural gas",
+              y: parseFloat(NaturalGasGWPPotential.toFixed(2)),
+            },
+
+            {
+              label: "Pumped Hydro",
+              y: parseFloat(PumpedHydroGWPPotential.toFixed(2)),
+            },
+            { label: "Solar", y: parseFloat(SolarGWPPotentail.toFixed(2)) },
+            { label: "Biomass", y: parseFloat(BiomassGWPPotential.toFixed(2)) },
           ]}
           type={"bar"}
         />
@@ -109,21 +160,32 @@ const OverallReactionAnodeCathode = (props) => {
 
       <div className={classes.HeatMapEnergyPerformance}>
         <ColumnChart
-        title={"Global Warming Potential Saving compared to natural gas (t CO2  eq.)/year"}
+          title={
+            "Global Warming Potential Saving compared to natural gas (t CO2 eq.)/year"
+          }
           labelData1={[
-            { label: "Pumped Hydro", y: parseFloat(PumpedHydroGWPSaving.toFixed(2)) },
+            {
+              label: "Pumped Hydro",
+              y: parseFloat(PumpedHydroGWPSaving.toFixed(2)),
+            },
             { label: "Solar", y: parseFloat(SolarGWPSaving.toFixed(2)) },
             { label: "Biomass", y: parseFloat(BiomassGWPSaving.toFixed(2)) },
-
           ]}
           type={"bar"}
         />
       </div>
+
       <div className={classes.HeatMapEnergyPerformance}>
         <ColumnChart
           labelData1={[
-            { label: "Cost Of CHP Production €/kWh", y: parseFloat(CostOfChpProduction.toFixed(2)) },
-            { label: "Electricity Price €/kWh", y: parseFloat(ElectricityPrice.toFixed(2)) },
+            {
+              label: "Cost Of Production €/kWh",
+              y: parseFloat(CostOfChpProduction.toFixed(2)),
+            },
+            {
+              label: "Electricity Price €/kWh",
+              y: parseFloat(ElectricityPrice.toFixed(2)),
+            },
           ]}
           type={"column"}
         />
@@ -132,13 +194,16 @@ const OverallReactionAnodeCathode = (props) => {
         <ColumnChart
           labelData1={[
             { label: "Capex million €/y", y: Capex.toFixed(2) },
-            { label: "Opex million €/y", y: Opex.toFixed(2) },
+            { label: "Fixed Opex million €/y", y: FixedOpex.toFixed(2) },
+
+            {
+              label: "Feedstock Cost million €/y",
+              y: FeedStockCost.toFixed(2),
+            },
+
             { label: "Product Value million €/y", y: ProductValue.toFixed(2) },
-
           ]}
-        
           type={"doughnut"}
-
         />
       </div>
       <div className={classes.HeatMapEnergyPerformance}>

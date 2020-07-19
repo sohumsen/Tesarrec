@@ -384,11 +384,7 @@ class ModelBench extends Component {
               Eqns={this.state.selectedModel.Eqns}
               Vars={this.state.selectedModel.Vars}
               sendToParent={this.sendToParent}
-              nodeRef={nodeRef}
-              eqnEditorPos={this.state.eqnEditorPos}
-              graphPos={this.state.graphPos}
-              configPos={this.state.configPos}
-              onStop={this.onStop}
+         
             />
           )}
         </div>
