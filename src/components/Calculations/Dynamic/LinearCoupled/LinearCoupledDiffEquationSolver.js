@@ -5,6 +5,48 @@ const LinearCoupledDiffEquationSolver = (props) => {
    * A method component that takes in a equation and outputs a chart
    */
 
+  var RK4 = [
+    [0.5, 0.5],
+    [0.5, 0, 0.5],
+    [1, 0, 0, 1],
+    [1 / 6, 1 / 3, 1 / 3, 1 / 6],
+  ];
+  let RK38 = [
+    [1 / 3, 1 / 3],
+    [2 / 3, -1 / 3, 1],
+    [1, 1, -1, 1],
+    [1 / 8, 3 / 8, 3 / 8, 1 / 8],
+  ];
+  let RKF = [
+    [1 / 4, 1 / 4],
+    [3 / 8, 3 / 32, 9 / 32],
+    [12 / 13, 1932 / 2197, -7200 / 2197, 7296 / 2197],
+    [1, 439 / 216, -8, 3680 / 513, -845 / 4104],
+    [1 / 2, -8 / 27, 2, -3544 / 2565, 1859 / 4104, -11 / 40],
+    [25 / 216, 0, 1408 / 2565, 2197 / 4104, -1 / 5, 0],
+  ];
+
+  // const integrate = (m,f,v,t,dt) => {
+  //   for (var k = [], ki = 0; ki < m.length; ki++) {
+  //     var _y = y.slice(),
+  //       dt = ki ? m[ki - 1][0] * h : 0;
+  //     for (var l = 0; l < _y.length; l++)
+  //       for (var j = 1; j <= ki; j++)
+  //         _y[l] = _y[l] + h * m[ki - 1][j] * k[ki - 1][l];
+  //     k[ki] = f(t + dt, _y, dt);
+  //   }
+  //   for (var r = y.slice(), l = 0; l < _y.length; l++)
+  //     for (var j = 0; j < k.length; j++)
+  //       r[l] = r[l] + h * k[j][l] * m[ki - 1][j];
+  //   return r;
+  // };
+
+  // integrate(RK4,f,[0], 0,0.5)
+
+  // const f=(h,y,)=>{
+
+  // }
+
   const calcValueAt = (initialValues) => {
     // { 1 , 2, 3}
     let eqnResultsArr = [];
@@ -25,12 +67,35 @@ const LinearCoupledDiffEquationSolver = (props) => {
     for (let idx = 0; idx < parsedEquations.length; idx++) {
       eqnResultsArr.push(parsedEquations[idx].evaluate(accumulative)); // { a :1 , b: 3.3,t:3}
     }
+    //eqnResultsArr.push(initialValues[initialValues.length-1])
 
     return eqnResultsArr;
   };
+  //let ki be the set of eqns entered by the user
+  //let n be the location
+  //let i varies upto the order or the number of points within the step n and n+1
+  //Compute ki by substituting the value of tn+bi*h and yn+ summation of aij*h*kj (j varies from 1 to i-1) in the set of eqns entered by the user
+  //Compute yn+1 = yn + h * summation of wi*ki (i varies from 1 to the order)
+  //Return yn+1 and tn+1 for the plot
+  const generalSolver = (method,y,t) => {
+    for (var k = [], ki = 0; ki < method.length; ki++) {
+      var _y = y.slice(),
+        dt = ki ? method[ki - 1][0] * h : 0;
+      for (var l = 0; l < _y.length; l++)
+        for (var j = 1; j <= ki; j++)
+          _y[l] = _y[l] + h * method[ki - 1][j] * k[ki - 1][l];
+      //k[ki] = f(t + dt, _y, dt);
+      console.log(t+dt,_y,dt)
+    }
+    for (var r = y.slice(), l = 0; l < _y.length; l++)
+      for (var j = 0; j < k.length; j++)
+        r[l] = r[l] + h * k[j][l] * method[ki - 1][j];
+    return r;
+  };
 
   const SolveLinearCoupledDifferentialEquationRungeKuttaForRth = (Y_n) => {
-    let K1 = calcValueAt(Y_n);
+    //a,b,t
+    let K1 = calcValueAt(Y_n); //k1 returns a,b
 
     let eqnResults2_ = [];
     for (let i = 0; i < props.LineNames.length; i++) {

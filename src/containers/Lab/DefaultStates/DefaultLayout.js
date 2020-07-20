@@ -19,8 +19,8 @@ const DEFAULTLAYOUT = (props)=> [
 
     },
 
-    { i: "GraphButtons", x: 5, y: 0, w: 7, h: 1.5, isResizable: false },
-    { i: "Graph", x: 5, y: 1.5, w: 7, h: 12.5, isResizable: false },
+    { i: "GraphButtons", x: 4.5, y: 0, w: 7, h: 1.5, isResizable: false },
+    { i: "Graph", x: 4.5, y: 1.5, w: 7, h: 12.5, isResizable: false },
     {
       i: "GraphConfig",
       x: 0,
