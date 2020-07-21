@@ -73,6 +73,9 @@ class LinearCoupled extends Component {
 
     return null;
   }
+  componentDidMount(){
+    this.setState({myReactGridLayout:DEFAULTLAYOUT(this.state)})
+  }
 
   componentDidUpdate() {
     if (
@@ -87,15 +90,15 @@ class LinearCoupled extends Component {
   }
   validateExpression = (expr, line) => {
     let lineNames = { t: 1 };
-    console.log(this.state.Eqns);
+    // console.log(this.state.Eqns);
     this.state.Eqns.forEach((Eqn) => {
       lineNames[Eqn.line] = 1;
     });
     this.state.Vars.forEach((Var) => {
       lineNames[Var.LatexForm] = 1;
     });
-    console.log(expr, lineNames);
-    console.log(typeof(expr))
+    // console.log(expr, lineNames);
+    // console.log(typeof(expr))
 
     //console.log(evaluate(expr, lineNames));
     // console.log(
@@ -109,10 +112,10 @@ class LinearCoupled extends Component {
 
     try {
       evaluate(expr, lineNames);
-      console.log("valid");
+      // console.log("valid");
       return true;
     } catch (error) {
-      console.log("invalid");
+      // console.log("invalid");
 
       return false;
     }
@@ -219,7 +222,7 @@ class LinearCoupled extends Component {
     const item = {
       ...items[idx],
     };
-    console.log(event.target.name, event.target.value);
+    // console.log(event.target.name, event.target.value);
 
     item[event.target.name] = event.target.value;
 
@@ -230,7 +233,7 @@ class LinearCoupled extends Component {
   };
 
   sliderHandleChange = (name, id) => (event, value) => {
-    console.log("jdkfskd");
+    // console.log("jdkfskd");
     let items = this.state.Vars;
 
     const idx = items.findIndex((e) => {
@@ -414,7 +417,7 @@ class LinearCoupled extends Component {
 
       numbers.splice(index, 1);
     }
-    console.log(numbers, numbers[0]);
+    // console.log(numbers, numbers[0]);
     let VariableObj = {
       id: type + numbers[0] + new Date().getTime(),
       LatexForm: letter + "_" + numbers[0],
@@ -453,7 +456,6 @@ class LinearCoupled extends Component {
     this.state.Eqns.forEach((eqn) => {
       eqns.push(eqn.ParsedEqn);
     });
-
     let LineNames = [];
     this.state.Eqns.forEach((eqn) => {
       LineNames.push(eqn.line);
@@ -467,11 +469,12 @@ class LinearCoupled extends Component {
     return (
       <Paper elevation={3} key="Graph">
         <LinearCoupledDiffEquationGrapher
-          h={0.05}
+          h={0.5}
           numberOfCycles={30}
           eqns={eqns} //send in parsed eqns
           vars={VarObj} // { K_1=0.27}
           LineNames={LineNames}
+          t0={0}
           axis={[this.state.graphConfig.xAxis, this.state.graphConfig.yAxis]}
           initialConditions={this.state.graphConfig.initialConditions} //includes t
           LegendVertical={this.state.graphConfig.LegendVertical}
@@ -557,7 +560,7 @@ class LinearCoupled extends Component {
         )}
 
         {this.state.graphConfig.show && this.state.calculate ? (
-          <div className={classes.graphConfig} key="GraphConfig">
+          <div key="GraphConfig" className={classes.graphConfig}>
             <GraphConfig
               configPos={this.props.configPos}
               errorMessage={!this.state.graphConfig.submitted}
@@ -574,7 +577,7 @@ class LinearCoupled extends Component {
             />
           </div>
         ) : (
-          <div  />
+          <div />
         )}
       </GridLayout>
     );

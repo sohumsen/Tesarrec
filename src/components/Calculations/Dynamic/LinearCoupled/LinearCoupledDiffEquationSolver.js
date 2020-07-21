@@ -1,52 +1,12 @@
 //DyByDx= x+3y
 
+
 const LinearCoupledDiffEquationSolver = (props) => {
   /**
    * A method component that takes in a equation and outputs a chart
    */
 
-  var RK4 = [
-    [0.5, 0.5],
-    [0.5, 0, 0.5],
-    [1, 0, 0, 1],
-    [1 / 6, 1 / 3, 1 / 3, 1 / 6],
-  ];
-  let RK38 = [
-    [1 / 3, 1 / 3],
-    [2 / 3, -1 / 3, 1],
-    [1, 1, -1, 1],
-    [1 / 8, 3 / 8, 3 / 8, 1 / 8],
-  ];
-  let RKF = [
-    [1 / 4, 1 / 4],
-    [3 / 8, 3 / 32, 9 / 32],
-    [12 / 13, 1932 / 2197, -7200 / 2197, 7296 / 2197],
-    [1, 439 / 216, -8, 3680 / 513, -845 / 4104],
-    [1 / 2, -8 / 27, 2, -3544 / 2565, 1859 / 4104, -11 / 40],
-    [25 / 216, 0, 1408 / 2565, 2197 / 4104, -1 / 5, 0],
-  ];
-
-  // const integrate = (m,f,v,t,dt) => {
-  //   for (var k = [], ki = 0; ki < m.length; ki++) {
-  //     var _y = y.slice(),
-  //       dt = ki ? m[ki - 1][0] * h : 0;
-  //     for (var l = 0; l < _y.length; l++)
-  //       for (var j = 1; j <= ki; j++)
-  //         _y[l] = _y[l] + h * m[ki - 1][j] * k[ki - 1][l];
-  //     k[ki] = f(t + dt, _y, dt);
-  //   }
-  //   for (var r = y.slice(), l = 0; l < _y.length; l++)
-  //     for (var j = 0; j < k.length; j++)
-  //       r[l] = r[l] + h * k[j][l] * m[ki - 1][j];
-  //   return r;
-  // };
-
-  // integrate(RK4,f,[0], 0,0.5)
-
-  // const f=(h,y,)=>{
-
-  // }
-
+  
   const calcValueAt = (initialValues) => {
     // { 1 , 2, 3}
     let eqnResultsArr = [];
@@ -138,9 +98,10 @@ const LinearCoupledDiffEquationSolver = (props) => {
     return finalResults;
   };
 
-  const solveRecursively = (numberOfLoops, Arr) => {
-    let allArrs = [initialConditions];
-
+  const solveRecursively = (numberOfLoops, Arr, t0) => {
+    initialConditions.push(t0)
+    let allArrs = [initialConditions ];
+    console.log(allArrs,initialConditions,t0)
     for (let i = 0; i < numberOfLoops; i++) {
       Arr = SolveLinearCoupledDifferentialEquationRungeKuttaForRth(Arr);
       allArrs.push(Arr);
@@ -161,19 +122,19 @@ const LinearCoupledDiffEquationSolver = (props) => {
 
   let h = parseFloat(props.h);
   let initialConditions = props.initialConditions;
-  let CompletedGridRungeKuttaLinearCoupled = [];
+  let t0 = props.t0
+  
   // const t1 = performance.now();
 
-  CompletedGridRungeKuttaLinearCoupled.push(
-    solveRecursively(props.numberOfCycles, initialConditions) //recursive(10,[1,2,3,4,5])
-  );
+  return solveRecursively(props.numberOfCycles, initialConditions, t0) //recursive(10,[1,2,3,4,5])
+  
   // const t2 = performance.now();
   // const t3 = performance.now();
 
   // console.log(`Call to end took ${(t3 - t0)/1000} milliseconds.`);
   // console.log(`Call to parse took ${(t2 - t1)/1000} milliseconds.`);
 
-  return CompletedGridRungeKuttaLinearCoupled;
+  
 };
 
 export default LinearCoupledDiffEquationSolver;

@@ -5,6 +5,7 @@ import { CSVLink } from "react-csv";
 import { Tooltip, IconButton } from "@material-ui/core";
 import ImportExportIcon from "@material-ui/icons/ImportExport";
 import LinearCoupledDiffEquationSolver from "./LinearCoupledDiffEquationSolver";
+import NewDiffEquationSolver from "./NewDiffEquationSolver";
 
 //DyByDx= x+3y
 
@@ -12,8 +13,7 @@ const LinearCoupledDiffEquationGrapher = (props) => {
   /**
    * A method component that takes in a equation and outputs a chart
    */
-
-  
+  console.log(props)
 
   const ShowLinearCoupledGraph = (EqnArr) => {
     let axis = props.axis; //x,y
@@ -104,13 +104,25 @@ const LinearCoupledDiffEquationGrapher = (props) => {
     return returnedArr;
   };
 
-  let computedResults = LinearCoupledDiffEquationSolver(props)
+  //let computedResults = LinearCoupledDiffEquationSolver(props)
 
-  let EqnArr = FormatArrayLinearCoupled(
-    computedResults[0]
+  let newcomputedResults = NewDiffEquationSolver(props)
+  let newEqnArr = FormatArrayLinearCoupled(
+    newcomputedResults
   );
+  let oldcomputedResults = LinearCoupledDiffEquationSolver(props)
+  let oldEqnArr = FormatArrayLinearCoupled(
+    oldcomputedResults
+  );
+  
+  // let actualSolutions = props.ActualSolution
+  // let ActualSolnsArr = FormatArrayLinearCoupled(
+  //   actualSolutions
+  // );
+  console.log(newcomputedResults)
+  console.log(oldcomputedResults)
 
-  return ShowLinearCoupledGraph(EqnArr);
+  return ShowLinearCoupledGraph(newEqnArr);
 };
 
 export default LinearCoupledDiffEquationGrapher;

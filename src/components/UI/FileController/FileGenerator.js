@@ -67,7 +67,6 @@ class FileGenerator extends Component {
     //       : "Junk"
     //   } //
     // />
-    console.log(this.props.allPublicId)
 
     return (
       <Paper elevation={3}>
