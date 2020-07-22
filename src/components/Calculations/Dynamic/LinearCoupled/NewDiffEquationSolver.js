@@ -128,7 +128,7 @@ const NewDiffEquationSolver = (props) => {
 
   //   return r;
   // };
-  let t0 = props.t0;
+  let t0 = parseFloat(props.t0);
   let returnedY = props.initialConditions.slice();
 
   let _returnedY = returnedY.slice();
@@ -136,7 +136,7 @@ const NewDiffEquationSolver = (props) => {
   let allY = [_returnedY];
 
   for (let i = 0; i < props.numberOfCycles; i++) {
-    returnedY = integrate(Integrators[props.method], func, returnedY, t0, props.h);
+    returnedY = integrate(Integrators[props.method], func, returnedY, t0, parseFloat(props.h));
     t0 += props.h; // constant step size
 
     allY.push([...returnedY, t0]);

@@ -17,6 +17,7 @@ import DEFAULTVARS from "../DefaultStates/DefaultVars";
 import LinearCoupledButtonVariablesContainer from "../../../components/UI/ButtonContainer/LinearCoupledButtonVariablesContainer";
 import LinearCoupledButtonGraphContainer from "../../../components/UI/ButtonContainer/LinearCoupledButtonGraphContainer";
 import DEFAULTLAYOUT from "../DefaultStates/DefaultLayout";
+import DEFAULTGRAPHCONFIG from "../DefaultStates/DefaultGraphConfig";
 class LinearCoupled extends Component {
   /**
    * Visual Component that contains the textbox for the equation and calculation outputs
@@ -29,17 +30,7 @@ class LinearCoupled extends Component {
     calculate: false,
     modelId: "",
 
-    graphConfig: {
-      show: false,
-      submitted: true,
-      LegendHorizontal: "left",
-      LegendVertical: "top",
-      DecimalPrecision: 2,
-      initialConditions: [0.5, 0.5, 0.5, 0.5],
-      xAxis: "t", //x,y,
-      yAxis: "a",
-      method: "RK4",
-    },
+    graphConfig: DEFAULTGRAPHCONFIG,
 
     Eqns: [],
     Vars: [],
@@ -270,16 +261,7 @@ class LinearCoupled extends Component {
       calculate: false,
       modelId: "",
 
-      graphConfig: {
-        show: false,
-        submitted: true,
-        LegendHorizontal: "left",
-        LegendVertical: "top",
-        DecimalPrecision: 2,
-        initialConditions: [0.5, 0.5, 0.5, 0.5],
-        xAxis: "t", //x,y,
-        yAxis: "a",
-      },
+      graphConfig: DEFAULTGRAPHCONFIG,
     });
   };
   resetEqns = () => {
@@ -289,16 +271,7 @@ class LinearCoupled extends Component {
       calculate: false,
       modelId: "",
 
-      graphConfig: {
-        show: false,
-        submitted: true,
-        LegendHorizontal: "left",
-        LegendVertical: "top",
-        DecimalPrecision: 2,
-        initialConditions: [0.5, 0.5, 0.5, 0.5],
-        xAxis: "t", //x,y,
-        yAxis: "a",
-      },
+      graphConfig: DEFAULTGRAPHCONFIG
     });
   };
   nextPossibleEqn = (prevState) => {
@@ -333,7 +306,6 @@ class LinearCoupled extends Component {
 
     this.setState({
       graphConfig: graphConfig,
-      myReactGridLayout: DEFAULTLAYOUT(this.state),
     });
   };
   onGraphConfigClose = () => {
@@ -345,6 +317,7 @@ class LinearCoupled extends Component {
   };
   onGraphConfigChange = (name) => (event, value) => {
     let graphConfig = { ...this.state.graphConfig };
+    console.log(event.target.value)
 
     if (name === "initialConditions") {
       let arr = event.target.value.split(",");
@@ -353,6 +326,7 @@ class LinearCoupled extends Component {
     } else {
       graphConfig[name] = event.target.value;
     }
+    console.log(graphConfig)
 
     graphConfig.submitted = false;
 
@@ -370,7 +344,8 @@ class LinearCoupled extends Component {
       graphConfig.submitted = false;
     }
 
-    this.setState({ graphConfig: graphConfig });
+    this.setState({ graphConfig: graphConfig,  
+    });
   };
 
   nextPossibleVariable = (prevState, type) => {
@@ -442,20 +417,20 @@ class LinearCoupled extends Component {
       LineNames.push(eqn.line);
     });
 
-    let VarObj = {};
+    let vars = {};
 
     this.state.Vars.forEach((VarElement) => {
-      VarObj[VarElement.LatexForm] = VarElement.VarCurrent;
+      vars[VarElement.LatexForm] = VarElement.VarCurrent;
     });
     return (
       <Paper elevation={3} key="Graph">
         <LinearCoupledDiffEquationGrapher
-          h={0.05}
+          h={this.state.graphConfig.h}
           numberOfCycles={30}
           eqns={eqns} //send in parsed eqns
-          vars={VarObj} // { K_1=0.27}
+          vars={vars} // { K_1=0.27}
           LineNames={LineNames}
-          t0={0}
+          t0={this.state.graphConfig.t0}
           method={this.state.graphConfig.method}
           axis={[this.state.graphConfig.xAxis, this.state.graphConfig.yAxis]}
           initialConditions={this.state.graphConfig.initialConditions} //includes t
@@ -532,13 +507,13 @@ class LinearCoupled extends Component {
             />
           </div>
         ) : (
-          <div />
+          <div key="GraphButtons"/>
         )}
 
         {this.state.calculate && this.state.graphConfig.submitted ? (
           this.renderGraph()
         ) : (
-          <div />
+          <div key="Graph"/>
         )}
 
         {this.state.graphConfig.show && this.state.calculate ? (
@@ -553,6 +528,8 @@ class LinearCoupled extends Component {
               xAxis={this.state.graphConfig.xAxis}
               yAxis={this.state.graphConfig.yAxis}
               method={this.state.graphConfig.method}
+              t0={this.state.graphConfig.t0}
+              h={this.state.graphConfig.h}
               Eqns={this.state.Eqns}
               onClose={this.onGraphConfigClose}
               onChange={(val) => this.onGraphConfigChange(val)}
@@ -560,7 +537,7 @@ class LinearCoupled extends Component {
             />
           </div>
         ) : (
-          <div />
+          <div key="GraphConfig"/>
         )}
       </GridLayout>
     );

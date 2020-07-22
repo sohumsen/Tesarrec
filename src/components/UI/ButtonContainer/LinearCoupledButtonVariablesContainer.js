@@ -29,9 +29,10 @@ const LinearCoupledButtonVariablesContainer = (props) => {
             edge="end"
             aria-label="add"
             onClick={()=>props.onIncrementVariable("Independent")}
-            disabled={props.Vars.filter((Var) => {
-              return Var.VarType === "Independent";
-            }).length===9}
+            // disabled={props.Vars.filter((Var) => {
+            //   return Var.VarType === "Independent";
+            // }).length===9}
+            disabled
           >
             <AddBoxIcon style={{ color: yellow[500] }}/>
           </IconButton>
@@ -43,9 +44,11 @@ const LinearCoupledButtonVariablesContainer = (props) => {
             edge="end"
             aria-label="add"
             onClick={()=>props.onIncrementVariable("Dependent")}
-            disabled={props.Vars.filter((Var) => {
-              return Var.VarType === "Dependent";
-            }).length===9}
+            // disabled={props.Vars.filter((Var) => {
+            //   return Var.VarType === "Dependent";
+            // }).length===9}
+            disabled
+
           >
             <AddBoxIcon style={{ color: blue[500] }}/>
           </IconButton>

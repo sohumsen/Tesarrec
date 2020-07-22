@@ -90,12 +90,12 @@ class FileLink extends Component {
                 primary={this.props.fileName}
               />
             ) : (
-              <OutlinedInput
-                width={"100%"}
-                type={"input"}
+              <input
+                style={{width:"10px"}}
+                type="input"
                 value={this.state.newFileName}
                 onChange={this.onChangeFileName}
-                name={"newFileName"}
+                name="newFileName"
                 onKeyDown={this.onKeyDown}
               />
             )}

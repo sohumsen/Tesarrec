@@ -89,7 +89,7 @@ const CashFlowGraph = (props) => {
         verticalAlign={"top"}
         horizontalAlign={"center"}
         LineNames={["Discounted cash flow analysis"]}
-        EulerData={data}
+        dataPoints={[data]}
       />
     </div>
   );

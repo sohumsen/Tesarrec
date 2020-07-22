@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import FileLink from "./FileLink";
+// import FileLink from "./FileLink";
 
 import IconButton from "@material-ui/core/IconButton";
 import ImportExportIcon from "@material-ui/icons/ImportExport";
@@ -13,7 +13,6 @@ import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import ChevronRightIcon from "@material-ui/icons/ChevronRight";
 import TreeItem from "@material-ui/lab/TreeItem";
 import StyledTreeItem from "./StyledTreeItem";
-import EditIcon from "@material-ui/icons/Edit";
 
 class FileGenerator extends Component {
   render() {
@@ -44,11 +43,11 @@ class FileGenerator extends Component {
             selectedModelId={this.props.selectedModelId} //
             onExpandFileLink={() => this.props.onSelectModelLink(ModelId)} //
             onEditFileLinkName={this.props.onEditModelName}
-            fileName={
-              this.props.allModelId[ModelId].Name
-                ? this.props.allModelId[ModelId].Name
-                : "Junk"
-            } //
+            // fileName={
+            //   this.props.allModelId[ModelId].Name
+            //     ? this.props.allModelId[ModelId].Name
+            //     : "Junk"
+            // } //
           />
         );
       }
@@ -145,13 +144,16 @@ class FileGenerator extends Component {
         <TreeView
           defaultCollapseIcon={<ExpandMoreIcon />}
           defaultExpandIcon={<ChevronRightIcon />}
-          defaultExpanded={(Object.keys(this.props.allPublicId).length+1).toString()!==0?(Object.keys(this.props.allPublicId).length+1).toString():"0"}
+        
         >
           <TreeItem nodeId="0" label={"Public"}>
             {publicFileLinks}
           </TreeItem>
 
-          <TreeItem nodeId={(Object.keys(this.props.allPublicId).length+1).toString()} label={"Private"}>
+          <TreeItem
+            nodeId={(Object.keys(this.props.allPublicId).length + 1).toString()}
+            label={"Private"}
+          >
             {privateFileLinks}
           </TreeItem>
         </TreeView>

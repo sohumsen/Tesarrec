@@ -137,6 +137,18 @@ export default function FormControlLabelPlacement(props) {
 
           </Select>
         </div>
+        <Input
+            label="Inititial t"
+            type="text"
+            value={props.t0}
+            onChange={props.onChange("t0")}
+          />
+            <Input
+            label="Step size"
+            type="text"
+            value={props.h}
+            onChange={props.onChange("h")}
+          />
         <GenericButton
           value="Submit"
           type="submit"

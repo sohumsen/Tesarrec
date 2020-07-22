@@ -98,7 +98,7 @@ const LinearCoupledDiffEquationSolver = (props) => {
 
   let h = parseFloat(props.h);
   let initialConditions = props.initialConditions.slice();
-  let t0 = props.t0;
+  let t0 = parseFloat(props.t0);
 
   // const t1 = performance.now();
 

@@ -4,7 +4,6 @@ import classes from "./RightContent.module.css";
 import MySliderContainer from "../../../../../components/UI/SliderContainer/SliderContainer";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Switch from "@material-ui/core/Switch";
-import FormGroup from "@material-ui/core/FormGroup";
 
 import { withStyles } from "@material-ui/core/styles";
 import SliderWithText from "../../../../../components/UI/SliderContainer/Slider/SliderWithText";

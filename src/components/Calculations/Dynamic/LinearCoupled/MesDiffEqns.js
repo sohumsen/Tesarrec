@@ -163,7 +163,7 @@ const LinearCoupledDiffEqns = (props) => {
         </CSVLink>
         
         <MyChart
-          EulerData={FormatTwoArraysIntoCoordObject(xCoord, yCoord)}
+          dataPoints={[FormatTwoArraysIntoCoordObject(xCoord, yCoord)]}
           LineNames={axis[1]}
           axisNames={axis}
           horizontalAlign={props.LegendHorizontal}

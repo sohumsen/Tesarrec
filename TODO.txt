@@ -4,9 +4,8 @@ allow db/dt as input on right side CLARIFY
 change file nav format CLARIFY
 
 
-for certain eqns ban negative initials
+for certain eqns ban negative initials 
 canvas js add 0 axis lines
-make toggles tabs 
 
 
 on double click eqns select all
@@ -15,10 +14,12 @@ fix dynamic mes
 fix stacked bar in chp
 
 da/dt=b is valid
-fix graph config size
-allow b/t for all methods
-allow selection of methods
-graph config submit doesnt work
+
+db/dt= b is invalid
+
+
+click new file select by pressing pencil
+
 
 
 
@@ -139,6 +140,14 @@ DONE
     publish only updated Sustainability DONE
     move toglle sliders down DONE
     fix chp sliders DONE
+    fix graph config size DONE
+    allow b/t for all methods DONE
+    allow selection of methods DONE
+    graph config submit doesnt work DONE
+    allow t0 to be set DONE
+    allow step size to be set DONE
+    plot t against t DONE
+
 
 
 NOT NEEDED
@@ -164,6 +173,8 @@ NOT NEEDED
     Variable Descfiption of a , b , c has default values from Mama but user can override( when user presses submit ) NOT NEEDED
     Add hover button to eqn for description NOT NEEDED
     move files around NOT NEEDED
+    make toggles tabs NOT NEEDED
+
 
 
 
