@@ -6,6 +6,22 @@ var CanvasJSChart = CanvasJSReact.CanvasJSChart;
 
 class LineChart extends Component {
   render() {
+
+    let data=[]
+    for (let i = 0; i < this.props.LineNames.length; i++) {
+      data.push({
+
+        type: "line",
+        name: this.props.LineNames[i],
+        showInLegend: true,
+
+        toolTipContent: this.props.LineNames[i]+ ": {x}, {y}",
+        dataPoints: this.props.dataPoints[i],
+        markerType: "none",
+      })
+      
+    }
+
     const options = {
       animationEnabled: true,
       exportEnabled: true,
@@ -23,44 +39,45 @@ class LineChart extends Component {
       },
       backgroundColor: "white",
       zoomEnabled: true,
-      data: [
-        {
-          type: "line",
-          name: this.props.LineNames[0],
-          showInLegend: true,
+      data:data
+      // data: [
+      //   {
+      //     type: "line",
+      //     name: this.props.LineNames[0],
+      //     showInLegend: true,
 
-          toolTipContent: this.props.LineNames[0]+ ": {x}, {y}",
-          dataPoints: this.props.EulerData,
-          markerType: "none",
-        },
-        {
-          type: "line",
-          name: this.props.LineNames[1],
-          showInLegend: true,
+      //     toolTipContent: this.props.LineNames[0]+ ": {x}, {y}",
+      //     dataPoints: this.props.EulerData,
+      //     markerType: "none",
+      //   },
+      //   {
+      //     type: "line",
+      //     name: this.props.LineNames[1],
+      //     showInLegend: true,
 
-          toolTipContent: this.props.LineNames[1]+ ": {x}, {y}",
-          dataPoints: this.props.MidpointData,
-          markerType: "none",
-        },
-        {
-          type: "line",
-          name: this.props.LineNames[2],
-          showInLegend: true,
+      //     toolTipContent: this.props.LineNames[1]+ ": {x}, {y}",
+      //     dataPoints: this.props.MidpointData,
+      //     markerType: "none",
+      //   },
+      //   {
+      //     type: "line",
+      //     name: this.props.LineNames[2],
+      //     showInLegend: true,
 
-          toolTipContent: this.props.LineNames[2]+ ": {x}, {y}",
-          dataPoints: this.props.RungeKuttaData,
-          markerType: "none",
-        },
-        {
-          type: "line",
-          name: this.props.LineNames[3],
-          showInLegend: true,
+      //     toolTipContent: this.props.LineNames[2]+ ": {x}, {y}",
+      //     dataPoints: this.props.RungeKuttaData,
+      //     markerType: "none",
+      //   },
+      //   {
+      //     type: "line",
+      //     name: this.props.LineNames[3],
+      //     showInLegend: true,
 
-          toolTipContent:this.props.LineNames[3]+ ":  {x}, {y}",
-          dataPoints: this.props.Line4Data,
-          markerType: "none",
-        },
-      ],
+      //     toolTipContent:this.props.LineNames[3]+ ":  {x}, {y}",
+      //     dataPoints: this.props.Line4Data,
+      //     markerType: "none",
+      //   },
+      // ],
     };
     return (
       <div style={{ width: "100%" }}>

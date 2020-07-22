@@ -35,9 +35,10 @@ class LinearCoupled extends Component {
       LegendHorizontal: "left",
       LegendVertical: "top",
       DecimalPrecision: 2,
-      initialConditions: [0.5, 0.5, 0.5, 0.5, 0.5],
+      initialConditions: [0.5, 0.5, 0.5, 0.5],
       xAxis: "t", //x,y,
       yAxis: "a",
+      method: "RK4",
     },
 
     Eqns: [],
@@ -55,7 +56,7 @@ class LinearCoupled extends Component {
 
       let graphConfig = { ...state.graphConfig };
       let arr = [];
-      for (let i = 0; i <= props.Eqns.length; i++) {
+      for (let i = 0; i < props.Eqns.length; i++) {
         //generates array of a,b,t 0.5 initial conditions
         arr.push(0.5);
       }
@@ -73,9 +74,6 @@ class LinearCoupled extends Component {
 
     return null;
   }
-  componentDidMount(){
-    this.setState({myReactGridLayout:DEFAULTLAYOUT(this.state)})
-  }
 
   componentDidUpdate() {
     if (
@@ -90,32 +88,18 @@ class LinearCoupled extends Component {
   }
   validateExpression = (expr, line) => {
     let lineNames = { t: 1 };
-    // console.log(this.state.Eqns);
     this.state.Eqns.forEach((Eqn) => {
       lineNames[Eqn.line] = 1;
     });
     this.state.Vars.forEach((Var) => {
       lineNames[Var.LatexForm] = 1;
     });
-    // console.log(expr, lineNames);
-    // console.log(typeof(expr))
-
-    //console.log(evaluate(expr, lineNames));
-    // console.log(
-    //   evaluate("b+1", {
-    //     t: 1,
-    //     a: 1,
-    //     Y_1: 1,
-    //     Y_2: 1,
-    //   })
-    // );
+   
 
     try {
       evaluate(expr, lineNames);
-      // console.log("valid");
       return true;
     } catch (error) {
-      // console.log("invalid");
 
       return false;
     }
@@ -136,7 +120,6 @@ class LinearCoupled extends Component {
       //replace mathField.latex() with another version which is the VarRange
       item.TextEqn = mathField.text();
       item.LatexEqn = mathField.latex();
-      //console.log(mathField);
       //mathField.select();
     } else {
       item.LatexForm = mathField.latex();
@@ -153,7 +136,6 @@ class LinearCoupled extends Component {
         }
       }
       var isDuplicate = valueArr.some(function (item, idx) {
-        //console.log(item,idx)
         return valueArr.indexOf(item) !== idx;
       });
 
@@ -222,7 +204,6 @@ class LinearCoupled extends Component {
     const item = {
       ...items[idx],
     };
-    // console.log(event.target.name, event.target.value);
 
     item[event.target.name] = event.target.value;
 
@@ -233,7 +214,6 @@ class LinearCoupled extends Component {
   };
 
   sliderHandleChange = (name, id) => (event, value) => {
-    // console.log("jdkfskd");
     let items = this.state.Vars;
 
     const idx = items.findIndex((e) => {
@@ -244,7 +224,6 @@ class LinearCoupled extends Component {
       ...items[idx],
     };
     item[name] = value;
-    console.log(value);
 
     const deepItems = [...this.state.Vars];
     deepItems[idx] = item;
@@ -297,7 +276,7 @@ class LinearCoupled extends Component {
         LegendHorizontal: "left",
         LegendVertical: "top",
         DecimalPrecision: 2,
-        initialConditions: [0.5, 0.5, 0.5, 0.5, 0.5],
+        initialConditions: [0.5, 0.5, 0.5, 0.5],
         xAxis: "t", //x,y,
         yAxis: "a",
       },
@@ -316,7 +295,7 @@ class LinearCoupled extends Component {
         LegendHorizontal: "left",
         LegendVertical: "top",
         DecimalPrecision: 2,
-        initialConditions: [0.5, 0.5, 0.5, 0.5, 0.5],
+        initialConditions: [0.5, 0.5, 0.5, 0.5],
         xAxis: "t", //x,y,
         yAxis: "a",
       },
@@ -352,7 +331,10 @@ class LinearCoupled extends Component {
     graphConfig.show = !this.state.graphConfig.show;
     graphConfig.submitted = true;
 
-    this.setState({ graphConfig: graphConfig });
+    this.setState({
+      graphConfig: graphConfig,
+      myReactGridLayout: DEFAULTLAYOUT(this.state),
+    });
   };
   onGraphConfigClose = () => {
     let graphConfig = { ...this.state.graphConfig };
@@ -381,7 +363,7 @@ class LinearCoupled extends Component {
     let graphConfig = { ...this.state.graphConfig };
 
     let newInitialConditions = graphConfig.initialConditions.map(Number);
-    if (newInitialConditions.length === this.state.Eqns.length + 1) {
+    if (newInitialConditions.length === this.state.Eqns.length) {
       graphConfig.initialConditions = newInitialConditions;
       graphConfig.submitted = true;
     } else {
@@ -417,7 +399,6 @@ class LinearCoupled extends Component {
 
       numbers.splice(index, 1);
     }
-    // console.log(numbers, numbers[0]);
     let VariableObj = {
       id: type + numbers[0] + new Date().getTime(),
       LatexForm: letter + "_" + numbers[0],
@@ -469,12 +450,13 @@ class LinearCoupled extends Component {
     return (
       <Paper elevation={3} key="Graph">
         <LinearCoupledDiffEquationGrapher
-          h={0.5}
+          h={0.05}
           numberOfCycles={30}
           eqns={eqns} //send in parsed eqns
           vars={VarObj} // { K_1=0.27}
           LineNames={LineNames}
           t0={0}
+          method={this.state.graphConfig.method}
           axis={[this.state.graphConfig.xAxis, this.state.graphConfig.yAxis]}
           initialConditions={this.state.graphConfig.initialConditions} //includes t
           LegendVertical={this.state.graphConfig.LegendVertical}
@@ -570,6 +552,7 @@ class LinearCoupled extends Component {
               initialConditions={this.state.graphConfig.initialConditions}
               xAxis={this.state.graphConfig.xAxis}
               yAxis={this.state.graphConfig.yAxis}
+              method={this.state.graphConfig.method}
               Eqns={this.state.Eqns}
               onClose={this.onGraphConfigClose}
               onChange={(val) => this.onGraphConfigChange(val)}

@@ -29,7 +29,16 @@ describe("<LinearCoupledDiffEquationGrapher/>", () => {
     //    t0={0.5} // t0
     //  />
     //);
-    
+    let oldArr = 
+    LinearCoupledDiffEquationSolver({
+      h:0.05,
+      numberOfCycles:NUMCYCLES,
+      eqns:eqns,
+      vars:varObjects, // { K_1=0.27}
+      LineNames:["a"],
+      initialConditions:[0.5] ,// y1
+      t0:0.5
+    });
    
     let calcedArr = 
       NewDiffEquationSolver({
@@ -52,25 +61,34 @@ describe("<LinearCoupledDiffEquationGrapher/>", () => {
 
     //const wrapper = shallow(comp1);
     //const wrapper = shallow(comp2);
-    let errorArr = []
-    for (let index = 0; index < NUMCYCLES; index++) {
-      let calced = calcedArr[index][0];
-      let actual = actualSolutionArr[index][0];
-      let error = actual - calced
-      errorArr.push(error)
+
+    const findRms=(calcedArr,actualSolutionArr)=>{
+      let errorArr = []
+      for (let index = 0; index < NUMCYCLES; index++) {
+        let calced = calcedArr[index][0];
+        let actual = actualSolutionArr[index][0];
+        let error = actual - calced
+        errorArr.push(error)
+      }
+      var sqrt = Math.sqrt;
+      var sqr = function(a) { return a*a; };
+      var add = function(a, b) { return a+b; };
+      var differenceFrom = function(target, a) { return target - a; };
+      var target = 0;
+      var differenceFromTarget = differenceFrom.bind(undefined, target);
+      var sqrdDiff = errorArr.map(differenceFromTarget).map(sqr);
+      var RMSE = sqrt( sqrdDiff.reduce(add, 0) / errorArr.length );
+
+      return RMSE
     }
-    var sqrt = Math.sqrt;
-    var sqr = function(a) { return a*a; };
-    var add = function(a, b) { return a+b; };
-    var differenceFrom = function(target, a) { return target - a; };
-    var target = 0;
-    var differenceFromTarget = differenceFrom.bind(undefined, target);
-    var sqrdDiff = errorArr.map(differenceFromTarget).map(sqr);
-    var RMSE = sqrt( sqrdDiff.reduce(add, 0) / errorArr.length );
+    console.log(oldArr)
+
     console.log(calcedArr)
     console.log(actualSolutionArr)
-    console.log(errorArr)
-    console.log(RMSE)
+    console.log(findRms(oldArr,calcedArr))
+    console.log(findRms(actualSolutionArr,calcedArr))
+    console.log(findRms(oldArr,actualSolutionArr))
+
     //expect(wrapper.find(<LineChart />));
     //expect(wrapper.find("LineChart").props().LineNames.length).toEqual(2);
     //expect(wrapper.find("LineChart").props().EulerData.length).toEqual(32);

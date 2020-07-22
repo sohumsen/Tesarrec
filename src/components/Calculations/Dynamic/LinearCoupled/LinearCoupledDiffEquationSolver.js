@@ -1,12 +1,10 @@
 //DyByDx= x+3y
 
-
 const LinearCoupledDiffEquationSolver = (props) => {
   /**
    * A method component that takes in a equation and outputs a chart
    */
 
-  
   const calcValueAt = (initialValues) => {
     // { 1 , 2, 3}
     let eqnResultsArr = [];
@@ -30,27 +28,6 @@ const LinearCoupledDiffEquationSolver = (props) => {
     //eqnResultsArr.push(initialValues[initialValues.length-1])
 
     return eqnResultsArr;
-  };
-  //let ki be the set of eqns entered by the user
-  //let n be the location
-  //let i varies upto the order or the number of points within the step n and n+1
-  //Compute ki by substituting the value of tn+bi*h and yn+ summation of aij*h*kj (j varies from 1 to i-1) in the set of eqns entered by the user
-  //Compute yn+1 = yn + h * summation of wi*ki (i varies from 1 to the order)
-  //Return yn+1 and tn+1 for the plot
-  const generalSolver = (method,y,t) => {
-    for (var k = [], ki = 0; ki < method.length; ki++) {
-      var _y = y.slice(),
-        dt = ki ? method[ki - 1][0] * h : 0;
-      for (var l = 0; l < _y.length; l++)
-        for (var j = 1; j <= ki; j++)
-          _y[l] = _y[l] + h * method[ki - 1][j] * k[ki - 1][l];
-      //k[ki] = f(t + dt, _y, dt);
-      console.log(t+dt,_y,dt)
-    }
-    for (var r = y.slice(), l = 0; l < _y.length; l++)
-      for (var j = 0; j < k.length; j++)
-        r[l] = r[l] + h * k[j][l] * method[ki - 1][j];
-    return r;
   };
 
   const SolveLinearCoupledDifferentialEquationRungeKuttaForRth = (Y_n) => {
@@ -99,9 +76,8 @@ const LinearCoupledDiffEquationSolver = (props) => {
   };
 
   const solveRecursively = (numberOfLoops, Arr, t0) => {
-    initialConditions.push(t0)
-    let allArrs = [initialConditions ];
-    console.log(allArrs,initialConditions,t0)
+    initialConditions.push(t0);
+    let allArrs = [initialConditions];
     for (let i = 0; i < numberOfLoops; i++) {
       Arr = SolveLinearCoupledDifferentialEquationRungeKuttaForRth(Arr);
       allArrs.push(Arr);
@@ -121,20 +97,18 @@ const LinearCoupledDiffEquationSolver = (props) => {
   // starts at x0=0
 
   let h = parseFloat(props.h);
-  let initialConditions = props.initialConditions;
-  let t0 = props.t0
-  
+  let initialConditions = props.initialConditions.slice();
+  let t0 = props.t0;
+
   // const t1 = performance.now();
 
-  return solveRecursively(props.numberOfCycles, initialConditions, t0) //recursive(10,[1,2,3,4,5])
-  
+  return solveRecursively(props.numberOfCycles, initialConditions, t0); //recursive(10,[1,2,3,4,5])
+
   // const t2 = performance.now();
   // const t3 = performance.now();
 
   // console.log(`Call to end took ${(t3 - t0)/1000} milliseconds.`);
   // console.log(`Call to parse took ${(t2 - t1)/1000} milliseconds.`);
-
-  
 };
 
 export default LinearCoupledDiffEquationSolver;

@@ -15,6 +15,11 @@ fix dynamic mes
 fix stacked bar in chp
 
 da/dt=b is valid
+fix graph config size
+allow b/t for all methods
+allow selection of methods
+graph config submit doesnt work
+
 
 
 

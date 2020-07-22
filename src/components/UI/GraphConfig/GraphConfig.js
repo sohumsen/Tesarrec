@@ -17,7 +17,7 @@ export default function FormControlLabelPlacement(props) {
   let axisMenuItemsList = [];
   props.Eqns.map((Eqn) => {
     axisMenuItemsList.push(Eqn.line);
-    return Eqn.line
+    return Eqn.line;
   });
   axisMenuItemsList.push("t");
   let menuItemsList = axisMenuItemsList.map((menuItem) => {
@@ -121,7 +121,22 @@ export default function FormControlLabelPlacement(props) {
             </div>
           </div>
         </FormControl>
+        <div className={classes.formControl}>
+          <p>Method</p>
+          <Select value={props.method} onChange={props.onChange("method")}>
+            <MenuItem value={"Euler"}>Euler</MenuItem>
+            <MenuItem value={"Midpoint"}>Midpoint</MenuItem>
+            <MenuItem value={"Heun"}>Heun</MenuItem>
+            <MenuItem value={"Ralston"}>Ralston</MenuItem>
+            <MenuItem value={"K3"}>K3</MenuItem>
+            <MenuItem value={"SSP33"}>SSP33</MenuItem>
+            <MenuItem value={"SSP43"}>SSP43</MenuItem>
+            <MenuItem value={"RK4"}>RK4</MenuItem>
+            <MenuItem value={"RK38"}>RK38</MenuItem>
+            <MenuItem value={"RKF"}>RKF</MenuItem>
 
+          </Select>
+        </div>
         <GenericButton
           value="Submit"
           type="submit"
