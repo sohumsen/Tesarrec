@@ -1,0 +1,11 @@
+{
+  "vars": {},
+  "eqns": ["cos(t)"],
+  "solved": ["sin(t)"],
+  "t0": 0,
+  "h": 0.1,
+  "numOfCylcles": 10,
+  "initialConditions": [0],
+  "lineNames":["a"]
+
+}

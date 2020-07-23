@@ -9,7 +9,7 @@ import MyErrorMessage from "../../components/UI/MyErrorMessage/MyErrorMessage";
 
 import DEFAULTEQNS from "./DefaultStates/DefaultEqns";
 import DEFAULTVARS from "./DefaultStates/DefaultVars";
-
+import SolverAnalysis from './SolverAnalysis/SolverAnalysis'
 class ModelBench extends Component {
   /**
    * Visual Component that contains the textbox for the equation and calculation outputs
@@ -25,7 +25,7 @@ class ModelBench extends Component {
 
     calculate: false,
     error: false,
-    tabChoiceValue: 1,
+    tabChoiceValue: 2,
     loading: false,
   };
 
@@ -369,24 +369,27 @@ class ModelBench extends Component {
             <MyTabs
               value={this.state.tabChoiceValue}
               handleChange={this.handleTabChange}
-              labels={["Single ODE", "Coupled ODE"]}
+              labels={["Single ODE", "Coupled ODE", "Solver Analysis"]}
             />
           </div>
         </div>
 
         <div className={classes.ModelBenchItemCenter}>
-          {this.state.tabChoiceValue === 0 ? (
-            <SingleODE />
-          ) : (
+          {this.state.tabChoiceValue === 0 ? <SingleODE /> : null}
+          {this.state.tabChoiceValue === 1 ? (
             <LinearCoupled
               calculate={this.state.calculate}
               modelId={this.state.selectedModelId}
               Eqns={this.state.selectedModel.Eqns}
               Vars={this.state.selectedModel.Vars}
               sendToParent={this.sendToParent}
-         
             />
-          )}
+          ) : null}
+           {this.state.tabChoiceValue === 2 ? (
+            <SolverAnalysis
+            
+            />
+          ) : null}
         </div>
         {this.state.error ? <MyErrorMessage /> : null}
       </div>

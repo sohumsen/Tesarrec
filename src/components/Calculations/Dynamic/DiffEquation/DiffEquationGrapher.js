@@ -14,9 +14,8 @@ const DiffEquationGrapher = (props) => {
         <div>
           <MyChart
             LineNames={props.LineNames}
-            EulerData={Euler}
-            MidpointData={Midpoint}
-            RungeKuttaData={RungeKutta}
+            dataPoints={[Euler,Midpoint,RungeKutta]}
+     
             eqn={props.eqn}
             axisNames={["x", "y"]}
             horizontalAlign={props.LegendHorizontal}
