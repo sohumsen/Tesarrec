@@ -416,6 +416,17 @@ class LinearCoupled extends Component {
     this.state.Eqns.forEach((eqn) => {
       LineNames.push(eqn.line);
     });
+    console.log(this.state.graphConfig.yAxis,LineNames)
+
+    let yAxis=this.state.graphConfig.yAxis
+
+    if (!(this.state.graphConfig.yAxis in LineNames) ){ // the y axis is not a valid line name
+      // let graphConfig={...this.state.graphConfig}
+      // graphConfig.yAxis=LineNames[0]
+      // this.setState({graphConfig:graphConfig})
+      yAxis=LineNames[0]
+    }
+    console.log(this.state.graphConfig.yAxis,yAxis,this.state.graphConfig.xAxis)
 
     let vars = {};
 
@@ -432,7 +443,7 @@ class LinearCoupled extends Component {
           LineNames={LineNames}
           t0={this.state.graphConfig.t0}
           method={this.state.graphConfig.method}
-          axis={[this.state.graphConfig.xAxis, this.state.graphConfig.yAxis]}
+          axis={[this.state.graphConfig.xAxis, yAxis]}
           initialConditions={this.state.graphConfig.initialConditions} //includes t
           LegendVertical={this.state.graphConfig.LegendVertical}
           LegendHorizontal={this.state.graphConfig.LegendHorizontal}

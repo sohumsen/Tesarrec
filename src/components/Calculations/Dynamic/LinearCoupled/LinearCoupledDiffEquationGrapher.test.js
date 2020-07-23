@@ -17,18 +17,7 @@ describe("<LinearCoupledDiffEquationGrapher/>", () => {
     let varObjects = props.varObjects
     let actualSolutionArr = props.actualSolutionArr
 
-    //** 
-    //let comp1 = (
-    //  <LinearCoupledDiffEquationSolver
-    //    h={0.05}
-    //    numberOfCycles={3}
-    //    eqns={["t"]}
-    //    vars={varObjects} // { K_1=0.27}
-    //    LineNames={["a"]}
-    //    initialConditions={[1]}  // y1
-    //    t0={0.5} // t0
-    //  />
-    //);
+    
     let oldArr = 
     LinearCoupledDiffEquationSolver({
       h:0.05,
