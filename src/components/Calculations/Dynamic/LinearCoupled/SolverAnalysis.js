@@ -1,4 +1,3 @@
-
 import React from "react";
 
 import NewDiffEquationSolver from "./NewDiffEquationSolver";
@@ -9,8 +8,47 @@ import linear3 from "../SampleEquations/SingleODE/linear3.json";
 import linear4 from "../SampleEquations/SingleODE/linear4.json";
 import linear5 from "../SampleEquations/SingleODE/linear5.json";
 import MyHeatMap from "../../../UI/MyHeatMap/MyHeatMap";
+import EqnItem from "../../../UI/Eqns/EqnItem";
+import classes from "./SolverAnalysis.module.css";
 
 const SolverAnalysis = () => {
+  const HeatMapChangedOnClick = (x, y, value) => {
+    console.log(x, y, value);
+    let idx = isItemInArray(RMSEArrSliced, value);
+    console.log(getSolutionForGraph(models[idx], integrators[x]));
+    for (let l = 0; l < dataArr.length; l++) {
+      data.push({
+        x: l,
+        y: parseFloat(dataArr[l].toFixed(2)),
+      });
+    }
+  };
+
+  const isItemInArray = (array, item) => {
+    for (var i = 0; i < array.length; i++) {
+      if (array[i] === item[0]) {
+        return i; // Found it
+      }
+    }
+  };
+
+  const getSolutionForGraph = (linear, method) => {
+    let stuff = master(linear);
+
+    let calcedArr = NewDiffEquationSolver({
+      method: method,
+      h: stuff.h,
+      numberOfCycles: stuff.numOfCylcles - 1,
+      eqns: stuff.eqns,
+      vars: stuff.vars, // { K_1=0.27}
+      LineNames: stuff.lineNames,
+      initialConditions: stuff.initialConditions, // y1
+      t0: stuff.t0,
+    });
+
+    return [calcedArr, stuff.actualSolutionArr];
+  };
+
   const getCalcedArr = (linear, method) => {
     let stuff = master(linear);
 
@@ -31,11 +69,7 @@ const SolverAnalysis = () => {
 
     let time_difference = t_1 - t_0;
 
-    return [
-      method,
-      calcRMSE(calcedArr, stuff.actualSolutionArr),
-      time_difference,
-    ];
+    return [calcRMSE(calcedArr, stuff.actualSolutionArr), time_difference];
   };
 
   const calcRMSE = (calcedResults, actualResults) => {
@@ -77,18 +111,73 @@ const SolverAnalysis = () => {
     "RK6",
   ];
 
-  let models = [linear1, linear2, linear3, linear4];
-  let allMethodsLinear=[]
+  let models = [linear1, linear2, linear3, linear4, linear5];
+  let allMethodsLinear = [];
   models.forEach((model) => {
     integrators.forEach((method) => {
       allMethodsLinear.push(getCalcedArr(model, method));
     });
   });
-  console.log(allMethodsLinear)
+  let textEqns = [];
 
+  models.forEach((model) => {
+    textEqns.push(...model.eqns);
+  });
+  console.log(allMethodsLinear);
 
-  return  null 
-  ;
+  let RMSEArr = [];
+  let timeArr = [];
+
+  allMethodsLinear.forEach((eqnMethod) => {
+    RMSEArr.push((eqnMethod[0] * 1000).toPrecision(3));
+  });
+  allMethodsLinear.forEach((eqnMethod) => {
+    timeArr.push((eqnMethod[1] * 1000).toPrecision(3));
+  });
+
+  const RMSEArrSliced = [];
+  while (RMSEArr.length)
+    RMSEArrSliced.push(RMSEArr.splice(0, integrators.length));
+
+  const timeArrSliced = [];
+  while (timeArr.length)
+    timeArrSliced.push(timeArr.splice(0, integrators.length));
+
+  console.log(textEqns);
+
+  let RMSEHeatmap = RMSEArrSliced.map((RMSEArr, i) => {
+    console.log(RMSEArr);
+    return (
+      <MyHeatMap
+        xLabels={integrators}
+        yLabels={[textEqns[i]]}
+        data={[RMSEArr]}
+        color={"rgba(0, 240, 40"}
+        HeatMapChangedOnClick={HeatMapChangedOnClick}
+      />
+    );
+  });
+
+  let timeHeatmap = timeArrSliced.map((TimeArr, i) => {
+    console.log(TimeArr);
+    return (
+      <MyHeatMap
+        xLabels={integrators}
+        yLabels={[""]}
+        data={[TimeArr]}
+        color={"rgba(240, 0, 40"}
+        HeatMapChangedOnClick={HeatMapChangedOnClick}
+      />
+    );
+  });
+
+  return (
+    <div className={classes.HeatMaps}>
+      <div className={classes.HeatMap}>{RMSEHeatmap}</div>
+      <br />
+      <div className={classes.HeatMap}>{timeHeatmap}</div>
+    </div>
+  );
 };
 
 export default SolverAnalysis;

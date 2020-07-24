@@ -1,6 +1,7 @@
 import React, { Component } from "react";
-import SolverAnalysisCalc from '../../../components/Calculations/Dynamic/LinearCoupled/SolverAnalysis'
-
+import SolverAnalysisCalc from "../../../components/Calculations/Dynamic/LinearCoupled/SolverAnalysis";
+import classes from "./SolverAnalysis.module.css";
+import { Paper } from "@material-ui/core";
 
 class SolverAnalysis extends Component {
   /**
@@ -14,7 +15,9 @@ class SolverAnalysis extends Component {
     return (
       // can u inject a background-color: ranmdom lookup color if DEVMODE=TRUE
 
-      <div><p>hi</p><SolverAnalysisCalc/></div>
+      <Paper className={classes.Container}>
+        <SolverAnalysisCalc />
+      </Paper>
     );
   }
 }

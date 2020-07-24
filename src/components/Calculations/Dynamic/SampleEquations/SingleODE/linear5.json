@@ -1,8 +1,8 @@
 {
   "vars": {},
-  "eqns": ["a"],
-  "solved": ["log(a)"],
-  "t0": 0,
+  "eqns": ["sin(log(t))"],
+  "solved": ["cos(log(t))/t"],
+  "t0": 0.1,
   "h": 0.1,
   "numOfCylcles": 10,
   "initialConditions": [0],

@@ -42,10 +42,11 @@ const MyHeatMap = (props) => {
           background: `${props.color}, ${1 - (max - value) / (max - min)})`,
           fontSize: "12px",
         })}
+
         
         //onClick={(x, y,value) => alert(`Clicked ${x}, ${y}, ${value}`)}
 
-        onClick={(x, y) => props.HeatMapChangedOnClick({ x }, { y }, data)}
+        onClick={(x, y) => props.HeatMapChangedOnClick( x ,  y , data)}
         cellRender={(value) => value && `${value}`}
         title={(value) => ` ${value}`}
       />

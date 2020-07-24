@@ -5,7 +5,8 @@
   border-color: rgb(156, 122, 12);
   border-style: solid;
   */
-  display: flex;
+  width:100%;
+  float: left;
 }
 
 .VarContainer {

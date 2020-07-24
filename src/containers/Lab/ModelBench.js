@@ -36,14 +36,7 @@ class ModelBench extends Component {
   }
 
   createNewFile = () => {
-    let aNewModel = {
-      Eqns: DEFAULTEQNS,
-      Vars: DEFAULTVARS,
-      Name: "Untitled",
-      Description: "Please add Description",
-      ActualSolution: "",
-      SolutionTechnique: "RK4",
-    };
+    let aNewModel = this.newModel();
 
     this.setState(
       {
@@ -333,6 +326,17 @@ class ModelBench extends Component {
   handleTabChange = (event, val) => {
     this.setState({ tabChoiceValue: val });
   };
+
+  newModel() {
+    return {
+      Eqns: DEFAULTEQNS,
+      Vars: DEFAULTVARS,
+      Name: "Untitled",
+      Description: "Please add Description",
+      ActualSolution: "",
+      SolutionTechnique: "RK4",
+    };
+  }
 
   render() {
     let modelLinks = null;
