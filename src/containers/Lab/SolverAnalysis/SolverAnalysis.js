@@ -15,9 +15,9 @@ class SolverAnalysis extends Component {
     return (
       // can u inject a background-color: ranmdom lookup color if DEVMODE=TRUE
 
-      <Paper className={classes.Container}>
+      <div className={classes.Container}>
         <SolverAnalysisCalc />
-      </Paper>
+      </div>
     );
   }
 }
