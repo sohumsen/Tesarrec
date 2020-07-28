@@ -12,7 +12,7 @@ const ReadJSON = (fileObj) => {
 
   fileObj.solved.forEach((element) => {
     let parsedEqn = simplify(parse(element));
-    for (let i = 0; i < fileObj.numOfCylcles; i++) {
+    for (let i = 0; i < fileObj.numOfCycles; i++) {
       let t = fileObj.t0 + i * fileObj.h;
     //   let a =fileObj.lineNames[0]
       let y = parsedEqn.evaluate({
@@ -29,7 +29,7 @@ const ReadJSON = (fileObj) => {
     t0: fileObj.t0,
     h: fileObj.h,
     vars: fileObj.vars,
-    numOfCylcles: fileObj.numOfCylcles,
+    numOfCycles: fileObj.numOfCycles,
     eqns: parsedEqns,
     textEqn:fileObj.eqns,
     actualSolutionArr: actualSolutionArr,

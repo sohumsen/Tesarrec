@@ -4,7 +4,7 @@
   "solved": ["e^t"],
   "t0": 0,
   "h": 0.1,
-  "numOfCylcles": 10,
+  "numOfCycles": 10,
   "initialConditions": [1],
   "lineNames":["a"]
 

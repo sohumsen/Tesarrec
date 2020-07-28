@@ -5,7 +5,7 @@
   "solved": ["-(1/2)*t*(cos(log(t)) - sin(log(t)))"],
   "t0": 0.1,
   "h": 0.1,
-  "numOfCylcles": 10,
+  "numOfCycles": 10,
   "initialConditions": [0],
   "lineNames":["a"]
 

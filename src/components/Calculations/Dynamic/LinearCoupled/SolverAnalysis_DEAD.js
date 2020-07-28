@@ -125,7 +125,7 @@ class SolverAnalysis extends Component {
         let calcedArr = NewDiffEquationSolver({
           method: method,
           h: stuff.h,
-          numberOfCycles: stuff.numOfCycles - 1,
+          numberOfCycles: stuff.numOfCylcles - 1,
           eqns: stuff.eqns,
           vars: stuff.vars, // { K_1=0.27}
           LineNames: stuff.lineNames,
@@ -145,7 +145,7 @@ class SolverAnalysis extends Component {
     let calcedArr = NewDiffEquationSolver({
       method: method,
       h: stuff.h,
-      numberOfCycles: stuff.numOfCycles - 1,
+      numberOfCycles: stuff.numOfCylcles - 1,
       eqns: stuff.eqns,
       vars: stuff.vars, // { K_1=0.27}
       LineNames: stuff.lineNames,
@@ -262,7 +262,7 @@ class SolverAnalysis extends Component {
     //     />
     //   );
     // });
-    console.log(xYObjScatterGraph);
+    console.log(this.state.lineChartActualAndCalced);
 
     return (
       <div className={classes.HeatMaps}>
