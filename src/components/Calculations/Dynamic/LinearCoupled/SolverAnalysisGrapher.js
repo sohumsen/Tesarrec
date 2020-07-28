@@ -15,7 +15,7 @@ import ScatterChart from "../../../UI/Canvas/ScatterChart.js";
 import allMethodsLinear from "./allMethodsLinear.json";
 import LineChart from "../../../UI/Canvas/LineChart.js";
 import allData from "./allData.json";
-import { Paper } from "@material-ui/core";
+import { Paper, Select, MenuItem } from "@material-ui/core";
 class SolverAnalysis extends Component {
   state = {
     integrators: [
@@ -44,158 +44,123 @@ class SolverAnalysis extends Component {
       "Grey",
     ],
     lineChartActualAndCalced: null,
-    xYObjScatterGraph:{}
+    methodFilterChoice: "Euler",
+    eqnFilterChoice: "ALL",
+    scatterChart: <p>its loading soon</p>,
   };
 
-  componentDidMount() {
-    let RMSEArr = [];
-    let timeArr = [];
-    let nameArr = [];
+  onClickGraphDataPoint = (e) => {
+    let graphArrXY = this.getSolutionForGraph(e.dataPoint.label); //returns calced and actual arr
 
-    allData.forEach((obj) => {
-      timeArr.push((obj.solutions.timeTaken * 1000).toPrecision(3));
-      RMSEArr.push(obj.solutions.rmse.toPrecision(3));
-      nameArr.push(obj.meta.name);
+    let allGraphObjXY = [];
+
+    graphArrXY.forEach((graph) => {
+      let graphObjXY = [];
+
+      for (let i = 0; i < graph.length; i++) {
+        graphObjXY.push({ x: graph[i][1], y: graph[i][0] });
+      }
+      allGraphObjXY.push(graphObjXY);
     });
+
+    this.setState({
+      lineChartActualAndCalced: (
+        <LineChart
+          LineNames={["calculated", "actual"]}
+          axisNames={["x", "y"]}
+          dataPoints={[allGraphObjXY[0], allGraphObjXY[1]]}
+          verticalAlign={"top"}
+          horizontalAlign={"left"}
+          title={e.dataPoint.label}
+        />
+      ),
+    });
+  };
+
+  getSolutionForGraph = (label) => {
+    //read locally from now on
+
+    for (let i = 0; i < allData.length; i++) {
+      if (allData[i].meta.name === label) {
+        return [
+          allData[i].solutions.calcedSolution,
+          allData[i].solutions.actualSolution,
+        ];
+      }
+    }
+  };
+
+  onChange = (name) => (event, value) => {
+    this.setState({ [name]: event.target.value });
+  };
+  render() {
+    let allEqns = new Set();
+
     let xYObjScatterGraph = [];
 
-    for (let i = 0; i < timeArr.length; i++) {
-      if (parseFloat(timeArr[i]) < 400) {
+    for (let i = 0; i < allData.length; i++) {
+      console.log(allData[i].eqns.textEqns[0])
+      allEqns.add(allData[i].eqns.textEqns[0]);
+      let tm = parseFloat(
+        (allData[i].solutions.timeTaken * 1000).toPrecision(3)
+      );
+      if (tm < 400) {
+        
+        if (allData[i].config.method != this.state.methodFilterChoice && this.state.methodFilterChoice != 'ALL') {
+          continue;
+        }
+
+        if (allData[i].eqns.textEqns[0] != this.state.eqnFilterChoice && this.state.eqnFilterChoice != 'ALL') {
+          continue;
+        }
         xYObjScatterGraph.push({
-          x: parseFloat(timeArr[i]),
-          y: parseFloat(RMSEArr[i]),
-          label: nameArr[i],
+          x: tm,
+          y: parseFloat(allData[i].solutions.rmse.toPrecision(3)),
+          label: allData[i].meta.name,
           color: this.state.scatterColours[i % this.state.integrators.length],
           click: this.onClickGraphDataPoint,
         });
       }
     }
-
-    this.setState({xYObjScatterGraph:xYObjScatterGraph})
-  }
-
-  onClickGraphDataPoint = (e) => {
-    console.log(e.dataPoint.label);
-    console.log(e.dataPoint.label.split(",")[0]);
-
-    // let graphArrXY = this.getSolutionForGraph(
-    //   e.dataPoint.label.split(",")[0],
-    //   e.dataPoint.label.split(",")[1]
-    // ); //returns calced and actual arr
-
-    // let allGraphObjXY = [];
-    // console.log(graphArrXY);
-
-    // graphArrXY.forEach((graph) => {
-    //   let graphObjXY = [];
-
-    //   for (let i = 0; i < graph.length; i++) {
-    //     graphObjXY.push({ x: graph[i][1], y: graph[i][0] });
-    //   }
-    //   console.log(graphObjXY);
-    //   allGraphObjXY.push(graphObjXY);
-    // });
-
-    // console.log(this.state.lineChartActualAndCalced);
-    // console.log(allGraphObjXY);
-
-    // this.setState({
-    //   lineChartActualAndCalced: (
-    //     <LineChart
-    //       LineNames={["calculated", "actual"]}
-    //       axisNames={["x", "y"]}
-    //       dataPoints={[allGraphObjXY[0], allGraphObjXY[1]]}
-    //       verticalAlign={"top"}
-    //       horizontalAlign={"left"}
-    //       title={e.dataPoint.label}
-
-    //     />
-    //   ),
-    // });
-  };
-
-  getSolutionForGraph = (eqnText, method) => {
-    //read locally from now on
-    console.log(eqnText, method);
-    for (let i = 0; i < this.state.models.length; i++) {
-      if (this.state.models[i].eqns[0] === eqnText) {
-        let stuff = master(this.state.models[i]);
-        let calcedArr = NewDiffEquationSolver({
-          method: method,
-          h: stuff.h,
-          numberOfCycles: stuff.numOfCylcles - 1,
-          eqns: stuff.eqns,
-          vars: stuff.vars, // { K_1=0.27}
-          LineNames: stuff.lineNames,
-          initialConditions: stuff.initialConditions, // y1
-          t0: stuff.t0,
-        });
-        return [calcedArr, stuff.actualSolutionArr];
-      }
-    }
-  };
-
-  render() {
-    // console.log(allData);
-    // let RMSEArr = [];
-    // let timeArr = [];
-    // let nameArr = [];
-
-    // allData.forEach((obj) => {
-    //   timeArr.push((obj.solutions.timeTaken * 1000).toPrecision(3));
-    //   RMSEArr.push(obj.solutions.rmse.toPrecision(3));
-    //   nameArr.push(obj.meta.name);
-    // });
-
-    // // let RMSEArr = [];
-    // // let timeArr = [];
-
-    // // allMethodsLinear.forEach((eqnMethod) => {
-    // //   RMSEArr.push((eqnMethod[0] * 1000).toPrecision(3));
-    // // });
-    // // allMethodsLinear.forEach((eqnMethod) => {
-    // //   timeArr.push((eqnMethod[1] * 1000).toPrecision(3));
-    // // });
-    // //discard greater than 400ns
-    // let xYObjScatterGraph = [];
-    // // console.log(timeArr,allMethodsLinear)
-
-    // for (let i = 0; i < this.state.timeArr.length; i++) {
-    //   if (parseFloat(this.state.timeArr[i]) < 400) {
-    //     xYObjScatterGraph.push({
-    //       x: parseFloat(this.state.timeArr[i]),
-    //       y: parseFloat(this.state.RMSEArr[i]),
-    //       label: this.state.nameArr[i],
-    //       color: this.state.scatterColours[i % this.state.integrators.length],
-    //       click: this.onClickGraphDataPoint,
-    //     });
-    //   }
-    // }
-
-    // console.log(xYObjScatterGraph);
-    // let allMethodsLinear1 = [];
-    // this.state.models.forEach((model) => {
-    //   this.state.integrators.forEach((method) => {
-    //     allMethodsLinear1.push(this.getCalcedArr(model, method));
-    //   });
-    // });
+    console.log(allEqns)
 
     return (
       <div className={classes.HeatMaps}>
-        <p>djsfhjdsf</p>
-
+        <div className={classes.formControl}></div>
         <Paper className={classes.HeatMap} elevation={3}>
-          <p>djsfhjdsf</p>
+          <p>Method</p>
+          <Select
+            value={this.state.eqnFilterChoice}
+            onChange={this.onChange("eqnFilterChoice")}
+          >
+            <MenuItem value="ALL">ALL</MenuItem>
+            {Array.from(allEqns).map((eqn) => (
+              <MenuItem value={eqn}>{eqn}</MenuItem>
+            ))}
+
+          </Select>
+          <Select
+            value={this.state.methodFilterChoice}
+            onChange={this.onChange("methodFilterChoice")}
+          >
+            <MenuItem value="ALL">ALL</MenuItem>
+            {this.state.integrators.map((method) => (
+              <MenuItem value={method}>{method}</MenuItem>
+            ))}
+          </Select>
+
           <ScatterChart
             LineNames={"time taken vs rmse"}
-            dataPoints={this.state.xYObjScatterGraph}
+            dataPoints={xYObjScatterGraph}
             axisNames={["time taken (ns)", "rmse"]}
+            verticalAlign={"top"}
+            horizontalAlign={"left"}
           />
         </Paper>
 
-        {/* <Paper className={classes.HeatMap} elevation={3}>
+        <Paper className={classes.HeatMap} elevation={3}>
           {this.state.lineChartActualAndCalced}
-        </Paper> */}
+        </Paper>
       </div>
     );
   }

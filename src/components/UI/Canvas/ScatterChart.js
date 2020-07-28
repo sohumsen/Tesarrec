@@ -6,6 +6,8 @@ var CanvasJSChart = CanvasJSReact.CanvasJSChart;
 
 class LineChart extends Component {
   render() {
+
+    console.log(this.props)
     let data = [];
     data.push({
       type: "scatter",
@@ -23,12 +25,12 @@ class LineChart extends Component {
 
       axisY: {
         title: this.props.axisNames[1],
-        labelFormatter: function(e){
-          return  "10^e" + Math.log10(e.value);
-        },
-        logarithmic: true,
-        logarithmBase:10,
-        gridThickness: 0,
+        // labelFormatter: function(e){
+        //   return  "10^e" + Math.log10(e.value);
+        // },
+        // logarithmic: true,
+        // logarithmBase:10,
+        gridThickness: 1,
         tickLength: 0,
         lineThickness: 0,
  
@@ -36,7 +38,7 @@ class LineChart extends Component {
       axisX: {
         title: this.props.axisNames[0],
 
-        gridThickness: 0,
+        gridThickness: 1,
         tickLength: 0,
         lineThickness: 0,
         labelFormatter: function () {
