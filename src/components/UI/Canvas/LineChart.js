@@ -27,6 +27,10 @@ class LineChart extends Component {
       exportEnabled: true,
       theme: "light2", // "light1", "dark1", "dark2"
 
+      title:{
+        text: this.props.title
+       // more attributes 
+    },
       axisY: {
         title: this.props.axisNames[1],
       },

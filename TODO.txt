@@ -19,6 +19,7 @@ db/dt= b is invalid
 
 
 click new file select by pressing pencil
+allow linear coupled test eqns
 
 24th Jul - 7th Aug 
 -----------------
@@ -27,7 +28,7 @@ click new file select by pressing pencil
 3. Create a Model class to represent the json file WHY - keep correctness together
 4. Convert a/b/c/d/t to y1,y2,y3,y4,t,
 5. Add indenpendnt x1,x2,x3,x4
-6. SolverAnalysis Grapher class to create a scatter from output jsons
+6. SolverAnalysis Grapher class to create a scatter from output jsons DONE
 SKills:
 Debugger - Chrome
 Debugger - Unit Test 
@@ -160,6 +161,8 @@ DONE
     allow t0 to be set DONE
     allow step size to be set DONE
     plot t against t DONE
+    in graph title= e^t ralston DONE
+
 
 
 

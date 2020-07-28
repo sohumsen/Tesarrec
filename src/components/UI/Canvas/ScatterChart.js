@@ -23,7 +23,11 @@ class LineChart extends Component {
 
       axisY: {
         title: this.props.axisNames[1],
+        labelFormatter: function(e){
+          return  "10^e" + Math.log10(e.value);
+        },
         logarithmic: true,
+        logarithmBase:10,
         gridThickness: 0,
         tickLength: 0,
         lineThickness: 0,

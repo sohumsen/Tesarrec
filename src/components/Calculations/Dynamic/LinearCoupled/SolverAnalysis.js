@@ -14,6 +14,7 @@ import ScatterChart from "../../../UI/Canvas/ScatterChart.js";
 // const writeJsonFile = require("write-json-file");
 import allMethodsLinear from "./allMethodsLinear.json";
 import LineChart from "../../../UI/Canvas/LineChart.js";
+import { Paper } from "@material-ui/core";
 class SolverAnalysis extends Component {
   state = {
     integrators: [
@@ -76,11 +77,10 @@ class SolverAnalysis extends Component {
       for (let i = 0; i < graph.length; i++) {
         graphObjXY.push({ x: graph[i][1], y: graph[i][0] });
       }
-      console.log(graphObjXY)
+      console.log(graphObjXY);
       allGraphObjXY.push(graphObjXY);
     });
 
-  
     console.log(this.state.lineChartActualAndCalced);
     console.log(allGraphObjXY);
 
@@ -90,6 +90,10 @@ class SolverAnalysis extends Component {
           LineNames={["calculated", "actual"]}
           axisNames={["x", "y"]}
           dataPoints={[allGraphObjXY[0], allGraphObjXY[1]]}
+          verticalAlign={"top"}
+          horizontalAlign={"left"}
+          title={e.dataPoint.label}
+
         />
       ),
     });
@@ -259,17 +263,20 @@ class SolverAnalysis extends Component {
 
     return (
       <div className={classes.HeatMaps}>
-        {this.state.lineChartActualAndCalced}
-
         {/* <div className={classes.HeatMap}>{RMSEHeatmap}</div> */}
         <br />
         {/* <div className={classes.HeatMap}>{timeHeatmap}</div> */}
+        <Paper className={classes.HeatMap} elevation={3}>
+          <ScatterChart
+            LineNames={"time taken vs rmse"}
+            dataPoints={xYObjScatterGraph}
+            axisNames={["time taken (ns)", "rmse"]}
+          />
+        </Paper>
 
-        <ScatterChart
-          LineNames={"time taken vs rmse"}
-          dataPoints={xYObjScatterGraph}
-          axisNames={["time taken (ns)", "rmse"]}
-        />
+        <Paper className={classes.HeatMap} elevation={3}>
+          {this.state.lineChartActualAndCalced}
+        </Paper>
       </div>
     );
   }

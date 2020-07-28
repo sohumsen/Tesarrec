@@ -1,11 +1,12 @@
 .HeatMaps{
-  background-color: rgb(224, 152, 64);
-  width: 50%;
+  width: 100%;
+  float: left;
 
 }
 
 .HeatMap{
-  background-color: rgb(180, 163, 219);
-  width: 50%;
+  width: 45%;
+  float: left;
+  margin-left: 2%;
 
 }

@@ -2,14 +2,15 @@
 
 class Model {
     constructor(){
-        this.Eqns= DEFAULTEQNS,
-        this.Vars= DEFAULTVARS,
-        this.Name= "Untitled",
+        this.eqns= DEFAULTEQNS,
+        this.vars= DEFAULTVARS,
+        this.name= "Untitled",
         this.lineNames = { t: 1 },
         this.Description= "Please add Description",
         this.ActualSolution= {},
         this.SolutionTechnique= "RK4",
         this.CalcuatedSolutions = {}
+        this.ModelResult = { "RK4 : {}"}
     }
 
     validateExpression(expr, line){

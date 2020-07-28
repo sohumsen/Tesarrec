@@ -1,7 +1,8 @@
 {
+  "name": "SinLog",
   "vars": {},
   "eqns": ["sin(log(t))"],
-  "solved": ["cos(log(t))/t"],
+  "solved": ["-(1/2)*t*(cos(log(t)) - sin(log(t)))"],
   "t0": 0.1,
   "h": 0.1,
   "numOfCylcles": 10,

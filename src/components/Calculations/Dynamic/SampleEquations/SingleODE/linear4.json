@@ -5,7 +5,7 @@
   "t0": 0,
   "h": 0.1,
   "numOfCylcles": 10,
-  "initialConditions": [0],
+  "initialConditions": [1],
   "lineNames":["a"]
 
 }
