@@ -1,4 +1,4 @@
-const DEFAULTVARS = [
+const defaultVars = [
     {
       id: "Independent1",
       LatexForm: "X_1",
@@ -76,4 +76,4 @@ const DEFAULTVARS = [
     },
   ];
 
-  export default DEFAULTVARS;
+  export default defaultVars;
