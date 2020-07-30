@@ -1,5 +1,5 @@
 {
-  "vars": {},
+  "vars": [{}],
   "eqns": ["cos(t)"],
   "solved": ["sin(t)"],
   "t0": 0,

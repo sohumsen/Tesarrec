@@ -1,5 +1,5 @@
 {
-  "vars": {},
+  "vars": [{}],
   "eqns": ["sin(log(t))"],
   "solved": ["-(1/2)*t*(cos(log(t)) - sin(log(t)))"],
   "t0": 0.1,

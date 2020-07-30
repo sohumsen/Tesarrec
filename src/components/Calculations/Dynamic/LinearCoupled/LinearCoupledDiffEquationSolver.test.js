@@ -2,8 +2,8 @@ import React from "react";
 import LineChart from "../../../UI/Canvas/Charts/Chart";
 import { configure, shallow, render } from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
-import DefaultEqns from "../../../../containers/Lab/DefaultStates/DefaultEqns";
-import DefaultVars from "../../../../containers/Lab/DefaultStates/DefaultVars";
+import DefaultEqns from "../SampleEquations/DEFAULTEQUATIONS";
+import DefaultVars from "../SampleEquations/DEFAULTVARS";
 import LinearCoupledDiffEquationSolver from "./LinearCoupledDiffEquationSolver";
 
 configure({ adapter: new Adapter() });

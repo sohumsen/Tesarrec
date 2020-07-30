@@ -14,9 +14,9 @@ import ScatterChart from "../../../UI/Canvas/ScatterChart.js";
 // const writeJsonFile = require("write-json-file");
 import allMethodsLinear from "./allMethodsLinear.json";
 import LineChart from "../../../UI/Canvas/LineChart.js";
-import allData from "./allData.json";
+import allData from "../SampleEquations/allData.json";
 import { Paper, Select, MenuItem } from "@material-ui/core";
-class SolverAnalysis extends Component {
+class SolverAnalysisGrapher extends Component {
   state = {
     integrators: [
       "Euler",
@@ -128,7 +128,6 @@ class SolverAnalysis extends Component {
       <div className={classes.HeatMaps}>
         <div className={classes.formControl}></div>
         <Paper className={classes.HeatMap} elevation={3}>
-          <p>Method</p>
           <Select
             value={this.state.eqnFilterChoice}
             onChange={this.onChange("eqnFilterChoice")}
@@ -166,4 +165,4 @@ class SolverAnalysis extends Component {
   }
 }
 
-export default SolverAnalysis;
+export default SolverAnalysisGrapher;

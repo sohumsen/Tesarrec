@@ -1,4 +1,4 @@
-const defaultEquations = [
+const DEFAULTEQUATIONS = [
     {
       id: "qwert",
       line: "a",
@@ -81,4 +81,4 @@ const defaultEquations = [
     },
   ];
 
-  export default defaultEquations
+  export default DEFAULTEQUATIONS

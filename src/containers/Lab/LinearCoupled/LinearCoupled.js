@@ -12,12 +12,12 @@ import LinearCoupledDiffEquationGrapher from "../../../components/Calculations/D
 import { Paper } from "@material-ui/core";
 import LinearCoupledButtonEqnsContainer from "../../../components/UI/ButtonContainer/LinearCoupledButtonEqnsContainer";
 
-import DEFAULTEQNS from "../DefaultStates/DefaultEqns";
-import DEFAULTVARS from "../DefaultStates/DefaultVars";
+import DEFAULTEQUATIONS from "../../../components/Calculations/Dynamic/SampleEquations/DEFAULTEQUATIONS";
+import DEFAULTVARS from "../../../components/Calculations/Dynamic/SampleEquations/DEFAULTVARS";
 import LinearCoupledButtonVariablesContainer from "../../../components/UI/ButtonContainer/LinearCoupledButtonVariablesContainer";
 import LinearCoupledButtonGraphContainer from "../../../components/UI/ButtonContainer/LinearCoupledButtonGraphContainer";
-import DEFAULTLAYOUT from "../DefaultStates/DefaultLayout";
-import DEFAULTGRAPHCONFIG from "../DefaultStates/DefaultGraphConfig";
+import DEFAULTLAYOUT from "./DefaultLayout";
+import DEFAULTGRAPHCONFIG from "./DefaultGraphConfig";
 class LinearCoupled extends Component {
   /**
    * Visual Component that contains the textbox for the equation and calculation outputs
@@ -38,7 +38,7 @@ class LinearCoupled extends Component {
     myReactGridLayout: [],
   };
 
-  defaultEqns = DEFAULTEQNS;
+  defaultEqns = DEFAULTEQUATIONS;
   defaultVars = DEFAULTVARS;
 
   static getDerivedStateFromProps(props, state) {

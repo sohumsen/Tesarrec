@@ -1,15 +1,17 @@
 import React, { Component } from "react";
 import SingleODE from "./SingleODE/SingleODE";
 import LinearCoupled from "./LinearCoupled/LinearCoupled";
-import FileController from "../../components/UI/FileController/FileGenerator";
+import ModelExplorer from "../../components/UI/FileController/ModelExplorer";
 import classes from "./ModelBench.module.css";
 import MyTabs from "../../components/UI/MyTabs/MyTabs";
 import Skeleton from "../../components/UI/Skeleton/Skeleton";
 import MyErrorMessage from "../../components/UI/MyErrorMessage/MyErrorMessage";
 
-import DEFAULTEQNS from "./DefaultStates/DefaultEqns";
-import DEFAULTVARS from "./DefaultStates/DefaultVars";
-import SolverAnalysis from './SolverAnalysis/SolverAnalysis'
+import DEFAULTEQUATIONS from "../../components/Calculations/Dynamic/SampleEquations/DEFAULTEQUATIONS";
+import DEFAULTVARS from "../../components/Calculations/Dynamic/SampleEquations/DEFAULTVARS";
+
+import SolverAnalysis from "./SolverAnalysis/SolverAnalysis";
+
 class ModelBench extends Component {
   /**
    * Visual Component that contains the textbox for the equation and calculation outputs
@@ -329,7 +331,7 @@ class ModelBench extends Component {
 
   newModel() {
     return {
-      Eqns: DEFAULTEQNS,
+      Eqns: DEFAULTEQUATIONS,
       Vars: DEFAULTVARS,
       Name: "Untitled",
       Description: "Please add Description",
@@ -342,7 +344,7 @@ class ModelBench extends Component {
     let modelLinks = null;
     Object.keys(this.state.allModelId + this.state.allPublicId).length !== 0
       ? (modelLinks = (
-          <FileController
+          <ModelExplorer
             allModelId={this.state.allModelId}
             allPublicId={this.state.allPublicId}
             selectedModelId={this.state.selectedModelId}
@@ -390,9 +392,8 @@ class ModelBench extends Component {
             />
           ) : null}
            {this.state.tabChoiceValue === 2 ? (
-            <SolverAnalysis
-            
-            />
+
+            <SolverAnalysis/>
           ) : null}
         </div>
         {this.state.error ? <MyErrorMessage /> : null}
@@ -400,5 +401,7 @@ class ModelBench extends Component {
     );
   }
 }
+
+
 
 export default ModelBench;

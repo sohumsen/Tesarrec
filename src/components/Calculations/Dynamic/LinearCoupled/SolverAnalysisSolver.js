@@ -13,6 +13,7 @@ import classes from "./SolverAnalysis.module.css";
 import ScatterChart from "../../../UI/Canvas/ScatterChart.js";
 // const writeJsonFile = require("write-json-file");
 import LineChart from "../../../UI/Canvas/LineChart.js";
+import Model from '../SampleEquations/Model'
 import { Paper } from "@material-ui/core";
 import { v4 as uuidv4 } from "uuid";
 
@@ -33,52 +34,63 @@ class SolverAnalysisSolver extends Component {
     models: [linear1, linear2, linear3, linear4, linear5],
   };
 
-  getCalcedArr = (linear, method) => {
+  getCalcedArr = (inputModel, method) => {
     //returns obj containing config, eqns, solutions
-    let stuff = master(linear);
+    let formattedModel = master(inputModel);
 
     let t_0 = performance.now();
 
     let calcedArr = NewDiffEquationSolver({
       method: method,
-      h: stuff.h,
-      numberOfCycles: stuff.numOfCycles - 1,
-      eqns: stuff.eqns,
-      vars: stuff.vars, // { K_1=0.27}
-      LineNames: stuff.lineNames,
-      initialConditions: stuff.initialConditions, // y1
-      t0: stuff.t0,
+      h: formattedModel.h,
+      numberOfCycles: formattedModel.numOfCycles - 1,
+      eqns: formattedModel.eqns,
+      vars: formattedModel.vars, // { K_1=0.27}
+      LineNames: formattedModel.lineNames,
+      initialConditions: formattedModel.initialConditions, // y1
+      t0: formattedModel.t0,
     });
 
     let t_1 = performance.now();
 
     let time_difference = t_1 - t_0;
 
-    let returnedObj = {
-      key: uuidv4(),
-      meta: {
-        name: linear.eqns.join() + "," + method,
-        description: "Please add a description",
-      },
-      config: {
-        initialConditions: stuff.initialConditions,
-        h: stuff.h,
-        lineNames: stuff.lineNames,
-        numOfCycles: stuff.numOfCycles,
-        method: method,
-      },
-      eqns: {
-        parsedEqns: stuff.eqns,
-        textEqns: linear.eqns,
-        vars: stuff.vars,
-      },
-      solutions: {
-        actualSolution: stuff.actualSolutionArr,
-        calcedSolution: calcedArr,
-        rmse: this.calcRMSE(calcedArr, stuff.actualSolutionArr),
-        timeTaken: time_difference,
-      },
-    };
+    //let returnedObj=new Model(formattedModel,method,calcedArr,time_difference)
+
+    //console.log(returnedObj.validateExpression())
+
+    // console.log(linear1)
+
+    let newModel=new Model(linear1,method)
+    console.log(newModel)
+    let returnedObj={}
+
+    // let returnedObj = {
+    //   key: uuidv4(),
+    //   meta: {
+    //     name: inputModel.eqns.join() + "," + method,
+    //     description: "Please add a description",
+    //   },
+    //   config: {
+    //     initialConditions: formattedModel.initialConditions,
+    //     h: formattedModel.h,
+    //      t0
+    //     lineNames: formattedModel.lineNames,
+    //     numOfCycles: formattedModel.numOfCycles,
+    //     method: method,
+    //   },
+    //   eqns: {
+    //     parsedEqns: formattedModel.eqns,
+    //     textEqns: inputModel.eqns,
+    //     vars: formattedModel.vars,
+    //   },
+    //   solutions: {
+    //     actualSolution: formattedModel.actualSolutionArr,
+    //     calcedSolution: calcedArr,
+    //     rmse: this.calcRMSE(calcedArr, formattedModel.actualSolutionArr),
+    //     timeTaken: time_difference,
+    //   },
+    // };
 
     return returnedObj;
   };
@@ -119,7 +131,7 @@ class SolverAnalysisSolver extends Component {
 
     //discard greater than 500ns
 
-    console.log(allMethodsLinear);
+    //console.log(allMethodsLinear);
 
     // returns calcedarr, rmse, time taken
     return <p>dfgdg</p>;

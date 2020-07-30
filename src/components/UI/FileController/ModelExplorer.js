@@ -14,7 +14,7 @@ import ChevronRightIcon from "@material-ui/icons/ChevronRight";
 import TreeItem from "@material-ui/lab/TreeItem";
 import StyledTreeItem from "./StyledTreeItem";
 
-class FileGenerator extends Component {
+class ModelExplorer extends Component {
   render() {
     let publicFileLinks = Object.keys(this.props.allPublicId).map(
       (ModelId, i) => {
@@ -162,4 +162,4 @@ class FileGenerator extends Component {
   }
 }
 
-export default FileGenerator;
+export default ModelExplorer;

@@ -1,7 +1,7 @@
 import { configure, shallow, render } from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
-import DefaultEqns from "../../../../containers/Lab/DefaultStates/DefaultEqns";
-import DefaultVars from "../../../../containers/Lab/DefaultStates/DefaultVars";
+import DefaultEqns from "../SampleEquations/DEFAULTEQUATIONS";
+import DefaultVars from "../SampleEquations/DEFAULTVARS";
 import NewDiffEquationSolver from "./NewDiffEquationSolver";
 import props from "../SampleEquations/linear5";
 

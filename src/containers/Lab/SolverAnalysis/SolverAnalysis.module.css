@@ -1,0 +1,45 @@
+.Container {
+  /*
+  background-color: blanchedalmond;
+  border-width: 2px;
+  border-color: rgb(156, 122, 12);
+  border-style: solid;
+  */
+  width:100%;
+  height: 100%;
+  background-color: rgb(231, 227, 227);
+}
+
+.VarContainer {
+  display: flex;
+  flex-direction: column;
+  width: 80%;
+}
+
+.EqnContainer {
+  width: 30%;
+  display: flex;
+  flex-direction: column;
+  width: 80%;
+
+  /*
+  border-width: 2px;
+  border-color: rgb(56, 122, 122);
+  border-style: solid;
+  */
+}
+
+.Graph {
+  float: right;
+  width: 43%;
+  /*
+  background-color: bisque; 
+  border-width: 2px;
+  border-color: rgb(21, 8, 99);
+  border-style: solid;
+  */
+}
+
+.graphConfig {
+  background-color: aquamarine;
+}
