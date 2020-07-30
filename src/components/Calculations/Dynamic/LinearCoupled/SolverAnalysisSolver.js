@@ -1,23 +1,14 @@
 import React, { Component } from "react";
 
-import NewDiffEquationSolver from "./NewDiffEquationSolver";
-import master from "../SampleEquations/master";
 import linear1 from "../SampleEquations/SingleODE/linear1.json";
 import linear2 from "../SampleEquations/SingleODE/linear2.json";
 import linear3 from "../SampleEquations/SingleODE/linear3.json";
 import linear4 from "../SampleEquations/SingleODE/linear4.json";
 import linear5 from "../SampleEquations/SingleODE/linear5.json";
-import linear6 from "../SampleEquations/SingleODE/linear6.json";
+import linear6 from "../SampleEquations/CoupledODE/linear6.json";
 
-import MyHeatMap from "../../../UI/MyHeatMap/MyHeatMap";
-import EqnItem from "../../../UI/Eqns/EqnItem";
-import classes from "./SolverAnalysis.module.css";
-import ScatterChart from "../../../UI/Canvas/ScatterChart.js";
-// const writeJsonFile = require("write-json-file");
-import LineChart from "../../../UI/Canvas/LineChart.js";
+
 import Model from '../SampleEquations/Model'
-import { Paper } from "@material-ui/core";
-import { v4 as uuidv4 } from "uuid";
 
 class SolverAnalysisSolver extends Component {
   state = {
@@ -100,7 +91,7 @@ class SolverAnalysisSolver extends Component {
   };
 
   render() {
-    let allMethodsLinear = [];
+    // let allMethodsLinear = [];
     // this.state.models.forEach((model) => {
     //   this.state.integrators.forEach((method) => {
     //     allMethodsLinear.push(this.getCalcedArr(model, method));

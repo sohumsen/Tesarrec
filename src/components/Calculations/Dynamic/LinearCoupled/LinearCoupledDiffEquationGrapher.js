@@ -22,7 +22,6 @@ const LinearCoupledDiffEquationGrapher = (props) => {
 
     allEqnArr.forEach((EqnArr) => {
       let axis = props.axis; //x,y  or t,a
-      console.log(axis);
       let allData = [];
       for (let index = 0; index < props.LineNames.length; index++) {
         let yData = [];
@@ -40,7 +39,6 @@ const LinearCoupledDiffEquationGrapher = (props) => {
       let yCoord = [];
 
       if (axis[0] === "t" && axis[1] === "t") {
-        console.log("2 ts");
         //fix this
         xCoord = allData[allData.length - 1]; //t coord
         yCoord = allData[allData.length - 1]; //t coord
@@ -155,7 +153,6 @@ const LinearCoupledDiffEquationGrapher = (props) => {
   var differenceFromTarget = differenceFrom.bind(undefined, target);
   var sqrdDiff = errorArr.map(differenceFromTarget).map(sqr);
   var RMSE = sqrt(sqrdDiff.reduce(add, 0) / errorArr.length);
-  console.log(RMSE)
 
   // return (
   //   <MyChart

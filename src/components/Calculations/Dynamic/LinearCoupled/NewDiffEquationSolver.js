@@ -95,6 +95,7 @@ const NewDiffEquationSolver = (props) => {
       for (var l=0; l<_y.length; l++) for (var j=1; j<=ki; j++) _y[l]=_y[l]+h*(m[ki-1][j])*(k[ki-1][l]);
       k[ki]=f(t+dt,_y,dt); 
     }
+    // eslint-disable-next-line
     for (var r=y.slice(),l=0; l<_y.length; l++) for (var j=0; j<k.length; j++) r[l]=r[l]+h*(k[j][l])*(m[ki-1][j]);
     return r;
   }

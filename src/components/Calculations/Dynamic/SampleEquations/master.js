@@ -1,5 +1,4 @@
-import linear1 from "./SingleODE/linear1.json";
-import { evaluate, simplify, parse } from "mathjs";
+import { simplify, parse } from "mathjs";
 
 const ReadJSON = (fileObj) => {
   let parsedEqns = [];

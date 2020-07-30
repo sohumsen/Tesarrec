@@ -3,6 +3,8 @@ show title in dcf graph with chemical CLARIFY
 allow db/dt as input on right side CLARIFY
 change file nav format CLARIFY
 
+use model class in linear coupled
+
 
 for certain eqns ban negative initials 
 canvas js add 0 axis lines
@@ -15,7 +17,6 @@ fix stacked bar in chp
 
 da/dt=b is valid
 
-db/dt= b is invalid
 
 
 click new file select by pressing pencil
@@ -164,6 +165,7 @@ DONE
     in graph title= e^t ralston DONE
     allow linear coupled test eqns DONE
     filter by method or eqn on SolverAnalysisGrapher DONE
+    db/dt= b is invalid DONE
 
     allow test eqns with y on the other side DONE
 

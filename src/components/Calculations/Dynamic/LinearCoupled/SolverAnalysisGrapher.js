@@ -1,18 +1,13 @@
 import React, { Component } from "react";
 
-import NewDiffEquationSolver from "./NewDiffEquationSolver";
-import master from "../SampleEquations/master";
 import linear1 from "../SampleEquations/SingleODE/linear1.json";
 import linear2 from "../SampleEquations/SingleODE/linear2.json";
 import linear3 from "../SampleEquations/SingleODE/linear3.json";
 import linear4 from "../SampleEquations/SingleODE/linear4.json";
 import linear5 from "../SampleEquations/SingleODE/linear5.json";
-import MyHeatMap from "../../../UI/MyHeatMap/MyHeatMap";
-import EqnItem from "../../../UI/Eqns/EqnItem";
 import classes from "./SolverAnalysis.module.css";
 import ScatterChart from "../../../UI/Canvas/ScatterChart.js";
 // const writeJsonFile = require("write-json-file");
-import allMethodsLinear from "./allMethodsLinear.json";
 import LineChart from "../../../UI/Canvas/LineChart.js";
 import allData from "../SampleEquations/allData.json";
 import { Paper, Select, MenuItem } from "@material-ui/core";
@@ -44,7 +39,7 @@ class SolverAnalysisGrapher extends Component {
       "Grey",
     ],
     lineChartActualAndCalced: null,
-    methodFilterChoice: "Euler",
+    methodFilterChoice: "ALL",
     eqnFilterChoice: "ALL",
     scatterChart: <p>its loading soon</p>,
   };
@@ -99,18 +94,17 @@ class SolverAnalysisGrapher extends Component {
     let xYObjScatterGraph = [];
 
     for (let i = 0; i < allData.length; i++) {
-      console.log(allData[i].eqns.textEqns[0])
       allEqns.add(allData[i].eqns.textEqns[0]);
       let tm = parseFloat(
         (allData[i].solutions.timeTaken * 1000).toPrecision(3)
       );
       if (tm < 400) {
         
-        if (allData[i].config.method != this.state.methodFilterChoice && this.state.methodFilterChoice != 'ALL') {
+        if (allData[i].config.method !== this.state.methodFilterChoice && this.state.methodFilterChoice !== 'ALL') {
           continue;
         }
 
-        if (allData[i].eqns.textEqns[0] != this.state.eqnFilterChoice && this.state.eqnFilterChoice != 'ALL') {
+        if (allData[i].eqns.textEqns[0] !== this.state.eqnFilterChoice && this.state.eqnFilterChoice !== 'ALL') {
           continue;
         }
         xYObjScatterGraph.push({
@@ -122,7 +116,6 @@ class SolverAnalysisGrapher extends Component {
         });
       }
     }
-    console.log(allEqns)
 
     return (
       <div className={classes.HeatMaps}>

@@ -1,7 +1,6 @@
 import React, { Component } from "react";
-import SolverAnalysisGrapher from "../../../components/Calculations/Dynamic/LinearCoupled/SolverAnalysisSolver";
+import SolverAnalysisGrapher from "../../../components/Calculations/Dynamic/LinearCoupled/SolverAnalysisGrapher";
 import classes from "./SolverAnalysis.module.css";
-import { Paper } from "@material-ui/core";
 
 
 class SolverAnalysis extends Component {

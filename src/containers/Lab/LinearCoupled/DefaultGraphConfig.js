@@ -5,6 +5,7 @@ const DEFAULTGRAPHCONFIG = {
   LegendVertical: "top",
   DecimalPrecision: 2,
   initialConditions: [0.5, 0.5, 0.5, 0.5],
+  lineNames:["a","b","c","d"],
   xAxis: "t", //x,y,
   yAxis: "a",
   method: "RK4",

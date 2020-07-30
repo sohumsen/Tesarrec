@@ -18,6 +18,7 @@ import LinearCoupledButtonVariablesContainer from "../../../components/UI/Button
 import LinearCoupledButtonGraphContainer from "../../../components/UI/ButtonContainer/LinearCoupledButtonGraphContainer";
 import DEFAULTLAYOUT from "./DefaultLayout";
 import DEFAULTGRAPHCONFIG from "./DefaultGraphConfig";
+import Model from "../../../components/Calculations/Dynamic/SampleEquations/Model";
 class LinearCoupled extends Component {
   /**
    * Visual Component that contains the textbox for the equation and calculation outputs
@@ -77,7 +78,37 @@ class LinearCoupled extends Component {
       });
     }
   }
+
+  transformStateToModelObj = () => {
+    let eqns = this.state.Eqns.map((eqn) => {
+      return eqn.TextEqn;
+    });
+
+    let lineNames = this.state.Eqns.map((eqn) => {
+      return eqn.line;
+    });
+    let newModel = new Model(
+      {
+        vars: this.state.Vars,
+        eqns: eqns,
+        solved: [],
+        t0: this.state.graphConfig.t0,
+        h: this.state.graphConfig.h,
+        numOfCycles: 30,
+        initialConditions: this.state.graphConfig.initialConditions,
+        lineNames: lineNames,
+      },
+      this.state.graphConfig.method
+    );
+    return newModel;
+  };
   validateExpression = (expr, line) => {
+    // console.log(this.transformStateToModelObj())
+    // console.log( this.transformStateToModelObj().validateExpression())
+
+    // return this.transformStateToModelObj().validateExpression()
+
+    // console.log();
     let lineNames = { t: 1 };
     this.state.Eqns.forEach((Eqn) => {
       lineNames[Eqn.line] = 1;
@@ -85,13 +116,11 @@ class LinearCoupled extends Component {
     this.state.Vars.forEach((Var) => {
       lineNames[Var.LatexForm] = 1;
     });
-   
 
     try {
       evaluate(expr, lineNames);
       return true;
     } catch (error) {
-
       return false;
     }
   };
@@ -181,6 +210,8 @@ class LinearCoupled extends Component {
     if (valid.includes("0")) {
       this.setState({ calculate: false });
     } else {
+
+      this.transformStateToModelObj()
       this.setState({ calculate: true });
     }
   };
@@ -271,7 +302,7 @@ class LinearCoupled extends Component {
       calculate: false,
       modelId: "",
 
-      graphConfig: DEFAULTGRAPHCONFIG
+      graphConfig: DEFAULTGRAPHCONFIG,
     });
   };
   nextPossibleEqn = (prevState) => {
@@ -317,7 +348,6 @@ class LinearCoupled extends Component {
   };
   onGraphConfigChange = (name) => (event, value) => {
     let graphConfig = { ...this.state.graphConfig };
-    console.log(event.target.value)
 
     if (name === "initialConditions") {
       let arr = event.target.value.split(",");
@@ -326,7 +356,6 @@ class LinearCoupled extends Component {
     } else {
       graphConfig[name] = event.target.value;
     }
-    console.log(graphConfig)
 
     graphConfig.submitted = false;
 
@@ -344,8 +373,7 @@ class LinearCoupled extends Component {
       graphConfig.submitted = false;
     }
 
-    this.setState({ graphConfig: graphConfig,  
-    });
+    this.setState({ graphConfig: graphConfig });
   };
 
   nextPossibleVariable = (prevState, type) => {
@@ -416,17 +444,16 @@ class LinearCoupled extends Component {
     this.state.Eqns.forEach((eqn) => {
       LineNames.push(eqn.line);
     });
-    console.log(this.state.graphConfig.yAxis,LineNames)
 
-    let yAxis=this.state.graphConfig.yAxis
+    let yAxis = this.state.graphConfig.yAxis;
 
-    if (!(this.state.graphConfig.yAxis in LineNames) ){ // the y axis is not a valid line name
+    if (!(this.state.graphConfig.yAxis in LineNames)) {
+      // the y axis is not a valid line name
       // let graphConfig={...this.state.graphConfig}
       // graphConfig.yAxis=LineNames[0]
       // this.setState({graphConfig:graphConfig})
-      yAxis=LineNames[0]
+      yAxis = LineNames[0];
     }
-    console.log(this.state.graphConfig.yAxis,yAxis,this.state.graphConfig.xAxis)
 
     let vars = {};
 
@@ -518,13 +545,13 @@ class LinearCoupled extends Component {
             />
           </div>
         ) : (
-          <div key="GraphButtons"/>
+          <div key="GraphButtons" />
         )}
 
         {this.state.calculate && this.state.graphConfig.submitted ? (
           this.renderGraph()
         ) : (
-          <div key="Graph"/>
+          <div key="Graph" />
         )}
 
         {this.state.graphConfig.show && this.state.calculate ? (
@@ -548,7 +575,7 @@ class LinearCoupled extends Component {
             />
           </div>
         ) : (
-          <div key="GraphConfig"/>
+          <div key="GraphConfig" />
         )}
       </GridLayout>
     );

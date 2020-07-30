@@ -7,7 +7,6 @@ var CanvasJSChart = CanvasJSReact.CanvasJSChart;
 class LineChart extends Component {
   render() {
 
-    console.log(this.props)
     let data = [];
     data.push({
       type: "scatter",
