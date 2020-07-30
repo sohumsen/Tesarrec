@@ -1,11 +1,21 @@
 {
-  "vars": [{}],
+  "vars": [
+    {
+      "id": "Constant1",
+      "LatexForm": "K_1",
+      "errorMessage": null,
+      "VarType": "Constant",
+
+      "VarLow": 0,
+      "VarCurrent": 50,
+      "VarHigh": 100
+    }
+  ],
   "eqns": ["1"],
   "solved": ["t"],
   "t0": 0,
   "h": 0.1,
   "numOfCycles": 10,
   "initialConditions": [0],
-  "lineNames":["a"]
-
+  "lineNames": ["a"]
 }

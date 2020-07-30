@@ -37,6 +37,28 @@ class ModelBench extends Component {
     this.getPublicModels();
   }
 
+  generalDBRequest = (payload, url, methodType, ifNoError) => {
+    fetch(url, {
+      method: methodType,
+      headers: {
+        Accept: "application/json, text/plain, */*",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(payload),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        if (!data.error) {
+          ifNoError();
+        } else {
+          this.setState({ error: true });
+        }
+      })
+      .catch((error) => {
+        this.setState({ error: true });
+      });
+  };
+
   createNewFile = () => {
     let aNewModel = this.newModel();
 
@@ -45,38 +67,50 @@ class ModelBench extends Component {
         selectedModel: aNewModel,
       },
       () => {
-        const payload = this.state.selectedModel;
-
-        fetch(
+        this.generalDBRequest(
+          this.state.selectedModel,
           "https://tesarrec.firebaseio.com/eqns/" +
             this.props.userId +
             ".json?auth=" +
             this.props.token,
-          {
-            method: "post",
-            headers: {
-              Accept: "application/json, text/plain, */*",
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify(payload),
-          }
-        )
-          .then((response) => response.json())
-          .then((data) => {
-            if (!data.error) {
-              this.setState(
-                { selectedModelId: data.name, error: false },
-                () => {
-                  this.getPrivateModels();
-                }
-              );
-            } else {
-              this.setState({ error: true });
-            }
+          "post",
+
+          this.setState({ error: false }, () => {
+            this.getPrivateModels();
           })
-          .catch((error) => {
-            this.setState({ error: true });
-          });
+        );
+        // const payload = this.state.selectedModel;
+
+        // fetch(
+        //   "https://tesarrec.firebaseio.com/eqns/" +
+        //     this.props.userId +
+        //     ".json?auth=" +
+        //     this.props.token,
+        //   {
+        //     method: "post",
+        //     headers: {
+        //       Accept: "application/json, text/plain, */*",
+        //       "Content-Type": "application/json",
+        //     },
+        //     body: JSON.stringify(payload),
+        //   }
+        // )
+        //   .then((response) => response.json())
+        //   .then((data) => {
+        //     if (!data.error) {
+        //       this.setState(
+        //         { selectedModelId: data.name, error: false },
+        //         () => {
+        //           this.getPrivateModels();
+        //         }
+        //       );
+        //     } else {
+        //       this.setState({ error: true });
+        //     }
+        //   })
+        //   .catch((error) => {
+        //     this.setState({ error: true });
+        //   });
       }
     );
   };
@@ -92,35 +126,48 @@ class ModelBench extends Component {
     const payload = this.state.selectedModel;
 
     if (this.state.selectedModelId !== "") {
-      fetch(
+      this.generalDBRequest(
+        payload,
         "https://tesarrec.firebaseio.com/eqns/" +
           this.props.userId +
           "/" +
           this.state.selectedModelId +
           "/.json?auth=" +
           this.props.token,
-        {
-          method: "PATCH",
-          headers: {
-            Accept: "application/json, text/plain, */*",
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(payload),
-        }
-      )
-        .then((response) => response.json())
-        .then((data) => {
-          if (!data.error) {
-            this.setState({ error: false }, () => {
-              this.getPrivateModels();
-            });
-          } else {
-            this.setState({ error: true });
-          }
+        "PATCH",
+        this.setState({ error: false }, () => {
+          this.getPrivateModels();
         })
-        .catch((error) => {
-          this.setState({ error: true });
-        });
+      );
+      // fetch(
+      //   "https://tesarrec.firebaseio.com/eqns/" +
+      //     this.props.userId +
+      //     "/" +
+      //     this.state.selectedModelId +
+      //     "/.json?auth=" +
+      //     this.props.token,
+      //   {
+      //     method: "PATCH",
+      //     headers: {
+      //       Accept: "application/json, text/plain, */*",
+      //       "Content-Type": "application/json",
+      //     },
+      //     body: JSON.stringify(payload),
+      //   }
+      // )
+      //   .then((response) => response.json())
+      //   .then((data) => {
+      //     if (!data.error) {
+      //       this.setState({ error: false }, () => {
+      //         this.getPrivateModels();
+      //       });
+      //     } else {
+      //       this.setState({ error: true });
+      //     }
+      //   })
+      //   .catch((error) => {
+      //     this.setState({ error: true });
+      //   });
     } else {
       this.setState({ error: true });
     }
@@ -130,32 +177,42 @@ class ModelBench extends Component {
     const payload = { ...this.state.selectedModel, SavedBy: this.props.userId };
 
     if (this.state.selectedModelId !== "") {
-      fetch(
+      this.generalDBRequest(
+        payload,
         "https://tesarrec.firebaseio.com/public" +
           ".json?auth=" +
           this.props.token,
-        {
-          method: "POST",
-          headers: {
-            Accept: "application/json, text/plain, */*",
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(payload),
-        }
-      )
-        .then((response) => response.json())
-        .then((data) => {
-          if (!data.error) {
-            this.setState({ error: false }, () => {
-              this.getPublicModels();
-            });
-          } else {
-            this.setState({ error: true });
-          }
+        "POST",
+        this.setState({ error: false }, () => {
+          this.getPublicModels();
         })
-        .catch((error) => {
-          this.setState({ error: true });
-        });
+      );
+      // fetch(
+      //   "https://tesarrec.firebaseio.com/public" +
+      //     ".json?auth=" +
+      //     this.props.token,
+      //   {
+      //     method: "POST",
+      //     headers: {
+      //       Accept: "application/json, text/plain, */*",
+      //       "Content-Type": "application/json",
+      //     },
+      //     body: JSON.stringify(payload),
+      //   }
+      // )
+      //   .then((response) => response.json())
+      //   .then((data) => {
+      //     if (!data.error) {
+      //       this.setState({ error: false }, () => {
+      //         this.getPublicModels();
+      //       });
+      //     } else {
+      //       this.setState({ error: true });
+      //     }
+      //   })
+      //   .catch((error) => {
+      //     this.setState({ error: true });
+      //   });
     } else {
       this.setState({ error: true });
     }
@@ -169,15 +226,11 @@ class ModelBench extends Component {
       calculate: false,
       selectedModel: allModels[modelId],
       selectedModelId: modelId,
+      tabChoiceValue:1
     });
   };
 
   onEditModelName = (newModelName) => {
-    // curl -X PUT -d '{ "first": "Jack", "last": "Sparrow" }' \
-    // 'https://[PROJECT_ID].firebaseio.com/users/jack/name.json'
-
-    //     curl -X PATCH -d '{"last":"Jones"}' \
-    //  'https://[PROJECT_ID].firebaseio.com/users/jack/name/.json'
     const Name = {
       Name: newModelName,
       // userId:this.props.userId
@@ -185,38 +238,52 @@ class ModelBench extends Component {
     // https://tesarrec.firebaseio.com/eqns/QXVRwu8vuHRTsLST6wMWOA9jt3b2/-MAeganGABPemhDxtCc_/Name
 
     if (this.state.selectedModelId !== "") {
-      fetch(
+      this.generalDBRequest(
+        Name,
         "https://tesarrec.firebaseio.com/eqns/" +
           this.props.userId +
           "/" +
           this.state.selectedModelId +
           "/.json?auth=" +
           this.props.token,
-        {
-          method: "PATCH",
-          headers: {
-            Accept: "application/json, text/plain, */*",
-            "Content-Type": "application/json",
-            type: "patch",
-            dataType: "json",
-          },
-
-          body: JSON.stringify(Name),
-        }
-      )
-        .then((response) => response.json())
-        .then((data) => {
-          if (!data.error) {
-            this.setState({ selectedModelId: "" });
-            this.getPrivateModels();
-            this.getPublicModels();
-          } else {
-            this.setState({ error: true });
-          }
+        "PATCH",
+        this.setState({ selectedModelId: "" }, () => {
+          this.getPrivateModels();
+          this.getPublicModels();
         })
-        .catch((error) => {
-          this.setState({ error: true });
-        });
+      );
+      // fetch(
+      //   "https://tesarrec.firebaseio.com/eqns/" +
+      //     this.props.userId +
+      //     "/" +
+      //     this.state.selectedModelId +
+      //     "/.json?auth=" +
+      //     this.props.token,
+      //   {
+      //     method: "PATCH",
+      //     headers: {
+      //       Accept: "application/json, text/plain, */*",
+      //       "Content-Type": "application/json",
+      //       type: "patch",
+      //       dataType: "json",
+      //     },
+
+      //     body: JSON.stringify(Name),
+      //   }
+      // )
+      //   .then((response) => response.json())
+      //   .then((data) => {
+      //     if (!data.error) {
+      //       this.setState({ selectedModelId: "" });
+      //       this.getPrivateModels();
+      //       this.getPublicModels();
+      //     } else {
+      //       this.setState({ error: true });
+      //     }
+      //   })
+      //   .catch((error) => {
+      //     this.setState({ error: true });
+      //   });
     } else {
       this.setState({ error: true });
     }
@@ -235,36 +302,55 @@ class ModelBench extends Component {
       allModelId: allModelId,
     });
 
-    fetch(
+    this.generalDBRequest(
+      null,
       "https://tesarrec.firebaseio.com/eqns/" +
         this.props.userId +
         "/" +
         this.state.selectedModelId +
         ".json?auth=" +
         this.props.token,
-      {
-        method: "delete",
-        headers: {
-          Accept: "application/json, text/plain, */*",
-          "Content-Type": "application/json",
-        },
-      }
-    )
-      .then((response) => response.json())
-      .then((data) => {
-        if (!data.error) {
-          this.setState({ error: false });
-        } else {
-          this.setState({ error: true });
-        }
-      })
-      .catch((error) => {
-        this.setState({ error: true });
-      });
+      "delete",
+      this.setState({ error: false })
+    );
+
+    // fetch(
+    //   "https://tesarrec.firebaseio.com/eqns/" +
+    //     this.props.userId +
+    //     "/" +
+    //     this.state.selectedModelId +
+    //     ".json?auth=" +
+    //     this.props.token,
+    //   {
+    //     method: "delete",
+    //     headers: {
+    //       Accept: "application/json, text/plain, */*",
+    //       "Content-Type": "application/json",
+    //     },
+    //   }
+    // )
+    //   .then((response) => response.json())
+    //   .then((data) => {
+    //     if (!data.error) {
+    //       this.setState({ error: false });
+    //     } else {
+    //       this.setState({ error: true });
+    //     }
+    //   })
+    //   .catch((error) => {
+    //     this.setState({ error: true });
+    //   });
   };
 
   getPublicModels = () => {
     const queryParams = "?auth=" + this.props.token; //+'&orderBy="userId"&equalTo="'+this.props.userId+'"'
+
+    // this.generalDBRequest(
+    //   null,
+    //   "https://tesarrec.firebaseio.com/public.json" + queryParams,
+    //   "get",
+    //   this.setState({ allPublicId: data, error: false, loading: false })
+    // );
     fetch("https://tesarrec.firebaseio.com/public.json" + queryParams, {
       method: "get",
       headers: {
@@ -391,17 +477,12 @@ class ModelBench extends Component {
               sendToParent={this.sendToParent}
             />
           ) : null}
-           {this.state.tabChoiceValue === 2 ? (
-
-            <SolverAnalysis/>
-          ) : null}
+          {this.state.tabChoiceValue === 2 ? <SolverAnalysis /> : null}
         </div>
-        {this.state.error ? <MyErrorMessage /> : null}
+        {/* {this.state.error ? <MyErrorMessage /> : null} */}
       </div>
     );
   }
 }
-
-
 
 export default ModelBench;

@@ -19,14 +19,13 @@ db/dt= b is invalid
 
 
 click new file select by pressing pencil
-allow linear coupled test eqns
 
-filter by method or eqn on SolverAnalysisGrapher
+when create new file, select it
 24th Jul - 7th Aug 
 -----------------
 1. SolverAnalysisGrapher to read *.json files and write *.json files to disk DONE
 2. upgrade strucutire of *json files to includes solutions, RMSE, Speed DONE
-3. Create a Model class to represent the json file WHY - keep correctness together
+3. Create a Model class to represent the json file WHY - keep correctness together DONE
 4. Convert a/b/c/d/t to y1,y2,y3,y4,t,
 5. Add indenpendnt x1,x2,x3,x4
 6. SolverAnalysisGrapher Grapher class to create a scatter from output jsons DONE
@@ -163,6 +162,10 @@ DONE
     allow step size to be set DONE
     plot t against t DONE
     in graph title= e^t ralston DONE
+    allow linear coupled test eqns DONE
+    filter by method or eqn on SolverAnalysisGrapher DONE
+
+    allow test eqns with y on the other side DONE
 
 
 

@@ -7,6 +7,8 @@ import linear2 from "../SampleEquations/SingleODE/linear2.json";
 import linear3 from "../SampleEquations/SingleODE/linear3.json";
 import linear4 from "../SampleEquations/SingleODE/linear4.json";
 import linear5 from "../SampleEquations/SingleODE/linear5.json";
+import linear6 from "../SampleEquations/SingleODE/linear6.json";
+
 import MyHeatMap from "../../../UI/MyHeatMap/MyHeatMap";
 import EqnItem from "../../../UI/Eqns/EqnItem";
 import classes from "./SolverAnalysis.module.css";
@@ -36,33 +38,9 @@ class SolverAnalysisSolver extends Component {
 
   getCalcedArr = (inputModel, method) => {
     //returns obj containing config, eqns, solutions
-    let formattedModel = master(inputModel);
-
-    let t_0 = performance.now();
-
-    let calcedArr = NewDiffEquationSolver({
-      method: method,
-      h: formattedModel.h,
-      numberOfCycles: formattedModel.numOfCycles - 1,
-      eqns: formattedModel.eqns,
-      vars: formattedModel.vars, // { K_1=0.27}
-      LineNames: formattedModel.lineNames,
-      initialConditions: formattedModel.initialConditions, // y1
-      t0: formattedModel.t0,
-    });
-
-    let t_1 = performance.now();
-
-    let time_difference = t_1 - t_0;
-
-    //let returnedObj=new Model(formattedModel,method,calcedArr,time_difference)
-
-    //console.log(returnedObj.validateExpression())
-
-    // console.log(linear1)
-
-    let newModel=new Model(linear1,method)
-    console.log(newModel)
+   
+    let newModel=new Model(inputModel,method)
+    console.log(newModel.returnConstructorObj())
     let returnedObj={}
 
     // let returnedObj = {
@@ -123,12 +101,13 @@ class SolverAnalysisSolver extends Component {
 
   render() {
     let allMethodsLinear = [];
-    this.state.models.forEach((model) => {
-      this.state.integrators.forEach((method) => {
-        allMethodsLinear.push(this.getCalcedArr(model, method));
-      });
-    });
-
+    // this.state.models.forEach((model) => {
+    //   this.state.integrators.forEach((method) => {
+    //     allMethodsLinear.push(this.getCalcedArr(model, method));
+    //   });
+    // });
+    let newModel=new Model(linear6,"Euler")
+    console.log(newModel.returnConstructorObj())
     //discard greater than 500ns
 
     //console.log(allMethodsLinear);
