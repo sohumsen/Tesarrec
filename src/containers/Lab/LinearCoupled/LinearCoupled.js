@@ -79,7 +79,7 @@ class LinearCoupled extends Component {
     }
   }
 
-  transformStateToModelObj = () => {
+  MODEL_transformStateToModelObj = () => {
     let eqns = this.state.Eqns.map((eqn) => {
       return eqn.TextEqn;
     });
@@ -102,30 +102,8 @@ class LinearCoupled extends Component {
     );
     return newModel;
   };
-  validateExpression = (expr, line) => {
-    // console.log(this.transformStateToModelObj())
-    // console.log( this.transformStateToModelObj().validateExpression())
 
-    // return this.transformStateToModelObj().validateExpression()
-
-    // console.log();
-    let lineNames = { t: 1 };
-    this.state.Eqns.forEach((Eqn) => {
-      lineNames[Eqn.line] = 1;
-    });
-    this.state.Vars.forEach((Var) => {
-      lineNames[Var.LatexForm] = 1;
-    });
-
-    try {
-      evaluate(expr, lineNames);
-      return true;
-    } catch (error) {
-      return false;
-    }
-  };
-
-  handleMathQuillInputChange = (id, itemType) => (mathField) => {
+  MATHQUILL_handleInputChange = (id, itemType) => (mathField) => {
     let items = this.state[itemType];
 
     const idx = items.findIndex((e) => {
@@ -169,13 +147,12 @@ class LinearCoupled extends Component {
     items[idx] = item;
     this.setState({ [itemType]: items, calculate: false });
   };
-
-  handleMathQuillInputSubmit = (event) => {
+  MATHQUILL_handleInputSubmit = (event) => {
     let valid = [];
     event.preventDefault();
 
     this.state.Eqns.forEach((elementObj) => {
-      if (this.validateExpression(elementObj.TextEqn, elementObj.line)) {
+      if (this.EQNS_validateExpression(elementObj.TextEqn, elementObj.line)) {
         valid.push("1");
       } else {
         valid.push("0");
@@ -192,9 +169,9 @@ class LinearCoupled extends Component {
       const element = valid[i];
 
       if (element === "0") {
-        newEqns.push(this.setErrorMessage(i, <MyErrorMessage />));
+        newEqns.push(this.ITEMS_setErrorMessage(i, <MyErrorMessage />));
       } else {
-        newEqns.push(this.setErrorMessage(i, null));
+        newEqns.push(this.ITEMS_setErrorMessage(i, null));
       }
     }
     const deepItems = [...this.state.Eqns];
@@ -211,56 +188,19 @@ class LinearCoupled extends Component {
       this.setState({ calculate: false });
     } else {
 
-      this.transformStateToModelObj()
+      this.MODEL_transformStateToModelObj()
       this.setState({ calculate: true });
     }
   };
 
-  handleVariableInputChange = (id) => (event) => {
-    let items = this.state.Vars;
-
-    const idx = items.findIndex((e) => {
-      return e.id === id;
-    });
-
-    const item = {
-      ...items[idx],
-    };
-
-    item[event.target.name] = event.target.value;
-
-    const deepItems = [...this.state.Vars];
-    deepItems[idx] = item;
-
-    this.setState({ Vars: deepItems, calculate: false });
-  };
-
-  sliderHandleChange = (name, id) => (event, value) => {
-    let items = this.state.Vars;
-
-    const idx = items.findIndex((e) => {
-      return e.id === id;
-    });
-
-    const item = {
-      ...items[idx],
-    };
-    item[name] = value;
-
-    const deepItems = [...this.state.Vars];
-    deepItems[idx] = item;
-
-    this.setState({ Vars: deepItems });
-  };
-  setErrorMessage = (i, errorMessage) => {
+  ITEMS_setErrorMessage = (i, errorMessage) => {
     let Eqn = {
       ...this.state.Eqns[i],
     };
     Eqn.errorMessage = errorMessage;
     return Eqn;
   };
-
-  removeItem = (id, itemType) => {
+  ITEMS_remove = (id, itemType) => {
     this.setState((prevState) => {
       if (itemType === "Eqns") {
         // Line up the initial Condition corresponding to the vars
@@ -285,7 +225,8 @@ class LinearCoupled extends Component {
       }
     });
   };
-  resetVars = () => {
+
+  VARS_reset = () => {
     this.props.sendToParent(this.state.Eqns, this.defaultVars);
 
     this.setState({
@@ -295,88 +236,42 @@ class LinearCoupled extends Component {
       graphConfig: DEFAULTGRAPHCONFIG,
     });
   };
-  resetEqns = () => {
-    this.props.sendToParent(this.defaultEqns, this.state.Vars);
+  VARS_handleInputChange = (id) => (event) => {
+    let items = this.state.Vars;
 
-    this.setState({
-      calculate: false,
-      modelId: "",
-
-      graphConfig: DEFAULTGRAPHCONFIG,
+    const idx = items.findIndex((e) => {
+      return e.id === id;
     });
+
+    const item = {
+      ...items[idx],
+    };
+
+    item[event.target.name] = event.target.value;
+
+    const deepItems = [...this.state.Vars];
+    deepItems[idx] = item;
+
+    this.setState({ Vars: deepItems, calculate: false });
   };
-  nextPossibleEqn = (prevState) => {
-    let Eqns = this.defaultEqns;
+  VARS_sliderHandleChange = (name, id) => (event, value) => {
+    let items = this.state.Vars;
 
-    const results = Eqns.filter(
-      ({ id: id1 }) => !prevState.Eqns.some(({ id: id2 }) => id2 === id1)
-    );
-
-    return results[0];
-  };
-
-  onIncrementEqn = () => {
-    this.setState((prevState) => {
-      let newGraphConfig = { ...prevState.graphConfig };
-      let newInitialConditions = [...newGraphConfig.initialConditions];
-      newInitialConditions.push(0.5);
-      newGraphConfig["initialConditions"] = newInitialConditions;
-      return {
-        graphConfig: newGraphConfig,
-
-        Eqns: prevState.Eqns.concat(this.nextPossibleEqn(prevState)),
-        calculate: false,
-      };
+    const idx = items.findIndex((e) => {
+      return e.id === id;
     });
+
+    const item = {
+      ...items[idx],
+    };
+    item[name] = value;
+
+    const deepItems = [...this.state.Vars];
+    deepItems[idx] = item;
+
+    this.setState({ Vars: deepItems });
   };
-
-  onGraphConfigOpen = () => {
-    let graphConfig = { ...this.state.graphConfig };
-    graphConfig.show = !this.state.graphConfig.show;
-    graphConfig.submitted = true;
-
-    this.setState({
-      graphConfig: graphConfig,
-    });
-  };
-  onGraphConfigClose = () => {
-    let graphConfig = { ...this.state.graphConfig };
-    graphConfig.show = !this.state.graphConfig.show;
-    graphConfig.submitted = true;
-
-    this.setState({ graphConfig: graphConfig, calculate: true });
-  };
-  onGraphConfigChange = (name) => (event, value) => {
-    let graphConfig = { ...this.state.graphConfig };
-
-    if (name === "initialConditions") {
-      let arr = event.target.value.split(",");
-
-      graphConfig.initialConditions = arr;
-    } else {
-      graphConfig[name] = event.target.value;
-    }
-
-    graphConfig.submitted = false;
-
-    this.setState({ graphConfig: graphConfig });
-  };
-
-  onGraphConfigSubmit = () => {
-    let graphConfig = { ...this.state.graphConfig };
-
-    let newInitialConditions = graphConfig.initialConditions.map(Number);
-    if (newInitialConditions.length === this.state.Eqns.length) {
-      graphConfig.initialConditions = newInitialConditions;
-      graphConfig.submitted = true;
-    } else {
-      graphConfig.submitted = false;
-    }
-
-    this.setState({ graphConfig: graphConfig });
-  };
-
-  nextPossibleVariable = (prevState, type) => {
+  VARS_nextPossible = (prevState, type) => {
     let typeArr = prevState.Vars.filter((Var) => {
       return Var.VarType === type;
     });
@@ -417,24 +312,126 @@ class LinearCoupled extends Component {
 
     return VariableObj;
   };
-  onIncrementVariable = (type) => {
+  VARS_onIncrement = (type) => {
     this.setState((prevState) => {
       return {
-        Vars: prevState.Vars.concat(this.nextPossibleVariable(prevState, type)),
+        Vars: prevState.Vars.concat(this.VARS_nextPossible(prevState, type)),
         calculate: false,
       };
     });
   };
-  onLayoutChange = (layout) => {
+
+  EQNS_reset = () => {
+    this.props.sendToParent(this.defaultEqns, this.state.Vars);
+
+    this.setState({
+      calculate: false,
+      modelId: "",
+
+      graphConfig: DEFAULTGRAPHCONFIG,
+    });
+  };
+  EQNS_nextPossible = (prevState) => {
+    let Eqns = this.defaultEqns;
+
+    const results = Eqns.filter(
+      ({ id: id1 }) => !prevState.Eqns.some(({ id: id2 }) => id2 === id1)
+    );
+
+    return results[0];
+  };
+  EQNS_onIncrement = () => {
+    this.setState((prevState) => {
+      let newGraphConfig = { ...prevState.graphConfig };
+      let newInitialConditions = [...newGraphConfig.initialConditions];
+      newInitialConditions.push(0.5);
+      newGraphConfig["initialConditions"] = newInitialConditions;
+      return {
+        graphConfig: newGraphConfig,
+
+        Eqns: prevState.Eqns.concat(this.EQNS_nextPossible(prevState)),
+        calculate: false,
+      };
+    });
+  };
+  EQNS_validateExpression = (expr, line) => {
+    // console.log(this.MODEL_transformStateToModelObj())
+    // console.log( this.MODEL_transformStateToModelObj().EQNS_validateExpression())
+
+    // return this.MODEL_transformStateToModelObj().EQNS_validateExpression()
+
+    // console.log();
+    let lineNames = { t: 1 };
+    this.state.Eqns.forEach((Eqn) => {
+      lineNames[Eqn.line] = 1;
+    });
+    this.state.Vars.forEach((Var) => {
+      lineNames[Var.LatexForm] = 1;
+    });
+
+    try {
+      evaluate(expr, lineNames);
+      return true;
+    } catch (error) {
+      return false;
+    }
+  };
+
+  GRAPHCONFIG_onOpen = () => {
+    let graphConfig = { ...this.state.graphConfig };
+    graphConfig.show = !this.state.graphConfig.show;
+    graphConfig.submitted = true;
+
+    this.setState({
+      graphConfig: graphConfig,
+    });
+  };
+  GRAPHCONFIG_onClose = () => {
+    let graphConfig = { ...this.state.graphConfig };
+    graphConfig.show = !this.state.graphConfig.show;
+    graphConfig.submitted = true;
+
+    this.setState({ graphConfig: graphConfig, calculate: true });
+  };
+  GRAPHCONFIG_onChange = (name) => (event, value) => {
+    let graphConfig = { ...this.state.graphConfig };
+
+    if (name === "initialConditions") {
+      let arr = event.target.value.split(",");
+
+      graphConfig.initialConditions = arr;
+    } else {
+      graphConfig[name] = event.target.value;
+    }
+
+    graphConfig.submitted = false;
+
+    this.setState({ graphConfig: graphConfig });
+  };
+  GRAPHCONFIG_onSubmit = () => {
+    let graphConfig = { ...this.state.graphConfig };
+
+    let newInitialConditions = graphConfig.initialConditions.map(Number);
+    if (newInitialConditions.length === this.state.Eqns.length) {
+      graphConfig.initialConditions = newInitialConditions;
+      graphConfig.submitted = true;
+    } else {
+      graphConfig.submitted = false;
+    }
+
+    this.setState({ graphConfig: graphConfig });
+  };
+
+  LAYOUT_onChange = (layout) => {
     this.setState({ myReactGridLayout: layout });
   };
-  onResetLayout = () => {
+  LAYOUT_onReset = () => {
     this.setState({
       myReactGridLayout: DEFAULTLAYOUT(this.state),
     });
   };
 
-  renderGraph = () => {
+  GRAPH_render = () => {
     let eqns = [];
 
     this.state.Eqns.forEach((eqn) => {
@@ -484,8 +481,8 @@ class LinearCoupled extends Component {
     let Eqns = (
       <EqnItems
         Eqns={this.state.Eqns}
-        removeItem={this.removeItem}
-        handleMathQuillInputChange={this.handleMathQuillInputChange}
+        removeItem={this.ITEMS_remove}
+        handleMathQuillInputChange={this.MATHQUILL_handleInputChange}
         //onDoubleClickMathQuill={this.onDoubleClickMathQuill}
       />
     );
@@ -493,10 +490,10 @@ class LinearCoupled extends Component {
     let Vars = (
       <VarItems
         Vars={this.state.Vars}
-        handleVariableInputChange={this.handleVariableInputChange}
-        removeItem={this.removeItem}
-        handleMathQuillInputChange={this.handleMathQuillInputChange}
-        SliderHandleChange={this.sliderHandleChange}
+        handleVariableInputChange={this.VARS_handleInputChange}
+        removeItem={this.ITEMS_remove}
+        handleMathQuillInputChange={this.MATHQUILL_handleInputChange}
+        SliderHandleChange={this.VARS_sliderHandleChange}
       />
     );
 
@@ -510,16 +507,16 @@ class LinearCoupled extends Component {
         style={{ position: "relative" }}
         autoSize
         onLayoutChange={(layout, layouts) =>
-          this.onLayoutChange(layout, layouts)
+          this.LAYOUT_onChange(layout, layouts)
         }
       >
         <Paper key="Eqns" className={classes.EqnContainer} elevation={3}>
           <LinearCoupledButtonEqnsContainer
             Eqns={this.state.Eqns}
-            onIncrementEqn={this.onIncrementEqn}
-            resetForm={this.resetEqns}
-            handleMathQuillInputSubmit={this.handleMathQuillInputSubmit}
-            onResetLayout={this.onResetLayout}
+            onIncrementEqn={this.EQNS_onIncrement}
+            resetForm={this.EQNS_reset}
+            handleMathQuillInputSubmit={this.MATHQUILL_handleInputSubmit}
+            onResetLayout={this.LAYOUT_onReset}
           />
 
           {Eqns}
@@ -528,8 +525,8 @@ class LinearCoupled extends Component {
         <Paper key="Vars" className={classes.VarContainer} elevation={3}>
           <LinearCoupledButtonVariablesContainer
             Vars={this.state.Vars}
-            onIncrementVariable={this.onIncrementVariable}
-            resetForm={this.resetVars}
+            onIncrementVariable={this.VARS_onIncrement}
+            resetForm={this.VARS_reset}
           />
           <Paper onMouseDown={(e) => e.stopPropagation()}>{Vars}</Paper>
         </Paper>
@@ -538,7 +535,7 @@ class LinearCoupled extends Component {
           <div key="GraphButtons" className={classes.Graph}>
             <LinearCoupledButtonGraphContainer
               calculate={this.state.calculate}
-              onGraphConfigOpen={this.onGraphConfigOpen}
+              onGraphConfigOpen={this.GRAPHCONFIG_onOpen}
               onGraphClose={() => {
                 this.setState({ calculate: false });
               }}
@@ -549,7 +546,7 @@ class LinearCoupled extends Component {
         )}
 
         {this.state.calculate && this.state.graphConfig.submitted ? (
-          this.renderGraph()
+          this.GRAPH_render()
         ) : (
           <div key="Graph" />
         )}
@@ -569,9 +566,9 @@ class LinearCoupled extends Component {
               t0={this.state.graphConfig.t0}
               h={this.state.graphConfig.h}
               Eqns={this.state.Eqns}
-              onClose={this.onGraphConfigClose}
-              onChange={(val) => this.onGraphConfigChange(val)}
-              onSubmit={this.onGraphConfigSubmit}
+              onClose={this.GRAPHCONFIG_onClose}
+              onChange={(val) => this.GRAPHCONFIG_onChange(val)}
+              onSubmit={this.GRAPHCONFIG_onSubmit}
             />
           </div>
         ) : (

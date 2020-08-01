@@ -58,8 +58,8 @@ class ModelExplorer extends Component {
     //   ModelId={ModelId} //
     //   selectedModelId={this.props.selectedModelId} //
     //   disabledEdit={this.props.selectedModelId in this.props.allPublicId}
-    //   onExpandFileLink={() => this.props.onSelectModelLink(ModelId)} //
-    //   onEditFileLinkName={this.props.onEditModelName}
+    //   onExpandFileLink={() => this.props.MODEL_onSelectLink(ModelId)} //
+    //   onEditFileLinkName={this.props.MODEL_onEditName}
     //   fileName={
     //     this.props.allPublicId[ModelId].Name
     //       ? this.props.allPublicId[ModelId].Name

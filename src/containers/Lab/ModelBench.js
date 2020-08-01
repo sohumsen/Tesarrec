@@ -33,8 +33,8 @@ class ModelBench extends Component {
 
   componentDidMount() {
     this.setState({ loading: true });
-    this.getPrivateModels();
-    this.getPublicModels();
+    this.MODEL_getPrivate();
+    this.MODEL_getPublic();
   }
 
   generalDBRequest = (payload, url, methodType, ifNoError) => {
@@ -59,7 +59,7 @@ class ModelBench extends Component {
       });
   };
 
-  createNewFile = () => {
+  MODEL_createNew = () => {
     let aNewModel = this.newModel();
 
     this.setState(
@@ -76,7 +76,7 @@ class ModelBench extends Component {
           "post",
 
           this.setState({ error: false }, () => {
-            this.getPrivateModels();
+            this.MODEL_getPrivate();
           })
         );
         // const payload = this.state.selectedModel;
@@ -101,7 +101,7 @@ class ModelBench extends Component {
         //       this.setState(
         //         { selectedModelId: data.name, error: false },
         //         () => {
-        //           this.getPrivateModels();
+        //           this.MODEL_getPrivate();
         //         }
         //       );
         //     } else {
@@ -115,14 +115,7 @@ class ModelBench extends Component {
     );
   };
 
-  sendToParent = (eqns, vars) => {
-    let selectedModel = { ...this.state.selectedModel };
-    selectedModel.Eqns = eqns;
-    selectedModel.Vars = vars;
-    this.setState({ selectedModel: selectedModel });
-  };
-
-  saveEquation = () => {
+  MODEL_save = () => {
     const payload = this.state.selectedModel;
 
     if (this.state.selectedModelId !== "") {
@@ -136,7 +129,7 @@ class ModelBench extends Component {
           this.props.token,
         "PATCH",
         this.setState({ error: false }, () => {
-          this.getPrivateModels();
+          this.MODEL_getPrivate();
         })
       );
       // fetch(
@@ -159,7 +152,7 @@ class ModelBench extends Component {
       //   .then((data) => {
       //     if (!data.error) {
       //       this.setState({ error: false }, () => {
-      //         this.getPrivateModels();
+      //         this.MODEL_getPrivate();
       //       });
       //     } else {
       //       this.setState({ error: true });
@@ -173,7 +166,7 @@ class ModelBench extends Component {
     }
   };
 
-  publishEquation = () => {
+  MODEL_publish = () => {
     const payload = { ...this.state.selectedModel, SavedBy: this.props.userId };
 
     if (this.state.selectedModelId !== "") {
@@ -184,7 +177,7 @@ class ModelBench extends Component {
           this.props.token,
         "POST",
         this.setState({ error: false }, () => {
-          this.getPublicModels();
+          this.MODEL_getPublic();
         })
       );
       // fetch(
@@ -204,7 +197,7 @@ class ModelBench extends Component {
       //   .then((data) => {
       //     if (!data.error) {
       //       this.setState({ error: false }, () => {
-      //         this.getPublicModels();
+      //         this.MODEL_getPublic();
       //       });
       //     } else {
       //       this.setState({ error: true });
@@ -218,7 +211,7 @@ class ModelBench extends Component {
     }
   };
 
-  onSelectModelLink = (modelId) => {
+  MODEL_onSelectLink = (modelId) => {
     //sets model id and eqns
     let allModels = { ...this.state.allModelId, ...this.state.allPublicId };
 
@@ -230,7 +223,7 @@ class ModelBench extends Component {
     });
   };
 
-  onEditModelName = (newModelName) => {
+  MODEL_onEditName = (newModelName) => {
     const Name = {
       Name: newModelName,
       // userId:this.props.userId
@@ -248,8 +241,8 @@ class ModelBench extends Component {
           this.props.token,
         "PATCH",
         this.setState({ selectedModelId: "" }, () => {
-          this.getPrivateModels();
-          this.getPublicModels();
+          this.MODEL_getPrivate();
+          this.MODEL_getPublic();
         })
       );
       // fetch(
@@ -275,8 +268,8 @@ class ModelBench extends Component {
       //   .then((data) => {
       //     if (!data.error) {
       //       this.setState({ selectedModelId: "" });
-      //       this.getPrivateModels();
-      //       this.getPublicModels();
+      //       this.MODEL_getPrivate();
+      //       this.MODEL_getPublic();
       //     } else {
       //       this.setState({ error: true });
       //     }
@@ -289,7 +282,7 @@ class ModelBench extends Component {
     }
   };
 
-  onRemoveModel = () => {
+  MODEL_onRemove = () => {
     let allModelId = { ...this.state.allModelId };
     delete allModelId[this.state.selectedModelId];
     let selectedModel = { ...this.state.selectedModel };
@@ -342,7 +335,7 @@ class ModelBench extends Component {
     //   });
   };
 
-  getPublicModels = () => {
+  MODEL_getPublic = () => {
     const queryParams = "?auth=" + this.props.token; //+'&orderBy="userId"&equalTo="'+this.props.userId+'"'
 
     // this.generalDBRequest(
@@ -371,7 +364,7 @@ class ModelBench extends Component {
       });
   };
 
-  getPrivateModels = () => {
+  MODEL_getPrivate = () => {
     const queryParams = "?auth=" + this.props.token; //+'&orderBy="userId"&equalTo="'+this.props.userId+'"'
     fetch(
       "https://tesarrec.firebaseio.com/eqns/" +
@@ -399,7 +392,7 @@ class ModelBench extends Component {
       });
   };
 
-  copyAllEqnsText = () => {
+  EQNS_copyAllText = () => {
     var allTextEqns = [];
 
     for (let i = 0; i < this.state.selectedModel.Eqns.length; i++) {
@@ -411,6 +404,13 @@ class ModelBench extends Component {
     navigator.clipboard.writeText(allTextEqns);
   };
   //        <TemplateController/>
+  sendToParent = (eqns, vars) => {
+    let selectedModel = { ...this.state.selectedModel };
+    selectedModel.Eqns = eqns;
+    selectedModel.Vars = vars;
+    this.setState({ selectedModel: selectedModel });
+  };
+
   handleTabChange = (event, val) => {
     this.setState({ tabChoiceValue: val });
   };
@@ -434,13 +434,13 @@ class ModelBench extends Component {
             allModelId={this.state.allModelId}
             allPublicId={this.state.allPublicId}
             selectedModelId={this.state.selectedModelId}
-            onSelectModelLink={this.onSelectModelLink}
-            onRemoveModel={this.onRemoveModel}
-            onEditModelName={this.onEditModelName}
-            saveEquation={this.saveEquation}
-            publishEquation={this.publishEquation}
-            copyAllEqnsText={this.copyAllEqnsText}
-            createNewFile={this.createNewFile}
+            onSelectModelLink={this.MODEL_onSelectLink}
+            onRemoveModel={this.MODEL_onRemove}
+            onEditModelName={this.MODEL_onEditName}
+            saveEquation={this.MODEL_save}
+            publishEquation={this.MODEL_publish}
+            copyAllEqnsText={this.EQNS_copyAllText}
+            createNewFile={this.MODEL_createNew}
           />
         ))
       : (modelLinks = null);

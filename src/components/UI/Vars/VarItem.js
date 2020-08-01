@@ -69,7 +69,7 @@ const VarItem = (props) => {
               width={105}
               type={"text"}
               value={props.VarDescription}
-              onChange={props.handleVariableInputChange}
+              onChange={props.VARS_handleInputChange}
               label={"Description"}
               name={"VarDescription"}
             />
@@ -137,7 +137,7 @@ const VarItem = (props) => {
               width={105}
               type={"text"}
               value={props.VarDescription}
-              onChange={props.handleVariableInputChange}
+              onChange={props.VARS_handleInputChange}
               label={"Description"}
               name={"VarDescription"}
             />

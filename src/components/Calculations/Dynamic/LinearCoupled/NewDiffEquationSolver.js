@@ -46,7 +46,7 @@ const NewDiffEquationSolver = (props) => {
       [1, 1, -1, 1],
       [1 / 8, 3 / 8, 3 / 8, 1 / 8],
     ],
-    RK6: [
+    RKF: [
       [1 / 4, 1 / 4],
       [3 / 8, 3 / 32, 9 / 32],
       [12 / 13, 1932 / 2197, -7200 / 2197, 7296 / 2197],
@@ -56,7 +56,6 @@ const NewDiffEquationSolver = (props) => {
     ],
   };
 
- 
   const func = (t, y) => {
     // for a given t , list of dependent varibales
 
@@ -89,16 +88,21 @@ const NewDiffEquationSolver = (props) => {
   //Compute yn+1 = yn + h * summation of wi*ki (i varies from 1 to the order)
   //Return yn+1 and tn+1 for the plot
 
-  const integrate=(m,f,y,t,h)=>{
-    for (var k=[],ki=0; ki<m.length; ki++) {
-      var _y=y.slice(), dt=ki?((m[ki-1][0])*h):0;
-      for (var l=0; l<_y.length; l++) for (var j=1; j<=ki; j++) _y[l]=_y[l]+h*(m[ki-1][j])*(k[ki-1][l]);
-      k[ki]=f(t+dt,_y,dt); 
+  const integrate = (m, f, y, t, h) => {
+    for (var k = [], ki = 0; ki < m.length; ki++) {
+      var _y = y.slice(),
+        dt = ki ? m[ki - 1][0] * h : 0;
+      for (var l = 0; l < _y.length; l++)
+        for (var j = 1; j <= ki; j++)
+          _y[l] = _y[l] + h * m[ki - 1][j] * k[ki - 1][l];
+      k[ki] = f(t + dt, _y, dt);
     }
     // eslint-disable-next-line
-    for (var r=y.slice(),l=0; l<_y.length; l++) for (var j=0; j<k.length; j++) r[l]=r[l]+h*(k[j][l])*(m[ki-1][j]);
+    for (var r = y.slice(), l = 0; l < _y.length; l++)
+      for (var j = 0; j < k.length; j++)
+        r[l] = r[l] + h * k[j][l] * m[ki - 1][j];
     return r;
-  }
+  };
 
   // const integrate = (meth, func, y, t, h) => {
   //   for (var k = [], ki = 0; ki < meth.length; ki++) {
@@ -137,7 +141,13 @@ const NewDiffEquationSolver = (props) => {
   let allY = [_returnedY];
 
   for (let i = 0; i < props.numberOfCycles; i++) {
-    returnedY = integrate(Integrators[props.method], func, returnedY, t0, parseFloat(props.h));
+    returnedY = integrate(
+      Integrators[props.method],
+      func,
+      returnedY,
+      t0,
+      parseFloat(props.h)
+    );
     t0 += props.h; // constant step size
 
     allY.push([...returnedY, t0]);
