@@ -123,6 +123,12 @@ const LinearCoupledDiffEquationGrapher = (props) => {
 
   let newcomputedResults = NewDiffEquationSolver(props);
   let newEqnArr = FormatArrayLinearCoupled(newcomputedResults);
+  let t0=performance.now()
+  
+  let newEqnArr2 = FormatArrayLinearCoupled(props.newcomputedResults2);
+  let t1=performance.now()
+  console.log(t1-t0)
+
   let oldcomputedResults = LinearCoupledDiffEquationSolver(props);
   let oldEqnArr = FormatArrayLinearCoupled(oldcomputedResults);
 
@@ -132,27 +138,7 @@ const LinearCoupledDiffEquationGrapher = (props) => {
   // );
 
 
-  let errorArr = [];
-  for (let index = 0; index < props.numberOfCycles; index++) {
-    let calced = newcomputedResults[index][0];
-    let actual = oldcomputedResults[index][0];
-    let error = actual - calced;
-    errorArr.push(error);
-  }
-  var sqrt = Math.sqrt;
-  var sqr = function (a) {
-    return a * a;
-  };
-  var add = function (a, b) {
-    return a + b;
-  };
-  var differenceFrom = function (target, a) {
-    return target - a;
-  };
-  var target = 0;
-  var differenceFromTarget = differenceFrom.bind(undefined, target);
-  var sqrdDiff = errorArr.map(differenceFromTarget).map(sqr);
-  var RMSE = sqrt(sqrdDiff.reduce(add, 0) / errorArr.length);
+  
 
   // return (
   //   <MyChart
@@ -165,7 +151,8 @@ const LinearCoupledDiffEquationGrapher = (props) => {
   //   />
   // );
 
-  return plotGraphs([newEqnArr, oldEqnArr]);
+  return plotGraphs([newEqnArr2, oldEqnArr]);
+
 };
 
 export default LinearCoupledDiffEquationGrapher;

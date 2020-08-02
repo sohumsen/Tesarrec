@@ -80,18 +80,22 @@ class LinearCoupled extends Component {
   }
 
   MODEL_transformStateToModelObj = () => {
-    let eqns = this.state.Eqns.map((eqn) => {
+    let eqnsText = this.state.Eqns.map((eqn) => {
       return eqn.TextEqn;
+    });
+    let eqnsParsed = this.state.Eqns.map((eqn) => {
+      return eqn.ParsedEqn;
     });
 
     let lineNames = this.state.Eqns.map((eqn) => {
       return eqn.line;
     });
+    let t0=performance.now()
     let newModel = new Model(
       {
         vars: this.state.Vars,
-        eqns: eqns,
-        solved: [],
+        eqns: eqnsText,
+        parsedEqns:eqnsParsed,
         t0: this.state.graphConfig.t0,
         h: this.state.graphConfig.h,
         numOfCycles: 30,
@@ -100,6 +104,10 @@ class LinearCoupled extends Component {
       },
       this.state.graphConfig.method
     );
+    let t1=performance.now()
+    console.log(t1-t0)
+    console.log(newModel.config.solvable)
+
     return newModel;
   };
 
@@ -187,8 +195,6 @@ class LinearCoupled extends Component {
     if (valid.includes("0")) {
       this.setState({ calculate: false });
     } else {
-
-      this.MODEL_transformStateToModelObj()
       this.setState({ calculate: true });
     }
   };
@@ -457,9 +463,17 @@ class LinearCoupled extends Component {
     this.state.Vars.forEach((VarElement) => {
       vars[VarElement.LatexForm] = VarElement.VarCurrent;
     });
+    let t0=performance.now()
+
+    let Model = this.MODEL_transformStateToModelObj();
+    // let t1=performance.now()
+    // console.log(t1-t0)
+    // console.log(Model.getTimeTaken())
+
     return (
       <Paper elevation={3} key="Graph">
         <LinearCoupledDiffEquationGrapher
+          newcomputedResults2={Model.solutions.calcedSolution}
           h={this.state.graphConfig.h}
           numberOfCycles={30}
           eqns={eqns} //send in parsed eqns

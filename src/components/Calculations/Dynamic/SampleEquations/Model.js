@@ -4,7 +4,7 @@ import NewDiffEquationSolver from "../LinearCoupled/NewDiffEquationSolver";
 
 export default class Model {
   constructor(inputModel, method) {
-    this.key = uuidv4();
+    // this.key = uuidv4();
 
     this.config = {
       initialConditions: inputModel.initialConditions,
@@ -13,10 +13,13 @@ export default class Model {
       lineNames: inputModel.lineNames,
       numOfCycles: inputModel.numOfCycles,
       method: method,
-      solvable: inputModel.solved.length !== 0,
+      solvable: inputModel.solved in inputModel,
     };
     this.eqns = {
-      parsedEqns: this.parseEqns(inputModel.eqns),
+      parsedEqns:
+        inputModel.parsedEqns in inputModel
+          ? inputModel.parsedEqns
+          : this.parseEqns(inputModel.eqns),
       textEqns: inputModel.eqns,
       //LATEX EQNS,id,errormessage,line,dybydlatex
 
@@ -36,7 +39,7 @@ export default class Model {
       name: inputModel.eqns.join() + "," + method,
       description: "Please add a description",
       rmse: this.config.solvable ? this.calcRMSE() : null,
-      timeTaken: this.getTimeTaken(),
+      timeTaken:this.config.solvable ? this.getTimeTaken():0,
     };
   }
 
