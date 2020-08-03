@@ -3,8 +3,8 @@ import { parse, evaluate, simplify } from "mathjs";
 import NewDiffEquationSolver from "../LinearCoupled/NewDiffEquationSolver";
 
 export default class Model {
-  constructor(inputModel, method) {
-    // this.key = uuidv4();
+  constructor(inputModel, method,meta) {
+    this.key = "modelId" in meta? meta.modelId: uuidv4();
 
     this.config = {
       initialConditions: inputModel.initialConditions,
@@ -13,7 +13,7 @@ export default class Model {
       lineNames: inputModel.lineNames,
       numOfCycles: inputModel.numOfCycles,
       method: method,
-      solvable: inputModel.solved in inputModel,
+      solvable: "solved" in inputModel,
     };
     this.eqns = {
       parsedEqns:
@@ -21,6 +21,7 @@ export default class Model {
           ? inputModel.parsedEqns
           : this.parseEqns(inputModel.eqns),
       textEqns: inputModel.eqns,
+      latexEqns:this.toLatex(inputModel.eqns),
       //LATEX EQNS,id,errormessage,line,dybydlatex
 
       textSolvedEqns: this.config.solvable ? inputModel.solved : null,
@@ -33,7 +34,7 @@ export default class Model {
       actualSolution: this.config.solvable
         ? this.generateActualSolutionArray()
         : null,
-      calcedSolution: this.solveDiffEqns(),
+      calcedSolution: meta.calculate? this.solveDiffEqns():null,
     };
     this.meta = {
       name: inputModel.eqns.join() + "," + method,
@@ -41,6 +42,10 @@ export default class Model {
       rmse: this.config.solvable ? this.calcRMSE() : null,
       timeTaken: this.config.solvable ? this.getTimeTaken() : 0,
     };
+  }
+  onCalculate(){
+    this.solutions.calcedSolution=this.solveDiffEqns()
+
   }
 
   calcRMSE() {
@@ -70,15 +75,30 @@ export default class Model {
     return RMSE;
   }
 
-  toLatex(expressionString) {
+  toLatex(eqns) {
     console.log("toLatex");
 
-    let a = parse(expressionString).toTex({
-      parenthesis: "auto",
+    let latexEqns = [];
+    eqns.forEach((eqn) => {
+      let stringVer=(parse(eqn).toString({implicit: "hide",parenthesis: 'auto'}));
+      let texVer=(parse(stringVer).toTex({parenthesis: "auto",implicit: "hide"})
+      )
+      latexEqns.push(texVer);
     });
-    let result = a.replace(/\/\//g, "/");
 
-    console.log(a, result);
+    // let parsedstring=(parse(expressionString).toTex({parenthesis: "auto"})
+    // )
+
+    // console.log(origstring,stringver,parsedstring,parsedstringtex)
+
+    // let a = parse(stringver).toTex({
+    //   parenthesis: "auto",
+    //   implicit: "hide",
+    // });
+    // let result1 = a.replace("cdot", "");
+    // let result2 = result1.replace("'\frac'", "\\frac");
+
+    return latexEqns;
   }
   validateExpression = () => {
     console.log("validateExpression");

@@ -27,7 +27,7 @@ class ModelBench extends Component {
 
     calculate: false,
     error: false,
-    tabChoiceValue: 2,
+    tabChoiceValue: 1,
     loading: false,
   };
 

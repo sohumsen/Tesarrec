@@ -21,7 +21,7 @@ const DEFAULTEQUATIONS = [
       line: "c",
 
       DByDLatex: "\\frac{dc}{dt}=",
-      LatexEqn: "\\frac{{K_2}}ac{{K_1}+a}-{K_4}c",
+      LatexEqn: "\\frac{K_2ac}{K_1+a}-K_4c",
       TextEqn: "(K_2*a*c)/(K_1+a)-K_4*c",
       errorMessage: null,
     },

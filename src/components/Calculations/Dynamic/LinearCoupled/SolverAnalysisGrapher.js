@@ -126,8 +126,8 @@ class SolverAnalysisGrapher extends Component {
             onChange={this.onChange("eqnFilterChoice")}
           >
             <MenuItem value="ALL">ALL</MenuItem>
-            {Array.from(allEqns).map((eqn) => (
-              <MenuItem value={eqn}>{eqn}</MenuItem>
+            {Array.from(allEqns).map((eqn,i) => (
+              <MenuItem key={i} value={eqn}>{eqn}</MenuItem>
             ))}
 
           </Select>

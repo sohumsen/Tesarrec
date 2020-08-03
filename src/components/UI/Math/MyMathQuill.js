@@ -35,7 +35,9 @@ const MyMathQuill = (props) => {
           // }}
           style={{ width: props.width }}
           latex={props.latex} // Initial latex value for the input field
-          //mathquillDidMount={(mathField) => props.onDoubleClick(mathField)}
+          // mathquillDidMount={(mathField) =>
+          //   console.log(mathField.text("df"), mathField.latex("2+5/6*4"))
+          // }
           //onKeyDown={(mathField)=>{console.log(mathField)}}
           onChange={(mathField) => props.onInputChange(mathField)}
         />

@@ -32,6 +32,7 @@ const EqnItems = (props) => {
         DByDLatex={Eqn.DByDLatex}
         LatexEqn={Eqn.LatexEqn}
         //onDoubleClick={props.onDoubleClickMathQuill(Eqn.id)}
+        mathquillDidMount={props.mathquillDidMount(Eqn.id, "Eqns")}
 
         handleMathQuillInputChange={props.handleMathQuillInputChange(Eqn.id, "Eqns")}
       />

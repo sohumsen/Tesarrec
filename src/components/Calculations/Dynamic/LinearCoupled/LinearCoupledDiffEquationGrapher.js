@@ -124,10 +124,11 @@ const LinearCoupledDiffEquationGrapher = (props) => {
 
   let newcomputedResults = NewDiffEquationSolver(props);
   let newEqnArr = FormatArrayLinearCoupled(newcomputedResults);
-  
+
+
   let newEqnArr2 = FormatArrayLinearCoupled(props.newcomputedResults2);
+
   let t1=performance.now()
-  console.log(t1-t0)
 
   let oldcomputedResults = LinearCoupledDiffEquationSolver(props);
   let oldEqnArr = FormatArrayLinearCoupled(oldcomputedResults);

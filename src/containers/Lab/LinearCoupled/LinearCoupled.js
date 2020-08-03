@@ -31,6 +31,7 @@ class LinearCoupled extends Component {
   state = {
     calculate: false,
     modelId: "",
+    Model:null,
 
     graphConfig: DEFAULTGRAPHCONFIG,
 
@@ -53,8 +54,46 @@ class LinearCoupled extends Component {
         //generates array of a,b,t 0.5 initial conditions
         arr.push(0.5);
       }
-
       graphConfig.initialConditions = arr;
+
+      let eqnsText = props.Eqns.map((eqn) => {
+        return eqn.TextEqn;
+      });
+      // let eqnsParsed = props.Eqns.map((eqn) => {
+      //   console.log(eqn)
+      //   return eqn.ParsedEqn;
+      // });
+
+      let lineNames = props.Eqns.map((eqn) => {
+        return eqn.line;
+      });
+
+      let vars = {};
+
+      props.Vars.forEach((VarElement) => {
+        vars[VarElement.LatexForm] = VarElement.VarCurrent;
+      });
+      let newModel = new Model(
+        {
+          vars: vars,
+          eqns: eqnsText,
+          t0: graphConfig.t0,
+          h: graphConfig.h,
+          numOfCycles: 30,
+          initialConditions: graphConfig.initialConditions,
+          lineNames: lineNames,
+        },
+        graphConfig.method,
+        {
+          modelId:props.modelId,
+          calculate:props.calculate
+        }
+      );
+
+      for (let i = 0; i < props.Eqns.length; i++) {
+        props.Eqns[i].LatexEqn = newModel.eqns.latexEqns[i];
+      }
+
       return {
         calculate: props.calculate,
         modelId: props.modelId,
@@ -62,6 +101,7 @@ class LinearCoupled extends Component {
         Vars: props.Vars,
         myReactGridLayout: DEFAULTLAYOUT(props),
         graphConfig: graphConfig,
+        Model:newModel
       };
     }
 
@@ -112,8 +152,7 @@ class LinearCoupled extends Component {
       this.state.graphConfig.method
     );
     let t1 = performance.now();
-    console.log(t1 - t0);
-    console.log(newModel.config.solvable);
+    // console.log(t1 - t0);
 
     return newModel;
   };
@@ -471,18 +510,33 @@ class LinearCoupled extends Component {
       vars[VarElement.LatexForm] = VarElement.VarCurrent;
     });
     let t0 = performance.now();
+    console.log(this.state.Model.eqns.textEqns,this.state.Eqns)
+    // console.log(this.state.Model.solveDiffEqns())
+    // this.state.Model.solveDiffEqns()
+    // console.log(this.state.Model)
 
-    let Model = this.MODEL_transformStateToModelObj();
-    console.log(this.state.Eqns[0].LatexEqn);
-    Model.toLatex(this.state.Eqns[0].TextEqn);
+    // let Model = this.MODEL_transformStateToModelObj();
+
     // let t1=performance.now()
     // console.log(t1-t0)
     // console.log(Model.getTimeTaken())
-
+    this.state.Model.onCalculate()
+    console.log(this.state.Model)
     return (
       <Paper elevation={3} key="Graph">
+        {/* <MyMathQuill
+          firstBit={""}
+          latex={Model.toLatex(this.state.Eqns[0].TextEqn)}
+          //onDoubleClick={props.onDoubleClick}
+          // \frac{ K\_2 a c}{ K\_1+ a}- K\_4 c
+          // \frac{{K_2}}ac{{K_1}+a}-{K_4}c
+          // \frac{ K\_2\cdot a\cdot c}{ K\_1+ a}- K\_4\cdot c
+
+          onInputChange={this.handleMathQuillInputChange}
+          width="60%"
+        /> */}
         <LinearCoupledDiffEquationGrapher
-          newcomputedResults2={Model.solutions.calcedSolution}
+          newcomputedResults2={this.state.Model.solutions.calcedSolution}
           h={this.state.graphConfig.h}
           numberOfCycles={30}
           eqns={eqns} //send in parsed eqns
@@ -500,13 +554,58 @@ class LinearCoupled extends Component {
     );
   };
 
+  mathquillDidMount = (id, itemType) => (mathField) => {
+    let items = this.state[itemType];
+
+    const idx = items.findIndex((e) => {
+      return e.id === id;
+    });
+
+    const item = {
+      ...items[idx],
+    };
+    if (itemType === "Eqns") {
+      //Parse mathField.latex() and only allow ur vars
+      //replace mathField.latex() with another version which is the VarRange
+      item.TextEqn = mathField.text();
+      item.LatexEqn = mathField.latex();
+      //mathField.select();
+    } else {
+      item.LatexForm = mathField.latex();
+      items[idx] = item;
+
+      var valueArr = items.map(function (item) {
+        return item.LatexForm;
+      });
+
+      for (let i = 0; i < valueArr.length; i++) {
+        const latex = valueArr[i];
+        if (valueArr.indexOf(latex) === i) {
+          items.forEach((item) => (item.errorMessage = null));
+        }
+      }
+      var isDuplicate = valueArr.some(function (item, idx) {
+        return valueArr.indexOf(item) !== idx;
+      });
+
+      if (isDuplicate) {
+        item.errorMessage = "doesnt work";
+      } else {
+        item.errorMessage = null;
+      }
+    }
+
+    items[idx] = item;
+    this.setState({ [itemType]: items, calculate: false });
+  };
+
   render() {
     let Eqns = (
       <EqnItems
         Eqns={this.state.Eqns}
         removeItem={this.ITEMS_remove}
         handleMathQuillInputChange={this.MATHQUILL_handleInputChange}
-        //onDoubleClickMathQuill={this.onDoubleClickMathQuill}
+        mathquillDidMount={this.mathquillDidMount}
       />
     );
 
@@ -543,39 +642,6 @@ class LinearCoupled extends Component {
           />
 
           {Eqns}
-          <MyMathQuill
-            firstBit={""}
-            latex={"\\frac{{K_2}}ac{{K_1}+a}-{K_4}c"}
-            //onDoubleClick={props.onDoubleClick}
-            // \frac{ K\_2 a c}{ K\_1+ a}- K\_4 c
-            // \frac{{K_2}}ac{{K_1}+a}-{K_4}c
-            // \frac{ K\_2\cdot a\cdot c}{ K\_1+ a}- K\_4\cdot c 
-
-            onInputChange={this.handleMathQuillInputChange}
-            width="60%"
-          />
-          <MyMathQuill
-            firstBit={""}
-            latex={"\frac{ K\_2\cdot a\cdot c}{ K\_1+ a}- K\_4\cdot c "}
-            //onDoubleClick={props.onDoubleClick}
-            // \frac{ K\_2 a c}{ K\_1+ a}- K\_4 c
-            // \frac{{K_2}}ac{{K_1}+a}-{K_4}c
-            // \frac{ K\_2\cdot a\cdot c}{ K\_1+ a}- K\_4\cdot c \frac{ K\_2\cdot a\cdot c}{ K\_1+ a}- K\_4\cdot c
-
-            onInputChange={this.handleMathQuillInputChange}
-            width="60%"
-          />
-          <MyMathQuill
-            firstBit={""}
-            latex={"\\frac{ {K\_2} }a c{ {K\_1}+ a}- {K\_4} c "}
-            //onDoubleClick={props.onDoubleClick}
-            // \frac{ K\_2 a c}{ K\_1+ a}- K\_4 c
-            // \frac{{K_2}}ac{{K_1}+a}-{K_4}c
-            // \frac{ K\_2\cdot a\cdot c}{ K\_1+ a}- K\_4\cdot c \frac{ K\_2\cdot a\cdot c}{ K\_1+ a}- K\_4\cdot c
-
-            onInputChange={this.handleMathQuillInputChange}
-            width="60%"
-          />
          
         </Paper>
 
