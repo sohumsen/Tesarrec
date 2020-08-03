@@ -3,8 +3,39 @@ import { parse, evaluate, simplify } from "mathjs";
 import NewDiffEquationSolver from "../LinearCoupled/NewDiffEquationSolver";
 
 export default class Model {
-  constructor(inputModel, method,meta) {
-    this.key = "modelId" in meta? meta.modelId: uuidv4();
+  constructor(inputModel, method, meta) {
+    /** 
+     * inputModel={
+      initialConditions =arr of num
+      h =num
+      t0 =num
+      lineNames =arr of str
+      numOfCycles =num
+      eqns=arr of str
+      vars=arr of obj
+
+      (OPTIONAL)
+      solved =arr of str
+      parsedEqns=arr of str
+      },
+
+
+      method=str,
+
+
+      meta={
+      calculate=bool
+
+      (OPTIONAL)
+      modelId=str
+      name=str
+      description=str
+
+      }
+
+    */
+
+    this.key = "modelId" in meta ? meta.modelId : uuidv4();
 
     this.config = {
       initialConditions: inputModel.initialConditions,
@@ -21,7 +52,7 @@ export default class Model {
           ? inputModel.parsedEqns
           : this.parseEqns(inputModel.eqns),
       textEqns: inputModel.eqns,
-      latexEqns:this.toLatex(inputModel.eqns),
+      latexEqns: this.toLatex(inputModel.eqns),
       //LATEX EQNS,id,errormessage,line,dybydlatex
 
       textSolvedEqns: this.config.solvable ? inputModel.solved : null,
@@ -34,18 +65,28 @@ export default class Model {
       actualSolution: this.config.solvable
         ? this.generateActualSolutionArray()
         : null,
-      calcedSolution: meta.calculate? this.solveDiffEqns():null,
+      calcedSolution: meta.calculate ? this.solveDiffEqns() : null,
     };
     this.meta = {
-      name: inputModel.eqns.join() + "," + method,
-      description: "Please add a description",
+      name: "name" in meta ? meta.name : inputModel.eqns.join() + "," + method,
+      description:
+        "description" in meta ? meta.description : "Please add a description",
       rmse: this.config.solvable ? this.calcRMSE() : null,
       timeTaken: this.config.solvable ? this.getTimeTaken() : 0,
     };
   }
-  onCalculate(){
-    this.solutions.calcedSolution=this.solveDiffEqns()
+  onCalculate() {
+    this.solutions.calcedSolution = this.solveDiffEqns();
+  }
 
+  /**
+   * This updates the models numCycles
+   */
+  setNumOfCycles(numCycles){
+    this.config.numOfCycles = numCycles
+    this.solutions.actualSolution = this.generateActualSolutionArray()
+    this.solutions.calcedSolution = this.solveDiffEqns()
+    this.meta.rmse = this.calcRMSE()
   }
 
   calcRMSE() {
@@ -75,14 +116,25 @@ export default class Model {
     return RMSE;
   }
 
+  /**TODO This method should not take in arguments */
+  /**
+   * Pass in a array of text forms and this returns a array of latex forms
+   * using Math.js parse
+   * @param {*} eqns 
+   */
   toLatex(eqns) {
     console.log("toLatex");
 
     let latexEqns = [];
     eqns.forEach((eqn) => {
-      let stringVer=(parse(eqn).toString({implicit: "hide",parenthesis: 'auto'}));
-      let texVer=(parse(stringVer).toTex({parenthesis: "auto",implicit: "hide"})
-      )
+      let stringVer = parse(eqn).toString({
+        implicit: "hide",
+        parenthesis: "auto",
+      });
+      let texVer = parse(stringVer).toTex({
+        parenthesis: "auto",
+        implicit: "hide",
+      });
       latexEqns.push(texVer);
     });
 
@@ -100,6 +152,15 @@ export default class Model {
 
     return latexEqns;
   }
+
+  /**
+   * This creates a text form from latex form eqautions
+   */
+  toTextForm() {
+
+  }
+
+
   validateExpression = () => {
     console.log("validateExpression");
 
@@ -131,6 +192,10 @@ export default class Model {
     return parsedEqns;
   };
 
+  /**
+   * This generates a actual solution of the model
+   * has been provided with any 
+   */
   generateActualSolutionArray = () => {
     console.log("generateActualSolutionArray");
 
@@ -212,6 +277,11 @@ export default class Model {
     return time_difference;
   };
 
+  /**
+   * This method returns a summary of the entire object
+   * to help clients of this class do comparitive analysis
+   * of models
+   */
   returnConstructorObj = () => {
     console.log("returnConstructorObj");
 

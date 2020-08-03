@@ -31,7 +31,7 @@ class LinearCoupled extends Component {
   state = {
     calculate: false,
     modelId: "",
-    Model:null,
+    model:null,  
 
     graphConfig: DEFAULTGRAPHCONFIG,
 
@@ -420,11 +420,11 @@ class LinearCoupled extends Component {
     this.state.Vars.forEach((Var) => {
       lineNames[Var.LatexForm] = 1;
     });
-
     try {
       evaluate(expr, lineNames);
       return true;
     } catch (error) {
+      console.log(error)
       return false;
     }
   };

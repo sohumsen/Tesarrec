@@ -9,8 +9,11 @@ import Skeleton from "../../components/UI/Skeleton/Skeleton";
 
 import DEFAULTEQUATIONS from "../../components/Calculations/Dynamic/SampleEquations/DEFAULTEQUATIONS";
 import DEFAULTVARS from "../../components/Calculations/Dynamic/SampleEquations/DEFAULTVARS";
+import DEFAULTGRAPHCONFIG from "./LinearCoupled/DefaultGraphConfig";
 
 import SolverAnalysis from "./SolverAnalysis/SolverAnalysis";
+import Model from "../../components/Calculations/Dynamic/SampleEquations/Model";
+
 
 class ModelBench extends Component {
   /**
@@ -19,7 +22,7 @@ class ModelBench extends Component {
    *
    */
   state = {
-    allModelId: {},
+    allModelId: {},  /* { modelID: modelObj ...} */
     allPublicId: {},
 
     selectedModelId: "",
@@ -27,7 +30,7 @@ class ModelBench extends Component {
 
     calculate: false,
     error: false,
-    tabChoiceValue: 1,
+    tabChoiceValue: 1, /* TODO This component doesnt need to know this */
     loading: false,
   };
 
@@ -415,7 +418,32 @@ class ModelBench extends Component {
     this.setState({ tabChoiceValue: val });
   };
 
+  /** Get all mehod names aligned */
+  
   newModel() {
+
+    /** TODO Harmonise default params */
+    /** TODO return new Model() */
+    let GRAPHCONFIG=DEFAULTGRAPHCONFIG
+
+    let newModel = new Model(
+      {
+        vars: DEFAULTVARS,
+        eqns: DEFAULTEQUATIONS,
+        t0: GRAPHCONFIG.t0,
+        h: GRAPHCONFIG.h,
+        numOfCycles: 30,
+        initialConditions: GRAPHCONFIG.initialConditions,
+        lineNames: GRAPHCONFIG.lineNames,
+      },
+      GRAPHCONFIG.method,
+      {
+        calculate:false,
+        name: "A sample model",
+        description: "This is meant to describe a model",
+
+      }
+    );
     return {
       Eqns: DEFAULTEQUATIONS,
       Vars: DEFAULTVARS,
@@ -423,6 +451,7 @@ class ModelBench extends Component {
       Description: "Please add Description",
       ActualSolution: "",
       SolutionTechnique: "RK4",
+      
     };
   }
 
