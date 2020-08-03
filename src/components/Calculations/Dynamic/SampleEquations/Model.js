@@ -17,7 +17,7 @@ export default class Model {
     };
     this.eqns = {
       parsedEqns:
-        inputModel.parsedEqns in inputModel
+        "parsedEqns" in inputModel
           ? inputModel.parsedEqns
           : this.parseEqns(inputModel.eqns),
       textEqns: inputModel.eqns,
@@ -39,11 +39,12 @@ export default class Model {
       name: inputModel.eqns.join() + "," + method,
       description: "Please add a description",
       rmse: this.config.solvable ? this.calcRMSE() : null,
-      timeTaken:this.config.solvable ? this.getTimeTaken():0,
+      timeTaken: this.config.solvable ? this.getTimeTaken() : 0,
     };
   }
 
   calcRMSE() {
+    console.log("calcRMSE");
     let errorArr = [];
     for (let i = 0; i < this.solutions.calcedSolution.length; i++) {
       let calced = this.solutions.calcedSolution[i][0];
@@ -70,15 +71,18 @@ export default class Model {
   }
 
   toLatex(expressionString) {
+    console.log("toLatex");
+
     let a = parse(expressionString).toTex({
       parenthesis: "auto",
-      implicit: "hide",
     });
     let result = a.replace(/\/\//g, "/");
 
     console.log(a, result);
   }
   validateExpression = () => {
+    console.log("validateExpression");
+
     let scope = {};
     this.config.lineNames.forEach((lineName) => {
       scope[lineName] = 1;
@@ -96,6 +100,8 @@ export default class Model {
   };
 
   parseEqns = (eqns) => {
+    console.log("parseEqns");
+
     let parsedEqns = [];
     eqns.forEach((element) => {
       let parsedEqn = simplify(parse(element));
@@ -106,6 +112,8 @@ export default class Model {
   };
 
   generateActualSolutionArray = () => {
+    console.log("generateActualSolutionArray");
+
     const func = (t, y) => {
       let eqnResultsArr = [];
 
@@ -117,12 +125,16 @@ export default class Model {
 
       coordinate["t"] = t; // { a, b , c, t}
 
-      for (let i = 0; i < this.eqns.vars.length; i++) {
-        coordinate[this.eqns.vars[i].LatexForm] = this.eqns.vars[i].VarCurrent;
-      }
+      let accumulative = {
+        ...coordinate,
+        ...this.eqns.vars,
+      };
+      // for (let i = 0; i < this.eqns.vars.length; i++) {
+      //   coordinate[this.eqns.vars[i].LatexForm] = this.eqns.vars[i].VarCurrent;
+      // }
       for (let idx = 0; idx < this.eqns.parsedSolvedEqns.length; idx++) {
         eqnResultsArr.push(
-          this.eqns.parsedSolvedEqns[idx].evaluate(coordinate)
+          this.eqns.parsedSolvedEqns[idx].evaluate(accumulative)
         ); // { a :1 , b: 3.3,t:3}
       }
 
@@ -148,26 +160,28 @@ export default class Model {
   };
 
   solveDiffEqns = () => {
-    let vars = {};
+    console.log("solveDiffEqns");
 
-    this.eqns.vars.forEach((VarElement) => {
-      vars[VarElement.LatexForm] = VarElement.VarCurrent;
-    });
+    let t0 = performance.now();
 
     let calcedArr = NewDiffEquationSolver({
       method: this.config.method,
       h: this.config.h,
       numberOfCycles: this.config.numOfCycles,
       eqns: this.eqns.parsedEqns,
-      vars: vars, // { K_1=0.27}
+      vars: this.eqns.vars, // { K_1=0.27}
       LineNames: this.config.lineNames,
       initialConditions: this.config.initialConditions, // y1
       t0: this.config.t0,
     });
+    let t1 = performance.now();
+    console.log(t1 - t0);
 
     return calcedArr;
   };
   getTimeTaken = () => {
+    console.log("getTimeTaken");
+
     let t_0 = performance.now();
     this.solveDiffEqns();
 
@@ -179,6 +193,8 @@ export default class Model {
   };
 
   returnConstructorObj = () => {
+    console.log("returnConstructorObj");
+
     return {
       key: this.key,
       config: this.config,

@@ -19,6 +19,7 @@ import LinearCoupledButtonGraphContainer from "../../../components/UI/ButtonCont
 import DEFAULTLAYOUT from "./DefaultLayout";
 import DEFAULTGRAPHCONFIG from "./DefaultGraphConfig";
 import Model from "../../../components/Calculations/Dynamic/SampleEquations/Model";
+import MyMathQuill from "../../../components/UI/Math/MyMathQuill";
 class LinearCoupled extends Component {
   /**
    * Visual Component that contains the textbox for the equation and calculation outputs
@@ -90,12 +91,18 @@ class LinearCoupled extends Component {
     let lineNames = this.state.Eqns.map((eqn) => {
       return eqn.line;
     });
-    let t0=performance.now()
+
+    let vars = {};
+
+    this.state.Vars.forEach((VarElement) => {
+      vars[VarElement.LatexForm] = VarElement.VarCurrent;
+    });
+    let t0 = performance.now();
     let newModel = new Model(
       {
-        vars: this.state.Vars,
+        vars: vars,
         eqns: eqnsText,
-        parsedEqns:eqnsParsed,
+        parsedEqns: eqnsParsed,
         t0: this.state.graphConfig.t0,
         h: this.state.graphConfig.h,
         numOfCycles: 30,
@@ -104,9 +111,9 @@ class LinearCoupled extends Component {
       },
       this.state.graphConfig.method
     );
-    let t1=performance.now()
-    console.log(t1-t0)
-    console.log(newModel.config.solvable)
+    let t1 = performance.now();
+    console.log(t1 - t0);
+    console.log(newModel.config.solvable);
 
     return newModel;
   };
@@ -463,9 +470,11 @@ class LinearCoupled extends Component {
     this.state.Vars.forEach((VarElement) => {
       vars[VarElement.LatexForm] = VarElement.VarCurrent;
     });
-    let t0=performance.now()
+    let t0 = performance.now();
 
     let Model = this.MODEL_transformStateToModelObj();
+    console.log(this.state.Eqns[0].LatexEqn);
+    Model.toLatex(this.state.Eqns[0].TextEqn);
     // let t1=performance.now()
     // console.log(t1-t0)
     // console.log(Model.getTimeTaken())
@@ -534,6 +543,40 @@ class LinearCoupled extends Component {
           />
 
           {Eqns}
+          <MyMathQuill
+            firstBit={""}
+            latex={"\\frac{{K_2}}ac{{K_1}+a}-{K_4}c"}
+            //onDoubleClick={props.onDoubleClick}
+            // \frac{ K\_2 a c}{ K\_1+ a}- K\_4 c
+            // \frac{{K_2}}ac{{K_1}+a}-{K_4}c
+            // \frac{ K\_2\cdot a\cdot c}{ K\_1+ a}- K\_4\cdot c 
+
+            onInputChange={this.handleMathQuillInputChange}
+            width="60%"
+          />
+          <MyMathQuill
+            firstBit={""}
+            latex={"\frac{ K\_2\cdot a\cdot c}{ K\_1+ a}- K\_4\cdot c "}
+            //onDoubleClick={props.onDoubleClick}
+            // \frac{ K\_2 a c}{ K\_1+ a}- K\_4 c
+            // \frac{{K_2}}ac{{K_1}+a}-{K_4}c
+            // \frac{ K\_2\cdot a\cdot c}{ K\_1+ a}- K\_4\cdot c \frac{ K\_2\cdot a\cdot c}{ K\_1+ a}- K\_4\cdot c
+
+            onInputChange={this.handleMathQuillInputChange}
+            width="60%"
+          />
+          <MyMathQuill
+            firstBit={""}
+            latex={"\\frac{ {K\_2} }a c{ {K\_1}+ a}- {K\_4} c "}
+            //onDoubleClick={props.onDoubleClick}
+            // \frac{ K\_2 a c}{ K\_1+ a}- K\_4 c
+            // \frac{{K_2}}ac{{K_1}+a}-{K_4}c
+            // \frac{ K\_2\cdot a\cdot c}{ K\_1+ a}- K\_4\cdot c \frac{ K\_2\cdot a\cdot c}{ K\_1+ a}- K\_4\cdot c
+
+            onInputChange={this.handleMathQuillInputChange}
+            width="60%"
+          />
+         
         </Paper>
 
         <Paper key="Vars" className={classes.VarContainer} elevation={3}>

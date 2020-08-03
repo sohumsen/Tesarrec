@@ -120,10 +120,10 @@ const LinearCoupledDiffEquationGrapher = (props) => {
   };
 
   //let computedResults = LinearCoupledDiffEquationSolver(props)
+  let t0=performance.now()
 
   let newcomputedResults = NewDiffEquationSolver(props);
   let newEqnArr = FormatArrayLinearCoupled(newcomputedResults);
-  let t0=performance.now()
   
   let newEqnArr2 = FormatArrayLinearCoupled(props.newcomputedResults2);
   let t1=performance.now()
@@ -139,7 +139,7 @@ const LinearCoupledDiffEquationGrapher = (props) => {
 
 
   
-
+ 
   // return (
   //   <MyChart
   //     EulerData={newEqnArr[1]}
