@@ -31,7 +31,8 @@ class LinearCoupled extends Component {
   state = {
     calculate: false,
     modelId: "",
-    modelObj:null,
+    model:null,  
+
     graphConfig: DEFAULTGRAPHCONFIG,
 
     Eqns: [],
@@ -157,9 +158,6 @@ class LinearCoupled extends Component {
   };
 
   MATHQUILL_handleInputChange = (id, itemType) => (mathField) => {
-    // if ( itemType == "Eqns") {
-    //   let items = this.state.modelObj.eqns.textEqns
-    // }
     let items = this.state[itemType];
 
     const idx = items.findIndex((e) => {
@@ -179,7 +177,7 @@ class LinearCoupled extends Component {
       item.LatexForm = mathField.latex();
       items[idx] = item;
 
-      let valueArr = items.map(function (item) {
+      var valueArr = items.map(function (item) {
         return item.LatexForm;
       });
 
@@ -204,22 +202,47 @@ class LinearCoupled extends Component {
     this.setState({ [itemType]: items, calculate: false });
   };
   MATHQUILL_handleInputSubmit = (event) => {
-
+    let valid = [];
     event.preventDefault();
-    let newEqns = [];
-    let validIndex = [];
-    for (let i = 0; i < this.state.modelObj.eqns.textEqns.length; i++) {
-      if (this.state.modelObj.validateExpression(eqn) ){
-        newEqns.push(this.ITEMS_setErrorMessage(i, null));
-      } else{
-        newEqns.push(this.ITEMS_setErrorMessage(i, <MyErrorMessage />));
-        this.setState({ calculate: false });
+
+    this.state.Eqns.forEach((elementObj) => {
+      if (this.EQNS_validateExpression(elementObj.TextEqn, elementObj.line)) {
+        valid.push("1");
+      } else {
+        valid.push("0");
       }
+    });
 
+    let validIndex = [];
+    for (let i = 0; i < valid.length; i++) {
+      if (valid[i] === "0") validIndex.push(i);
     }
-    let validatioNStatus = modelObj.validate()
-    this.setState({'validationStatus'})
 
+    let newEqns = [];
+    for (let i = 0; i < valid.length; i++) {
+      const element = valid[i];
+
+      if (element === "0") {
+        newEqns.push(this.ITEMS_setErrorMessage(i, <MyErrorMessage />));
+      } else {
+        newEqns.push(this.ITEMS_setErrorMessage(i, null));
+      }
+    }
+    const deepItems = [...this.state.Eqns];
+
+    for (let i = 0; i < newEqns.length; i++) {
+      const eqn = { ...newEqns[i] };
+      eqn.ParsedEqn = simplify(parse(eqn.TextEqn));
+
+      deepItems[i] = eqn;
+    }
+    this.setState({ Eqns: deepItems });
+
+    if (valid.includes("0")) {
+      this.setState({ calculate: false });
+    } else {
+      this.setState({ calculate: true });
+    }
   };
 
   ITEMS_setErrorMessage = (i, errorMessage) => {

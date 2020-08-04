@@ -17,8 +17,6 @@ fix stacked bar in chp
 
 da/dt=b is valid
 
-
-
 click new file select by pressing pencil
 
 when create new file, select it

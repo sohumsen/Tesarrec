@@ -500,9 +500,10 @@ class ModelBench extends Component {
           {this.state.tabChoiceValue === 1 ? (
             <LinearCoupled
               calculate={this.state.calculate}
-              modelId={this.state.selectedModelId}
-              Eqns={this.state.selectedModel.Eqns}
-              Vars={this.state.selectedModel.Vars}
+              //modelId={this.state.selectedModelId}
+              //Eqns={this.state.selectedModel.Eqns}
+              //Vars={this.state.selectedModel.Vars}
+              modelObj={this.state.selectedModel}
               sendToParent={this.sendToParent}
             />
           ) : null}
