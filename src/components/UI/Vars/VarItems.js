@@ -47,8 +47,14 @@ const VarItems = (props) => {
           Var.id,
           "Vars"
         )}
-        handleVariableInputChange={props.handleVariableInputChange(Var.id)}
-        SliderHandleChange={props.SliderHandleChange}
+        handleVariableInputChange={props.handleVariableInputChange(
+          Var.id,
+          false
+        )}
+        SliderHandleChange={props.handleVariableInputChange(
+          Var.id,
+          true
+        )}
         disabledRemoveButton={disabledRemoveButton()}
       />
     );

@@ -63,11 +63,11 @@ class HeatMapFormMFC extends Component {
 
   HeatMapChangedOnClick = (x, y, value) => {
     this.setState({
-      xCoordAnode:x.x,
-      yCoordCathode:y.y,
-      AnodeSubstrateChemical: this.state.HeatMapState.xLabels[x.x],
-      CathodeProductChemical: this.state.HeatMapState.yLabels[y.y],
-      chosenValue: value[y.y][x.x],
+      xCoordAnode: x,
+      yCoordCathode: y,
+      AnodeSubstrateChemical: this.state.HeatMapState.xLabels[x],
+      CathodeProductChemical: this.state.HeatMapState.yLabels[y],
+      chosenValue: value,
     });
   };
 

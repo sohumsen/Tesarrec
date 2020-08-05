@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import GridLayout from "react-grid-layout";
 import "../../../../node_modules/react-grid-layout/css/styles.css";
-
 import EqnItems from "../../../components/UI/Eqns/EqnItems";
 import VarItems from "../../../components/UI/Vars/VarItems";
 import { evaluate, simplify, parse } from "mathjs";
@@ -31,7 +30,8 @@ class LinearCoupled extends Component {
   state = {
     calculate: false,
     modelId: "",
-    modelObj:null,
+    model: null,
+
     graphConfig: DEFAULTGRAPHCONFIG,
 
     Eqns: [],
@@ -81,11 +81,11 @@ class LinearCoupled extends Component {
           numOfCycles: 30,
           initialConditions: graphConfig.initialConditions,
           lineNames: lineNames,
+          method: graphConfig.method,
         },
-        graphConfig.method,
         {
-          modelId:props.modelId,
-          calculate:props.calculate
+          modelId: props.modelId,
+          calculate: props.calculate,
         }
       );
 
@@ -100,7 +100,7 @@ class LinearCoupled extends Component {
         Vars: props.Vars,
         myReactGridLayout: DEFAULTLAYOUT(props),
         graphConfig: graphConfig,
-        Model:newModel
+        Model: newModel,
       };
     }
 
@@ -157,9 +157,6 @@ class LinearCoupled extends Component {
   };
 
   MATHQUILL_handleInputChange = (id, itemType) => (mathField) => {
-    // if ( itemType == "Eqns") {
-    //   let items = this.state.modelObj.eqns.textEqns
-    // }
     let items = this.state[itemType];
 
     const idx = items.findIndex((e) => {
@@ -179,7 +176,7 @@ class LinearCoupled extends Component {
       item.LatexForm = mathField.latex();
       items[idx] = item;
 
-      let valueArr = items.map(function (item) {
+      var valueArr = items.map(function (item) {
         return item.LatexForm;
       });
 
@@ -204,22 +201,47 @@ class LinearCoupled extends Component {
     this.setState({ [itemType]: items, calculate: false });
   };
   MATHQUILL_handleInputSubmit = (event) => {
-
+    let valid = [];
     event.preventDefault();
-    let newEqns = [];
-    let validIndex = [];
-    for (let i = 0; i < this.state.modelObj.eqns.textEqns.length; i++) {
-      if (this.state.modelObj.validateExpression(eqn) ){
-        newEqns.push(this.ITEMS_setErrorMessage(i, null));
-      } else{
-        newEqns.push(this.ITEMS_setErrorMessage(i, <MyErrorMessage />));
-        this.setState({ calculate: false });
+
+    this.state.Eqns.forEach((elementObj) => {
+      if (this.EQNS_validateExpression(elementObj.TextEqn, elementObj.line)) {
+        valid.push("1");
+      } else {
+        valid.push("0");
       }
+    });
 
+    let validIndex = [];
+    for (let i = 0; i < valid.length; i++) {
+      if (valid[i] === "0") validIndex.push(i);
     }
-    let validatioNStatus = modelObj.validate()
-    this.setState({'validationStatus'})
 
+    let newEqns = [];
+    for (let i = 0; i < valid.length; i++) {
+      const element = valid[i];
+
+      if (element === "0") {
+        newEqns.push(this.ITEMS_setErrorMessage(i, <MyErrorMessage />));
+      } else {
+        newEqns.push(this.ITEMS_setErrorMessage(i, null));
+      }
+    }
+    const deepItems = [...this.state.Eqns];
+
+    for (let i = 0; i < newEqns.length; i++) {
+      const eqn = { ...newEqns[i] };
+      eqn.ParsedEqn = simplify(parse(eqn.TextEqn));
+
+      deepItems[i] = eqn;
+    }
+    this.setState({ Eqns: deepItems });
+
+    if (valid.includes("0")) {
+      this.setState({ calculate: false });
+    } else {
+      this.setState({ calculate: true });
+    }
   };
 
   ITEMS_setErrorMessage = (i, errorMessage) => {
@@ -265,7 +287,7 @@ class LinearCoupled extends Component {
       graphConfig: DEFAULTGRAPHCONFIG,
     });
   };
-  VARS_handleInputChange = (id) => (event) => {
+  VARS_handleInputChange = (id, calculate) => (event, value) => {
     let items = this.state.Vars;
 
     const idx = items.findIndex((e) => {
@@ -275,31 +297,26 @@ class LinearCoupled extends Component {
     const item = {
       ...items[idx],
     };
-
-    item[event.target.name] = event.target.value;
-
-    const deepItems = [...this.state.Vars];
-    deepItems[idx] = item;
-
-    this.setState({ Vars: deepItems, calculate: false });
-  };
-  VARS_sliderHandleChange = (name, id) => (event, value) => {
-    let items = this.state.Vars;
-
-    const idx = items.findIndex((e) => {
-      return e.id === id;
-    });
-
-    const item = {
-      ...items[idx],
-    };
-    item[name] = value;
+    if (event.target.name === undefined) {
+      item["VarCurrent"] = value;
+    } else {
+      item[event.target.name] = event.target.value;
+    }
 
     const deepItems = [...this.state.Vars];
     deepItems[idx] = item;
-
-    this.setState({ Vars: deepItems });
+    console.log(
+      id,
+      calculate,
+      deepItems,
+      event.target.name,
+      event.target.value
+    );
+    calculate
+      ? this.setState({ Vars: deepItems })
+      : this.setState({ Vars: deepItems, calculate: false });
   };
+
   VARS_nextPossible = (prevState, type) => {
     let typeArr = prevState.Vars.filter((Var) => {
       return Var.VarType === type;
@@ -401,7 +418,7 @@ class LinearCoupled extends Component {
       evaluate(expr, lineNames);
       return true;
     } catch (error) {
-      console.log(error)
+      console.log(error);
       return false;
     }
   };
@@ -487,7 +504,7 @@ class LinearCoupled extends Component {
       vars[VarElement.LatexForm] = VarElement.VarCurrent;
     });
     let t0 = performance.now();
-    console.log(this.state.Model.eqns.textEqns,this.state.Eqns)
+    console.log(this.state.Model.eqns.textEqns, this.state.Eqns);
     // console.log(this.state.Model.solveDiffEqns())
     // this.state.Model.solveDiffEqns()
     // console.log(this.state.Model)
@@ -497,8 +514,8 @@ class LinearCoupled extends Component {
     // let t1=performance.now()
     // console.log(t1-t0)
     // console.log(Model.getTimeTaken())
-    this.state.Model.onCalculate()
-    console.log(this.state.Model)
+    this.state.Model.onCalculate();
+    console.log(this.state.Model);
     return (
       <Paper elevation={3} key="Graph">
         {/* <MyMathQuill
@@ -592,7 +609,6 @@ class LinearCoupled extends Component {
         handleVariableInputChange={this.VARS_handleInputChange}
         removeItem={this.ITEMS_remove}
         handleMathQuillInputChange={this.MATHQUILL_handleInputChange}
-        SliderHandleChange={this.VARS_sliderHandleChange}
       />
     );
 
@@ -619,7 +635,6 @@ class LinearCoupled extends Component {
           />
 
           {Eqns}
-         
         </Paper>
 
         <Paper key="Vars" className={classes.VarContainer} elevation={3}>

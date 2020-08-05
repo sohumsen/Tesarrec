@@ -3,7 +3,7 @@ import { parse, evaluate, simplify } from "mathjs";
 import NewDiffEquationSolver from "../LinearCoupled/NewDiffEquationSolver";
 
 export default class Model {
-  constructor(inputModel, method, meta) {
+  constructor(inputModel, meta) {
     /** 
      * inputModel={
       initialConditions =arr of num
@@ -43,7 +43,7 @@ export default class Model {
       t0: inputModel.t0,
       lineNames: inputModel.lineNames,
       numOfCycles: inputModel.numOfCycles,
-      method: method,
+      method: inputModel.method,
       solvable: "solved" in inputModel,
     };
     this.eqns = {
@@ -53,7 +53,7 @@ export default class Model {
           : this.parseEqns(inputModel.eqns),
       textEqns: inputModel.eqns,
       latexEqns: this.toLatex(inputModel.eqns),
-      //LATEX EQNS,id,errormessage,line,dybydlatex
+      //id,errormessage,line,dybydlatex
 
       textSolvedEqns: this.config.solvable ? inputModel.solved : null,
       parsedSolvedEqns: this.config.solvable
@@ -68,7 +68,7 @@ export default class Model {
       calcedSolution: meta.calculate ? this.solveDiffEqns() : null,
     };
     this.meta = {
-      name: "name" in meta ? meta.name : inputModel.eqns.join() + "," + method,
+      name: "name" in meta ? meta.name : inputModel.eqns.join() + "," + inputModel.method,
       description:
         "description" in meta ? meta.description : "Please add a description",
       rmse: this.config.solvable ? this.calcRMSE() : null,
@@ -82,11 +82,11 @@ export default class Model {
   /**
    * This updates the models numCycles
    */
-  setNumOfCycles(numCycles){
-    this.config.numOfCycles = numCycles
-    this.solutions.actualSolution = this.generateActualSolutionArray()
-    this.solutions.calcedSolution = this.solveDiffEqns()
-    this.meta.rmse = this.calcRMSE()
+  setNumOfCycles(numCycles) {
+    this.config.numOfCycles = numCycles;
+    this.solutions.actualSolution = this.generateActualSolutionArray();
+    this.solutions.calcedSolution = this.solveDiffEqns();
+    this.meta.rmse = this.calcRMSE();
   }
 
   calcRMSE() {
@@ -120,7 +120,7 @@ export default class Model {
   /**
    * Pass in a array of text forms and this returns a array of latex forms
    * using Math.js parse
-   * @param {*} eqns 
+   * @param {*} eqns
    */
   toLatex(eqns) {
     console.log("toLatex");
@@ -156,12 +156,9 @@ export default class Model {
   /**
    * This creates a text form from latex form eqautions
    */
-  toTextForm() {
+  toTextForm() {}
 
-  }
-
-
-  validateExpression = () => {
+  validateExpressions = () => {
     console.log("validateExpression");
 
     let scope = {};
@@ -172,12 +169,16 @@ export default class Model {
       scope[Var.LatexForm] = 1;
     });
 
-    try {
-      evaluate(this.eqns.parsedEqns, scope);
-      return true;
-    } catch (error) {
-      return false;
+    let invalidIndex = [];
+
+    for (let i = 0; i < this.eqns.parsedEqns.length; i++) {
+      try {
+        evaluate(this.eqns.parsedEqns[i], scope);
+      } catch (error) {
+        invalidIndex.push(i);
+      }
     }
+    return invalidIndex
   };
 
   parseEqns = (eqns) => {
@@ -194,7 +195,7 @@ export default class Model {
 
   /**
    * This generates a actual solution of the model
-   * has been provided with any 
+   * has been provided with any
    */
   generateActualSolutionArray = () => {
     console.log("generateActualSolutionArray");

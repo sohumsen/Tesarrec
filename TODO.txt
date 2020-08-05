@@ -18,6 +18,8 @@ fix stacked bar in chp
 da/dt=b is valid
 
 click new file select by pressing pencil
+click on mes heatmap
+update mfc y axis
 
 when create new file, select it
 24th Jul - 7th Aug 

@@ -79,7 +79,7 @@ const OverallReactionAnodeCathode = (props) => {
           0.0167 *
           ElectricityGeneration +
         0.09 * props.concentration * props.volume);
-    let MinimumProductSellingPrice=(Capex)+(Opex/ElectricityGeneration)*24*0.365
+    let MinimumProductSellingPrice=(Capex+Opex)/(ElectricityGeneration*24*0.365)
 
 
     let GWPsaving = ElectricityGeneration * 3.6 * CarbonEmmision * 8.76;
@@ -95,7 +95,7 @@ const OverallReactionAnodeCathode = (props) => {
 
     GWPSavingData.push(GWPsaving.toFixed(2));
 
-    MinimumProductSellingPriceData.push(MinimumProductSellingPrice.toFixed(2))
+    MinimumProductSellingPriceData.push(MinimumProductSellingPrice.toFixed(4))
 
     //console.log( Xelement,Yelement)
 

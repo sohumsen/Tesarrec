@@ -194,10 +194,8 @@ const VarItem = (props) => {
               lowestVal={parseFloat(props.VarLow)}
               highestVal={props.VarHigh}
               handleVariableInputChange={props.handleVariableInputChange}
-              SliderhandleChange={props.SliderHandleChange(
-                "VarCurrent",
-                props.id
-              )}
+              SliderhandleChange={props.handleVariableInputChange
+              }
             />
           </div>
         </Paper>
