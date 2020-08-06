@@ -19,7 +19,7 @@ const EqnItem = (props) => {
       <MyMathQuill
         firstBit={props.DByDLatex}
         latex={props.LatexEqn}
-        mathquillDidMount={props.mathquillDidMount}
+        // mathquillDidMount={props.mathquillDidMount}
         onInputChange={props.handleMathQuillInputChange}
         width="60%"
       />

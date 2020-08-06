@@ -116,7 +116,23 @@ const OverallReactionAnodeCathode = (props) => {
         />
       </div>
       <div className={classes.HeatMapEnergyPerformance}>
-        <StackedChart
+      <ColumnChart
+          labelData1={[
+            {
+              label: "Heat Generation Efficiency",
+              y: parseFloat(
+                (
+                  ChpGenerationEfficiency - ElectricityGenerationEfficiency
+                ).toFixed(2)
+              ),            },
+            {
+              label: "Electricity Generation Efficiency",
+              y: parseFloat(ElectricityGenerationEfficiency.toFixed(2)),
+            },
+          ]}
+          type={"bar"}
+        />
+        {/* <StackedChart
           name1={"Heat Generation Efficiency"}
           data1={[
             {
@@ -136,7 +152,7 @@ const OverallReactionAnodeCathode = (props) => {
             },
           ]}
           title={""}
-        />
+        /> */}
       </div>
       <div className={classes.HeatMapEnergyPerformance}>
         <ColumnChart

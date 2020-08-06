@@ -2,6 +2,8 @@ import React from "react";
 import EqnItem from "./EqnItem";
 
 const EqnItems = (props) => {
+  console.log(props.Eqns)
+
   const disabledRemoveButton = () => {
     if (props.Eqns.length === 1) {
       return true;
@@ -32,7 +34,7 @@ const EqnItems = (props) => {
         DByDLatex={Eqn.DByDLatex}
         LatexEqn={Eqn.LatexEqn}
         //onDoubleClick={props.onDoubleClickMathQuill(Eqn.id)}
-        mathquillDidMount={props.mathquillDidMount(Eqn.id, "Eqns")}
+        // mathquillDidMount={props.mathquillDidMount(Eqn.id, "Eqns")}
 
         handleMathQuillInputChange={props.handleMathQuillInputChange(Eqn.id, "Eqns")}
       />

@@ -68,7 +68,7 @@ const NewDiffEquationSolver = (props) => {
     }
 
     coordinate["t"] = t; // { a, b , c, t}
-
+  
     const accumulative = {
       ...coordinate,
       ...props.vars,

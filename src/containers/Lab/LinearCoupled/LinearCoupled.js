@@ -19,6 +19,7 @@ import DEFAULTLAYOUT from "./DefaultLayout";
 import DEFAULTGRAPHCONFIG from "./DefaultGraphConfig";
 import Model from "../../../components/Calculations/Dynamic/SampleEquations/Model";
 import MyMathQuill from "../../../components/UI/Math/MyMathQuill";
+import ModelWrapper from "../../../components/Calculations/Dynamic/SampleEquations/ModelWrapper";
 class LinearCoupled extends Component {
   /**
    * Visual Component that contains the textbox for the equation and calculation outputs

@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import SingleODE from "./SingleODE/SingleODE";
-import LinearCoupled from "./LinearCoupled/LinearCoupled";
+import LinearCoupled from "./LinearCoupled/LinearCoupledNew";
 import ModelExplorer from "../../components/UI/FileController/ModelExplorer";
 import classes from "./ModelBench.module.css";
 import MyTabs from "../../components/UI/MyTabs/MyTabs";
