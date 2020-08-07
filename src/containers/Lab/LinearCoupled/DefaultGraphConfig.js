@@ -4,7 +4,7 @@ const DEFAULTGRAPHCONFIG = {
   LegendHorizontal: "left",
   LegendVertical: "top",
   DecimalPrecision: 2,
-  initialConditions: [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5],
+  initialConditions: [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5],
   lineNames:["a","b","c","d","e","f","g"],
   xAxis: "t", //x,y,
   yAxis: "a",

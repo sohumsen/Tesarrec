@@ -13,9 +13,7 @@ const LinearCoupledDiffEquationGrapher = (props) => {
   /**
    * A method component that takes in a equation and outputs a chart
    */
-
- 
-
+  console.log(props.LegendHorizontal)
   const plotGraphs = (allEqnArr) => {
     let allXCoord = [];
     let allYCoord = [];
@@ -120,15 +118,14 @@ const LinearCoupledDiffEquationGrapher = (props) => {
   };
 
   //let computedResults = LinearCoupledDiffEquationSolver(props)
-  let t0=performance.now()
+  let t0 = performance.now();
 
   let newcomputedResults = NewDiffEquationSolver(props);
   let newEqnArr = FormatArrayLinearCoupled(newcomputedResults);
 
-
   let newEqnArr2 = FormatArrayLinearCoupled(props.newcomputedResults2);
 
-  let t1=performance.now()
+  let t1 = performance.now();
 
   let oldcomputedResults = LinearCoupledDiffEquationSolver(props);
   let oldEqnArr = FormatArrayLinearCoupled(oldcomputedResults);
@@ -138,9 +135,6 @@ const LinearCoupledDiffEquationGrapher = (props) => {
   //   actualSolutions
   // );
 
-
-  
- 
   // return (
   //   <MyChart
   //     EulerData={newEqnArr[1]}
@@ -153,7 +147,6 @@ const LinearCoupledDiffEquationGrapher = (props) => {
   // );
 
   return plotGraphs([newEqnArr2, oldEqnArr]);
-
 };
 
 export default LinearCoupledDiffEquationGrapher;

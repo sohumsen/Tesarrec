@@ -17,7 +17,7 @@ export default class ModelWrapper extends Model {
       submitted: inputModel.submitted,
       LegendHorizontal: inputModel.LegendHorizontal,
       LegendVertical: inputModel.LegendVertical,
-      DecimalPrecision: inputModel.LegendHorizontal,
+      DecimalPrecision: inputModel.DecimalPrecision,
       initialConditions: inputModel.initialConditions,
       lineNames: inputModel.lineNames,
       xAxis: inputModel.xAxis,
@@ -56,16 +56,21 @@ export default class ModelWrapper extends Model {
     let t0 = performance.now();
 
     let parsedEqns = this.Eqns.map((eqn) => eqn.ParsedEqn);
+    let vars = {};
+
+    this.Vars.forEach((VarElement) => {
+      vars[VarElement.LatexForm] = VarElement.VarCurrent;
+    });
 
     let calcedArr = NewDiffEquationSolver({
       method: this.Config.method,
       h: this.Config.h,
       numberOfCycles: 30,
       eqns: parsedEqns,
-      vars: this.Vars, // { K_1=0.27}
-      LineNames: this.config.lineNames,
-      initialConditions: this.config.initialConditions, // y1
-      t0: this.config.t0,
+      vars: vars, // { K_1=0.27}
+      LineNames: this.Config.lineNames,
+      initialConditions: this.Config.initialConditions, // y1
+      t0: this.Config.t0,
     });
     let t1 = performance.now();
 
@@ -74,28 +79,44 @@ export default class ModelWrapper extends Model {
 
   validateExpressions() {
     let parsedEqns = this.Eqns.map((eqn) => eqn.ParsedEqn);
-    console.log(this.Config)
-    console.log(this.validateExpressions2(parsedEqns,this.Config.lineNames,this.Vars))
-    return this.validateExpressions2(parsedEqns,this.Config.lineNames,this.Vars)
+    console.log(this.Config);
+    console.log(
+      this.validateExpressions2(parsedEqns, this.Config.lineNames, this.Vars)
+    );
+    return this.validateExpressions2(
+      parsedEqns,
+      this.Config.lineNames,
+      this.Vars
+    );
     //super.validateExpressions([parsedEqns, this.Config.lineNames, this.Vars]);
-  };
+  }
 
-  validateExpressions2(parsedEqns,lineNames,Vars){
+  validateExpressions2 = (Eqns) => {
     let scope = {};
+    // let parsedEqns = this.Eqns.map((eqn) => eqn.ParsedEqn);
+    console.log(this);
+    let textEqns = Eqns.map((eqn) => eqn.TextEqn);
+    let lineNames = Eqns.map((eqn) => eqn.line);
+
     lineNames.forEach((lineName) => {
       scope[lineName] = 1;
     });
-    Vars.forEach((Var) => {
+
+    scope["t"] = 1;
+
+    this.Vars.forEach((Var) => {
       scope[Var.LatexForm] = 1;
     });
 
     let invalidIndex = [];
-    console.log(scope)
-    for (let i = 0; i < parsedEqns.length; i++) {
+    console.log(textEqns, scope);
+    for (let i = 0; i < textEqns.length; i++) {
       try {
-        evaluate(parsedEqns[i], scope);
+        evaluate(textEqns[i], scope);
+        console.log("valid");
       } catch (error) {
         invalidIndex.push(i);
+        console.log("invalid");
       }
     }
     return invalidIndex;

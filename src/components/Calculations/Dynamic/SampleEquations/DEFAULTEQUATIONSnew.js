@@ -46,3 +46,18 @@ const DEFAULTEQUATIONS = [
 ];
 
 export default DEFAULTEQUATIONS;
+
+// const DEFAULTEQUATIONS = [
+//   {
+//     line: "a",
+//     TextEqn: "a",
+//   },
+//   {
+//     line: "b",
+
+//     TextEqn: "b",
+//   },
+ 
+// ];
+
+// export default DEFAULTEQUATIONS;

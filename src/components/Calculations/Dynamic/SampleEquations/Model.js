@@ -37,7 +37,7 @@ export default class Model {
 
     this.key = "modelId" in meta ? meta.modelId : uuidv4();
 
-    this.config = {
+    this.Config = {
       initialConditions: inputModel.initialConditions,
       h: inputModel.h,
       t0: inputModel.t0,
@@ -46,7 +46,7 @@ export default class Model {
       method: inputModel.method,
       solvable: "solved" in inputModel,
     };
-    this.eqns = {
+    this.Eqns = {
       parsedEqns:
         "parsedEqns" in inputModel
           ? inputModel.parsedEqns
@@ -55,15 +55,15 @@ export default class Model {
       latexEqns: this.toLatex(inputModel.eqns),
       //id,errormessage,line,dybydlatex
 
-      textSolvedEqns: this.config.solvable ? inputModel.solved : null,
-      parsedSolvedEqns: this.config.solvable
+      textSolvedEqns: this.Config.solvable ? inputModel.solved : null,
+      parsedSolvedEqns: this.Config.solvable
         ? this.parseEqns(inputModel.solved)
         : null,
     };
     this.Vars = inputModel.vars;
 
     this.solutions = {
-      actualSolution: this.config.solvable
+      actualSolution: this.Config.solvable
         ? this.generateActualSolutionArray()
         : null,
       calcedSolution: meta.calculate ? this.solveDiffEqns() : null,
@@ -76,8 +76,8 @@ export default class Model {
       description:
         "description" in meta ? meta.description : "Please add a description",
       calculate: meta.calculate,
-      rmse: this.config.solvable ? this.calcRMSE() : null,
-      timeTaken: this.config.solvable ? this.getTimeTaken() : 0,
+      rmse: this.Config.solvable ? this.calcRMSE() : null,
+      timeTaken: this.Config.solvable ? this.getTimeTaken() : 0,
     };
   }
   onCalculate() {

@@ -2,7 +2,6 @@ import React from "react";
 import EqnItem from "./EqnItem";
 
 const EqnItems = (props) => {
-  console.log(props.Eqns)
 
   const disabledRemoveButton = () => {
     if (props.Eqns.length === 1) {

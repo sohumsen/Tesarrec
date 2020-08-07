@@ -70,14 +70,16 @@ class LinearCoupled extends Component {
   //   return null;
   // }
   componentDidMount() {
-   
     let newModelWrapper2 = new ModelWrapper(
-      { ...DEFAULTGRAPHCONFIG, eqnsObj: DEFAULTEQUATIONSNEW, vars: DEFAULTVARS },
+      {
+        ...DEFAULTGRAPHCONFIG,
+        eqnsObj: DEFAULTEQUATIONSNEW,
+        vars: DEFAULTVARS,
+      },
       {
         calculate: false,
       }
     );
-    console.log(newModelWrapper2)
     this.setState({
       modelObj: newModelWrapper2,
       myReactGridLayout: DEFAULTLAYOUT(newModelWrapper2),
@@ -96,68 +98,36 @@ class LinearCoupled extends Component {
   // }
 
   MATHQUILL_handleInputChange = (id, itemType) => (mathField) => {
-    // if ( itemType == "Eqns") {
-    //   let items = this.state.modelObj.eqns.textEqns
-    // }
     let items = this.state.modelObj[itemType];
-
     const idx = items.findIndex((e) => {
       return e.id === id;
     });
-
     const item = {
       ...items[idx],
     };
     if (itemType === "Eqns") {
-      //Parse mathField.latex() and only allow ur vars
-      //replace mathField.latex() with another version which is the VarRange
       item.TextEqn = mathField.text();
       item.LatexEqn = mathField.latex();
-      //mathField.select();
     } else {
       item.LatexForm = mathField.latex();
       items[idx] = item;
-
+      let invalidIdx = [];
       // Check if item is a dup
-      /**
       for (let i = 0; i < items.length; i++) {
-        const latex = items[i].LatexForm;
         for (let j = 0; j < items.length; j++) {
-          if (i != j) {
-            const latexOther = items[j].LatexForm;
-            if ( latex === latexOther){
-              items[i].errorMessage = "Err"
+          if (i !== j) {
+            if (items[i].LatexForm === items[j].LatexForm) {
+              invalidIdx.push(i, j);
             } else {
-              items[i].errorMessage = null
+              items[i].errorMessage = null;
+              items[j].errorMessage = null;
             }
-
           }
-        
-      }
-    }
-
-    */
-     
-      let latexFormArr = items.map(function (item) {
-        return item.LatexForm;
-      });
-
-      for (let i = 0; i < latexFormArr.length; i++) {
-        const latex = latexFormArr[i];
-        if (latexFormArr.indexOf(latex) === i) {
-          items.forEach((item) => (item.errorMessage = null));
         }
       }
-      var isDuplicate = latexFormArr.some(function (item, idx) {
-        return latexFormArr.indexOf(item) !== idx;
-      });
-
-      if (isDuplicate) {
-        item.errorMessage = "doesnt work";
-      } else {
-        item.errorMessage = null;
-      }
-      
+      [...new Set(invalidIdx)].forEach(
+        (idx) => (items[idx].errorMessage = "Err")
+      );
     }
 
     items[idx] = item;
@@ -171,14 +141,19 @@ class LinearCoupled extends Component {
   MATHQUILL_handleInputSubmit = (event) => {
     event.preventDefault();
     let newEqns = [];
-    let invalidIndex = this.state.modelObj.validateExpressions();
-
-    invalidIndex.forEach((idx) => {
-      newEqns.push(this.ITEMS_setErrorMessage(idx, <MyErrorMessage />));
-    });
+    let invalidIndex = this.state.modelObj.validateExpressions2(
+      this.state.modelObj.Eqns,
+      this.state.modelObj.Config.lineNames
+    );
+    for (let i = 0; i < this.state.modelObj.Eqns.length; i++) {
+      if (invalidIndex.includes(i)) {
+        newEqns.push(this.ITEMS_setErrorMessage(i, <MyErrorMessage />));
+      } else {
+        newEqns.push(this.ITEMS_setErrorMessage(i, null));
+      }
+    }
     let modelObj = { ...this.state.modelObj };
     modelObj.Eqns = newEqns;
-
     invalidIndex.length != 0
       ? (modelObj.calculate = false)
       : (modelObj.calculate = true);
@@ -194,61 +169,54 @@ class LinearCoupled extends Component {
     return Eqn;
   };
   ITEMS_remove = (id, itemType) => {
-    this.setState(
-      (prevState) => {
-        if (itemType === "Eqns") {
-          // Line up the initial Condition corresponding to the vars
-          let newGraphConfig = { ...prevState.modelObj.Config };
-          let newInitialConditions = [...newGraphConfig.initialConditions];
-          let lineNames = [...newGraphConfig.lineNames];
+    this.setState((prevState) => {
+      let modelObj = { ...prevState.modelObj };
 
-          const idx = prevState.modelObj.Eqns.findIndex((e) => {
-            return e.id === id;
-          });
-      
-          lineNames.splice(idx,1)
-          newGraphConfig.lineNames=lineNames
+      if (itemType === "Eqns") {
+        // Line up the initial Condition corresponding to the vars
+        let Config = { ...prevState.modelObj.Config };
+        let initialConditions = [...Config.initialConditions];
+        let lineNames = [...Config.lineNames];
+        const idx = prevState.modelObj.Eqns.findIndex((e) => {
+          return e.id === id;
+        });
 
-          newInitialConditions.pop();
-          newGraphConfig["initialConditions"] = newInitialConditions;
-          console.log(newGraphConfig)
-          let modelObj = { ...prevState.modelObj };
-          modelObj.Config = newGraphConfig;
+        lineNames.splice(idx, 1);
+        Config.lineNames = lineNames;
 
-          let Eqns = prevState.modelObj.Eqns.filter((eqn) => {
-            return eqn.id !== id;
-          });
-          modelObj.Eqns = Eqns;
-          modelObj.calculate = false;
-          console.log(modelObj);
-          return {
-            modelObj: modelObj,
-          };
-        } else {
-          let modelObj = { ...prevState.modelObj };
+        initialConditions.splice(idx, 1);
+        Config.initialConditions = initialConditions;
 
-          let Vars = prevState.modelObj.Vars.filter((element) => {
-            return element.id !== id;
-          });
-          modelObj.calculate = false;
+        let Eqns = prevState.modelObj.Eqns.filter((eqn) => {
+          return eqn.id !== id;
+        });
 
-          modelObj.Vars = Vars;
-          return {
-            modelObj,
-          };
-        }
-      },
-      () => {
-        console.log(this.state.modelObj);
+        modelObj.Config = Config;
+        modelObj.Eqns = Eqns;
+        modelObj.calculate = false;
+
+        return {
+          modelObj: modelObj,
+        };
+      } else {
+        let Vars = prevState.modelObj.Vars.filter((element) => {
+          return element.id !== id;
+        });
+
+        modelObj.calculate = false;
+        modelObj.Vars = Vars;
+        return {
+          modelObj,
+        };
       }
-    );
+    });
   };
   ITEMS_reset = (itemType) => {
     let modelObj = { ...this.state.modelObj };
     modelObj.calculate = false;
     modelObj.Config = DEFAULTGRAPHCONFIG;
     itemType === "eqns"
-      ? (modelObj.Eqns = DEFAULTEQUATIONS)
+      ? (modelObj.Eqns = DEFAULTEQUATIONSNEW)
       : (modelObj.Vars = DEFAULTVARS);
 
     this.setState(
@@ -263,30 +231,28 @@ class LinearCoupled extends Component {
   };
 
   VARS_handleInputChange = (id, calculate) => (event, value) => {
-    let items = this.state.modelObj.Vars;
+    let modelObj = { ...this.state.modelObj };
+    let Vars = [...modelObj.Vars];
 
-    const idx = items.findIndex((e) => {
+    const idx = Vars.findIndex((e) => {
       return e.id === id;
     });
 
-    const item = {
-      ...items[idx],
+    const Var = {
+      ...Vars[idx],
     };
     if (event.target.name === undefined) {
-      item["VarCurrent"] = value;
+      Var["VarCurrent"] = value;
     } else {
-      item[event.target.name] = event.target.value;
+      Var[event.target.name] = event.target.value;
     }
 
-    const deepItems = [...this.state.modelObj.Vars];
-    deepItems[idx] = item;
+    Vars[idx] = Var;
 
-    let modelObj = { ...this.state.modelObj };
-    modelObj.Vars = deepItems;
-    if (!calculate) {
+    modelObj.Vars = Vars;
+    if (calculate) {
       modelObj.calculate = false;
     }
-    console.log(modelObj);
 
     this.setState({ modelObj: modelObj });
   };
@@ -380,7 +346,7 @@ class LinearCoupled extends Component {
     modelObj.Config = graphConfig;
 
     this.setState({
-      graphConfig: graphConfig,
+      modelObj: modelObj,
     });
   };
 
@@ -398,7 +364,7 @@ class LinearCoupled extends Component {
     graphConfig.submitted = false;
     let modelObj = { ...this.state.modelObj };
     modelObj.Config = graphConfig;
-
+    console.log(modelObj);
     this.setState({ modelObj: modelObj });
   };
   GRAPHCONFIG_onSubmit = () => {
@@ -427,7 +393,7 @@ class LinearCoupled extends Component {
 
   GRAPH_render = () => {
     let eqns = [];
-
+    console.log("start");
     this.state.modelObj.Eqns.forEach((eqn) => {
       eqns.push(eqn.ParsedEqn);
     });
@@ -452,26 +418,26 @@ class LinearCoupled extends Component {
       vars[VarElement.LatexForm] = VarElement.VarCurrent;
     });
     let t0 = performance.now();
+    console.log(this.state.modelObj);
 
-    console.log(this.state.modelObj)
+    console.log(this.state.modelObj.solveDiffEqns());
 
-    console.log(this.state.modelObj.solveDiffEqns())
     return (
       <Paper elevation={3} key="Graph">
         <LinearCoupledDiffEquationGrapher
-          newcomputedResults2={this.state.Model.solutions.calcedSolution}
-          h={this.state.graphConfig.h}
+          newcomputedResults2={this.state.modelObj.solveDiffEqns()}
+          h={this.state.modelObj.Config.h}
           numberOfCycles={30}
           eqns={eqns} //send in parsed eqns
           vars={vars} // { K_1=0.27}
           LineNames={LineNames}
-          t0={this.state.graphConfig.t0}
-          method={this.state.graphConfig.method}
-          axis={[this.state.graphConfig.xAxis, yAxis]}
-          initialConditions={this.state.graphConfig.initialConditions} //includes t
-          LegendVertical={this.state.graphConfig.LegendVertical}
-          LegendHorizontal={this.state.graphConfig.LegendHorizontal}
-          DecimalPrecision={this.state.graphConfig.DecimalPrecision}
+          t0={this.state.modelObj.Config.t0}
+          method={this.state.modelObj.Config.method}
+          axis={[this.state.modelObj.Config.xAxis, yAxis]}
+          initialConditions={this.state.modelObj.Config.initialConditions} //includes t
+          LegendVertical={this.state.modelObj.Config.LegendVertical}
+          LegendHorizontal={this.state.modelObj.Config.LegendHorizontal}
+          DecimalPrecision={this.state.modelObj.Config.DecimalPrecision}
         />
       </Paper>
     );
@@ -529,10 +495,10 @@ class LinearCoupled extends Component {
           <Paper onMouseDown={(e) => e.stopPropagation()}>{Vars}</Paper>
         </Paper>
 
-        {this.state.calculate ? (
+        {this.state.modelObj.calculate ? (
           <div key="GraphButtons" className={classes.Graph}>
             <LinearCoupledButtonGraphContainer
-              calculate={this.state.calculate}
+              calculate={this.state.modelObj.calculate}
               onGraphConfigOpen={this.GRAPHCONFIG_onToggleView}
               onGraphClose={() => {
                 this.setState({ calculate: false });
@@ -543,26 +509,27 @@ class LinearCoupled extends Component {
           <div key="GraphButtons" />
         )}
 
-        {this.state.calculate && this.state.graphConfig.submitted ? (
+        {this.state.modelObj.calculate &&
+        this.state.modelObj.Config.submitted ? (
           this.GRAPH_render()
         ) : (
           <div key="Graph" />
         )}
 
-        {this.state.graphConfig.show && this.state.calculate ? (
+        {this.state.modelObj.Config.show && this.state.modelObj.calculate ? (
           <div key="GraphConfig" className={classes.graphConfig}>
             <GraphConfig
               configPos={this.props.configPos}
-              errorMessage={!this.state.graphConfig.submitted}
-              LegendHorizontal={this.state.graphConfig.LegendHorizontal}
-              LegendVertical={this.state.graphConfig.LegendVertical}
-              DecimalPrecision={this.state.graphConfig.DecimalPrecision}
-              initialConditions={this.state.graphConfig.initialConditions}
-              xAxis={this.state.graphConfig.xAxis}
-              yAxis={this.state.graphConfig.yAxis}
-              method={this.state.graphConfig.method}
-              t0={this.state.graphConfig.t0}
-              h={this.state.graphConfig.h}
+              errorMessage={!this.state.modelObj.Config.submitted}
+              LegendHorizontal={this.state.modelObj.Config.LegendHorizontal}
+              LegendVertical={this.state.modelObj.Config.LegendVertical}
+              DecimalPrecision={this.state.modelObj.Config.DecimalPrecision}
+              initialConditions={this.state.modelObj.Config.initialConditions}
+              xAxis={this.state.modelObj.Config.xAxis}
+              yAxis={this.state.modelObj.Config.yAxis}
+              method={this.state.modelObj.Config.method}
+              t0={this.state.modelObj.Config.t0}
+              h={this.state.modelObj.Config.h}
               Eqns={this.state.modelObj.Eqns}
               onClose={this.GRAPHCONFIG_onToggleView}
               onChange={(val) => this.GRAPHCONFIG_onChange(val)}
