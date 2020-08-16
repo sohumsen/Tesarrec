@@ -63,7 +63,7 @@ const DiffEquationSolver = (props) => {
   };
 
  
-  for (let i = 1; i <= props.numberOfCycles; i++) {
+  for (let i = 1; i <= props.numOfCycles; i++) {
     retEuler.push(solveRecursively(i, x0, y0, h, "Euler"));
     retMidpoint.push(solveRecursively(i, x0, y0, h, "Midpoint"));
     retRungaKutta.push(solveRecursively(i, x0, y0, h, "RungeKutta"));

@@ -11,13 +11,7 @@ const VarItems = (props) => {
   //     ? 1
   //     : -1
   // );
-  const disabledRemoveButton = () => {
-    if (props.Vars.length === 2) {
-      return true;
-    } else {
-      return false;
-    }
-  };
+
   let order = ["Dependent", "Independent", "Constant"];
 
   for (let i = 0; i < order.length; i++) {
@@ -55,7 +49,7 @@ const VarItems = (props) => {
           Var.id,
           true
         )}
-        disabledRemoveButton={disabledRemoveButton()}
+        disabledRemoveButton={Vars.length === 2}
       />
     );
   });

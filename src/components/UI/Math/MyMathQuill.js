@@ -7,7 +7,10 @@ addStyles();
 const MyMathQuill = (props) => {
   return (
     <div>
-      <StaticMathField>{props.firstBit}</StaticMathField>
+      <StaticMathField          
+ >
+        {props.firstBit}
+      </StaticMathField>
 
       {!props.NoEdit ? (
         <EditableMathField
@@ -33,7 +36,9 @@ const MyMathQuill = (props) => {
           //     },
           //   },
           // }}
-          style={{ width: props.width }}
+          // style={{ width: props.width }}
+          // style={{ fontSize: props.fontSize }}
+          style={props.style}
           latex={props.latex} // Initial latex value for the input field
           // mathquillDidMount={(mathField) =>
           //   console.log(mathField.text("df"), mathField.latex("2+5/6*4"))

@@ -102,7 +102,7 @@ const LinearCoupledDiffEquationSolver = (props) => {
 
   // const t1 = performance.now();
 
-  return solveRecursively(props.numberOfCycles, initialConditions, t0); //recursive(10,[1,2,3,4,5])
+  return solveRecursively(props.numOfCycles, initialConditions, t0); //recursive(10,[1,2,3,4,5])
 
   // const t2 = performance.now();
   // const t3 = performance.now();

@@ -3,17 +3,17 @@ show title in dcf graph with chemical CLARIFY
 allow db/dt as input on right side CLARIFY
 change file nav format CLARIFY
 
-use model class in linear coupled
+use model class in linear coupled DONE
 
 
 for certain eqns ban negative initials 
 canvas js add 0 axis lines
 
 
-on double click eqns select all
+on double click eqns select all 
 
-fix dynamic mes 
-fix stacked bar in chp
+fix dynamic mes  
+fix stacked bar in chp 
 
 da/dt=b is valid
 
@@ -21,7 +21,18 @@ click new file select by pressing pencil
 click on mes heatmap
 update mfc y axis
 
+
+solver analysis y=cost(t)
+fix var sliders
 when create new file, select it
+export table to csv
+
+
+remove legend orientations
+table is too big DONE
+error handling in db response
+format graph config
+
 24th Jul - 7th Aug 
 -----------------
 1. SolverAnalysisGrapher to read *.json files and write *.json files to disk DONE
@@ -166,10 +177,14 @@ DONE
     allow linear coupled test eqns DONE
     filter by method or eqn on SolverAnalysisGrapher DONE
     db/dt= b is invalid DONE
-
+    changes in state dont change model DONE
+    remove react grid layout DONE
+    reset eqns DONE
     allow test eqns with y on the other side DONE
 
-
+    scroll down table DONE
+    shrink methquill in varitems DONE
+    when remove graph, show the same b/t axis DONE
 
 
 NOT NEEDED

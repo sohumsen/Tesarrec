@@ -2,6 +2,9 @@ import React, { Component } from "react";
 import CanvasJSReact from "../../../assets/canvasjs.react";
 //import classes from './Chart.module.css';
 //import FractionDisplay from '../../Math/Math'
+import {
+  ScatterChart, Scatter, XAxis, YAxis, CartesianGrid, Tooltip
+} from 'recharts';
 var CanvasJSChart = CanvasJSReact.CanvasJSChart;
 
 class LineChart extends Component {
@@ -51,45 +54,23 @@ class LineChart extends Component {
       backgroundColor: "white",
       zoomEnabled: true,
       data: data,
-      // data: [
-      //   {
-      //     type: "line",
-      //     name: this.props.LineNames[0],
-      //     showInLegend: true,
-
-      //     toolTipContent: this.props.LineNames[0]+ ": {x}, {y}",
-      //     dataPoints: this.props.EulerData,
-      //     markerType: "none",
-      //   },
-      //   {
-      //     type: "line",
-      //     name: this.props.LineNames[1],
-      //     showInLegend: true,
-
-      //     toolTipContent: this.props.LineNames[1]+ ": {x}, {y}",
-      //     dataPoints: this.props.MidpointData,
-      //     markerType: "none",
-      //   },
-      //   {
-      //     type: "line",
-      //     name: this.props.LineNames[2],
-      //     showInLegend: true,
-
-      //     toolTipContent: this.props.LineNames[2]+ ": {x}, {y}",
-      //     dataPoints: this.props.RungeKuttaData,
-      //     markerType: "none",
-      //   },
-      //   {
-      //     type: "line",
-      //     name: this.props.LineNames[3],
-      //     showInLegend: true,
-
-      //     toolTipContent:this.props.LineNames[3]+ ":  {x}, {y}",
-      //     dataPoints: this.props.Line4Data,
-      //     markerType: "none",
-      //   },
-      // ],
+   
     };
+    // return (
+    //   <ScatterChart
+    //     width={400}
+    //     height={400}
+    //     margin={{
+    //       top: 20, right: 20, bottom: 20, left: 20,
+    //     }}
+    //   >
+    //     <CartesianGrid />
+    //     <XAxis type="number" dataKey="x" name="time" unit="ns" />
+    //     <YAxis type="number" dataKey="y" name="rmse" unit="kg" />
+    //     <Tooltip cursor={{ strokeDasharray: '3 3' }} />
+    //     <Scatter name="A school" data={data} fill="#8884d8" />
+    //   </ScatterChart>
+    // );
     return (
       <div style={{ width: "100%" }}>
         <CanvasJSChart

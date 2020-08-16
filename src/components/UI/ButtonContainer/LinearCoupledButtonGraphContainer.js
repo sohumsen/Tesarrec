@@ -7,7 +7,7 @@ import { red } from "@material-ui/core/colors";
 import CloseIcon from "@material-ui/icons/Close";
 import SettingsIcon from "@material-ui/icons/Settings";
 
-const LinearCoupledButtonVariablesContainer = (props) => {
+const LinearCoupledButtonGraphContainer = (props) => {
   return (
     <Paper>
       <Tooltip title="Config Equations" placement="top" arrow>
@@ -33,4 +33,4 @@ const LinearCoupledButtonVariablesContainer = (props) => {
   );
 };
 
-export default LinearCoupledButtonVariablesContainer;
+export default LinearCoupledButtonGraphContainer;

@@ -1,17 +1,13 @@
 const DEFAULTGRAPHCONFIG = {
   show: false,
+  calculate : true,
   submitted: true,
   LegendHorizontal: "left",
   LegendVertical: "top",
   DecimalPrecision: 2,
-  initialConditions: [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5],
-  lineNames:["a","b","c","d","e","f","g"],
   xAxis: "t", //x,y,
   yAxis: "a",
-  method: "RK4",
-  t0:0,
-  h:0.05
-
+  axis: [ 't', 'a' ],
 };
 
 export default DEFAULTGRAPHCONFIG;

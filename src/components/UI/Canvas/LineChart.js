@@ -2,97 +2,142 @@ import React, { Component } from "react";
 import CanvasJSReact from "../../../assets/canvasjs.react";
 //import classes from './Chart.module.css';
 //import FractionDisplay from '../../Math/Math'
+import {
+  LineChart,
+  Line,
+  CartesianGrid,
+  XAxis,
+  YAxis,
+  Tooltip,
+  Legend,
+  ResponsiveContainer,
+} from "recharts";
+
 var CanvasJSChart = CanvasJSReact.CanvasJSChart;
 
-class LineChart extends Component {
+// class LineChart extends Component {
+//   render() {
+//     let data = [];
+//     for (let i = 0; i < this.props.dataPoints.length; i++) {
+//       data.push({
+//         type: "line",
+//         // name: this.props.LineNames[i],
+
+//         toolTipContent: " {x}, {y}",
+//         dataPoints: this.props.dataPoints[i],
+//         markerType: "none",
+//       });
+//     }
+
+//     const options = {
+//       animationEnabled: true,
+//       // exportEnabled: true,
+//       theme: "light2", // "light1", "dark1", "dark2"
+
+//       title: {
+//         text: this.props.title,
+//         // more attributes
+//       },
+//       axisY: {
+//         title: this.props.axisNames[1],
+//       },
+//       axisX: {
+//         title: this.props.axisNames[0],
+//       },
+//       legend: {
+//         verticalAlign: this.props.verticalAlign,
+//         horizontalAlign: this.props.horizontalAlign,
+//       },
+//       backgroundColor: "white",
+//       zoomEnabled: true,
+//       data: data,
+//     };
+//     return (
+//       <div style={{ width: "100%" }}>
+//         <CanvasJSChart
+//           options={options}
+//           /* onRef={ref => this.chart = ref} */
+//         />
+//         {/*You can get reference to the chart instance as shown above using onRef. This allows you to access all chart properties and methods*/}
+//       </div>
+//     );
+//   }
+// }
+
+class MyLineChart extends Component {
   render() {
-
-    let data=[]
-    for (let i = 0; i < this.props.LineNames.length; i++) {
+    let data = [];
+    for (let i = 0; i < this.props.dataPoints.length; i++) {
       data.push({
-
         type: "line",
-        name: this.props.LineNames[i],
-        showInLegend: true,
+        // name: this.props.LineNames[i],
 
-        toolTipContent: this.props.LineNames[i]+ ": {x}, {y}",
+        toolTipContent: " {x}, {y}",
         dataPoints: this.props.dataPoints[i],
         markerType: "none",
-      })
-      
+      });
     }
 
     const options = {
       animationEnabled: true,
-      exportEnabled: true,
+      // exportEnabled: true,
       theme: "light2", // "light1", "dark1", "dark2"
 
-      title:{
-        text: this.props.title
-       // more attributes 
-    },
+      title: {
+        text: this.props.title,
+        // more attributes
+      },
       axisY: {
         title: this.props.axisNames[1],
       },
       axisX: {
         title: this.props.axisNames[0],
       },
-      legend:{
-        verticalAlign:this.props.verticalAlign,
-        horizontalAlign:this.props.horizontalAlign
+      legend: {
+        verticalAlign: this.props.verticalAlign,
+        horizontalAlign: this.props.horizontalAlign,
       },
       backgroundColor: "white",
       zoomEnabled: true,
-      data:data
-      // data: [
-      //   {
-      //     type: "line",
-      //     name: this.props.LineNames[0],
-      //     showInLegend: true,
-
-      //     toolTipContent: this.props.LineNames[0]+ ": {x}, {y}",
-      //     dataPoints: this.props.EulerData,
-      //     markerType: "none",
-      //   },
-      //   {
-      //     type: "line",
-      //     name: this.props.LineNames[1],
-      //     showInLegend: true,
-
-      //     toolTipContent: this.props.LineNames[1]+ ": {x}, {y}",
-      //     dataPoints: this.props.MidpointData,
-      //     markerType: "none",
-      //   },
-      //   {
-      //     type: "line",
-      //     name: this.props.LineNames[2],
-      //     showInLegend: true,
-
-      //     toolTipContent: this.props.LineNames[2]+ ": {x}, {y}",
-      //     dataPoints: this.props.RungeKuttaData,
-      //     markerType: "none",
-      //   },
-      //   {
-      //     type: "line",
-      //     name: this.props.LineNames[3],
-      //     showInLegend: true,
-
-      //     toolTipContent:this.props.LineNames[3]+ ":  {x}, {y}",
-      //     dataPoints: this.props.Line4Data,
-      //     markerType: "none",
-      //   },
-      // ],
+      data: data,
     };
+    console.log(this.props.dataPoints);
+
     return (
-      <div style={{ width: "100%" }}>
-        <CanvasJSChart
-          options={options}
-          /* onRef={ref => this.chart = ref} */
-        />
-        {/*You can get reference to the chart instance as shown above using onRef. This allows you to access all chart properties and methods*/}
+      <div
+        style={{
+          paddingBottom: "56.25%" /* 16:9 */,
+          position: "relative",
+          height: 0,
+        }}
+      >
+        <div
+          style={{
+            position: "absolute",
+            top: "0",
+            left: "0",
+            width: "100%",
+            height: "100%",
+          }}
+        >
+          <ResponsiveContainer width="95%" height="100%">
+            <LineChart
+              data={this.props.dataPoints[0]}
+              // margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
+            >
+              <CartesianGrid strokeDasharray="3 3" />
+              <XAxis dataKey="x" />
+              <YAxis />
+              <Tooltip />
+              <Legend />
+              <Line type="monotone" dataKey="y" stroke="#8884d8" />
+              {/* <Line type="monotone" dataKey="y" stroke="#82ca9d" /> */}
+            </LineChart>
+          </ResponsiveContainer>
+        </div>
       </div>
     );
   }
 }
 
-export default LineChart;
+export default MyLineChart;

@@ -7,7 +7,7 @@ describe("<Model/>", () => {
   it("Model ", () => {
     let eqnsText = DEFAULTEQUATIONSnew.map((eqn) => eqn.TextEqn);
 
-    debugger
+    
     let newModel = new Model(
       {
         vars: { K_1: 3, K_2: 3, K_3: 3, K_4: 3, K_5: 3 },

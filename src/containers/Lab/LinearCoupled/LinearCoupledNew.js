@@ -9,7 +9,7 @@ import classes from "./LinearCoupled.module.css";
 import MyErrorMessage from "../../../components/UI/MyErrorMessage/CustomizedErrorMessage";
 import GraphConfig from "../../../components/UI/GraphConfig/GraphConfig";
 import LinearCoupledDiffEquationGrapher from "../../../components/Calculations/Dynamic/LinearCoupled/LinearCoupledDiffEquationGrapher";
-import { Paper } from "@material-ui/core";
+import { Paper, Modal } from "@material-ui/core";
 import LinearCoupledButtonEqnsContainer from "../../../components/UI/ButtonContainer/LinearCoupledButtonEqnsContainer";
 import DEFAULTEQUATIONSNEW from "../../../components/Calculations/Dynamic/SampleEquations/DEFAULTEQUATIONSnew";
 
@@ -20,10 +20,9 @@ import LinearCoupledButtonGraphContainer from "../../../components/UI/ButtonCont
 import DEFAULTLAYOUT from "./DefaultLayout";
 import DEFAULTGRAPHCONFIG from "./DefaultGraphConfignew";
 import Model from "../../../components/Calculations/Dynamic/SampleEquations/Model";
-import ModelWrapper from "../../../components/Calculations/Dynamic/SampleEquations/ModelWrapper";
 
 import MyMathQuill from "../../../components/UI/Math/MyMathQuill";
-class LinearCoupled extends Component {
+class LinearCoupledNew extends Component {
   /**
    * Visual Component that contains the textbox for the equation and calculation outputs
    * plus some equation labels
@@ -33,81 +32,77 @@ class LinearCoupled extends Component {
   //y1=a, y2=b,y3=c
 
   state = {
-    calculate: false,
     modelId: "",
-    modelObj: { Config: {}, Eqns: [], Vars: [] },
-
-    graphConfig: DEFAULTGRAPHCONFIG,
-
-    myReactGridLayout: [],
+    modelObj: { Eqns: [], Vars: [], Config: {} }, // This hack is required to handle the modelObj default state
+    // myReactGridLayout: DEFAULTLAYOUT(new Model()), //TODO should create a new model obj here
   };
 
-  // static getDerivedStateFromProps(props, state) {
-  //   if (props.modelId !== state.modelId) {
-  //     //NEW MODEL
+  static getDerivedStateFromProps(props, state) {
+    if (props.modelId !== state.modelId) {
+      let newModel = new Model(
+        {
+          Config: props.modelObj.Config,
+          Eqns: props.modelObj.Eqns,
+          Vars: props.modelObj.Vars,
+        },
+        {
+          name: "Untitled",
+          description: "this is a default Model",
+          modelId: "dfjskf",
+        }
+      );
 
-  //     let newModelWrapper = new ModelWrapper(
-  //       { ...DEFAULTGRAPHCONFIG, eqnsObj: DEFAULTEQUATIONS, vars: DEFAULTVARS },
-  //       {
-  //         calculate: false,
-  //       }
-  //     );
-  //     console.log(newModelWrapper)
-  //     console.log(newModelWrapper.Eqns)
+      return {
+        // calculate: props.modelObj.meta.calculate,
+        modelId: props.modelId,
+        // Eqns: Eqns,
+        // Vars: Vars,
+        // myReactGridLayout: DEFAULTLAYOUT(props.modelObj),
+        // graphConfig: graphConfig,
+        // modelObj: props.modelObj,
+        modelObj: newModel,
+      };
+    }
 
-  //     return {
-  //       // calculate: props.modelObj.meta.calculate,
-  //       // modelId: props.modelId,
-  //       // Eqns: Eqns,
-  //       // Vars: Vars,
-  //       myReactGridLayout: DEFAULTLAYOUT(newModelWrapper),
-  //       // graphConfig: graphConfig,
-  //       // modelObj: props.modelObj,
-  //       modelObj: newModelWrapper,
-  //     };
-  //   }
-
-  //   return null;
-  // }
-  componentDidMount() {
-    let newModelWrapper2 = new ModelWrapper(
-      {
-        ...DEFAULTGRAPHCONFIG,
-        eqnsObj: DEFAULTEQUATIONSNEW,
-        vars: DEFAULTVARS,
-      },
-      {
-        calculate: false,
-      }
-    );
-    this.setState({
-      modelObj: newModelWrapper2,
-      myReactGridLayout: DEFAULTLAYOUT(newModelWrapper2),
-    });
+    return null;
   }
-  // componentDidUpdate() {
+
+  // componentDidMount() {
+  //   let aNewModel = new Model();
+  //   this.setState({
+  //     modelObj: aNewModel,
+  //     myReactGridLayout: DEFAULTLAYOUT(aNewModel),
+  //   });
+  // }
+  // componentDidUpdate(prevState, nextState) {
   //   if (
-  //     this.state.Eqns !== this.props.modelObj.Eqns ||
-  //     this.state.Vars !== this.props.Vars
+  //     prevState.modelObj.Eqns !== nextState.modelObj.Eqns ||
+  //     prevState.modelObj.Vars !== nextState.modelObj.Vars
   //   ) {
-  //     this.props.sendToParent(this.state.Eqns, this.state.Vars);
-  //     this.setState({
-  //       myReactGridLayout: DEFAULTLAYOUT(this.state),
-  //     });
+  //     this.props.sendToParent(nextState.modelObj);
+  //     // this.setState({
+  //     //   modelObj:nextState.modelObj,
+  //     //   myReactGridLayout: DEFAULTLAYOUT(this.state.modelObj),
+  //     // });
   //   }
   // }
+  componentDidUpdate() {
+    if (this.props.saveSnapshot) {
+      this.props.sendToParent(this.state.modelObj);
+    }
+  }
 
   MATHQUILL_handleInputChange = (id, itemType) => (mathField) => {
+    // this.state.modelObj.Config="dsfds"
     let items = this.state.modelObj[itemType];
     const idx = items.findIndex((e) => {
       return e.id === id;
     });
-    const item = {
-      ...items[idx],
-    };
+    const item = items[idx];
+
     if (itemType === "Eqns") {
-      item.TextEqn = mathField.text();
-      item.LatexEqn = mathField.latex();
+      item.textEqn = mathField.text();
+      item.latexEqn = mathField.latex();
     } else {
       item.LatexForm = mathField.latex();
       items[idx] = item;
@@ -132,69 +127,78 @@ class LinearCoupled extends Component {
 
     items[idx] = item;
 
-    let modelObj = { ...this.state.modelObj };
+    let modelObj = this.state.modelObj;
     modelObj[itemType] = items;
-    modelObj.calculate = false;
+    modelObj.Config.calculate = false;
 
     this.setState({ modelObj: modelObj });
   };
   MATHQUILL_handleInputSubmit = (event) => {
     event.preventDefault();
     let newEqns = [];
-    let invalidIndex = this.state.modelObj.validateExpressions2(
-      this.state.modelObj.Eqns,
-      this.state.modelObj.Config.lineNames
-    );
+    let invalidIndex = this.state.modelObj.validateExpressions2();
+
     for (let i = 0; i < this.state.modelObj.Eqns.length; i++) {
+      const eqn = this.state.modelObj.Eqns[i];
+
       if (invalidIndex.includes(i)) {
-        newEqns.push(this.ITEMS_setErrorMessage(i, <MyErrorMessage />));
+        //newEqns.push(this.setErrorMessageOnEqns(i, <MyErrorMessage />));
+        eqn.errorMessage = <MyErrorMessage />;
+        newEqns.push(eqn);
       } else {
-        newEqns.push(this.ITEMS_setErrorMessage(i, null));
+        //newEqns.push(this.setErrorMessageOnEqns(i, null));
+        eqn.errorMessage = null;
+        eqn.parsedEqn = simplify(parse(eqn.textEqn));
+        newEqns.push(eqn);
       }
     }
-    let modelObj = { ...this.state.modelObj };
-    modelObj.Eqns = newEqns;
+    let aModel = this.state.modelObj;
+    aModel.Eqns = newEqns;
+
     invalidIndex.length != 0
-      ? (modelObj.calculate = false)
-      : (modelObj.calculate = true);
+      ? (aModel.Config.calculate = false)
+      : (aModel.Config.calculate = true);
 
-    this.setState({ modelObj: modelObj });
+    let yAxis = this.state.modelObj.Config.yAxis;
+
+    if (!( this.state.modelObj.Config.lineNames.includes(yAxis))) {
+      yAxis = this.state.modelObj.Config.lineNames[0];
+    }
+    aModel.Config.yAxis = yAxis;
+
+    this.setState({ modelObj: aModel });
   };
 
-  ITEMS_setErrorMessage = (i, errorMessage) => {
-    let Eqn = {
-      ...this.state.modelObj.Eqns[i],
-    };
-    Eqn.errorMessage = errorMessage;
-    return Eqn;
-  };
   ITEMS_remove = (id, itemType) => {
     this.setState((prevState) => {
-      let modelObj = { ...prevState.modelObj };
+      let modelObj = prevState.modelObj;
 
       if (itemType === "Eqns") {
         // Line up the initial Condition corresponding to the vars
-        let Config = { ...prevState.modelObj.Config };
-        let initialConditions = [...Config.initialConditions];
-        let lineNames = [...Config.lineNames];
+        let Config = prevState.modelObj.Config;
+
         const idx = prevState.modelObj.Eqns.findIndex((e) => {
           return e.id === id;
         });
-
-        lineNames.splice(idx, 1);
-        Config.lineNames = lineNames;
-
-        initialConditions.splice(idx, 1);
-        Config.initialConditions = initialConditions;
 
         let Eqns = prevState.modelObj.Eqns.filter((eqn) => {
           return eqn.id !== id;
         });
 
+        let lineNames = Eqns.map((eqn) => eqn.lineName);
+        let initialConditions = prevState.modelObj.Config.initialConditions.filter(
+          (_, i) => {
+            return i !== idx;
+          }
+        );
+        Config.lineNames = lineNames;
+        Config.initialConditions = initialConditions;
+
         modelObj.Config = Config;
         modelObj.Eqns = Eqns;
-        modelObj.calculate = false;
+        modelObj.Config.calculate = false;
 
+        // this.state.modelObj.Config = Config;
         return {
           modelObj: modelObj,
         };
@@ -203,7 +207,7 @@ class LinearCoupled extends Component {
           return element.id !== id;
         });
 
-        modelObj.calculate = false;
+        modelObj.Config.calculate = false;
         modelObj.Vars = Vars;
         return {
           modelObj,
@@ -212,35 +216,20 @@ class LinearCoupled extends Component {
     });
   };
   ITEMS_reset = (itemType) => {
-    let modelObj = { ...this.state.modelObj };
-    modelObj.calculate = false;
-    modelObj.Config = DEFAULTGRAPHCONFIG;
-    itemType === "eqns"
-      ? (modelObj.Eqns = DEFAULTEQUATIONSNEW)
-      : (modelObj.Vars = DEFAULTVARS);
-
-    this.setState(
-      {
-        modelId: "",
-        modelObj: modelObj,
-      },
-      () => {
-        this.props.sendToParent(modelObj);
-      }
-    );
+    this.setState({
+      modelObj: new Model(),
+    });
   };
 
   VARS_handleInputChange = (id, calculate) => (event, value) => {
-    let modelObj = { ...this.state.modelObj };
-    let Vars = [...modelObj.Vars];
+    let modelObj = this.state.modelObj;
+    let Vars = modelObj.Vars;
 
     const idx = Vars.findIndex((e) => {
       return e.id === id;
     });
 
-    const Var = {
-      ...Vars[idx],
-    };
+    const Var = Vars[idx];
     if (event.target.name === undefined) {
       Var["VarCurrent"] = value;
     } else {
@@ -251,7 +240,7 @@ class LinearCoupled extends Component {
 
     modelObj.Vars = Vars;
     if (calculate) {
-      modelObj.calculate = false;
+      modelObj.Config.calculate = false;
     }
 
     this.setState({ modelObj: modelObj });
@@ -266,13 +255,9 @@ class LinearCoupled extends Component {
       Dependent: "Y",
       Independent: "X",
     };
-    let letter = letterTypes.Constant;
 
-    let numbers = [];
+    let numbers = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"];
 
-    for (let i = 1; i < 15; i++) {
-      numbers.push(i.toString());
-    }
     for (let i = 0; i < typeArr.length; i++) {
       const index = numbers.indexOf(
         typeArr[i].LatexForm[typeArr[i].LatexForm.length - 1]
@@ -280,9 +265,10 @@ class LinearCoupled extends Component {
 
       numbers.splice(index, 1);
     }
+
     let VariableObj = {
       id: type + numbers[0] + new Date().getTime(),
-      LatexForm: letter + "_" + numbers[0],
+      LatexForm: letterTypes.Constant + "_" + numbers[0],
       errorMessage: null,
       VarType: type,
       VarLow: 0,
@@ -297,11 +283,11 @@ class LinearCoupled extends Component {
   };
   VARS_onIncrement = (type) => {
     this.setState((prevState) => {
-      let modelObj = { ...this.state.modelObj };
+      let modelObj = this.state.modelObj;
       modelObj.Vars = prevState.modelObj.Vars.concat(
         this.VARS_nextPossible(prevState, type)
       );
-      modelObj.calculate = false;
+      modelObj.Config.calculate = false;
       return {
         modelObj: modelObj,
       };
@@ -309,41 +295,86 @@ class LinearCoupled extends Component {
   };
 
   EQNS_nextPossible = (prevState) => {
-    let Eqns = DEFAULTEQUATIONS;
+    let Eqns = DEFAULTEQUATIONSNEW;
 
-    const results = Eqns.filter(
-      ({ id: id1 }) =>
-        !prevState.modelObj.Eqns.some(({ id: id2 }) => id2 === id1)
-    );
+    const results = Eqns.filter(({ lineName: a }) => {
+      return !prevState.modelObj.Eqns.some(({ lineName: b }) => b === a);
+    });
+    let EqnObj = {
+      id: results[0].lineName,
+      lineName: results[0].lineName,
+      DByDLatex: "\\frac{d" + results[0].lineName + "}{dt}=",
+      latexEqn: parse(
+        parse(results[0].textEqn).toString({
+          implicit: "hide",
+          parenthesis: "auto",
+        })
+      ).toTex({
+        parenthesis: "auto",
+        implicit: "hide",
+      }),
+      textEqn: results[0].textEqn,
+      parsedEqn: simplify(parse(results[0].textEqn)),
+      errorMessage: null,
+    };
 
-    return results[0];
+    return EqnObj;
   };
   EQNS_onIncrement = () => {
-    this.setState((prevState) => {
-      let newGraphConfig = { ...prevState.modelObj.Config };
-      let newInitialConditions = [...newGraphConfig.initialConditions];
-      newInitialConditions.push(0.5);
-      newGraphConfig["initialConditions"] = newInitialConditions;
-      let modelObj = { ...prevState.modelObj };
-      modelObj.Config = newGraphConfig;
-      modelObj.calculate = false;
-      modelObj.Eqns = prevState.modelObj.Eqns.concat(
-        this.EQNS_nextPossible(prevState)
-      );
-
-      return {
-        modelObj: modelObj,
-      };
+    let modelObj = this.state.modelObj;
+    modelObj.Eqns = modelObj.Eqns.concat(this.EQNS_nextPossible(this.state));
+    modelObj.Config.initialConditions.push(0.5);
+    modelObj.Config.lineNames = modelObj.Eqns.map((eqn) => eqn.lineName);
+    console.log(modelObj);
+    this.setState({
+      modelObj: modelObj,
     });
+
+    // this.setState(
+    //   (prevState) => {
+    //     let modelObj = prevState.modelObj;
+    //     // let newGraphConfig = modelObj.Config
+    //     // let newInitialConditions = newGraphConfig.initialConditions
+
+    //     // newInitialConditions.push(0.5);
+    //     // newGraphConfig.initialConditions = newInitialConditions;
+    //     console.log(modelObj)
+    //     console.log(this.EQNS_nextPossible(prevState));
+
+    //     modelObj.Eqns = modelObj.Eqns.concat(this.EQNS_nextPossible(prevState));
+    //     modelObj.Config.initialConditions.push(0.5);
+    //     modelObj.Config.lineNames = modelObj.Eqns.map((eqn) => eqn.lineName);
+    //     // console.log(modelObj)
+
+    //     // modelObj.Config.calculate = false;
+    //     // modelObj.Eqns = prevState.modelObj.Eqns.concat(
+    //     //   this.EQNS_nextPossible(prevState)
+    //     // );
+    //     // newGraphConfig.lineNames = modelObj.Eqns.map((eqn) => eqn.lineName);
+    //     // modelObj.Config = newGraphConfig;
+
+    //     return {
+    //       modelObj: modelObj,
+    //     };
+    //   },
+    //   () => {
+    //     console.log(
+    //       this.state.modelObj,
+    //       this.state.modelObj.returnConstructorObj()
+    //     );
+    //   }
+    // );
   };
 
   GRAPHCONFIG_onToggleView = () => {
-    let graphConfig = { ...this.state.modelObj.Config };
-    graphConfig.show = !this.state.modelObj.Config.show;
-    graphConfig.submitted = true;
+    let modelObj = this.state.modelObj;
+    modelObj.Config.show = !this.state.modelObj.Config.show;
+    modelObj.Config.submitted = true;
+    // let graphConfig = this.state.modelObj.Config;
+    // graphConfig.show = !this.state.modelObj.Config.show;
+    // graphConfig.submitted = true;
 
-    let modelObj = { ...this.state.modelObj };
-    modelObj.Config = graphConfig;
+    // modelObj.Config = graphConfig;
 
     this.setState({
       modelObj: modelObj,
@@ -351,95 +382,104 @@ class LinearCoupled extends Component {
   };
 
   GRAPHCONFIG_onChange = (name) => (event, value) => {
-    let graphConfig = { ...this.state.modelObj.Config };
+    let modelObj = this.state.modelObj;
 
     if (name === "initialConditions") {
       let arr = event.target.value.split(",");
 
-      graphConfig.initialConditions = arr;
+      modelObj.Config.initialConditions = arr;
     } else {
-      graphConfig[name] = event.target.value;
+      modelObj.Config[name] = event.target.value;
     }
 
-    graphConfig.submitted = false;
-    let modelObj = { ...this.state.modelObj };
-    modelObj.Config = graphConfig;
-    console.log(modelObj);
+    modelObj.Config.submitted = false;
+
     this.setState({ modelObj: modelObj });
   };
   GRAPHCONFIG_onSubmit = () => {
-    let graphConfig = { ...this.state.modelObj.Config };
+    let modelObj = this.state.modelObj;
 
-    let newInitialConditions = graphConfig.initialConditions.map(Number);
+    let newInitialConditions = modelObj.Config.initialConditions.map(Number);
     if (newInitialConditions.length === this.state.modelObj.Eqns.length) {
-      graphConfig.initialConditions = newInitialConditions;
-      graphConfig.submitted = true;
+      modelObj.Config.initialConditions = newInitialConditions;
+      modelObj.Config.submitted = true;
     } else {
-      graphConfig.submitted = false;
+      modelObj.Config.submitted = false;
     }
-    let modelObj = { ...this.state.modelObj };
-    modelObj.Config = graphConfig;
+    modelObj.Config.show = false
+
+
     this.setState({ modelObj: modelObj });
   };
 
-  LAYOUT_onChange = (layout) => {
-    this.setState({ myReactGridLayout: layout });
-  };
-  LAYOUT_onReset = () => {
-    this.setState({
-      myReactGridLayout: DEFAULTLAYOUT(this.state),
-    });
-  };
+  // LAYOUT_onChange = (layout) => {
+  //   this.setState({ myReactGridLayout: layout });
+  // };
+  // LAYOUT_onReset = () => {
+  //   this.setState({
+  //     myReactGridLayout: DEFAULTLAYOUT(this.state.modelObj),
+  //   });
+  // };
 
   GRAPH_render = () => {
-    let eqns = [];
-    console.log("start");
-    this.state.modelObj.Eqns.forEach((eqn) => {
-      eqns.push(eqn.ParsedEqn);
-    });
-    let LineNames = [];
-    this.state.modelObj.Eqns.forEach((eqn) => {
-      LineNames.push(eqn.line);
-    });
+    //TODO WHY DOESNT THIS METHOD WORK OK . IF ID IT WE CAN COMPLETE AND DO STUFF libe model.solve()
+    // console.log(this.state.modelObj.returnConstructorObj());
+    // console.log(this.state.modelObj.solveDiffEqns());
+    // console.log(this.state.modelObj.returnConstructorObj());
 
-    let yAxis = this.state.graphConfig.yAxis;
+    // let eqns = [];
+    // this.state.modelObj.Eqns.forEach((eqn) => {
+    //   eqns.push(eqn.parsedEqn);
+    // });
+    // let LineNames = [];
+    // this.state.modelObj.Eqns.forEach((eqn) => {
+    //   LineNames.push(eqn.line);
+    // });
 
-    if (!(this.state.graphConfig.yAxis in LineNames)) {
-      // the y axis is not a valid line name
-      // let graphConfig={...this.state.graphConfig}
-      // graphConfig.yAxis=LineNames[0]
-      // this.setState({graphConfig:graphConfig})
-      yAxis = LineNames[0];
-    }
+    // let yAxis = this.state.modelObj.Config.yAxis;
 
+    // // if (!(yAxis in this.state.modelObj.Config.lineNames)){
+
+    // //   yAxis=this.state.modelObj.Config.lineNames[0]
+    // // }
+
+    // // if (!(this.state.modelObj.Config in LineNames)) {
+    // //   // the y axis is not a valid line name
+    // //   // let graphConfig={...this.state.graphConfig}
+    // //   // graphConfig.yAxis=LineNames[0]
+    // //   // this.setState({graphConfig:graphConfig})
+    // //   yAxis = LineNames[0];
+    // // }
     let vars = {};
 
     this.state.modelObj.Vars.forEach((VarElement) => {
       vars[VarElement.LatexForm] = VarElement.VarCurrent;
     });
-    let t0 = performance.now();
-    console.log(this.state.modelObj);
+    // let t0 = performance.now();
 
-    console.log(this.state.modelObj.solveDiffEqns());
+    // let parsedEqns = this.state.modelObj.Eqns.map((eqn) =>
+    //   simplify(parse(eqn.textEqn))
+    // );
 
     return (
-      <Paper elevation={3} key="Graph">
+      <div  key="Graph">
         <LinearCoupledDiffEquationGrapher
-          newcomputedResults2={this.state.modelObj.solveDiffEqns()}
-          h={this.state.modelObj.Config.h}
-          numberOfCycles={30}
-          eqns={eqns} //send in parsed eqns
-          vars={vars} // { K_1=0.27}
-          LineNames={LineNames}
-          t0={this.state.modelObj.Config.t0}
-          method={this.state.modelObj.Config.method}
-          axis={[this.state.modelObj.Config.xAxis, yAxis]}
-          initialConditions={this.state.modelObj.Config.initialConditions} //includes t
-          LegendVertical={this.state.modelObj.Config.LegendVertical}
-          LegendHorizontal={this.state.modelObj.Config.LegendHorizontal}
-          DecimalPrecision={this.state.modelObj.Config.DecimalPrecision}
+          computedResults={this.state.modelObj.solveDiffEqns()}
+          modelObj={this.state.modelObj}
+          // h={this.state.modelObj.Config.h}
+          // numOfCycles={30}
+          // // eqns={parsedEqns} //send in parsed eqns
+          // vars={vars} // { K_1=0.27}
+          // // LineNames={LineNames}
+          // t0={this.state.modelObj.Config.t0}
+          // method={this.state.modelObj.Config.method}
+          // // axis={[this.state.modelObj.Config.xAxis, this.state.modelObj.Config.yAxis]}
+          // initialConditions={this.state.modelObj.Config.initialConditions} //includes t
+          // LegendVertical={this.state.modelObj.Config.LegendVertical}
+          // LegendHorizontal={this.state.modelObj.Config.LegendHorizontal}
+          // DecimalPrecision={this.state.modelObj.Config.DecimalPrecision}
         />
-      </Paper>
+      </div>
     );
   };
 
@@ -462,25 +502,26 @@ class LinearCoupled extends Component {
     );
 
     return (
-      <GridLayout
-        className={classes.Container}
-        layout={this.state.myReactGridLayout}
-        cols={12}
-        rowHeight={30}
-        width={1300}
-        style={{ position: "relative" }}
-        autoSize
-        onLayoutChange={(layout, layouts) =>
-          this.LAYOUT_onChange(layout, layouts)
-        }
-      >
+      // <GridLayout
+      //   className={classes.Container}
+      //   layout={this.state.myReactGridLayout}
+      //   cols={12}
+      //   rowHeight={30}
+      //   width={1300}
+      //   style={{ position: "relative" }}
+      //   autoSize
+      //   onLayoutChange={(layout, layouts) =>
+      //     this.LAYOUT_onChange(layout, layouts)
+      //   }
+      // >
+      <div className={classes.Container}>
         <Paper key="Eqns" className={classes.EqnContainer} elevation={3}>
           <LinearCoupledButtonEqnsContainer
             Eqns={this.state.modelObj.Eqns}
             onIncrementEqn={this.EQNS_onIncrement}
             resetForm={() => this.ITEMS_reset("eqns")}
             handleMathQuillInputSubmit={this.MATHQUILL_handleInputSubmit}
-            onResetLayout={this.LAYOUT_onReset}
+            // onResetLayout={this.LAYOUT_onReset}
           />
 
           {Eqns}
@@ -495,28 +536,33 @@ class LinearCoupled extends Component {
           <Paper onMouseDown={(e) => e.stopPropagation()}>{Vars}</Paper>
         </Paper>
 
-        {this.state.modelObj.calculate ? (
+        {this.state.modelObj.Config.calculate ? (
           <div key="GraphButtons" className={classes.Graph}>
             <LinearCoupledButtonGraphContainer
-              calculate={this.state.modelObj.calculate}
+              calculate={this.state.modelObj.Config.calculate}
               onGraphConfigOpen={this.GRAPHCONFIG_onToggleView}
               onGraphClose={() => {
-                this.setState({ calculate: false });
+                let modelObj = { ...this.state.modelObj };
+                modelObj.Config.calculate = false;
+                this.setState({ modelObj: modelObj });
               }}
             />
+            {this.state.modelObj.Config.submitted ? this.GRAPH_render() : null}
           </div>
         ) : (
-          <div key="GraphButtons" />
+          <div className={classes.Graph} key="GraphButtons" />
         )}
 
-        {this.state.modelObj.calculate &&
+        {/* {this.state.modelObj.Config.calculate &&
         this.state.modelObj.Config.submitted ? (
           this.GRAPH_render()
         ) : (
           <div key="Graph" />
-        )}
-
-        {this.state.modelObj.Config.show && this.state.modelObj.calculate ? (
+        )} */}
+        <Modal
+          open={this.state.modelObj.Config.show}
+          onClose={this.GRAPHCONFIG_onToggleView}
+        >
           <div key="GraphConfig" className={classes.graphConfig}>
             <GraphConfig
               configPos={this.props.configPos}
@@ -525,6 +571,31 @@ class LinearCoupled extends Component {
               LegendVertical={this.state.modelObj.Config.LegendVertical}
               DecimalPrecision={this.state.modelObj.Config.DecimalPrecision}
               initialConditions={this.state.modelObj.Config.initialConditions}
+              lineNames={this.state.modelObj.Config.lineNames}
+              xAxis={this.state.modelObj.Config.xAxis}
+              yAxis={this.state.modelObj.Config.yAxis}
+              method={this.state.modelObj.Config.method}
+              t0={this.state.modelObj.Config.t0}
+              h={this.state.modelObj.Config.h}
+              Eqns={this.state.modelObj.Eqns}
+              onClose={this.GRAPHCONFIG_onToggleView}
+              onChange={(val) => this.GRAPHCONFIG_onChange(val)}
+              onSubmit={this.GRAPHCONFIG_onSubmit}
+            />
+          </div>
+        </Modal>
+
+        {/* {this.state.modelObj.Config.show &&
+        this.state.modelObj.Config.calculate ? (
+          <div key="GraphConfig" className={classes.graphConfig}>
+            <GraphConfig
+              configPos={this.props.configPos}
+              errorMessage={!this.state.modelObj.Config.submitted}
+              LegendHorizontal={this.state.modelObj.Config.LegendHorizontal}
+              LegendVertical={this.state.modelObj.Config.LegendVertical}
+              DecimalPrecision={this.state.modelObj.Config.DecimalPrecision}
+              initialConditions={this.state.modelObj.Config.initialConditions}
+              lineNames={this.state.modelObj.Config.lineNames}
               xAxis={this.state.modelObj.Config.xAxis}
               yAxis={this.state.modelObj.Config.yAxis}
               method={this.state.modelObj.Config.method}
@@ -537,11 +608,12 @@ class LinearCoupled extends Component {
             />
           </div>
         ) : (
-          <div key="GraphConfig" />
-        )}
-      </GridLayout>
+          <div key="GraphConfig" className={classes.graphConfig}/>
+        )} */}
+      </div>
+      // </GridLayout>
     );
   }
 }
 
-export default LinearCoupled;
+export default LinearCoupledNew;

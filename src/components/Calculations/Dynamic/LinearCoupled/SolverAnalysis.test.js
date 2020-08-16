@@ -16,7 +16,7 @@ describe("<NewDiffEquationSolverAnalysis/>", () => {
       let calcedArr = NewDiffEquationSolver({
         method: method,
         h: stuff.h,
-        numberOfCycles: stuff.numOfCylcles - 1,
+        numOfCycles: stuff.numOfCylcles - 1,
         eqns: stuff.eqns,
         vars: stuff.vars, // { K_1=0.27}
         LineNames: stuff.lineNames,

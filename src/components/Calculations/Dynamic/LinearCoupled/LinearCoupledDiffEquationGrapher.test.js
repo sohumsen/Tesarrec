@@ -21,7 +21,7 @@ describe("<LinearCoupledDiffEquationGrapher/>", () => {
     let oldArr = 
     LinearCoupledDiffEquationSolver({
       h:0.05,
-      numberOfCycles:NUMCYCLES,
+      numOfCycles:NUMCYCLES,
       eqns:eqns,
       vars:varObjects, // { K_1=0.27}
       LineNames:["a"],
@@ -32,7 +32,7 @@ describe("<LinearCoupledDiffEquationGrapher/>", () => {
     let calcedArr = 
       NewDiffEquationSolver({
         h:0.05,
-        numberOfCycles:NUMCYCLES,
+        numOfCycles:NUMCYCLES,
         eqns:eqns,
         vars:varObjects, // { K_1=0.27}
         LineNames:["a"],
@@ -86,7 +86,7 @@ describe("<LinearCoupledDiffEquationGrapher/>", () => {
     // expect(wrapper.find("LineChart").props().EulerData[0].y).toEqual(1);
 
     //expect(wrapper.find(<LineChart/>).type()).to.equal('LineChart');
-    //expect(wrapper.props().numberOfCycles).to.equal([ 'Euler', 'Midpoint', 'Runge Kutta' ]);
+    //expect(wrapper.props().numOfCycles).to.equal([ 'Euler', 'Midpoint', 'Runge Kutta' ]);
 
     //console.log(wrapper.find('EulerData').debug({ verbose: true }));
     //console.log(wrapper.debug({ verbose: true }));

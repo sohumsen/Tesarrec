@@ -1,0 +1,17 @@
+.Container{
+  margin: 10px;
+  display: inline;
+}
+
+.Table{
+  flex:7;
+  margin: 10px;
+  /* width:30vw */
+
+}
+
+.Graph{
+  flex: 15;
+  margin: 10px;
+
+}

@@ -1,28 +1,23 @@
 .Independent {
   /*background-color: aqua;*/
-  float: left;
-  margin: 1%;
-  width: auto;
-  height: 70px;
+  flex:1;
+ 
 
 }
 .Dependent {
   /*background-color: rgb(126, 126, 177);*/
-  background-color: rgb(250, 235, 215);
+
   float: left;
-  width: auto;
-  margin: 1%;
-  height: 70px;
+  width: 100%;
+
 
 }
 
 .Constant {
-  background-color: beige;
   float: left;
-  width: auto;
-  height: 70px;
+  width: 100%;
 
-  margin: 1%;
+
 }
 .RemoveButton {
   float: right;
@@ -30,7 +25,8 @@
 }
 .slider {
   /*background-color: rgb(173, 172, 211);*/
-  width: 100%;
+  width: 50%;
+  padding-left: 2px;
 
   float: left;
 }

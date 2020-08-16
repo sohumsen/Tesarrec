@@ -2,7 +2,7 @@ import React from "react";
 import MyMathQuill from "../Math/MyMathQuill";
 import classes from "./VarItem.module.css";
 import OutlinedInput from "../Input/OutlinedInput";
-import { Paper } from "@material-ui/core";
+import { Paper, InputBase } from "@material-ui/core";
 import MinMaxSlider from "../SliderContainer/MinMaxSlider/MinMaxSlider";
 import CloseButton from "../Button/CloseButton";
 import CustomizedErrorMessage from '../MyErrorMessage/CustomizedErrorMessage'
@@ -23,6 +23,8 @@ const VarItem = (props) => {
             <MyMathQuill
               latex={props.LatexForm}
               onInputChange={props.handleMathQuillInputChange}
+              style={{fontSize:"12px"}}
+
             />
           </div>
 
@@ -91,6 +93,7 @@ const VarItem = (props) => {
             <MyMathQuill
               latex={props.LatexForm}
               onInputChange={props.handleMathQuillInputChange}
+              style={{fontSize:"12px"}}
             />
           </div>
 
@@ -159,6 +162,8 @@ const VarItem = (props) => {
             <MyMathQuill
               latex={props.LatexForm}
               onInputChange={props.handleMathQuillInputChange}
+              style={{fontSize:"12px"}}
+
             />
           </div>
           <div className={classes.inputs}>
@@ -170,7 +175,20 @@ const VarItem = (props) => {
                 label={"Current"}
                 name={"VarCurrent"}
               />
+       
             </div>
+          </div>
+          <div className={classes.slider}>
+            <MinMaxSlider
+              rootWidth={"100%"}
+              inputWidth={25}
+              value={props.VarCurrent}
+              lowestVal={parseFloat(props.VarLow)}
+              highestVal={props.VarHigh}
+              handleVariableInputChange={props.handleVariableInputChange}
+              SliderhandleChange={props.handleVariableInputChange
+              }
+            />
           </div>
           <div className={classes.RemoveButton}>
             <CloseButton
@@ -186,18 +204,7 @@ const VarItem = (props) => {
               <CustomizedErrorMessage/>
             </div>
           ) : null}
-          <div className={classes.slider}>
-            <MinMaxSlider
-              rootWidth={"100%"}
-              inputWidth={32}
-              value={props.VarCurrent}
-              lowestVal={parseFloat(props.VarLow)}
-              highestVal={props.VarHigh}
-              handleVariableInputChange={props.handleVariableInputChange}
-              SliderhandleChange={props.handleVariableInputChange
-              }
-            />
-          </div>
+
         </Paper>
       ) : null}
     </li>

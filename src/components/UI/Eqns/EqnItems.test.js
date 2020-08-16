@@ -50,7 +50,7 @@ describe("<LinearCoupledDiffEqns/>", () => {
 
 
     //expect(wrapper.find(<LineChart/>).type()).to.equal('LineChart');
-    //expect(wrapper.props().numberOfCycles).to.equal([ 'Euler', 'Midpoint', 'Runge Kutta' ]);
+    //expect(wrapper.props().numOfCycles).to.equal([ 'Euler', 'Midpoint', 'Runge Kutta' ]);
 
     //console.log(wrapper.find('EulerData').debug({ verbose: true }));
     //console.log(wrapper.debug({ verbose: true }));

@@ -25,7 +25,7 @@ import props from "../SampleEquations/linear5";
 //       method:"RK4",
 //       h: 0.1,
 //       t0: 0.5,
-//       numberOfCycles: 10,
+//       numOfCycles: 10,
 //       eqns: myEqns,
 //       vars: myVars, // { K_1=0.27}
 //       LineNames: ["a", "b", "c", "d"],
@@ -36,7 +36,7 @@ import props from "../SampleEquations/linear5";
 //     const howLongDidOurLoopTake = secondNow - firstNow;
 //     console.log(howLongDidOurLoopTake);
 
-//     //expect(wrapper.props().numberOfCycles).to.equal([ 'Euler', 'Midpoint', 'Runge Kutta' ]);
+//     //expect(wrapper.props().numOfCycles).to.equal([ 'Euler', 'Midpoint', 'Runge Kutta' ]);
 
 //     //console.log(wrapper.find('EulerData').debug({ verbose: true }));
 //     //console.log(wrapper.debug({ verbose: true }));
@@ -59,7 +59,7 @@ describe("<NewDiffEquationSolver3rdPartyCheck/>", () => {
       NewDiffEquationSolver({
         method:"RK4",
         h:h,
-        numberOfCycles:NUMCYCLES,
+        numOfCycles:NUMCYCLES,
         eqns:eqns,
         vars:varObjects, // { K_1=0.27}
         LineNames:["a","b"],

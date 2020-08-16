@@ -1,13 +1,19 @@
 .HeatMaps{
-    
-    float: left;
+    display: flex;
     width: 100%;
+    flex-flow: row wrap;
+/*     
+    float: left;
+    width: 100%; */
 }
 
 .HeatMapEnergyPerformance {
-    float: left;
-    width: 50%;
-    padding-top: 3%;
+    flex:1 1 50%;
+   
 
     text-align: center;
+
+    /* float: left;
+    width: 50%;
+    padding-top: 3%; */
   }

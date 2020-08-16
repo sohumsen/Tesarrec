@@ -48,7 +48,7 @@ const LinearCoupledButtonEqnsContainer = (props) => {
         </span>
       </Tooltip>
 
-      <Tooltip
+      {/* <Tooltip
         style={{ float: "right" }}
         title="Reset Layout"
         placement="top"
@@ -63,7 +63,7 @@ const LinearCoupledButtonEqnsContainer = (props) => {
             <RestorePageIcon />
           </IconButton>
         </span>
-      </Tooltip>
+      </Tooltip> */}
     </Paper>
   );
 };

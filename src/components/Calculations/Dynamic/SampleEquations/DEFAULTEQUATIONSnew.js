@@ -1,47 +1,47 @@
 const DEFAULTEQUATIONS = [
   {
-    line: "a",
-    TextEqn: "-(K_1*a*b)/(K_2+a)-(K_3)/(a)*c*K_4+a",
+    lineName: "a",
+    textEqn: "-(K_1*a*b)/(K_2+a)-(K_3)/(a)*c*K_4+a",
   },
   {
-    line: "b",
+    lineName: "b",
 
-    TextEqn: "(K_1*a*b)/(K_3+a)-K_4*b",
+    textEqn: "(K_1*a*b)/(K_3+a)-K_4*b",
   },
   {
-    line: "c",
+    lineName: "c",
 
-    TextEqn: "(K_2*a*c)/(K_1+a)-K_4*c",
+    textEqn: "(K_2*a*c)/(K_1+a)-K_4*c",
   },
   {
-    line: "d",
+    lineName: "d",
 
-    TextEqn: "-(K_1*a*b)/(K_4+a)-(K_3*a*c)/(K_2+a)",
+    textEqn: "-(K_1*a*b)/(K_4+a)-(K_3*a*c)/(K_2+a)",
   },
   {
-    line: "f",
+    lineName: "f",
 
-    TextEqn: "-(K_1*a*b)/(K_4+a)-(K_3*a*c)/(K_2+a)",
+    textEqn: "-(K_1*a*b)/(K_4+a)-(K_3*a*c)/(K_2+a)",
   },
   {
-    line: "g",
+    lineName: "g",
 
-    TextEqn: "-(K_1*a*b)/(K_4+a)-(K_3*a*c)/(K_2+a)",
+    textEqn: "-(K_1*a*b)/(K_4+a)-(K_3*a*c)/(K_2+a)",
   },
   {
-    line: "h",
+    lineName: "h",
 
-    TextEqn: "-(K_1*a*b)/(K_4+a)-(K_3*a*c)/(K_2+a)",
+    textEqn: "-(K_1*a*b)/(K_4+a)-(K_3*a*c)/(K_2+a)",
   },
   {
-    line: "j",
+    lineName: "j",
 
-    TextEqn: "-(K_1*a*b)/(K_4+a)-(K_3*a*c)/(K_2+a)",
+    textEqn: "-(K_1*a*b)/(K_4+a)-(K_3*a*c)/(K_2+a)",
   },
   {
-    line: "k",
+    lineName: "k",
 
-    TextEqn: "-(K_1*a*b)/(K_4+a)-(K_3*a*c)/(K_2+a)",
+    textEqn: "-(K_1*a*b)/(K_4+a)-(K_3*a*c)/(K_2+a)",
   },
 ];
 
@@ -57,7 +57,7 @@ export default DEFAULTEQUATIONS;
 
 //     TextEqn: "b",
 //   },
- 
+
 // ];
 
 // export default DEFAULTEQUATIONS;

@@ -208,7 +208,7 @@ const LinearCoupledDiffEqns = (props) => {
   let CompletedGridRungeKuttaLinearCoupled = [];
 
   CompletedGridRungeKuttaLinearCoupled.push(
-    recursive(props.numberOfCycles, initialConditions) //recursive(10,[1,2,3,4,5])
+    recursive(props.numOfCycles, initialConditions) //recursive(10,[1,2,3,4,5])
   );
 
   let EqnArr = FormatArrayLinearCoupled(

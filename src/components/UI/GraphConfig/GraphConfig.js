@@ -14,18 +14,27 @@ import { Paper, Select, MenuItem } from "@material-ui/core";
 // import Paper from '../Paper/Paper'
 
 export default function FormControlLabelPlacement(props) {
-  let axisMenuItemsList = [];
-  props.Eqns.map((Eqn) => {
-    axisMenuItemsList.push(Eqn.line);
-    return Eqn.line;
-  });
-  axisMenuItemsList.push("t");
-  let menuItemsList = axisMenuItemsList.map((menuItem) => {
+  // props.Eqns.map((Eqn) => {
+  //   axisMenuItemsList.push(Eqn.line);
+  //   return Eqn.line;
+  // });
+
+  let menuItemsList = ["t", ...props.lineNames].map((menuItem) => {
     return <MenuItem value={menuItem}>{menuItem}</MenuItem>;
+  });
+  let initialConditionsList = props.lineNames.map((line, i) => {
+    return (
+      <Input
+        label={"Initial " + line}
+        name={line}
+        value={props.initialConditions[i]}
+        onChange={props.onChange("initialConditions")}
+      />
+    );
   });
 
   return (
-    <div className={classes.Container}>
+    <div>
       <Paper elevation={3}>
         <div className={classes.CloseButton}>
           <CloseButton
@@ -36,8 +45,8 @@ export default function FormControlLabelPlacement(props) {
           />
         </div>
 
-        <FormControl component="fieldset">
-          <FormLabel component="legend">Horizontal Align</FormLabel>
+        <div className={classes.Container}>
+          {/* <FormLabel component="legend">Horizontal Align</FormLabel>
           <RadioGroup
             row
             aria-label="position"
@@ -93,70 +102,83 @@ export default function FormControlLabelPlacement(props) {
               labelPlacement="start"
             />
           </RadioGroup>
-          <Input
-            label="Decimal Precision"
-            type="text"
-            name="DecimalPrecision"
-            value={props.DecimalPrecision}
-            onChange={props.onChange("DecimalPrecision")}
-          />
-          <Input
-            label="initialConditions"
-            name="initialConditions"
-            value={props.initialConditions}
-            onChange={props.onChange("initialConditions")}
-          />
-          <div className={classes.formControlParent}>
-            <div className={classes.formControl}>
-              <p>X axis</p>
-              <Select value={props.xAxis} onChange={props.onChange("xAxis")}>
-                {menuItemsList}
-              </Select>
+          
+           */}
+          <div className={classes.model}>
+            <div className={classes.item}>{initialConditionsList}</div>
+            {/* <div className={classes.item}>
+              <Input
+                label="Initial y"
+                name="initialConditions"
+                value={props.initialConditions}
+                onChange={props.onChange("initialConditions")}
+              />
+            </div> */}
+            <div className={classes.item}>
+              <Input
+                label="Inititial t"
+                type="text"
+                value={props.t0}
+                onChange={props.onChange("t0")}
+              />
             </div>
-            <div className={classes.formControl}>
-              <p>Y axis</p>
-              <Select value={props.yAxis} onChange={props.onChange("yAxis")}>
-                {menuItemsList}
+            <div className={classes.item}>
+              <Input
+                label="Step size"
+                type="text"
+                value={props.h}
+                onChange={props.onChange("h")}
+              />
+            </div>
+            <div className={classes.methodChoice}>
+              <Select value={props.method} onChange={props.onChange("method")}>
+                <MenuItem value={"Euler"}>Euler</MenuItem>
+                <MenuItem value={"Midpoint"}>Midpoint</MenuItem>
+                <MenuItem value={"Heun"}>Heun</MenuItem>
+                <MenuItem value={"Ralston"}>Ralston</MenuItem>
+                <MenuItem value={"K3"}>K3</MenuItem>
+                <MenuItem value={"SSP33"}>SSP33</MenuItem>
+                <MenuItem value={"SSP43"}>SSP43</MenuItem>
+                <MenuItem value={"RK4"}>RK4</MenuItem>
+                <MenuItem value={"RK38"}>RK38</MenuItem>
+                <MenuItem value={"RKF"}>RKF</MenuItem>
               </Select>
             </div>
           </div>
-        </FormControl>
-        <div className={classes.formControl}>
-          <p>Method</p>
-          <Select value={props.method} onChange={props.onChange("method")}>
-            <MenuItem value={"Euler"}>Euler</MenuItem>
-            <MenuItem value={"Midpoint"}>Midpoint</MenuItem>
-            <MenuItem value={"Heun"}>Heun</MenuItem>
-            <MenuItem value={"Ralston"}>Ralston</MenuItem>
-            <MenuItem value={"K3"}>K3</MenuItem>
-            <MenuItem value={"SSP33"}>SSP33</MenuItem>
-            <MenuItem value={"SSP43"}>SSP43</MenuItem>
-            <MenuItem value={"RK4"}>RK4</MenuItem>
-            <MenuItem value={"RK38"}>RK38</MenuItem>
-            <MenuItem value={"RKF"}>RKF</MenuItem>
+          <div className={classes.graph}>
+            <div className={classes.item}>
+              <Input
+                label="Decimal Precision"
+                type="text"
+                value={props.DecimalPrecision}
+                onChange={props.onChange("DecimalPrecision")}
+              />
+            </div>
+            <div className={classes.item}>
+              <div className={classes.selectAxis}>
+                <p>X axis</p>
+                <Select value={props.xAxis} onChange={props.onChange("xAxis")}>
+                  {menuItemsList}
+                </Select>
+              </div>
+              <div className={classes.selectAxis}>
+                <p>Y axis</p>
+                <Select value={props.yAxis} onChange={props.onChange("yAxis")}>
+                  {menuItemsList}
+                </Select>
+              </div>
+            </div>
+          </div>
+          {/* 
+          <GenericButton
+            value="Submit"
+            type="submit"
+            displayValue="SUBMIT"
+            onClick={props.onSubmit}
+          /> */}
 
-          </Select>
+          {props.errorMessage ? <MyErrorMessage /> : null}
         </div>
-        <Input
-            label="Inititial t"
-            type="text"
-            value={props.t0}
-            onChange={props.onChange("t0")}
-          />
-            <Input
-            label="Step size"
-            type="text"
-            value={props.h}
-            onChange={props.onChange("h")}
-          />
-        <GenericButton
-          value="Submit"
-          type="submit"
-          displayValue="SUBMIT"
-          onClick={props.onSubmit}
-        />
-
-        {props.errorMessage ? <MyErrorMessage /> : null}
       </Paper>
     </div>
   );

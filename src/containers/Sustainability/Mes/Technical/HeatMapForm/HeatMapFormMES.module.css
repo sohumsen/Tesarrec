@@ -1,4 +1,15 @@
+.Container{
+  flex-flow: row wrap;
+  display: flex;
 
-.HeatMap{
-  background-color: blue;
 }
+.HeatMaps{
+  flex: 3;
+
+}
+.RightContent{
+  flex: 1;
+
+
+}
+

@@ -506,8 +506,8 @@ class LinearCoupled extends Component {
     });
     let t0 = performance.now();
     console.log(this.state.Model.eqns.textEqns, this.state.Eqns);
-    // console.log(this.state.Model.solveDiffEqns())
-    // this.state.Model.solveDiffEqns()
+    
+  
     // console.log(this.state.Model)
 
     // let Model = this.MODEL_transformStateToModelObj();
@@ -533,7 +533,7 @@ class LinearCoupled extends Component {
         <LinearCoupledDiffEquationGrapher
           newcomputedResults2={this.state.Model.solutions.calcedSolution}
           h={this.state.graphConfig.h}
-          numberOfCycles={30}
+          numOfCycles={30}
           eqns={eqns} //send in parsed eqns
           vars={vars} // { K_1=0.27}
           LineNames={LineNames}

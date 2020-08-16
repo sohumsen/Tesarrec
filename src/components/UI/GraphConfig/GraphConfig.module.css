@@ -1,19 +1,44 @@
 .Container {
-  text-align: center;
+  /* text-align: center; */
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 100%;
+  background-color: beige;
+  justify-content: center;
 }
 
 .CloseButton {
   float: right;
 }
 
-.formControl{
+.methodChoice {
+  position: relative;
+  top: 12px;
+  flex: 1 1 auto;
 
-  float: left;
-  margin-left: 5px;
+  /* float: left;
+  margin-left: 5px; */
+}
+
+.selectAxis {
+  flex: 1 1 auto;
+}
+.model {
+  flex: 1 1 50%;
+  order: 1;
+  background-color: antiquewhite;
+  display: flex;
 
 }
 
-.formControlParent{
-  
-background-color: aqua;
+.graph {
+  flex: 1 1 50%;
+  order: 2;
+  display: flex;
+
+
+}
+.item{
+  flex: 1;
 }

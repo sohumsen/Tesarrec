@@ -21,7 +21,12 @@ const EqnItem = (props) => {
         latex={props.LatexEqn}
         // mathquillDidMount={props.mathquillDidMount}
         onInputChange={props.handleMathQuillInputChange}
-        width="60%"
+        style={{
+          fontSize:"16px",
+          width:"65%"
+
+
+        }}
       />
     </li>
   );

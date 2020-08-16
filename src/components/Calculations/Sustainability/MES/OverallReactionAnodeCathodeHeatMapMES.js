@@ -295,6 +295,8 @@ const OverallReactionAnodeCathode = (props) => {
       </div>
 
       <div className={classes.HeatMapEnergyPerformance}>
+      <h3>Discounted cash flow analysis</h3>
+
         <CashFlowGraph
           TwoDCapitalCostData={TwoDCapitalCostData}
           ProductionPriceCost={props.ProductionPriceCost}

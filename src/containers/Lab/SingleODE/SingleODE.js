@@ -144,7 +144,7 @@ class SingleODE extends Component {
               h={0.5}
               X0={-12.5}
               Y0={-12.5}
-              numberOfCycles={50}
+              numOfCycles={50}
               eqn={this.state.SingleDiffChangeableText}
               LineNames={["Euler", "Midpoint", "Runge Kutta"]}
               LegendHorizontal={this.state.graphConfig.LegendHorizontal}

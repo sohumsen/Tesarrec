@@ -134,6 +134,21 @@ const OverallReactionAnodeCathode = (props) => {
         <img src={MFCPic} width="100%" alt="MFC Pic "></img>
       </div>
       <div className={classes.HeatMapEnergyPerformance}>
+      <h3>Discounted cash flow analysis</h3>
+
+        <CashFlowGraph
+          TwoDCapitalCostData={TwoDCapitalCostData}
+          TwoDProductValueData={TwoDProductValueData}
+          TwoDOpexData={TwoDOpexData}
+          TwoDCapexData={TwoDCapexData}
+          IRRCost={props.IRRCost}
+          anodeSubstrate={props.anodeSubstrate}
+          cathodeProduct={props.cathodeProduct}
+          xCoordAnode={props.xCoordAnode}
+          yCoordCathode={props.yCoordCathode}
+        />
+      </div>
+      <div className={classes.HeatMapEnergyPerformance}>
         <h3>Electricity Generation (Watt)</h3>
         <MyHeatMap
           xLabels={props.heatMapContents.xLabels}
@@ -195,19 +210,7 @@ const OverallReactionAnodeCathode = (props) => {
           HeatMapChangedOnClick={props.HeatMapChangedOnClick}
         />
       </div>
-      <div className={classes.HeatMapEnergyPerformance}>
-        <CashFlowGraph
-          TwoDCapitalCostData={TwoDCapitalCostData}
-          TwoDProductValueData={TwoDProductValueData}
-          TwoDOpexData={TwoDOpexData}
-          TwoDCapexData={TwoDCapexData}
-          IRRCost={props.IRRCost}
-          anodeSubstrate={props.anodeSubstrate}
-          cathodeProduct={props.cathodeProduct}
-          xCoordAnode={props.xCoordAnode}
-          yCoordCathode={props.yCoordCathode}
-        />
-      </div>
+    
     </div>
   );
 };

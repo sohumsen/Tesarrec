@@ -4,6 +4,7 @@ const NewDiffEquationSolver = (props) => {
   /**
    * A method component that takes in a equation and outputs a chart
    */
+  
   var Integrators = {
     Euler: [[1]],
     Midpoint: [
@@ -56,6 +57,8 @@ const NewDiffEquationSolver = (props) => {
     ],
   };
 
+
+
   const func = (t, y) => {
     // for a given t , list of dependent varibales
 
@@ -63,7 +66,7 @@ const NewDiffEquationSolver = (props) => {
     let coordinate = {}; //t initial value
     //generates the eval object
     for (let i = 0; i < y.length; i++) {
-      const dependentVariable = props.LineNames[i]; // { a, b , c}
+      const dependentVariable = props.modelObj.Config.lineNames[i]; // { a, b , c}
       coordinate[dependentVariable] = y[i];
     }
 
@@ -73,9 +76,13 @@ const NewDiffEquationSolver = (props) => {
       ...coordinate,
       ...props.vars,
     };
-
-    for (let idx = 0; idx < props.eqns.length; idx++) {
-      eqnResultsArr.push(props.eqns[idx].evaluate(accumulative)); // { a :1 , b: 3.3,t:3}
+    
+    
+    for (let idx = 0; idx < props.modelObj.Eqns.length; idx++) {
+      const eqnObj = props.modelObj.Eqns[idx]
+     
+      
+      eqnResultsArr.push(eqnObj.parsedEqn.evaluate(accumulative)); // { a :1 , b: 3.3,t:3}
     }
 
     return eqnResultsArr;
@@ -133,22 +140,23 @@ const NewDiffEquationSolver = (props) => {
 
   //   return r;
   // };
-  let t0 = parseFloat(props.t0);
-  let returnedY = props.initialConditions.slice();
+  
+  let t0 = parseFloat(props.modelObj.Config.t0);
+  let returnedY = props.modelObj.Config.initialConditions.slice();
 
   let _returnedY = returnedY.slice();
   _returnedY.push(t0);
   let allY = [_returnedY];
 
-  for (let i = 0; i < props.numberOfCycles; i++) {
+  for (let i = 0; i < props.modelObj.Config.numOfCycles; i++) {
     returnedY = integrate(
-      Integrators[props.method],
+      Integrators[props.modelObj.Config.method],
       func,
       returnedY,
       t0,
-      parseFloat(props.h)
+      parseFloat(props.modelObj.Config.h)
     );
-    t0 += props.h; // constant step size
+    t0 += props.modelObj.Config.h; // constant step size
 
     allY.push([...returnedY, t0]);
   }

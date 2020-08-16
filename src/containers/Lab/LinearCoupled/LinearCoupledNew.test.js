@@ -13,17 +13,28 @@ import Model from "../../../components/Calculations/Dynamic/SampleEquations/Mode
 
 configure({adapter:new Adapter()})
 
+
 describe('<LinearCoupledNew/>', ()=>{
     it('should solve on differential eqn and presnet a chart', ()=>{
 
         let aNewModel = new Model()
-        aNewModel.initDefault()
 
-        let mycomp  = <LinearCoupled    modelObj={aNewModel}/>
+
+        let mycomp  = <LinearCoupledNew    modelObj={aNewModel}/>
 
         const wrapper = shallow(mycomp)
 
-        expect(wrapper.find(<LineChart/>))
+        console.log(mycomp.props.modelObj.Eqns);
+        //mycomp.props.modelObj.solveDiffEqns()
+        console.log(mycomp.props.modelObj.solutions);
+
+        //TODO have model class remove eqsns
+        mycomp.props.modelObj.Eqns.textEqns.pop()
+        mycomp.props.modelObj.Eqns.parsedEqns.pop()
+
+        console.log(mycomp.props.modelObj.Eqns);
+        //mycomp.props.modelObj.solveDiffEqns()
+        console.log(mycomp.props.modelObj.solutions);
 
 
 

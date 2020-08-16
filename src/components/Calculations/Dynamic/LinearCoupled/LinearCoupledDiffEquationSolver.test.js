@@ -24,7 +24,7 @@ describe("<LinearCoupledDiffEquationSolver/>", () => {
     const firstNow = performance.now();
     let computedResults = LinearCoupledDiffEquationSolver({
       h: 0.05,
-      numberOfCycles: 10,
+      numOfCycles: 10,
       eqns: myEqns,
       vars: myVars, // { K_1=0.27}
       LineNames: ["a", "b", "c", "d"],
@@ -34,7 +34,7 @@ describe("<LinearCoupledDiffEquationSolver/>", () => {
     const howLongDidOurLoopTake = secondNow - firstNow;
     console.log(howLongDidOurLoopTake);
 
-    //expect(wrapper.props().numberOfCycles).to.equal([ 'Euler', 'Midpoint', 'Runge Kutta' ]);
+    //expect(wrapper.props().numOfCycles).to.equal([ 'Euler', 'Midpoint', 'Runge Kutta' ]);
 
     //console.log(wrapper.find('EulerData').debug({ verbose: true }));
     //console.log(wrapper.debug({ verbose: true }));

@@ -1,10 +1,85 @@
 import { v4 as uuidv4 } from "uuid";
 import { parse, evaluate, simplify } from "mathjs";
 import NewDiffEquationSolver from "../LinearCoupled/NewDiffEquationSolver";
+import DEFAULTGRAPHCONFIG from "../../../../containers/Lab/LinearCoupled/DefaultGraphConfig";
+import DEFAULTMODELCONFIG from "../../../../containers/Lab/LinearCoupled/DefaultModelConfig";
+import DEFAULTEQUATIONSFORMODEL from "./DEFAULTEQUATIONSFORMODEL";
+import DEFAULTVARSFORMODEL from "./DEFAULTVARS";
+import DEFAULTEQUATIONSNEW from "./DEFAULTEQUATIONSnew";
+import DEFAULTMODELCONFIGNew from "../../../../containers/Lab/LinearCoupled/DefaultGraphConfignew";
 
 export default class Model {
-  constructor(inputModel, meta) {
-    /** 
+  constructor(dbModel, meta) {
+    if (dbModel === undefined && meta === undefined) {
+      dbModel = {
+        Config: DEFAULTMODELCONFIGNew,
+        Eqns: DEFAULTEQUATIONSNEW,
+        Vars: DEFAULTVARSFORMODEL,
+      };
+      meta = {
+        name: "Untitled",
+        description: "this is a default Model",
+        modelId: "dfjskf",
+      };
+    }
+
+    this.key = "modelId" in meta ? meta.modelId : uuidv4();
+    this.Config = {
+      initialConditions: dbModel.Config.initialConditions,
+      h: dbModel.Config.h,
+      t0: dbModel.Config.t0,
+      lineNames: dbModel.Config.lineNames,
+      numOfCycles: dbModel.Config.numOfCycles,
+      method: dbModel.Config.method,
+
+      // DOES THIS REALLY FIT INTO A MODEL CLASS
+      // axis: dbModel.Config.axis,
+      calculate: dbModel.Config.calculate,
+      solvable: dbModel.Config.solvable,
+      show: dbModel.Config.show,
+      submitted: dbModel.Config.submitted,
+      LegendHorizontal: dbModel.Config.LegendHorizontal,
+      LegendVertical: dbModel.Config.LegendVertical,
+      DecimalPrecision: dbModel.Config.DecimalPrecision,
+
+      xAxis: dbModel.Config.xAxis,
+      yAxis: dbModel.Config.yAxis,
+    };
+    this.Eqns = dbModel.Eqns.map((eqnObj, i) => ({
+      id: eqnObj.lineName+i,
+      lineName: eqnObj.lineName,
+      DByDLatex: "\\frac{d" + eqnObj.lineName + "}{dt}=",
+      latexEqn: parse(
+        parse(eqnObj.textEqn).toString({
+          implicit: "hide",
+          parenthesis: "auto",
+        })
+      ).toTex({
+        parenthesis: "auto",
+        implicit: "hide",
+      }),
+      textEqn: eqnObj.textEqn,
+      parsedEqn: simplify(parse(eqnObj.textEqn)),
+      errorMessage: null,
+    }));
+
+    this.Vars = dbModel.Vars;
+
+    this.solutions = {
+      actualSolution: this.Config.solvable
+        ? this.generateActualSolutionArray()
+        : null,
+      calcedSolution: meta.calculate ? this.solveDiffEqns() : null,
+    };
+    this.meta = {
+      name: meta.name,
+      description: meta.description,
+      rmse: this.Config.solvable ? this.calcRMSE() : null,
+      timeTaken: this.Config.solvable ? this.getTimeTaken() : 0,
+    };
+  }
+
+  /** 
      * inputModel={
       initialConditions =arr of num
       h =num
@@ -35,58 +110,43 @@ export default class Model {
 
     */
 
-    this.key = "modelId" in meta ? meta.modelId : uuidv4();
-
-    this.Config = {
-      initialConditions: inputModel.initialConditions,
-      h: inputModel.h,
-      t0: inputModel.t0,
-      lineNames: inputModel.lineNames,
-      numOfCycles: inputModel.numOfCycles,
-      method: inputModel.method,
-      solvable: "solved" in inputModel,
-    };
-    this.Eqns = {
-      parsedEqns:
-        "parsedEqns" in inputModel
-          ? inputModel.parsedEqns
-          : this.parseEqns(inputModel.eqns),
-      textEqns: inputModel.eqns,
-      latexEqns: this.toLatex(inputModel.eqns),
-      //id,errormessage,line,dybydlatex
-
-      textSolvedEqns: this.Config.solvable ? inputModel.solved : null,
-      parsedSolvedEqns: this.Config.solvable
-        ? this.parseEqns(inputModel.solved)
-        : null,
-    };
-    this.Vars = inputModel.vars;
-
-    this.solutions = {
-      actualSolution: this.Config.solvable
-        ? this.generateActualSolutionArray()
-        : null,
-      calcedSolution: meta.calculate ? this.solveDiffEqns() : null,
-    };
-    this.meta = {
-      name:
-        "name" in meta
-          ? meta.name
-          : inputModel.eqns.join() + "," + inputModel.method,
-      description:
-        "description" in meta ? meta.description : "Please add a description",
-      calculate: meta.calculate,
-      rmse: this.Config.solvable ? this.calcRMSE() : null,
-      timeTaken: this.Config.solvable ? this.getTimeTaken() : 0,
-    };
-  }
   onCalculate() {
     this.solutions.calcedSolution = this.solveDiffEqns();
   }
 
-  set calculate(val) {
+ 
+  setCalculate(val) {
     this.meta.calculate = val;
   }
+
+  validateExpressions2 = () => {
+    let scope = {};
+    // let parsedEqns = this.Eqns.map((eqn) => eqn.ParsedEqn);
+
+    let textEqns = this.Eqns.map((eqn) => eqn.textEqn);
+    let lineNames =this.Eqns.map((eqn) => eqn.lineName);
+
+    lineNames.forEach((lineName) => {
+      scope[lineName] = 1;
+    });
+
+    scope["t"] = 1;
+
+    this.Vars.forEach((Var) => {
+      scope[Var.LatexForm] = 1;
+    });
+
+    let invalidIndex = [];
+
+    for (let i = 0; i < textEqns.length; i++) {
+      try {
+        evaluate(textEqns[i], scope);
+      } catch (error) {
+        invalidIndex.push(i);
+      }
+    }
+    return invalidIndex;
+  };
   // set eqns(textEqnsArr){
   //   this.eqns.textEqns=textEqnsArr
   // }
@@ -94,15 +154,23 @@ export default class Model {
   /**
    * This updates the models numCycles
    */
+
   setNumOfCycles(numCycles) {
     this.config.numOfCycles = numCycles;
-    this.solutions.actualSolution = this.generateActualSolutionArray();
-    this.solutions.calcedSolution = this.solveDiffEqns();
-    this.meta.rmse = this.calcRMSE();
+    //this.solutions.actualSolution = this.generateActualSolutionArray();
+    //this.solutions.calcedSolution = this.solveDiffEqns();
+    //this.meta.rmse = this.calcRMSE();
   }
 
   calcRMSE() {
+    /**
+     * This compares the RMSE between real and cacluated solution for this method
+     * and numCycles etc
+     * @type {*[]}
+     */
     let errorArr = [];
+    if (!this.solutions.actualSolution) return;
+
     for (let i = 0; i < this.solutions.calcedSolution.length; i++) {
       let calced = this.solutions.calcedSolution[i][0];
       let actual = this.solutions.actualSolution[i][0];
@@ -148,18 +216,6 @@ export default class Model {
       latexEqns.push(texVer);
     });
 
-    // let parsedstring=(parse(expressionString).toTex({parenthesis: "auto"})
-    // )
-
-    // console.log(origstring,stringver,parsedstring,parsedstringtex)
-
-    // let a = parse(stringver).toTex({
-    //   parenthesis: "auto",
-    //   implicit: "hide",
-    // });
-    // let result1 = a.replace("cdot", "");
-    // let result2 = result1.replace("'\frac'", "\\frac");
-
     return latexEqns;
   }
 
@@ -168,7 +224,7 @@ export default class Model {
    */
   toTextForm() {}
 
-  validateExpressions(parsedEqns,lineNames,Vars){
+  validateExpressions(parsedEqns, lineNames, Vars) {
     let scope = {};
     lineNames.forEach((lineName) => {
       scope[lineName] = 1;
@@ -178,7 +234,7 @@ export default class Model {
     });
 
     let invalidIndex = [];
-    console.log(scope)
+
     for (let i = 0; i < parsedEqns.length; i++) {
       try {
         evaluate(parsedEqns[i], scope);
@@ -187,18 +243,9 @@ export default class Model {
       }
     }
     return invalidIndex;
-  };
+  }
 
-  parseEqns = (eqns) => {
-    let parsedEqns = [];
-    eqns.forEach((element) => {
-      let parsedEqn = simplify(parse(element));
-      parsedEqns.push(parsedEqn);
-    });
-
-    return parsedEqns;
-  };
-
+ 
   /**
    * This generates a actual solution of the model
    * has been provided with any
@@ -251,21 +298,19 @@ export default class Model {
 
   solveDiffEqns = () => {
     let t0 = performance.now();
+     // }
+     let vars = {};
 
-    let calcedArr = NewDiffEquationSolver({
-      method: this.config.method,
-      h: this.config.h,
-      numberOfCycles: this.config.numOfCycles,
-      eqns: this.eqns.parsedEqns,
-      vars: this.Vars, // { K_1=0.27}
-      LineNames: this.config.lineNames,
-      initialConditions: this.config.initialConditions, // y1
-      t0: this.config.t0,
-    });
+     this.Vars.forEach((VarElement) => {
+       vars[VarElement.LatexForm] = VarElement.VarCurrent;
+     });
+    let calcedArr = NewDiffEquationSolver({modelObj: this,vars:vars});
     let t1 = performance.now();
-
+    this.solutions.calcedSolution  = calcedArr
     return calcedArr;
   };
+
+
   getTimeTaken = () => {
     let t_0 = performance.now();
     this.solveDiffEqns();
@@ -285,8 +330,9 @@ export default class Model {
   returnConstructorObj = () => {
     return {
       key: this.key,
-      config: this.config,
-      eqns: this.eqns,
+      Config: this.Config,
+      Eqns: this.Eqns,
+      Vars: this.Vars,
       solutions: this.solutions,
       meta: this.meta,
     };

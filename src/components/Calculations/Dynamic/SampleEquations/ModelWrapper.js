@@ -11,7 +11,7 @@ export default class ModelWrapper extends Model {
     let textEqns = inputModel.eqnsObj.map((eqn) => eqn.TextEqn);
     inputModel.eqns = textEqns;
     super(inputModel, meta);
-
+    
     this.Config = {
       show: inputModel.show,
       submitted: inputModel.submitted,
@@ -45,27 +45,29 @@ export default class ModelWrapper extends Model {
       errorMessage: null,
     }));
 
-    this.Vars = inputModel.vars;
+    // this.Vars = inputModel.vars;
   }
 
   set calculate(val) {
     super.calculate = val;
   }
 
-  solveDiffEqns = () => {
+  solveDiffEqns = (parsedEqns,Vars) => {
     let t0 = performance.now();
 
-    let parsedEqns = this.Eqns.map((eqn) => eqn.ParsedEqn);
+    // let parsedEqns = Eqns.map((eqn) => simplify(parse(eqn.TextEqn)));
+    // console.log(Eqns)
     let vars = {};
 
-    this.Vars.forEach((VarElement) => {
+    Vars.forEach((VarElement) => {
       vars[VarElement.LatexForm] = VarElement.VarCurrent;
     });
+    console.log(this)
 
     let calcedArr = NewDiffEquationSolver({
       method: this.Config.method,
       h: this.Config.h,
-      numberOfCycles: 30,
+      numOfCycles: 30,
       eqns: parsedEqns,
       vars: vars, // { K_1=0.27}
       LineNames: this.Config.lineNames,
@@ -121,4 +123,9 @@ export default class ModelWrapper extends Model {
     }
     return invalidIndex;
   };
+  returnConstructorObj(){
+    Model.prototype.returnConstructorObj.call(this)
+  }
+  
 }
+

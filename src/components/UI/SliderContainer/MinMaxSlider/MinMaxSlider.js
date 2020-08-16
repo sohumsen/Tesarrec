@@ -22,7 +22,7 @@ const InputSlider = (props) => {
       <Grid container spacing={1} >
         <Grid item >
           <InputBase
-            style={{ color: "black" }}
+            style={{ fontSize: "14px" }}
             className={classes.input}
             value={props.lowestVal}
             margin="dense"
@@ -32,7 +32,7 @@ const InputSlider = (props) => {
 
           />
         </Grid>
-        <Grid item xs>
+        <Grid item xs >
           <Slider
             style={{ color: "black" }}
             value={props.value}
@@ -44,7 +44,7 @@ const InputSlider = (props) => {
         </Grid>
         <Grid item >
           <InputBase
-            style={{ color: "black" }}
+            style={{ fontSize: "14px" }}
             className={classes.input}
             value={props.highestVal}
             margin="dense"

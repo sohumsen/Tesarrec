@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 
-import LeftContent from "../LeftContent/LeftContent";
 import RightContent from "../RightContent/RightContent";
 import classes from "./HeatMapFormMFC.module.css";
 import OverallReactionAnodeCathode from "../../../../../components/Calculations/Sustainability/MFC/OverallReactionAnodeCathodeHeatMapMFC";
@@ -87,8 +86,9 @@ class HeatMapFormMFC extends Component {
 
   render() {
     return (
-      <div>
-        <LeftContent />
+      <div className={classes.Container}>
+
+        <div className={classes.RightContent}>
 
         <RightContent
           AnodeSubstrateChemical={this.state.AnodeSubstrateChemical}
@@ -119,8 +119,10 @@ class HeatMapFormMFC extends Component {
           AnnualCapitalChargeCost={this.state.AnnualCapitalChargeCost}
           IRRCost={this.state.IRRCost}
         />
+        </div>
+       
 
-        <div className={classes.HeatMap}>
+        <div className={classes.HeatMaps}>
           <OverallReactionAnodeCathode
             cathodeProduct={this.state.CathodeProductChemical}
             anodeSubstrate={this.state.AnodeSubstrateChemical}
