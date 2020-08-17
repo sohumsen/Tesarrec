@@ -161,7 +161,7 @@ class LinearCoupledNew extends Component {
 
     let yAxis = this.state.modelObj.Config.yAxis;
 
-    if (!( this.state.modelObj.Config.lineNames.includes(yAxis))) {
+    if (!this.state.modelObj.Config.lineNames.includes(yAxis)) {
       yAxis = this.state.modelObj.Config.lineNames[0];
     }
     aModel.Config.yAxis = yAxis;
@@ -383,14 +383,23 @@ class LinearCoupledNew extends Component {
 
   GRAPHCONFIG_onChange = (name) => (event, value) => {
     let modelObj = this.state.modelObj;
-
-    if (name === "initialConditions") {
-      let arr = event.target.value.split(",");
-
-      modelObj.Config.initialConditions = arr;
+    console.log(name, event.target);
+    console.log(modelObj.Config);
+    if (name.includes("initialConditions")) {
+      let idx = name[name.length - 1];
+      modelObj.Config.initialConditions[idx] = event.target.value;
     } else {
       modelObj.Config[name] = event.target.value;
     }
+
+    // if (name === "initialConditions") {
+    //   let arr = event.target.value.split(",");
+
+    //   modelObj.Config.initialConditions = arr;
+    // } else {
+    //   modelObj.Config[name] = event.target.value;
+    // }
+    // console.log(modelObj.Config)
 
     modelObj.Config.submitted = false;
 
@@ -406,8 +415,7 @@ class LinearCoupledNew extends Component {
     } else {
       modelObj.Config.submitted = false;
     }
-    modelObj.Config.show = false
-
+    modelObj.Config.show = false;
 
     this.setState({ modelObj: modelObj });
   };
@@ -462,7 +470,7 @@ class LinearCoupledNew extends Component {
     // );
 
     return (
-      <div  key="Graph">
+      <div key="Graph">
         <LinearCoupledDiffEquationGrapher
           computedResults={this.state.modelObj.solveDiffEqns()}
           modelObj={this.state.modelObj}

@@ -50,6 +50,9 @@
 
 .graphConfig {
   width:50%;
+  position: absolute;
+  top: 30%;
+  left: 25%;
   /* display: flex;
   justify-content: center;
   align-items: center; */

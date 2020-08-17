@@ -9,7 +9,11 @@ import Input from "../Input/Input";
 import CloseButton from "../Button/CloseButton";
 import GenericButton from "../Button/GenericButton";
 import MyErrorMessage from "../MyErrorMessage/MyErrorMessage";
-import { Paper, Select, MenuItem } from "@material-ui/core";
+import { Paper, Select, MenuItem, Tooltip, IconButton } from "@material-ui/core";
+import CustomizedErrorMessage from "../MyErrorMessage/CustomizedErrorMessage";
+import ErrorOutlineIcon from '@material-ui/icons/ErrorOutline';
+import PlayCircleOutlineIcon from "@material-ui/icons/PlayCircleOutline";
+import { green } from "@material-ui/core/colors";
 
 // import Paper from '../Paper/Paper'
 
@@ -28,7 +32,7 @@ export default function FormControlLabelPlacement(props) {
         label={"Initial " + line}
         name={line}
         value={props.initialConditions[i]}
-        onChange={props.onChange("initialConditions")}
+        onChange={props.onChange("initialConditions" + i)}
       />
     );
   });
@@ -36,7 +40,8 @@ export default function FormControlLabelPlacement(props) {
   return (
     <div>
       <Paper elevation={3}>
-        <div className={classes.CloseButton}>
+     
+        <div className={classes.closeButton}>
           <CloseButton
             type="button"
             value="Close"
@@ -44,6 +49,29 @@ export default function FormControlLabelPlacement(props) {
             onClick={props.onClose}
           />
         </div>
+
+        <Tooltip title="Submit Config" placement="top" arrow>
+        <span>
+          <IconButton
+            edge="end"
+            aria-label="Submit"
+            onClick={props.onSubmit}
+          >
+            <PlayCircleOutlineIcon style={{ color: green[500] }} />
+          </IconButton>
+        </span>
+      </Tooltip>
+        {/* <div className={classes.submitButton}>
+            <GenericButton
+              value="Submit"
+              type="submit"
+              displayValue="SUBMIT"
+              onClick={props.onSubmit}
+            />
+          </div> */}
+          <div className={classes.errorMessage}>
+            {props.errorMessage ?<ErrorOutlineIcon color="secondary"/> : null}
+          </div>
 
         <div className={classes.Container}>
           {/* <FormLabel component="legend">Horizontal Align</FormLabel>
@@ -155,29 +183,25 @@ export default function FormControlLabelPlacement(props) {
               />
             </div>
             <div className={classes.item}>
-              <div className={classes.selectAxis}>
-                <p>X axis</p>
-                <Select value={props.xAxis} onChange={props.onChange("xAxis")}>
-                  {menuItemsList}
-                </Select>
-              </div>
-              <div className={classes.selectAxis}>
-                <p>Y axis</p>
-                <Select value={props.yAxis} onChange={props.onChange("yAxis")}>
-                  {menuItemsList}
-                </Select>
-              </div>
+              {/* <div className={classes.selectAxis}> */}
+              <p>X axis</p>
+              <Select value={props.xAxis} onChange={props.onChange("xAxis")}>
+                {menuItemsList}
+              </Select>
+              {/* </div> */}
+              {/* <div className={classes.selectAxis}> */}
             </div>
-          </div>
-          {/* 
-          <GenericButton
-            value="Submit"
-            type="submit"
-            displayValue="SUBMIT"
-            onClick={props.onSubmit}
-          /> */}
 
-          {props.errorMessage ? <MyErrorMessage /> : null}
+            <div className={classes.item}>
+              <p>Y axis</p>
+              <Select value={props.yAxis} onChange={props.onChange("yAxis")}>
+                {menuItemsList}
+              </Select>
+            </div>
+
+            {/* </div> */}
+          </div>
+
         </div>
       </Paper>
     </div>

@@ -56,7 +56,6 @@ const LinearCoupledDiffEquationGrapher = (props) => {
         yCoord = allData[props.modelObj.Config.lineNames.indexOf(axis[1])];
       }
       var csvData = [["x", "y"]];
-      console.log(xCoord, yCoord, csvData, axis);
       for (let i = 0; i < xCoord.length; i++) {
         csvData.push([xCoord[i], yCoord[i]]);
       }
@@ -132,13 +131,13 @@ const LinearCoupledDiffEquationGrapher = (props) => {
   let t0 = performance.now();
 
   let vars = {};
+  console.log(props.computedResults)
 
   let newcomputedResults = props.computedResults.map((row) =>
     row.map((num) =>
       parseFloat(num.toFixed(props.modelObj.Config.DecimalPrecision))
     )
   ); //NewDiffEquationSolver(props);
-  console.log(newcomputedResults);
   // let newEqnArr = FormatArrayLinearCoupled(newcomputedResults);
   // console.log(newEqnArr);
 
@@ -169,7 +168,6 @@ const LinearCoupledDiffEquationGrapher = (props) => {
     }
     order3.push(order2);
   }
-  console.log(order3);
 
   // if (props.modelObj.Config.xAxis!=="t"){
 

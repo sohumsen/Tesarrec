@@ -11,6 +11,7 @@ import {
   Tooltip,
   Legend,
   ResponsiveContainer,
+  Label
 } from "recharts";
 
 var CanvasJSChart = CanvasJSReact.CanvasJSChart;
@@ -101,7 +102,6 @@ class MyLineChart extends Component {
       zoomEnabled: true,
       data: data,
     };
-    console.log(this.props.dataPoints);
 
     return (
       <div
@@ -127,10 +127,12 @@ class MyLineChart extends Component {
             >
               <CartesianGrid strokeDasharray="3 3" />
               <XAxis dataKey="x" />
-              <YAxis />
+
+
+              <YAxis/>
               <Tooltip />
               <Legend />
-              <Line type="monotone" dataKey="y" stroke="#8884d8" />
+              <Line type="monotone" dataKey="y" stroke="#8884d8"  name={this.props.axisNames[1]} />
               {/* <Line type="monotone" dataKey="y" stroke="#82ca9d" /> */}
             </LineChart>
           </ResponsiveContainer>

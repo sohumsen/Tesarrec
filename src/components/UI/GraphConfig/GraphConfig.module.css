@@ -1,14 +1,12 @@
 .Container {
   /* text-align: center; */
   display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
+
+  flex-flow: row wrap;
   width: 100%;
-  background-color: beige;
-  justify-content: center;
 }
 
-.CloseButton {
+.closeButton {
   float: right;
 }
 
@@ -22,23 +20,28 @@
 }
 
 .selectAxis {
-  flex: 1 1 auto;
+  flex: 1;
 }
 .model {
   flex: 1 1 50%;
-  order: 1;
-  background-color: antiquewhite;
   display: flex;
-
+  background-color: rgba(216, 250, 215, 0.726);
 }
 
 .graph {
   flex: 1 1 50%;
-  order: 2;
   display: flex;
-
+  background-color: rgb(215, 221, 250);
 
 }
-.item{
+.item {
   flex: 1;
+}
+
+.submitButton {
+  float: right;
+}
+.errorMessage {
+  flex: 1;
+  float: right;
 }

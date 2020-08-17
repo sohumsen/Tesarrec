@@ -1,24 +1,19 @@
-format graph config CLARIFY
 show title in dcf graph with chemical CLARIFY
 allow db/dt as input on right side CLARIFY
 change file nav format CLARIFY
 
-use model class in linear coupled DONE
-
-
 for certain eqns ban negative initials 
 canvas js add 0 axis lines
 
-
 on double click eqns select all 
 
-fix dynamic mes  
+remove dynamic mes  
 fix stacked bar in chp 
 
 da/dt=b is valid
 
 click new file select by pressing pencil
-click on mes heatmap
+click on mes heatmap DONE
 update mfc y axis
 
 
@@ -26,12 +21,14 @@ solver analysis y=cost(t)
 fix var sliders
 when create new file, select it
 export table to csv
-
+line chart show axis
+hide model explorer on solver ananlysis
 
 remove legend orientations
-table is too big DONE
 error handling in db response
 format graph config
+
+RECHARTS, title, axis names, origins
 
 24th Jul - 7th Aug 
 -----------------
@@ -181,6 +178,8 @@ DONE
     remove react grid layout DONE
     reset eqns DONE
     allow test eqns with y on the other side DONE
+    table is too big DONE
+use model class in linear coupled DONE
 
     scroll down table DONE
     shrink methquill in varitems DONE

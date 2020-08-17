@@ -4,7 +4,7 @@ const NewDiffEquationSolver = (props) => {
   /**
    * A method component that takes in a equation and outputs a chart
    */
-  
+
   var Integrators = {
     Euler: [[1]],
     Midpoint: [
@@ -57,8 +57,6 @@ const NewDiffEquationSolver = (props) => {
     ],
   };
 
-
-
   const func = (t, y) => {
     // for a given t , list of dependent varibales
 
@@ -71,17 +69,15 @@ const NewDiffEquationSolver = (props) => {
     }
 
     coordinate["t"] = t; // { a, b , c, t}
-  
+
     const accumulative = {
       ...coordinate,
       ...props.vars,
     };
-    
-    
+
     for (let idx = 0; idx < props.modelObj.Eqns.length; idx++) {
-      const eqnObj = props.modelObj.Eqns[idx]
-     
-      
+      const eqnObj = props.modelObj.Eqns[idx];
+
       eqnResultsArr.push(eqnObj.parsedEqn.evaluate(accumulative)); // { a :1 , b: 3.3,t:3}
     }
 
@@ -140,7 +136,7 @@ const NewDiffEquationSolver = (props) => {
 
   //   return r;
   // };
-  
+
   let t0 = parseFloat(props.modelObj.Config.t0);
   let returnedY = props.modelObj.Config.initialConditions.slice();
 
@@ -156,7 +152,7 @@ const NewDiffEquationSolver = (props) => {
       t0,
       parseFloat(props.modelObj.Config.h)
     );
-    t0 += props.modelObj.Config.h; // constant step size
+    t0 += parseFloat(props.modelObj.Config.h); // constant step size
 
     allY.push([...returnedY, t0]);
   }
