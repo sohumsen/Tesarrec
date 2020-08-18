@@ -1,34 +1,26 @@
-show title in dcf graph with chemical CLARIFY
 allow db/dt as input on right side CLARIFY
-change file nav format CLARIFY
 
 for certain eqns ban negative initials 
 canvas js add 0 axis lines
 
 on double click eqns select all 
 
-remove dynamic mes  
-fix stacked bar in chp 
 
 da/dt=b is valid
 
-click new file select by pressing pencil
-click on mes heatmap DONE
-update mfc y axis
-
-
-solver analysis y=cost(t)
-fix var sliders
 when create new file, select it
-export table to csv
-line chart show axis
-hide model explorer on solver ananlysis
 
 remove legend orientations
+Understand linear coupled solver
 error handling in db response
-format graph config
 
-RECHARTS, title, axis names, origins
+
+
+
+allow db/dt as input on other side
+remove a,b,c
+
+
 
 24th Jul - 7th Aug 
 -----------------
@@ -88,6 +80,20 @@ Audit
 
 DONE
 ========
+shrink sid pic DONE
+edit name doesnt save in correct place DONE
+fix graph config inputs DONE
+
+fix var sliders DONE
+abiut page contact button DONE
+remove contact page DONE
+hide model explorer on solver ananlysis DONE
+export table to csv DONE
+update mfc y axis DONE
+fix var inputs DONE
+disable min max DONE
+copyright symbol below about page DONE
+solver analysis y=cost(t) DONE
     Dynamic=>MES,MFC  DONE
     move all token states to app or execute authsuccess and timeout DONE
     remove api key from github DONE
@@ -180,10 +186,20 @@ DONE
     allow test eqns with y on the other side DONE
     table is too big DONE
 use model class in linear coupled DONE
-
+fix stacked bar in chp DONE
+show title in dcf graph with chemical CLARIFY DONE
+change file nav format CLARIFY DONE
+change file name doesnt work DONE
+line chart show axis DONE
     scroll down table DONE
     shrink methquill in varitems DONE
     when remove graph, show the same b/t axis DONE
+    click new file select by pressing pencil DONE
+click on mes heatmap DONE
+format graph config DONE
+remove dynamic mes  DONE
+allow model descriptions DONE
+add varitems is broken DONE
 
 
 NOT NEEDED

@@ -22,7 +22,7 @@ const Team = (props) => {
               https://www.surrey.ac.uk/people/jhuma-sadhukhan
             </a>
             <p>
-              <button className={classes.button}>Contact</button>
+              {/* <button className={classes.button}>Contact</button> */}
             </p>
           </div>
         </div>
@@ -32,7 +32,7 @@ const Team = (props) => {
           <img
             src={Siddharth}
             alt="Dr Siddharth Gadkari"
-            style={{ width: "67%" }}
+            style={{ width: "66%" }}
           />
           <div className={classes.container}>
             <h2>Dr Siddharth Gadkari</h2>
@@ -46,7 +46,7 @@ const Team = (props) => {
             </a>
 
             <p>
-              <button className={classes.button}>Contact</button>
+              {/* <button className={classes.button}>Contact</button> */}
             </p>
           </div>
         </div>
@@ -62,7 +62,7 @@ const Team = (props) => {
             </a>
 
             <p>
-              <button className={classes.button}>Contact</button>
+              {/* <button className={classes.button}>Contact</button> */}
             </p>
           </div>
         </div>

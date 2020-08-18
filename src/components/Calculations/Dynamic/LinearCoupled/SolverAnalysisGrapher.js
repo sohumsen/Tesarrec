@@ -8,7 +8,7 @@ import linear5 from "../SampleEquations/SingleODE/linear5.json";
 import classes from "./SolverAnalysis.module.css";
 import ScatterChart from "../../../UI/Canvas/ScatterChart.js";
 // const writeJsonFile = require("write-json-file");
-import LineChart from "../../../UI/Canvas/LineChart.js";
+import LineChart from "../../../UI/Canvas/analysisLineChart.js";
 import allData from "../SampleEquations/allData.json";
 import { Paper, Select, MenuItem } from "@material-ui/core";
 class SolverAnalysisGrapher extends Component {
@@ -58,16 +58,36 @@ class SolverAnalysisGrapher extends Component {
       allGraphObjXY.push(graphObjXY);
     });
 
+    let tColumn = graphArrXY[0].map((val, idx) => {
+      return val[1];
+    });
+    let calculatedColumn = graphArrXY[0].map((val, idx) => {
+      return val[0];
+    });
+    let actualColumn = graphArrXY[1].map((val, idx) => {
+      return val[0];
+    });
+    let data = [];
+    for (let i = 0; i < tColumn.length; i++) {
+      data.push({
+        t: tColumn[i],
+        calculated: calculatedColumn[i],
+        actual: actualColumn[i],
+      });
+    }
     this.setState({
       lineChartActualAndCalced: (
-        <LineChart
-          LineNames={["calculated", "actual"]}
-          axisNames={["x", "y"]}
-          dataPoints={[allGraphObjXY[0], allGraphObjXY[1]]}
-          verticalAlign={"top"}
-          horizontalAlign={"left"}
-          title={e.dataPoint.label}
-        />
+        <div>
+          <h3>{e.dataPoint.label}</h3>
+          <LineChart
+            LineNames={["calculated", "actual"]}
+            axisNames={["t", "y"]}
+            dataPoints={data}
+            verticalAlign={"top"}
+            horizontalAlign={"left"}
+            title={e.dataPoint.label}
+          />
+        </div>
       ),
     });
   };
@@ -99,12 +119,17 @@ class SolverAnalysisGrapher extends Component {
         (allData[i].solutions.timeTaken * 1000).toPrecision(3)
       );
       if (tm < 400) {
-        
-        if (allData[i].config.method !== this.state.methodFilterChoice && this.state.methodFilterChoice !== 'ALL') {
+        if (
+          allData[i].config.method !== this.state.methodFilterChoice &&
+          this.state.methodFilterChoice !== "ALL"
+        ) {
           continue;
         }
 
-        if (allData[i].eqns.textEqns[0] !== this.state.eqnFilterChoice && this.state.eqnFilterChoice !== 'ALL') {
+        if (
+          allData[i].eqns.textEqns[0] !== this.state.eqnFilterChoice &&
+          this.state.eqnFilterChoice !== "ALL"
+        ) {
           continue;
         }
         xYObjScatterGraph.push({
@@ -126,10 +151,11 @@ class SolverAnalysisGrapher extends Component {
             onChange={this.onChange("eqnFilterChoice")}
           >
             <MenuItem value="ALL">ALL</MenuItem>
-            {Array.from(allEqns).map((eqn,i) => (
-              <MenuItem key={i} value={eqn}>{eqn}</MenuItem>
+            {Array.from(allEqns).map((eqn, i) => (
+              <MenuItem key={i} value={eqn}>
+                {eqn}
+              </MenuItem>
             ))}
-
           </Select>
           <Select
             value={this.state.methodFilterChoice}

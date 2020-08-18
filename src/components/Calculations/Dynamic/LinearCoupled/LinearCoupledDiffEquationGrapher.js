@@ -168,11 +168,22 @@ const LinearCoupledDiffEquationGrapher = (props) => {
     }
     order3.push(order2);
   }
+  let csvData=[[...props.modelObj.Config.lineNames,"t"]]
+  csvData.push(...props.computedResults)
 
   // if (props.modelObj.Config.xAxis!=="t"){
 
   return (
     <div className={classes.Container}>
+       <CSVLink data={csvData}>
+          <Tooltip title="Download model" placement="top">
+            <span>
+              <IconButton edge="end" aria-label="Download">
+                <ImportExportIcon />
+              </IconButton>
+            </span>
+          </Tooltip>
+        </CSVLink>
       <Paper elevation={3} className={classes.Graph}>
         <MyChart
           dataPoints={[

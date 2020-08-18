@@ -11,7 +11,7 @@ import {
   Tooltip,
   Legend,
   ResponsiveContainer,
-  Label
+  Label,
 } from "recharts";
 
 var CanvasJSChart = CanvasJSReact.CanvasJSChart;
@@ -67,41 +67,41 @@ var CanvasJSChart = CanvasJSReact.CanvasJSChart;
 
 class MyLineChart extends Component {
   render() {
-    let data = [];
-    for (let i = 0; i < this.props.dataPoints.length; i++) {
-      data.push({
-        type: "line",
-        // name: this.props.LineNames[i],
+    // let data = [];
+    // for (let i = 0; i < this.props.dataPoints.length; i++) {
+    //   data.push({
+    //     type: "line",
+    //     // name: this.props.LineNames[i],
 
-        toolTipContent: " {x}, {y}",
-        dataPoints: this.props.dataPoints[i],
-        markerType: "none",
-      });
-    }
+    //     toolTipContent: " {x}, {y}",
+    //     dataPoints: this.props.dataPoints[i],
+    //     markerType: "none",
+    //   });
+    // }
 
-    const options = {
-      animationEnabled: true,
-      // exportEnabled: true,
-      theme: "light2", // "light1", "dark1", "dark2"
+    // const options = {
+    //   animationEnabled: true,
+    //   // exportEnabled: true,
+    //   theme: "light2", // "light1", "dark1", "dark2"
 
-      title: {
-        text: this.props.title,
-        // more attributes
-      },
-      axisY: {
-        title: this.props.axisNames[1],
-      },
-      axisX: {
-        title: this.props.axisNames[0],
-      },
-      legend: {
-        verticalAlign: this.props.verticalAlign,
-        horizontalAlign: this.props.horizontalAlign,
-      },
-      backgroundColor: "white",
-      zoomEnabled: true,
-      data: data,
-    };
+    //   title: {
+    //     text: this.props.title,
+    //     // more attributes
+    //   },
+    //   axisY: {
+    //     title: this.props.axisNames[1],
+    //   },
+    //   axisX: {
+    //     title: this.props.axisNames[0],
+    //   },
+    //   legend: {
+    //     verticalAlign: this.props.verticalAlign,
+    //     horizontalAlign: this.props.horizontalAlign,
+    //   },
+    //   backgroundColor: "white",
+    //   zoomEnabled: true,
+    //   data: data,
+    // };
 
     return (
       <div
@@ -126,13 +126,27 @@ class MyLineChart extends Component {
               // margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
             >
               <CartesianGrid strokeDasharray="3 3" />
-              <XAxis dataKey="x" />
+              <XAxis
+                dataKey="f"
+                label={{ value: this.props.axisNames[0], position: "insideBottom" }}
+              />
 
-
-              <YAxis/>
+              <YAxis>
+                <Label
+                  value={this.props.axisNames[1]}
+                  position="insideLeft"
+                  angle={-90}
+                  style={{ textAnchor: "middle" }}
+                />
+              </YAxis>
               <Tooltip />
               <Legend />
-              <Line type="monotone" dataKey="y" stroke="#8884d8"  name={this.props.axisNames[1]} />
+              <Line
+                type="monotone"
+                dataKey="y"
+                stroke="#8884d8"
+                legendType="none"
+              />
               {/* <Line type="monotone" dataKey="y" stroke="#82ca9d" /> */}
             </LineChart>
           </ResponsiveContainer>

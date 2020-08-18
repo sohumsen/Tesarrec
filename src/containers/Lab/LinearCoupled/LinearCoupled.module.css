@@ -6,14 +6,15 @@
   border-style: solid;
   */
   display: flex;
-  width: 100%; 
+  width: 100%;
 
-  justify-content: space-around;
+  align-content: center;
+  justify-content: space-evenly;
+  flex-flow: row wrap;
+
   /* margin-left: auto;
   align-content: flex-end
   flex-wrap: wrap; */
-
-
 }
 
 .VarContainer {
@@ -21,11 +22,13 @@
   flex: 3.1 1;
   align-self: baseline;
   background-color: aqua;
+  order: 3;
 }
 
 .EqnContainer {
-  flex: 4 0;
+  /* flex: 4 0;
   align-self: baseline;
+  order: 2; */
 
   /* margin: 10px; */
   /* height: auto; */
@@ -36,11 +39,22 @@
   border-style: solid;
   */
 }
-
+.Column{
+  flex: 4 0;
+  align-self: baseline;
+  order: 2;
+}
+.MetaContainer {
+  /* position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 15%; */
+}
 .Graph {
-  flex: 10 ;
+  flex: 10;
   /* margin: 10px; */
   align-self: baseline;
+  order: 4;
 
   /* background-color: bisque; 
   border-width: 2px;
@@ -49,7 +63,7 @@
 }
 
 .graphConfig {
-  width:50%;
+  width: 50%;
   position: absolute;
   top: 30%;
   left: 25%;

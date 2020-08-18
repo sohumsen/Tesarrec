@@ -9,7 +9,7 @@ import classes from "./LinearCoupled.module.css";
 import MyErrorMessage from "../../../components/UI/MyErrorMessage/CustomizedErrorMessage";
 import GraphConfig from "../../../components/UI/GraphConfig/GraphConfig";
 import LinearCoupledDiffEquationGrapher from "../../../components/Calculations/Dynamic/LinearCoupled/LinearCoupledDiffEquationGrapher";
-import { Paper, Modal } from "@material-ui/core";
+import { Paper, Modal, TextField } from "@material-ui/core";
 import LinearCoupledButtonEqnsContainer from "../../../components/UI/ButtonContainer/LinearCoupledButtonEqnsContainer";
 import DEFAULTEQUATIONSNEW from "../../../components/Calculations/Dynamic/SampleEquations/DEFAULTEQUATIONSnew";
 
@@ -33,7 +33,7 @@ class LinearCoupledNew extends Component {
 
   state = {
     modelId: "",
-    modelObj: { Eqns: [], Vars: [], Config: {} }, // This hack is required to handle the modelObj default state
+    modelObj: { Eqns: [], Vars: [], Config: {}, meta: {} }, // This hack is required to handle the modelObj default state
     // myReactGridLayout: DEFAULTLAYOUT(new Model()), //TODO should create a new model obj here
   };
 
@@ -46,20 +46,15 @@ class LinearCoupledNew extends Component {
           Vars: props.modelObj.Vars,
         },
         {
-          name: "Untitled",
-          description: "this is a default Model",
-          modelId: "dfjskf",
+          name: props.modelObj.meta.name,
+          description: props.modelObj.meta.description,
+          modelId: props.modelId,
         }
       );
 
       return {
-        // calculate: props.modelObj.meta.calculate,
         modelId: props.modelId,
-        // Eqns: Eqns,
-        // Vars: Vars,
-        // myReactGridLayout: DEFAULTLAYOUT(props.modelObj),
-        // graphConfig: graphConfig,
-        // modelObj: props.modelObj,
+    
         modelObj: newModel,
       };
     }
@@ -88,6 +83,7 @@ class LinearCoupledNew extends Component {
   // }
   componentDidUpdate() {
     if (this.props.saveSnapshot) {
+      console.log(this.state.modelObj);
       this.props.sendToParent(this.state.modelObj);
     }
   }
@@ -224,16 +220,33 @@ class LinearCoupledNew extends Component {
   VARS_handleInputChange = (id, calculate) => (event, value) => {
     let modelObj = this.state.modelObj;
     let Vars = modelObj.Vars;
+    console.log(
+      id,
+      calculate,
+      value,
+      event.target.name,
+      event.target.value,
+      isNaN(event.target.value)
+    );
 
     const idx = Vars.findIndex((e) => {
       return e.id === id;
     });
+    // let { value, max } = event.target;
 
+    // if (+value > +max) {
+    //   value = max;
+    // }
     const Var = Vars[idx];
     if (event.target.name === undefined) {
       Var["VarCurrent"] = value;
     } else {
-      Var[event.target.name] = event.target.value;
+      isNaN(event.target.value)
+        ? (Var[event.target.name] = +event.target.value)
+        : (Var[event.target.name] = event.target.value);
+    }
+    if (event.target.name === "VarLow" && event.target.value === "") {
+      Var["VarLow"] = 0;
     }
 
     Vars[idx] = Var;
@@ -282,16 +295,27 @@ class LinearCoupledNew extends Component {
     return VariableObj;
   };
   VARS_onIncrement = (type) => {
-    this.setState((prevState) => {
-      let modelObj = this.state.modelObj;
-      modelObj.Vars = prevState.modelObj.Vars.concat(
-        this.VARS_nextPossible(prevState, type)
-      );
-      modelObj.Config.calculate = false;
-      return {
-        modelObj: modelObj,
-      };
+    let modelObj = this.state.modelObj;
+    modelObj.Vars = modelObj.Vars.concat(
+      this.VARS_nextPossible(this.state, type)
+    );
+    modelObj.Config.calculate = false;
+
+    this.setState({
+      modelObj: modelObj,
     });
+
+    // this.setState((prevState) => {
+    //   let modelObj = this.state.modelObj;
+    //   console.log(this.VARS_nextPossible(prevState, type));
+    //   modelObj.Vars = prevState.modelObj.Vars.concat(
+    //     this.VARS_nextPossible(prevState, type)
+    //   );
+    //   modelObj.Config.calculate = false;
+    //   return {
+    //     modelObj: modelObj,
+    //   };
+    // });
   };
 
   EQNS_nextPossible = (prevState) => {
@@ -523,17 +547,39 @@ class LinearCoupledNew extends Component {
       //   }
       // >
       <div className={classes.Container}>
-        <Paper key="Eqns" className={classes.EqnContainer} elevation={3}>
-          <LinearCoupledButtonEqnsContainer
-            Eqns={this.state.modelObj.Eqns}
-            onIncrementEqn={this.EQNS_onIncrement}
-            resetForm={() => this.ITEMS_reset("eqns")}
-            handleMathQuillInputSubmit={this.MATHQUILL_handleInputSubmit}
-            // onResetLayout={this.LAYOUT_onReset}
-          />
+        <div className={classes.Column}>
+          <Paper key="Eqns" className={classes.EqnContainer} elevation={3}>
+            <LinearCoupledButtonEqnsContainer
+              Eqns={this.state.modelObj.Eqns}
+              onIncrementEqn={this.EQNS_onIncrement}
+              resetForm={() => this.ITEMS_reset("eqns")}
+              handleMathQuillInputSubmit={this.MATHQUILL_handleInputSubmit}
+              // onResetLayout={this.LAYOUT_onReset}
+            />
 
-          {Eqns}
-        </Paper>
+            {Eqns}
+          </Paper>
+
+          <Paper key="meta" className={classes.MetaContainer} elevation={3}>
+            <TextField
+              id="outlined-multiline-static"
+              label="Model description"
+              multiline
+              rows={4}
+              defaultValue="Open a model to view descriptions"
+              value={this.state.modelObj.meta.description}
+              onChange={(e) => {
+                let modelObj = this.state.modelObj;
+                modelObj.meta.description = e.target.value;
+                this.setState({ modelObj: modelObj });
+              }}
+              variant="outlined"
+              size="small"
+              fullWidth
+              inputProps={{ style: { fontSize: 12 } }} // font size of input text
+            />
+          </Paper>
+        </div>
 
         <Paper key="Vars" className={classes.VarContainer} elevation={3}>
           <LinearCoupledButtonVariablesContainer

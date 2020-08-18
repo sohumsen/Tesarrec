@@ -38,7 +38,7 @@ const VarItem = (props) => {
                 name={"Unit"}
               />
             </div>
-            <div className={classes.input}>
+            {/* <div className={classes.input}>
               <OutlinedInput
                 type={"text"}
                 value={props.VarLow}
@@ -55,7 +55,7 @@ const VarItem = (props) => {
                 label={"Max"}
                 name={"VarHigh"}
               />
-            </div>
+            </div> */}
           </div>
           <div className={classes.RemoveButton}>
             <CloseButton
@@ -107,7 +107,7 @@ const VarItem = (props) => {
                 name={"Unit"}
               />
             </div>
-            <div className={classes.input}>
+            {/* <div className={classes.input}>
               <OutlinedInput
                 type={"text"}
                 value={props.VarLow}
@@ -124,7 +124,7 @@ const VarItem = (props) => {
                 label={"Max"}
                 name={"VarHigh"}
               />
-            </div>
+            </div> */}
           </div>
           <div className={classes.RemoveButton}>
             <CloseButton

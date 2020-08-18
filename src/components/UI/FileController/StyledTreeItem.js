@@ -103,6 +103,7 @@ class StlyedTreeItem extends Component {
       <ClickAwayListener onClickAway={this.handleClickAway}>
         <TreeItem
           onLabelClick={this.props.onExpandFileLink}
+          onIconClick={this.props.onExpandFileLink}
           label={
             <div className={classes.labelRoot}>
               {!this.state.showInputField ? (

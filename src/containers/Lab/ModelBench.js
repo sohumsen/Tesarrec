@@ -65,6 +65,7 @@ class ModelBench extends Component {
 
   MODEL_createNew = () => {
     let aNewModel = this.newModel();
+    console.log(aNewModel)
 
     this.setState(
       {
@@ -81,6 +82,8 @@ class ModelBench extends Component {
 
           //TODO to be optimised
           this.setState({ error: false }, () => {
+            console.log(this.state)
+
             this.MODEL_getPrivate();
           })
         );
@@ -403,6 +406,7 @@ class ModelBench extends Component {
             createNewFile={this.MODEL_createNew}
 
             handleTabChange={this.handleTabChange}
+            tabChoiceValue={this.state.tabChoiceValue}
           />
         ))
       : (modelLinks = null);

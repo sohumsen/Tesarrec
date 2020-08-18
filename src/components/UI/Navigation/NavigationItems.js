@@ -14,12 +14,12 @@ const navigationItems = (props) => {
       </Dropdown>
       
 
-      {props.isLoggedIn ? (
+      {/* {props.isLoggedIn ? (
         <Dropdown name="Dynamic">
           <NavigationItem link="/dynamic/mfc">MFC</NavigationItem>
           <NavigationItem link="/dynamic/mes"> MES</NavigationItem>
         </Dropdown>
-      ) : null}
+      ) : null} */}
       {props.isLoggedIn ? (
         <NavigationItem link="/modelbench"> Model Bench</NavigationItem>
       ) : null}
@@ -32,7 +32,7 @@ const navigationItems = (props) => {
         <NavigationItem link="/logout">Log Out</NavigationItem>
       )}
 
-      <NavigationItem link="/contact">Contact</NavigationItem>
+      {/* <NavigationItem link="/contact">Contact</NavigationItem> */}
     </ul>
   );
 };

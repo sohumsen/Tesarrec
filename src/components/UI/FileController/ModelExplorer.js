@@ -63,138 +63,166 @@ class ModelExplorer extends Component {
 
     return (
       <div>
-        <Tooltip title="Show menu" placement="top" arrow>
-          <span>
-            <IconButton
-              edge="end"
-              aria-label="show"
-              onClick={() => {
-                this.setState({
-                  showModels: !this.state.showModels,
-                });
-              }}
-            >
-              <MenuIcon />
-            </IconButton>
-          </span>
-        </Tooltip>
-        <Tooltip title="Coupled ODE" placement="top">
-          <span>
-            <IconButton
-              edge="end"
-              aria-label="Coupled ODE"
-              onClick={() => this.props.handleTabChange(0, 1)}
-            >
-              <FunctionsIcon />
-            </IconButton>
-          </span>
-        </Tooltip>
-        <Tooltip title="Solver Analysis" placement="top">
-          <span>
-            <IconButton
-              edge="end"
-              aria-label="Solver Analysis"
-              onClick={() => this.props.handleTabChange(0, 2)}
-            >
-              <AssessmentIcon />
-            </IconButton>
-          </span>
-        </Tooltip>
+        {this.props.tabChoiceValue === 2 ? (
+          <div>
+            <Tooltip title="Coupled ODE" placement="top">
+              <span>
+                <IconButton
+                  edge="end"
+                  aria-label="Coupled ODE"
+                  onClick={() => this.props.handleTabChange(0, 1)}
+                >
+                  <FunctionsIcon />
+                </IconButton>
+              </span>
+            </Tooltip>
+            <Tooltip title="Solver Analysis" placement="top">
+              <span>
+                <IconButton
+                  edge="end"
+                  aria-label="Solver Analysis"
+                  onClick={() => this.props.handleTabChange(0, 2)}
+                >
+                  <AssessmentIcon />
+                </IconButton>
+              </span>
+            </Tooltip>
+          </div>
+        ) : (
+          <div>
+            <Tooltip title="Show menu" placement="top" arrow>
+              <span>
+                <IconButton
+                  edge="end"
+                  aria-label="show"
+                  onClick={() => {
+                    this.setState({
+                      showModels: !this.state.showModels,
+                    });
+                  }}
+                >
+                  <MenuIcon />
+                </IconButton>
+              </span>
+            </Tooltip>
+            <Tooltip title="Coupled ODE" placement="top">
+              <span>
+                <IconButton
+                  edge="end"
+                  aria-label="Coupled ODE"
+                  onClick={() => this.props.handleTabChange(0, 1)}
+                >
+                  <FunctionsIcon />
+                </IconButton>
+              </span>
+            </Tooltip>
+            <Tooltip title="Solver Analysis" placement="top">
+              <span>
+                <IconButton
+                  edge="end"
+                  aria-label="Solver Analysis"
+                  onClick={() => this.props.handleTabChange(0, 2)}
+                >
+                  <AssessmentIcon />
+                </IconButton>
+              </span>
+            </Tooltip>
+            {this.state.showModels ? (
+              <Paper elevation={3}>
+                <Paper elevation={3}>
+                  <Tooltip title="Create model" placement="top" arrow>
+                    <span>
+                      <IconButton
+                        edge="end"
+                        aria-label="create"
+                        onClick={this.props.createNewFile}
+                      >
+                        <AddBoxIcon />
+                      </IconButton>
+                    </span>
+                  </Tooltip>
+                  <Tooltip title="Save model" placement="top">
+                    <span>
+                      <IconButton
+                        edge="end"
+                        aria-label="save"
+                        onClick={this.props.saveEquation}
+                        disabled={
+                          this.props.selectedModelId === "" ||
+                          this.props.selectedModelId in this.props.allPublicId
+                        }
+                      >
+                        <SaveIcon />
+                      </IconButton>
+                    </span>
+                  </Tooltip>
+                  <Tooltip title="Publish model" placement="top">
+                    <span>
+                      <IconButton
+                        edge="end"
+                        aria-label="save"
+                        onClick={this.props.publishEquation}
+                        disabled={
+                          this.props.selectedModelId === "" ||
+                          this.props.selectedModelId in this.props.allPublicId
+                        }
+                      >
+                        <PublishIcon />
+                      </IconButton>
+                    </span>
+                  </Tooltip>
 
-        {this.state.showModels ? (
-          <Paper elevation={3}>
-            <Paper elevation={3}>
-              <Tooltip title="Create model" placement="top" arrow>
-                <span>
-                  <IconButton
-                    edge="end"
-                    aria-label="create"
-                    onClick={this.props.createNewFile}
-                  >
-                    <AddBoxIcon />
-                  </IconButton>
-                </span>
-              </Tooltip>
-              <Tooltip title="Save model" placement="top">
-                <span>
-                  <IconButton
-                    edge="end"
-                    aria-label="save"
-                    onClick={this.props.saveEquation}
-                    disabled={
-                      this.props.selectedModelId === "" ||
-                      this.props.selectedModelId in this.props.allPublicId
-                    }
-                  >
-                    <SaveIcon />
-                  </IconButton>
-                </span>
-              </Tooltip>
-              <Tooltip title="Publish model" placement="top">
-                <span>
-                  <IconButton
-                    edge="end"
-                    aria-label="save"
-                    onClick={this.props.publishEquation}
-                    disabled={
-                      this.props.selectedModelId === "" ||
-                      this.props.selectedModelId in this.props.allPublicId
-                    }
-                  >
-                    <PublishIcon />
-                  </IconButton>
-                </span>
-              </Tooltip>
+                  <Tooltip title="Copy model" placement="top">
+                    <span>
+                      <IconButton
+                        edge="end"
+                        aria-label="copy"
+                        onClick={this.props.copyAllEqnsText}
+                        disabled={this.props.selectedModelId === ""}
+                      >
+                        <ImportExportIcon />
+                      </IconButton>
+                    </span>
+                  </Tooltip>
+                  <Tooltip title="Delete model" placement="top">
+                    <span>
+                      <IconButton
+                        edge="end"
+                        aria-label="delete"
+                        onClick={this.props.onRemoveModel}
+                        disabled={
+                          this.props.selectedModelId === "" ||
+                          this.props.selectedModelId in this.props.allPublicId
+                        }
+                      >
+                        <DeleteIcon />
+                      </IconButton>
+                    </span>
+                  </Tooltip>
+                  <Divider />
+                </Paper>
 
-              <Tooltip title="Copy model" placement="top">
-                <span>
-                  <IconButton
-                    edge="end"
-                    aria-label="copy"
-                    onClick={this.props.copyAllEqnsText}
-                    disabled={this.props.selectedModelId === ""}
-                  >
-                    <ImportExportIcon />
-                  </IconButton>
-                </span>
-              </Tooltip>
-              <Tooltip title="Delete model" placement="top">
-                <span>
-                  <IconButton
-                    edge="end"
-                    aria-label="delete"
-                    onClick={this.props.onRemoveModel}
-                    disabled={
-                      this.props.selectedModelId === "" ||
-                      this.props.selectedModelId in this.props.allPublicId
-                    }
-                  >
-                    <DeleteIcon />
-                  </IconButton>
-                </span>
-              </Tooltip>
-              <Divider />
-            </Paper>
+                <TreeView
+                  defaultCollapseIcon={<ExpandMoreIcon />}
+                  defaultExpandIcon={<ChevronRightIcon />}
+                >
+                  <TreeItem nodeId="0" label={"Public"}>
+                    {publicFileLinks}
+                  </TreeItem>
 
-            <TreeView
-              defaultCollapseIcon={<ExpandMoreIcon />}
-              defaultExpandIcon={<ChevronRightIcon />}
-            >
-              <TreeItem nodeId="0" label={"Public"}>
-                {publicFileLinks}
-              </TreeItem>
-
-              <TreeItem
-                nodeId={(
-                  Object.keys(this.props.allPublicId).length + 1
-                ).toString()}
-                label={"Private"}
-              >
-                {privateFileLinks}
-              </TreeItem>
-            </TreeView>
-          </Paper>
-        ) : null}
+                  <TreeItem
+                    nodeId={(
+                      Object.keys(this.props.allPublicId).length + 1
+                    ).toString()}
+                    label={"Private"}
+                  >
+                    {privateFileLinks}
+                  </TreeItem>
+                </TreeView>
+              </Paper>
+            ) : null}
+          </div>
+        )}
       </div>
     );
   }

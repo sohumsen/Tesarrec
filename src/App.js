@@ -138,7 +138,7 @@ class App extends Component {
             <Logout {...props} onLogoutHandler={this.onLogoutHandler} />
           )}
         />
-          <Route path="/dynamic/mes" exact component={DynamicMes} />
+          {/* <Route path="/dynamic/mes" exact component={DynamicMes} /> */}
 
 
         <Route path="/sustainability/chp" exact component={Chp} />
@@ -146,7 +146,7 @@ class App extends Component {
         <Route path="/sustainability/mfc" exact component={Mfc} />
         <Route path="/sustainability/mes" exact component={Mes} />
         <Route path="/reference" component={Reference} />
-        <Route path="/contact" component={Contact} />
+        {/* <Route path="/contact" component={Contact} /> */}
 
         <Redirect to="/" />
       </Switch>
@@ -184,7 +184,7 @@ class App extends Component {
         <Route path="/sustainability/mfc" exact component={Mfc} />
         <Route path="/sustainability/mes" exact component={Mes} />
         <Route path="/reference" component={Reference} />
-        <Route path="/contact" component={Contact} />
+        {/* <Route path="/contact" component={Contact} /> */}
         <Redirect to="/" />
       </Switch>
     );
