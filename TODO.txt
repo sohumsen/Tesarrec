@@ -13,9 +13,10 @@ when create new file, select it
 remove legend orientations
 Understand linear coupled solver
 error handling in db response
+space around flex items in linear coupled
 
 
-
+publish eqns doesnt workd
 
 allow db/dt as input on other side
 remove a,b,c

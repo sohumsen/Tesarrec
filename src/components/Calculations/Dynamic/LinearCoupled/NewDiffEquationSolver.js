@@ -69,11 +69,12 @@ const NewDiffEquationSolver = (props) => {
     }
 
     coordinate["t"] = t; // { a, b , c, t}
-
+    console.log(coordinate)
     const accumulative = {
       ...coordinate,
       ...props.vars,
     };
+    console.log(accumulative)
 
     for (let idx = 0; idx < props.modelObj.Eqns.length; idx++) {
       const eqnObj = props.modelObj.Eqns[idx];

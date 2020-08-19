@@ -1,61 +1,61 @@
 const DEFAULTEQUATIONS = [
   {
-    lineName: "a",
-    textEqn: "-(K_1*a*b)/(K_2+a)-(K_3)/(a)*c*K_4+a",
+    lineName: "Y_1",
+    textEqn: "-(K_1*Y_1*Y_2)/(K_2+Y_1)-(K_3)/(Y_1)*Y_3*K_4+Y_1",
   },
   {
-    lineName: "b",
+    lineName: "Y_2",
 
-    textEqn: "(K_1*a*b)/(K_3+a)-K_4*b",
+    textEqn: "(K_1*Y_1*Y_2)/(K_3+Y_1)-K_4*Y_2",
   },
   {
-    lineName: "c",
+    lineName: "Y_3",
 
-    textEqn: "(K_2*a*c)/(K_1+a)-K_4*c",
+    textEqn: "(K_2*Y_1*Y_3)/(K_1+Y_1)-K_4*Y_3",
   },
   {
-    lineName: "d",
+    lineName: "Y_4",
 
-    textEqn: "-(K_1*a*b)/(K_4+a)-(K_3*a*c)/(K_2+a)",
+    textEqn: "-(K_1*Y_1*Y_2)/(K_4+Y_1)-(K_3*Y_1*Y_3)/(K_2+Y_1)",
   },
   {
-    lineName: "f",
+    lineName: "Y_5",
 
-    textEqn: "-(K_1*a*b)/(K_4+a)-(K_3*a*c)/(K_2+a)",
+    textEqn: "-(K_1*Y_1*Y_2)/(K_4+Y_1)-(K_3*Y_1*Y_3)/(K_2+Y_1)",
   },
   {
-    lineName: "g",
+    lineName: "Y_6",
 
-    textEqn: "-(K_1*a*b)/(K_4+a)-(K_3*a*c)/(K_2+a)",
+    textEqn: "-(K_1*Y_1*Y_2)/(K_4+Y_1)-(K_3*Y_1*Y_3)/(K_2+Y_1)",
   },
   {
-    lineName: "h",
+    lineName: "Y_7",
 
-    textEqn: "-(K_1*a*b)/(K_4+a)-(K_3*a*c)/(K_2+a)",
+    textEqn: "-(K_1*Y_1*Y_2)/(K_4+Y_1)-(K_3*Y_1*Y_3)/(K_2+Y_1)",
   },
   {
-    lineName: "j",
+    lineName: "Y_8",
 
-    textEqn: "-(K_1*a*b)/(K_4+a)-(K_3*a*c)/(K_2+a)",
+    textEqn: "-(K_1*Y_1*Y_2)/(K_4+Y_1)-(K_3*Y_1*Y_3)/(K_2+Y_1)",
   },
   {
-    lineName: "k",
+    lineName: "Y_9",
 
-    textEqn: "-(K_1*a*b)/(K_4+a)-(K_3*a*c)/(K_2+a)",
+    textEqn: "-(K_1*Y_1*Y_2)/(K_4+Y_1)-(K_3*Y_1*Y_3)/(K_2+Y_1)",
   },
 ];
 
 export default DEFAULTEQUATIONS;
 
-// const DEFAULTEQUATIONS = [
+// Y_3onst DEFAULTEQUATIONS = [
 //   {
 //     line: "a",
 //     TextEqn: "a",
 //   },
 //   {
-//     line: "b",
+//     line: "Y_2",
 
-//     TextEqn: "b",
+//     TextEqn: "Y_2",
 //   },
 
 // ];

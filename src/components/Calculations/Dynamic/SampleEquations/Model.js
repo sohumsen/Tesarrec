@@ -48,12 +48,13 @@ export default class Model {
     this.Eqns = dbModel.Eqns.map((eqnObj, i) => ({
       id: eqnObj.lineName+i,
       lineName: eqnObj.lineName,
-      DByDLatex: "\\frac{d" + eqnObj.lineName + "}{dt}=",
+      DByDLatex: "\\frac{d" + eqnObj.lineName+ "}{dt}=",
       latexEqn: parse(
         parse(eqnObj.textEqn).toString({
           implicit: "hide",
           parenthesis: "auto",
         })
+        // \frac{dY_1}{dx}=
       ).toTex({
         parenthesis: "auto",
         implicit: "hide",
