@@ -19,8 +19,13 @@ space around flex items in linear coupled
 publish eqns doesnt workd
 
 allow db/dt as input on other side
+sort var items
+when change varitems, change eqns 
 remove a,b,c
-
+graph shakes when moving slider
+get private public doesnt work
+on edit filename, select it
+save eqn doesnt work
 
 
 24th Jul - 7th Aug 
@@ -95,6 +100,8 @@ fix var inputs DONE
 disable min max DONE
 copyright symbol below about page DONE
 solver analysis y=cost(t) DONE
+allow variable descriptions and initial conditions DONE
+
     Dynamic=>MES,MFC  DONE
     move all token states to app or execute authsuccess and timeout DONE
     remove api key from github DONE

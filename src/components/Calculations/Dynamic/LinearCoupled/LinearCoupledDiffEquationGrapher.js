@@ -131,7 +131,6 @@ const LinearCoupledDiffEquationGrapher = (props) => {
   let t0 = performance.now();
 
   let vars = {};
-  console.log(props.computedResults)
 
   let newcomputedResults = props.computedResults.map((row) =>
     row.map((num) =>
@@ -142,7 +141,16 @@ const LinearCoupledDiffEquationGrapher = (props) => {
   // console.log(newEqnArr);
 
   let objOfCoords = {};
-  let order = [...props.modelObj.Config.lineNames, "t"];
+  let independentLatexForm=props.modelObj.Vars.find(el=>{
+    if (el.VarType="Independent"){
+      return (
+        el.LatexForm
+
+        )
+    }
+    }).LatexForm
+
+  let order = [...props.modelObj.Config.lineNames, independentLatexForm];
 
   for (let i = 0; i < newcomputedResults.length; i++) {
     objOfCoords[order[i]] = newcomputedResults.map(function (value) {
@@ -168,11 +176,10 @@ const LinearCoupledDiffEquationGrapher = (props) => {
     }
     order3.push(order2);
   }
-  let csvData=[[...props.modelObj.Config.lineNames,"t"]]
+  let csvData=[[...props.modelObj.Config.lineNames,independentLatexForm]]
   csvData.push(...props.computedResults)
 
   // if (props.modelObj.Config.xAxis!=="t"){
-
   return (
     <div className={classes.Container}>
        <CSVLink data={csvData}>

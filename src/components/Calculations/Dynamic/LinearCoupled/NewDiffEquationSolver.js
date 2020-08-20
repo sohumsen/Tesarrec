@@ -68,13 +68,13 @@ const NewDiffEquationSolver = (props) => {
       coordinate[dependentVariable] = y[i];
     }
 
-    coordinate["t"] = t; // { a, b , c, t}
-    console.log(coordinate)
+    coordinate[independentLatexForm] = t; // { a, b , c, t}
     const accumulative = {
       ...coordinate,
-      ...props.vars,
+      // ...props.vars,
+      ...constants,
+      // t:t
     };
-    console.log(accumulative)
 
     for (let idx = 0; idx < props.modelObj.Eqns.length; idx++) {
       const eqnObj = props.modelObj.Eqns[idx];
@@ -138,8 +138,28 @@ const NewDiffEquationSolver = (props) => {
   //   return r;
   // };
 
-  let t0 = parseFloat(props.modelObj.Config.t0);
-  let returnedY = props.modelObj.Config.initialConditions.slice();
+  // let t0 = parseFloat(props.modelObj.Config.t0);
+  let t0 = null;
+  let initialConditions = [];
+  let constants = {};
+  let independentLatexForm=null
+  for (let i = 0; i < props.modelObj.Vars.length; i++) {
+    if (props.modelObj.Vars[i].VarType === "Independent") {
+      t0 = parseFloat(props.modelObj.Vars[i].VarCurrent);
+      independentLatexForm=props.modelObj.Vars[i].LatexForm
+    }
+    if (props.modelObj.Vars[i].VarType === "Dependent") {
+      initialConditions.push(parseFloat(props.modelObj.Vars[i].VarCurrent));
+    }
+    if (props.modelObj.Vars[i].VarType === "Constant") {
+      constants[props.modelObj.Vars[i].LatexForm] = parseFloat(
+        props.modelObj.Vars[i].VarCurrent
+      );
+    }
+  }
+
+  // let returnedY = props.modelObj.Config.initialConditions.slice();
+  let returnedY = initialConditions.slice();
 
   let _returnedY = returnedY.slice();
   _returnedY.push(t0);

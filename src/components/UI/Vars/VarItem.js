@@ -14,7 +14,7 @@ import CustomizedErrorMessage from '../MyErrorMessage/CustomizedErrorMessage'
 const VarItem = (props) => {
   return (
     <li className={classes.Container} style={{ listStyleType: "none" }}>
-      {props.VarType === "Independent" ? (
+      {props.VarType === "Independent"  ? (
         <Paper
           className={classes.Dependent}
           style={{ backgroundColor: "rgb(250, 250, 230)" }}
@@ -29,7 +29,17 @@ const VarItem = (props) => {
           </div>
 
           <div className={classes.inputs}>
-            <div className={classes.input}>
+          <div className={classes.input}>
+              <OutlinedInput
+                type={"text"}
+                value={props.VarCurrent}
+                onChange={props.handleVariableInputChange}
+                label={"Current"}
+                name={"VarCurrent"}
+              />
+       
+            </div>
+            {/* <div className={classes.input}>
               <OutlinedInput
                 type={"text"}
                 value={props.Unit}
@@ -37,7 +47,7 @@ const VarItem = (props) => {
                 label={"Unit"}
                 name={"Unit"}
               />
-            </div>
+            </div> */}
             {/* <div className={classes.input}>
               <OutlinedInput
                 type={"text"}
@@ -98,7 +108,17 @@ const VarItem = (props) => {
           </div>
 
           <div className={classes.inputs}>
-            <div className={classes.input}>
+          <div className={classes.input}>
+              <OutlinedInput
+                type={"text"}
+                value={props.VarCurrent}
+                onChange={props.handleVariableInputChange}
+                label={"Current"}
+                name={"VarCurrent"}
+              />
+       
+            </div>
+            {/* <div className={classes.input}>
               <OutlinedInput
                 type={"text"}
                 value={props.Unit}
@@ -106,7 +126,7 @@ const VarItem = (props) => {
                 label={"Unit"}
                 name={"Unit"}
               />
-            </div>
+            </div> */}
             {/* <div className={classes.input}>
               <OutlinedInput
                 type={"text"}

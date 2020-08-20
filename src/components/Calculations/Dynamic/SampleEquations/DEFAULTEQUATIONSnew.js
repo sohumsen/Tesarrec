@@ -1,7 +1,7 @@
 const DEFAULTEQUATIONS = [
   {
     lineName: "Y_1",
-    textEqn: "-(K_1*Y_1*Y_2)/(K_2+Y_1)-(K_3)/(Y_1)*Y_3*K_4+Y_1",
+    textEqn: "-(K_1*Y_1*Y_2)/(K_2+Y_1)-(K_3)/(Y_1)*Y_3*K_4+Y_1*X_1",
   },
   {
     lineName: "Y_2",

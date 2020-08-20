@@ -125,18 +125,21 @@ export default class Model {
     // let parsedEqns = this.Eqns.map((eqn) => eqn.ParsedEqn);
 
     let textEqns = this.Eqns.map((eqn) => eqn.textEqn);
-    let lineNames =this.Eqns.map((eqn) => eqn.lineName);
+    // let lineNames =this.Eqns.map((eqn) => eqn.lineName);
 
-    lineNames.forEach((lineName) => {
-      scope[lineName] = 1;
+    // lineNames.forEach((lineName) => {
+    //   scope[lineName] = 1;
+    // });
+
+    // scope["X_1"] = 1;
+    this.Vars.forEach((Var) => {
+      scope["d"] = 1;
     });
-
-    scope["t"] = 1;
-
     this.Vars.forEach((Var) => {
       scope[Var.LatexForm] = 1;
     });
-
+    console.log(scope)
+    console.log(textEqns)
     let invalidIndex = [];
 
     for (let i = 0; i < textEqns.length; i++) {
@@ -299,13 +302,8 @@ export default class Model {
 
   solveDiffEqns = () => {
     let t0 = performance.now();
-     // }
-     let vars = {};
-
-     this.Vars.forEach((VarElement) => {
-       vars[VarElement.LatexForm] = VarElement.VarCurrent;
-     });
-    let calcedArr = NewDiffEquationSolver({modelObj: this,vars:vars});
+   
+    let calcedArr = NewDiffEquationSolver({modelObj: this});
     let t1 = performance.now();
     this.solutions.calcedSolution  = calcedArr
     return calcedArr;

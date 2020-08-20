@@ -23,7 +23,7 @@ export default function FormControlLabelPlacement(props) {
   //   return Eqn.line;
   // });
 
-  let menuItemsList = ["t", ...props.lineNames].map((menuItem) => {
+  let menuItemsList = ["X_1", ...props.lineNames].map((menuItem) => {
     return <MenuItem value={menuItem}>{menuItem}</MenuItem>;
   });
   let initialConditionsList = props.lineNames.map((line, i) => {

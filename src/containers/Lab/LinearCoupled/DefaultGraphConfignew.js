@@ -6,7 +6,7 @@ const DEFAULTGRAPHCONFIG = {
   DecimalPrecision: 2,
   initialConditions: [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5],
   lineNames: ["Y_1", "Y_2", "Y_3", "Y_4","Y_5","Y_6","Y_7","Y_8","Y_9"],
-  xAxis: "t", //x,y,
+  xAxis: "X_1", //x,y,
   yAxis: "Y_1",
   method: "RK4",
   numOfCycles: 30,
