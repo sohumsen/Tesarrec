@@ -7,7 +7,7 @@ import DEFAULTEQUATIONSFORMODEL from "./DEFAULTEQUATIONSFORMODEL";
 import DEFAULTVARSFORMODEL from "./DEFAULTVARS";
 import DEFAULTEQUATIONSNEW from "./DEFAULTEQUATIONSnew";
 import DEFAULTMODELCONFIGNew from "../../../../containers/Lab/LinearCoupled/DefaultGraphConfignew";
-import React from 'react'
+import React from "react";
 
 import MyErrorMessage from "../../../UI/MyErrorMessage/CustomizedErrorMessage";
 
@@ -28,10 +28,10 @@ export default class Model {
 
     this.key = "modelId" in meta ? meta.modelId : uuidv4();
     this.Config = {
-      initialConditions: dbModel.Config.initialConditions,
+      // initialConditions: dbModel.Config.initialConditions,
       h: dbModel.Config.h,
       t0: dbModel.Config.t0,
-      lineNames: dbModel.Config.lineNames,
+      // lineNames: dbModel.Config.lineNames,
       numOfCycles: dbModel.Config.numOfCycles,
       method: dbModel.Config.method,
 
@@ -41,8 +41,8 @@ export default class Model {
       solvable: dbModel.Config.solvable,
       show: dbModel.Config.show,
       submitted: dbModel.Config.submitted,
-      LegendHorizontal: dbModel.Config.LegendHorizontal,
-      LegendVertical: dbModel.Config.LegendVertical,
+      // LegendHorizontal: dbModel.Config.LegendHorizontal,
+      // LegendVertical: dbModel.Config.LegendVertical,
       DecimalPrecision: dbModel.Config.DecimalPrecision,
 
       xAxis: dbModel.Config.xAxis,
@@ -51,7 +51,12 @@ export default class Model {
     this.Eqns = dbModel.Eqns.map((eqnObj, i) => ({
       id: eqnObj.lineName + i,
       lineName: eqnObj.lineName,
-      DByDLatex: "\\frac{d" + eqnObj.lineName + "}{dt}=",
+      DByDLatex:
+        "\\frac{d" +
+        eqnObj.lineName +
+        "}{d" +
+        dbModel.Vars.find((Var) => Var.VarType === "Independent").LatexForm +
+        "}=",
       latexEqn: parse(
         parse(eqnObj.textEqn).toString({
           implicit: "hide",
@@ -276,10 +281,13 @@ export default class Model {
     for (let i = 0; i < allEqns.length; i++) {
       let textEqn = allEqns[i].textEqn;
       if (textEqn.includes("d")) {
-        let independentLatex=this.Vars.find(Var=>Var.VarType==="Independent").LatexForm
+        let independentLatex = this.Vars.find(
+          (Var) => Var.VarType === "Independent"
+        ).LatexForm;
 
         this.Vars.map((Var) => {
-          let differentialText = "(d*" + Var.LatexForm + ")/(d*" + independentLatex + ")";
+          let differentialText =
+            "(d*" + Var.LatexForm + ")/(d*" + independentLatex + ")";
           let newExpression = this.Eqns.filter(
             (eqn) => eqn.lineName === Var.LatexForm
           );

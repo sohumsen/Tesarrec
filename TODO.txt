@@ -1,24 +1,19 @@
 
 for certain eqns ban negative initials 
-can i remove graph legends configs?
-on double click eqns select all 
 
 
-da/dt=b is valid
+da/dt=b is valid 
 
 when create new file, select it
 
-remove legend orientations
-Understand linear coupled solver
 error handling in db response
-space around flex items in linear coupled
 
 
 publish eqns doesnt work
 when change varitems, change eqns 
-get private public doesnt work
-update graph config
-on change varitems, change differentials
+get private public doesnt work 
+if error in var items, dont calculate
+
 
 
 24th Jul - 7th Aug 
@@ -80,9 +75,15 @@ Audit
 DONE
 ========
 allow db/dt as input on right side CLARIFY DONE
+space around flex items in linear coupled DONE
+remove legend orientations DONE
+can i remove graph legends configs? DONE
+remove lineNames maybe DONE
+
 on edit filename, select it DONE
 remove hard coding of X_1 DONE
-
+update graph config DONE
+on change varitems, change differentials DONE
 save eqn doesnt work DONE
 graph shakes when moving slider DONE
 shrink sid pic DONE

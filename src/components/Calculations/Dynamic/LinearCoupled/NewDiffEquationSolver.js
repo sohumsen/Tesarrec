@@ -64,7 +64,9 @@ const NewDiffEquationSolver = (props) => {
     let coordinate = {}; //t initial value
     //generates the eval object
     for (let i = 0; i < y.length; i++) {
-      const dependentVariable = props.modelObj.Config.lineNames[i]; // { a, b , c}
+      // const dependentVariable = props.modelObj.Config.lineNames[i]; // { a, b , c}
+      const dependentVariable = lineNames[i]; // { a, b , c}
+
       coordinate[dependentVariable] = y[i];
     }
 
@@ -143,6 +145,7 @@ const NewDiffEquationSolver = (props) => {
   let initialConditions = [];
   let constants = {};
   let independentLatexForm=null
+  let lineNames=[]
   for (let i = 0; i < props.modelObj.Vars.length; i++) {
     if (props.modelObj.Vars[i].VarType === "Independent") {
       t0 = parseFloat(props.modelObj.Vars[i].VarCurrent);
@@ -150,6 +153,7 @@ const NewDiffEquationSolver = (props) => {
     }
     if (props.modelObj.Vars[i].VarType === "Dependent") {
       initialConditions.push(parseFloat(props.modelObj.Vars[i].VarCurrent));
+      lineNames.push(props.modelObj.Vars[i].LatexForm)
     }
     if (props.modelObj.Vars[i].VarType === "Constant") {
       constants[props.modelObj.Vars[i].LatexForm] = parseFloat(

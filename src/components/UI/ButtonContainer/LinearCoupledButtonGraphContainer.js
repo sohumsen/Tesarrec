@@ -6,8 +6,16 @@ import { Tooltip, Paper } from "@material-ui/core";
 import { red } from "@material-ui/core/colors";
 import CloseIcon from "@material-ui/icons/Close";
 import SettingsIcon from "@material-ui/icons/Settings";
+import ImportExportIcon from "@material-ui/icons/ImportExport";
+
+import { CSVLink } from "react-csv";
 
 const LinearCoupledButtonGraphContainer = (props) => {
+  let lineNames = props.modelObj.Vars.filter((el) => {
+    return el.VarType === "Independent"||el.VarType === "Dependent"
+  }).map(Var=>Var.LatexForm)
+  let csvData = [lineNames];
+  csvData.push(...props.modelObj.solutions.calcedSolution);
   return (
     <Paper>
       <Tooltip title="Config Equations" placement="top" arrow>
@@ -22,6 +30,16 @@ const LinearCoupledButtonGraphContainer = (props) => {
           </IconButton>
         </span>
       </Tooltip>
+
+      <CSVLink data={csvData}>
+        <Tooltip title="Download model" placement="top">
+          <span>
+            <IconButton edge="end" aria-label="Download">
+              <ImportExportIcon />
+            </IconButton>
+          </span>
+        </Tooltip>
+      </CSVLink>
       <Tooltip title="Close" placement="top" arrow>
         <span>
           <IconButton edge="end" aria-label="add" onClick={props.onGraphClose}>

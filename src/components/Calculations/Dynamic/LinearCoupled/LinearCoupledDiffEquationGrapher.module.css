@@ -1,18 +1,27 @@
 .Container{
-  background-color: aqua;
 
 
 }
 
 .Table{
   /* width:30vw */
+  margin:5px;
+
   width: 50vw;
 
 
 }
 
 .Graph{
+  margin:5px;
+
   width: 50vw;
 
  
+}
+.Button{
+  background-color: aqua;
+  position: absolute;
+  top: 0;
+  left: 50vw;
 }

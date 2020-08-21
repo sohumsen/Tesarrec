@@ -80,42 +80,64 @@ class LinearCoupledNew extends Component {
       item.textEqn = mathField.text();
       item.latexEqn = mathField.latex();
     } else {
-      if (!(item.errorMessage === "Err")) {
-        console.log("its valid, make the change");
-        let Eqns = [...this.state.modelObj.Eqns];
-        let eqnObj=Eqns.find(eqn=>eqn.lineName===this.state.modelObj.Vars[idx].LatexForm)
-        eqnObj.DByDLatex=2
-        for (let i = 0; i < Eqns.length; i++) {
-          // console.log(this.state.modelObj.Vars[idx].LatexForm,mathField.latex(),Eqns[i].textEqn)
-          console.log(mathField.latex(), mathField.text());
-          let textEqn = Eqns[i].textEqn
-            .split(this.state.modelObj.Vars[idx].LatexForm) //find
-            .join(mathField.text()); //replace
-          // let txt2 = this.state.modelObj.Vars[idx].LatexForm.slice(0, 1) + "\\" + this.state.modelObj.Vars[idx].LatexForm.slice(1);
-          // let txt3 = mathField.latex().slice(0, 1) + "\\" + mathField.latex().slice(1);
+      // if (!(item.errorMessage === "Err")) {
+      let modelObj = this.state.modelObj;
 
-          // console.log(txt2)
-          // let latexEqn = Eqns[i].latexEqn
-          //   .split(txt2)
-          //   .join(txt3);
+      let Eqns = this.state.modelObj.Eqns;
 
+      if (item.VarType === "Dependent") {
 
-          console.log(textEqn);
-          Eqns[i].latexEqn = parse(
-            parse(textEqn).toString({
-              implicit: "hide",
-              parenthesis: "auto",
-            })
-            // \frac{dY_1}{dx}=
-          ).toTex({
-            parenthesis: "auto",
-            implicit: "hide",
-          });
-          // Eqns[i].textEqn = textEqn;
-        }
+        let index = Eqns.findIndex(
+          (Eqn) => Eqn.lineName === this.state.modelObj.Vars[idx].LatexForm
+        );
+        let independentLatex = this.state.modelObj.Vars.find(
+          (Var) => Var.VarType === "Independent"
+        ).LatexForm;
+        Eqns[index].DByDLatex =
+          "\\frac{d" + mathField.latex() + "}{" + independentLatex + "}=";
+        Eqns[index].lineName = mathField.latex();
 
-        console.log(Eqns);
+        modelObj.Eqns = Eqns;
+        console.log(Eqns, modelObj, index);
+      } else if (item.VarType === "Independent") {
+        Eqns.forEach(
+          (Eqn) =>
+            (Eqn.DByDLatex =
+              "\\frac{d" + Eqn.lineName + "}{" + mathField.latex() + "}=")
+        );
       }
+
+      // this.setState({modelObj:modelObj})
+
+      // for (let i = 0; i < Eqns.length; i++) {
+      //   // console.log(this.state.modelObj.Vars[idx].LatexForm,mathField.latex(),Eqns[i].textEqn)
+      //   console.log(mathField.latex(), mathField.text());
+      //   let textEqn = Eqns[i].textEqn
+      //     .split(this.state.modelObj.Vars[idx].LatexForm) //find
+      //     .join(mathField.text()); //replace
+      //   // let txt2 = this.state.modelObj.Vars[idx].LatexForm.slice(0, 1) + "\\" + this.state.modelObj.Vars[idx].LatexForm.slice(1);
+      //   // let txt3 = mathField.latex().slice(0, 1) + "\\" + mathField.latex().slice(1);
+
+      //   // console.log(txt2)
+      //   // let latexEqn = Eqns[i].latexEqn
+      //   //   .split(txt2)
+      //   //   .join(txt3);
+
+      //   console.log(textEqn);
+      //   Eqns[i].latexEqn = parse(
+      //     parse(textEqn).toString({
+      //       implicit: "hide",
+      //       parenthesis: "auto",
+      //     })
+      //     // \frac{dY_1}{dx}=
+      //   ).toTex({
+      //     parenthesis: "auto",
+      //     implicit: "hide",
+      //   });
+      //   // Eqns[i].textEqn = textEqn;
+      // }
+
+      // }
       item.LatexForm = mathField.latex();
       items[idx] = item;
       let invalidIdx = [];
@@ -181,19 +203,24 @@ class LinearCoupledNew extends Component {
       aModel.Config.calculate = false;
     }
 
+    let allPossibleAxes = this.state.modelObj.Vars.filter(
+      (Var) => Var.VarType === "Independent" || Var.VarType === "Dependent"
+    ).map((Var) => Var.LatexForm);
     let yAxis = this.state.modelObj.Config.yAxis;
+    let xAxis = this.state.modelObj.Config.xAxis;
 
-    if (!this.state.modelObj.Config.lineNames.includes(yAxis)) {
-      yAxis = this.state.modelObj.Config.lineNames[0];
+    if (!allPossibleAxes.includes(xAxis)) {
+      xAxis = allPossibleAxes[0];
     }
-    // aModel.Eqns = newEqns;
+    if (!allPossibleAxes.includes(yAxis)) {
+      yAxis = allPossibleAxes[0];
+    }
 
     aModel.Config.yAxis = yAxis;
+    aModel.Config.xAxis = xAxis;
 
     this.setState({ modelObj: aModel });
   };
-
-
 
   ITEMS_remove = (id, itemType) => {
     let modelObj = this.state.modelObj;
@@ -213,14 +240,14 @@ class LinearCoupledNew extends Component {
         return eqn.id !== id;
       });
 
-      let lineNames = Eqns.map((eqn) => eqn.lineName);
-      let initialConditions = this.state.modelObj.Config.initialConditions.filter(
-        (_, i) => {
-          return i !== idx;
-        }
-      );
-      Config.lineNames = lineNames;
-      Config.initialConditions = initialConditions;
+      // let lineNames = Eqns.map((eqn) => eqn.lineName);
+      // let initialConditions = this.state.modelObj.Config.initialConditions.filter(
+      //   (_, i) => {
+      //     return i !== idx;
+      //   }
+      // );
+      // Config.lineNames = lineNames;
+      // Config.initialConditions = initialConditions;
       modelObj.Config = Config;
       modelObj.Eqns = Eqns;
       modelObj.Vars = Vars;
@@ -348,10 +375,15 @@ class LinearCoupledNew extends Component {
     const results = Eqns.filter(({ lineName: a }) => {
       return !prevState.modelObj.Eqns.some(({ lineName: b }) => b === a);
     });
+    let independentLatex = this.state.modelObj.Vars.find(
+      (Var) => Var.VarType === "Independent"
+    ).LatexForm;
+
     let EqnObj = {
       id: results[0].lineName,
       lineName: results[0].lineName,
-      DByDLatex: "\\frac{d" + results[0].lineName + "}{dt}=",
+      DByDLatex:
+        "\\frac{d" + results[0].lineName + "}{d" + independentLatex + "}=",
       latexEqn: parse(
         parse(results[0].textEqn).toString({
           implicit: "hide",
@@ -375,8 +407,8 @@ class LinearCoupledNew extends Component {
       this.VARS_nextPossible(this.state, "Dependent")
     );
 
-    modelObj.Config.initialConditions.push(0.5);
-    modelObj.Config.lineNames = modelObj.Eqns.map((eqn) => eqn.lineName);
+    // modelObj.Config.initialConditions.push(0.5);
+    // modelObj.Config.lineNames = modelObj.Eqns.map((eqn) => eqn.lineName);
     this.setState({
       modelObj: modelObj,
     });
@@ -394,12 +426,12 @@ class LinearCoupledNew extends Component {
 
   GRAPHCONFIG_onChange = (name) => (event, value) => {
     let modelObj = this.state.modelObj;
-    if (name.includes("initialConditions")) {
-      let idx = name[name.length - 1];
-      modelObj.Config.initialConditions[idx] = event.target.value;
-    } else {
-      modelObj.Config[name] = event.target.value;
-    }
+    // if (name.includes("initialConditions")) {
+    //   let idx = name[name.length - 1];
+    //   modelObj.Config.initialConditions[idx] = event.target.value;
+    // } else {
+    modelObj.Config[name] = event.target.value;
+    // }
 
     modelObj.Config.submitted = false;
 
@@ -408,13 +440,13 @@ class LinearCoupledNew extends Component {
   GRAPHCONFIG_onSubmit = () => {
     let modelObj = this.state.modelObj;
 
-    let newInitialConditions = modelObj.Config.initialConditions.map(Number);
-    if (newInitialConditions.length === this.state.modelObj.Eqns.length) {
-      modelObj.Config.initialConditions = newInitialConditions;
-      modelObj.Config.submitted = true;
-    } else {
-      modelObj.Config.submitted = false;
-    }
+    // let newInitialConditions = modelObj.Config.initialConditions.map(Number);
+    // if (newInitialConditions.length === this.state.modelObj.Eqns.length) {
+    //   modelObj.Config.initialConditions = newInitialConditions;
+    //   modelObj.Config.submitted = true;
+    // } else {
+    modelObj.Config.submitted = false;
+    // }
     modelObj.Config.show = false;
 
     this.setState({ modelObj: modelObj });
@@ -426,6 +458,7 @@ class LinearCoupledNew extends Component {
     this.state.modelObj.Vars.forEach((VarElement) => {
       vars[VarElement.LatexForm] = VarElement.VarCurrent;
     });
+    console.log(this.state.modelObj);
     return (
       <div key="Graph">
         <LinearCoupledDiffEquationGrapher
@@ -503,6 +536,7 @@ class LinearCoupledNew extends Component {
                 modelObj.Config.calculate = false;
                 this.setState({ modelObj: modelObj });
               }}
+              modelObj={this.state.modelObj}
             />
             {this.state.modelObj.Config.submitted ? this.GRAPH_render() : null}
           </div>
@@ -519,11 +553,11 @@ class LinearCoupledNew extends Component {
               configPos={this.props.configPos}
               Vars={this.state.modelObj.Vars}
               errorMessage={!this.state.modelObj.Config.submitted}
-              LegendHorizontal={this.state.modelObj.Config.LegendHorizontal}
-              LegendVertical={this.state.modelObj.Config.LegendVertical}
+              // LegendHorizontal={this.state.modelObj.Config.LegendHorizontal}
+              // LegendVertical={this.state.modelObj.Config.LegendVertical}
               DecimalPrecision={this.state.modelObj.Config.DecimalPrecision}
-              initialConditions={this.state.modelObj.Config.initialConditions}
-              lineNames={this.state.modelObj.Config.lineNames}
+              // initialConditions={this.state.modelObj.Config.initialConditions}
+              // lineNames={this.state.modelObj.Config.lineNames}
               xAxis={this.state.modelObj.Config.xAxis}
               yAxis={this.state.modelObj.Config.yAxis}
               method={this.state.modelObj.Config.method}

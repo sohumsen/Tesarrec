@@ -11,6 +11,7 @@
   align-content: center;
   justify-content: space-between;
   flex-flow: row wrap;
+  padding:5px
 
   /* margin-left: auto;
   align-content: flex-end
@@ -23,6 +24,7 @@
   align-self: baseline;
   background-color: aqua;
   order: 3;
+  margin:5px
 }
 
 .EqnContainer {
@@ -43,12 +45,13 @@
   flex: 4 0;
   align-self: baseline;
   order: 2;
-}
+  margin:5px}
 .MetaContainer {
   /* position: absolute;
   bottom: 0;
   left: 0;
   width: 15%; */
+  margin:5px;
   background-color: antiquewhite;
 }
 .Graph {
@@ -56,6 +59,7 @@
   /* margin: 10px; */
   align-self: baseline;
   order: 4;
+  margin:5px
 
   /* background-color: bisque; 
   border-width: 2px;

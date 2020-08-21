@@ -65,30 +65,108 @@ class ModelBench extends Component {
 
   MODEL_createNew = () => {
     let aNewModel = this.newModel();
-    console.log(aNewModel);
 
-    this.setState(
+    fetch(
+      "https://tesarrec.firebaseio.com/eqns/" +
+        this.props.userId +
+        ".json?auth=" +
+        this.props.token,
       {
-        selectedModel: aNewModel,
-      },
-      () => {
-        this.generalDBRequest(
-          this.state.selectedModel,
-          "https://tesarrec.firebaseio.com/eqns/" +
-            this.props.userId +
-            ".json?auth=" +
-            this.props.token,
-          "post",
-
-          //TODO to be optimised
-          this.setState({ error: false }, () => {
-            console.log(this.state);
-
-            this.MODEL_getPrivate();
-          })
-        );
+        method: "post",
+        headers: {
+          Accept: "application/json, text/plain, */*",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(aNewModel),
       }
-    );
+    )
+      .then((response) => response.json())
+      .then((data) => {
+        if (!data.error) {
+          this.setState(
+            {
+              error: false,
+              selectedModelId: data.name,
+            },
+            ()=>{
+
+              const queryParams = "?auth=" + this.props.token; //+'&orderBy="userId"&equalTo="'+this.props.userId+'"'
+              fetch(
+                "https://tesarrec.firebaseio.com/eqns/" +
+                  this.props.userId +
+                  ".json" +
+                  queryParams,
+                {
+                  method: "get",
+                  headers: {
+                    Accept: "application/json, text/plain, */*",
+                    "Content-Type": "application/json",
+                  },
+                }
+              )
+                .then((response) => response.json())
+                .then((data) => {
+                  if (!data.error) {
+                    console.log(data);
+                    this.setState({
+                      allModelId: data,
+                      error: false,
+                      selectedModel: this.state.allModelId[this.state.selectedModelId],
+
+                      loading: false,
+                    });
+                  } else {
+                    this.setState({ error: true });
+                  }
+                })
+                .catch((error) => {
+                  this.setState({ error: true });
+                });
+
+            })
+          
+         
+          // console.log(data.name, this.state.allModelId);
+          // this.setState(
+          //   {
+          //     error: false,
+          //     selectedModelId: data.name,
+          //     selectedModel: this.state.allModelId[data.name],
+          //   },
+          //   () => {
+          //     console.log(this.state, data);
+          //   }
+          // );
+        } else {
+          this.setState({ error: true });
+        }
+      })
+      .catch((error) => {
+        this.setState({ error: true });
+      });
+
+    // this.setState(
+    //   {
+    //     selectedModel: aNewModel,
+    //   },
+    //   () => {
+    //     this.generalDBRequest(
+    //       this.state.selectedModel,
+    //       "https://tesarrec.firebaseio.com/eqns/" +
+    //         this.props.userId +
+    //         ".json?auth=" +
+    //         this.props.token,
+    //       "post",
+
+    //       //TODO to be optimised
+    //       this.setState({ error: false }, () => {
+    //         console.log(this.state);
+
+    //         this.MODEL_getPrivate();
+    //       })
+    //     );
+    //   }
+    // );
   };
 
   toSkeleton = (modelObj) => {
@@ -314,6 +392,7 @@ class ModelBench extends Component {
       .then((response) => response.json())
       .then((data) => {
         if (!data.error) {
+          console.log(data);
           this.setState({ allModelId: data, error: false, loading: false });
         } else {
           this.setState({ error: true });
