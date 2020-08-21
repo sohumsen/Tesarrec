@@ -1,8 +1,6 @@
-allow db/dt as input on right side CLARIFY
 
 for certain eqns ban negative initials 
-canvas js add 0 axis lines
-
+can i remove graph legends configs?
 on double click eqns select all 
 
 
@@ -16,16 +14,11 @@ error handling in db response
 space around flex items in linear coupled
 
 
-publish eqns doesnt workd
-
-allow db/dt as input on other side
-sort var items
+publish eqns doesnt work
 when change varitems, change eqns 
-remove a,b,c
-graph shakes when moving slider
 get private public doesnt work
-on edit filename, select it
-save eqn doesnt work
+update graph config
+on change varitems, change differentials
 
 
 24th Jul - 7th Aug 
@@ -86,10 +79,18 @@ Audit
 
 DONE
 ========
+allow db/dt as input on right side CLARIFY DONE
+on edit filename, select it DONE
+remove hard coding of X_1 DONE
+
+save eqn doesnt work DONE
+graph shakes when moving slider DONE
 shrink sid pic DONE
 edit name doesnt save in correct place DONE
 fix graph config inputs DONE
-
+allow db/dt as input on other side DONE 
+sort var items DONE
+remove a,b,c DONE
 fix var sliders DONE
 abiut page contact button DONE
 remove contact page DONE

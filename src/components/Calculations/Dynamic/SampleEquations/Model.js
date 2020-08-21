@@ -7,6 +7,9 @@ import DEFAULTEQUATIONSFORMODEL from "./DEFAULTEQUATIONSFORMODEL";
 import DEFAULTVARSFORMODEL from "./DEFAULTVARS";
 import DEFAULTEQUATIONSNEW from "./DEFAULTEQUATIONSnew";
 import DEFAULTMODELCONFIGNew from "../../../../containers/Lab/LinearCoupled/DefaultGraphConfignew";
+import React from 'react'
+
+import MyErrorMessage from "../../../UI/MyErrorMessage/CustomizedErrorMessage";
 
 export default class Model {
   constructor(dbModel, meta) {
@@ -46,9 +49,9 @@ export default class Model {
       yAxis: dbModel.Config.yAxis,
     };
     this.Eqns = dbModel.Eqns.map((eqnObj, i) => ({
-      id: eqnObj.lineName+i,
+      id: eqnObj.lineName + i,
       lineName: eqnObj.lineName,
-      DByDLatex: "\\frac{d" + eqnObj.lineName+ "}{dt}=",
+      DByDLatex: "\\frac{d" + eqnObj.lineName + "}{dt}=",
       latexEqn: parse(
         parse(eqnObj.textEqn).toString({
           implicit: "hide",
@@ -111,16 +114,7 @@ export default class Model {
 
     */
 
-  onCalculate() {
-    this.solutions.calcedSolution = this.solveDiffEqns();
-  }
-
- 
-  setCalculate(val) {
-    this.meta.calculate = val;
-  }
-
-  validateExpressions2 = () => {
+  validateExpressions = () => {
     let scope = {};
     // let parsedEqns = this.Eqns.map((eqn) => eqn.ParsedEqn);
 
@@ -131,15 +125,14 @@ export default class Model {
     //   scope[lineName] = 1;
     // });
 
-    // scope["X_1"] = 1;
     this.Vars.forEach((Var) => {
       scope["d"] = 1;
     });
     this.Vars.forEach((Var) => {
       scope[Var.LatexForm] = 1;
     });
-    console.log(scope)
-    console.log(textEqns)
+    console.log(scope);
+    console.log(textEqns);
     let invalidIndex = [];
 
     for (let i = 0; i < textEqns.length; i++) {
@@ -158,13 +151,6 @@ export default class Model {
   /**
    * This updates the models numCycles
    */
-
-  setNumOfCycles(numCycles) {
-    this.config.numOfCycles = numCycles;
-    //this.solutions.actualSolution = this.generateActualSolutionArray();
-    //this.solutions.calcedSolution = this.solveDiffEqns();
-    //this.meta.rmse = this.calcRMSE();
-  }
 
   calcRMSE() {
     /**
@@ -226,30 +212,7 @@ export default class Model {
   /**
    * This creates a text form from latex form eqautions
    */
-  toTextForm() {}
 
-  validateExpressions(parsedEqns, lineNames, Vars) {
-    let scope = {};
-    lineNames.forEach((lineName) => {
-      scope[lineName] = 1;
-    });
-    Vars.forEach((Var) => {
-      scope[Var.LatexForm] = 1;
-    });
-
-    let invalidIndex = [];
-
-    for (let i = 0; i < parsedEqns.length; i++) {
-      try {
-        evaluate(parsedEqns[i], scope);
-      } catch (error) {
-        invalidIndex.push(i);
-      }
-    }
-    return invalidIndex;
-  }
-
- 
   /**
    * This generates a actual solution of the model
    * has been provided with any
@@ -302,13 +265,44 @@ export default class Model {
 
   solveDiffEqns = () => {
     let t0 = performance.now();
-   
-    let calcedArr = NewDiffEquationSolver({modelObj: this});
+
+    let calcedArr = NewDiffEquationSolver({ modelObj: this });
     let t1 = performance.now();
-    this.solutions.calcedSolution  = calcedArr
+    this.solutions.calcedSolution = calcedArr;
     return calcedArr;
   };
 
+  insertDifferentialIntoText = (allEqns) => {
+    for (let i = 0; i < allEqns.length; i++) {
+      let textEqn = allEqns[i].textEqn;
+      if (textEqn.includes("d")) {
+        let independentLatex=this.Vars.find(Var=>Var.VarType==="Independent").LatexForm
+
+        this.Vars.map((Var) => {
+          let differentialText = "(d*" + Var.LatexForm + ")/(d*" + independentLatex + ")";
+          let newExpression = this.Eqns.filter(
+            (eqn) => eqn.lineName === Var.LatexForm
+          );
+          if (
+            newExpression.length !== 0 &&
+            textEqn.includes(differentialText)
+          ) {
+            let newtextEqn = textEqn
+              .split(differentialText)
+              .join(newExpression[0].textEqn);
+
+            if (newtextEqn.includes(differentialText)) {
+              allEqns[i].errorMessage = <MyErrorMessage />;
+            } else {
+              allEqns[i].textEqn = newtextEqn;
+              allEqns[i].parsedEqn = simplify(parse(newtextEqn));
+            }
+          }
+        });
+      }
+    }
+    return allEqns;
+  };
 
   getTimeTaken = () => {
     let t_0 = performance.now();

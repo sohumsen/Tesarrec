@@ -9,9 +9,15 @@ import Input from "../Input/Input";
 import CloseButton from "../Button/CloseButton";
 import GenericButton from "../Button/GenericButton";
 import MyErrorMessage from "../MyErrorMessage/MyErrorMessage";
-import { Paper, Select, MenuItem, Tooltip, IconButton } from "@material-ui/core";
+import {
+  Paper,
+  Select,
+  MenuItem,
+  Tooltip,
+  IconButton,
+} from "@material-ui/core";
 import CustomizedErrorMessage from "../MyErrorMessage/CustomizedErrorMessage";
-import ErrorOutlineIcon from '@material-ui/icons/ErrorOutline';
+import ErrorOutlineIcon from "@material-ui/icons/ErrorOutline";
 import PlayCircleOutlineIcon from "@material-ui/icons/PlayCircleOutline";
 import { green } from "@material-ui/core/colors";
 
@@ -22,25 +28,26 @@ export default function FormControlLabelPlacement(props) {
   //   axisMenuItemsList.push(Eqn.line);
   //   return Eqn.line;
   // });
-
-  let menuItemsList = ["X_1", ...props.lineNames].map((menuItem) => {
+  let allAxis = props.Vars.filter(
+    (Var) => Var.VarType === "Independent" || Var.VarType === "Dependent"
+  ).map((Var1) => Var1.LatexForm);
+  let menuItemsList = allAxis.map((menuItem) => {
     return <MenuItem value={menuItem}>{menuItem}</MenuItem>;
   });
-  let initialConditionsList = props.lineNames.map((line, i) => {
-    return (
-      <Input
-        label={"Initial " + line}
-        name={line}
-        value={props.initialConditions[i]}
-        onChange={props.onChange("initialConditions" + i)}
-      />
-    );
-  });
+  // let initialConditionsList = props.lineNames.map((line, i) => {
+  //   return (
+  //     <Input
+  //       label={"Initial " + line}
+  //       name={line}
+  //       value={props.initialConditions[i]}
+  //       onChange={props.onChange("initialConditions" + i)}
+  //     />
+  //   );
+  // });
 
   return (
     <div>
       <Paper elevation={3}>
-     
         <div className={classes.closeButton}>
           <CloseButton
             type="button"
@@ -51,16 +58,12 @@ export default function FormControlLabelPlacement(props) {
         </div>
 
         <Tooltip title="Submit Config" placement="top" arrow>
-        <span>
-          <IconButton
-            edge="end"
-            aria-label="Submit"
-            onClick={props.onSubmit}
-          >
-            <PlayCircleOutlineIcon style={{ color: green[500] }} />
-          </IconButton>
-        </span>
-      </Tooltip>
+          <span>
+            <IconButton edge="end" aria-label="Submit" onClick={props.onSubmit}>
+              <PlayCircleOutlineIcon style={{ color: green[500] }} />
+            </IconButton>
+          </span>
+        </Tooltip>
         {/* <div className={classes.submitButton}>
             <GenericButton
               value="Submit"
@@ -69,9 +72,9 @@ export default function FormControlLabelPlacement(props) {
               onClick={props.onSubmit}
             />
           </div> */}
-          <div className={classes.errorMessage}>
-            {props.errorMessage ?<ErrorOutlineIcon color="secondary"/> : null}
-          </div>
+        <div className={classes.errorMessage}>
+          {props.errorMessage ? <ErrorOutlineIcon color="secondary" /> : null}
+        </div>
 
         <div className={classes.Container}>
           {/* <FormLabel component="legend">Horizontal Align</FormLabel>
@@ -133,7 +136,7 @@ export default function FormControlLabelPlacement(props) {
           
            */}
           <div className={classes.model}>
-            <div className={classes.item}>{initialConditionsList}</div>
+            {/* <div className={classes.item}>{initialConditionsList}</div> */}
             {/* <div className={classes.item}>
               <Input
                 label="Initial y"
@@ -142,14 +145,14 @@ export default function FormControlLabelPlacement(props) {
                 onChange={props.onChange("initialConditions")}
               />
             </div> */}
-            <div className={classes.item}>
+            {/* <div className={classes.item}>
               <Input
                 label="Inititial t"
                 type="text"
                 value={props.t0}
                 onChange={props.onChange("t0")}
               />
-            </div>
+            </div> */}
             <div className={classes.item}>
               <Input
                 label="Step size"
@@ -201,7 +204,6 @@ export default function FormControlLabelPlacement(props) {
 
             {/* </div> */}
           </div>
-
         </div>
       </Paper>
     </div>

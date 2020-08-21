@@ -1,17 +1,18 @@
 .Container{
-  margin: 10px;
-  display: inline;
+  background-color: aqua;
+
+
 }
 
 .Table{
-  flex:7;
-  margin: 10px;
   /* width:30vw */
+  width: 50vw;
+
 
 }
 
 .Graph{
-  flex: 15;
-  margin: 10px;
+  width: 50vw;
 
+ 
 }

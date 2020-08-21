@@ -6,7 +6,7 @@ import classes from "./ModelBench.module.css";
 import MyTabs from "../../components/UI/MyTabs/MyTabs";
 import Skeleton from "../../components/UI/Skeleton/Skeleton";
 // import MyErrorMessage from "../../components/UI/MyErrorMessage/MyErrorMessage";
-import Sample from './Sample'
+import Sample from "./Sample";
 
 import DEFAULTEQUATIONS from "../../components/Calculations/Dynamic/SampleEquations/DEFAULTEQUATIONS";
 import DEFAULTVARS from "../../components/Calculations/Dynamic/SampleEquations/DEFAULTVARS";
@@ -65,7 +65,7 @@ class ModelBench extends Component {
 
   MODEL_createNew = () => {
     let aNewModel = this.newModel();
-    console.log(aNewModel)
+    console.log(aNewModel);
 
     this.setState(
       {
@@ -82,7 +82,7 @@ class ModelBench extends Component {
 
           //TODO to be optimised
           this.setState({ error: false }, () => {
-            console.log(this.state)
+            console.log(this.state);
 
             this.MODEL_getPrivate();
           })
@@ -171,10 +171,10 @@ class ModelBench extends Component {
           "/.json?auth=" +
           this.props.token,
         "PATCH",
-        this.setState({ selectedModelId: "" }, () => {
+        () => {
           this.MODEL_getPrivate();
           this.MODEL_getPublic();
-        })
+        }
       );
       // fetch(
       //   "https://tesarrec.firebaseio.com/eqns/" +
@@ -285,6 +285,7 @@ class ModelBench extends Component {
       .then((response) => response.json())
       .then((data) => {
         if (!data.error) {
+          console.log(data);
           this.setState({ allPublicId: data, error: false, loading: false });
         } else {
           this.setState({ error: true });
@@ -404,7 +405,6 @@ class ModelBench extends Component {
             publishEquation={this.MODEL_publish}
             copyAllEqnsText={this.EQNS_copyAllText}
             createNewFile={this.MODEL_createNew}
-
             handleTabChange={this.handleTabChange}
             tabChoiceValue={this.state.tabChoiceValue}
           />
@@ -412,7 +412,6 @@ class ModelBench extends Component {
       : (modelLinks = null);
 
     const nodeRef = React.createRef(null);
-
     return (
       // can u inject a background-color: ranmdom lookup color if DEVMODE=TRUE
 

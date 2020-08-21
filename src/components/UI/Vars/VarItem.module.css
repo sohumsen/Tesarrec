@@ -26,7 +26,7 @@
 .slider {
   /*background-color: rgb(173, 172, 211);*/
   width: 50%;
-  padding-left: 2px;
+  /* padding-left: 2px; */
 
   float: left;
 }

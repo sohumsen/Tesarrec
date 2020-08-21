@@ -83,6 +83,8 @@ class LinearCoupledNew extends Component {
       if (!(item.errorMessage === "Err")) {
         console.log("its valid, make the change");
         let Eqns = [...this.state.modelObj.Eqns];
+        let eqnObj=Eqns.find(eqn=>eqn.lineName===this.state.modelObj.Vars[idx].LatexForm)
+        eqnObj.DByDLatex=2
         for (let i = 0; i < Eqns.length; i++) {
           // console.log(this.state.modelObj.Vars[idx].LatexForm,mathField.latex(),Eqns[i].textEqn)
           console.log(mathField.latex(), mathField.text());
@@ -97,6 +99,7 @@ class LinearCoupledNew extends Component {
           //   .split(txt2)
           //   .join(txt3);
 
+
           console.log(textEqn);
           Eqns[i].latexEqn = parse(
             parse(textEqn).toString({
@@ -108,7 +111,7 @@ class LinearCoupledNew extends Component {
             parenthesis: "auto",
             implicit: "hide",
           });
-          Eqns[i].textEqn = textEqn;
+          // Eqns[i].textEqn = textEqn;
         }
 
         console.log(Eqns);
@@ -145,7 +148,7 @@ class LinearCoupledNew extends Component {
   MATHQUILL_handleInputSubmit = (event) => {
     event.preventDefault();
     let newEqns = [];
-    let invalidIndex = this.state.modelObj.validateExpressions2();
+    let invalidIndex = this.state.modelObj.validateExpressions();
 
     for (let i = 0; i < this.state.modelObj.Eqns.length; i++) {
       const eqn = this.state.modelObj.Eqns[i];
@@ -161,16 +164,21 @@ class LinearCoupledNew extends Component {
     }
     let aModel = this.state.modelObj;
 
-    invalidIndex.length != 0
-      ? (aModel.Config.calculate = false)
-      : (aModel.Config.calculate = true);
-
-    if (invalidIndex.length!==0){
+    if (invalidIndex.length === 0) {
       //valid
-      for (let i = 0; i < newEqns.length; i++) {
-        this.EQNS_insertDifferential(newEqns[i].textEqn)
-        
+      // let newEqns2 = this.EQNS_insertDifferential(newEqns);
+      let newEqns2 = this.state.modelObj.insertDifferentialIntoText(newEqns);
+
+      if (newEqns.some((eqn) => eqn.errorMessage !== null)) {
+        //invalid
+        aModel.Config.calculate = false;
+        aModel.Eqns = newEqns2;
+      } else {
+        aModel.Config.calculate = true;
+        aModel.Eqns = newEqns2;
       }
+    } else {
+      aModel.Config.calculate = false;
     }
 
     let yAxis = this.state.modelObj.Config.yAxis;
@@ -178,22 +186,14 @@ class LinearCoupledNew extends Component {
     if (!this.state.modelObj.Config.lineNames.includes(yAxis)) {
       yAxis = this.state.modelObj.Config.lineNames[0];
     }
-    aModel.Eqns = newEqns;
+    // aModel.Eqns = newEqns;
 
     aModel.Config.yAxis = yAxis;
 
     this.setState({ modelObj: aModel });
   };
 
-  EQNS_insertDifferential=(textEqn)=>{
-    if (textEqn.includes("d"))
-    this.state.modelObj.Vars.map(Var=>{
-      let differentialText="(d*"+Var.LatexForm+")/(d*"+"X_1"+")"
-      console.log(differentialText)
-      let newExpression=
-    })
-    textEqn.replace("d"+)
-  }
+
 
   ITEMS_remove = (id, itemType) => {
     let modelObj = this.state.modelObj;
@@ -320,17 +320,13 @@ class LinearCoupledNew extends Component {
       LatexForm: letterTypes[type] + "_" + numbers[0],
       errorMessage: null,
       VarType: type,
-      VarCurrent: type==="Constant"?50:0.5,
+      VarCurrent: type === "Constant" ? 50 : 0.5,
     };
     if (type === "Constant") {
-      VariableObj.VarLow= 0
-      VariableObj.VarHigh= 100
-
+      VariableObj.VarLow = 0;
+      VariableObj.VarHigh = 100;
     }
-      // VariableObj.Unit = "cm";
-    
-
-    
+    // VariableObj.Unit = "cm";
 
     return VariableObj;
   };
@@ -375,7 +371,9 @@ class LinearCoupledNew extends Component {
   EQNS_onIncrement = () => {
     let modelObj = this.state.modelObj;
     modelObj.Eqns = modelObj.Eqns.concat(this.EQNS_nextPossible(this.state));
-    modelObj.Vars = modelObj.Vars.concat(this.VARS_nextPossible(this.state,"Dependent"));
+    modelObj.Vars = modelObj.Vars.concat(
+      this.VARS_nextPossible(this.state, "Dependent")
+    );
 
     modelObj.Config.initialConditions.push(0.5);
     modelObj.Config.lineNames = modelObj.Eqns.map((eqn) => eqn.lineName);
@@ -519,6 +517,7 @@ class LinearCoupledNew extends Component {
           <div key="GraphConfig" className={classes.graphConfig}>
             <GraphConfig
               configPos={this.props.configPos}
+              Vars={this.state.modelObj.Vars}
               errorMessage={!this.state.modelObj.Config.submitted}
               LegendHorizontal={this.state.modelObj.Config.LegendHorizontal}
               LegendVertical={this.state.modelObj.Config.LegendVertical}

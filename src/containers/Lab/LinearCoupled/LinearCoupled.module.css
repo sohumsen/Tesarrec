@@ -9,7 +9,7 @@
   width: 100%;
 
   align-content: center;
-  justify-content: space-evenly;
+  justify-content: space-between;
   flex-flow: row wrap;
 
   /* margin-left: auto;
@@ -49,6 +49,7 @@
   bottom: 0;
   left: 0;
   width: 15%; */
+  background-color: antiquewhite;
 }
 .Graph {
   flex: 10;
