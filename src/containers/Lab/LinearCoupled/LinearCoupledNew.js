@@ -39,6 +39,7 @@ class LinearCoupledNew extends Component {
 
   static getDerivedStateFromProps(props, state) {
     if (props.modelId !== state.modelId) {
+      console.log(props.modelObj)
       let newModel = new Model(
         {
           Config: props.modelObj.Config,
@@ -51,6 +52,7 @@ class LinearCoupledNew extends Component {
           modelId: props.modelId,
         }
       );
+      console.log(newModel)
 
       return {
         modelId: props.modelId,
@@ -86,7 +88,6 @@ class LinearCoupledNew extends Component {
       let Eqns = this.state.modelObj.Eqns;
 
       if (item.VarType === "Dependent") {
-
         let index = Eqns.findIndex(
           (Eqn) => Eqn.lineName === this.state.modelObj.Vars[idx].LatexForm
         );
@@ -190,8 +191,15 @@ class LinearCoupledNew extends Component {
       //valid
       // let newEqns2 = this.EQNS_insertDifferential(newEqns);
       let newEqns2 = this.state.modelObj.insertDifferentialIntoText(newEqns);
-
-      if (newEqns.some((eqn) => eqn.errorMessage !== null)) {
+      console.log(this.state.modelObj.Vars)
+      if (  
+        newEqns.some(
+          (eqn) =>
+            eqn.errorMessage !== null 
+            ||
+            this.state.modelObj.Vars.some((Var) => Var.errorMessage !== undefined || Var.errorMessage !== null) 
+        )
+      ) {
         //invalid
         aModel.Config.calculate = false;
         aModel.Eqns = newEqns2;

@@ -83,13 +83,13 @@ class ModelBench extends Component {
       .then((response) => response.json())
       .then((data) => {
         if (!data.error) {
+          console.log(data)
           this.setState(
             {
               error: false,
               selectedModelId: data.name,
             },
-            ()=>{
-
+            () => {
               const queryParams = "?auth=" + this.props.token; //+'&orderBy="userId"&equalTo="'+this.props.userId+'"'
               fetch(
                 "https://tesarrec.firebaseio.com/eqns/" +
@@ -111,7 +111,9 @@ class ModelBench extends Component {
                     this.setState({
                       allModelId: data,
                       error: false,
-                      selectedModel: this.state.allModelId[this.state.selectedModelId],
+                      selectedModel: this.state.allModelId[
+                        this.state.selectedModelId
+                      ],
 
                       loading: false,
                     });
@@ -122,10 +124,9 @@ class ModelBench extends Component {
                 .catch((error) => {
                   this.setState({ error: true });
                 });
+            }
+          );
 
-            })
-          
-         
           // console.log(data.name, this.state.allModelId);
           // this.setState(
           //   {
@@ -203,20 +204,118 @@ class ModelBench extends Component {
   MODEL_publish = () => {
     const payload = { ...this.state.selectedModel, SavedBy: this.props.userId };
 
-    if (this.state.selectedModelId !== "") {
-      this.generalDBRequest(
-        payload,
-        "https://tesarrec.firebaseio.com/public" +
-          ".json?auth=" +
-          this.props.token,
-        "POST",
-        this.setState({ error: false }, () => {
-          this.MODEL_getPublic();
-        })
-      );
-    } else {
-      this.setState({ error: true });
-    }
+    // if (this.state.selectedModelId !== "") {
+    //   this.generalDBRequest(
+    //     payload,
+    //     "https://tesarrec.firebaseio.com/public" +
+    //       ".json?auth=" +
+    //       this.props.token,
+    //     "POST",
+    //     this.setState({ error: false }, () => {
+    //       this.MODEL_getPublic();
+    //     })
+    //   );
+    // } else {
+    //   this.setState({ error: true });
+    // }
+
+    //////////////////////////////////
+
+    fetch(
+      "https://tesarrec.firebaseio.com/public" +
+        ".json?auth=" +
+        this.props.token,
+      {
+        method: "post",
+        headers: {
+          Accept: "application/json, text/plain, */*",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(payload),
+      }
+    )
+      .then((response) => response.json())
+      .then((data) => {
+        if (!data.error) {
+          fetch(
+            "https://tesarrec.firebaseio.com/public.json?auth=" +
+              this.props.token,
+            {
+              method: "get",
+              headers: {
+                Accept: "application/json, text/plain, */*",
+                "Content-Type": "application/json",
+              },
+            }
+          )
+            .then((response) => response.json())
+            .then((data1) => {
+              if (!data1.error) {
+                console.log(data1);
+                this.setState({
+                  allPublicId: data1,
+                  error: false,
+                  loading: false,
+                });
+              } else {
+                this.setState({ error: true });
+              }
+            })
+            .catch((error) => {
+              this.setState({ error: true });
+            });
+
+          // const queryParams = "?auth=" + this.props.token; //+'&orderBy="userId"&equalTo="'+this.props.userId+'"'
+          // fetch(
+          //   "https://tesarrec.firebaseio.com/eqns/" +
+          //     this.props.userId +
+          //     ".json" +
+          //     queryParams,
+          //   {
+          //     method: "get",
+          //     headers: {
+          //       Accept: "application/json, text/plain, */*",
+          //       "Content-Type": "application/json",
+          //     },
+          //   }
+          // )
+          //   .then((response) => response.json())
+          //   .then((data) => {
+          //     if (!data.error) {
+          //       console.log(data);
+          //       this.setState({
+          //         allModelId: data,
+          //         error: false,
+          //         selectedModel: this.state.allModelId[this.state.selectedModelId],
+
+          //         loading: false,
+          //       });
+          //     } else {
+          //       this.setState({ error: true });
+          //     }
+          //   })
+          //   .catch((error) => {
+          //     this.setState({ error: true });
+          //   });
+
+          // console.log(data.name, this.state.allModelId);
+          // this.setState(
+          //   {
+          //     error: false,
+          //     selectedModelId: data.name,
+          //     selectedModel: this.state.allModelId[data.name],
+          //   },
+          //   () => {
+          //     console.log(this.state, data);
+          //   }
+          // );
+        } else {
+          this.setState({ error: true });
+        }
+      })
+      .catch((error) => {
+        this.setState({ error: true });
+      });
   };
 
   MODEL_onSelectLink = (modelId) => {

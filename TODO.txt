@@ -13,6 +13,9 @@ publish eqns doesnt work
 when change varitems, change eqns 
 get private public doesnt work 
 if error in var items, dont calculate
+store var items error message in db
+create new file, select it, its not updated
+
 
 
 
