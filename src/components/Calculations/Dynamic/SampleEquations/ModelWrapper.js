@@ -56,13 +56,11 @@ export default class ModelWrapper extends Model {
     let t0 = performance.now();
 
     // let parsedEqns = Eqns.map((eqn) => simplify(parse(eqn.TextEqn)));
-    // console.log(Eqns)
     let vars = {};
 
     Vars.forEach((VarElement) => {
       vars[VarElement.LatexForm] = VarElement.VarCurrent;
     });
-    console.log(this)
 
     let calcedArr = NewDiffEquationSolver({
       method: this.Config.method,
@@ -81,10 +79,6 @@ export default class ModelWrapper extends Model {
 
   validateExpressions() {
     let parsedEqns = this.Eqns.map((eqn) => eqn.ParsedEqn);
-    console.log(this.Config);
-    console.log(
-      this.validateExpressions2(parsedEqns, this.Config.lineNames, this.Vars)
-    );
     return this.validateExpressions2(
       parsedEqns,
       this.Config.lineNames,
@@ -96,7 +90,6 @@ export default class ModelWrapper extends Model {
   validateExpressions2 = (Eqns) => {
     let scope = {};
     // let parsedEqns = this.Eqns.map((eqn) => eqn.ParsedEqn);
-    console.log(this);
     let textEqns = Eqns.map((eqn) => eqn.TextEqn);
     let lineNames = Eqns.map((eqn) => eqn.line);
 
@@ -111,14 +104,11 @@ export default class ModelWrapper extends Model {
     });
 
     let invalidIndex = [];
-    console.log(textEqns, scope);
     for (let i = 0; i < textEqns.length; i++) {
       try {
         evaluate(textEqns[i], scope);
-        console.log("valid");
       } catch (error) {
         invalidIndex.push(i);
-        console.log("invalid");
       }
     }
     return invalidIndex;

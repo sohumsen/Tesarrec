@@ -36,11 +36,7 @@ describe('<DiffEquationGrapher/>', ()=>{
         //expect(wrapper.find(<LineChart/>).type()).to.equal('LineChart');
         //expect(wrapper.props().numOfCycles).to.equal([ 'Euler', 'Midpoint', 'Runge Kutta' ]);
         
-        console.log(wrapper.find('LineChart').props().RungeKuttaData[45].y);
-        console.log(wrapper.find('LineChart').props().MidpointData[45].y);
-        console.log(wrapper.find('LineChart').props().EulerData[45].y);
-        //console.log(wrapper.find('EulerData').debug({ verbose: true }));
-        //console.log(wrapper.debug({ verbose: true }));
+
         expect(wrapper).toMatchSnapshot();
 
     })

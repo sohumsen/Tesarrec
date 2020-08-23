@@ -46,7 +46,6 @@ class SolverAnalysis extends Component {
   };
   HeatMapChangedOnClick = (x, y, value) => {
     // let idx = isItemInArray(RMSEArrSliced, value);
-    // console.log(getSolutionForGraph(models[idx], integrators[x]));
     // (async () => {
     //   await writeJsonFile("foo.json", { foo: true });
     // })();
@@ -60,8 +59,6 @@ class SolverAnalysis extends Component {
   };
 
   onClickGraphDataPoint = (e) => {
-    console.log(e.dataPoint.label);
-    console.log(e.dataPoint.label.split(",")[0]);
 
     let graphArrXY = this.getSolutionForGraph(
       e.dataPoint.label.split(",")[0],
@@ -69,7 +66,6 @@ class SolverAnalysis extends Component {
     ); //returns calced and actual arr
 
     let allGraphObjXY = [];
-    console.log(graphArrXY);
 
     graphArrXY.forEach((graph) => {
       let graphObjXY = [];
@@ -77,12 +73,9 @@ class SolverAnalysis extends Component {
       for (let i = 0; i < graph.length; i++) {
         graphObjXY.push({ x: graph[i][1], y: graph[i][0] });
       }
-      console.log(graphObjXY);
       allGraphObjXY.push(graphObjXY);
     });
 
-    console.log(this.state.lineChartActualAndCalced);
-    console.log(allGraphObjXY);
 
     this.setState({
       lineChartActualAndCalced: (
@@ -118,7 +111,6 @@ class SolverAnalysis extends Component {
   };
 
   getSolutionForGraph = (eqnText, method) => {
-    console.log(eqnText, method);
     for (let i = 0; i < this.state.models.length; i++) {
       if (this.state.models[i].eqns[0] === eqnText) {
         let stuff = master(this.state.models[i]);
@@ -157,7 +149,6 @@ class SolverAnalysis extends Component {
 
     let time_difference = t_1 - t_0;
 
-    console.log(calcedArr,stuff, time_difference)
 
     return [this.calcRMSE(calcedArr, stuff.actualSolutionArr), time_difference];
   };
@@ -237,7 +228,6 @@ class SolverAnalysis extends Component {
     // while (timeArr.length)
     //   timeArrSliced.push(timeArr.splice(0, integrators.length));
 
-    // console.log(timeArrSliced);
 
     // let RMSEHeatmap = RMSEArrSliced.map((RMSEArr, i) => {
     //   return (
@@ -262,7 +252,6 @@ class SolverAnalysis extends Component {
     //     />
     //   );
     // });
-    console.log(xYObjScatterGraph);
 
     return (
       <div className={classes.HeatMaps}>

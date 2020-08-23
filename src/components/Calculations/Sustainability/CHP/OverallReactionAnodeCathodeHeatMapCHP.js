@@ -8,8 +8,6 @@ import ColumnChart from "../../../UI/Canvas/ColumnChart";
 import StackedChart from "../../../UI/Canvas/StackedChart";
 
 const OverallReactionAnodeCathode = (props) => {
-  //console.log(props.anodeSubstrate)
-  //console.log(props.cathodeProduct)
   let {
     BiomassMoistureContent,
     BiomassCarbonContent,

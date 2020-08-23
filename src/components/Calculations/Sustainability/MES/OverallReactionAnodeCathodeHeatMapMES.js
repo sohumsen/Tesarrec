@@ -11,8 +11,6 @@ import { abs } from "mathjs";
 import MESPic from "../../../../assets/MES.png";
 import CashFlowGraph from "./CashFlowGraph";
 const OverallReactionAnodeCathode = (props) => {
-  //console.log(props.anodeSubstrate)
-  //console.log(props.cathodeProduct)
 
   let CarbonEmmision =
     (props.CCGT * 0.1386 +
@@ -48,7 +46,6 @@ const OverallReactionAnodeCathode = (props) => {
   props.heatMapContents.yLabels.forEach((Yelement) => {
     props.heatMapContents.xLabels.forEach((Xelement) => {
       let AnodeData = ReadAnodeJSON(Xelement);
-      //console.log(AnodeData)
       let x = parseInt(AnodeData.value.x);
       let y = parseInt(AnodeData.value.y);
       let z = parseInt(AnodeData.value.z);
@@ -57,7 +54,6 @@ const OverallReactionAnodeCathode = (props) => {
       );
 
       let CathodeData = ReadCathodeJSON(Yelement);
-      //console.log(CathodeData)
       let c = parseInt(CathodeData.value.c); //n_c
       let h = parseInt(CathodeData.value.h);
       let o = parseInt(CathodeData.value.o);
@@ -189,23 +185,7 @@ const OverallReactionAnodeCathode = (props) => {
 
   let TwoDMinimumProductSellingPriceData=FormatArr(MinimumProductSellingPriceData)
 
-  // console.log(
-  //   TwoDCapitalCostData,
-  //   props.ProductionPriceCost,
-  //   TwoDProductionRategData,
-  //   props.ACCCost,
-  //   props.LangFactorCost,
-  //   props.AnolyteCost,
-  //   props.CatholyteCost,
-  //   props.ExternalEnergyCost,
-  //   TwoDGibbsEnergyData,
-  //   props.IRRCost,
-  //   props.chosenValue,
-  //   props.anodeSubstrate,
-  //   props.cathodeProduct,
-  //   props.xCoordAnode,
-  //   props.yCoordCathode
-  // );
+  
   return (
     <div className={classes.HeatMaps}>
       <div className={classes.HeatMapEnergyPerformance}>

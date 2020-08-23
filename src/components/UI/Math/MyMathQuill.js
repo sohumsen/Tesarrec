@@ -16,19 +16,14 @@ const MyMathQuill = (props) => {
         <EditableMathField
           // config={{
           //   substituteTextarea: function () {
-          //     console.log("substituteTextarea");
           //     return document.createElement("textarea");
           //   },
           //   handlers: {
-          //     edit: (mathField) => console.log("edit"),
           //     upOutOf: (mathField) => {
-          //       console.log("upOutOf");
           //     },
           //     selectOutOf: (direction,mathField) => {
-          //       console.log("selectOutOf");
           //     },
           //     moveOutOf: (mathField, dir, MQ) => {
-          //       console.log("moveOutOf");
 
           //       if (dir === MQ.L) {
           //         return null;
@@ -41,9 +36,7 @@ const MyMathQuill = (props) => {
           style={props.style}
           latex={props.latex} // Initial latex value for the input field
           // mathquillDidMount={(mathField) =>
-          //   console.log(mathField.text("df"), mathField.latex("2+5/6*4"))
           // }
-          //onKeyDown={(mathField)=>{console.log(mathField)}}
           onChange={(mathField) => props.onInputChange(mathField)}
         />
       ) : null}

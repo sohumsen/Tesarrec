@@ -24,17 +24,13 @@ describe('<LinearCoupledNew/>', ()=>{
 
         const wrapper = shallow(mycomp)
 
-        console.log(mycomp.props.modelObj.Eqns);
         //mycomp.props.modelObj.solveDiffEqns()
-        console.log(mycomp.props.modelObj.solutions);
 
         //TODO have model class remove eqsns
         mycomp.props.modelObj.Eqns.textEqns.pop()
         mycomp.props.modelObj.Eqns.parsedEqns.pop()
 
-        console.log(mycomp.props.modelObj.Eqns);
         //mycomp.props.modelObj.solveDiffEqns()
-        console.log(mycomp.props.modelObj.solutions);
 
 
 

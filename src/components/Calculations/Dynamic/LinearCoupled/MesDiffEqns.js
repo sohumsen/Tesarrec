@@ -20,7 +20,6 @@ const LinearCoupledDiffEqns = (props) => {
     var parsed = simplify(parse(eqn));
     parsedEquations.push(parsed);
   }
-  console.log(props.eqns)
 
 
   const calcValueAt = (initialValues) => {
@@ -38,7 +37,6 @@ const LinearCoupledDiffEqns = (props) => {
       ...coordinate,
       ...props.vars
     }
-    console.log(accumulative)
    
     
 

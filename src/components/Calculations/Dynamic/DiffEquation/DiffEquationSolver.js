@@ -15,7 +15,6 @@ const DiffEquationSolver = (props) => {
 
   const parsedEquation = simplify(parse(props.eqn));
 
-  //console.log(eval(props.eqn));
 
   const calcValueAt = (x, y) => {
     // eslint-disable-next-line

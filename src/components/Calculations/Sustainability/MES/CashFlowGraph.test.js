@@ -30,7 +30,6 @@ describe("<CashFlowGraph/>", () => {
     const wrapper = shallow(comp);
 
     expect(wrapper.find(<MyChart />));
-    console.log(wrapper.find('MyChart').props());
     expect(wrapper.find("EqnItem").props().disabledRemoveButton).toEqual(false);
     expect(wrapper.find("EqnItem").props().error).toEqual(null);
     expect(wrapper.find("EqnItem").props().id).toEqual("qwert");
@@ -39,8 +38,6 @@ describe("<CashFlowGraph/>", () => {
     //expect(wrapper.find(<LineChart/>).type()).to.equal('LineChart');
     //expect(wrapper.props().numOfCycles).to.equal([ 'Euler', 'Midpoint', 'Runge Kutta' ]);
 
-    //console.log(wrapper.find('EulerData').debug({ verbose: true }));
-    //console.log(wrapper.debug({ verbose: true }));
     //expect(wrapper).toMatchSnapshot();
   });
 });

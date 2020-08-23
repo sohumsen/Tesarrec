@@ -83,8 +83,6 @@ describe("<NewDiffEquationSolverAnalysis/>", () => {
       });
     });
 
-    //console.log(allMethodsLinear1);
-    console.log(allMethodsLinear);
     // expect(calcedArr).toMatchSnapshot();
   });
 });

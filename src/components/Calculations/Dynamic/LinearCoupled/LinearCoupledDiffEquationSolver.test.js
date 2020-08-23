@@ -32,12 +32,9 @@ describe("<LinearCoupledDiffEquationSolver/>", () => {
     });
     const secondNow = performance.now();
     const howLongDidOurLoopTake = secondNow - firstNow;
-    console.log(howLongDidOurLoopTake);
 
     //expect(wrapper.props().numOfCycles).to.equal([ 'Euler', 'Midpoint', 'Runge Kutta' ]);
 
-    //console.log(wrapper.find('EulerData').debug({ verbose: true }));
-    //console.log(wrapper.debug({ verbose: true }));
 
     expect(computedResults).toMatchSnapshot();
   });

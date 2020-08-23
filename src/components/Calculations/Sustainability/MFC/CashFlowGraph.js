@@ -22,7 +22,6 @@ const CashFlowGraph = (props) => {
   for (let t = 1; t < 15; t++) {
     dataArr[t] = dataArr[t - 1] + k / (1 + props.IRRCost) ** t;
   }
-  // console.log(dataArr);
 
   let data = [
     { x: -3, y: 0 },
@@ -36,7 +35,6 @@ const CashFlowGraph = (props) => {
       y: parseFloat(dataArr[l].toFixed(2)),
     });
   }
-  console.log(data)
   return (
     <div>
       <MyChart

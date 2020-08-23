@@ -43,7 +43,6 @@ describe("<LinearCoupledDiffEqns/>", () => {
     const wrapper = shallow(comp);
 
     expect(wrapper.find(<EqnItem />));
-    console.log(wrapper.find('EqnItem').props());
     expect(wrapper.find("EqnItem").props().disabledRemoveButton).toEqual(false);
     expect(wrapper.find("EqnItem").props().error).toEqual(null);
     expect(wrapper.find("EqnItem").props().id).toEqual("qwert");
@@ -52,8 +51,6 @@ describe("<LinearCoupledDiffEqns/>", () => {
     //expect(wrapper.find(<LineChart/>).type()).to.equal('LineChart');
     //expect(wrapper.props().numOfCycles).to.equal([ 'Euler', 'Midpoint', 'Runge Kutta' ]);
 
-    //console.log(wrapper.find('EulerData').debug({ verbose: true }));
-    //console.log(wrapper.debug({ verbose: true }));
     expect(wrapper).toMatchSnapshot();
   });
 });

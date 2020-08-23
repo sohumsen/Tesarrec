@@ -39,10 +39,8 @@ class HeatMapFormMFC extends Component {
     // if (value !== "") {
     //   value = Math.max(Number(min), Math.min(Number(max), Number(value)));
     // }
-    console.log(value,max)
 
     if (+value > +max) {
-      console.log("here")
       value = max;
     }
 

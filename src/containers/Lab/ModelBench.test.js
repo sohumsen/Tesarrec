@@ -30,7 +30,6 @@ describe('<Model Bench/>', ()=>{
         expect(instance.MODEL_getPrivate());
         expect(instance.MODEL_getPublic());
 
-        console.log(instance.state)
 
 
     })

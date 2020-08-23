@@ -142,8 +142,6 @@ export default class Model {
     this.Vars.forEach((Var) => {
       scope[Var.LatexForm] = 1;
     });
-    console.log(scope);
-    console.log(textEqns);
     let invalidIndex = [];
 
     for (let i = 0; i < textEqns.length; i++) {

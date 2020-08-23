@@ -10,8 +10,6 @@ class Person extends Component {
     eye.colour = "red";
 
     this.setState({ eye: eye }, () => {
-      console.log(this.state.eye); //equals  { colour:red}, which is correct
-      console.log(this.state.eye.returnEyeColour()); //equals  { colour:green}, which is incorrect.
 
       //QUESTION: How to sync js pure class constructor and react class state
     });

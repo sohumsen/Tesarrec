@@ -31,7 +31,6 @@ class SolverAnalysisSolver extends Component {
     //returns obj containing config, eqns, solutions
    
     let newModel=new Model(inputModel,method)
-    console.log(newModel.returnConstructorObj())
     let returnedObj={}
 
     // let returnedObj = {
@@ -98,10 +97,8 @@ class SolverAnalysisSolver extends Component {
     //   });
     // });
     let newModel=new Model(linear6,"Euler")
-    console.log(newModel.returnConstructorObj())
     //discard greater than 500ns
 
-    //console.log(allMethodsLinear);
 
     // returns calcedarr, rmse, time taken
     return <p>dfgdg</p>;

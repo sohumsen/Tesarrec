@@ -11,7 +11,9 @@ Allow Ijitial COnditions to be set according to equaltions
 
 5. Simplify UI spaces 
 6. Fix the consoleplace
-
+type more eqns
+remove console logs
+remove warnings
 
 
 24th Jul - 7th Aug 

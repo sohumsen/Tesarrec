@@ -2,8 +2,6 @@ import React from "react";
 import HeatMap from "react-heatmap-grid";
 
 //const consoleLogger = (background, value, min, max, data, x, y) => {
- // console.log(background, value, min, max, data, x, y);
-  //console.log(1 - (max - value) / (max - min))
 
  // return null;
 //};

@@ -7,8 +7,7 @@ import MFCPic from "../../../../assets/MFC.png";
 import MyHeatMap from "../../../UI/MyHeatMap/MyHeatMap";
 import classes from "./OverallReactionAnodeCathodeMFC.module.css";
 const OverallReactionAnodeCathode = (props) => {
-  //console.log(props.anodeSubstrate)
-  //console.log(props.cathodeProduct)
+
 
   let CarbonEmmision =
     (props.CCGT * 0.1386 +
@@ -42,7 +41,6 @@ const OverallReactionAnodeCathode = (props) => {
   let MinimumProductSellingPriceData=[]
   props.heatMapContents.xLabels.forEach((Xelement) => {
     let AnodeData = ReadAnodeJSON(Xelement);
-    //console.log(AnodeData)
     let x = parseInt(AnodeData.value.x);
     let y = parseInt(AnodeData.value.y);
     let z = parseInt(AnodeData.value.z);
@@ -97,9 +95,7 @@ const OverallReactionAnodeCathode = (props) => {
 
     MinimumProductSellingPriceData.push(MinimumProductSellingPrice.toFixed(4))
 
-    //console.log( Xelement,Yelement)
 
-    //console.log((StandardGibbsEnergyOfReactionkJ.toFixed(2)))
   });
 
   const FormatArr = (Arr) => {
@@ -125,9 +121,7 @@ const OverallReactionAnodeCathode = (props) => {
 
   let TwoDMinimumProductSellingPrice=FormatArr(MinimumProductSellingPriceData)
 
-  //console.log(energyObj)
 
-  //console.log("heat map contents   "+ props.heatMapContents)
   return (
     <div className={classes.HeatMaps}>
       <div className={classes.HeatMapEnergyPerformance}>

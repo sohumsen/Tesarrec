@@ -4,7 +4,7 @@ import { CSVLink } from "react-csv";
 
 import { Tooltip, IconButton, Paper } from "@material-ui/core";
 import ImportExportIcon from "@material-ui/icons/ImportExport";
-import LinearCoupledDiffEquationSolver from "./LinearCoupledDiffEquationSolver";
+// import LinearCoupledDiffEquationSolver from "./LinearCoupledDiffEquationSolver";
 import NewDiffEquationSolver from "./NewDiffEquationSolver";
 import Table from "../../../UI/Table/Table";
 import classes from "./LinearCoupledDiffEquationGrapher.module.css";
@@ -30,7 +30,6 @@ const LinearCoupledDiffEquationGrapher = (props) => {
 
   let t0 = performance.now();
 
-  console.log(props.computedResults);
 
   let newcomputedResults = props.computedResults.map((row) =>
     row.map((num) =>
@@ -63,7 +62,6 @@ const LinearCoupledDiffEquationGrapher = (props) => {
     order3.push(order2);
   }
 
-  console.log(objOfCoords, props.modelObj.Config);
   return (
     <div className={classes.Container}>
       <Paper elevation={3} className={classes.Graph}>

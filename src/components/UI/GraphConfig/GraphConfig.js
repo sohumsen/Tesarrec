@@ -28,11 +28,9 @@ export default function FormControlLabelPlacement(props) {
   //   axisMenuItemsList.push(Eqn.line);
   //   return Eqn.line;
   // });
-  console.log(props.Vars)
   let allAxis = props.Vars.filter(
     (Var) => (Var.VarType === "Independent" || Var.VarType === "Dependent")
   ).map((Var) => Var.LatexForm);
-  console.log(allAxis)
   let menuItemsList = allAxis.map((menuItem) => {
     return <MenuItem value={menuItem}>{menuItem}</MenuItem>;
   });

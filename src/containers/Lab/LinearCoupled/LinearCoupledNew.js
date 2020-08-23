@@ -46,7 +46,6 @@ class LinearCoupledNew extends Component {
 
   static getDerivedStateFromProps(props, state) {
     if (props.modelId !== state.modelId) {
-      console.log(props.modelObj);
       let newModel = new Model(
         {
           Config: props.modelObj.Config,
@@ -59,7 +58,6 @@ class LinearCoupledNew extends Component {
           modelId: props.modelId,
         }
       );
-      console.log(newModel);
 
       return {
         modelId: props.modelId,
@@ -77,7 +75,6 @@ class LinearCoupledNew extends Component {
 
   componentDidUpdate() {
     if (this.props.saveSnapshot) {
-      console.log(this.state.modelObj);
       this.props.sendToParent(this.state.modelObj);
     }
   }
@@ -112,7 +109,6 @@ class LinearCoupledNew extends Component {
         Eqns[index].lineName = mathField.latex();
 
         modelObj.Eqns = Eqns;
-        console.log(Eqns, modelObj, index);
       } else if (item.VarType === "Independent") {
         Eqns.forEach(
           (Eqn) =>
@@ -124,20 +120,16 @@ class LinearCoupledNew extends Component {
       // this.setState({modelObj:modelObj})
 
       // for (let i = 0; i < Eqns.length; i++) {
-      //   // console.log(this.state.modelObj.Vars[idx].LatexForm,mathField.latex(),Eqns[i].textEqn)
-      //   console.log(mathField.latex(), mathField.text());
       //   let textEqn = Eqns[i].textEqn
       //     .split(this.state.modelObj.Vars[idx].LatexForm) //find
       //     .join(mathField.text()); //replace
       //   // let txt2 = this.state.modelObj.Vars[idx].LatexForm.slice(0, 1) + "\\" + this.state.modelObj.Vars[idx].LatexForm.slice(1);
       //   // let txt3 = mathField.latex().slice(0, 1) + "\\" + mathField.latex().slice(1);
 
-      //   // console.log(txt2)
       //   // let latexEqn = Eqns[i].latexEqn
       //   //   .split(txt2)
       //   //   .join(txt3);
 
-      //   console.log(textEqn);
       //   Eqns[i].latexEqn = parse(
       //     parse(textEqn).toString({
       //       implicit: "hide",
@@ -204,8 +196,6 @@ class LinearCoupledNew extends Component {
       //valid
 
       let newEqns2 = this.state.modelObj.insertDifferentialIntoText(newEqns);
-      console.log(this.state.modelObj.Vars);
-      console.log(newEqns2);
       if (
         newEqns2.some((eqn) => eqn.errorMessage !== null) ||
         this.state.modelObj.Vars.some((Var) => Var.errorMessage !== null)
@@ -223,17 +213,13 @@ class LinearCoupledNew extends Component {
         );
         let consoleMessages = [...this.state.consoleMessages];
         consoleMessages.push(msg);
-        this.setState({ consoleMessages: msg }, () =>
-          console.log(this.state.consoleMessages)
-        );
+        this.setState({ consoleMessages: msg });
       } else {
         aModel.Config.calculate = true;
       let msg = [<p>Calculating...</p>];
         let consoleMessages = [...this.state.consoleMessages];
         consoleMessages.push(msg);
-        this.setState({ consoleMessages: msg }, () =>
-          console.log(this.state.consoleMessages)
-        );
+        this.setState({ consoleMessages: msg });
         aModel.Eqns = newEqns2;
       }
     } else {
@@ -324,25 +310,22 @@ class LinearCoupledNew extends Component {
   VARS_handleInputChange = (id, calculate) => (event, value) => {
     let modelObj = this.state.modelObj;
     let Vars = modelObj.Vars;
-    // console.log(
-    //   id,
-    //   calculate,
-    //   value,
-    //   event.target.name,
-    //   event.target.value,
-    //   isNaN(event.target.value)
-    // );
+
 
     const idx = Vars.findIndex((e) => {
       return e.id === id;
     });
 
     const Var = Vars[idx];
+  
     if (event.target.name === undefined) {
+      isNaN(value)
+      ? (Var["VarCurrent"]  = 0)
+      : (Var["VarCurrent"]  = event.target.value);
       Var["VarCurrent"] = value;
     } else {
       isNaN(event.target.value)
-        ? (Var[event.target.name] = +event.target.value)
+        ? (Var[event.target.name] = 0)
         : (Var[event.target.name] = event.target.value);
     }
     if (event.target.name === "VarLow" && event.target.value === "") {
@@ -495,7 +478,6 @@ class LinearCoupledNew extends Component {
     this.state.modelObj.Vars.forEach((VarElement) => {
       vars[VarElement.LatexForm] = VarElement.VarCurrent;
     });
-    console.log(this.state.modelObj);
     return (
       <div key="Graph">
         <LinearCoupledDiffEquationGrapher

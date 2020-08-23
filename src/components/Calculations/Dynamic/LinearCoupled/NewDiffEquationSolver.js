@@ -124,7 +124,6 @@ const NewDiffEquationSolver = (props) => {
   //     }
   //     k[ki] = func(t + dt, _y);
   //   }
-  //   console.log(k)
   //   for (
   //     var r = y.slice(), l = 0;
   //     l < _y.length;

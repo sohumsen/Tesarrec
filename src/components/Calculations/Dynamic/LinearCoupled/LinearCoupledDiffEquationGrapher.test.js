@@ -45,7 +45,6 @@ describe("<LinearCoupledDiffEquationGrapher/>", () => {
     
     // compare the Error between comp1 vs Actual 
     //comp2 v Actual
-    //console.log(comp1)
     
 
     //const wrapper = shallow(comp1);
@@ -70,14 +69,7 @@ describe("<LinearCoupledDiffEquationGrapher/>", () => {
 
       return RMSE
     }
-    console.log(oldArr)
-
-    console.log(calcedArr)
-    console.log(actualSolutionArr)
-    console.log(findRms(oldArr,calcedArr))
-    console.log(findRms(actualSolutionArr,calcedArr))
-    console.log(findRms(oldArr,actualSolutionArr))
-
+ 
     //expect(wrapper.find(<LineChart />));
     //expect(wrapper.find("LineChart").props().LineNames.length).toEqual(2);
     //expect(wrapper.find("LineChart").props().EulerData.length).toEqual(32);
@@ -88,8 +80,7 @@ describe("<LinearCoupledDiffEquationGrapher/>", () => {
     //expect(wrapper.find(<LineChart/>).type()).to.equal('LineChart');
     //expect(wrapper.props().numOfCycles).to.equal([ 'Euler', 'Midpoint', 'Runge Kutta' ]);
 
-    //console.log(wrapper.find('EulerData').debug({ verbose: true }));
-    //console.log(wrapper.debug({ verbose: true }));
+
     //expect(wrapper).toMatchSnapshot();
   });
 });

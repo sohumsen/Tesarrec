@@ -25,6 +25,5 @@ describe("<Model/>", () => {
     });
    
 
-    console.log(newModel);
   });
 });

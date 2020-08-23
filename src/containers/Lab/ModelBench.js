@@ -84,7 +84,6 @@ class ModelBench extends Component {
       .then((response) => response.json())
       .then((data) => {
         if (!data.error) {
-          console.log(data)
           this.setState(
             {
               error: false,
@@ -190,7 +189,6 @@ class ModelBench extends Component {
             .then((response) => response.json())
             .then((data1) => {
               if (!data1.error) {
-                console.log(data1);
                 this.setState({
                   allPublicId: data1,
                   error: false,
@@ -358,7 +356,6 @@ class ModelBench extends Component {
       .then((response) => response.json())
       .then((data) => {
         if (!data.error) {
-          console.log(data);
           this.setState({ allPublicId: data, error: false, loading: false });
         } else {
           this.setState({ error: true });
@@ -387,7 +384,6 @@ class ModelBench extends Component {
       .then((response) => response.json())
       .then((data) => {
         if (!data.error) {
-          console.log(data);
           this.setState({ allModelId: data, error: false, loading: false });
         } else {
           this.setState({ error: true });
