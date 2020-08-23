@@ -1,0 +1,19 @@
+
+
+
+.ModelExplorerPane {
+  flex: 100;
+}
+
+.ChildAppControl {
+  flex: 1;
+}
+.Container {
+  display: flex;
+}
+
+.ButtonPanel {
+  flex: 0.30;
+  margin-right: 10px;
+
+}

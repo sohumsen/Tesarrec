@@ -39,7 +39,7 @@
 }
 
 .submitButton {
-  float: right;
+  float: left;
 }
 .errorMessage {
   flex: 1;

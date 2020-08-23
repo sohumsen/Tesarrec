@@ -11,7 +11,7 @@
   align-content: center;
   justify-content: space-between;
   flex-flow: row wrap;
-  padding:5px
+  
 
   /* margin-left: auto;
   align-content: flex-end
@@ -45,15 +45,27 @@
   flex: 4 0;
   align-self: baseline;
   order: 2;
-  margin:5px}
+  }
 .MetaContainer {
   /* position: absolute;
   bottom: 0;
   left: 0;
   width: 15%; */
-  margin:5px;
+  margin-top: 10px;
   background-color: antiquewhite;
 }
+
+.ConsoleContainer {
+  /* position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 15%; */
+  overflow-y : auto;
+  height: 200px;
+  margin-top: 10px;
+  background-color: antiquewhite;
+}
+
 .Graph {
   flex: 10;
   /* margin: 10px; */

@@ -21,7 +21,7 @@ export default class Model {
       };
       meta = {
         name: "Untitled",
-        description: "this is a default Model",
+        description: "Please add a description with references for your model",
         modelId: "dfjskf",
       };
     }
@@ -72,7 +72,12 @@ export default class Model {
       errorMessage: null,
     }));
 
-    this.Vars = dbModel.Vars;
+    
+    this.Vars = dbModel.Vars.map(Var => { return { ...Var , errorMessage : null} } )
+
+   
+
+    
 
     this.solutions = {
       actualSolution: this.Config.solvable

@@ -36,16 +36,7 @@ export default function FormControlLabelPlacement(props) {
   let menuItemsList = allAxis.map((menuItem) => {
     return <MenuItem value={menuItem}>{menuItem}</MenuItem>;
   });
-  // let initialConditionsList = props.lineNames.map((line, i) => {
-  //   return (
-  //     <Input
-  //       label={"Initial " + line}
-  //       name={line}
-  //       value={props.initialConditions[i]}
-  //       onChange={props.onChange("initialConditions" + i)}
-  //     />
-  //   );
-  // });
+ 
 
   return (
     <div>
@@ -79,82 +70,9 @@ export default function FormControlLabelPlacement(props) {
         </div>
 
         <div className={classes.Container}>
-          {/* <FormLabel component="legend">Horizontal Align</FormLabel>
-          <RadioGroup
-            row
-            aria-label="position"
-            name="position"
-            defaultValue="top"
-            value={props.LegendHorizontal}
-            onChange={props.onChange("LegendHorizontal")}
-          >
-            <FormControlLabel
-              value="left"
-              control={<Radio color="primary" />}
-              label="left"
-              labelPlacement="start"
-            />
-            <FormControlLabel
-              value="center"
-              control={<Radio color="primary" />}
-              label="center"
-              labelPlacement="start"
-            />
-            <FormControlLabel
-              value="right"
-              control={<Radio color="primary" />}
-              label="right"
-              labelPlacement="start"
-            />
-          </RadioGroup>
-          <FormLabel component="legend">Vertical Align</FormLabel>
-          <RadioGroup
-            row
-            aria-label="position"
-            name="position"
-            defaultValue="top"
-            value={props.LegendVertical}
-            onChange={props.onChange("LegendVertical")}
-          >
-            <FormControlLabel
-              value="top"
-              control={<Radio color="primary" />}
-              label="top"
-              labelPlacement="start"
-            />
-            <FormControlLabel
-              value="center"
-              control={<Radio color="primary" />}
-              label="center"
-              labelPlacement="start"
-            />
-            <FormControlLabel
-              value="bottom"
-              control={<Radio color="primary" />}
-              label="bottom"
-              labelPlacement="start"
-            />
-          </RadioGroup>
-          
-           */}
+         
           <div className={classes.model}>
-            {/* <div className={classes.item}>{initialConditionsList}</div> */}
-            {/* <div className={classes.item}>
-              <Input
-                label="Initial y"
-                name="initialConditions"
-                value={props.initialConditions}
-                onChange={props.onChange("initialConditions")}
-              />
-            </div> */}
-            {/* <div className={classes.item}>
-              <Input
-                label="Inititial t"
-                type="text"
-                value={props.t0}
-                onChange={props.onChange("t0")}
-              />
-            </div> */}
+            
             <div className={classes.item}>
               <Input
                 label="Step size"

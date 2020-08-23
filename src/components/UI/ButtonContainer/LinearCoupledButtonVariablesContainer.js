@@ -7,11 +7,10 @@ import { blue,yellow,pink } from '@material-ui/core/colors';
 
 const LinearCoupledButtonVariablesContainer = (props) => {
   return (
-    <Paper>
+    <Paper>Parameters
       <Tooltip title="Add Constant" placement="top" arrow>
         <span>
           <IconButton
-            
             edge="end"
             aria-label="add"
             onClick={()=>props.onIncrementVariable("Constant")}
@@ -54,18 +53,7 @@ const LinearCoupledButtonVariablesContainer = (props) => {
           </IconButton>
         </span>
       </Tooltip>
-      <Tooltip title="Reset Variables" placement="top" arrow>
-        <span>
-          <IconButton
-            edge="end"
-            aria-label="Reset"
-            onClick={props.resetForm}
-          >
-            <RestoreIcon />
-          </IconButton>
-        </span>
-      </Tooltip>
-
+     
      
     </Paper>
   );

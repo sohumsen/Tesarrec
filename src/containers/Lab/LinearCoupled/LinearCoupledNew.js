@@ -33,13 +33,15 @@ class LinearCoupledNew extends Component {
 
   state = {
     modelId: "",
+    consoleMessages: [],
+      
     modelObj: { Eqns: [], Vars: [], Config: {}, meta: {} }, // This hack is required to handle the modelObj default state
     // myReactGridLayout: DEFAULTLAYOUT(new Model()), //TODO should create a new model obj here
   };
 
   static getDerivedStateFromProps(props, state) {
     if (props.modelId !== state.modelId) {
-      console.log(props.modelObj)
+      console.log(props.modelObj);
       let newModel = new Model(
         {
           Config: props.modelObj.Config,
@@ -52,7 +54,7 @@ class LinearCoupledNew extends Component {
           modelId: props.modelId,
         }
       );
-      console.log(newModel)
+      console.log(newModel);
 
       return {
         modelId: props.modelId,
@@ -82,20 +84,23 @@ class LinearCoupledNew extends Component {
       item.textEqn = mathField.text();
       item.latexEqn = mathField.latex();
     } else {
-      // if (!(item.errorMessage === "Err")) {
+     
       let modelObj = this.state.modelObj;
 
       let Eqns = this.state.modelObj.Eqns;
 
       if (item.VarType === "Dependent") {
+        //TODO rename var for Vars the LatexForm can be y_1 or y2 which is being compared to eqn linename
         let index = Eqns.findIndex(
           (Eqn) => Eqn.lineName === this.state.modelObj.Vars[idx].LatexForm
         );
+
         let independentLatex = this.state.modelObj.Vars.find(
           (Var) => Var.VarType === "Independent"
         ).LatexForm;
+
         Eqns[index].DByDLatex =
-          "\\frac{d" + mathField.latex() + "}{" + independentLatex + "}=";
+          "\\frac{d" + mathField.latex() + "}{d" + independentLatex + "}=";
         Eqns[index].lineName = mathField.latex();
 
         modelObj.Eqns = Eqns;
@@ -104,7 +109,7 @@ class LinearCoupledNew extends Component {
         Eqns.forEach(
           (Eqn) =>
             (Eqn.DByDLatex =
-              "\\frac{d" + Eqn.lineName + "}{" + mathField.latex() + "}=")
+              "\\frac{d" + Eqn.lineName + "}{d" + mathField.latex() + "}=")
         );
       }
 
@@ -189,20 +194,25 @@ class LinearCoupledNew extends Component {
 
     if (invalidIndex.length === 0) {
       //valid
-      // let newEqns2 = this.EQNS_insertDifferential(newEqns);
+
       let newEqns2 = this.state.modelObj.insertDifferentialIntoText(newEqns);
-      console.log(this.state.modelObj.Vars)
-      if (  
-        newEqns.some(
-          (eqn) =>
-            eqn.errorMessage !== null 
-            ||
-            this.state.modelObj.Vars.some((Var) => Var.errorMessage !== undefined || Var.errorMessage !== null) 
-        )
+      console.log(this.state.modelObj.Vars);
+      console.log(newEqns2);
+      if (
+        newEqns2.some((eqn) => eqn.errorMessage !== null) 
+        ||
+        this.state.modelObj.Vars.some((Var) => Var.errorMessage !== null) 
       ) {
         //invalid
         aModel.Config.calculate = false;
         aModel.Eqns = newEqns2;
+        let msg =
+          "Please correct the equations or vars highlighted to be able to solve the model";
+        let consoleMessages = [...this.state.consoleMessages];
+        consoleMessages.push(msg);
+        this.setState({ consoleMessages: consoleMessages }, () =>
+          console.log(this.state.consoleMessages)
+        );
       } else {
         aModel.Config.calculate = true;
         aModel.Eqns = newEqns2;
@@ -498,11 +508,10 @@ class LinearCoupledNew extends Component {
           <Paper key="meta" className={classes.MetaContainer} elevation={3}>
             <TextField
               id="outlined-multiline-static"
-              label="Model description"
               multiline
               rows={4}
               defaultValue="Open a model to view descriptions"
-              value={this.state.modelObj.meta.description || ""}
+              value={this.state.modelObj.meta.description}
               onChange={(e) => {
                 let modelObj = this.state.modelObj;
                 modelObj.Config.calculate = false;
@@ -515,6 +524,13 @@ class LinearCoupledNew extends Component {
               fullWidth
               inputProps={{ style: { fontSize: 12 } }} // font size of input text
             />
+          </Paper>
+          <Paper
+            key="console"
+            className={classes.ConsoleContainer}
+            elevation={3}
+          >
+            {this.state.consoleMessages}
           </Paper>
         </div>
 
@@ -584,3 +600,5 @@ class LinearCoupledNew extends Component {
 }
 
 export default LinearCoupledNew;
+
+

@@ -1,26 +1,22 @@
 
-for certain eqns ban negative initials 
 
+1. for certain eqns ban negative initials 
+Allow Ijitial COnditions to be set according to equaltions
 
-da/dt=b is valid 
+2. da/dt=b is valid 
 
-when create new file, select it
+3. create new file, select it, its not updated
 
-error handling in db response
+4. error handling in db response
 
-
-publish eqns doesnt work
-when change varitems, change eqns 
-get private public doesnt work 
-if error in var items, dont calculate
-store var items error message in db
-create new file, select it, its not updated
-
+5. Simplify UI spaces 
+6. Fix the consoleplace
 
 
 
 24th Jul - 7th Aug 
 -----------------
+show the first model when it launches using onNodeSelect
 1. SolverAnalysisGrapher to read *.json files and write *.json files to disk DONE
 2. upgrade strucutire of *json files to includes solutions, RMSE, Speed DONE
 3. Create a Model class to represent the json file WHY - keep correctness together DONE
@@ -82,6 +78,8 @@ space around flex items in linear coupled DONE
 remove legend orientations DONE
 can i remove graph legends configs? DONE
 remove lineNames maybe DONE
+publish eqns doesnt work DONE
+get private public doesnt work DONE
 
 on edit filename, select it DONE
 remove hard coding of X_1 DONE

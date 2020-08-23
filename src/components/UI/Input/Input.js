@@ -18,8 +18,8 @@ export default function Input(props) {
   return (
     
     <TextField className={classes.root}
-    size="small"
-
+      
+      id="standard-basic"
       type={props.type}
       value={props.value}
       onChange={props.onChange}

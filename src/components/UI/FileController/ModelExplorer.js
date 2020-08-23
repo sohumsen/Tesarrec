@@ -16,6 +16,8 @@ import StyledTreeItem from "./StyledTreeItem";
 import AssessmentIcon from "@material-ui/icons/Assessment";
 import FunctionsIcon from "@material-ui/icons/Functions";
 import MenuIcon from "@material-ui/icons/Menu";
+import classes from "./ModelExplorer.module.css";
+
 class ModelExplorer extends Component {
   state = {
     showModels: true,
@@ -25,7 +27,7 @@ class ModelExplorer extends Component {
       (ModelId, i) => {
         return (
           <StyledTreeItem
-            nodeId={i + 1}
+            nodeId={(i + 1).toString()}
             labelText={
               this.props.allPublicId[ModelId].Name
                 ? this.props.allPublicId[ModelId].Name
@@ -34,7 +36,7 @@ class ModelExplorer extends Component {
             ModelId={ModelId}
             selectedModelId={this.props.selectedModelId}
             disabledEdit={this.props.selectedModelId in this.props.allPublicId}
-            onExpandFileLink={() => this.props.onSelectModelLink(ModelId)} //
+            onExpandFileLink={() => this.props.onSelectModelLink(ModelId)}
             onEditFileLinkName={this.props.onEditModelName}
           />
         );
@@ -45,7 +47,11 @@ class ModelExplorer extends Component {
       (ModelId, i) => {
         return (
           <StyledTreeItem
-            nodeId={i + Object.keys(this.props.allPublicId).length + 2}
+            nodeId={(
+              i +
+              Object.keys(this.props.allPublicId).length +
+              2
+            ).toString()}
             labelText={
               this.props.allModelId[ModelId].Name
                 ? this.props.allModelId[ModelId].Name
@@ -62,73 +68,86 @@ class ModelExplorer extends Component {
     );
 
     return (
-      <div>
+      <div className={classes.Container}>
         {this.props.tabChoiceValue === 2 ? (
-          <div>
-            <Tooltip title="Coupled ODE" placement="top">
-              <span>
-                <IconButton
-                  edge="end"
-                  aria-label="Coupled ODE"
-                  onClick={() => this.props.handleTabChange(0, 1)}
-                >
-                  <FunctionsIcon />
-                </IconButton>
-              </span>
-            </Tooltip>
-            <Tooltip title="Solver Analysis" placement="top">
-              <span>
-                <IconButton
-                  edge="end"
-                  aria-label="Solver Analysis"
-                  onClick={() => this.props.handleTabChange(0, 2)}
-                >
-                  <AssessmentIcon />
-                </IconButton>
-              </span>
-            </Tooltip>
+          <div className={classes.ButtonPanel}>
+            <div className={classes.ChildAppControl}>
+              <Tooltip title="Coupled ODE" placement="top">
+                <span>
+                  <IconButton
+                    edge="end"
+                    aria-label="Coupled ODE"
+                    onClick={() => this.props.handleTabChange(0, 1)}
+                  >
+                    <FunctionsIcon />
+                  </IconButton>
+                </span>
+              </Tooltip>
+            </div>
+            <div className={classes.ChildAppControl}>
+              <Tooltip title="Solver Analysis" placement="top">
+                <span>
+                  <IconButton
+                    edge="end"
+                    aria-label="Solver Analysis"
+                    onClick={() => this.props.handleTabChange(0, 2)}
+                  >
+                    <AssessmentIcon />
+                  </IconButton>
+                </span>
+              </Tooltip>
+            </div>
           </div>
         ) : (
-          <div>
-            <Tooltip title="Show menu" placement="top" arrow>
-              <span>
-                <IconButton
-                  edge="end"
-                  aria-label="show"
-                  onClick={() => {
-                    this.setState({
-                      showModels: !this.state.showModels,
-                    });
-                  }}
-                >
-                  <MenuIcon />
-                </IconButton>
-              </span>
-            </Tooltip>
-            <Tooltip title="Coupled ODE" placement="top">
-              <span>
-                <IconButton
-                  edge="end"
-                  aria-label="Coupled ODE"
-                  onClick={() => this.props.handleTabChange(0, 1)}
-                >
-                  <FunctionsIcon />
-                </IconButton>
-              </span>
-            </Tooltip>
-            <Tooltip title="Solver Analysis" placement="top">
-              <span>
-                <IconButton
-                  edge="end"
-                  aria-label="Solver Analysis"
-                  onClick={() => this.props.handleTabChange(0, 2)}
-                >
-                  <AssessmentIcon />
-                </IconButton>
-              </span>
-            </Tooltip>
+          <div className={classes.Container}>
+            <div className={classes.ButtonPanel}>
+              <div className={classes.ChildAppControl}>
+                <Tooltip title="Toggle Model Explorer" placement="top" arrow>
+                  <span>
+                    <IconButton
+                      edge="end"
+                      aria-label="show"
+                      onClick={() => {
+                        this.setState({
+                          showModels: !this.state.showModels,
+                        });
+                      }}
+                    >
+                      <MenuIcon />
+                    </IconButton>
+                  </span>
+                </Tooltip>
+              </div>
+              <div className={classes.ChildAppControl}>
+                <Tooltip title="Coupled ODE" placement="top">
+                  <span>
+                    <IconButton
+                      edge="end"
+                      aria-label="Coupled ODE"
+                      onClick={() => this.props.handleTabChange(0, 1)}
+                    >
+                      <FunctionsIcon />
+                    </IconButton>
+                  </span>
+                </Tooltip>
+              </div>
+              <div className={classes.ChildAppControl}>
+                <Tooltip title="Solver Analysis" placement="top">
+                  <span>
+                    <IconButton
+                      edge="end"
+                      aria-label="Solver Analysis"
+                      onClick={() => this.props.handleTabChange(0, 2)}
+                    >
+                      <AssessmentIcon />
+                    </IconButton>
+                  </span>
+                </Tooltip>
+              </div>
+            </div>
+
             {this.state.showModels ? (
-              <Paper elevation={3}>
+              <Paper className={classes.ModelExplorerPane} elevation={3}>
                 <Paper elevation={3}>
                   <Tooltip title="Create model" placement="top" arrow>
                     <span>
@@ -156,6 +175,7 @@ class ModelExplorer extends Component {
                       </IconButton>
                     </span>
                   </Tooltip>
+
                   <Tooltip title="Publish model" placement="top">
                     <span>
                       <IconButton
@@ -204,6 +224,11 @@ class ModelExplorer extends Component {
 
                 <TreeView
                   defaultCollapseIcon={<ExpandMoreIcon />}
+                  expanded={[
+                    "0",
+                    (Object.keys(this.props.allPublicId).length + 1).toString(),
+                  ]}
+                  defaultSelected={["1"]}
                   defaultExpandIcon={<ChevronRightIcon />}
                 >
                   <TreeItem nodeId="0" label={"Public"}>

@@ -8,7 +8,7 @@ import { green } from "@material-ui/core/colors";
 import RestorePageIcon from "@material-ui/icons/RestorePage";
 const LinearCoupledButtonEqnsContainer = (props) => {
   return (
-    <Paper>
+    <Paper>Equations
       <Tooltip title="Add Equations" placement="top" arrow>
         <span>
           <IconButton

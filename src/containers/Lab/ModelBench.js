@@ -65,6 +65,7 @@ class ModelBench extends Component {
 
   MODEL_createNew = () => {
     let aNewModel = this.newModel();
+    aNewModel.meta.name = aNewModel.meta.name + Object.keys(this.state.allModelId).length
 
     fetch(
       "https://tesarrec.firebaseio.com/eqns/" +
@@ -88,56 +89,15 @@ class ModelBench extends Component {
             {
               error: false,
               selectedModelId: data.name,
-            },
-            () => {
-              const queryParams = "?auth=" + this.props.token; //+'&orderBy="userId"&equalTo="'+this.props.userId+'"'
-              fetch(
-                "https://tesarrec.firebaseio.com/eqns/" +
-                  this.props.userId +
-                  ".json" +
-                  queryParams,
-                {
-                  method: "get",
-                  headers: {
-                    Accept: "application/json, text/plain, */*",
-                    "Content-Type": "application/json",
-                  },
-                }
-              )
-                .then((response) => response.json())
-                .then((data) => {
-                  if (!data.error) {
-                    console.log(data);
-                    this.setState({
-                      allModelId: data,
-                      error: false,
-                      selectedModel: this.state.allModelId[
-                        this.state.selectedModelId
-                      ],
-
-                      loading: false,
-                    });
-                  } else {
-                    this.setState({ error: true });
-                  }
-                })
-                .catch((error) => {
-                  this.setState({ error: true });
-                });
+              selectedModel : aNewModel,
+              allModelId : { ...this.state.allModelId , [data.name ]: aNewModel }
             }
+            
+            
+            
           );
 
-          // console.log(data.name, this.state.allModelId);
-          // this.setState(
-          //   {
-          //     error: false,
-          //     selectedModelId: data.name,
-          //     selectedModel: this.state.allModelId[data.name],
-          //   },
-          //   () => {
-          //     console.log(this.state, data);
-          //   }
-          // );
+         
         } else {
           this.setState({ error: true });
         }
@@ -146,28 +106,7 @@ class ModelBench extends Component {
         this.setState({ error: true });
       });
 
-    // this.setState(
-    //   {
-    //     selectedModel: aNewModel,
-    //   },
-    //   () => {
-    //     this.generalDBRequest(
-    //       this.state.selectedModel,
-    //       "https://tesarrec.firebaseio.com/eqns/" +
-    //         this.props.userId +
-    //         ".json?auth=" +
-    //         this.props.token,
-    //       "post",
-
-    //       //TODO to be optimised
-    //       this.setState({ error: false }, () => {
-    //         console.log(this.state);
-
-    //         this.MODEL_getPrivate();
-    //       })
-    //     );
-    //   }
-    // );
+    
   };
 
   toSkeleton = (modelObj) => {
@@ -265,50 +204,7 @@ class ModelBench extends Component {
               this.setState({ error: true });
             });
 
-          // const queryParams = "?auth=" + this.props.token; //+'&orderBy="userId"&equalTo="'+this.props.userId+'"'
-          // fetch(
-          //   "https://tesarrec.firebaseio.com/eqns/" +
-          //     this.props.userId +
-          //     ".json" +
-          //     queryParams,
-          //   {
-          //     method: "get",
-          //     headers: {
-          //       Accept: "application/json, text/plain, */*",
-          //       "Content-Type": "application/json",
-          //     },
-          //   }
-          // )
-          //   .then((response) => response.json())
-          //   .then((data) => {
-          //     if (!data.error) {
-          //       console.log(data);
-          //       this.setState({
-          //         allModelId: data,
-          //         error: false,
-          //         selectedModel: this.state.allModelId[this.state.selectedModelId],
-
-          //         loading: false,
-          //       });
-          //     } else {
-          //       this.setState({ error: true });
-          //     }
-          //   })
-          //   .catch((error) => {
-          //     this.setState({ error: true });
-          //   });
-
-          // console.log(data.name, this.state.allModelId);
-          // this.setState(
-          //   {
-          //     error: false,
-          //     selectedModelId: data.name,
-          //     selectedModel: this.state.allModelId[data.name],
-          //   },
-          //   () => {
-          //     console.log(this.state, data);
-          //   }
-          // );
+         
         } else {
           this.setState({ error: true });
         }
