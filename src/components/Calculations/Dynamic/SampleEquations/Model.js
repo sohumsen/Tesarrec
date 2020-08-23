@@ -84,12 +84,13 @@ export default class Model {
         ? this.generateActualSolutionArray()
         : null,
       calcedSolution: meta.calculate ? this.solveDiffEqns() : null,
+      timeTaken: this.Config.solvable ? this.getTimeTaken() : 0,
+
     };
     this.meta = {
       name: meta.name,
       description: meta.description,
       rmse: this.Config.solvable ? this.calcRMSE() : null,
-      timeTaken: this.Config.solvable ? this.getTimeTaken() : 0,
     };
   }
 
@@ -279,6 +280,7 @@ export default class Model {
     let calcedArr = NewDiffEquationSolver({ modelObj: this });
     let t1 = performance.now();
     this.solutions.calcedSolution = calcedArr;
+    this.solutions.timeTaken=t1-t0
     return calcedArr;
   };
 

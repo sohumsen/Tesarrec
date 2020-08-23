@@ -39,6 +39,7 @@
     "react-scripts": "3.4.1",
     "react-scroll": "^1.7.16",
     "react-test-renderer": "^16.13.1",
+    "react-typist": "^2.0.5",
     "read-excel-file": "^4.0.6",
     "recharts": "^1.8.5",
     "semantic-ui-css": "^2.4.1",

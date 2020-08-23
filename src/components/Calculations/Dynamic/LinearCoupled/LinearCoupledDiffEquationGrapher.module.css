@@ -7,7 +7,7 @@
   /* width:30vw */
   margin:5px;
 
-  width: 50vw;
+  width: 45vw;
 
 
 }
@@ -15,7 +15,7 @@
 .Graph{
   margin:5px;
 
-  width: 50vw;
+  width: 45vw;
 
  
 }
@@ -23,5 +23,5 @@
   background-color: aqua;
   position: absolute;
   top: 0;
-  left: 50vw;
+  left: 45vw;
 }

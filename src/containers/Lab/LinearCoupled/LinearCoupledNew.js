@@ -22,6 +22,7 @@ import DEFAULTGRAPHCONFIG from "./DefaultGraphConfignew";
 import Model from "../../../components/Calculations/Dynamic/SampleEquations/Model";
 
 import MyMathQuill from "../../../components/UI/Math/MyMathQuill";
+import Typist from "react-typist";
 class LinearCoupledNew extends Component {
   /**
    * Visual Component that contains the textbox for the equation and calculation outputs
@@ -33,8 +34,12 @@ class LinearCoupledNew extends Component {
 
   state = {
     modelId: "",
-    consoleMessages: [],
-      
+    consoleMessages: [
+      "Welcome to ModelBench!",
+      "Select a model to get started",
+    ],
+    typistIndex:0,
+
     modelObj: { Eqns: [], Vars: [], Config: {}, meta: {} }, // This hack is required to handle the modelObj default state
     // myReactGridLayout: DEFAULTLAYOUT(new Model()), //TODO should create a new model obj here
   };
@@ -60,6 +65,10 @@ class LinearCoupledNew extends Component {
         modelId: props.modelId,
 
         modelObj: newModel,
+        consoleMessages: [
+          // "Welcome to ModelBench!",
+          // "Select a model to get started",
+        ],
       };
     }
 
@@ -84,7 +93,6 @@ class LinearCoupledNew extends Component {
       item.textEqn = mathField.text();
       item.latexEqn = mathField.latex();
     } else {
-     
       let modelObj = this.state.modelObj;
 
       let Eqns = this.state.modelObj.Eqns;
@@ -199,22 +207,33 @@ class LinearCoupledNew extends Component {
       console.log(this.state.modelObj.Vars);
       console.log(newEqns2);
       if (
-        newEqns2.some((eqn) => eqn.errorMessage !== null) 
-        ||
-        this.state.modelObj.Vars.some((Var) => Var.errorMessage !== null) 
+        newEqns2.some((eqn) => eqn.errorMessage !== null) ||
+        this.state.modelObj.Vars.some((Var) => Var.errorMessage !== null)
       ) {
         //invalid
         aModel.Config.calculate = false;
         aModel.Eqns = newEqns2;
-        let msg =
-          "Please correct the equations or vars highlighted to be able to solve the model";
+        let msg = ([
+          <p>
+          ERROR: Please correct the equations or vars highlighted to be able to solve
+          the model"
+        </p>
+        ]
+         
+        );
         let consoleMessages = [...this.state.consoleMessages];
         consoleMessages.push(msg);
-        this.setState({ consoleMessages: consoleMessages }, () =>
+        this.setState({ consoleMessages: msg }, () =>
           console.log(this.state.consoleMessages)
         );
       } else {
         aModel.Config.calculate = true;
+      let msg = [<p>Calculating...</p>];
+        let consoleMessages = [...this.state.consoleMessages];
+        consoleMessages.push(msg);
+        this.setState({ consoleMessages: msg }, () =>
+          console.log(this.state.consoleMessages)
+        );
         aModel.Eqns = newEqns2;
       }
     } else {
@@ -490,7 +509,7 @@ class LinearCoupledNew extends Component {
   render() {
     return (
       <div className={classes.Container}>
-        <div className={classes.Column}>
+        <div className={classes.EqnColumn}>
           <Paper key="Eqns" className={classes.EqnContainer} elevation={3}>
             <LinearCoupledButtonEqnsContainer
               Eqns={this.state.modelObj.Eqns}
@@ -525,22 +544,14 @@ class LinearCoupledNew extends Component {
               inputProps={{ style: { fontSize: 12 } }} // font size of input text
             />
           </Paper>
-          <Paper
-            key="console"
-            className={classes.ConsoleContainer}
-            elevation={3}
-          >
-            {this.state.consoleMessages}
-          </Paper>
         </div>
-
-        <Paper key="Vars" className={classes.VarContainer} elevation={3}>
-          <LinearCoupledButtonVariablesContainer
-            Vars={this.state.modelObj.Vars}
-            onIncrementVariable={this.VARS_onIncrement}
-            resetForm={() => this.ITEMS_reset("vars")}
-          />
-          <Paper onMouseDown={(e) => e.stopPropagation()}>
+        <div className={classes.VarColumn}>
+          <Paper key="Vars" className={classes.VarContainer} elevation={3}>
+            <LinearCoupledButtonVariablesContainer
+              Vars={this.state.modelObj.Vars}
+              onIncrementVariable={this.VARS_onIncrement}
+              resetForm={() => this.ITEMS_reset("vars")}
+            />
             <VarItems
               Vars={this.state.modelObj.Vars}
               handleVariableInputChange={this.VARS_handleInputChange}
@@ -548,7 +559,35 @@ class LinearCoupledNew extends Component {
               handleMathQuillInputChange={this.MATHQUILL_handleInputChange}
             />
           </Paper>
-        </Paper>
+
+          <div
+            key="console"
+            className={classes.ConsoleContainer}
+            style={{ backgroundColor: "#003B00" }}
+            elevation={3}
+          >
+            {/* <Typist>
+              This will be animated after first sentence is complete 
+              Final sentence
+            </Typist> */}
+            {this.state.consoleMessages}
+{/* 
+            <Typist
+              // key={this.state.consoleMessages}
+              // onTypingDone={() =>
+              //   this.setState((state) => ({
+              //     typistIndex: state.typistIndex + 1,
+              //   }))
+              // }
+            >
+              {this.state.consoleMessages.map((word) => [
+                <span>{word}</span>,
+                // <Typist.Backspace count={word.length} delay={1000} />,
+              ])}
+            </Typist> */}
+            {/* <Typist key={this.state.consoleMessages}>{this.state.consoleMessages}</Typist> */}
+          </div>
+        </div>
 
         {this.state.modelObj.Config.calculate ? (
           <div key="GraphButtons" className={classes.Graph}>
@@ -600,5 +639,3 @@ class LinearCoupledNew extends Component {
 }
 
 export default LinearCoupledNew;
-
-
