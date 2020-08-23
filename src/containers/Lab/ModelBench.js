@@ -3,13 +3,7 @@ import SingleODE from "./SingleODE/SingleODE";
 import LinearCoupled from "./LinearCoupled/LinearCoupledNew";
 import ModelExplorer from "../../components/UI/FileController/ModelExplorer";
 import classes from "./ModelBench.module.css";
-import MyTabs from "../../components/UI/MyTabs/MyTabs";
-import Skeleton from "../../components/UI/Skeleton/Skeleton";
-// import MyErrorMessage from "../../components/UI/MyErrorMessage/MyErrorMessage";
-import Sample from "./Sample";
 
-import DEFAULTEQUATIONS from "../../components/Calculations/Dynamic/SampleEquations/DEFAULTEQUATIONS";
-import DEFAULTVARS from "../../components/Calculations/Dynamic/SampleEquations/DEFAULTVARS";
 import DEFAULTGRAPHCONFIG from "./LinearCoupled/DefaultGraphConfig";
 
 import SolverAnalysis from "./SolverAnalysis/SolverAnalysis";
@@ -109,7 +103,6 @@ class ModelBench extends Component {
   };
 
   toSkeleton = (modelObj) => {
-    let res = JSON.stringify(modelObj);
     return modelObj;
   };
 
@@ -444,7 +437,6 @@ class ModelBench extends Component {
   newModel() {
     /** TODO Harmonise default params */
     /** TODO return new Model() */
-    let GRAPHCONFIG = DEFAULTGRAPHCONFIG;
 
     let newModel = new Model();
 

@@ -1,11 +1,8 @@
 import React from "react";
 import MyChart from "../../../UI/Canvas/LineChart";
-import { CSVLink } from "react-csv";
 
-import { Tooltip, IconButton, Paper } from "@material-ui/core";
-import ImportExportIcon from "@material-ui/icons/ImportExport";
-// import LinearCoupledDiffEquationSolver from "./LinearCoupledDiffEquationSolver";
-import NewDiffEquationSolver from "./NewDiffEquationSolver";
+import {  Paper } from "@material-ui/core";
+
 import Table from "../../../UI/Table/Table";
 import classes from "./LinearCoupledDiffEquationGrapher.module.css";
 //DyByDx= x+3y
@@ -28,7 +25,6 @@ const LinearCoupledDiffEquationGrapher = (props) => {
     return returnedArr;
   };
 
-  let t0 = performance.now();
 
 
   let newcomputedResults = props.computedResults.map((row) =>

@@ -1,14 +1,9 @@
 import React from "react";
-import Radio from "@material-ui/core/Radio";
-import RadioGroup from "@material-ui/core/RadioGroup";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import FormControl from "@material-ui/core/FormControl";
-import FormLabel from "@material-ui/core/FormLabel";
+
 import classes from "./GraphConfig.module.css";
 import Input from "../Input/Input";
 import CloseButton from "../Button/CloseButton";
-import GenericButton from "../Button/GenericButton";
-import MyErrorMessage from "../MyErrorMessage/MyErrorMessage";
+
 import {
   Paper,
   Select,
@@ -16,7 +11,6 @@ import {
   Tooltip,
   IconButton,
 } from "@material-ui/core";
-import CustomizedErrorMessage from "../MyErrorMessage/CustomizedErrorMessage";
 import ErrorOutlineIcon from "@material-ui/icons/ErrorOutline";
 import PlayCircleOutlineIcon from "@material-ui/icons/PlayCircleOutline";
 import { green } from "@material-ui/core/colors";

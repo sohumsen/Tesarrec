@@ -1,9 +1,7 @@
 import { v4 as uuidv4 } from "uuid";
 import { parse, evaluate, simplify } from "mathjs";
 import NewDiffEquationSolver from "../LinearCoupled/NewDiffEquationSolver";
-import DEFAULTGRAPHCONFIG from "../../../../containers/Lab/LinearCoupled/DefaultGraphConfig";
-import DEFAULTMODELCONFIG from "../../../../containers/Lab/LinearCoupled/DefaultModelConfig";
-import DEFAULTEQUATIONSFORMODEL from "./DEFAULTEQUATIONSFORMODEL";
+
 import DEFAULTVARSFORMODEL from "./DEFAULTVARS";
 import DEFAULTEQUATIONSNEW from "./DEFAULTEQUATIONSnew";
 import DEFAULTMODELCONFIGNew from "../../../../containers/Lab/LinearCoupled/DefaultGraphConfignew";

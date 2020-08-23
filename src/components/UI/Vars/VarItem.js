@@ -2,7 +2,7 @@ import React from "react";
 import MyMathQuill from "../Math/MyMathQuill";
 import classes from "./VarItem.module.css";
 import OutlinedInput from "../Input/OutlinedInput";
-import { Paper, InputBase } from "@material-ui/core";
+import { Paper } from "@material-ui/core";
 import MinMaxSlider from "../SliderContainer/MinMaxSlider/MinMaxSlider";
 import CloseButton from "../Button/CloseButton";
 import CustomizedErrorMessage from '../MyErrorMessage/CustomizedErrorMessage'

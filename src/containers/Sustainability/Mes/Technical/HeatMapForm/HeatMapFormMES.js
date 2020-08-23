@@ -1,6 +1,4 @@
 import React, { Component } from "react";
-import WordDoc from "../../../../../assets/MES download.docx";
-import DonwloadButton from "../../../../../components/UI/Button/DownloadButton";
 
 import RightContent from "../RightContent/RightContent";
 import classes from "./HeatMapFormMES.module.css";

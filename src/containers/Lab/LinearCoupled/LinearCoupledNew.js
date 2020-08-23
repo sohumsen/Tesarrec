@@ -1,10 +1,9 @@
 import React, { Component } from "react";
-import GridLayout from "react-grid-layout";
 import "../../../../node_modules/react-grid-layout/css/styles.css";
 
 import EqnItems from "../../../components/UI/Eqns/EqnItems";
 import VarItems from "../../../components/UI/Vars/VarItems";
-import { evaluate, simplify, parse } from "mathjs";
+import {  simplify, parse } from "mathjs";
 import classes from "./LinearCoupled.module.css";
 import MyErrorMessage from "../../../components/UI/MyErrorMessage/CustomizedErrorMessage";
 import GraphConfig from "../../../components/UI/GraphConfig/GraphConfig";
@@ -13,16 +12,11 @@ import { Paper, Modal, TextField } from "@material-ui/core";
 import LinearCoupledButtonEqnsContainer from "../../../components/UI/ButtonContainer/LinearCoupledButtonEqnsContainer";
 import DEFAULTEQUATIONSNEW from "../../../components/Calculations/Dynamic/SampleEquations/DEFAULTEQUATIONSnew";
 
-import DEFAULTEQUATIONS from "../../../components/Calculations/Dynamic/SampleEquations/DEFAULTEQUATIONS";
-import DEFAULTVARS from "../../../components/Calculations/Dynamic/SampleEquations/DEFAULTVARS";
 import LinearCoupledButtonVariablesContainer from "../../../components/UI/ButtonContainer/LinearCoupledButtonVariablesContainer";
 import LinearCoupledButtonGraphContainer from "../../../components/UI/ButtonContainer/LinearCoupledButtonGraphContainer";
-import DEFAULTLAYOUT from "./DefaultLayout";
-import DEFAULTGRAPHCONFIG from "./DefaultGraphConfignew";
+
 import Model from "../../../components/Calculations/Dynamic/SampleEquations/Model";
 
-import MyMathQuill from "../../../components/UI/Math/MyMathQuill";
-import Typist from "react-typist";
 class LinearCoupledNew extends Component {
   /**
    * Visual Component that contains the textbox for the equation and calculation outputs

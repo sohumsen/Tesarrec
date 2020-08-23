@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import CanvasJSReact from "../../../assets/canvasjs.react";
 //import classes from './Chart.module.css';
 //import FractionDisplay from '../../Math/Math'
 import {
@@ -14,7 +13,7 @@ import {
   Label,
 } from "recharts";
 
-var CanvasJSChart = CanvasJSReact.CanvasJSChart;
+// var CanvasJSChart = CanvasJSReact.CanvasJSChart;
 
 // class LineChart extends Component {
 //   render() {

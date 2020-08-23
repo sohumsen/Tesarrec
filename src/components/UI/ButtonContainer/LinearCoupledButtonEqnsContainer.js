@@ -5,7 +5,6 @@ import IconButton from "@material-ui/core/IconButton";
 import { Tooltip,  Paper } from "@material-ui/core";
 import RestoreIcon from "@material-ui/icons/Restore";
 import { green } from "@material-ui/core/colors";
-import RestorePageIcon from "@material-ui/icons/RestorePage";
 const LinearCoupledButtonEqnsContainer = (props) => {
   return (
     <Paper>Equations

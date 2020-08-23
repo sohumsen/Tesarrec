@@ -2,7 +2,6 @@ import React from "react";
 import AddBoxIcon from "@material-ui/icons/AddBox";
 import IconButton from "@material-ui/core/IconButton";
 import { Tooltip, Paper } from "@material-ui/core";
-import RestoreIcon from "@material-ui/icons/Restore";
 import { blue,yellow,pink } from '@material-ui/core/colors';
 
 const LinearCoupledButtonVariablesContainer = (props) => {

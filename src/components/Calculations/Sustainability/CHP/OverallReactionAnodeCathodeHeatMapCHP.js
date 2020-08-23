@@ -5,7 +5,6 @@ import CashFlowGraph from "./CashFlowGraph";
 import CHPPic from "../../../../assets/CHP.png";
 import classes from "./OverallReactionAnodeCathodeCHP.module.css";
 import ColumnChart from "../../../UI/Canvas/ColumnChart";
-import StackedChart from "../../../UI/Canvas/StackedChart";
 
 const OverallReactionAnodeCathode = (props) => {
   let {
