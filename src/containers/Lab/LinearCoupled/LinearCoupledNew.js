@@ -521,28 +521,30 @@ class LinearCoupledNew extends Component {
             />
           </Paper>
         </div>
-        <div className={classes.VarColumn}>
+        <Paper className={classes.VarColumn}>
           <Paper key="Vars" className={classes.VarContainer} elevation={3}>
             <LinearCoupledButtonVariablesContainer
               Vars={this.state.modelObj.Vars}
               onIncrementVariable={this.VARS_onIncrement}
               resetForm={() => this.ITEMS_reset("vars")}
             />
-            
             <VarItems
               Vars={this.state.modelObj.Vars}
               handleVariableInputChange={this.VARS_handleInputChange}
               removeItem={this.ITEMS_remove}
               handleMathQuillInputChange={this.MATHQUILL_handleInputChange}
             />
+
+           
           </Paper>
-
-          {/* <Paper key="Console" className={classes.ConsoleContainer}            style={{ backgroundColor: "#003B00" }}
-            elevation={3}      >
-            {    this.state.consoleMessages.map(element => (<p>{element}</p>) )   }
-          </Paper> */}
-        </div>
-
+          <Paper key="Console" className={classes.ConsoleContainer} elevation={3}>
+            {this.state.consoleMessages.map((msg) => (
+              <p>{">  " + msg}</p>
+            ))}
+          </Paper>
+      
+        </Paper>
+       
         {this.state.modelObj.Config.calculate ? (
           <div key="GraphButtons" className={classes.Graph}>
             <LinearCoupledButtonGraphContainer

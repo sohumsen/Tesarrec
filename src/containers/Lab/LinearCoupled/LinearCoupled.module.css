@@ -7,10 +7,7 @@
   flex-flow: row wrap;
 }
 
-.VarContainer {
-  flex :1;
-  background-color: aquamarine;
-}
+
 
 .EqnContainer {
   flex :1;
@@ -21,25 +18,32 @@
   align-self: baseline;
   order: 2;
 }
-
-.VarColumn {
-  flex: 3 0;
-  display: flex;
-  align-self: baseline;
-  order: 4;
-  margin-left: 10px;
-}
 .MetaContainer {
   margin-top: 10px;
   background-color: antiquewhite;
 }
+.VarColumn {
+  flex: 3 0;
+  display: flex;
+  flex-flow: column wrap;
+  align-self: baseline;
+  order: 4;
+  margin-left: 10px;
+}
 
+
+.VarContainer {
+  flex :5 1 ;
+  background-color: aquamarine;
+}
 .ConsoleContainer {
+  line-height: 50%;
+  flex :1 1 auto;
 
   font-family: "VT323", monospace;
   font-size: small;
-  color: #00ff41;
-  background-color: rgb(10, 10, 10);
+  color: rgb(12, 221, 12);
+  background-color: black;
 }
 
 .Graph {
