@@ -1,27 +1,17 @@
-.Independent {
-  /*background-color: aqua;*/
-  flex:1;
- 
 
-}
 .Dependent {
   /*background-color: rgb(126, 126, 177);*/
 
   float: left;
   width: 50%;
-
-
 }
 
 .Constant {
   float: left;
   width: 100%;
-
-
 }
 .RemoveButton {
   float: right;
-
 }
 .slider {
   /*background-color: rgb(173, 172, 211);*/
@@ -44,8 +34,7 @@
   float: left;
 }
 
-.ErrorMsg{
+.ErrorMsg {
   float: right;
   color: red;
-
 }

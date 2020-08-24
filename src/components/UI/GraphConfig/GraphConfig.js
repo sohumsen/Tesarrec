@@ -2,7 +2,8 @@ import React from "react";
 
 import classes from "./GraphConfig.module.css";
 import Input from "../Input/Input";
-import CloseButton from "../Button/CloseButton";
+import CloseIcon from "@material-ui/icons/Close";
+import SaveIcon from "@material-ui/icons/Save";
 
 import {
   Paper,
@@ -13,68 +14,64 @@ import {
 } from "@material-ui/core";
 import ErrorOutlineIcon from "@material-ui/icons/ErrorOutline";
 import PlayCircleOutlineIcon from "@material-ui/icons/PlayCircleOutline";
-import { green } from "@material-ui/core/colors";
+import { green, red } from "@material-ui/core/colors";
 
 // import Paper from '../Paper/Paper'
 
 export default function FormControlLabelPlacement(props) {
-  // props.Eqns.map((Eqn) => {
-  //   axisMenuItemsList.push(Eqn.line);
-  //   return Eqn.line;
-  // });
-  let allAxis = props.Vars.filter(
-    (Var) => (Var.VarType === "Independent" || Var.VarType === "Dependent")
+
+  let allAxis = props.modelObj.Vars.filter(
+    (Var) => Var.VarType === "Independent" || Var.VarType === "Dependent"
   ).map((Var) => Var.LatexForm);
   let menuItemsList = allAxis.map((menuItem) => {
     return <MenuItem value={menuItem}>{menuItem}</MenuItem>;
   });
- 
 
   return (
     <div>
       <Paper elevation={3}>
-        <div className={classes.closeButton}>
-          <CloseButton
-            type="button"
-            value="Close"
-            displayValue="Close"
-            onClick={props.onClose}
-          />
-        </div>
-
-        <Tooltip title="Submit Config" placement="top" arrow>
+        {/* <Tooltip title="Save Config" placement="top" arrow>
           <span>
-            <IconButton edge="end" aria-label="Submit" onClick={props.onSubmit}>
-              <PlayCircleOutlineIcon style={{ color: green[500] }} />
+            <IconButton edge="end" aria-label="Save" onClick={props.onSubmit}>
+              <SaveIcon style={{ color: green[500] }} />
             </IconButton>
           </span>
-        </Tooltip>
-        {/* <div className={classes.submitButton}>
-            <GenericButton
-              value="Submit"
-              type="submit"
-              displayValue="SUBMIT"
-              onClick={props.onSubmit}
-            />
-          </div> */}
-        <div className={classes.errorMessage}>
-          {props.errorMessage ? <ErrorOutlineIcon color="secondary" /> : null}
-        </div>
+        </Tooltip> */}
 
         <div className={classes.Container}>
-         
-          <div className={classes.model}>
+        <div className={classes.closeButton}>
+              <Tooltip title="Close Config" placement="top" arrow>
+                <span>
+                  <IconButton
+                    edge="end"
+                    aria-label="Close"
+                    onClick={props.onClose}
+                  >
+                    <CloseIcon style={{ color: red[500] }} />
+                  </IconButton>
+                </span>
+              </Tooltip>
+            </div>
+          <div className={classes.modelAttributes}>
             
             <div className={classes.item}>
               <Input
                 label="Step size"
                 type="text"
-                value={props.h}
+                value={props.modelObj.Config.h}
                 onChange={props.onChange("h")}
               />
             </div>
+            <div className={classes.item}>
+              <Input
+                label="Num cycles"
+                type="text"
+                value={props.modelObj.Config.numOfCycles}
+                onChange={props.onChange("numOfCycles")}
+              />
+            </div>
             <div className={classes.methodChoice}>
-              <Select value={props.method} onChange={props.onChange("method")}>
+              <Select value={props.modelObj.Config.method} onChange={props.onChange("method")}>
                 <MenuItem value={"Euler"}>Euler</MenuItem>
                 <MenuItem value={"Midpoint"}>Midpoint</MenuItem>
                 <MenuItem value={"Heun"}>Heun</MenuItem>
@@ -88,19 +85,19 @@ export default function FormControlLabelPlacement(props) {
               </Select>
             </div>
           </div>
-          <div className={classes.graph}>
+          <div className={classes.graphAttributes}>
             <div className={classes.item}>
               <Input
-                label="Decimal Precision"
+                label="Precision"
                 type="text"
-                value={props.DecimalPrecision}
+                value={props.modelObj.Config.DecimalPrecision}
                 onChange={props.onChange("DecimalPrecision")}
               />
             </div>
             <div className={classes.item}>
               {/* <div className={classes.selectAxis}> */}
               <p>X axis</p>
-              <Select value={props.xAxis} onChange={props.onChange("xAxis")}>
+              <Select value={props.modelObj.Config.xAxis} onChange={props.onChange("xAxis")}>
                 {menuItemsList}
               </Select>
               {/* </div> */}
@@ -109,7 +106,7 @@ export default function FormControlLabelPlacement(props) {
 
             <div className={classes.item}>
               <p>Y axis</p>
-              <Select value={props.yAxis} onChange={props.onChange("yAxis")}>
+              <Select value={props.modelObj.Config.yAxis} onChange={props.onChange("yAxis")}>
                 {menuItemsList}
               </Select>
             </div>
@@ -118,6 +115,14 @@ export default function FormControlLabelPlacement(props) {
           </div>
         </div>
       </Paper>
+      <div className={classes.errorMessage}>
+        {props.modelObj.Eqns[0].errorMessage ? (
+          <div>
+            <ErrorOutlineIcon color="secondary" />
+            {props.errorMessage}{" "}
+          </div>
+        ) : null}
+      </div>
     </div>
   );
 }

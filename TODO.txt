@@ -1,7 +1,7 @@
 
 
 1. for certain eqns ban negative initials 
-Allow Ijitial COnditions to be set according to equaltions
+
 
 2. da/dt=b is valid 
 
@@ -11,8 +11,10 @@ Allow Ijitial COnditions to be set according to equaltions
 
 5. Simplify UI spaces 
 6. Fix the consoleplace
+
 type more eqns
 remove warnings
+
 
 
 24th Jul - 7th Aug 

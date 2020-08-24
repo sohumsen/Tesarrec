@@ -3,7 +3,7 @@ import "../../../../node_modules/react-grid-layout/css/styles.css";
 
 import EqnItems from "../../../components/UI/Eqns/EqnItems";
 import VarItems from "../../../components/UI/Vars/VarItems";
-import {  simplify, parse } from "mathjs";
+import { simplify, parse } from "mathjs";
 import classes from "./LinearCoupled.module.css";
 import MyErrorMessage from "../../../components/UI/MyErrorMessage/CustomizedErrorMessage";
 import GraphConfig from "../../../components/UI/GraphConfig/GraphConfig";
@@ -32,7 +32,7 @@ class LinearCoupledNew extends Component {
       "Welcome to ModelBench!",
       "Select a model to get started",
     ],
-    typistIndex:0,
+    typistIndex: 0,
 
     modelObj: { Eqns: [], Vars: [], Config: {}, meta: {} }, // This hack is required to handle the modelObj default state
     // myReactGridLayout: DEFAULTLAYOUT(new Model()), //TODO should create a new model obj here
@@ -55,11 +55,10 @@ class LinearCoupledNew extends Component {
 
       return {
         modelId: props.modelId,
-
         modelObj: newModel,
         consoleMessages: [
-          // "Welcome to ModelBench!",
-          // "Select a model to get started",
+          "Welcome to ModelBench!",
+          "Select a model to get started",
         ],
       };
     }
@@ -68,7 +67,10 @@ class LinearCoupledNew extends Component {
   }
 
   componentDidUpdate() {
-    if (this.props.saveSnapshot) {
+    // This flag is a signal from the parent component that any further updates to the state
+    // in this component should be synced with the parent
+
+    if (this.props.seekChildUpdates) {
       this.props.sendToParent(this.state.modelObj);
     }
   }
@@ -197,20 +199,18 @@ class LinearCoupledNew extends Component {
         //invalid
         aModel.Config.calculate = false;
         aModel.Eqns = newEqns2;
-        let msg = ([
+        let msg = [
           <p>
-          ERROR: Please correct the equations or vars highlighted to be able to solve
-          the model"
-        </p>
-        ]
-         
-        );
+            ERROR: Please correct the equations or vars highlighted to be able
+            to solve the model"
+          </p>,
+        ];
         let consoleMessages = [...this.state.consoleMessages];
         consoleMessages.push(msg);
         this.setState({ consoleMessages: msg });
       } else {
         aModel.Config.calculate = true;
-      let msg = [<p>Calculating...</p>];
+        let msg = [<p>Calculating...</p>];
         let consoleMessages = [...this.state.consoleMessages];
         consoleMessages.push(msg);
         this.setState({ consoleMessages: msg });
@@ -305,17 +305,16 @@ class LinearCoupledNew extends Component {
     let modelObj = this.state.modelObj;
     let Vars = modelObj.Vars;
 
-
     const idx = Vars.findIndex((e) => {
       return e.id === id;
     });
 
     const Var = Vars[idx];
-  
+
     if (event.target.name === undefined) {
       isNaN(value)
-      ? (Var["VarCurrent"]  = 0)
-      : (Var["VarCurrent"]  = event.target.value);
+        ? (Var["VarCurrent"] = 0)
+        : (Var["VarCurrent"] = event.target.value);
       Var["VarCurrent"] = value;
     } else {
       isNaN(event.target.value)
@@ -428,58 +427,55 @@ class LinearCoupledNew extends Component {
     });
   };
 
-  GRAPHCONFIG_onToggleView = () => {
+  GRAPHCONFIG_onClose = () => {
     let modelObj = this.state.modelObj;
     modelObj.Config.show = !this.state.modelObj.Config.show;
-    modelObj.Config.submitted = true;
-
     this.setState({
       modelObj: modelObj,
     });
   };
 
-  GRAPHCONFIG_onChange = (name) => (event, value) => {
+  GRAPHCONFIG_onChange = (keyName) => (event, value) => {
     let modelObj = this.state.modelObj;
-    // if (name.includes("initialConditions")) {
-    //   let idx = name[name.length - 1];
-    //   modelObj.Config.initialConditions[idx] = event.target.value;
-    // } else {
-    modelObj.Config[name] = event.target.value;
-    // }
 
-    modelObj.Config.submitted = false;
+    modelObj.Config[keyName] = event.target.value;
+    // this should be passed in from event source
+    let GRAPHAXISNAMES = ["xAxis", "yAxis", "DecimalPrecision"];
+
+    if (GRAPHAXISNAMES.includes(keyName)) {
+      // pluck the data out from modelObj and plot
+      this.GRAPH_renderCalced(modelObj.solutions.calcedSolution);
+    } else {
+      // Here we are waiting for a rerrun of the model
+      modelObj.Config.calculate = false;
+    }
+
+    console.log(this.state.modelObj);
 
     this.setState({ modelObj: modelObj });
   };
   GRAPHCONFIG_onSubmit = () => {
     let modelObj = this.state.modelObj;
-
-    // let newInitialConditions = modelObj.Config.initialConditions.map(Number);
-    // if (newInitialConditions.length === this.state.modelObj.Eqns.length) {
-    //   modelObj.Config.initialConditions = newInitialConditions;
-    //   modelObj.Config.submitted = true;
-    // } else {
-    modelObj.Config.submitted = false;
-    // }
+    console.log(this.state.modelObj);
     modelObj.Config.show = false;
+    modelObj.Config.calculate = true;
 
     this.setState({ modelObj: modelObj });
   };
 
-  GRAPH_render = () => {
-    let vars = {};
-
-    this.state.modelObj.Vars.forEach((VarElement) => {
-      vars[VarElement.LatexForm] = VarElement.VarCurrent;
-    });
+  GRAPH_renderCalced = (calcedSolution) => {
     return (
       <div key="Graph">
         <LinearCoupledDiffEquationGrapher
-          computedResults={this.state.modelObj.solveDiffEqns()}
+          computedResults={calcedSolution}
           modelObj={this.state.modelObj}
         />
       </div>
     );
+  };
+
+  GRAPH_render = () => {
+    return this.GRAPH_renderCalced(this.state.modelObj.solveDiffEqns());
   };
 
   render() {
@@ -500,11 +496,15 @@ class LinearCoupledNew extends Component {
             />
           </Paper>
 
-          <Paper key="meta" className={classes.MetaContainer} elevation={3}>
+          <Paper
+            key="Description"
+            className={classes.MetaContainer}
+            elevation={3}
+          >
             <TextField
               id="outlined-multiline-static"
               multiline
-              rows={4}
+              rows={15}
               defaultValue="Open a model to view descriptions"
               value={this.state.modelObj.meta.description}
               onChange={(e) => {
@@ -528,6 +528,7 @@ class LinearCoupledNew extends Component {
               onIncrementVariable={this.VARS_onIncrement}
               resetForm={() => this.ITEMS_reset("vars")}
             />
+            
             <VarItems
               Vars={this.state.modelObj.Vars}
               handleVariableInputChange={this.VARS_handleInputChange}
@@ -536,40 +537,17 @@ class LinearCoupledNew extends Component {
             />
           </Paper>
 
-          <div
-            key="console"
-            className={classes.ConsoleContainer}
-            style={{ backgroundColor: "#003B00" }}
-            elevation={3}
-          >
-            {/* <Typist>
-              This will be animated after first sentence is complete 
-              Final sentence
-            </Typist> */}
-            {this.state.consoleMessages}
-{/* 
-            <Typist
-              // key={this.state.consoleMessages}
-              // onTypingDone={() =>
-              //   this.setState((state) => ({
-              //     typistIndex: state.typistIndex + 1,
-              //   }))
-              // }
-            >
-              {this.state.consoleMessages.map((word) => [
-                <span>{word}</span>,
-                // <Typist.Backspace count={word.length} delay={1000} />,
-              ])}
-            </Typist> */}
-            {/* <Typist key={this.state.consoleMessages}>{this.state.consoleMessages}</Typist> */}
-          </div>
+          {/* <Paper key="Console" className={classes.ConsoleContainer}            style={{ backgroundColor: "#003B00" }}
+            elevation={3}      >
+            {    this.state.consoleMessages.map(element => (<p>{element}</p>) )   }
+          </Paper> */}
         </div>
 
         {this.state.modelObj.Config.calculate ? (
           <div key="GraphButtons" className={classes.Graph}>
             <LinearCoupledButtonGraphContainer
               calculate={this.state.modelObj.Config.calculate}
-              onGraphConfigOpen={this.GRAPHCONFIG_onToggleView}
+              onGraphConfigOpen={this.GRAPHCONFIG_onClose}
               onGraphClose={() => {
                 let modelObj = { ...this.state.modelObj };
                 modelObj.Config.calculate = false;
@@ -577,7 +555,7 @@ class LinearCoupledNew extends Component {
               }}
               modelObj={this.state.modelObj}
             />
-            {this.state.modelObj.Config.submitted ? this.GRAPH_render() : null}
+            {this.GRAPH_render()}
           </div>
         ) : (
           <div className={classes.Graph} key="GraphButtons" />
@@ -585,25 +563,12 @@ class LinearCoupledNew extends Component {
 
         <Modal
           open={this.state.modelObj.Config.show}
-          onClose={this.GRAPHCONFIG_onToggleView}
+          onClose={this.GRAPHCONFIG_onClose}
         >
           <div key="GraphConfig" className={classes.graphConfig}>
             <GraphConfig
-              configPos={this.props.configPos}
-              Vars={this.state.modelObj.Vars}
-              errorMessage={!this.state.modelObj.Config.submitted}
-              // LegendHorizontal={this.state.modelObj.Config.LegendHorizontal}
-              // LegendVertical={this.state.modelObj.Config.LegendVertical}
-              DecimalPrecision={this.state.modelObj.Config.DecimalPrecision}
-              // initialConditions={this.state.modelObj.Config.initialConditions}
-              // lineNames={this.state.modelObj.Config.lineNames}
-              xAxis={this.state.modelObj.Config.xAxis}
-              yAxis={this.state.modelObj.Config.yAxis}
-              method={this.state.modelObj.Config.method}
-              t0={this.state.modelObj.Config.t0}
-              h={this.state.modelObj.Config.h}
-              Eqns={this.state.modelObj.Eqns}
-              onClose={this.GRAPHCONFIG_onToggleView}
+              modelObj={this.state.modelObj}
+              onClose={this.GRAPHCONFIG_onClose}
               onChange={(val) => this.GRAPHCONFIG_onChange(val)}
               onSubmit={this.GRAPHCONFIG_onSubmit}
             />

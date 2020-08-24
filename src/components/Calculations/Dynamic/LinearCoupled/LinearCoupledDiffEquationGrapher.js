@@ -58,6 +58,12 @@ const LinearCoupledDiffEquationGrapher = (props) => {
     order3.push(order2);
   }
 
+
+console.log(objOfCoords[props.modelObj.Config.xAxis])
+
+console.log(objOfCoords[props.modelObj.Config.yAxis])
+
+
   return (
     <div className={classes.Container}>
       <Paper elevation={3} className={classes.Graph}>

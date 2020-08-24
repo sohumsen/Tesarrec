@@ -14,7 +14,7 @@ export default class ModelWrapper extends Model {
     
     this.Config = {
       show: inputModel.show,
-      submitted: inputModel.submitted,
+      //submitted: inputModel.submitted,
       LegendHorizontal: inputModel.LegendHorizontal,
       LegendVertical: inputModel.LegendVertical,
       DecimalPrecision: inputModel.DecimalPrecision,

@@ -56,7 +56,7 @@ class FileLink extends Component {
         };
       },
       () => {
-        this.props.onEditFileLinkName(this.state.newFileName);
+        this.props.onEditModelName(this.state.newFileName);
       }
     );
   };
@@ -79,7 +79,7 @@ class FileLink extends Component {
           <MenuItem
             button
             onClick={() => {
-              this.props.onExpandFileLink();
+              this.props.onExpandModelLink();
             }}
             selected={this.props.selectedModelId === this.props.ModelId}
             classes={{ selected: classes.selected }}

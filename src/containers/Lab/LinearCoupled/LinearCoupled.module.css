@@ -1,45 +1,20 @@
 .Container {
-  /*
-  background-color: blanchedalmond;
-  border-width: 2px;
-  border-color: rgb(156, 122, 12);
-  border-style: solid;
-  */
   display: flex;
   width: 100%;
 
   align-content: center;
   justify-content: space-between;
   flex-flow: row wrap;
-
-  /* margin-left: auto;
-  align-content: flex-end
-  flex-wrap: wrap; */
 }
 
 .VarContainer {
-  /* flex: 1 1 70px; */
-  /* flex: 3.1 1;
-  align-self: baseline;
-  background-color: aqua;
-  order: 3;
-  margin:5px */
+  flex :1;
   background-color: aquamarine;
 }
 
 .EqnContainer {
-  /* flex: 4 0;
-  align-self: baseline;
-  order: 2; */
-
-  /* margin: 10px; */
-  /* height: auto; */
+  flex :1;
   overflow-y: auto;
-  /*
-  border-width: 2px;
-  border-color: rgb(56, 122, 122);
-  border-style: solid;
-  */
 }
 .EqnColumn {
   flex: 4 0;
@@ -49,29 +24,21 @@
 
 .VarColumn {
   flex: 3 0;
+  display: flex;
   align-self: baseline;
   order: 4;
+  margin-left: 10px;
 }
 .MetaContainer {
-  /* position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 15%; */
   margin-top: 10px;
   background-color: antiquewhite;
 }
 
 .ConsoleContainer {
-  /* position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 15%; */
-  /* overflow-y : auto;
-  height: 200px;
-  margin-top: 10px; */
-  font-family: 'VT323', monospace;
+
+  font-family: "VT323", monospace;
   font-size: small;
-  color: #00FF41;
+  color: #00ff41;
   background-color: rgb(10, 10, 10);
 }
 
@@ -89,7 +56,7 @@
 }
 
 .graphConfig {
-  width: 50%;
+  width: 25%;
   position: absolute;
   top: 30%;
   left: 25%;

@@ -26,7 +26,7 @@ class ModelBench extends Component {
     error: false,
     tabChoiceValue: 1 /* TODO This component doesnt need to know this */,
     loading: false,
-    saveSnapshot: false,
+    seekChildUpdates: false,
   };
 
   componentDidMount() {
@@ -78,19 +78,12 @@ class ModelBench extends Component {
       .then((response) => response.json())
       .then((data) => {
         if (!data.error) {
-          this.setState(
-            {
-              error: false,
-              selectedModelId: data.name,
-              selectedModel : aNewModel,
-              allModelId : { ...this.state.allModelId , [data.name ]: aNewModel }
-            }
-            
-            
-            
-          );
-
-         
+          this.setState({
+            error: false,
+            selectedModelId: data.name,
+            selectedModel: aNewModel,
+            allModelId: { ...this.state.allModelId, [data.name]: aNewModel },
+          });
         } else {
           this.setState({ error: true });
         }
@@ -98,36 +91,40 @@ class ModelBench extends Component {
       .catch((error) => {
         this.setState({ error: true });
       });
-
-    
   };
 
   toSkeleton = (modelObj) => {
     return modelObj;
   };
 
+  /**
+   * At this point this states selectedModel is completely up2date
+   */
   MODEL_save = () => {
-    this.setState({ saveSnapshot: true }, () => {
-      let payload = this.toSkeleton(this.state.selectedModel);
+    
+    this.setState({ seekChildUpdates: true });
+    // this.setState({ seekChildUpdates: true }, () => {
+        //let payload = this.toSkeleton(this.state.selectedModel);
+        //console.log(payload)
 
-      if (this.state.selectedModelId !== "") {
-        this.generalDBRequest(
-          payload,
-          "https://tesarrec.firebaseio.com/eqns/" +
-            this.props.userId +
-            "/" +
-            this.state.selectedModelId +
-            "/.json?auth=" +
-            this.props.token,
-          "PATCH",
-          this.setState({ error: false, saveSnapshot: false }, () => {
-            this.MODEL_getPrivate();
-          })
-        );
-      } else {
-        this.setState({ error: true });
-      }
-    });
+    //   if (this.state.selectedModelId !== "") {
+    //     this.generalDBRequest(
+    //       payload,
+    //       "https://tesarrec.firebaseio.com/eqns/" +
+    //         this.props.userId +
+    //         "/" +
+    //         this.state.selectedModelId +
+    //         "/.json?auth=" +
+    //         this.props.token,
+    //       "PATCH",
+    //       this.setState({ error: false, seekChildUpdates: false }, () => {
+    //         this.MODEL_getPrivate();
+    //       })
+    //     );
+    //   } else {
+    //     this.setState({ error: true });
+    //   }
+    // });
 
     //const payload = this.state.selectedModel;
   };
@@ -194,8 +191,6 @@ class ModelBench extends Component {
             .catch((error) => {
               this.setState({ error: true });
             });
-
-         
         } else {
           this.setState({ error: true });
         }
@@ -218,63 +213,16 @@ class ModelBench extends Component {
   };
 
   MODEL_onEditName = (newModelName) => {
-    const nameDict = {
-      name: newModelName,
-      // userId:this.props.userId
-    };
-    // https://tesarrec.firebaseio.com/eqns/QXVRwu8vuHRTsLST6wMWOA9jt3b2/-MAeganGABPemhDxtCc_/Name
 
-    if (this.state.selectedModelId !== "") {
-      this.generalDBRequest(
-        nameDict,
-        "https://tesarrec.firebaseio.com/eqns/" +
-          this.props.userId +
-          "/" +
-          this.state.selectedModelId +
-          "/meta/" +
-          "/.json?auth=" +
-          this.props.token,
-        "PATCH",
-        () => {
-          this.MODEL_getPrivate();
-          this.MODEL_getPublic();
-        }
-      );
-      // fetch(
-      //   "https://tesarrec.firebaseio.com/eqns/" +
-      //     this.props.userId +
-      //     "/" +
-      //     this.state.selectedModelId +
-      //     "/.json?auth=" +
-      //     this.props.token,
-      //   {
-      //     method: "PATCH",
-      //     headers: {
-      //       Accept: "application/json, text/plain, */*",
-      //       "Content-Type": "application/json",
-      //       type: "patch",
-      //       dataType: "json",
-      //     },
+    let modelObj = this.state.selectedModel;
+    modelObj.meta.name = newModelName;
+    this.setState({selectedModel:modelObj}, () => { console.log(this.state.selectedModel.meta.name) })
 
-      //     body: JSON.stringify(Name),
-      //   }
-      // )
-      //   .then((response) => response.json())
-      //   .then((data) => {
-      //     if (!data.error) {
-      //       this.setState({ selectedModelId: "" });
-      //       this.MODEL_getPrivate();
-      //       this.MODEL_getPublic();
-      //     } else {
-      //       this.setState({ error: true });
-      //     }
-      //   })
-      //   .catch((error) => {
-      //     this.setState({ error: true });
-      //   });
-    } else {
-      this.setState({ error: true });
-    }
+    
+
+    //this.MODEL_save()
+
+    // this.sendToParent(modelObj);
   };
 
   MODEL_onRemove = () => {
@@ -399,13 +347,19 @@ class ModelBench extends Component {
     navigator.clipboard.writeText(allTextEqns);
   };
   //        <TemplateController/>
-  sendToParent = (eqns, vars) => {
-    let selectedModel = { ...this.state.selectedModel };
-    selectedModel.Eqns = eqns;
-    selectedModel.Vars = vars;
-    this.setState({ selectedModel: selectedModel });
-  };
-  sendToParent2 = (modelObj) => {
+
+  /**
+   * This is used by child components to keep this parent informed of changes
+   * Therefore we must merge itemwise because its possible that 
+   * further changes to the model has happened in this class
+   */
+  sendToParent = (modelObj) => {
+
+    
+    // At the moment only the name can be out of sync here
+    modelObj.meta.name = this.state.selectedModel.meta.name
+    
+
     this.setState({ selectedModel: modelObj }, () => {
       let payload = this.toSkeleton(this.state.selectedModel);
       if (this.state.selectedModelId !== "") {
@@ -418,7 +372,7 @@ class ModelBench extends Component {
             "/.json?auth=" +
             this.props.token,
           "PATCH",
-          this.setState({ error: false, saveSnapshot: false }, () => {
+          this.setState({ error: false, seekChildUpdates: false }, () => {
             this.MODEL_getPrivate();
           })
         );
@@ -499,9 +453,8 @@ class ModelBench extends Component {
             <LinearCoupled
               modelId={this.state.selectedModelId}
               modelObj={this.state.selectedModel}
-              sendToParent={this.sendToParent2}
-              saveModel={this.MODEL_save}
-              saveSnapshot={this.state.saveSnapshot}
+              sendToParent={this.sendToParent}
+              seekChildUpdates={this.state.seekChildUpdates}
             />
           ) : null}
           {this.state.tabChoiceValue === 2 ? <SolverAnalysis /> : null}

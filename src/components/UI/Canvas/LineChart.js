@@ -66,42 +66,9 @@ import {
 
 class MyLineChart extends Component {
   render() {
-    // let data = [];
-    // for (let i = 0; i < this.props.dataPoints.length; i++) {
-    //   data.push({
-    //     type: "line",
-    //     // name: this.props.LineNames[i],
-
-    //     toolTipContent: " {x}, {y}",
-    //     dataPoints: this.props.dataPoints[i],
-    //     markerType: "none",
-    //   });
-    // }
-
-    // const options = {
-    //   animationEnabled: true,
-    //   // exportEnabled: true,
-    //   theme: "light2", // "light1", "dark1", "dark2"
-
-    //   title: {
-    //     text: this.props.title,
-    //     // more attributes
-    //   },
-    //   axisY: {
-    //     title: this.props.axisNames[1],
-    //   },
-    //   axisX: {
-    //     title: this.props.axisNames[0],
-    //   },
-    //   legend: {
-    //     verticalAlign: this.props.verticalAlign,
-    //     horizontalAlign: this.props.horizontalAlign,
-    //   },
-    //   backgroundColor: "white",
-    //   zoomEnabled: true,
-    //   data: data,
-    // };
-
+    
+    console.log(this.props.dataPoints[0][5].x)
+    console.log(this.props.dataPoints[0][5].y)
     return (
       <div
         style={{
@@ -126,7 +93,7 @@ class MyLineChart extends Component {
             >
               <CartesianGrid strokeDasharray="3 3" />
               <XAxis
-                dataKey="f"
+                dataKey="x"
                 label={{ value: this.props.axisNames[0], position: "insideBottom" }}
               />
 

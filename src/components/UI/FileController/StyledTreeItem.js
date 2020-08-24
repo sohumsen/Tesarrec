@@ -53,12 +53,13 @@ const styles = (theme) => ({
 });
 
 class StlyedTreeItem extends Component {
+  
   state = {
-    newFileName: "",
+    currentModelName: "",
     showInputField: false,
   };
   componentDidMount() {
-    this.setState({ newFileName: this.props.labelText });
+    this.setState({ currentModelName: this.props.labelText });
   }
   onShowInputField = () => {
     this.setState((prevState) => {
@@ -81,13 +82,13 @@ class StlyedTreeItem extends Component {
         };
       },
       () => {
-        this.props.onEditFileLinkName(this.state.newFileName);
+        this.props.onEditModelName(this.state.currentModelName);
       }
     );
   };
 
   handleClickAway = () => {
-    this.setState({ showInputField: false, newFileName: this.props.labelText });
+    this.setState({ showInputField: false, currentModelName: this.props.labelText });
   };
 
   onKeyDown = (e) => {
@@ -102,8 +103,9 @@ class StlyedTreeItem extends Component {
     return (
       <ClickAwayListener onClickAway={this.handleClickAway}>
         <TreeItem
-          onLabelClick={this.props.onExpandFileLink}
-          onIconClick={this.props.onExpandFileLink}
+          selected = { this.props.selectedModelId !== this.props.modelId ? { color:"blue"} : {color : "red"} }
+          onLabelClick={this.props.onExpandModelLink}
+          onIconClick={this.props.onExpandModelLink}
           label={
             <div className={classes.labelRoot}>
               {!this.state.showInputField ? (
@@ -114,9 +116,9 @@ class StlyedTreeItem extends Component {
                 <input
                   width={"10px"}
                   type={"input"}
-                  value={this.state.newFileName}
+                  value={this.state.currentModelName}
                   onChange={this.onChangeFileName}
-                  name={"newFileName"}
+                  name={"currentModelName"}
                   onKeyDown={this.onKeyDown}
                 />
               )}
@@ -131,7 +133,7 @@ class StlyedTreeItem extends Component {
                   aria-label="edit"
                   onClick={this.onShowInputField}
                   disabled={
-                    this.props.selectedModelId !== this.props.ModelId ||
+                    this.props.selectedModelId !== this.props.modelId ||
                     this.props.disabledEdit
                   }
                 >

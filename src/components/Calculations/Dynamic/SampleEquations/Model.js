@@ -29,18 +29,13 @@ export default class Model {
       // initialConditions: dbModel.Config.initialConditions,
       h: dbModel.Config.h,
       t0: dbModel.Config.t0,
-      // lineNames: dbModel.Config.lineNames,
       numOfCycles: dbModel.Config.numOfCycles,
       method: dbModel.Config.method,
 
       // DOES THIS REALLY FIT INTO A MODEL CLASS
-      // axis: dbModel.Config.axis,
       calculate: dbModel.Config.calculate,
       solvable: dbModel.Config.solvable,
       show: dbModel.Config.show,
-      submitted: dbModel.Config.submitted,
-      // LegendHorizontal: dbModel.Config.LegendHorizontal,
-      // LegendVertical: dbModel.Config.LegendVertical,
       DecimalPrecision: dbModel.Config.DecimalPrecision,
 
       xAxis: dbModel.Config.xAxis,

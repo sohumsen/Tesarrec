@@ -2,12 +2,13 @@
   /* text-align: center; */
   display: flex;
 
-  flex-flow: row wrap;
+  flex-flow: column wrap;
   width: 100%;
 }
 
 .closeButton {
   float: right;
+  flex:1
 }
 
 .methodChoice {
@@ -22,13 +23,13 @@
 .selectAxis {
   flex: 1;
 }
-.model {
+.modelAttributes {
   flex: 1 1 50%;
   display: flex;
   background-color: rgba(216, 250, 215, 0.726);
 }
 
-.graph {
+.graphAttributes {
   flex: 1 1 50%;
   display: flex;
   background-color: rgb(215, 221, 250);
