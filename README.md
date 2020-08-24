@@ -1,44 +1,8 @@
 
 
-# Application Manual 
+# React Tesserac 
 
-# How to develop on it 
-
-To test a single test do 
-npm run test LinearCoupledDiffEqns
-
-## Application Design
-
-Uses container vs component folder structure
-Container= statefull 
-Component= stateless
-group js css test files together
-
-
-
-## How to check for test coverage
-npm run test= npm test (to test all files)
-
-npm test -- --coverage (for files changed since last commit)
-npm test -- --coverage --watchAll=false (for all files )
-
-## How to deploy and run on Firebase
-
-npm run build
-then follow https://firebase.google.com/docs/hosting
-
-for future updates run:
-npm run build
-firebase deploy
-## How to deploy and run locally
-npm install (to install 3rd party packages)
-npm start
-
-
-
-### React-tesarrec
-
-# What is the Application About
+## User Guidelines
 
 This is a webpage that was built in alliance with the University Of Surrey CES Department. It contains Microbial Fuel Cell calculations and graphs. It containes dynamic simulations involving single ODEs and linear coupled ODEs. Fundamentally this site allowed browser based modelling of a variety of scientific models including and not limited to models 
 
@@ -71,78 +35,80 @@ IT Analyst: Sohum Sen
 Download Paper from
 https://tesarrec.web.app/static/media/MES%20download.2608cd29.docx
 
-### Deployment to Firebase
-Create a file called src/firebasekey.js with the following contents
-const FIREBASE_KEY = "<Put Your Key here from Google Firebase>"
-export default FIREBASE_KEY 
 
 
+## Development Guidelines 
 
+To test a single test do 
+npm run test LinearCoupledDiffEqns
+
+### Application Design Notes
+
+Uses container vs component folder structure
+Container= statefull 
+Component= stateless
+group js css test files together
 
 ### SDLC = Software Development Life Cycle
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-### `npm start`
-
+#### `npm start`
 Runs the app in the development mode.<br />
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
 The page will reload if you make edits.<br />
 You will also see any lint errors in the console.
-
-### `npm test`
-
+#### `npm test`
 Launches the test runner in the interactive watch mode.<br />
 See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-### `npm run build`
-
+#### `npm run build`
 Builds the app for production to the `build` folder.<br />
 It correctly bundles React in production mode and optimizes the build for the best performance.
-
 The build is minified and the filenames include the hashes.<br />
 Your app is ready to be deployed!
-
 See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-### `npm run eject`
-
+#### `npm run eject`
 **Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
 If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
 Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
 You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
 
-## Learn More
+#### How to check for test coverage
+npm run test= npm test (to test all files)
+npm test -- --coverage (for files changed since last commit)
+npm test -- --coverage --watchAll=false (for all files )
 
+#### How to deploy and run on Firebase
+npm run build
+then follow https://firebase.google.com/docs/hosting
+
+#### for future updates run:
+npm run build
+firebase deploy
+
+#### How to deploy and run locally
+npm install (to install 3rd party packages)
+npm start
+
+#### Deployment to Firebase
+Create a file called src/firebasekey.js with the following contents
+const FIREBASE_KEY = "<Put Your Key here from Google Firebase>"
+export default FIREBASE_KEY 
+
+### Learn More
 You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
 To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
+#### Code Splitting
 This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
+#### Analyzing the Bundle Size
 This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
+#### Making a Progressive Web App
 This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
+#### Advanced Configuration
 This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
+#### Deployment
 This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
+#### `npm run build` fails to minify
 This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
-
 
