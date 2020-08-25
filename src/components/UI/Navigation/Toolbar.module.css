@@ -14,12 +14,20 @@
 }
 
 .Toolbar nav{
+
     height: 100%;
 
 }
 
 .Logo{
+
     height: 80%;
+}
+.caption{
+    position: absolute;
+    left: 5%;
+    width:10%;
+
 }
 
 @media (max-width:499px){

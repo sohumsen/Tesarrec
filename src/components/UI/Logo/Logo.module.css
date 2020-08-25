@@ -1,12 +1,12 @@
 .Logo{
-    background-color: rgb(97, 176, 240);
-    height: 110%;
-    box-sizing: border-box;
-    border-radius: 5px;
+   
+    height: 100%;
 
 }
 
-.Logo img{
-    height:100%;
+.cube{
+    height: 100%;
+
+    flex: 2;
 
 }

@@ -7,10 +7,8 @@
   flex-flow: row wrap;
 }
 
-
-
 .EqnContainer {
-  flex :1;
+  flex: 1;
   overflow-y: auto;
 }
 .EqnColumn {
@@ -24,22 +22,20 @@
 }
 .VarColumn {
   flex: 3 0;
+  order: 4;
+
   display: flex;
   flex-flow: column wrap;
-  align-self: baseline;
-  order: 4;
   margin-left: 10px;
+
+  justify-content: flex-start;
+  align-content: flex-start; /* NEW */
 }
 
-
 .VarContainer {
-  flex :5 1 ;
   background-color: aquamarine;
 }
 .ConsoleContainer {
-  line-height: 50%;
-  flex :1 1 auto;
-
   font-family: "VT323", monospace;
   font-size: small;
   color: rgb(12, 221, 12);

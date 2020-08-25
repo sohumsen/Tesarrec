@@ -11,7 +11,7 @@
 
 5. Simplify UI spaces 
 6. Fix the consoleplace
-autosize textbox
+autosize textbox DONE
 type more eqns
 remove warnings
 

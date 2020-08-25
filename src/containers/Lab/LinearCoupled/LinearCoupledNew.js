@@ -8,7 +8,7 @@ import classes from "./LinearCoupled.module.css";
 import MyErrorMessage from "../../../components/UI/MyErrorMessage/CustomizedErrorMessage";
 import GraphConfig from "../../../components/UI/GraphConfig/GraphConfig";
 import LinearCoupledDiffEquationGrapher from "../../../components/Calculations/Dynamic/LinearCoupled/LinearCoupledDiffEquationGrapher";
-import { Paper, Modal, TextField } from "@material-ui/core";
+import { Paper, Modal, TextField, TextareaAutosize } from "@material-ui/core";
 import LinearCoupledButtonEqnsContainer from "../../../components/UI/ButtonContainer/LinearCoupledButtonEqnsContainer";
 import DEFAULTEQUATIONSNEW from "../../../components/Calculations/Dynamic/SampleEquations/DEFAULTEQUATIONSnew";
 
@@ -504,7 +504,7 @@ class LinearCoupledNew extends Component {
             <TextField
               id="outlined-multiline-static"
               multiline
-              rows={15}
+              rowsMax={Infinity}
               defaultValue="Open a model to view descriptions"
               value={this.state.modelObj.meta.description}
               onChange={(e) => {
@@ -520,9 +520,21 @@ class LinearCoupledNew extends Component {
               inputProps={{ style: { fontSize: 12 } }} // font size of input text
             />
           </Paper>
+          <Paper
+            key="Console"
+            className={classes.ConsoleContainer}
+            elevation={3}
+          >
+            {this.state.consoleMessages.map((msg) => (
+              <p>{">  " + msg}</p>
+            ))}
+          </Paper>
         </div>
-        <Paper className={classes.VarColumn}>
-          <Paper key="Vars" className={classes.VarContainer} elevation={3}>
+        <div className={classes.VarColumn}>
+          <Paper
+            className={classes.VarContainer}
+            style={{ backgroundColor: "red" }}
+          >
             <LinearCoupledButtonVariablesContainer
               Vars={this.state.modelObj.Vars}
               onIncrementVariable={this.VARS_onIncrement}
@@ -534,17 +546,18 @@ class LinearCoupledNew extends Component {
               removeItem={this.ITEMS_remove}
               handleMathQuillInputChange={this.MATHQUILL_handleInputChange}
             />
-
-           
           </Paper>
-          <Paper key="Console" className={classes.ConsoleContainer} elevation={3}>
+          <Paper
+            key="Console"
+            className={classes.ConsoleContainer}
+            elevation={3}
+          >
             {this.state.consoleMessages.map((msg) => (
               <p>{">  " + msg}</p>
             ))}
           </Paper>
-      
-        </Paper>
-       
+        </div>
+
         {this.state.modelObj.Config.calculate ? (
           <div key="GraphButtons" className={classes.Graph}>
             <LinearCoupledButtonGraphContainer
