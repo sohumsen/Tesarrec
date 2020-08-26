@@ -28,8 +28,8 @@
   flex-flow: column wrap;
   margin-left: 10px;
 
-  justify-content: flex-start;
-  align-content: flex-start; /* NEW */
+  /* justify-content: flex-start;
+  align-content: flex-start; NEW */
 }
 
 .VarContainer {

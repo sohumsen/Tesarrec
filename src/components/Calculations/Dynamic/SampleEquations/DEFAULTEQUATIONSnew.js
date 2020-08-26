@@ -43,6 +43,17 @@ const DEFAULTEQUATIONS = [
 
     textEqn: "-(K_1*Y_1*Y_2)/(K_4+Y_1)-(K_3*Y_1*Y_3)/(K_2+Y_1)",
   },
+  
+  {
+    lineName: "a",
+
+    textEqn: "-(K_1*Y_1*Y_2)/(K_4+Y_1)-(K_3*Y_1*Y_3)/(K_2+Y_1)",
+  },
+  {
+    lineName: "b",
+
+    textEqn: "-(K_1*Y_1*Y_2)/(K_4+Y_1)-(K_3*Y_1*Y_3)/(K_2+Y_1)",
+  },
 ];
 
 export default DEFAULTEQUATIONS;

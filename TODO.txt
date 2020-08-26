@@ -11,10 +11,8 @@
 
 5. Simplify UI spaces 
 6. Fix the consoleplace
-autosize textbox DONE
-type more eqns
+allow y_10
 remove warnings
-
 
 
 24th Jul - 7th Aug 
@@ -83,6 +81,8 @@ can i remove graph legends configs? DONE
 remove lineNames maybe DONE
 publish eqns doesnt work DONE
 get private public doesnt work DONE
+remove t0 from config DONE
+type more eqns DONE
 
 on edit filename, select it DONE
 remove hard coding of X_1 DONE

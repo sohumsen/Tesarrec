@@ -28,7 +28,7 @@ export default class Model {
     this.Config = {
       // initialConditions: dbModel.Config.initialConditions,
       h: dbModel.Config.h,
-      t0: dbModel.Config.t0,
+      // t0: dbModel.Config.t0,
       numOfCycles: dbModel.Config.numOfCycles,
       method: dbModel.Config.method,
 
@@ -135,12 +135,16 @@ export default class Model {
     this.Vars.forEach((Var) => {
       scope[Var.LatexForm] = 1;
     });
+    console.log(scope)
     let invalidIndex = [];
+    console.log(this.Eqns)
 
     for (let i = 0; i < textEqns.length; i++) {
       try {
         evaluate(textEqns[i], scope);
       } catch (error) {
+        console.log(i,textEqns[i])
+
         invalidIndex.push(i);
       }
     }

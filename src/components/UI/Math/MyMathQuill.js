@@ -7,8 +7,7 @@ addStyles();
 const MyMathQuill = (props) => {
   return (
     <div>
-      <StaticMathField          
- >
+      <StaticMathField style={{ fontSize: "14px" }}>
         {props.firstBit}
       </StaticMathField>
 

@@ -16,6 +16,7 @@ import LinearCoupledButtonVariablesContainer from "../../../components/UI/Button
 import LinearCoupledButtonGraphContainer from "../../../components/UI/ButtonContainer/LinearCoupledButtonGraphContainer";
 
 import Model from "../../../components/Calculations/Dynamic/SampleEquations/Model";
+import DEFAULTVARS from "../../../components/Calculations/Dynamic/SampleEquations/DEFAULTVARS";
 
 class LinearCoupledNew extends Component {
   /**
@@ -173,6 +174,7 @@ class LinearCoupledNew extends Component {
     event.preventDefault();
     let newEqns = [];
     let invalidIndex = this.state.modelObj.validateExpressions();
+
 
     for (let i = 0; i < this.state.modelObj.Eqns.length; i++) {
       const eqn = this.state.modelObj.Eqns[i];
@@ -336,9 +338,12 @@ class LinearCoupledNew extends Component {
   };
 
   VARS_nextPossible = (prevState, type) => {
+
+   
     let typeArr = prevState.modelObj.Vars.filter((Var) => {
       return Var.VarType === type;
     });
+   
     let letterTypes = {
       Constant: "K",
       Dependent: "Y",
@@ -415,9 +420,20 @@ class LinearCoupledNew extends Component {
   };
   EQNS_onIncrement = () => {
     let modelObj = this.state.modelObj;
-    modelObj.Eqns = modelObj.Eqns.concat(this.EQNS_nextPossible(this.state));
+    let nextEqn=this.EQNS_nextPossible(this.state)
+    modelObj.Eqns = modelObj.Eqns.concat(nextEqn);
     modelObj.Vars = modelObj.Vars.concat(
-      this.VARS_nextPossible(this.state, "Dependent")
+
+      {
+        id: nextEqn.lineName+"2",
+        LatexForm: nextEqn.lineName,
+        errorMessage: null,
+       
+        VarType: "Dependent",
+        VarCurrent: 0.5,
+    
+      },
+      // this.VARS_nextPossible(this.state, "Dependent")
     );
 
     // modelObj.Config.initialConditions.push(0.5);
@@ -595,3 +611,4 @@ class LinearCoupledNew extends Component {
 }
 
 export default LinearCoupledNew;
+

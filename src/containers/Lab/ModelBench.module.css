@@ -40,3 +40,10 @@
 
   /*background-color: brown;*/
 }
+
+.copyright{
+  font-size: xx-small;
+  position: fixed;
+  bottom: 0;
+  left: 35vw;
+}

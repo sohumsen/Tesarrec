@@ -94,6 +94,8 @@ const NewDiffEquationSolver = (props) => {
   //Compute yn+1 = yn + h * summation of wi*ki (i varies from 1 to the order)
   //Return yn+1 and tn+1 for the plot
 
+  //The following code is from: https://github.com/gabgoh/epcalc/blob/master/src/App.svelte
+
   const integrate = (m, f, y, t, h) => {
     for (var k = [], ki = 0; ki < m.length; ki++) {
       var _y = y.slice(),
@@ -110,36 +112,6 @@ const NewDiffEquationSolver = (props) => {
     return r;
   };
 
-  // const integrate = (meth, func, y, t, h) => {
-  //   for (var k = [], ki = 0; ki < meth.length; ki++) {
-  //     // for each technique iterate over the solver coeff
-  //     var _y = y.slice();
-
-  //     var dt = ki ? meth[ki - 1][0] * h : 0; // dt=0 when ki=0
-
-  //     for (var l = 0; l < _y.length; l++) {
-  //       for (var j = 1; j <= ki; j++) {
-  //         _y[l] = _y[l] + h * meth[ki - 1][j] * k[ki - 1][l];
-  //       }
-  //     }
-  //     k[ki] = func(t + dt, _y);
-  //   }
-  //   for (
-  //     var r = y.slice(), l = 0;
-  //     l < _y.length;
-  //     l++ // 0-2
-  //   )
-  //     for (
-  //       var j = 0;
-  //       j < k.length;
-  //       j++ //0-4 (rk4)
-  //     )
-  //       r[l] = r[l] + h * k[j][l] * meth[ki - 1][j]; //r[0]=r[0]+ 0.5*0.5 *16  //r[0]=r[0]+ 0.5*0.5 *16
-
-  //   return r;
-  // };
-
-  // let t0 = parseFloat(props.modelObj.Config.t0);
   let t0 = null;
   let initialConditions = [];
   let constants = {};
@@ -161,7 +133,6 @@ const NewDiffEquationSolver = (props) => {
     }
   }
 
-  // let returnedY = props.modelObj.Config.initialConditions.slice();
   let returnedY = initialConditions.slice();
 
   let _returnedY = returnedY.slice();
@@ -182,76 +153,7 @@ const NewDiffEquationSolver = (props) => {
   }
 
   return allY;
-  //   // const f=(h,y,)=>{
 
-  //   // }
-  //   ([0, 0.6249999999999999],
-  //   [0.5, 0.9999999999999999],
-  //   [1, 1.6249999999999998],
-  //   [1.5, 2.4999999999999996],
-  //   [2, 3.6249999999999996],
-  //   [2.5, 4.999999999999999],
-  //   [3, 6.625],
-  //   [3.5, 8.500000000000002],
-  //   [4, 10.625000000000004],
-  //   [4.5, 13.000000000000002],
-  //   [5, 15.625000000000002],
-  //   [5.5, 18.5],
-  //   [6, 21.625000000000004],
-  //   [6.5, 25.000000000000004],
-  //   [7, 28.625],
-  //   [7.5, 32.5],
-  //   [8, 36.625],
-  //   [8.5, 41.00000000000001],
-  //   [9, 45.625],
-  //   [9.5, 50.5],
-  //   [10, 55.62500000000001],
-  //   [10.5, 61],
-  //   [11, 66.62499999999999],
-  //   [11.5, 72.49999999999997],
-  //   [12, 78.62499999999999],
-  //   [12.5, 84.99999999999999],
-  //   [13, 91.62499999999997],
-  //   [13.5, 98.49999999999999],
-  //   [14, 105.62499999999999],
-  //   [14.5, 112.99999999999997])
-  // ];
-
-  // [
-  //   [
-  //     [0.5, 0.5],
-  //     [0.875, 1],
-  //     [1.5, 1.5],
-  //     [2.375, 2],
-  //     [3.5, 2.5],
-  //     [4.875, 3],
-  //     [6.5, 3.5],
-  //     [8.375, 4],
-  //     [10.5, 4.5],
-  //     [12.875, 5],
-  //     [15.5, 5.5],
-  //     [18.375, 6],
-  //     [21.5, 6.5],
-  //     [24.875, 7],
-  //     [28.5, 7.5],
-  //     [32.375, 8],
-  //     [36.5, 8.5],
-  //     [40.875, 9],
-  //     [45.5, 9.5],
-  //     [50.375, 10],
-  //     [55.5, 10.5],
-  //     [60.875, 11],
-  //     [66.5, 11.5],
-  //     [72.375, 12],
-  //     [78.5, 12.5],
-  //     [84.875, 13],
-  //     [91.5, 13.5],
-  //     [98.375, 14],
-  //     [105.5, 14.5],
-  //     [112.875, 15],
-  //     [120.5, 15.5],
-  //   ],
-  // ];
 };
 
 export default NewDiffEquationSolver;

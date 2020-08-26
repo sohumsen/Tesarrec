@@ -69,7 +69,7 @@ const VarItem = (props) => {
           </div>
           <div className={classes.RemoveButton}>
             <CloseButton
-              disabled={props.disabledRemoveButton}
+              disabled={true}
               type="button"
               value="removeItem"
               displayValue="REMOVEIT"

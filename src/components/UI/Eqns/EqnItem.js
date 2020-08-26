@@ -22,10 +22,8 @@ const EqnItem = (props) => {
         // mathquillDidMount={props.mathquillDidMount}
         onInputChange={props.handleMathQuillInputChange}
         style={{
-          fontSize:"16px",
-          width:"65%"
-
-
+          fontSize: "14px",
+          width: "65%",
         }}
       />
     </li>

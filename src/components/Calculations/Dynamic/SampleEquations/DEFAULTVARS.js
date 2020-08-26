@@ -150,6 +150,24 @@ const DEFAULTVARS = [
     VarCurrent: 0.5,
     // VarHigh: 100,
   },
+  {
+    id: "Dependent10",
+    LatexForm: "a",
+    errorMessage: null,
+    VarType: "Dependent",
+
+
+    VarCurrent: 0.5,
+  },
+  {
+    id: "Dependent11",
+    LatexForm: "b",
+    errorMessage: null,
+    VarType: "Dependent",
+
+
+    VarCurrent: 0.5,
+  },
 ];
 
 export default DEFAULTVARS;

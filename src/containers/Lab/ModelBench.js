@@ -59,7 +59,8 @@ class ModelBench extends Component {
 
   MODEL_createNew = () => {
     let aNewModel = this.newModel();
-    aNewModel.meta.name = aNewModel.meta.name + Object.keys(this.state.allModelId).length
+    aNewModel.meta.name =
+      aNewModel.meta.name + Object.keys(this.state.allModelId).length;
 
     fetch(
       "https://tesarrec.firebaseio.com/eqns/" +
@@ -101,11 +102,10 @@ class ModelBench extends Component {
    * At this point this states selectedModel is completely up2date
    */
   MODEL_save = () => {
-    
     this.setState({ seekChildUpdates: true });
     // this.setState({ seekChildUpdates: true }, () => {
-        //let payload = this.toSkeleton(this.state.selectedModel);
-        //console.log(payload)
+    //let payload = this.toSkeleton(this.state.selectedModel);
+    //console.log(payload)
 
     //   if (this.state.selectedModelId !== "") {
     //     this.generalDBRequest(
@@ -213,12 +213,11 @@ class ModelBench extends Component {
   };
 
   MODEL_onEditName = (newModelName) => {
-
     let modelObj = this.state.selectedModel;
     modelObj.meta.name = newModelName;
-    this.setState({selectedModel:modelObj}, () => { console.log(this.state.selectedModel.meta.name) })
-
-    
+    this.setState({ selectedModel: modelObj }, () => {
+      console.log(this.state.selectedModel.meta.name);
+    });
 
     //this.MODEL_save()
 
@@ -350,15 +349,12 @@ class ModelBench extends Component {
 
   /**
    * This is used by child components to keep this parent informed of changes
-   * Therefore we must merge itemwise because its possible that 
+   * Therefore we must merge itemwise because its possible that
    * further changes to the model has happened in this class
    */
   sendToParent = (modelObj) => {
-
-    
     // At the moment only the name can be out of sync here
-    modelObj.meta.name = this.state.selectedModel.meta.name
-    
+    modelObj.meta.name = this.state.selectedModel.meta.name;
 
     this.setState({ selectedModel: modelObj }, () => {
       let payload = this.toSkeleton(this.state.selectedModel);
@@ -460,6 +456,18 @@ class ModelBench extends Component {
           {this.state.tabChoiceValue === 2 ? <SolverAnalysis /> : null}
         </div>
         {/* {this.state.error ? <MyErrorMessage /> : null} */}
+        <div className={classes.copyright}>
+
+        <p>
+          For the Model Bench User, you must give appropriate credit: ©Sohum Sen{" "}
+          <a href="https://tesarrec.org/modelbench" target="_blank" >
+            https://tesarrec.org/modelbench
+          </a>{" "}
+          01/05/2020
+        </p>
+        </div>
+
+      
       </div>
     );
   }
