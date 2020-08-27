@@ -228,7 +228,7 @@ class ModelExplorer extends Component {
                     "0",
                     (Object.keys(this.props.allPublicId).length + 1).toString(),
                   ]}
-                  defaultSelected={["1"]}
+                  // defaultSelected={["0"]}
                   defaultExpandIcon={<ChevronRightIcon />}
                 >
                   <TreeItem nodeId="0" label={"Public"}>
