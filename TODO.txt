@@ -2,7 +2,8 @@
 
 1. for certain eqns ban negative initials 
 
-
+git config --global user.email "you@example.com"
+git config --global user.name "Your Name"
 2. da/dt=b is valid 
 
 3. create new file, select it, its not updated
