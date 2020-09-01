@@ -1,10 +1,8 @@
 import React, { Component } from "react";
-import SingleODE from "./SingleODE/SingleODE";
 import LinearCoupled from "./LinearCoupled/LinearCoupledNew";
 import ModelExplorer from "../../components/UI/FileController/ModelExplorer";
 import classes from "./ModelBench.module.css";
 
-import DEFAULTGRAPHCONFIG from "./LinearCoupled/DefaultGraphConfig";
 
 import SolverAnalysis from "./SolverAnalysis/SolverAnalysis";
 import Model from "../../components/Calculations/Dynamic/SampleEquations/Model";
@@ -444,7 +442,7 @@ class ModelBench extends Component {
         </div>
 
         <div className={classes.ModelBenchItemCenter}>
-          {this.state.tabChoiceValue === 0 ? <SingleODE /> : null}
+          {/* {this.state.tabChoiceValue === 0 ? <SingleODE /> : null} */}
           {this.state.tabChoiceValue === 1 ? (
             <LinearCoupled
               modelId={this.state.selectedModelId}
