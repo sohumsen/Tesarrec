@@ -21,37 +21,37 @@ const LinearCoupledButtonVariablesContainer = (props) => {
           </IconButton>
         </span>
       </Tooltip>
-      <Tooltip title="Add Independent" placement="top" arrow>
-        <span>
-          <IconButton
-            edge="end"
-            aria-label="add"
-            onClick={()=>props.onIncrementVariable("Independent")}
-            // disabled={props.Vars.filter((Var) => {
-            //   return Var.VarType === "Independent";
-            // }).length===9}
-            disabled
-          >
-            <AddBoxIcon style={{ color: yellow[500] }}/>
-          </IconButton>
-        </span>
-      </Tooltip>
-      <Tooltip title="Add Dependent" placement="top" arrow>
-        <span>
-          <IconButton
-            edge="end"
-            aria-label="add"
-            onClick={()=>props.onIncrementVariable("Dependent")}
-            // disabled={props.Vars.filter((Var) => {
-            //   return Var.VarType === "Dependent";
-            // }).length===9}
-            disabled
+      {/*<Tooltip title="Add Independent" placement="top" arrow>*/}
+      {/*  <span>*/}
+      {/*    <IconButton*/}
+      {/*      edge="end"*/}
+      {/*      aria-label="add"*/}
+      {/*      onClick={()=>props.onIncrementVariable("Independent")}*/}
+      {/*      // disabled={props.Vars.filter((Var) => {*/}
+      {/*      //   return Var.VarType === "Independent";*/}
+      {/*      // }).length===9}*/}
+      {/*      disabled*/}
+      {/*    >*/}
+      {/*      <AddBoxIcon style={{ color: yellow[500] }}/>*/}
+      {/*    </IconButton>*/}
+      {/*  </span>*/}
+      {/*</Tooltip>*/}
+      {/*<Tooltip title="Add Dependent" placement="top" arrow>*/}
+      {/*  <span>*/}
+      {/*    <IconButton*/}
+      {/*      edge="end"*/}
+      {/*      aria-label="add"*/}
+      {/*      onClick={()=>props.onIncrementVariable("Dependent")}*/}
+      {/*      // disabled={props.Vars.filter((Var) => {*/}
+      {/*      //   return Var.VarType === "Dependent";*/}
+      {/*      // }).length===9}*/}
+      {/*      disabled*/}
 
-          >
-            <AddBoxIcon style={{ color: blue[500] }}/>
-          </IconButton>
-        </span>
-      </Tooltip>
+      {/*    >*/}
+      {/*      <AddBoxIcon style={{ color: blue[500] }}/>*/}
+      {/*    </IconButton>*/}
+      {/*  </span>*/}
+      {/*</Tooltip>*/}
      
      
     </Paper>

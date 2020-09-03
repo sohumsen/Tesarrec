@@ -24,7 +24,7 @@ const LinearCoupledButtonEqnsContainer = (props) => {
       <Tooltip title="Reset Equations" placement="top" arrow>
         <span>
           <IconButton
-            disabled={props.Eqns.length === 0}
+            // disabled={props.Eqns.length === 0}
             edge="end"
             aria-label="Reset"
             onClick={props.resetForm}
@@ -46,6 +46,20 @@ const LinearCoupledButtonEqnsContainer = (props) => {
           </IconButton>
         </span>
       </Tooltip>
+
+      <Tooltip title="Show Text box" placement="top" arrow>
+        <span>
+          <IconButton
+            disabled={props.Eqns.length === 0}
+            edge="end"
+            aria-label="Submit"
+            onClick={props.handleChangeShowMathQuillBox}
+          >
+            <PlayCircleOutlineIcon style={{ color: green[0] }} />
+          </IconButton>
+        </span>
+      </Tooltip>
+
 
       {/* <Tooltip
         style={{ float: "right" }}

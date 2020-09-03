@@ -56,7 +56,7 @@ export default function FormControlLabelPlacement(props) {
             
             <div className={classes.item}>
               <Input
-                label="Step size"
+                label="Step"
                 type="text"
                 value={props.modelObj.Config.h}
                 onChange={props.onChange("h")}
@@ -64,7 +64,7 @@ export default function FormControlLabelPlacement(props) {
             </div>
             <div className={classes.item}>
               <Input
-                label="Num cycles"
+                label="Cycles"
                 type="text"
                 value={props.modelObj.Config.numOfCycles}
                 onChange={props.onChange("numOfCycles")}

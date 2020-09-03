@@ -4,6 +4,8 @@
   height: 90vh;
   justify-content: flex-end;  /*background-color: aqua;*/
   margin-left: auto;
+  overflow: hidden;
+
 }
 .ModelBenchItemLeft {
   flex: 1 1 auto;
@@ -13,17 +15,7 @@
   border-color: red;
   border-style: solid;*/
 }
-.SolverAnalysisContainer {
-  /*
-  background-color: blanchedalmond;
-  border-width: 2px;
-  border-color: rgb(156, 122, 12);
-  border-style: solid;
-  */
-  flex: 1 1 auto;
-
-  background-color: rgb(231, 227, 227);
-}
+/*  */
 
 .ModelBenchItemLeftEqnNav {
   flex: 1 1 auto;
@@ -37,6 +29,7 @@
 }
 .ModelBenchItemCenter {
   flex: 30 30 auto;
+  overflow: hidden;
 
   /*background-color: brown;*/
 }

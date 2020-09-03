@@ -1,8 +1,9 @@
 import React, { Component } from "react";
-import LinearCoupled from "./LinearCoupled/LinearCoupledNew";
+import LinearCoupled from "./LinearCoupled/LinearCoupled";
 import ModelExplorer from "../../components/UI/FileController/ModelExplorer";
-import classes from "./ModelBench.module.css";
+import PublishedDialog from "../../components/UI/PublishedDialog/PublishedDialog";
 
+import classes from "./ModelBench.module.css";
 
 import SolverAnalysis from "./SolverAnalysis/SolverAnalysis";
 import Model from "../../components/Calculations/Dynamic/SampleEquations/Model";
@@ -25,6 +26,7 @@ class ModelBench extends Component {
     tabChoiceValue: 1 /* TODO This component doesnt need to know this */,
     loading: false,
     seekChildUpdates: false,
+    published: false,
   };
 
   componentDidMount() {
@@ -128,8 +130,9 @@ class ModelBench extends Component {
   };
 
   MODEL_publish = () => {
-    const payload = { ...this.state.selectedModel, SavedBy: this.props.userId };
-
+    const payload = { ...this.state.selectedModel.returnConstructorObj(), SavedBy: this.props.userId };
+    // alert("model Published");
+    this.setState({ published: false });
     // if (this.state.selectedModelId !== "") {
     //   this.generalDBRequest(
     //     payload,
@@ -355,7 +358,8 @@ class ModelBench extends Component {
     modelObj.meta.name = this.state.selectedModel.meta.name;
 
     this.setState({ selectedModel: modelObj }, () => {
-      let payload = this.toSkeleton(this.state.selectedModel);
+      console.log(this.state.selectedModel.returnConstructorObj())
+      let payload = this.state.selectedModel.returnConstructorObj();
       if (this.state.selectedModelId !== "") {
         this.generalDBRequest(
           payload,
@@ -401,7 +405,7 @@ class ModelBench extends Component {
   }
 
   render() {
-    let modelLinks = null;
+    let modelLinks;
     Object.keys(this.state.allModelId + this.state.allPublicId).length !== 0
       ? (modelLinks = (
           <ModelExplorer
@@ -412,7 +416,9 @@ class ModelBench extends Component {
             onRemoveModel={this.MODEL_onRemove}
             onEditModelName={this.MODEL_onEditName}
             saveEquation={this.MODEL_save}
-            publishEquation={this.MODEL_publish}
+            publishEquation={()=>{
+              this.setState({published:true})
+            }}
             copyAllEqnsText={this.EQNS_copyAllText}
             createNewFile={this.MODEL_createNew}
             handleTabChange={this.handleTabChange}
@@ -452,20 +458,27 @@ class ModelBench extends Component {
             />
           ) : null}
           {this.state.tabChoiceValue === 2 ? <SolverAnalysis /> : null}
+          {this.state.published ? (
+            <PublishedDialog
+              onCancelPublish={() => {
+                this.setState({ published: false });
+              }}
+              onPublishModel={this.MODEL_publish}
+              
+            />
+          ) : null}
         </div>
         {/* {this.state.error ? <MyErrorMessage /> : null} */}
         <div className={classes.copyright}>
-
-        <p>
-          For the Model Bench User, you must give appropriate credit: ©Sohum Sen{" "}
-          <a href="https://tesarrec.org/modelbench" target="_blank" >
-            https://tesarrec.org/modelbench
-          </a>{" "}
-          01/05/2020
-        </p>
+          <p>
+            For the Model Bench User, you must give appropriate credit: ©Sohum
+            Sen{" "}
+            <a href="https://tesarrec.org/modelbench" target="_blank">
+              https://tesarrec.org/modelbench
+            </a>{" "}
+            01/05/2020
+          </p>
         </div>
-
-      
       </div>
     );
   }

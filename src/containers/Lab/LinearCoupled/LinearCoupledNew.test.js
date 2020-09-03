@@ -8,7 +8,7 @@
 import React from "react" ;
 import {configure, shallow} from 'enzyme'
 import Adapter from 'enzyme-adapter-react-16'
-import LinearCoupledNew from './LinearCoupledNew'
+import LinearCoupled from './LinearCoupled'
 import Model from "../../../components/Calculations/Dynamic/SampleEquations/Model";
 
 configure({adapter:new Adapter()})
@@ -20,7 +20,7 @@ describe('<LinearCoupledNew/>', ()=>{
         let aNewModel = new Model()
 
 
-        let mycomp  = <LinearCoupledNew    modelObj={aNewModel}/>
+        let mycomp  = <LinearCoupled modelObj={aNewModel}/>
 
         const wrapper = shallow(mycomp)
 

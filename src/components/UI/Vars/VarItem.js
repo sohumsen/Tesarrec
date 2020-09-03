@@ -23,7 +23,7 @@ const VarItem = (props) => {
             <MyMathQuill
               latex={props.LatexForm}
               onInputChange={props.handleMathQuillInputChange}
-              style={{fontSize:"12px"}}
+              style={{fontSize:"14px"}}
 
             />
           </div>
@@ -103,7 +103,7 @@ const VarItem = (props) => {
             <MyMathQuill
               latex={props.LatexForm}
               onInputChange={props.handleMathQuillInputChange}
-              style={{fontSize:"12px"}}
+              style={{fontSize:"14px"}}
             />
           </div>
 
@@ -182,7 +182,7 @@ const VarItem = (props) => {
             <MyMathQuill
               latex={props.LatexForm}
               onInputChange={props.handleMathQuillInputChange}
-              style={{fontSize:"12px"}}
+              style={{fontSize:"14px"}}
 
             />
           </div>

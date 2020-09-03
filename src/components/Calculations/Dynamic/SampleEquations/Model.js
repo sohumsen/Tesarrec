@@ -24,7 +24,7 @@ export default class Model {
       };
     }
 
-    this.key = "modelId" in meta ? meta.modelId : uuidv4();
+    // this.key = "modelId" in meta ? meta.modelId : uuidv4();
     this.Config = {
       // initialConditions: dbModel.Config.initialConditions,
       h: dbModel.Config.h,
@@ -65,25 +65,25 @@ export default class Model {
       errorMessage: null,
     }));
 
-    
-    this.Vars = dbModel.Vars.map(Var => { return { ...Var , errorMessage : null} } )
-
-   
-
-    
+    this.Vars = dbModel.Vars.map((Var, i) => {
+      return { ...Var, errorMessage: null, id: Var.VarType + i.toString() };
+    });
 
     this.solutions = {
       actualSolution: this.Config.solvable
         ? this.generateActualSolutionArray()
         : null,
-      calcedSolution: meta.calculate ? this.solveDiffEqns() : null,
-      timeTaken: this.Config.solvable ? this.getTimeTaken() : 0,
+      calcedSolution: null,
+      timeTaken: 0,
+      rmse: null,
 
+      // calcedSolution: meta.calculate ? this.solveDiffEqns() : null,
+      // timeTaken: this.Config.solvable ? this.getTimeTaken() : 0,
+      // rmse: this.Config.solvable ? this.calcRMSE() : null,
     };
     this.meta = {
       name: meta.name,
       description: meta.description,
-      rmse: this.Config.solvable ? this.calcRMSE() : null,
     };
   }
 
@@ -135,15 +135,15 @@ export default class Model {
     this.Vars.forEach((Var) => {
       scope[Var.LatexForm] = 1;
     });
-    console.log(scope)
+    console.log(scope);
     let invalidIndex = [];
-    console.log(this.Eqns)
+    console.log(this.Eqns);
 
     for (let i = 0; i < textEqns.length; i++) {
       try {
         evaluate(textEqns[i], scope);
       } catch (error) {
-        console.log(i,textEqns[i])
+        console.log(i, textEqns[i]);
 
         invalidIndex.push(i);
       }
@@ -197,6 +197,35 @@ export default class Model {
    * using Math.js parse
    * @param {*} eqns
    */
+
+  singleEqnToLatex = (textEqn) => {
+    let latexEqn = textEqn;
+    try {
+      const node = parse(textEqn);
+      console.log(node.toString());
+      console.log(node.toTex());
+
+      latexEqn = parse(
+        parse(textEqn)
+          .toString
+          //   {
+          //   implicit: "hide",
+          //   parenthesis: "auto",
+          // }
+          ()
+        // \frac{dY_1}{dx}=
+      )
+        .toTex
+        //   {
+        //   parenthesis: "auto",
+        //   implicit: "hide",
+        // }
+        ();
+      return latexEqn;
+    } catch (error) {
+      return latexEqn;
+    }
+  };
   toLatex(eqns) {
     let latexEqns = [];
     eqns.forEach((eqn) => {
@@ -275,7 +304,7 @@ export default class Model {
     let calcedArr = NewDiffEquationSolver({ modelObj: this });
     let t1 = performance.now();
     this.solutions.calcedSolution = calcedArr;
-    this.solutions.timeTaken=t1-t0
+    this.solutions.timeTaken = t1 - t0;
     return calcedArr;
   };
 
@@ -331,13 +360,38 @@ export default class Model {
    * of models
    */
   returnConstructorObj = () => {
+ 
     return {
-      key: this.key,
       Config: this.Config,
-      Eqns: this.Eqns,
-      Vars: this.Vars,
-      solutions: this.solutions,
+      Eqns: this.Eqns.map((Eqn) => {
+        return { lineName: Eqn.lineName, textEqn: Eqn.textEqn };
+      }),
+
+      Vars: this.Vars.map((Var) => {
+        if (Var.VarType === "Independent" || Var.VarType === "Dependent") {
+          return {
+            LatexForm: Var.LatexForm,
+            VarType: Var.VarType,
+            VarCurrent: Var.VarCurrent,
+          };
+        } else {
+          return {
+            LatexForm: Var.LatexForm,
+            VarType: Var.VarType,
+            VarLow: Var.VarLow,
+            VarCurrent: Var.VarCurrent,
+            VarHigh: Var.VarHigh,
+          };
+        }
+      }),
+
       meta: this.meta,
+      // key: this.key,
+      // Config: this.Config,
+      // Eqns: this.Eqns,
+      // Vars: this.Vars,
+      // solutions: this.solutions,
+      // meta: this.meta,
     };
   };
 }

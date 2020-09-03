@@ -11,10 +11,13 @@ import ImportExportIcon from "@material-ui/icons/ImportExport";
 import { CSVLink } from "react-csv";
 
 const LinearCoupledButtonGraphContainer = (props) => {
-  let lineNames = props.modelObj.Vars.filter((el) => {
-    return el.VarType === "Independent"||el.VarType === "Dependent"
-  }).map(Var=>Var.LatexForm)
-  let csvData = [lineNames];
+  let independents = props.modelObj.Vars.filter((el) => {
+    return el.VarType === "Independent";
+  }).map((Var) => Var.LatexForm);
+  let dependents = props.modelObj.Vars.filter((el) => {
+    return el.VarType === "Dependent";
+  }).map((Var) => Var.LatexForm);
+  let csvData = [[...dependents, ...independents]];
   csvData.push(...props.modelObj.solutions.calcedSolution);
   return (
     <Paper>

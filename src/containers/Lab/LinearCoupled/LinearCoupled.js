@@ -16,9 +16,9 @@ import LinearCoupledButtonVariablesContainer from "../../../components/UI/Button
 import LinearCoupledButtonGraphContainer from "../../../components/UI/ButtonContainer/LinearCoupledButtonGraphContainer";
 
 import Model from "../../../components/Calculations/Dynamic/SampleEquations/Model";
-import DEFAULTVARS from "../../../components/Calculations/Dynamic/SampleEquations/DEFAULTVARS";
+import Draggable from "react-draggable";
 
-class LinearCoupledNew extends Component {
+class LinearCoupled extends Component {
   /**
    * Visual Component that contains the textbox for the equation and calculation outputs
    * plus some equation labels
@@ -34,6 +34,7 @@ class LinearCoupledNew extends Component {
       "Select a model to get started",
     ],
     typistIndex: 0,
+    showMathQuillBox: true,
 
     modelObj: { Eqns: [], Vars: [], Config: {}, meta: {} }, // This hack is required to handle the modelObj default state
     // myReactGridLayout: DEFAULTLAYOUT(new Model()), //TODO should create a new model obj here
@@ -75,6 +76,26 @@ class LinearCoupledNew extends Component {
       this.props.sendToParent(this.state.modelObj);
     }
   }
+  TEXTEQNS_handleInputChange = (id) => (event, value) => {
+    let Eqns = this.state.modelObj.Eqns;
+
+    const idx = Eqns.findIndex((e) => {
+      return e.id === id;
+    });
+
+    const Eqn = Eqns[idx];
+    Eqn.textEqn = event.target.value;
+    console.log(this.state.modelObj.singleEqnToLatex(event.target.value));
+    // Eqn.latexEqn=this.state.modelObj.singleEqnToLatex(event.target.value)
+
+    Eqns[idx] = Eqn;
+
+    let modelObj = this.state.modelObj;
+    modelObj.Eqns = Eqns;
+    modelObj.Config.calculate = false;
+
+    this.setState({ modelObj: modelObj });
+  };
 
   MATHQUILL_handleInputChange = (id, itemType) => (mathField) => {
     let items = this.state.modelObj[itemType];
@@ -82,6 +103,8 @@ class LinearCoupledNew extends Component {
       return e.id === id;
     });
     const item = items[idx];
+
+    console.log(item, mathField.text(), mathField.latex());
 
     if (itemType === "Eqns") {
       item.textEqn = mathField.text();
@@ -174,7 +197,6 @@ class LinearCoupledNew extends Component {
     event.preventDefault();
     let newEqns = [];
     let invalidIndex = this.state.modelObj.validateExpressions();
-
 
     for (let i = 0; i < this.state.modelObj.Eqns.length; i++) {
       const eqn = this.state.modelObj.Eqns[i];
@@ -338,12 +360,10 @@ class LinearCoupledNew extends Component {
   };
 
   VARS_nextPossible = (prevState, type) => {
-
-   
     let typeArr = prevState.modelObj.Vars.filter((Var) => {
       return Var.VarType === type;
     });
-   
+
     let letterTypes = {
       Constant: "K",
       Dependent: "Y",
@@ -420,19 +440,17 @@ class LinearCoupledNew extends Component {
   };
   EQNS_onIncrement = () => {
     let modelObj = this.state.modelObj;
-    let nextEqn=this.EQNS_nextPossible(this.state)
+    let nextEqn = this.EQNS_nextPossible(this.state);
     modelObj.Eqns = modelObj.Eqns.concat(nextEqn);
     modelObj.Vars = modelObj.Vars.concat(
-
       {
-        id: nextEqn.lineName+"2",
+        id: nextEqn.lineName + "2",
         LatexForm: nextEqn.lineName,
         errorMessage: null,
-       
+
         VarType: "Dependent",
         VarCurrent: 0.5,
-    
-      },
+      }
       // this.VARS_nextPossible(this.state, "Dependent")
     );
 
@@ -504,11 +522,18 @@ class LinearCoupledNew extends Component {
               onIncrementEqn={this.EQNS_onIncrement}
               resetForm={() => this.ITEMS_reset("eqns")}
               handleMathQuillInputSubmit={this.MATHQUILL_handleInputSubmit}
+              handleChangeShowMathQuillBox={() => {
+                this.setState({
+                  showMathQuillBox: !this.state.showMathQuillBox,
+                });
+              }}
             />
             <EqnItems
               Eqns={this.state.modelObj.Eqns}
               removeItem={this.ITEMS_remove}
               handleMathQuillInputChange={this.MATHQUILL_handleInputChange}
+              showMathQuillBox={this.state.showMathQuillBox}
+              handleTextEqnInputChange={this.TEXTEQNS_handleInputChange}
             />
           </Paper>
 
@@ -586,29 +611,36 @@ class LinearCoupledNew extends Component {
               }}
               modelObj={this.state.modelObj}
             />
-            {this.GRAPH_render()}
+            {this.GRAPH_render(
+              this.state.modelObj.solutions.calcedSolution
+                ? this.state.modelObj.solutions.calcedSolution
+                : null
+            )}
           </div>
         ) : (
           <div className={classes.Graph} key="GraphButtons" />
         )}
 
-        <Modal
-          open={this.state.modelObj.Config.show}
-          onClose={this.GRAPHCONFIG_onClose}
-        >
-          <div key="GraphConfig" className={classes.graphConfig}>
-            <GraphConfig
-              modelObj={this.state.modelObj}
-              onClose={this.GRAPHCONFIG_onClose}
-              onChange={(val) => this.GRAPHCONFIG_onChange(val)}
-              onSubmit={this.GRAPHCONFIG_onSubmit}
-            />
-          </div>
-        </Modal>
+        {/* <Modal
+                    open={this.state.modelObj.Config.show}
+                    onClose={this.GRAPHCONFIG_onClose}
+                > */}
+        {this.state.modelObj.Config.show ? (
+          <Draggable enableUserSelectHack={false}>
+            <div key="GraphConfig" className={classes.graphConfig}>
+              <GraphConfig
+                modelObj={this.state.modelObj}
+                onClose={this.GRAPHCONFIG_onClose}
+                onChange={(val) => this.GRAPHCONFIG_onChange(val)}
+                onSubmit={this.GRAPHCONFIG_onSubmit}
+              />
+            </div>
+          </Draggable>
+        ) : null}
+        {/* </Modal> */}
       </div>
     );
   }
 }
 
-export default LinearCoupledNew;
-
+export default LinearCoupled;

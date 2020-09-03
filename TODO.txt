@@ -13,6 +13,7 @@
 6. Fix the consoleplace
 allow y_10
 remove warnings
+position of copyright symbol
 
 
 24th Jul - 7th Aug 

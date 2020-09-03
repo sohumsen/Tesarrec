@@ -5,6 +5,8 @@
   align-content: center;
   justify-content: space-between;
   flex-flow: row wrap;
+  overflow: hidden;
+
 }
 
 .EqnContainer {
