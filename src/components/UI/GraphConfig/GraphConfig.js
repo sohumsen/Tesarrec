@@ -3,7 +3,6 @@ import React from "react";
 import classes from "./GraphConfig.module.css";
 import Input from "../Input/Input";
 import CloseIcon from "@material-ui/icons/Close";
-import SaveIcon from "@material-ui/icons/Save";
 
 import {
   Paper,
@@ -13,8 +12,7 @@ import {
   IconButton,
 } from "@material-ui/core";
 import ErrorOutlineIcon from "@material-ui/icons/ErrorOutline";
-import PlayCircleOutlineIcon from "@material-ui/icons/PlayCircleOutline";
-import { green, red } from "@material-ui/core/colors";
+import {  red } from "@material-ui/core/colors";
 
 // import Paper from '../Paper/Paper'
 

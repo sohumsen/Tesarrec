@@ -17,7 +17,6 @@ function MyDropzone(props) {
         props.setDescription(binaryStr)
 
       }
-      let txt=reader.readAsText(file)
 
     //   reader.readAsArrayBuffer(file)
     })

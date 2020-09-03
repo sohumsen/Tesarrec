@@ -473,7 +473,7 @@ class ModelBench extends Component {
           <p>
             For the Model Bench User, <br/>you must give appropriate credit: ©Sohum
             Sen{" "}<br/>
-            <a href="https://tesarrec.org/modelbench" target="_blank">
+            <a href="https://tesarrec.org/modelbench" target="_blank" rel="noopener noreferrer">
               https://tesarrec.org/modelbench<br/>
             </a>{" "}
             01/05/2020

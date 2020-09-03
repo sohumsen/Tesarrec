@@ -12,21 +12,11 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 });
 
 export default function AlertDialogSlide(props) {
-  const [open, setOpen] = React.useState(true);
-
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
-
-  const handleClose = () => {
-    setOpen(false);
-  };
+  const [open ] = React.useState(true);
 
   return (
     <div>
-      {/* <Button variant="outlined" color="primary" onClick={handleClickOpen}>
-        Slide in alert dialog
-      </Button> */}
+    
       <Dialog
         open={open}
         TransitionComponent={Transition}
@@ -41,14 +31,14 @@ export default function AlertDialogSlide(props) {
         <DialogContent>
           <DialogContentText id="alert-dialog-slide-description">
             Once published it cannot be editted or deleted and will be open to
-            other users. 
+            other users.
           </DialogContentText>
         </DialogContent>
         <DialogActions>
           <Button onClick={props.onCancelPublish} color="primary">
             Maybe later
           </Button>
-          <Button onClick={props.onPublishModel}  color="primary">
+          <Button onClick={props.onPublishModel} color="primary">
             Publish
           </Button>
         </DialogActions>

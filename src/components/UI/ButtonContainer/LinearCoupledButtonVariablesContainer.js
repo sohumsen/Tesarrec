@@ -2,7 +2,7 @@ import React from "react";
 import AddBoxIcon from "@material-ui/icons/AddBox";
 import IconButton from "@material-ui/core/IconButton";
 import { Tooltip, Paper } from "@material-ui/core";
-import { blue,yellow,pink } from '@material-ui/core/colors';
+import { pink } from '@material-ui/core/colors';
 
 const LinearCoupledButtonVariablesContainer = (props) => {
   return (

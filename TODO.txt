@@ -1,6 +1,5 @@
 
 
-1. for certain eqns ban negative initials 
 
 2. da/dt=b is valid 
 
@@ -10,10 +9,8 @@
 
 5. Simplify UI spaces 
 
-6. Fix the consoleplace
 allow y_10
 remove warnings
-position of copyright symbol
 
 
 24th Jul - 7th Aug 

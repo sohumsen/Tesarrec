@@ -1,4 +1,3 @@
-import { v4 as uuidv4 } from "uuid";
 import { parse, evaluate, simplify } from "mathjs";
 import NewDiffEquationSolver from "../LinearCoupled/NewDiffEquationSolver";
 
@@ -294,8 +293,7 @@ export default class Model {
         ).LatexForm;
 
         this.Vars.map((Var) => {
-          let differentialText =
-            "(d*" + Var.LatexForm + ")/(d*" + independentLatex + ")";
+          let differentialText ="(d*" + Var.LatexForm + ")/(d*" + independentLatex + ")";
           let newExpression = this.Eqns.filter(
             (eqn) => eqn.lineName === Var.LatexForm
           );

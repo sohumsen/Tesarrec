@@ -1,7 +1,6 @@
 import React from 'react'
 
 import tesarrec from '../../../assets/logo2.png'
-import caption from '../../../assets/caption.png'
 
 import classes from './Logo.module.css'
 const logo=(props)=>(
