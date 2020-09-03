@@ -5,13 +5,14 @@ import IconButton from "@material-ui/core/IconButton";
 import { Tooltip,  Paper } from "@material-ui/core";
 import RestoreIcon from "@material-ui/icons/Restore";
 import { green } from "@material-ui/core/colors";
+import TextFormatIcon from '@material-ui/icons/TextFormat';
 const LinearCoupledButtonEqnsContainer = (props) => {
   return (
-    <Paper>Equations
+    <Paper>
       <Tooltip title="Add Equations" placement="top" arrow>
         <span>
           <IconButton
-            disabled={props.Eqns.length === 10 || props.Eqns.length === 0}
+            disabled={props.Eqns.length === 11 || props.Eqns.length === 0}
             edge="end"
             aria-label="add"
             onClick={props.onIncrementEqn}
@@ -33,6 +34,18 @@ const LinearCoupledButtonEqnsContainer = (props) => {
           </IconButton>
         </span>
       </Tooltip>
+      <Tooltip title="Show Text box" placement="top" arrow>
+        <span>
+          <IconButton
+            disabled={props.Eqns.length === 0}
+            edge="end"
+            aria-label="Submit"
+            onClick={props.handleChangeShowMathQuillBox}
+          >
+            <TextFormatIcon  />
+          </IconButton>
+        </span>
+      </Tooltip>
 
       <Tooltip title="Submit Equations" placement="top" arrow>
         <span>
@@ -47,19 +60,7 @@ const LinearCoupledButtonEqnsContainer = (props) => {
         </span>
       </Tooltip>
 
-      <Tooltip title="Show Text box" placement="top" arrow>
-        <span>
-          <IconButton
-            disabled={props.Eqns.length === 0}
-            edge="end"
-            aria-label="Submit"
-            onClick={props.handleChangeShowMathQuillBox}
-          >
-            <PlayCircleOutlineIcon style={{ color: green[0] }} />
-          </IconButton>
-        </span>
-      </Tooltip>
-
+     
 
       {/* <Tooltip
         style={{ float: "right" }}

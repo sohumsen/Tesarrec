@@ -471,10 +471,10 @@ class ModelBench extends Component {
         {/* {this.state.error ? <MyErrorMessage /> : null} */}
         <div className={classes.copyright}>
           <p>
-            For the Model Bench User, you must give appropriate credit: ©Sohum
-            Sen{" "}
+            For the Model Bench User, <br/>you must give appropriate credit: ©Sohum
+            Sen{" "}<br/>
             <a href="https://tesarrec.org/modelbench" target="_blank">
-              https://tesarrec.org/modelbench
+              https://tesarrec.org/modelbench<br/>
             </a>{" "}
             01/05/2020
           </p>

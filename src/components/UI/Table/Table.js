@@ -30,11 +30,17 @@ export default function SimpleTable(props) {
         size="small"
         aria-label="simple table"
       >
- 
         <TableHead>
           <TableRow>
             {props.columns.map((column) => (
-              <TableCell style={{width:"10px"}}>{column}</TableCell>
+              <TableCell
+                style={{ width: "10px" }}
+                onClick={() => {
+                  console.log(column);
+                }}
+              >
+                {column}
+              </TableCell>
             ))}
           </TableRow>
         </TableHead>
@@ -42,7 +48,7 @@ export default function SimpleTable(props) {
           {props.rows.map((row) => (
             <TableRow>
               {props.columns.map((letter) => (
-                <TableCell style={{width:"10px"}}>{row[letter]}</TableCell>
+                <TableCell style={{ width: "10px" }}>{row[letter]}</TableCell>
               ))}
             </TableRow>
           ))}

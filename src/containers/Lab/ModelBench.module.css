@@ -1,10 +1,10 @@
 .ModelBenchContainer {
   display: flex;
   background-color: rgb(240, 240, 240);
-  height: 90vh;
+  height: 91vh;
   justify-content: flex-end;  /*background-color: aqua;*/
   margin-left: auto;
-  overflow: hidden;
+  /* overflow: hidden; */
 
 }
 .ModelBenchItemLeft {
@@ -29,14 +29,14 @@
 }
 .ModelBenchItemCenter {
   flex: 30 30 auto;
-  overflow: hidden;
+  /* overflow: hidden; */
 
   /*background-color: brown;*/
 }
 
 .copyright{
-  font-size: xx-small;
-  position: fixed;
+  font-size: 9px;
+  position: absolute;
   bottom: 0;
-  left: 35vw;
+  left: 0;
 }

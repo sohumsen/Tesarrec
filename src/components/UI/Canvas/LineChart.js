@@ -67,8 +67,6 @@ import {
 class MyLineChart extends Component {
   render() {
     
-    console.log(this.props.dataPoints[0][5].x)
-    console.log(this.props.dataPoints[0][5].y)
     return (
       <div
         style={{

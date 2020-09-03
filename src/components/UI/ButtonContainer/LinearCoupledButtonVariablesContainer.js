@@ -6,7 +6,7 @@ import { blue,yellow,pink } from '@material-ui/core/colors';
 
 const LinearCoupledButtonVariablesContainer = (props) => {
   return (
-    <Paper>Parameters
+    <Paper>
       <Tooltip title="Add Constant" placement="top" arrow>
         <span>
           <IconButton
@@ -15,7 +15,7 @@ const LinearCoupledButtonVariablesContainer = (props) => {
             onClick={()=>props.onIncrementVariable("Constant")}
             disabled={props.Vars.filter((Var) => {
               return Var.VarType === "Constant";
-            }).length===9}
+            }).length===9||props.Eqns.length===0}
           >
             <AddBoxIcon style={{ color: pink[300] }}/>
           </IconButton>

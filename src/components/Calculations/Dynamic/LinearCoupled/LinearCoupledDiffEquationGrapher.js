@@ -59,9 +59,7 @@ const LinearCoupledDiffEquationGrapher = (props) => {
   }
 
 
-console.log(objOfCoords[props.modelObj.Config.xAxis])
 
-console.log(objOfCoords[props.modelObj.Config.yAxis])
 
 
   return (

@@ -8,12 +8,19 @@ import classes from "./LinearCoupled.module.css";
 import MyErrorMessage from "../../../components/UI/MyErrorMessage/CustomizedErrorMessage";
 import GraphConfig from "../../../components/UI/GraphConfig/GraphConfig";
 import LinearCoupledDiffEquationGrapher from "../../../components/Calculations/Dynamic/LinearCoupled/LinearCoupledDiffEquationGrapher";
-import { Paper, Modal, TextField, TextareaAutosize } from "@material-ui/core";
+import {
+  Paper,
+  Modal,
+  TextField,
+  TextareaAutosize,
+  InputAdornment,
+} from "@material-ui/core";
 import LinearCoupledButtonEqnsContainer from "../../../components/UI/ButtonContainer/LinearCoupledButtonEqnsContainer";
 import DEFAULTEQUATIONSNEW from "../../../components/Calculations/Dynamic/SampleEquations/DEFAULTEQUATIONSnew";
 
 import LinearCoupledButtonVariablesContainer from "../../../components/UI/ButtonContainer/LinearCoupledButtonVariablesContainer";
 import LinearCoupledButtonGraphContainer from "../../../components/UI/ButtonContainer/LinearCoupledButtonGraphContainer";
+import FileUpload from "../../../components/UI/FileUpload/FileUpload";
 
 import Model from "../../../components/Calculations/Dynamic/SampleEquations/Model";
 import Draggable from "react-draggable";
@@ -85,8 +92,7 @@ class LinearCoupled extends Component {
 
     const Eqn = Eqns[idx];
     Eqn.textEqn = event.target.value;
-    console.log(this.state.modelObj.singleEqnToLatex(event.target.value));
-    // Eqn.latexEqn=this.state.modelObj.singleEqnToLatex(event.target.value)
+    Eqn.latexEqn = this.state.modelObj.singleEqnToLatex(event.target.value);
 
     Eqns[idx] = Eqn;
 
@@ -103,8 +109,6 @@ class LinearCoupled extends Component {
       return e.id === id;
     });
     const item = items[idx];
-
-    console.log(item, mathField.text(), mathField.latex());
 
     if (itemType === "Eqns") {
       item.textEqn = mathField.text();
@@ -484,13 +488,10 @@ class LinearCoupled extends Component {
       modelObj.Config.calculate = false;
     }
 
-    console.log(this.state.modelObj);
-
     this.setState({ modelObj: modelObj });
   };
   GRAPHCONFIG_onSubmit = () => {
     let modelObj = this.state.modelObj;
-    console.log(this.state.modelObj);
     modelObj.Config.show = false;
     modelObj.Config.calculate = true;
 
@@ -542,6 +543,19 @@ class LinearCoupled extends Component {
             className={classes.MetaContainer}
             elevation={3}
           >
+            {/* <div className={classes.uploadButton}>
+            <FileUpload
+              setDescription={(txt) => {
+                let modelObj = this.state.modelObj;
+                modelObj.Config.calculate = false;
+                console.log(txt);
+                modelObj.meta.description = txt;
+                this.setState({ modelObj: modelObj });
+              }}
+            />
+
+            </div> */}
+            {/* <div className={classes.textfield}> */}
             <TextField
               id="outlined-multiline-static"
               multiline
@@ -558,10 +572,27 @@ class LinearCoupled extends Component {
               variant="outlined"
               size="small"
               fullWidth
+              InputProps={{
+                endAdornment: (
+                  <InputAdornment position="end">
+                    <FileUpload
+                      setDescription={(txt) => {
+                        let modelObj = this.state.modelObj;
+                        modelObj.Config.calculate = false;
+                        console.log(txt);
+                        modelObj.meta.description = txt;
+                        this.setState({ modelObj: modelObj });
+                      }}
+                    />
+                  </InputAdornment>
+                ),
+              }}
               inputProps={{ style: { fontSize: 12 } }} // font size of input text
             />
+            {/* </div> */}
           </Paper>
-          <Paper
+
+          {/* <Paper
             key="Console"
             className={classes.ConsoleContainer}
             elevation={3}
@@ -569,15 +600,16 @@ class LinearCoupled extends Component {
             {this.state.consoleMessages.map((msg) => (
               <p>{">  " + msg}</p>
             ))}
-          </Paper>
+          </Paper> */}
         </div>
         <div className={classes.VarColumn}>
           <Paper
             className={classes.VarContainer}
-            style={{ backgroundColor: "red" }}
+            // style={{ backgroundColor: "red" }}
           >
             <LinearCoupledButtonVariablesContainer
               Vars={this.state.modelObj.Vars}
+              Eqns={this.state.modelObj.Eqns}
               onIncrementVariable={this.VARS_onIncrement}
               resetForm={() => this.ITEMS_reset("vars")}
             />
@@ -588,7 +620,7 @@ class LinearCoupled extends Component {
               handleMathQuillInputChange={this.MATHQUILL_handleInputChange}
             />
           </Paper>
-          <Paper
+          {/* <Paper
             key="Console"
             className={classes.ConsoleContainer}
             elevation={3}
@@ -596,7 +628,7 @@ class LinearCoupled extends Component {
             {this.state.consoleMessages.map((msg) => (
               <p>{">  " + msg}</p>
             ))}
-          </Paper>
+          </Paper> */}
         </div>
 
         {this.state.modelObj.Config.calculate ? (

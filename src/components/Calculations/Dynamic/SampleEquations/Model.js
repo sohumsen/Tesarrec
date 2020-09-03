@@ -135,15 +135,12 @@ export default class Model {
     this.Vars.forEach((Var) => {
       scope[Var.LatexForm] = 1;
     });
-    console.log(scope);
     let invalidIndex = [];
-    console.log(this.Eqns);
 
     for (let i = 0; i < textEqns.length; i++) {
       try {
         evaluate(textEqns[i], scope);
       } catch (error) {
-        console.log(i, textEqns[i]);
 
         invalidIndex.push(i);
       }
@@ -199,31 +196,11 @@ export default class Model {
    */
 
   singleEqnToLatex = (textEqn) => {
-    let latexEqn = textEqn;
     try {
       const node = parse(textEqn);
-      console.log(node.toString());
-      console.log(node.toTex());
-
-      latexEqn = parse(
-        parse(textEqn)
-          .toString
-          //   {
-          //   implicit: "hide",
-          //   parenthesis: "auto",
-          // }
-          ()
-        // \frac{dY_1}{dx}=
-      )
-        .toTex
-        //   {
-        //   parenthesis: "auto",
-        //   implicit: "hide",
-        // }
-        ();
-      return latexEqn;
-    } catch (error) {
-      return latexEqn;
+      return node.toTex();
+    } catch (err) {
+      return textEqn;
     }
   };
   toLatex(eqns) {
@@ -360,7 +337,6 @@ export default class Model {
    * of models
    */
   returnConstructorObj = () => {
- 
     return {
       Config: this.Config,
       Eqns: this.Eqns.map((Eqn) => {
