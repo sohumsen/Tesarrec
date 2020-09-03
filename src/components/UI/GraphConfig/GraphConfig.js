@@ -80,6 +80,8 @@ export default function FormControlLabelPlacement(props) {
                 <MenuItem value={"RK4"}>RK4</MenuItem>
                 <MenuItem value={"RK38"}>RK38</MenuItem>
                 <MenuItem value={"RKF"}>RKF</MenuItem>
+                <MenuItem value={"RK45"}>RK45</MenuItem>
+
               </Select>
             </div>
           </div>

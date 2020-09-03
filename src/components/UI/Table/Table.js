@@ -13,10 +13,10 @@ const useStyles = makeStyles({
     // minWidth: 5,
     // maxWidth: "1px",
   },
-  TableContainer: {
-    maxWidth: 820,
-    maxHeight: 180,
-  },
+  // TableContainer: {
+  //   maxWidth: 820,
+  //   maxHeight: 180,
+  // },
 });
 
 export default function SimpleTable(props) {

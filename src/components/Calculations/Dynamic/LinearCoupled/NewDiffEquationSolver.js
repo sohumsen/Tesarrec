@@ -42,18 +42,27 @@ const NewDiffEquationSolver = (props) => {
       [1 / 6, 1 / 3, 1 / 3, 1 / 6],
     ],
     RK38: [
-      [1 / 3, 1 / 3],
+      [1 / 3, 1 / 3], //1,2,3,4
       [2 / 3, -1 / 3, 1],
       [1, 1, -1, 1],
       [1 / 8, 3 / 8, 3 / 8, 1 / 8],
     ],
     RKF: [
-      [1 / 4, 1 / 4],
+      [1 / 4, 1 / 4], //1,2,3,4,5,5
       [3 / 8, 3 / 32, 9 / 32],
       [12 / 13, 1932 / 2197, -7200 / 2197, 7296 / 2197],
       [1, 439 / 216, -8, 3680 / 513, -845 / 4104],
       [1 / 2, -8 / 27, 2, -3544 / 2565, 1859 / 4104, -11 / 40],
       [25 / 216, 0, 1408 / 2565, 2197 / 4104, -1 / 5, 0],
+    ],
+
+    RK45: [
+      // [11 / 84],
+      [-5103 / 18656, -2187 / 6784],//1,2,3,4,5
+      [-212 / 729, 49 / 176, 125 / 192],
+      [32 / 9, 64448 / 6561, 46732 / 5247, 500 / 1113],
+      [9 / 40, -56 / 15, -25360 / 2187, -355 / 33, 0],
+      [1 / 5, 3 / 40, 44 / 45, 19372 / 6561, 9017 / 3168, 35 / 384],
     ],
   };
 
@@ -115,16 +124,16 @@ const NewDiffEquationSolver = (props) => {
   let t0 = null;
   let initialConditions = [];
   let constants = {};
-  let independentLatexForm=null
-  let lineNames=[]
+  let independentLatexForm = null;
+  let lineNames = [];
   for (let i = 0; i < props.modelObj.Vars.length; i++) {
     if (props.modelObj.Vars[i].VarType === "Independent") {
       t0 = parseFloat(props.modelObj.Vars[i].VarCurrent);
-      independentLatexForm=props.modelObj.Vars[i].LatexForm
+      independentLatexForm = props.modelObj.Vars[i].LatexForm;
     }
     if (props.modelObj.Vars[i].VarType === "Dependent") {
       initialConditions.push(parseFloat(props.modelObj.Vars[i].VarCurrent));
-      lineNames.push(props.modelObj.Vars[i].LatexForm)
+      lineNames.push(props.modelObj.Vars[i].LatexForm);
     }
     if (props.modelObj.Vars[i].VarType === "Constant") {
       constants[props.modelObj.Vars[i].LatexForm] = parseFloat(
@@ -153,7 +162,6 @@ const NewDiffEquationSolver = (props) => {
   }
 
   return allY;
-
 };
 
 export default NewDiffEquationSolver;

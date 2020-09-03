@@ -105,7 +105,6 @@ class ModelBench extends Component {
     this.setState({ seekChildUpdates: true });
     // this.setState({ seekChildUpdates: true }, () => {
     //let payload = this.toSkeleton(this.state.selectedModel);
-    //console.log(payload)
 
     //   if (this.state.selectedModelId !== "") {
     //     this.generalDBRequest(
@@ -216,9 +215,7 @@ class ModelBench extends Component {
   MODEL_onEditName = (newModelName) => {
     let modelObj = this.state.selectedModel;
     modelObj.meta.name = newModelName;
-    this.setState({ selectedModel: modelObj }, () => {
-      console.log(this.state.selectedModel.meta.name);
-    });
+    this.setState({ selectedModel: modelObj });
 
     //this.MODEL_save()
 
@@ -342,7 +339,7 @@ class ModelBench extends Component {
       let Eqn = {
         ...this.state.selectedModel.Eqns[i],
       };
-      allTextEqns.push(Eqn.TextEqn);
+      allTextEqns.push(Eqn.textEqn);
     }
     navigator.clipboard.writeText(allTextEqns);
   };
@@ -358,7 +355,6 @@ class ModelBench extends Component {
     modelObj.meta.name = this.state.selectedModel.meta.name;
 
     this.setState({ selectedModel: modelObj }, () => {
-      console.log(this.state.selectedModel.returnConstructorObj())
       let payload = this.state.selectedModel.returnConstructorObj();
       if (this.state.selectedModelId !== "") {
         this.generalDBRequest(

@@ -60,6 +60,8 @@ class LinearCoupled extends Component {
         }
       );
 
+      console.log(newModel)
+
       return {
         modelId: props.modelId,
         modelObj: newModel,
@@ -103,10 +105,10 @@ class LinearCoupled extends Component {
 
   MATHQUILL_handleInputChange = (id, itemType) => (mathField) => {
     let items = this.state.modelObj[itemType];
-    const idx = items.findIndex((e) => {
+    let idx = items.findIndex((e) => {
       return e.id === id;
     });
-    const item = items[idx];
+    let item = items[idx];
 
     if (itemType === "Eqns") {
       item.textEqn = mathField.text();
@@ -125,7 +127,7 @@ class LinearCoupled extends Component {
         let independentLatex = this.state.modelObj.Vars.find(
           (Var) => Var.VarType === "Independent"
         ).LatexForm;
-
+        console.log(Eqns,index,this.state.modelObj.Vars[idx].LatexForm,idx)
         Eqns[index].DByDLatex =
           "\\frac{d" + mathField.latex() + "}{d" + independentLatex + "}=";
         Eqns[index].lineName = mathField.latex();
@@ -642,9 +644,9 @@ class LinearCoupled extends Component {
               modelObj={this.state.modelObj}
             />
             {this.GRAPH_render(
-              this.state.modelObj.solutions.calcedSolution
-                ? this.state.modelObj.solutions.calcedSolution
-                : null
+              // this.state.modelObj.solutions.calcedSolution
+              //   ? this.state.modelObj.solutions.calcedSolution
+              //   : null
             )}
           </div>
         ) : (
