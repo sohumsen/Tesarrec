@@ -10,6 +10,8 @@ import ModelBench from "./containers/Lab/ModelBench";
 import { BrowserView, MobileView } from "react-device-detect";
 import MyMobileView from "./hoc/MyMobileView/MyMobileView";
 import SignIn from "./containers/Authenticate/SignIn/SignIn";
+import ForgotPassword from "./containers/Authenticate/ForgotPassword/ForgotPassword";
+
 import SignUp from "./containers/Authenticate/SignUp/SignUp";
 import Logout from "./containers/Authenticate/Logout/Logout";
 import FIREBASE_KEY from "./firebasekey";
@@ -161,6 +163,19 @@ class App extends Component {
               checkAuthTimeout={this.checkAuthTimeout}
               authFail={this.authFail}
               authSuccess={this.authSuccess}
+            />
+          )}
+        />
+          <Route
+          path="/forgotpassword"
+          exact
+          render={(props) => (
+            <ForgotPassword
+              {...props}
+              error={this.state.error}
+              // checkAuthTimeout={this.checkAuthTimeout}
+              // authFail={this.authFail}
+              // authSuccess={this.authSuccess}
             />
           )}
         />

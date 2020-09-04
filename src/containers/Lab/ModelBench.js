@@ -365,7 +365,7 @@ class ModelBench extends Component {
             this.state.selectedModelId +
             "/.json?auth=" +
             this.props.token,
-          "PATCH",
+          "PUT",
           this.setState({ error: false, seekChildUpdates: false }, () => {
             this.MODEL_getPrivate();
           })

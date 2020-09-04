@@ -3,8 +3,7 @@ import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import TextField from "@material-ui/core/TextField";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import Checkbox from "@material-ui/core/Checkbox";
+
 import Link from "@material-ui/core/Link";
 import Grid from "@material-ui/core/Grid";
 import Box from "@material-ui/core/Box";
@@ -52,25 +51,26 @@ const styles = (theme) => ({
   },
 });
 
-class SignIn extends Component {
+class ForgotPassword extends Component {
   state = {
     email: "",
+    showPassword: false,
     password: "",
+    oobCode: "",
   };
 
   onChange = (e) => {
     this.setState({ [e.target.name]: e.target.value });
   };
 
-  sendToServer = () => {
+  sendPasswordResetEmail = () => {
     const authData = {
       email: this.state.email,
-      password: this.state.password,
-      returnSecureToken: true,
+      requestType: "PASSWORD_RESET",
     };
 
     fetch(
-      "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=" +
+      "https://identitytoolkit.googleapis.com/v1/accounts:sendOobCode?key=" +
         FIREBASE_KEY,
       {
         method: "post",
@@ -84,29 +84,45 @@ class SignIn extends Component {
       .then((response) => response.json())
       .then((data) => {
         if (!data.error) {
-          const expirationDate = new Date(
-            new Date().getTime() + data.expiresIn * 1000
-          );
-          localStorage.setItem("token", data.idToken);
-          localStorage.setItem("expirationDate", expirationDate);
-          localStorage.setItem("userId", data.localId);
-          localStorage.setItem("refreshToken", data.refreshToken);
-
-          this.props.authSuccess(data.idToken, data.localId);
-          this.props.checkAuthTimeout(data.expiresIn);
+          this.setState({ showPassword: true });
         } else {
-          this.props.authFail(data.error.message);
         }
       })
-      .catch((error) => {
-        this.props.authFail(error);
-      });
+      .catch((error) => {});
 
     //
   };
+  updatePassword = () => {
+    const authData = {
+      oobCode: this.state.oobCode,
+      newPassword: this.state.password,
+    };
+    fetch(
+      "https://identitytoolkit.googleapis.com/v1/accounts:resetPassword?key=" +
+        FIREBASE_KEY,
+      {
+        method: "post",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(authData),
+      }
+    )
+      .then((response) => response.json())
+      .then((data) => {
+        if (!data.error) {
+        } else {
+        }
+      })
+      .catch((error) => {});
+  };
   onSubmit = (e) => {
     e.preventDefault();
-    this.sendToServer();
+    if (!this.state.showPassword) {
+      this.sendPasswordResetEmail();
+    } else {
+      this.updatePassword();
+    }
   };
   render() {
     const { classes } = this.props;
@@ -119,37 +135,50 @@ class SignIn extends Component {
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
-            Sign in
+            Forgot Password
           </Typography>
           <form className={classes.form} noValidate onSubmit={this.onSubmit}>
-            <TextField
-              variant="outlined"
-              margin="normal"
-              required
-              fullWidth
-              id="email"
-              label="Email Address"
-              name="email"
-              autoComplete="email"
-              autoFocus
-              onChange={this.onChange}
-            />
-            <TextField
-              variant="outlined"
-              margin="normal"
-              required
-              fullWidth
-              name="password"
-              label="Password"
-              type="password"
-              id="password"
-              autoComplete="current-password"
-              onChange={this.onChange}
-            />
-            <FormControlLabel
-              control={<Checkbox value="remember" color="primary" />}
-              label="Remember me"
-            />
+            {!this.state.showPassword ? (
+              <TextField
+                variant="outlined"
+                margin="normal"
+                required
+                fullWidth
+                id="email"
+                label="Email Address"
+                name="email"
+                autoComplete="email"
+                autoFocus
+                onChange={this.onChange}
+              />
+            ) : (
+              <div>
+                <TextField
+                  variant="outlined"
+                  margin="normal"
+                  required
+                  fullWidth
+                  name="oobCode"
+                  label="oobCode"
+                  id="oobCode"
+                  autoComplete="current-password"
+                  onChange={this.onChange}
+                />
+                <TextField
+                  variant="outlined"
+                  margin="normal"
+                  required
+                  fullWidth
+                  name="password"
+                  label="Password"
+                  type="password"
+                  id="password"
+                  autoComplete="current-password"
+                  onChange={this.onChange}
+                />
+              </div>
+            )}
+
             <Button
               type="submit"
               fullWidth
@@ -157,18 +186,14 @@ class SignIn extends Component {
               color="primary"
               className={classes.submit}
             >
-              Sign In
+              Reset Password
             </Button>
             {this.props.error !== null ? (
               <CustomizedErrorMessage msg={this.props.error} />
             ) : null}
             <Grid container>
               <Grid item xs>
-                <NavLink
-                 to="/forgotpassword"
-                >
-                 {" Forgot password?"}
-                </NavLink>
+                <NavLink to="/forgotpassword">{" Forgot password?"}</NavLink>
               </Grid>
               <Grid item>
                 <NavLink to="/signup" variant="body2">
@@ -186,4 +211,4 @@ class SignIn extends Component {
   }
 }
 
-export default withStyles(styles)(SignIn);
+export default withStyles(styles)(ForgotPassword);

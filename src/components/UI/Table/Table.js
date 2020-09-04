@@ -13,17 +13,20 @@ const useStyles = makeStyles({
     // minWidth: 5,
     // maxWidth: "1px",
   },
-  // TableContainer: {
-  //   maxWidth: 820,
-  //   maxHeight: 180,
-  // },
+  TableContainer: {
+    // maxWidth: 820,
+    // maxHeight: 180,
+    width:"100%",
+    height:"100%",
+    overflow:"auto"
+  },
 });
 
 export default function SimpleTable(props) {
   const classes = useStyles();
 
   return (
-    <TableContainer component={Paper} className={classes.TableContainer}>
+    <TableContainer className={classes.TableContainer}>
       <Table
         stickyHeader
         className={classes.table}

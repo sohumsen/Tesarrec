@@ -10,7 +10,8 @@
 5. Simplify UI spaces 
 
 allow y_10
-remove warnings
+covert fetch to acios
+handle errors in forgot password 
 
 
 24th Jul - 7th Aug 
