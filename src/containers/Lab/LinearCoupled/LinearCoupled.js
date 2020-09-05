@@ -8,11 +8,7 @@ import classes from "./LinearCoupled.module.css";
 import MyErrorMessage from "../../../components/UI/MyErrorMessage/CustomizedErrorMessage";
 import GraphConfig from "../../../components/UI/GraphConfig/GraphConfig";
 import LinearCoupledDiffEquationGrapher from "../../../components/Calculations/Dynamic/LinearCoupled/LinearCoupledDiffEquationGrapher";
-import {
-  Paper,
-  TextField,
-  InputAdornment,
-} from "@material-ui/core";
+import { Paper, TextField, InputAdornment } from "@material-ui/core";
 import LinearCoupledButtonEqnsContainer from "../../../components/UI/ButtonContainer/LinearCoupledButtonEqnsContainer";
 import DEFAULTEQUATIONSNEW from "../../../components/Calculations/Dynamic/SampleEquations/DEFAULTEQUATIONSnew";
 
@@ -60,7 +56,6 @@ class LinearCoupled extends Component {
         }
       );
 
-      console.log(newModel)
 
       return {
         modelId: props.modelId,
@@ -127,7 +122,6 @@ class LinearCoupled extends Component {
         let independentLatex = this.state.modelObj.Vars.find(
           (Var) => Var.VarType === "Independent"
         ).LatexForm;
-        console.log(Eqns,index,this.state.modelObj.Vars[idx].LatexForm,idx)
         Eqns[index].DByDLatex =
           "\\frac{d" + mathField.latex() + "}{d" + independentLatex + "}=";
         Eqns[index].lineName = mathField.latex();
@@ -548,7 +542,6 @@ class LinearCoupled extends Component {
               setDescription={(txt) => {
                 let modelObj = this.state.modelObj;
                 modelObj.Config.calculate = false;
-                console.log(txt);
                 modelObj.meta.description = txt;
                 this.setState({ modelObj: modelObj });
               }}
@@ -643,11 +636,12 @@ class LinearCoupled extends Component {
               }}
               modelObj={this.state.modelObj}
             />
-            {this.GRAPH_render(
+            {this
+              .GRAPH_render
               // this.state.modelObj.solutions.calcedSolution
               //   ? this.state.modelObj.solutions.calcedSolution
               //   : null
-            )}
+              ()}
           </div>
         ) : (
           <div className={classes.Graph} key="GraphButtons" />

@@ -15,7 +15,8 @@ import ForgotPassword from "./containers/Authenticate/ForgotPassword/ForgotPassw
 import SignUp from "./containers/Authenticate/SignUp/SignUp";
 import Logout from "./containers/Authenticate/Logout/Logout";
 import FIREBASE_KEY from "./firebasekey";
-import Chp from './containers/Sustainability/Chp/Chp'
+import Chp from "./containers/Sustainability/Chp/Chp";
+import axios from "axios";
 class App extends Component {
   state = {
     isLoggedIn: false,
@@ -38,6 +39,8 @@ class App extends Component {
       grant_type: "refresh_token",
       refresh_token: refreshToken,
     };
+
+
     fetch("https://securetoken.googleapis.com/v1/token?key=" + FIREBASE_KEY, {
       method: "post",
       headers: {
@@ -66,6 +69,26 @@ class App extends Component {
       .catch((error) => {
         this.authFail(error);
       });
+    // axios
+    //   .post(
+    //     "https://securetoken.googleapis.com/v1/token?key=" + FIREBASE_KEY,
+    //     authData
+    //   )
+    //   .then((data) => {
+    //     const expirationDate = new Date(
+    //       new Date().getTime() + data.expires_in * 1000
+    //     );
+    //     localStorage.setItem("token", data.id_token);
+    //     localStorage.setItem("expirationDate", expirationDate);
+    //     localStorage.setItem("userId", data.user_id);
+    //     localStorage.setItem("refreshToken", data.refresh_token);
+
+    //     this.authSuccess(data.id_token, data.user_id);
+    //     this.checkAuthTimeout(data.expires_in);
+    //   })
+    //   .catch((err) => {
+    //     this.authFail(err);
+    //   });
   };
 
   checkAuthTimeout = (expirationTime) => {
@@ -104,7 +127,7 @@ class App extends Component {
       const expirationDate = new Date(localStorage.getItem("expirationDate"));
       const refreshToken = localStorage.getItem("refreshToken");
       if (expirationDate <= new Date()) {
-        this.refreshSession(refreshToken)
+        this.refreshSession(refreshToken);
         //this.onLogoutHandler(); //token expired
       } else {
         const userId = localStorage.getItem("userId");
@@ -120,7 +143,7 @@ class App extends Component {
   render() {
     let ifLoggedIn = (
       <Switch>
-       <Route
+        <Route
           path="/modelbench"
           exact
           render={(props) => (
@@ -138,8 +161,7 @@ class App extends Component {
             <Logout {...props} onLogoutHandler={this.onLogoutHandler} />
           )}
         />
-          {/* <Route path="/dynamic/mes" exact component={DynamicMes} /> */}
-
+        {/* <Route path="/dynamic/mes" exact component={DynamicMes} /> */}
 
         <Route path="/sustainability/chp" exact component={Chp} />
 
@@ -153,7 +175,7 @@ class App extends Component {
     );
     let ifNotLoggedIn = (
       <Switch>
-       <Route
+        <Route
           path="/signin"
           exact
           render={(props) => (
@@ -166,7 +188,7 @@ class App extends Component {
             />
           )}
         />
-          <Route
+        <Route
           path="/forgotpassword"
           exact
           render={(props) => (
@@ -191,7 +213,7 @@ class App extends Component {
               authSuccess={this.authSuccess}
             />
           )}
-          />
+        />
         <Route path="/sustainability/chp" exact component={Chp} />
 
         <Route path="/sustainability/mfc" exact component={Mfc} />

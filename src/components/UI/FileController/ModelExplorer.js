@@ -27,8 +27,8 @@ class ModelExplorer extends Component {
       (ModelId, i) => {
         return (
           <StyledTreeItem
-            nodeId={(i + 1).toString()}
-            labelText={
+          nodeId={ModelId}
+          labelText={
               this.props.allPublicId[ModelId].Name
                 ? this.props.allPublicId[ModelId].Name
                 : this.props.allPublicId[ModelId].meta.name
@@ -47,11 +47,7 @@ class ModelExplorer extends Component {
       (ModelId, i) => {
         return (
           <StyledTreeItem
-            nodeId={(
-              i +
-              Object.keys(this.props.allPublicId).length +
-              2
-            ).toString()}
+            nodeId={ModelId}
             labelText={
               this.props.allModelId[ModelId].Name
                 ? this.props.allModelId[ModelId].Name
@@ -224,21 +220,20 @@ class ModelExplorer extends Component {
 
                 <TreeView
                   defaultCollapseIcon={<ExpandMoreIcon />}
-                  expanded={[
-                    "0",
-                    (Object.keys(this.props.allPublicId).length + 1).toString(),
+                  defaultExpanded={["public","private"
+                    // (Object.keys(this.props.allPublicId).length + 1).toString(),
                   ]}
-                  // defaultSelected={["0"]}
-                  defaultExpandIcon={<ChevronRightIcon />}
+                  disableSelection                  
+                  
+                  defaultSelected={["MF5PnbuCZi0w7Bc2ihU"]}
+                  defaultExpandIcon={<ChevronRightIcon  />}
                 >
-                  <TreeItem nodeId="0" label={"Public"}>
+                  <TreeItem nodeId="public" label={"Public"}>
                     {publicFileLinks}
                   </TreeItem>
 
                   <TreeItem
-                    nodeId={(
-                      Object.keys(this.props.allPublicId).length + 1
-                    ).toString()}
+                    nodeId="private"
                     label={"Private"}
                   >
                     {privateFileLinks}

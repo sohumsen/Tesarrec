@@ -1,7 +1,7 @@
 import React from "react";
 import MyChart from "../../../UI/Canvas/LineChart";
 
-import {  Paper } from "@material-ui/core";
+import { Paper } from "@material-ui/core";
 
 import Table from "../../../UI/Table/Table";
 import classes from "./LinearCoupledDiffEquationGrapher.module.css";
@@ -24,8 +24,6 @@ const LinearCoupledDiffEquationGrapher = (props) => {
     }
     return returnedArr;
   };
-
-
 
   let newcomputedResults = props.computedResults.map((row) =>
     row.map((num) =>
@@ -57,10 +55,6 @@ const LinearCoupledDiffEquationGrapher = (props) => {
     }
     order3.push(order2);
   }
-
-
-
-
 
   return (
     <div className={classes.Container}>

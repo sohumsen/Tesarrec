@@ -57,7 +57,6 @@ const styles = (theme) => ({
 });
 
 class StlyedTreeItem extends Component {
-  
   state = {
     currentModelName: "",
     showInputField: false,
@@ -94,16 +93,17 @@ class StlyedTreeItem extends Component {
   handleClickAway = () => {
     // this.onButtonPress()
 
-    this.setState({ showInputField: false, currentModelName: this.props.labelText });
-    
+    this.setState({
+      showInputField: false,
+      currentModelName: this.props.labelText,
+    });
   };
 
   onKeyDown = (e) => {
     if (e.key === "Enter") {
       // e.preventDefault();
-      this.onButtonPress()
+      this.onButtonPress();
       // this.props.onEditModelName(this.state.currentModelName);
-
     }
   };
 
@@ -113,8 +113,12 @@ class StlyedTreeItem extends Component {
     return (
       <ClickAwayListener onClickAway={this.handleClickAway}>
         <TreeItem
-        nodeId={this.props.nodeId}
-          selected = { this.props.selectedModelId !== this.props.modelId ? { color:"blue"} : {color : "red"} }
+          nodeId={this.props.nodeId}
+          selected={
+            this.props.selectedModelId !== this.props.modelId
+              ? { color: "blue" }
+              : { color: "red" }
+          }
           onLabelClick={this.props.onExpandModelLink}
           onIconClick={this.props.onExpandModelLink}
           label={
@@ -169,7 +173,7 @@ class StlyedTreeItem extends Component {
             // selected:classes.selected,
             group: classes.group,
             label: classes.label,
-            icon:classes.icon
+            icon: classes.icon,
           }}
           {...other}
         />
