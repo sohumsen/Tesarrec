@@ -4,7 +4,7 @@ import ModelExplorer from "../../components/UI/FileController/ModelExplorer";
 import PublishedDialog from "../../components/UI/PublishedDialog/PublishedDialog";
 
 import classes from "./ModelBench.module.css";
-
+import DBAccess from './DBAccess'
 import SolverAnalysis from "./SolverAnalysis/SolverAnalysis";
 import Model from "../../components/Calculations/Dynamic/SampleEquations/Model";
 import axios from "axios";
@@ -294,6 +294,7 @@ class ModelBench extends Component {
       // can u inject a background-color: ranmdom lookup color if DEVMODE=TRUE
 
       <div className={classes.ModelBenchContainer}>
+        <DBAccess/>
         <div ref={nodeRef} className={classes.ModelBenchItemLeft}>
           <div className={classes.ModelBenchItemLeftFileNav}>
             {/* {this.state.loading ? <Skeleton /> : null} */}
