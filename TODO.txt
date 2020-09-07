@@ -17,6 +17,8 @@ cant minimize private, public
 change tree view
 on edit file name save update
 
+hook up api
+
 
 24th Jul - 7th Aug 
 -----------------

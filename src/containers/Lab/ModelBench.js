@@ -294,7 +294,6 @@ class ModelBench extends Component {
       // can u inject a background-color: ranmdom lookup color if DEVMODE=TRUE
 
       <div className={classes.ModelBenchContainer}>
-        <DBAccess/>
         <div ref={nodeRef} className={classes.ModelBenchItemLeft}>
           <div className={classes.ModelBenchItemLeftFileNav}>
             {/* {this.state.loading ? <Skeleton /> : null} */}

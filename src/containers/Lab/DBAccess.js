@@ -1,25 +1,56 @@
 import React, { Component } from "react";
 import $ from "jquery";
 import test from "./test.py";
+import axios from "axios";
 
 class DBAccess extends Component {
-    state={
-        data:{}
-    }
-    
+  state = {
+    data: {},
+  };
+
   componentDidMount() {
+    let scrapeJSON = "http://127.0.0.1:8080";
 
-    let scrapeJSON = 'http://bluegalaxy.info/cgi/scrapeJSON.py'
+    // axios
+    //   .get("http://127.0.0.1:8080/scipy_integrate?eqnStr=x**3")
 
-    $.get(test, function(data) {
-        // Get JSON data from Python script
-        if (data){
-           console.log("Data returned:", data)
+    //   .then((res) => console.log(res))
+    //   .catch((err) => console.log(err));
+    console.log(this.props.modelObj.returnConstructorObj())
+    fetch("http://127.0.0.1:8080/scipy_integrate", {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+        mode: "no-cors",
+      },
+      body: JSON.stringify(this.props.modelObj.returnConstructorObj()),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        if (!data.error) {
+          console.log(data);
+        } else {
+          console.log(data);
         }
-        let jobDataJSON = JSON.parse(data)
-     })
+      })
+      .catch((error) => {
+        console.log(error);
+      });
 
+    // axios
+    //   .get("http://127.0.0.1:8080/plot.png")
 
+    //   .then((res) => console.log( res))
+    //   .catch((err) => console.log("error " + err));
+
+    // $.get(test, function(data) {
+    //     // Get JSON data from Python script
+    //     if (data){
+    //        console.log("Data returned:", data)
+    //     }
+    //     let jobDataJSON = JSON.parse(data)
+    //  })
 
     // $.ajax({
     //   type: "GET",

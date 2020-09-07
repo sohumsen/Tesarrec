@@ -18,6 +18,7 @@ import FileUpload from "../../../components/UI/FileUpload/FileUpload";
 
 import Model from "../../../components/Calculations/Dynamic/SampleEquations/Model";
 import Draggable from "react-draggable";
+import DBAccess from "../DBAccess";
 
 class LinearCoupled extends Component {
   /**
@@ -55,7 +56,6 @@ class LinearCoupled extends Component {
           modelId: props.modelId,
         }
       );
-
 
       return {
         modelId: props.modelId,
@@ -626,6 +626,8 @@ class LinearCoupled extends Component {
 
         {this.state.modelObj.Config.calculate ? (
           <div key="GraphButtons" className={classes.Graph}>
+            <DBAccess modelObj={this.state.modelObj} />
+
             <LinearCoupledButtonGraphContainer
               calculate={this.state.modelObj.Config.calculate}
               onGraphConfigOpen={this.GRAPHCONFIG_onClose}
