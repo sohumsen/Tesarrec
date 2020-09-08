@@ -281,6 +281,7 @@ export default class Model {
     let t1 = performance.now();
     this.solutions.calcedSolution = calcedArr;
     this.solutions.timeTaken = t1 - t0;
+    console.log((t1-t0)/1000)
     return calcedArr;
   };
 

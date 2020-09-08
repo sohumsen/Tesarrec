@@ -503,9 +503,7 @@ class LinearCoupled extends Component {
     );
   };
 
-  GRAPH_render = () => {
-    return this.GRAPH_renderCalced(this.state.modelObj.solveDiffEqns());
-  };
+ 
 
   render() {
     return (
@@ -626,7 +624,10 @@ class LinearCoupled extends Component {
 
         {this.state.modelObj.Config.calculate ? (
           <div key="GraphButtons" className={classes.Graph}>
-            <DBAccess modelObj={this.state.modelObj} />
+            <DBAccess
+              modelObj={this.state.modelObj}
+              grapher={this.GRAPH_renderCalced}
+            />
 
             <LinearCoupledButtonGraphContainer
               calculate={this.state.modelObj.Config.calculate}
@@ -638,12 +639,8 @@ class LinearCoupled extends Component {
               }}
               modelObj={this.state.modelObj}
             />
-            {this
-              .GRAPH_render
-              // this.state.modelObj.solutions.calcedSolution
-              //   ? this.state.modelObj.solutions.calcedSolution
-              //   : null
-              ()}
+
+            {this.GRAPH_renderCalced(this.state.modelObj.solveDiffEqns())}
           </div>
         ) : (
           <div className={classes.Graph} key="GraphButtons" />

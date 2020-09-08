@@ -9,34 +9,45 @@ class DBAccess extends Component {
   };
 
   componentDidMount() {
-    let scrapeJSON = "http://127.0.0.1:8080";
-
     // axios
     //   .get("http://127.0.0.1:8080/scipy_integrate?eqnStr=x**3")
 
     //   .then((res) => console.log(res))
     //   .catch((err) => console.log(err));
-    console.log(this.props.modelObj.returnConstructorObj())
-    fetch("http://127.0.0.1:8080/scipy_integrate", {
-      method: "POST",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-        mode: "no-cors",
-      },
-      body: JSON.stringify(this.props.modelObj.returnConstructorObj()),
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        if (!data.error) {
-          console.log(data);
-        } else {
-          console.log(data);
+    console.log(this.props.modelObj.returnConstructorObj());
+    // fetch("http://127.0.0.1:8080/scipy_integrate", {
+    //   method: "POST",
+    //   headers: {
+    //     Accept: "application/json",
+    //     "Content-Type": "application/json",
+    //     mode: "no-cors",
+    //   },
+    //   body: JSON.stringify(this.props.modelObj.returnConstructorObj()),
+    // })
+    //   .then((response) => response.json())
+    //   .then((data) => {
+    //     if (!data.error) {
+    //       console.log(data);
+    //     } else {
+    //       console.log(data);
+    //     }
+    //   })
+    //   .catch((error) => {
+    //     console.log(error);
+    //   });
+
+    axios
+      .post(
+        "http://127.0.0.1:8080/scipy_integrate",
+        this.props.modelObj.returnConstructorObj(),
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
         }
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+      )
+      .then((res) => this.props.grapher(res.data))
+      .then((err) => console.log(err));
 
     // axios
     //   .get("http://127.0.0.1:8080/plot.png")

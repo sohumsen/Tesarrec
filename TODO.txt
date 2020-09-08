@@ -16,6 +16,7 @@ on go to new model, ask if they want to save
 cant minimize private, public
 change tree view
 on edit file name save update
+full screen modelbench
 
 hook up api
 
