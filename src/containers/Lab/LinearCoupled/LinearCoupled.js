@@ -214,6 +214,7 @@ class LinearCoupled extends Component {
       //valid
 
       let newEqns2 = this.state.modelObj.insertDifferentialIntoText(newEqns);
+      // this.state.modelObj.solveDiffEqns()
       if (
         newEqns2.some((eqn) => eqn.errorMessage !== null) ||
         this.state.modelObj.Vars.some((Var) => Var.errorMessage !== null)
@@ -493,14 +494,19 @@ class LinearCoupled extends Component {
   };
 
   GRAPH_renderCalced = (calcedSolution) => {
-    return (
-      <div key="Graph">
-        <LinearCoupledDiffEquationGrapher
-          computedResults={calcedSolution}
-          modelObj={this.state.modelObj}
-        />
-      </div>
-    );
+
+    if (calcedSolution!==null&&calcedSolution!==undefined){
+      console.log(calcedSolution)
+      return (
+        <div key="Graph">
+          <LinearCoupledDiffEquationGrapher
+            computedResults={calcedSolution}
+            modelObj={this.state.modelObj}
+          />
+        </div>
+      );
+    }
+   
   };
 
  
@@ -624,10 +630,7 @@ class LinearCoupled extends Component {
 
         {this.state.modelObj.Config.calculate ? (
           <div key="GraphButtons" className={classes.Graph}>
-            <DBAccess
-              modelObj={this.state.modelObj}
-              grapher={this.GRAPH_renderCalced}
-            />
+         
 
             <LinearCoupledButtonGraphContainer
               calculate={this.state.modelObj.Config.calculate}

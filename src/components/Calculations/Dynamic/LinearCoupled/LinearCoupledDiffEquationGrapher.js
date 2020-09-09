@@ -24,12 +24,21 @@ const LinearCoupledDiffEquationGrapher = (props) => {
     }
     return returnedArr;
   };
+  console.log(props.modelObj)
 
-  let newcomputedResults = props.computedResults.map((row) =>
+  let newcomputedResults = props.modelObj.solutions.calcedSolution.map((row) =>
     row.map((num) =>
       parseFloat(num.toFixed(props.modelObj.Config.DecimalPrecision))
     )
   );
+
+  // let newcomputedResults = props.computedResults.map((row) =>
+  //   row.map((num) =>
+  //     parseFloat(num.toFixed(props.modelObj.Config.DecimalPrecision))
+  //   )
+  // );
+
+
   let objOfCoords = {};
   let independentLatexForm = props.modelObj.Vars.find((el) => {
     return el.VarType === "Independent";

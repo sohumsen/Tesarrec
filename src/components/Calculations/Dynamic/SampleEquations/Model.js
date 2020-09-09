@@ -7,6 +7,7 @@ import DEFAULTMODELCONFIGNew from "../../../../containers/Lab/LinearCoupled/Defa
 import React from "react";
 
 import MyErrorMessage from "../../../UI/MyErrorMessage/CustomizedErrorMessage";
+import axios from "axios";
 
 export default class Model {
   constructor(dbModel, meta) {
@@ -140,7 +141,6 @@ export default class Model {
       try {
         evaluate(textEqns[i], scope);
       } catch (error) {
-
         invalidIndex.push(i);
       }
     }
@@ -274,17 +274,112 @@ export default class Model {
     return allY;
   };
 
+  async getData() {
+    // const res = await axios({
+    //   method: "post",
+    //   url: "http://127.0.0.1:8080/scipy_integrate",
+    //   data: this.returnConstructorObj(),
+    // });
+    const res = await axios.post(
+      "http://127.0.0.1:8080/scipy_integrate",
+      this.returnConstructorObj()
+    );
+
+    return res;
+  }
+
+  temp = () => {
+    this.getData()
+      .then((data) => {
+        this.setSoltuions(data.data);
+        return data.data;
+      })
+      .catch((err) => console.log(err));
+  };
+
   solveDiffEqns = () => {
     let t0 = performance.now();
 
-    let calcedArr = NewDiffEquationSolver({ modelObj: this });
+    // let calcedArr = NewDiffEquationSolver({ modelObj: this });
+    // console.log(calcedArr);
+
+    // async function run() {
+    //   const data = await this.getData();
+    //   console.log(data); // will print your data
+    //   return data;
+    // }
+
+    // run();
+
+    // let calced=this.temp()
+    // console.log(calced)
+    console.log(this.returnConstructorObj())
+
+    fetch("http://127.0.0.1:8080/scipy_integrate", {
+      method: "POST",
+      // cache: "no-cache",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(this.returnConstructorObj()),
+    })
+      .then((response) => {
+        return response.json();
+      })
+      .then((json) => {
+        console.log(json);
+        this.solutions.calcedSolution = json;
+        return json
+      })
+      .catch((err) => console.log(err));
+
+    // let calcedArr2= this.getData().then(res=>{return (res)})
+    // console.log(calcedArr2);
+
+    // this.getData()
+    //   .then((data) => this,(data))
+    //   .catch((err) => console.log(err));
+
+    let newArr = [];
+
+    // axios
+    //   .post(
+    //     "http://127.0.0.1:8080/scipy_integrate",
+    //     this.returnConstructorObj(),
+    //     {
+    //       headers: {
+    //         "Content-Type": "application/json",
+    //       },
+    //     }
+    //   )
+    //   .then((res) => {
+    //     console.log(res.data);
+
+    //     let t0 = performance.now();
+    //     newArr=res.data
+    //     let calcedArr = res.data;
+    //     let t1 = performance.now();
+    //     console.log(calcedArr);
+    //     this.solutions.calcedSolution = calcedArr;
+    //     this.solutions.timeTaken = t1 - t0;
+    //     console.log((t1 - t0) / 1000);
+    //     return calcedArr;
+    //   })
+    //   .then((err) => console.log(err));
+
+    //   console.log(newArr)
+  };
+  setSoltuions = (data) => {
+    let t0 = performance.now();
+
+    let calcedArr = data;
     let t1 = performance.now();
+    console.log(calcedArr);
     this.solutions.calcedSolution = calcedArr;
     this.solutions.timeTaken = t1 - t0;
-    console.log((t1-t0)/1000)
+    console.log((t1 - t0) / 1000);
     return calcedArr;
   };
-
   insertDifferentialIntoText = (allEqns) => {
     for (let i = 0; i < allEqns.length; i++) {
       let textEqn = allEqns[i].textEqn;
@@ -294,7 +389,8 @@ export default class Model {
         ).LatexForm;
 
         this.Vars.map((Var) => {
-          let differentialText ="(d*" + Var.LatexForm + ")/(d*" + independentLatex + ")";
+          let differentialText =
+            "(d*" + Var.LatexForm + ")/(d*" + independentLatex + ")";
           let newExpression = this.Eqns.filter(
             (eqn) => eqn.lineName === Var.LatexForm
           );

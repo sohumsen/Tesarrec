@@ -18,7 +18,12 @@ const LinearCoupledButtonGraphContainer = (props) => {
     return el.VarType === "Dependent";
   }).map((Var) => Var.LatexForm);
   let csvData = [[...dependents, ...independents]];
-  csvData.push(...props.modelObj.solutions.calcedSolution);
+  console.log(props.modelObj)
+
+  if (props.modelObj.solutions.calcedSolution!==null){
+    csvData.push(...props.modelObj.solutions.calcedSolution);
+
+  }
   return (
     <Paper>
       <Tooltip title="Config Equations" placement="top" arrow>

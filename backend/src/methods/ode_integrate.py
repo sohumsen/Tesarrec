@@ -57,6 +57,19 @@ def ode_integrate(modelObj):
     start = time.process_time()
 
     x = odeint(func, x_0_arr, t)
+
+    print(type(x),len(x),x.shape)
+    print(type(t),len(t),t.shape)
+
+    t.reshape(200,1)
+
+    # np.hstack((x,[t]))
     print(time.process_time() - start)
 
-    return x
+    # if isinstance(x, np.ndarray):
+    return np.hstack((x,t.reshape(200,1)))
+    # else:
+    #     return "didnt work"
+
+
+
