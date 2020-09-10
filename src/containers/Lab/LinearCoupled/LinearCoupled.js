@@ -214,7 +214,7 @@ class LinearCoupled extends Component {
       //valid
 
       let newEqns2 = this.state.modelObj.insertDifferentialIntoText(newEqns);
-      // this.state.modelObj.solveDiffEqns()
+      this.getNewSolution()
       if (
         newEqns2.some((eqn) => eqn.errorMessage !== null) ||
         this.state.modelObj.Vars.some((Var) => Var.errorMessage !== null)
@@ -493,10 +493,31 @@ class LinearCoupled extends Component {
     this.setState({ modelObj: modelObj });
   };
 
+  getNewSolution = () => {
+    let modelObj = this.state.modelObj;
+
+    fetch("http://127.0.0.1:8080/solve_ode", {
+      method: "POST",
+      // cache: "no-cache",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(this.state.modelObj.returnConstructorObj()),
+    })
+      .then((response) => {
+        return response.json();
+      })
+      .then((json) => {
+        modelObj.solutions.calcedSolution = json;
+        this.setState({ modelObj: modelObj });
+        return json;
+      })
+      .catch((err) => console.log(err));
+  };
+
   GRAPH_renderCalced = (calcedSolution) => {
 
-    if (calcedSolution!==null&&calcedSolution!==undefined){
-      console.log(calcedSolution)
+    if (calcedSolution !== null && calcedSolution !== undefined) {
       return (
         <div key="Graph">
           <LinearCoupledDiffEquationGrapher
@@ -506,10 +527,7 @@ class LinearCoupled extends Component {
         </div>
       );
     }
-   
   };
-
- 
 
   render() {
     return (
@@ -576,7 +594,6 @@ class LinearCoupled extends Component {
                       setDescription={(txt) => {
                         let modelObj = this.state.modelObj;
                         modelObj.Config.calculate = false;
-                        console.log(txt);
                         modelObj.meta.description = txt;
                         this.setState({ modelObj: modelObj });
                       }}
@@ -630,8 +647,6 @@ class LinearCoupled extends Component {
 
         {this.state.modelObj.Config.calculate ? (
           <div key="GraphButtons" className={classes.Graph}>
-         
-
             <LinearCoupledButtonGraphContainer
               calculate={this.state.modelObj.Config.calculate}
               onGraphConfigOpen={this.GRAPHCONFIG_onClose}
@@ -643,7 +658,9 @@ class LinearCoupled extends Component {
               modelObj={this.state.modelObj}
             />
 
-            {this.GRAPH_renderCalced(this.state.modelObj.solveDiffEqns())}
+            {this.GRAPH_renderCalced(
+              this.state.modelObj.solutions.calcedSolution
+            )}
           </div>
         ) : (
           <div className={classes.Graph} key="GraphButtons" />

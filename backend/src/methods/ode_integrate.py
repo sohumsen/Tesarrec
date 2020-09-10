@@ -4,20 +4,20 @@ import numpy as np
 from scipy.integrate import odeint
 
 
-def ode_integrate(modelObj):
+def ode_integrate(model_obj):
 
-    num_of_cycles = int(modelObj["Config"]["numOfCycles"])
+    num_of_cycles = int(model_obj["Config"]["numOfCycles"])
 
     x_0_arr = []
     constants = {}
     dep_names = []
     indep_latex = ""
-    for i in range(len(modelObj["Vars"])):
-        var = modelObj["Vars"][i]
+    for i in range(len(model_obj["Vars"])):
+        var = model_obj["Vars"][i]
         if var["VarType"] == "Independent":
             t = np.linspace(
                 var["VarCurrent"],
-                num_of_cycles * float(modelObj["Config"]["h"]),
+                num_of_cycles * float(model_obj["Config"]["h"]),
                 num_of_cycles,
             )
             indep_latex = var["LatexForm"]
@@ -29,10 +29,10 @@ def ode_integrate(modelObj):
             constants[var["LatexForm"]] = float(var["VarCurrent"])
 
     compiled_eqn = []
-    for i in range(len(modelObj["Eqns"])):
+    for i in range(len(model_obj["Eqns"])):
         compiled_eqn.append(
             compile(
-                modelObj["Eqns"][i]["textEqn"]
+                model_obj["Eqns"][i]["textEqn"]
                 .replace("^", "**")
                 .replace("e", str(np.exp(1))),
                 "<string>",
@@ -46,7 +46,7 @@ def ode_integrate(modelObj):
             x_0[dep_names[idx]] = x[idx]
 
         returned_arr = []
-        for idx in range(len(modelObj["Eqns"])):
+        for idx in range(len(model_obj["Eqns"])):
 
             returned_arr.append(
                 eval(compiled_eqn[idx], {**constants, **x_0, indep_latex: t})
@@ -61,13 +61,12 @@ def ode_integrate(modelObj):
     print(type(x),len(x),x.shape)
     print(type(t),len(t),t.shape)
 
-    t.reshape(200,1)
 
     # np.hstack((x,[t]))
     print(time.process_time() - start)
 
     # if isinstance(x, np.ndarray):
-    return np.hstack((x,t.reshape(200,1)))
+    return np.hstack((x,t.reshape(len(t),1)))
     # else:
     #     return "didnt work"
 

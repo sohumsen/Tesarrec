@@ -14,15 +14,20 @@ CORS(app)
 main = Blueprint("main", __name__)
 
 
-@main.route("/scipy_integrate", methods=["POST"])
-def scipy_integrate():
-    # take a modelobj here
+@main.route("/solve_ode", methods=["POST"])
+def solve_ode():
     model_obj = request.get_json()
     solution = ode_integrate(model_obj)
-    # print(dae_integrate())
-    # return jsonify(dae_integrate().tolist())
 
     return jsonify(solution.tolist())
+
+
+@main.route("/solve_dae", methods=["POST"])
+def solve_dae():
+    model_obj = request.get_json()
+    solution = dae_integrate(model_obj)
+
+    return jsonify(solution)
 
 
 if __name__ == "__main__":

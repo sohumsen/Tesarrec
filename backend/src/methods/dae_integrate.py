@@ -1,31 +1,79 @@
-import sys
-from numpy import linspace
-from scipy.integrate import odeint
-from scipy.optimize import fsolve
+from gekko import GEKKO
+import numpy as np
+import matplotlib.pyplot as plt
 
 
-def dae_integrate():
+def dae_integrate(model_obj):
 
-    y0 = [0, 5]
-    time = linspace(0., 10., 1000)
-    F_lon = 10.
-    mass = 1000.
+    m = GEKKO()
 
-    def F_r(a, v):
-        return (((1 - a) / 3) ** 2 + (2 * (1 + a) / 3) ** 2) * v
+    num_of_cycles = int(model_obj["Config"]["numOfCycles"])
 
-    def constraint(a, v):
-        return (F_lon - F_r(a, v)) / mass - a
+    x_0_arr = []
+    constants = {}
+    dep_names = []
+    indep_latex = ""
 
-    def integral(y, _):
-        v = y[1]
-        a, _, ier, mesg = fsolve(constraint, 0, args=[v, ], full_output=True)
-        if ier != 1:
-            print( "I coudn't solve the algebraic constraint, error:\n\n", mesg)
-            sys.stdout.flush()
-        return [v, a]
+    for i in range(len(model_obj["Vars"])):
+        var = model_obj["Vars"][i]
+        if var["VarType"] == "Independent":
+            m.time = np.linspace(
+                var["VarCurrent"],
+                num_of_cycles * float(model_obj["Config"]["h"]),
+                num_of_cycles,
+            )
+            indep_latex = var["LatexForm"]
+        elif var["VarType"] == "Dependent":
 
-    dydt = odeint(integral, y0, time)
+            dep_names.append(var["LatexForm"])
 
-    return dydt
+            expr=str(var["LatexForm"])+"="+str(m.Var(value=float(var["VarCurrent"])))
+            expr=var["LatexForm"]+"= "+"m.Var(value="+str(float(var["VarCurrent"]))+")"
+            
+            print(expr)
+            exec(expr)
 
+
+        else:
+            
+            
+            expr=str(var["LatexForm"])+"="+str(m.Param(value=float(var["VarCurrent"])))
+            expr=var["LatexForm"]+"= "+"m.Const(value="+str(float(var["VarCurrent"]))+")"
+
+            print(expr)
+
+            exec(expr)
+
+
+
+    m.options.IMODE = 4
+    m.options.NODES = 3
+
+    clean_eqn = []
+    for i in range(len(model_obj["Eqns"])):
+        new_eqn = (
+            model_obj["Eqns"][i]["textEqn"]
+            .replace("^", "**")
+            .replace("e", str(np.exp(1)))
+            .replace("/d" + indep_latex, ".dt()")
+            .replace("=", "==")
+        )
+        for i in range(len(dep_names)):
+            letter=dep_names[i]
+            new_eqn=new_eqn.replace("d"+letter,letter)
+
+        clean_eqn.append(new_eqn)
+    print(clean_eqn)
+    for i in range(len(clean_eqn)):
+        m.Equation(eval(clean_eqn[i]))
+
+
+
+  
+    m.solve(disp=False)
+    # plt.plot(x)
+    print("######################################")
+    print(m.time)
+    print("######################################")
+
+    return model_obj

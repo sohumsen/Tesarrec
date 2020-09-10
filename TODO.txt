@@ -10,15 +10,14 @@
 5. Simplify UI spaces 
 
 allow y_10
-covert fetch to acios
 handle errors in forgot password 
 on go to new model, ask if they want to save
-cant minimize private, public
 change tree view
 on edit file name save update
 full screen modelbench
+make entire mathfield editable
+add dae solver
 
-hook up api
 
 
 24th Jul - 7th Aug 

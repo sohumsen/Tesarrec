@@ -24,7 +24,6 @@ const LinearCoupledDiffEquationGrapher = (props) => {
     }
     return returnedArr;
   };
-  console.log(props.modelObj)
 
   let newcomputedResults = props.modelObj.solutions.calcedSolution.map((row) =>
     row.map((num) =>
