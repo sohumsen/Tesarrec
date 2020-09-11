@@ -194,6 +194,8 @@ class LinearCoupled extends Component {
   MATHQUILL_handleInputSubmit = (event) => {
     event.preventDefault();
     let newEqns = [];
+    this.getDAESolution()
+
     let invalidIndex = this.state.modelObj.validateExpressions();
 
     for (let i = 0; i < this.state.modelObj.Eqns.length; i++) {
@@ -214,7 +216,7 @@ class LinearCoupled extends Component {
       //valid
 
       let newEqns2 = this.state.modelObj.insertDifferentialIntoText(newEqns);
-      this.getNewSolution()
+      // this.getODESolution()
       if (
         newEqns2.some((eqn) => eqn.errorMessage !== null) ||
         this.state.modelObj.Vars.some((Var) => Var.errorMessage !== null)
@@ -493,7 +495,7 @@ class LinearCoupled extends Component {
     this.setState({ modelObj: modelObj });
   };
 
-  getNewSolution = () => {
+  getODESolution = () => {
     let modelObj = this.state.modelObj;
 
     fetch("http://127.0.0.1:8080/solve_ode", {
@@ -514,6 +516,29 @@ class LinearCoupled extends Component {
       })
       .catch((err) => console.log(err));
   };
+  getDAESolution = () => {
+    let modelObj = this.state.modelObj;
+
+    fetch("http://127.0.0.1:8080/solve_dae", {
+      method: "POST",
+      // cache: "no-cache",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(this.state.modelObj.returnConstructorObj()),
+    })
+      .then((response) => {
+        return response.json();
+      })
+      .then((json) => {
+        modelObj.solutions.calcedSolution = json;
+        
+        this.setState({ modelObj: modelObj });
+        return json;
+      })
+      .catch((err) => console.log(err));
+  };
+
 
   GRAPH_renderCalced = (calcedSolution) => {
 

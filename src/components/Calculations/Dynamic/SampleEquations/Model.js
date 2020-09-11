@@ -52,16 +52,16 @@ export default class Model {
         "}=",
       latexEqn: parse(
         parse(eqnObj.textEqn).toString({
-          implicit: "hide",
-          parenthesis: "auto",
+          // implicit: "hide",
+          // parenthesis: "auto",
         })
         // \frac{dY_1}{dx}=
       ).toTex({
-        parenthesis: "auto",
-        implicit: "hide",
+        // parenthesis: "auto",
+        // implicit: "hide",
       }),
       textEqn: eqnObj.textEqn,
-      parsedEqn: simplify(parse(eqnObj.textEqn)),
+      // parsedEqn: simplify(parse(eqnObj.textEqn)),
       errorMessage: null,
     }));
 
@@ -129,9 +129,9 @@ export default class Model {
     //   scope[lineName] = 1;
     // });
 
-    this.Vars.forEach((Var) => {
-      scope["d"] = 1;
-    });
+    // this.Vars.forEach((Var) => {
+    scope["d"] = 1;
+    // });
     this.Vars.forEach((Var) => {
       scope[Var.LatexForm] = 1;
     });
@@ -139,6 +139,7 @@ export default class Model {
 
     for (let i = 0; i < textEqns.length; i++) {
       try {
+        console.log(textEqns[i],scope)
         evaluate(textEqns[i], scope);
       } catch (error) {
         invalidIndex.push(i);
