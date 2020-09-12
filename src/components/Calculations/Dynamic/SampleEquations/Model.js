@@ -5,6 +5,7 @@ import DEFAULTVARSFORMODEL from "./DEFAULTVARS";
 import DEFAULTEQUATIONSNEW from "./DEFAULTEQUATIONSnew";
 import DEFAULTMODELCONFIGNew from "../../../../containers/Lab/LinearCoupled/DefaultGraphConfignew";
 import React from "react";
+import texFromExpression from '../../../toLatexCoverter'
 
 import MyErrorMessage from "../../../UI/MyErrorMessage/CustomizedErrorMessage";
 import axios from "axios";
@@ -50,16 +51,18 @@ export default class Model {
         "}{d" +
         dbModel.Vars.find((Var) => Var.VarType === "Independent").LatexForm +
         "}=",
-      latexEqn: parse(
-        parse(eqnObj.textEqn).toString({
-          // implicit: "hide",
-          // parenthesis: "auto",
-        })
-        // \frac{dY_1}{dx}=
-      ).toTex({
-        // parenthesis: "auto",
-        // implicit: "hide",
-      }),
+
+      latexEqn:eqnObj.textEqn,
+      // latexEqn: parse(
+      //   parse(eqnObj.textEqn).toString({
+      //     // implicit: "hide",
+      //     // parenthesis: "auto",
+      //   })
+      //   // \frac{dY_1}{dx}=
+      // ).toTex({
+      //   // parenthesis: "auto",
+      //   // implicit: "hide",
+      // }),
       textEqn: eqnObj.textEqn,
       // parsedEqn: simplify(parse(eqnObj.textEqn)),
       errorMessage: null,

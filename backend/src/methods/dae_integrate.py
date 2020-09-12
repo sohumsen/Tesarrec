@@ -72,7 +72,7 @@ def dae_integrate(model_obj):
         )
         for i in range(len(dep_names)):
             letter = dep_names[i]
-            new_eqn = new_eqn.replace("d" + letter, letter)
+            new_eqn=new_eqn.replace("d"+letter,letter)
 
         clean_eqn.append(new_eqn)
 
@@ -84,6 +84,8 @@ def dae_integrate(model_obj):
     for i in range(len(variables_list)):
         exec(variables_list[i], globals(), locals())
 
+    print(clean_eqn)
+
     for i in range(len(clean_eqn)):
         m.Equation(eval(str(clean_eqn[i])))
 
@@ -92,16 +94,19 @@ def dae_integrate(model_obj):
 
     # m.open_folder()
     solution_arr=[]
-    solution_arr.append(m.time.tolist())
     for i in range(len(dep_names)):
         # print(dep_names[i])
         # solution_arr.append(exec(dep_names[i]+".value"))
         # print(dep_names[i]+".value")
         exec("solution_arr.append("+dep_names[i]+".value)")
-        
+    solution_arr.append(m.time.tolist())
+
     print(solution_arr)
+    solution_arr=np.transpose(solution_arr)
+    print(solution_arr)
+
     # print("######################################")
     # exec("print(S.value, E.value, I.value, R.value)")
     # print("######################################")
 
-    return solution_arr
+    return solution_arr.tolist()

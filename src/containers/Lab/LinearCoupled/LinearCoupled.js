@@ -19,6 +19,7 @@ import FileUpload from "../../../components/UI/FileUpload/FileUpload";
 import Model from "../../../components/Calculations/Dynamic/SampleEquations/Model";
 import Draggable from "react-draggable";
 import DBAccess from "../DBAccess";
+import Spinner from "../../../components/UI/Skeleton/Spinner";
 
 class LinearCoupled extends Component {
   /**
@@ -36,6 +37,7 @@ class LinearCoupled extends Component {
       "Select a model to get started",
     ],
     typistIndex: 0,
+    loading:false,
     showMathQuillBox: true,
 
     modelObj: { Eqns: [], Vars: [], Config: {}, meta: {} }, // This hack is required to handle the modelObj default state
@@ -191,78 +193,82 @@ class LinearCoupled extends Component {
 
     this.setState({ modelObj: modelObj });
   };
+
   MATHQUILL_handleInputSubmit = (event) => {
-    event.preventDefault();
-    let newEqns = [];
-    this.getDAESolution()
-
-    let invalidIndex = this.state.modelObj.validateExpressions();
-
-    for (let i = 0; i < this.state.modelObj.Eqns.length; i++) {
-      const eqn = this.state.modelObj.Eqns[i];
-
-      if (invalidIndex.includes(i)) {
-        eqn.errorMessage = <MyErrorMessage />;
-        newEqns.push(eqn);
-      } else {
-        eqn.errorMessage = null;
-        eqn.parsedEqn = simplify(parse(eqn.textEqn));
-        newEqns.push(eqn);
-      }
-    }
-    let aModel = this.state.modelObj;
-
-    if (invalidIndex.length === 0) {
-      //valid
-
-      let newEqns2 = this.state.modelObj.insertDifferentialIntoText(newEqns);
-      // this.getODESolution()
-      if (
-        newEqns2.some((eqn) => eqn.errorMessage !== null) ||
-        this.state.modelObj.Vars.some((Var) => Var.errorMessage !== null)
-      ) {
-        //invalid
-        aModel.Config.calculate = false;
-        aModel.Eqns = newEqns2;
-        let msg = [
-          <p>
-            ERROR: Please correct the equations or vars highlighted to be able
-            to solve the model"
-          </p>,
-        ];
-        let consoleMessages = [...this.state.consoleMessages];
-        consoleMessages.push(msg);
-        this.setState({ consoleMessages: msg });
-      } else {
-        aModel.Config.calculate = true;
-        let msg = [<p>Calculating...</p>];
-        let consoleMessages = [...this.state.consoleMessages];
-        consoleMessages.push(msg);
-        this.setState({ consoleMessages: msg });
-        aModel.Eqns = newEqns2;
-      }
-    } else {
-      aModel.Config.calculate = false;
-    }
-
-    let allPossibleAxes = this.state.modelObj.Vars.filter(
-      (Var) => Var.VarType === "Independent" || Var.VarType === "Dependent"
-    ).map((Var) => Var.LatexForm);
-    let yAxis = this.state.modelObj.Config.yAxis;
-    let xAxis = this.state.modelObj.Config.xAxis;
-
-    if (!allPossibleAxes.includes(xAxis)) {
-      xAxis = allPossibleAxes[0];
-    }
-    if (!allPossibleAxes.includes(yAxis)) {
-      yAxis = allPossibleAxes[0];
-    }
-
-    aModel.Config.yAxis = yAxis;
-    aModel.Config.xAxis = xAxis;
-
-    this.setState({ modelObj: aModel });
+    this.getDAESolution();
   };
+  // MATHQUILL_handleInputSubmit = (event) => {
+  //   event.preventDefault();
+  //   let newEqns = [];
+  //   this.getDAESolution()
+
+  //   let invalidIndex = this.state.modelObj.validateExpressions();
+
+  //   for (let i = 0; i < this.state.modelObj.Eqns.length; i++) {
+  //     const eqn = this.state.modelObj.Eqns[i];
+
+  //     if (invalidIndex.includes(i)) {
+  //       eqn.errorMessage = <MyErrorMessage />;
+  //       newEqns.push(eqn);
+  //     } else {
+  //       eqn.errorMessage = null;
+  //       eqn.parsedEqn = simplify(parse(eqn.textEqn));
+  //       newEqns.push(eqn);
+  //     }
+  //   }
+  //   let aModel = this.state.modelObj;
+
+  //   if (invalidIndex.length === 0) {
+  //     //valid
+
+  //     let newEqns2 = this.state.modelObj.insertDifferentialIntoText(newEqns);
+  //     // this.getODESolution()
+  //     if (
+  //       newEqns2.some((eqn) => eqn.errorMessage !== null) ||
+  //       this.state.modelObj.Vars.some((Var) => Var.errorMessage !== null)
+  //     ) {
+  //       //invalid
+  //       aModel.Config.calculate = false;
+  //       aModel.Eqns = newEqns2;
+  //       let msg = [
+  //         <p>
+  //           ERROR: Please correct the equations or vars highlighted to be able
+  //           to solve the model"
+  //         </p>,
+  //       ];
+  //       let consoleMessages = [...this.state.consoleMessages];
+  //       consoleMessages.push(msg);
+  //       this.setState({ consoleMessages: msg });
+  //     } else {
+  //       aModel.Config.calculate = true;
+  //       let msg = [<p>Calculating...</p>];
+  //       let consoleMessages = [...this.state.consoleMessages];
+  //       consoleMessages.push(msg);
+  //       this.setState({ consoleMessages: msg });
+  //       aModel.Eqns = newEqns2;
+  //     }
+  //   } else {
+  //     aModel.Config.calculate = false;
+  //   }
+
+  //   let allPossibleAxes = this.state.modelObj.Vars.filter(
+  //     (Var) => Var.VarType === "Independent" || Var.VarType === "Dependent"
+  //   ).map((Var) => Var.LatexForm);
+  //   let yAxis = this.state.modelObj.Config.yAxis;
+  //   let xAxis = this.state.modelObj.Config.xAxis;
+
+  //   if (!allPossibleAxes.includes(xAxis)) {
+  //     xAxis = allPossibleAxes[0];
+  //   }
+  //   if (!allPossibleAxes.includes(yAxis)) {
+  //     yAxis = allPossibleAxes[0];
+  //   }
+
+  //   aModel.Config.yAxis = yAxis;
+  //   aModel.Config.xAxis = xAxis;
+
+  //   this.setState({ modelObj: aModel });
+  // };
 
   ITEMS_remove = (id, itemType) => {
     let modelObj = this.state.modelObj;
@@ -518,6 +524,11 @@ class LinearCoupled extends Component {
   };
   getDAESolution = () => {
     let modelObj = this.state.modelObj;
+    modelObj.Config.calculate = true;
+    // modelObj.solutions.calcedSolution = [];
+
+
+    this.setState({ modelObj: modelObj, loading: true });
 
     fetch("http://127.0.0.1:8080/solve_dae", {
       method: "POST",
@@ -532,16 +543,14 @@ class LinearCoupled extends Component {
       })
       .then((json) => {
         modelObj.solutions.calcedSolution = json;
-        
-        this.setState({ modelObj: modelObj });
+
+        this.setState({ modelObj: modelObj, loading: false });
         return json;
       })
       .catch((err) => console.log(err));
   };
 
-
   GRAPH_renderCalced = (calcedSolution) => {
-
     if (calcedSolution !== null && calcedSolution !== undefined) {
       return (
         <div key="Graph">
@@ -682,6 +691,7 @@ class LinearCoupled extends Component {
               }}
               modelObj={this.state.modelObj}
             />
+            {this.state.loading?<Spinner/>:null}
 
             {this.GRAPH_renderCalced(
               this.state.modelObj.solutions.calcedSolution

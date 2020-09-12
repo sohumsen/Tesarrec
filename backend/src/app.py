@@ -26,8 +26,8 @@ def solve_ode():
 def solve_dae():
     model_obj = request.get_json()
     solution = dae_integrate(model_obj)
-
     return jsonify(solution)
+
 
 
 if __name__ == "__main__":
