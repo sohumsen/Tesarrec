@@ -529,6 +529,7 @@ class LinearCoupled extends Component {
 
 
     this.setState({ modelObj: modelObj, loading: true });
+    
 
     fetch("http://127.0.0.1:8080/solve_dae", {
       method: "POST",
