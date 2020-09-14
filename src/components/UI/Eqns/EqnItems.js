@@ -13,7 +13,7 @@ const EqnItems = (props) => {
         // id={Eqn.id}
         disabledRemoveButton={props.Eqns.length === 1}
         removeItem={() => props.removeItem(Eqn.id, "Eqns")}
-        DByDLatex={Eqn.DByDLatex}
+        LHSLatexEqn={Eqn.LHSLatexEqn}
         LatexEqn={Eqn.latexEqn}
         TextEqn={Eqn.textEqn}
 
@@ -22,6 +22,7 @@ const EqnItems = (props) => {
         // mathquillDidMount={props.mathquillDidMount(Eqn.id, "Eqns")}
         handleTextEqnInputChange={props.handleTextEqnInputChange(Eqn.id)}
         handleMathQuillInputChange={props.handleMathQuillInputChange(Eqn.id, "Eqns")}
+        handleLHSEqnInputChange={props.handleMathQuillInputChange(Eqn.id, "LHSEqns")}
       />
     );
   });

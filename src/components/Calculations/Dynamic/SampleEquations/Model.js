@@ -45,7 +45,7 @@ export default class Model {
     this.Eqns = dbModel.Eqns.map((eqnObj, i) => ({
       id: eqnObj.lineName + i,
       lineName: eqnObj.lineName,
-      DByDLatex:
+      LHSLatexEqn:
         "\\frac{d" +
         eqnObj.lineName +
         "}{d" +
@@ -142,7 +142,6 @@ export default class Model {
 
     for (let i = 0; i < textEqns.length; i++) {
       try {
-        console.log(textEqns[i],scope)
         evaluate(textEqns[i], scope);
       } catch (error) {
         invalidIndex.push(i);
@@ -312,6 +311,14 @@ export default class Model {
     }
     return allEqns;
   };
+
+  solveDiffEqns = () => { 
+    console.log(this.Vars)
+    let solution=NewDiffEquationSolver({modelObj:this})
+    this.solutions.calcedSolution = solution
+    return solution
+
+  }
 
   getTimeTaken = () => {
     let t_0 = performance.now();

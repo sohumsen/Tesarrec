@@ -1,11 +1,12 @@
 from gekko import GEKKO
 import numpy as np
+from pylatexenc.latex2text import LatexNodes2Text
 
 
 def dae_integrate(model_obj):
+    # eqnlooks like ["da/dt=a+t"...]
 
     m = GEKKO()
-
 
     num_of_cycles = int(model_obj["Config"]["numOfCycles"])
 
@@ -20,7 +21,7 @@ def dae_integrate(model_obj):
             m.time = np.linspace(
                 var["VarCurrent"],
                 num_of_cycles * float(model_obj["Config"]["h"]),
-                num_of_cycles+1,
+                num_of_cycles + 1,
             )
             indep_latex = var["LatexForm"]
 
@@ -63,23 +64,39 @@ def dae_integrate(model_obj):
 
     clean_eqn = []
     for i in range(len(model_obj["Eqns"])):
-        new_eqn = (
-            model_obj["Eqns"][i]["textEqn"]
-            .replace("^", "**")
-            .replace("e", str(np.exp(1)))
+        # print(
+        #     LatexNodes2Text().latex_to_text( model_obj["Eqns"][i]["LHSLatexEqn"])
+        # )
+
+        first_bit = (
+            (LatexNodes2Text().latex_to_text(model_obj["Eqns"][i]["LHSLatexEqn"]))
             .replace("/d" + indep_latex, ".dt()")
             .replace("=", "==")
         )
+
+        second_bit = (
+            model_obj["Eqns"][i]["textEqn"]
+            .replace("^", "**")
+            .replace("e", str(np.exp(1)))
+            # .replace("/d" + indep_latex, ".dt()")
+        )
+        # new_eqn = (
+        #     model_obj["Eqns"][i]["textEqn"]
+        #     .replace("^", "**")
+        #     .replace("e", str(np.exp(1)))
+        #     .replace("/d" + indep_latex, ".dt()")
+        #     .replace("=", "==")
+        # )
         for i in range(len(dep_names)):
             letter = dep_names[i]
-            new_eqn=new_eqn.replace("d"+letter,letter)
+            first_bit = first_bit.replace("d" + letter, letter)
+
+        new_eqn = first_bit + second_bit
 
         clean_eqn.append(new_eqn)
 
-
     m.options.IMODE = 7
     m.options.NODES = 3
-
 
     for i in range(len(variables_list)):
         exec(variables_list[i], globals(), locals())
@@ -93,17 +110,15 @@ def dae_integrate(model_obj):
     # plt.plot(x)
 
     # m.open_folder()
-    solution_arr=[]
+    solution_arr = []
     for i in range(len(dep_names)):
         # print(dep_names[i])
         # solution_arr.append(exec(dep_names[i]+".value"))
         # print(dep_names[i]+".value")
-        exec("solution_arr.append("+dep_names[i]+".value)")
+        exec("solution_arr.append(" + dep_names[i] + ".value)")
     solution_arr.append(m.time.tolist())
 
-    print(solution_arr)
-    solution_arr=np.transpose(solution_arr)
-    print(solution_arr)
+    solution_arr = np.transpose(solution_arr)
 
     # print("######################################")
     # exec("print(S.value, E.value, I.value, R.value)")

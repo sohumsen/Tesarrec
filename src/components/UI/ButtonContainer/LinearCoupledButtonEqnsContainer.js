@@ -6,6 +6,7 @@ import { Tooltip,  Paper } from "@material-ui/core";
 import RestoreIcon from "@material-ui/icons/Restore";
 import { green } from "@material-ui/core/colors";
 import TextFormatIcon from '@material-ui/icons/TextFormat';
+import DnsIcon from '@material-ui/icons/Dns';
 const LinearCoupledButtonEqnsContainer = (props) => {
   return (
     <Paper>
@@ -34,7 +35,7 @@ const LinearCoupledButtonEqnsContainer = (props) => {
           </IconButton>
         </span>
       </Tooltip>
-      <Tooltip title="Show Text box" placement="top" arrow>
+      <Tooltip title="Text Equations" placement="top" arrow>
         <span>
           <IconButton
             disabled={props.Eqns.length === 0}
@@ -43,6 +44,19 @@ const LinearCoupledButtonEqnsContainer = (props) => {
             onClick={props.handleChangeShowMathQuillBox}
           >
             <TextFormatIcon  />
+          </IconButton>
+        </span>
+      </Tooltip>
+
+      <Tooltip title="Use Remote Server" placement="top" arrow>
+        <span>
+          <IconButton
+            disabled={props.Eqns.length === 0}
+            edge="end"
+            aria-label="Remote"
+            onClick={props.handleChangeLocalToServer}
+          >
+            <DnsIcon  />
           </IconButton>
         </span>
       </Tooltip>

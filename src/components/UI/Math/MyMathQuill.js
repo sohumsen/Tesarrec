@@ -7,33 +7,18 @@ addStyles();
 const MyMathQuill = (props) => {
   return (
     <div>
-      <StaticMathField style={{ fontSize: "14px" }}>
-        {props.firstBit}
-      </StaticMathField>
-
+      <EditableMathField
+        style={{ fontSize: "14px" }}
+        latex={props.firstBit}
+        // mathquillDidMount={(mathField) =>
+        // }
+        onChange={(mathField) => props.onLHSInputChange(mathField)}
+      />
+      &nbsp;&nbsp;&nbsp;
       {!props.NoEdit ? (
         <EditableMathField
-          // config={{
-          //   substituteTextarea: function () {
-          //     return document.createElement("textarea");
-          //   },
-          //   handlers: {
-          //     upOutOf: (mathField) => {
-          //     },
-          //     selectOutOf: (direction,mathField) => {
-          //     },
-          //     moveOutOf: (mathField, dir, MQ) => {
-
-          //       if (dir === MQ.L) {
-          //         return null;
-          //       }
-          //     },
-          //   },
-          // }}
-          // style={{ width: props.width }}
-          // style={{ fontSize: props.fontSize }}
           style={props.style}
-          latex={props.latex} // Initial latex value for the input field
+          latex={props.secondBit} // Initial latex value for the input field
           // mathquillDidMount={(mathField) =>
           // }
           onChange={(mathField) => props.onInputChange(mathField)}

@@ -30,7 +30,7 @@ describe("<LinearCoupledDiffEqns/>", () => {
           {
             id: "qwert",
             line: "a",
-            DByDLatex: "\\frac{da}{dt}=",
+            LHSLatexEqn: "\\frac{da}{dt}=",
             LatexEqn: "-\\frac{0.09ab}{0.103+a}-\\frac{0.84ac}{0.425+a}",
             TextEqn: "-(0.09*a*b)/(0.103+a)-(0.84*a*c)/(0.425+a)",
             errorMessage: null,

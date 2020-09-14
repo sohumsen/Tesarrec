@@ -36,8 +36,8 @@ class LinearCoupled extends Component {
       "Welcome to ModelBench!",
       "Select a model to get started",
     ],
-    typistIndex: 0,
-    loading:false,
+    localSolver: true, // this flag determines if we are using JS or remote Python Server
+    completed: false, // onky relevant for remote Python server
     showMathQuillBox: true,
 
     modelObj: { Eqns: [], Vars: [], Config: {}, meta: {} }, // This hack is required to handle the modelObj default state
@@ -45,6 +45,9 @@ class LinearCoupled extends Component {
   };
 
   static getDerivedStateFromProps(props, state) {
+    /* This can be called by children of LinearCoupled ie ModelBench or Graph / GraphConfig/VariableItems/EquationItems
+     */
+
     if (props.modelId !== state.modelId) {
       let newModel = new Model(
         {
@@ -101,174 +104,192 @@ class LinearCoupled extends Component {
   };
 
   MATHQUILL_handleInputChange = (id, itemType) => (mathField) => {
-    let items = this.state.modelObj[itemType];
+    // When editing LHS of equations, we need to handle it and
+    // console.log(id, itemType, mathField.latex());
+    let modelObj = this.state.modelObj;
+    let items = this.state.modelObj["Eqns"];
     let idx = items.findIndex((e) => {
       return e.id === id;
     });
     let item = items[idx];
 
-    if (itemType === "Eqns") {
-      item.textEqn = mathField.text();
-      item.latexEqn = mathField.latex();
-    } else {
-      let modelObj = this.state.modelObj;
-
-      let Eqns = this.state.modelObj.Eqns;
-
-      if (item.VarType === "Dependent") {
-        //TODO rename var for Vars the LatexForm can be y_1 or y2 which is being compared to eqn linename
-        let index = Eqns.findIndex(
-          (Eqn) => Eqn.lineName === this.state.modelObj.Vars[idx].LatexForm
-        );
-
-        let independentLatex = this.state.modelObj.Vars.find(
-          (Var) => Var.VarType === "Independent"
-        ).LatexForm;
-        Eqns[index].DByDLatex =
-          "\\frac{d" + mathField.latex() + "}{d" + independentLatex + "}=";
-        Eqns[index].lineName = mathField.latex();
-
-        modelObj.Eqns = Eqns;
-      } else if (item.VarType === "Independent") {
-        Eqns.forEach(
-          (Eqn) =>
-            (Eqn.DByDLatex =
-              "\\frac{d" + Eqn.lineName + "}{d" + mathField.latex() + "}=")
-        );
-      }
-
-      // this.setState({modelObj:modelObj})
-
-      // for (let i = 0; i < Eqns.length; i++) {
-      //   let textEqn = Eqns[i].textEqn
-      //     .split(this.state.modelObj.Vars[idx].LatexForm) //find
-      //     .join(mathField.text()); //replace
-      //   // let txt2 = this.state.modelObj.Vars[idx].LatexForm.slice(0, 1) + "\\" + this.state.modelObj.Vars[idx].LatexForm.slice(1);
-      //   // let txt3 = mathField.latex().slice(0, 1) + "\\" + mathField.latex().slice(1);
-
-      //   // let latexEqn = Eqns[i].latexEqn
-      //   //   .split(txt2)
-      //   //   .join(txt3);
-
-      //   Eqns[i].latexEqn = parse(
-      //     parse(textEqn).toString({
-      //       implicit: "hide",
-      //       parenthesis: "auto",
-      //     })
-      //     // \frac{dY_1}{dx}=
-      //   ).toTex({
-      //     parenthesis: "auto",
-      //     implicit: "hide",
-      //   });
-      //   // Eqns[i].textEqn = textEqn;
-      // }
-
-      // }
-      item.LatexForm = mathField.latex();
+    if (itemType === "LHSEqns") {
+      item.LHSLatexEqn = mathField.latex();
       items[idx] = item;
-      let invalidIdx = [];
-      // Check if item is a dup
-      for (let i = 0; i < items.length; i++) {
-        for (let j = 0; j < items.length; j++) {
-          if (i !== j) {
-            if (items[i].LatexForm === items[j].LatexForm) {
-              invalidIdx.push(i, j);
-            } else {
-              items[i].errorMessage = null;
-              items[j].errorMessage = null;
+      modelObj["Eqns"] = items;
+      modelObj.Config.calculate = false;
+
+      this.setState({ modelObj: modelObj });
+    } else {
+      if (itemType === "Eqns") {
+        item.textEqn = mathField.text();
+        item.latexEqn = mathField.latex();
+      } else {
+        // Editing the Vars
+        // let modelObj = this.state.modelObj;
+        let items = this.state.modelObj["Vars"];
+        let idx = items.findIndex((e) => {
+          return e.id === id;
+        });
+        let item = items[idx];
+
+        let Eqns = this.state.modelObj.Eqns;
+
+        if (item.VarType === "Dependent") {
+          //TODO rename var for Vars the LatexForm can be y_1 or y2 which is being compared to eqn linename
+          let index = Eqns.findIndex(
+            (Eqn) => Eqn.lineName === this.state.modelObj.Vars[idx].LatexForm
+          );
+
+          let independentLatex = this.state.modelObj.Vars.find(
+            (Var) => Var.VarType === "Independent"
+          ).LatexForm;
+          Eqns[index].LHSLatexEqn =
+            "\\frac{d" + mathField.latex() + "}{d" + independentLatex + "}=";
+          Eqns[index].lineName = mathField.latex();
+
+          modelObj.Eqns = Eqns;
+        } else if (item.VarType === "Independent") {
+          Eqns.forEach(
+            (Eqn) =>
+              (Eqn.LHSLatexEqn =
+                "\\frac{d" + Eqn.lineName + "}{d" + mathField.latex() + "}=")
+          );
+        }
+
+        // this.setState({modelObj:modelObj})
+
+        // for (let i = 0; i < Eqns.length; i++) {
+        //   let textEqn = Eqns[i].textEqn
+        //     .split(this.state.modelObj.Vars[idx].LatexForm) //find
+        //     .join(mathField.text()); //replace
+        //   // let txt2 = this.state.modelObj.Vars[idx].LatexForm.slice(0, 1) + "\\" + this.state.modelObj.Vars[idx].LatexForm.slice(1);
+        //   // let txt3 = mathField.latex().slice(0, 1) + "\\" + mathField.latex().slice(1);
+
+        //   // let latexEqn = Eqns[i].latexEqn
+        //   //   .split(txt2)
+        //   //   .join(txt3);
+
+        //   Eqns[i].latexEqn = parse(
+        //     parse(textEqn).toString({
+        //       implicit: "hide",
+        //       parenthesis: "auto",
+        //     })
+        //     // \frac{dY_1}{dx}=
+        //   ).toTex({
+        //     parenthesis: "auto",
+        //     implicit: "hide",
+        //   });
+        //   // Eqns[i].textEqn = textEqn;
+        // }
+
+        // }
+        item.LatexForm = mathField.latex();
+        items[idx] = item;
+        let invalidIdx = [];
+        // Check if item is a dup
+        for (let i = 0; i < items.length; i++) {
+          for (let j = 0; j < items.length; j++) {
+            if (i !== j) {
+              if (items[i].LatexForm === items[j].LatexForm) {
+                invalidIdx.push(i, j);
+              } else {
+                items[i].errorMessage = null;
+                items[j].errorMessage = null;
+              }
             }
           }
         }
+        [...new Set(invalidIdx)].forEach(
+          (idx) => (items[idx].errorMessage = "Err")
+        );
+        items[idx] = item;
+        modelObj[itemType] = items;
+        modelObj.Config.calculate = false;
+
+        this.setState({ modelObj: modelObj });
       }
-      [...new Set(invalidIdx)].forEach(
-        (idx) => (items[idx].errorMessage = "Err")
-      );
     }
-
-    items[idx] = item;
-
-    let modelObj = this.state.modelObj;
-    modelObj[itemType] = items;
-    modelObj.Config.calculate = false;
-
-    this.setState({ modelObj: modelObj });
   };
 
   MATHQUILL_handleInputSubmit = (event) => {
-    this.getDAESolution();
+    event.preventDefault();
+    let newEqns = [];
+    let invalidIndex = this.state.modelObj.validateExpressions();
+
+    for (let i = 0; i < this.state.modelObj.Eqns.length; i++) {
+      const eqn = this.state.modelObj.Eqns[i];
+
+      if (invalidIndex.includes(i)) {
+        eqn.errorMessage = <MyErrorMessage />;
+        newEqns.push(eqn);
+      } else {
+        eqn.errorMessage = null;
+        eqn.parsedEqn = simplify(parse(eqn.textEqn));
+        newEqns.push(eqn);
+      }
+    }
+    let aModel = this.state.modelObj;
+
+    if (invalidIndex.length === 0) {
+      //valid
+      let newEqns2 = this.state.modelObj.insertDifferentialIntoText(newEqns);
+      if (
+        newEqns2.some((eqn) => eqn.errorMessage !== null) ||
+        this.state.modelObj.Vars.some((Var) => Var.errorMessage !== null)
+      ) {
+        //invalid
+        aModel.Config.calculate = false;
+        aModel.Eqns = newEqns2;
+        let msg = [
+          <p>
+            ERROR: Please correct the equations or vars highlighted to be able
+            to solve the model"
+          </p>,
+        ];
+        let consoleMessages = [...this.state.consoleMessages];
+        consoleMessages.push(msg);
+        this.setState({ consoleMessages: msg });
+      } else {
+        aModel.Eqns = newEqns2;
+        aModel.Config.calculate = true;
+        let msg = [<p>Calculating...</p>];
+
+        if (this.state.localSolver) {
+          let solution=this.state.modelObj.solveDiffEqns();
+          aModel.solutions.calcedSolution=solution
+          this.setState({modelObj:aModel})
+        } else {
+          this.getDAESolution();
+          // this.getODESolution()
+        }
+
+        let consoleMessages = [...this.state.consoleMessages];
+        consoleMessages.push(msg);
+        this.setState({ consoleMessages: msg });
+      }
+    } else {
+      aModel.Config.calculate = false;
+    }
+
+    let allPossibleAxes = this.state.modelObj.Vars.filter(
+      (Var) => Var.VarType === "Independent" || Var.VarType === "Dependent"
+    ).map((Var) => Var.LatexForm);
+    let yAxis = this.state.modelObj.Config.yAxis;
+    let xAxis = this.state.modelObj.Config.xAxis;
+
+    if (!allPossibleAxes.includes(xAxis)) {
+      xAxis = allPossibleAxes[0];
+    }
+    if (!allPossibleAxes.includes(yAxis)) {
+      yAxis = allPossibleAxes[0];
+    }
+
+    aModel.Config.yAxis = yAxis;
+    aModel.Config.xAxis = xAxis;
+
+    this.setState({ modelObj: aModel });
   };
-  // MATHQUILL_handleInputSubmit = (event) => {
-  //   event.preventDefault();
-  //   let newEqns = [];
-  //   this.getDAESolution()
-
-  //   let invalidIndex = this.state.modelObj.validateExpressions();
-
-  //   for (let i = 0; i < this.state.modelObj.Eqns.length; i++) {
-  //     const eqn = this.state.modelObj.Eqns[i];
-
-  //     if (invalidIndex.includes(i)) {
-  //       eqn.errorMessage = <MyErrorMessage />;
-  //       newEqns.push(eqn);
-  //     } else {
-  //       eqn.errorMessage = null;
-  //       eqn.parsedEqn = simplify(parse(eqn.textEqn));
-  //       newEqns.push(eqn);
-  //     }
-  //   }
-  //   let aModel = this.state.modelObj;
-
-  //   if (invalidIndex.length === 0) {
-  //     //valid
-
-  //     let newEqns2 = this.state.modelObj.insertDifferentialIntoText(newEqns);
-  //     // this.getODESolution()
-  //     if (
-  //       newEqns2.some((eqn) => eqn.errorMessage !== null) ||
-  //       this.state.modelObj.Vars.some((Var) => Var.errorMessage !== null)
-  //     ) {
-  //       //invalid
-  //       aModel.Config.calculate = false;
-  //       aModel.Eqns = newEqns2;
-  //       let msg = [
-  //         <p>
-  //           ERROR: Please correct the equations or vars highlighted to be able
-  //           to solve the model"
-  //         </p>,
-  //       ];
-  //       let consoleMessages = [...this.state.consoleMessages];
-  //       consoleMessages.push(msg);
-  //       this.setState({ consoleMessages: msg });
-  //     } else {
-  //       aModel.Config.calculate = true;
-  //       let msg = [<p>Calculating...</p>];
-  //       let consoleMessages = [...this.state.consoleMessages];
-  //       consoleMessages.push(msg);
-  //       this.setState({ consoleMessages: msg });
-  //       aModel.Eqns = newEqns2;
-  //     }
-  //   } else {
-  //     aModel.Config.calculate = false;
-  //   }
-
-  //   let allPossibleAxes = this.state.modelObj.Vars.filter(
-  //     (Var) => Var.VarType === "Independent" || Var.VarType === "Dependent"
-  //   ).map((Var) => Var.LatexForm);
-  //   let yAxis = this.state.modelObj.Config.yAxis;
-  //   let xAxis = this.state.modelObj.Config.xAxis;
-
-  //   if (!allPossibleAxes.includes(xAxis)) {
-  //     xAxis = allPossibleAxes[0];
-  //   }
-  //   if (!allPossibleAxes.includes(yAxis)) {
-  //     yAxis = allPossibleAxes[0];
-  //   }
-
-  //   aModel.Config.yAxis = yAxis;
-  //   aModel.Config.xAxis = xAxis;
-
-  //   this.setState({ modelObj: aModel });
-  // };
 
   ITEMS_remove = (id, itemType) => {
     let modelObj = this.state.modelObj;
@@ -359,6 +380,8 @@ class LinearCoupled extends Component {
     Vars[idx] = Var;
 
     modelObj.Vars = Vars;
+    // this.getDAESolution()
+
     if (calculate) {
       modelObj.Config.calculate = false;
     }
@@ -427,7 +450,7 @@ class LinearCoupled extends Component {
     let EqnObj = {
       id: results[0].lineName,
       lineName: results[0].lineName,
-      DByDLatex:
+      LHSLatexEqn:
         "\\frac{d" + results[0].lineName + "}{d" + independentLatex + "}=",
       latexEqn: parse(
         parse(results[0].textEqn).toString({
@@ -522,14 +545,19 @@ class LinearCoupled extends Component {
       })
       .catch((err) => console.log(err));
   };
+
   getDAESolution = () => {
+    /**
+     * This makes a call to a python server with the equations
+     */
     let modelObj = this.state.modelObj;
     modelObj.Config.calculate = true;
     // modelObj.solutions.calcedSolution = [];
+    console.log(modelObj)
 
+    this.setState({ modelObj: modelObj, localSolver: false, completed: false });
 
-    this.setState({ modelObj: modelObj, loading: true });
-    
+    //Eqns frac MUST have "\\frac{da}{dt}"
 
     fetch("http://127.0.0.1:8080/solve_dae", {
       method: "POST",
@@ -537,7 +565,7 @@ class LinearCoupled extends Component {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(this.state.modelObj.returnConstructorObj()),
+      body: JSON.stringify(this.state.modelObj),
     })
       .then((response) => {
         return response.json();
@@ -545,7 +573,11 @@ class LinearCoupled extends Component {
       .then((json) => {
         modelObj.solutions.calcedSolution = json;
 
-        this.setState({ modelObj: modelObj, loading: false });
+        this.setState({
+          modelObj: modelObj,
+          localSolver: false,
+          completed: true,
+        });
         return json;
       })
       .catch((err) => console.log(err));
@@ -579,7 +611,14 @@ class LinearCoupled extends Component {
                   showMathQuillBox: !this.state.showMathQuillBox,
                 });
               }}
+              handleChangeLocalToServer={() => {
+                
+                this.setState({
+                  localSolver: !this.state.localSolver,
+                });
+              }}
             />
+            {this.state.localSolver?<p>using local</p>:<p>using python</p>}
             <EqnItems
               Eqns={this.state.modelObj.Eqns}
               removeItem={this.ITEMS_remove}
@@ -692,11 +731,15 @@ class LinearCoupled extends Component {
               }}
               modelObj={this.state.modelObj}
             />
-            {this.state.loading?<Spinner/>:null}
+            {/*if remote solver and not completed show the spinner*/}
 
-            {this.GRAPH_renderCalced(
+            {!this.state.localSolver && !this.state.completed ? (
+              <Spinner />
+            ) : null}
+
+            {this.state.completed || this.state.localSolver?this.GRAPH_renderCalced(
               this.state.modelObj.solutions.calcedSolution
-            )}
+            ):null}
           </div>
         ) : (
           <div className={classes.Graph} key="GraphButtons" />

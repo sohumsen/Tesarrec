@@ -38,7 +38,7 @@ class LinearCoupled extends Component {
       {
         id: "qwert",
         line: "a",
-        DByDLatex: "\\frac{da}{dt}=",
+        LHSLatexEqn: "\\frac{da}{dt}=",
         LatexEqn:
           "-\\frac{1.5abd}{\\left(0.5+a\\right)\\left(0.04+d\\right)}-\\frac{0.01ac}{0.1+a}",
         TextEqn: "-1.5*a*b*d/(0.5+a)/(0.04+d)-0.01*a*c/(0.1+a)",
@@ -48,7 +48,7 @@ class LinearCoupled extends Component {
         id: "yuiop",
         line: "b",
 
-        DByDLatex: "\\frac{db}{dt}=",
+        LHSLatexEqn: "\\frac{db}{dt}=",
         LatexEqn:
           "\\frac{0.2abd}{\\left(0.5+a\\right)\\left(0.04+d\\right)}-0.05b",
         TextEqn: "0.2*a*b*d/(0.5+a)/(0.04+d)-0.05*b",
@@ -58,7 +58,7 @@ class LinearCoupled extends Component {
         id: "asdfg",
         line: "c",
 
-        DByDLatex: "\\frac{dc}{dt}=",
+        LHSLatexEqn: "\\frac{dc}{dt}=",
         LatexEqn: "\\frac{0.1ac}{\\left(0.1+a\\right)}-0.05c",
         TextEqn: "0.1*a*c/(0.1+a)-0.05*c",
         errorMessage: null,
@@ -67,7 +67,7 @@ class LinearCoupled extends Component {
         id: "hjklz",
         line: "d",
 
-        DByDLatex: "\\frac{dd}{dt}=",
+        LHSLatexEqn: "\\frac{dd}{dt}=",
         LatexEqn:
           "-\\frac{1.5ad}{\\left(0.5+a\\right)\\left(0.04+d\\right)}-\\frac{0.34e^{0.3236t}}{b}",
         TextEqn: "-1.5*a*d/(0.5+a)/(0.04+d)-0.34*e^(0.3236*t)/b",
@@ -77,7 +77,7 @@ class LinearCoupled extends Component {
         id: "dfsf",
         line: "f",
 
-        DByDLatex: "\\frac{df}{dt}=",
+        LHSLatexEqn: "\\frac{df}{dt}=",
         LatexEqn:
           "-\\frac{1.3fgj}{\\left(0.5+f\\right)\\left(0.002+j\\right)}-\\frac{0.05fh}{0.5+f}",
         TextEqn: " -1.3*f*g*j/(0.5+f)/(0.002+j)-0.05*f*h/(0.5+f)",
@@ -87,7 +87,7 @@ class LinearCoupled extends Component {
         id: "klsdf",
         line: "g",
 
-        DByDLatex: "\\frac{dg}{dt}=",
+        LHSLatexEqn: "\\frac{dg}{dt}=",
         LatexEqn:
           "\\frac{0.18fgj}{\\left(0.5+f\\right)\\left(0.002+j\\right)}-0.13g",
         TextEqn: "0.18*f*g*j/(0.5+f)/(0.002+j)-0.13*g",
@@ -97,7 +97,7 @@ class LinearCoupled extends Component {
         id: "sdgfdg",
         line: "h",
 
-        DByDLatex: "\\frac{dh}{dt}=",
+        LHSLatexEqn: "\\frac{dh}{dt}=",
         LatexEqn: "\\frac{fh}{\\left(0.5+f\\right)}-0.14h",
         TextEqn: "f*h/(0.5+f)-0.14*h",
         errorMessage: null,
@@ -106,7 +106,7 @@ class LinearCoupled extends Component {
         id: "ewrtew",
         line: "j",
 
-        DByDLatex: "\\frac{dj}{dt}=",
+        LHSLatexEqn: "\\frac{dj}{dt}=",
         LatexEqn:
           "-\\frac{1.3fj}{\\left(0.5+f\\right)\\left(0.002+j\\right)}-\\frac{0.34e^{0.3236t}}{g}",
         TextEqn: "-1.3*f*j/(0.5+f)/(0.002+j)-0.34*e^(0.3236*t)/g",
@@ -116,7 +116,7 @@ class LinearCoupled extends Component {
         id: "sjmew",
         line: "k",
 
-        DByDLatex: "\\frac{dk}{dt}=",
+        LHSLatexEqn: "\\frac{dk}{dt}=",
         LatexEqn:
           "\\frac{1.3fj}{\\left(0.5+f\\right)\\left(0.002+j\\right)}+\\frac{0.34e^{0.3236t}}{g}",
         TextEqn: "1.3*f*j/(0.5+f)/(0.002+j)+0.34*e^(0.3236*t)/g",
@@ -236,7 +236,7 @@ class LinearCoupled extends Component {
         {
           id: "qwert",
           line: "a",
-          DByDLatex: "\\frac{da}{dt}=",
+          LHSLatexEqn: "\\frac{da}{dt}=",
           LatexEqn:
             "-\\frac{1.5abd}{\\left(0.5+a\\right)\\left(0.04+d\\right)}-\\frac{0.01ac}{0.1+a}",
           TextEqn: "-1.5*a*b*d/(0.5+a)/(0.04+d)-0.01*a*c/(0.1+a)",
@@ -246,7 +246,7 @@ class LinearCoupled extends Component {
           id: "yuiop",
           line: "b",
 
-          DByDLatex: "\\frac{db}{dt}=",
+          LHSLatexEqn: "\\frac{db}{dt}=",
           LatexEqn:
             "\\frac{0.2abd}{\\left(0.5+a\\right)\\left(0.04+d\\right)}-0.05b",
           TextEqn: "0.2*a*b*d/(0.5+a)/(0.04+d)-0.05*b",
@@ -256,7 +256,7 @@ class LinearCoupled extends Component {
           id: "asdfg",
           line: "c",
 
-          DByDLatex: "\\frac{dc}{dt}=",
+          LHSLatexEqn: "\\frac{dc}{dt}=",
           LatexEqn: "\\frac{0.1ac}{\\left(0.1+a\\right)}-0.05c",
           TextEqn: "0.1*a*c/(0.1+a)-0.05*c",
           errorMessage: null,
@@ -265,7 +265,7 @@ class LinearCoupled extends Component {
           id: "hjklz",
           line: "d",
 
-          DByDLatex: "\\frac{dd}{dt}=",
+          LHSLatexEqn: "\\frac{dd}{dt}=",
           LatexEqn:
             "-\\frac{1.5ad}{\\left(0.5+a\\right)\\left(0.04+d\\right)}-\\frac{0.34e^{0.3236t}}{b}",
           TextEqn: "-1.5*a*d/(0.5+a)/(0.04+d)-0.34*e^(0.3236*t)/b",
@@ -275,7 +275,7 @@ class LinearCoupled extends Component {
           id: "dfsf",
           line: "f",
 
-          DByDLatex: "\\frac{df}{dt}=",
+          LHSLatexEqn: "\\frac{df}{dt}=",
           LatexEqn:
             "-\\frac{1.3fgj}{\\left(0.5+f\\right)\\left(0.002+j\\right)}-\\frac{0.05fh}{0.5+f}",
           TextEqn: " -1.3*f*g*j/(0.5+f)/(0.002+j)-0.05*f*h/(0.5+f)",
@@ -285,7 +285,7 @@ class LinearCoupled extends Component {
           id: "klsdf",
           line: "g",
 
-          DByDLatex: "\\frac{dg}{dt}=",
+          LHSLatexEqn: "\\frac{dg}{dt}=",
           LatexEqn:
             "\\frac{0.18fgj}{\\left(0.5+f\\right)\\left(0.002+j\\right)}-0.13g",
           TextEqn: "0.18*f*g*j/(0.5+f)/(0.002+j)-0.13*g",
@@ -295,7 +295,7 @@ class LinearCoupled extends Component {
           id: "sdgfdg",
           line: "h",
 
-          DByDLatex: "\\frac{dh}{dt}=",
+          LHSLatexEqn: "\\frac{dh}{dt}=",
           LatexEqn: "\\frac{fh}{\\left(0.5+f\\right)}-0.14h",
           TextEqn: "f*h/(0.5+f)-0.14*h",
           errorMessage: null,
@@ -304,7 +304,7 @@ class LinearCoupled extends Component {
           id: "ewrtew",
           line: "j",
 
-          DByDLatex: "\\frac{dj}{dt}=",
+          LHSLatexEqn: "\\frac{dj}{dt}=",
           LatexEqn:
             "-\\frac{1.3fj}{\\left(0.5+f\\right)\\left(0.002+j\\right)}-\\frac{0.34e^{0.3236t}}{g}",
           TextEqn: "-1.3*f*j/(0.5+f)/(0.002+j)-0.34*e^(0.3236*t)/g",
@@ -314,7 +314,7 @@ class LinearCoupled extends Component {
           id: "sjmew",
           line: "k",
 
-          DByDLatex: "\\frac{dk}{dt}=",
+          LHSLatexEqn: "\\frac{dk}{dt}=",
           LatexEqn:
             "\\frac{1.3fj}{\\left(0.5+f\\right)\\left(0.002+j\\right)}+\\frac{0.34e^{0.3236t}}{g}",
           TextEqn: "1.3*f*j/(0.5+f)/(0.002+j)+0.34*e^(0.3236*t)/g",
@@ -328,7 +328,7 @@ class LinearCoupled extends Component {
       {
         id: "qwert",
         line: "a",
-        DByDLatex: "\\frac{da}{dt}=",
+        LHSLatexEqn: "\\frac{da}{dt}=",
         LatexEqn:
           "-\\frac{1.5abd}{\\left(0.5+a\\right)\\left(0.04+d\\right)}-\\frac{0.01ac}{0.1+a}",
         TextEqn: "-1.5*a*b*d/(0.5+a)/(0.04+d)-0.01*a*c/(0.1+a)",
@@ -338,7 +338,7 @@ class LinearCoupled extends Component {
         id: "yuiop",
         line: "b",
 
-        DByDLatex: "\\frac{db}{dt}=",
+        LHSLatexEqn: "\\frac{db}{dt}=",
         LatexEqn:
           "\\frac{0.2abd}{\\left(0.5+a\\right)\\left(0.04+d\\right)}-0.05b",
         TextEqn: "0.2*a*b*d/(0.5+a)/(0.04+d)-0.05*b",
@@ -348,7 +348,7 @@ class LinearCoupled extends Component {
         id: "asdfg",
         line: "c",
 
-        DByDLatex: "\\frac{dc}{dt}=",
+        LHSLatexEqn: "\\frac{dc}{dt}=",
         LatexEqn: "\\frac{0.1ac}{\\left(0.1+a\\right)}-0.05c",
         TextEqn: "0.1*a*c/(0.1+a)-0.05*c",
         errorMessage: null,
@@ -357,7 +357,7 @@ class LinearCoupled extends Component {
         id: "hjklz",
         line: "d",
 
-        DByDLatex: "\\frac{dd}{dt}=",
+        LHSLatexEqn: "\\frac{dd}{dt}=",
         LatexEqn:
           "-\\frac{1.5ad}{\\left(0.5+a\\right)\\left(0.04+d\\right)}-\\frac{0.34e^{0.3236t}}{b}",
         TextEqn: "-1.5*a*d/(0.5+a)/(0.04+d)-0.34*e^(0.3236*t)/b",
@@ -367,7 +367,7 @@ class LinearCoupled extends Component {
         id: "dfsf",
         line: "f",
 
-        DByDLatex: "\\frac{df}{dt}=",
+        LHSLatexEqn: "\\frac{df}{dt}=",
         LatexEqn:
           "-\\frac{1.3fgj}{\\left(0.5+f\\right)\\left(0.002+j\\right)}-\\frac{0.05fh}{0.5+f}",
         TextEqn: " -1.3*f*g*j/(0.5+f)/(0.002+j)-0.05*f*h/(0.5+f)",
@@ -377,7 +377,7 @@ class LinearCoupled extends Component {
         id: "klsdf",
         line: "g",
 
-        DByDLatex: "\\frac{dg}{dt}=",
+        LHSLatexEqn: "\\frac{dg}{dt}=",
         LatexEqn:
           "\\frac{0.18fgj}{\\left(0.5+f\\right)\\left(0.002+j\\right)}-0.13g",
         TextEqn: "0.18*f*g*j/(0.5+f)/(0.002+j)-0.13*g",
@@ -387,7 +387,7 @@ class LinearCoupled extends Component {
         id: "sdgfdg",
         line: "h",
 
-        DByDLatex: "\\frac{dh}{dt}=",
+        LHSLatexEqn: "\\frac{dh}{dt}=",
         LatexEqn: "\\frac{fh}{\\left(0.5+f\\right)}-0.14h",
         TextEqn: "f*h/(0.5+f)-0.14*h",
         errorMessage: null,
@@ -396,7 +396,7 @@ class LinearCoupled extends Component {
         id: "ewrtew",
         line: "j",
 
-        DByDLatex: "\\frac{dj}{dt}=",
+        LHSLatexEqn: "\\frac{dj}{dt}=",
         LatexEqn:
           "-\\frac{1.3fj}{\\left(0.5+f\\right)\\left(0.002+j\\right)}-\\frac{0.34e^{0.3236t}}{g}",
         TextEqn: "-1.3*f*j/(0.5+f)/(0.002+j)-0.34*e^(0.3236*t)/g",
@@ -406,7 +406,7 @@ class LinearCoupled extends Component {
         id: "sjmew",
         line: "k",
 
-        DByDLatex: "\\frac{dk}{dt}=",
+        LHSLatexEqn: "\\frac{dk}{dt}=",
         LatexEqn:
           "\\frac{1.3fj}{\\left(0.5+f\\right)\\left(0.002+j\\right)}+\\frac{0.34e^{0.3236t}}{g}",
         TextEqn: "1.3*f*j/(0.5+f)/(0.002+j)+0.34*e^(0.3236*t)/g",

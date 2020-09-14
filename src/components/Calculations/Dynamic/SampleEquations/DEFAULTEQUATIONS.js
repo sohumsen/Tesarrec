@@ -2,7 +2,7 @@ const DEFAULTEQUATIONS = [
     {
       id: "qwert",
       line: "a",
-      DByDLatex: "\\frac{da}{dt}=",
+      LHSLatexEqn: "\\frac{da}{dt}=",
       LatexEqn: "-\\frac{{K_1}ab}{{K_2}+a}-\\frac{{K_3}}ac{{K_4}+a}",
       TextEqn: "-(K_1*a*b)/(K_2+a)-(K_3)/(a)*c*K_4+a",
       errorMessage: null,
@@ -11,7 +11,7 @@ const DEFAULTEQUATIONS = [
       id: "yuiop",
       line: "b",
 
-      DByDLatex: "\\frac{db}{dt}=",
+      LHSLatexEqn: "\\frac{db}{dt}=",
       LatexEqn: "\\frac{{K_1}ab}{{K_3}+a}-{K_4}b",
       TextEqn: "(K_1*a*b)/(K_3+a)-K_4*b",
       errorMessage: null,
@@ -20,7 +20,7 @@ const DEFAULTEQUATIONS = [
       id: "asdfg",
       line: "c",
 
-      DByDLatex: "\\frac{dc}{dt}=",
+      LHSLatexEqn: "\\frac{dc}{dt}=",
       LatexEqn: "\\frac{K_2ac}{K_1+a}-K_4c",
       TextEqn: "(K_2*a*c)/(K_1+a)-K_4*c",
       errorMessage: null,
@@ -29,7 +29,7 @@ const DEFAULTEQUATIONS = [
       id: "hjklz",
       line: "d",
 
-      DByDLatex: "\\frac{dd}{dt}=",
+      LHSLatexEqn: "\\frac{dd}{dt}=",
       LatexEqn: "-\\frac{{K_1}}ab{{K_4}+a}-\\frac{{K_3}ac}{{K_2}+a}",
       TextEqn: "-(K_1*a*b)/(K_4+a)-(K_3*a*c)/(K_2+a)",
       errorMessage: null,
@@ -38,7 +38,7 @@ const DEFAULTEQUATIONS = [
       id: "dfsf",
       line: "f",
 
-      DByDLatex: "\\frac{df}{dt}=",
+      LHSLatexEqn: "\\frac{df}{dt}=",
       LatexEqn: "-\\frac{{K_1}}ab{{K_4}+a}-\\frac{{K_3}ac}{{K_2}+a}",
       TextEqn: "-(K_1*a*b)/(K_4+a)-(K_3*a*c)/(K_2+a)",
       errorMessage: null,
@@ -47,7 +47,7 @@ const DEFAULTEQUATIONS = [
       id: "klsdf",
       line: "g",
 
-      DByDLatex: "\\frac{dg}{dt}=",
+      LHSLatexEqn: "\\frac{dg}{dt}=",
       LatexEqn: "-\\frac{{K_1}}ab{{K_4}+a}-\\frac{{K_3}ac}{{K_2}+a}",
       TextEqn: "-(K_1*a*b)/(K_4+a)-(K_3*a*c)/(K_2+a)",
       errorMessage: null,
@@ -56,7 +56,7 @@ const DEFAULTEQUATIONS = [
       id: "sdgfdg",
       line: "h",
 
-      DByDLatex: "\\frac{dh}{dt}=",
+      LHSLatexEqn: "\\frac{dh}{dt}=",
       LatexEqn: "-\\frac{{K_1}}ab{{K_4}+a}-\\frac{{K_3}ac}{{K_2}+a}",
       TextEqn: "-(K_1*a*b)/(K_4+a)-(K_3*a*c)/(K_2+a)",
       errorMessage: null,
@@ -65,7 +65,7 @@ const DEFAULTEQUATIONS = [
       id: "ewrtew",
       line: "j",
 
-      DByDLatex: "\\frac{dj}{dt}=",
+      LHSLatexEqn: "\\frac{dj}{dt}=",
       LatexEqn: "-\\frac{{K_1}}ab{{K_4}+a}-\\frac{{K_3}ac}{{K_2}+a}",
       TextEqn: "-(K_1*a*b)/(K_4+a)-(K_3*a*c)/(K_2+a)",
       errorMessage: null,
@@ -74,7 +74,7 @@ const DEFAULTEQUATIONS = [
       id: "sjmew",
       line: "k",
 
-      DByDLatex: "\\frac{dk}{dt}=",
+      LHSLatexEqn: "\\frac{dk}{dt}=",
       LatexEqn: "-\\frac{{K_1}}ab{{K_4}+a}-\\frac{{K_3}ac}{{K_2}+a}",
       TextEqn: "-(K_1*a*b)/(K_4+a)-(K_3*a*c)/(K_2+a)",
       errorMessage: null,

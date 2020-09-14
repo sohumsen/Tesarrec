@@ -15,9 +15,11 @@ on go to new model, ask if they want to save
 change tree view
 on edit file name save update
 full screen modelbench
-make entire mathfield editable
-add dae solver
-
+siders dont change graph
+varitem cross fix to side
+error handling in python server
+frontend validation
+on change varitem, change lhs
 
 
 24th Jul - 7th Aug 

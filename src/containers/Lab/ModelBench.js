@@ -4,10 +4,13 @@ import ModelExplorer from "../../components/UI/FileController/ModelExplorer";
 import PublishedDialog from "../../components/UI/PublishedDialog/PublishedDialog";
 
 import classes from "./ModelBench.module.css";
-import DBAccess from './DBAccess'
+import DBAccess from "./DBAccess";
 import SolverAnalysis from "./SolverAnalysis/SolverAnalysis";
 import Model from "../../components/Calculations/Dynamic/SampleEquations/Model";
 import axios from "axios";
+import MathQuillTest from "../../components/UI/Math/MathQuillTest";
+import { FullScreen, useFullScreenHandle } from "react-full-screen";
+import FullScreenWrapper from "../../components/UI/FullScreenWrapper/FullScreenWrapper";
 
 class ModelBench extends Component {
   /**
@@ -290,62 +293,67 @@ class ModelBench extends Component {
       : (modelLinks = null);
 
     const nodeRef = React.createRef(null);
+
     return (
       // can u inject a background-color: ranmdom lookup color if DEVMODE=TRUE
 
-      <div className={classes.ModelBenchContainer}>
-        <div ref={nodeRef} className={classes.ModelBenchItemLeft}>
-          <div className={classes.ModelBenchItemLeftFileNav}>
-            {/* {this.state.loading ? <Skeleton /> : null} */}
-            {modelLinks}
-          </div>
+      <FullScreenWrapper>
+        <div className={classes.ModelBenchContainer}>
+          <div ref={nodeRef} className={classes.ModelBenchItemLeft}>
+            <div className={classes.ModelBenchItemLeftFileNav}>
+              {/* {this.state.loading ? <Skeleton /> : null} */}
+              {modelLinks}
+            </div>
 
-          {/* <div className={classes.ModelBenchItemLeftEqnNav}>
+            {/* <div className={classes.ModelBenchItemLeftEqnNav}>
             <MyTabs
               value={this.state.tabChoiceValue}
               handleChange={this.handleTabChange}
               labels={["Single ODE", "Coupled ODE", "Solver Analysis"]}
             />
           </div> */}
-        </div>
+          </div>
 
-        <div className={classes.ModelBenchItemCenter}>
-          {/* {this.state.tabChoiceValue === 0 ? <SingleODE /> : null} */}
-          {this.state.tabChoiceValue === 1 ? (
-            <LinearCoupled
-              modelId={this.state.selectedModelId}
-              modelObj={this.state.selectedModel}
-              sendToParent={this.sendToParent}
-              seekChildUpdates={this.state.seekChildUpdates}
-            />
-          ) : null}
-          {this.state.tabChoiceValue === 2 ? <SolverAnalysis /> : null}
-          {this.state.published ? (
-            <PublishedDialog
-              onCancelPublish={() => {
-                this.setState({ published: false });
-              }}
-              onPublishModel={this.MODEL_publish}
-            />
-          ) : null}
+          <div className={classes.ModelBenchItemCenter}>
+            {/* <MathQuillTest/> */}
+            {/* {this.state.tabChoiceValue === 0 ? <SingleODE /> : null} */}
+            {this.state.tabChoiceValue === 1 ? (
+              <LinearCoupled
+                modelId={this.state.selectedModelId}
+                modelObj={this.state.selectedModel}
+                sendToParent={this.sendToParent}
+                seekChildUpdates={this.state.seekChildUpdates}
+              />
+            ) : null}
+            {this.state.tabChoiceValue === 2 ? <SolverAnalysis /> : null}
+            {this.state.published ? (
+              <PublishedDialog
+                onCancelPublish={() => {
+                  this.setState({ published: false });
+                }}
+                onPublishModel={this.MODEL_publish}
+              />
+            ) : null}
+          </div>
+          {/* {this.state.error ? <MyErrorMessage /> : null} */}
+
+          <div className={classes.copyright}>
+            <p>
+              For the Model Bench User, <br />
+              you must give appropriate credit: ©Sohum Sen <br />
+              <a
+                href="https://tesarrec.org/modelbench"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                https://tesarrec.org/modelbench
+                <br />
+              </a>{" "}
+              01/05/2020
+            </p>
+          </div>
         </div>
-        {/* {this.state.error ? <MyErrorMessage /> : null} */}
-        <div className={classes.copyright}>
-          <p>
-            For the Model Bench User, <br />
-            you must give appropriate credit: ©Sohum Sen <br />
-            <a
-              href="https://tesarrec.org/modelbench"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              https://tesarrec.org/modelbench
-              <br />
-            </a>{" "}
-            01/05/2020
-          </p>
-        </div>
-      </div>
+      </FullScreenWrapper>
     );
   }
 }
