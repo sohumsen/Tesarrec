@@ -26,9 +26,16 @@ def solve_ode():
 @main.route("/solve_dae", methods=["POST"])
 def solve_dae():
     model_obj = request.get_json()
-  
+
+    # try:
     solution = dae_integrate(model_obj)
     return jsonify(solution)
+
+    # except Exception as e:
+    #     return jsonify(e)
+
+
+  
 
 
 

@@ -16,10 +16,8 @@ change tree view
 on edit file name save update
 full screen modelbench
 siders dont change graph
-varitem cross fix to side
-error handling in python server
-frontend validation
 on change varitem, change lhs
+set calculate to false not working
 
 
 24th Jul - 7th Aug 

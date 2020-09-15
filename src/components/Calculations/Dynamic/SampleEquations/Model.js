@@ -5,7 +5,7 @@ import DEFAULTVARSFORMODEL from "./DEFAULTVARS";
 import DEFAULTEQUATIONSNEW from "./DEFAULTEQUATIONSnew";
 import DEFAULTMODELCONFIGNew from "../../../../containers/Lab/LinearCoupled/DefaultGraphConfignew";
 import React from "react";
-import texFromExpression from '../../../toLatexCoverter'
+import texFromExpression from "../../../toLatexCoverter";
 
 import MyErrorMessage from "../../../UI/MyErrorMessage/CustomizedErrorMessage";
 import axios from "axios";
@@ -52,17 +52,17 @@ export default class Model {
         dbModel.Vars.find((Var) => Var.VarType === "Independent").LatexForm +
         "}=",
 
-      latexEqn:eqnObj.textEqn,
-      // latexEqn: parse(
-      //   parse(eqnObj.textEqn).toString({
-      //     // implicit: "hide",
-      //     // parenthesis: "auto",
-      //   })
-      //   // \frac{dY_1}{dx}=
-      // ).toTex({
-      //   // parenthesis: "auto",
-      //   // implicit: "hide",
-      // }),
+      // latexEqn:eqnObj.textEqn,
+      latexEqn: parse(
+        parse(eqnObj.textEqn).toString({
+          // implicit: "hide",
+          // parenthesis: "auto",
+        })
+        // \frac{dY_1}{dx}=
+      ).toTex({
+        // parenthesis: "auto",
+        // implicit: "hide",
+      }),
       textEqn: eqnObj.textEqn,
       // parsedEqn: simplify(parse(eqnObj.textEqn)),
       errorMessage: null,
@@ -123,30 +123,35 @@ export default class Model {
 
   validateExpressions = () => {
     let scope = {};
-    // let parsedEqns = this.Eqns.map((eqn) => eqn.ParsedEqn);
 
     let textEqns = this.Eqns.map((eqn) => eqn.textEqn);
-    // let lineNames =this.Eqns.map((eqn) => eqn.lineName);
-
-    // lineNames.forEach((lineName) => {
-    //   scope[lineName] = 1;
-    // });
-
-    // this.Vars.forEach((Var) => {
+    //checks for correct letters
     scope["d"] = 1;
-    // });
     this.Vars.forEach((Var) => {
       scope[Var.LatexForm] = 1;
     });
+    let indepLatex=this.Vars.find(Var=>Var.VarType==="Independent").LatexForm
+    console.log(indepLatex)
     let invalidIndex = [];
+    console.log(this.Eqns);
 
     for (let i = 0; i < textEqns.length; i++) {
-      try {
-        evaluate(textEqns[i], scope);
-      } catch (error) {
+      let LHSLatex = this.Eqns[i].LHSLatexEqn;
+      //must be \\frac{da}{dt}= or a=
+      console.log(/(frac({d[\w]+}){2}=)|(\w+=)/.test(LHSLatex)); // true
+
+      if (/(frac({d[\w]+}){2}=)|(\w+=)/.test(LHSLatex)) {
+        //Valid pattern
+        try {
+          evaluate(textEqns[i], scope);
+        } catch (error) {
+          invalidIndex.push(i);
+        }
+      } else {
         invalidIndex.push(i);
       }
     }
+    console.log(invalidIndex);
     return invalidIndex;
   };
   // set eqns(textEqnsArr){
@@ -312,13 +317,12 @@ export default class Model {
     return allEqns;
   };
 
-  solveDiffEqns = () => { 
-    console.log(this.Vars)
-    let solution=NewDiffEquationSolver({modelObj:this})
-    this.solutions.calcedSolution = solution
-    return solution
-
-  }
+  solveDiffEqns = () => {
+    console.log(this.Vars);
+    let solution = NewDiffEquationSolver({ modelObj: this });
+    this.solutions.calcedSolution = solution;
+    return solution;
+  };
 
   getTimeTaken = () => {
     let t_0 = performance.now();
