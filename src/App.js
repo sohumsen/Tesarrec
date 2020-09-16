@@ -30,6 +30,8 @@ class App extends Component {
     this.setState({ isLoggedIn: false, token: null, userId: null });
     localStorage.removeItem("token");
     localStorage.removeItem("expirationDate");
+    localStorage.removeItem("refreshToken");
+
     localStorage.removeItem("userId");
     this.props.history.push("/");
   };

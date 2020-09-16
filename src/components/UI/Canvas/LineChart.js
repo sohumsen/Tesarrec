@@ -84,7 +84,7 @@ class MyLineChart extends Component {
       //     }}
       //   >
       <div
-        style={{ position: "relative", width: "100%", paddingBottom: "250px" }}
+        style={{ position: "relative", width: "100%", paddingBottom: "300px" }}
       >
         <div
           style={{

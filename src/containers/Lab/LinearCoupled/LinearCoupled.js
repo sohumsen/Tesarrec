@@ -122,7 +122,7 @@ class LinearCoupled extends Component {
       item.LHSLatexEqn = latex;
 
       let dependentLatex = item.lineName;
-      if (/frac({d.*}){2}/.test(latex)) {
+      if (/frac({d.*}){2}=/.test(latex)) {
         //its a valid fraction
         //doesnt work for S_{11}
 
@@ -394,10 +394,11 @@ class LinearCoupled extends Component {
       });
     }
   };
-  ITEMS_reset = (itemType) => {
+  ITEMS_reset = () => {
+    console.log(new Model())
     this.setState({
       modelObj: new Model(),
-    });
+    },()=>console.log(this.state.modelObj));
   };
 
   VARS_handleInputChange = (id, calculate) => (event, value) => {
@@ -416,7 +417,8 @@ class LinearCoupled extends Component {
         : (Var["VarCurrent"] = event.target.value);
       Var["VarCurrent"] = value;
     } else {
-      isNaN(event.target.value)
+      console.log(isNaN(event.target.value),event.target.value[0]!=="-")
+      isNaN(event.target.value)&& (event.target.value[0]!=="-")&& (event.target.value[0]!=="+")
         ? (Var[event.target.name] = 0)
         : (Var[event.target.name] = event.target.value);
     }
@@ -683,7 +685,7 @@ class LinearCoupled extends Component {
             <LinearCoupledButtonEqnsContainer
               Eqns={this.state.modelObj.Eqns}
               onIncrementEqn={this.EQNS_onIncrement}
-              resetForm={() => this.ITEMS_reset("eqns")}
+              resetForm={() => this.ITEMS_reset()}
               handleMathQuillInputSubmit={this.MATHQUILL_handleInputSubmit}
               handleChangeShowMathQuillBox={() => {
                 this.setState({
@@ -781,7 +783,6 @@ class LinearCoupled extends Component {
               Vars={this.state.modelObj.Vars}
               Eqns={this.state.modelObj.Eqns}
               onIncrementVariable={this.VARS_onIncrement}
-              resetForm={() => this.ITEMS_reset("vars")}
             />
             <VarItems
               Vars={this.state.modelObj.Vars}

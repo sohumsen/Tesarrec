@@ -46,25 +46,18 @@ export default class Model {
       id: eqnObj.lineName + i,
       lineName: eqnObj.lineName,
       LHSLatexEqn:
-        "\\frac{d" +
-        eqnObj.lineName +
-        "}{d" +
-        dbModel.Vars.find((Var) => Var.VarType === "Independent").LatexForm +
-        "}=",
+        eqnObj.LHSLatexEqn !== undefined
+          ? eqnObj.LHSLatexEqn
+          : "\\frac{d" +
+            eqnObj.lineName +
+            "}{d" +
+            dbModel.Vars.find((Var) => Var.VarType === "Independent")
+              .LatexForm +
+            "}=",
 
-      // latexEqn:eqnObj.textEqn,
-      latexEqn: parse(
-        parse(eqnObj.textEqn).toString({
-          // implicit: "hide",
-          // parenthesis: "auto",
-        })
-        // \frac{dY_1}{dx}=
-      ).toTex({
-        // parenthesis: "auto",
-        // implicit: "hide",
-      }),
+      latexEqn: this.tryConvertToLatex(eqnObj.textEqn),
+
       textEqn: eqnObj.textEqn,
-      // parsedEqn: simplify(parse(eqnObj.textEqn)),
       errorMessage: null,
     }));
 
@@ -130,17 +123,24 @@ export default class Model {
     this.Vars.forEach((Var) => {
       scope[Var.LatexForm] = 1;
     });
-    let indepLatex=this.Vars.find(Var=>Var.VarType==="Independent").LatexForm
+
     let invalidIndex = [];
 
     for (let i = 0; i < textEqns.length; i++) {
       let LHSLatex = this.Eqns[i].LHSLatexEqn;
       //must be \\frac{da}{dt}= or a=
-
-      if (/(frac({d[\w]+}){2}=)|(\w+=)/.test(LHSLatex)) {
+      // /frac({d.*}){2}=/
+      if (/frac({d.*}){2}=|(.+=)/.test(LHSLatex)) {
         //Valid pattern
         try {
-          evaluate(textEqns[i], scope);
+          let res = evaluate(textEqns[i], scope);
+
+          if (res instanceof Object) {
+            invalidIndex.push(i);
+          }
+          // console.log(res instanceof Object);
+
+          // console.log(textEqns[i],evaluate(textEqns[i], scope))
         } catch (error) {
           invalidIndex.push(i);
         }
@@ -150,6 +150,15 @@ export default class Model {
     }
     return invalidIndex;
   };
+
+  tryConvertToLatex = (textEqn) => {
+    try {
+      return parse(parse(textEqn).toString({})).toTex({});
+    } catch (error) {
+      return textEqn;
+    }
+  };
+
   // set eqns(textEqnsArr){
   //   this.eqns.textEqns=textEqnsArr
   // }
@@ -339,7 +348,11 @@ export default class Model {
     return {
       Config: this.Config,
       Eqns: this.Eqns.map((Eqn) => {
-        return { lineName: Eqn.lineName, textEqn: Eqn.textEqn };
+        return {
+          lineName: Eqn.lineName,
+          LHSLatexEqn: Eqn.LHSLatexEqn,
+          textEqn: Eqn.textEqn,
+        };
       }),
 
       Vars: this.Vars.map((Var) => {

@@ -12,15 +12,15 @@ const useStyles = makeStyles({
   table: {
     // minWidth: 5,
     // maxWidth: "1px",
-        // width:200,
-
+    // width:200,
   },
   TableContainer: {
     // maxWidth: 820,
     // maxHeight: 180,
-    // width:"100%",
-    // height:"100%",
-    // overflow:"auto"
+    width:"100%",
+    height:"100%",
+    overflow:"auto"
+
   },
 });
 

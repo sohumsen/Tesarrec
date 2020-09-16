@@ -7,18 +7,17 @@
 
 4. error handling in db response
 
-5. Simplify UI spaces 
 
 allow y_10
 handle errors in forgot password 
 on go to new model, ask if they want to save
 change tree view
 on edit file name save update
-siders dont change graph
 set calculate to false not working
-fix size of mps
-fix column width in table
 fix saving model
+reset eqns not working
+change to ds_1/dt and doesnt validate properly
+
 
 24th Jul - 7th Aug 
 -----------------

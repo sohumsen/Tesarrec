@@ -79,7 +79,7 @@ const LinearCoupledDiffEquationGrapher = (props) => {
       </Paper>
 
       <Paper elevation={3} className={classes.Table}>
-        <p>hidjfksfdsjfjdfhgjdfhjgf</p>
+        {/* <p>lore</p> */}
         <Table rows={order3} columns={order} />
       </Paper>
     </div>
