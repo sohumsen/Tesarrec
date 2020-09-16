@@ -14,11 +14,11 @@ handle errors in forgot password
 on go to new model, ask if they want to save
 change tree view
 on edit file name save update
-full screen modelbench
 siders dont change graph
-on change varitem, change lhs
 set calculate to false not working
-
+fix size of mps
+fix column width in table
+fix saving model
 
 24th Jul - 7th Aug 
 -----------------

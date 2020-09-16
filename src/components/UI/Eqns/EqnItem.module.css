@@ -5,14 +5,18 @@
 }  
 .EqnText{
  
-  flex: 20;
+  flex: 80;
+  /* background-color: aqua; */
 }
 
 .Container {
 
   margin: 1%;
+  width: 100%;
+max-width: 100%;
+height: auto;
   display: flex;
-  flex-flow: row wrap;
+  flex-flow: row nowrap;
 
 }
 

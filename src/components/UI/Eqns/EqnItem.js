@@ -16,7 +16,7 @@ const EqnItem = (props) => {
             onInputChange={props.handleMathQuillInputChange}
             style={{
               fontSize: "14px",
-              width: "65%",
+              width: "80%",
             }}
           />
         ) : (

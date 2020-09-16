@@ -6,8 +6,7 @@ const Header = (props) => {
   return (
     <div className={classes.header}>
       <div className={classes.title}>
-      <h1>Tesarrec™</h1>
-
+        <h1>Tesarrec™</h1>
       </div>
       <p>
         <b>T</b>ool for techno-
@@ -22,23 +21,22 @@ const Header = (props) => {
         <br />
       </p>
       <div className={classes.links}>
-      <p>
-        For steady state sensitivity analysis go to Sustainabilty{" "}
-        <a
-          className={classes.anchor}
-          href="https://tesarrec.web.app/sustainability/mes"
-          
-        >
-          <ForwardButton />
-        </a>
-      </p>
+        <p>
+          For steady state sensitivity analysis go to Sustainabilty{" "}
+          <a
+            className={classes.anchor}
+            href="https://tesarrec.web.app/sustainability/mes"
+          >
+            <ForwardButton />
+          </a>
+        </p>
 
-      <p>
-        For dynamic simulation go to Model Bench{" "}
-        <a className={classes.anchor} href="https://tesarrec.web.app/dynamic">
-          <ForwardButton />
-        </a>
-      </p>
+        <p>
+          For dynamic simulation go to Model Bench{" "}
+          <a className={classes.anchor} href="https://tesarrec.web.app/dynamic">
+            <ForwardButton />
+          </a>
+        </p>
       </div>
     </div>
   );

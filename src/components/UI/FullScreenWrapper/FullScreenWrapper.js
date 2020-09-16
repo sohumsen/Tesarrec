@@ -1,18 +1,25 @@
-import React, {useCallback} from 'react';
+import { IconButton, Tooltip } from "@material-ui/core";
+import React, { useCallback } from "react";
 import { FullScreen, useFullScreenHandle } from "react-full-screen";
-
+import FullscreenIcon from "@material-ui/icons/Fullscreen";
+import classes from "./FullScreenWrapper.module.css";
 function FullScreenWrapper(props) {
   const handle = useFullScreenHandle();
 
   return (
-    <div>
-      <button onClick={handle.enter}>
-        Enter fullscreen
-      </button>
-
-      <FullScreen handle={handle}>
-        {props.children}
-      </FullScreen>
+    <div className={classes.Container}>
+      <div className={classes.Button}>
+        <Tooltip title="Full screen" placement="top" arrow>
+          <span>
+            <IconButton edge="end" aria-label="add" onClick={handle.enter}>
+              <FullscreenIcon />
+            </IconButton>
+          </span>
+        </Tooltip>
+      </div>
+      <div className={classes.Content}>
+        <FullScreen handle={handle}>{props.children}</FullScreen>
+      </div>
     </div>
   );
 }

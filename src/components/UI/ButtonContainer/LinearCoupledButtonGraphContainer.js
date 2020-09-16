@@ -19,9 +19,8 @@ const LinearCoupledButtonGraphContainer = (props) => {
   }).map((Var) => Var.LatexForm);
   let csvData = [[...dependents, ...independents]];
 
-  if (props.modelObj.solutions.calcedSolution!==null){
+  if (props.modelObj.solutions.calcedSolution !== null) {
     csvData.push(...props.modelObj.solutions.calcedSolution);
-
   }
   return (
     <Paper>

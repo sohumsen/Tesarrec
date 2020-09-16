@@ -131,14 +131,11 @@ export default class Model {
       scope[Var.LatexForm] = 1;
     });
     let indepLatex=this.Vars.find(Var=>Var.VarType==="Independent").LatexForm
-    console.log(indepLatex)
     let invalidIndex = [];
-    console.log(this.Eqns);
 
     for (let i = 0; i < textEqns.length; i++) {
       let LHSLatex = this.Eqns[i].LHSLatexEqn;
       //must be \\frac{da}{dt}= or a=
-      console.log(/(frac({d[\w]+}){2}=)|(\w+=)/.test(LHSLatex)); // true
 
       if (/(frac({d[\w]+}){2}=)|(\w+=)/.test(LHSLatex)) {
         //Valid pattern
@@ -151,7 +148,6 @@ export default class Model {
         invalidIndex.push(i);
       }
     }
-    console.log(invalidIndex);
     return invalidIndex;
   };
   // set eqns(textEqnsArr){
@@ -318,7 +314,6 @@ export default class Model {
   };
 
   solveDiffEqns = () => {
-    console.log(this.Vars);
     let solution = NewDiffEquationSolver({ modelObj: this });
     this.solutions.calcedSolution = solution;
     return solution;

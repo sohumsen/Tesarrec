@@ -6,26 +6,23 @@
   justify-content: space-between;
   flex-flow: row wrap;
   /* overflow: hidden; */
-
-}
-
-.EqnContainer {
-  flex: 1;
-  overflow-y: auto;
 }
 .EqnColumn {
-  flex: 4 0;
-  align-self: baseline;
+  flex: 5 0;
+  width: 0;
   order: 2;
 }
+.EqnContainer {
+  overflow: auto;
+}
+
 .MetaContainer {
   margin-top: 10px;
-  flex: auto;
-  background-color: antiquewhite;
-  font-size: small;
 }
 .VarColumn {
   flex: 3 0;
+  width: 0;
+
   order: 4;
 
   /* flex-flow: column wrap; */
@@ -39,7 +36,6 @@
   background-color: aquamarine;
 }
 .ConsoleContainer {
-
   font-family: "VT323", monospace;
   font-size: small;
   color: rgb(12, 221, 12);
@@ -47,10 +43,11 @@
 }
 
 .Graph {
-  flex: 7;
+  flex: 8 0;
+  width: 0;
+
   /* margin: 10px; */
-  align-self: baseline;
-  order: 4;
+  order: 5;
   /* margin: 5px; */
 
   /* background-color: bisque; 

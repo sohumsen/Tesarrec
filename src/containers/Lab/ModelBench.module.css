@@ -28,7 +28,7 @@
   
 }
 .ModelBenchItemCenter {
-  flex: 30 30 auto;
+  flex: 70 1 auto;
   /* overflow: hidden; */
 
   /*background-color: brown;*/

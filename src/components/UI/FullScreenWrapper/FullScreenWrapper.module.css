@@ -1,0 +1,16 @@
+.Container{
+  /* overflow: hidden; */
+
+}
+
+.Button{
+  position: absolute;
+  top: 0;
+  right: 4%;
+  width: 0;
+  height: 0;
+}
+
+.Content{
+  background-color: rgb(240, 240, 240);
+}

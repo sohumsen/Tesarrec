@@ -66,25 +66,36 @@ import {
 
 class MyLineChart extends Component {
   render() {
-    
     return (
+      // <div
+      //   style={{
+      //     paddingBottom: "56.25%" /* 16:9 */,
+      //     position: "relative",
+      //     height: 0,
+      //   }}
+      // >
+      //   <div
+      //     style={{
+      //       position: "absolute",
+      //       top: "0",
+      //       left: "0",
+      //       width: "100%",
+      //       height: "100%",
+      //     }}
+      //   >
       <div
-        style={{
-          paddingBottom: "56.25%" /* 16:9 */,
-          position: "relative",
-          height: 0,
-        }}
+        style={{ position: "relative", width: "100%", paddingBottom: "250px" }}
       >
         <div
           style={{
             position: "absolute",
-            top: "0",
-            left: "0",
-            width: "100%",
-            height: "100%",
+            left: 0,
+            right: 0,
+            bottom: 0,
+            top: 0,
           }}
         >
-          <ResponsiveContainer width="95%" height="100%">
+          <ResponsiveContainer>
             <LineChart
               data={this.props.dataPoints[0]}
               // margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
@@ -92,14 +103,15 @@ class MyLineChart extends Component {
               <CartesianGrid strokeDasharray="3 3" />
               <XAxis
                 dataKey="x"
-                label={{ value: this.props.axisNames[0], position: "insideBottom" }}
+                label={{
+                  value: this.props.axisNames[0],
+                }}
               />
 
               <YAxis>
                 <Label
                   value={this.props.axisNames[1]}
                   position="insideLeft"
-                  angle={-90}
                   style={{ textAnchor: "middle" }}
                 />
               </YAxis>
@@ -114,7 +126,9 @@ class MyLineChart extends Component {
               {/* <Line type="monotone" dataKey="y" stroke="#82ca9d" /> */}
             </LineChart>
           </ResponsiveContainer>
+          //{" "}
         </div>
+        //{" "}
       </div>
     );
   }

@@ -8,7 +8,6 @@ def dae_integrate(model_obj):
 
     m = GEKKO()
 
-    num_of_cycles = int(model_obj["Config"]["numOfCycles"])
 
     dep_names = []
     variables_list = []
@@ -19,9 +18,9 @@ def dae_integrate(model_obj):
         if var["VarType"] == "Independent":
 
             m.time = np.linspace(
-                var["VarCurrent"],
-                num_of_cycles * float(model_obj["Config"]["h"]),
-                num_of_cycles + 1,
+                float(var["VarCurrent"]),
+                int(model_obj["Config"]["numOfCycles"]) * float(model_obj["Config"]["h"]),
+                int(model_obj["Config"]["numOfCycles"]) + 1,
             )
             indep_latex = var["LatexForm"]
 
@@ -60,7 +59,7 @@ def dae_integrate(model_obj):
 
     # (IMODE=1, 4, and 7) where the problem must have the same number of variables and equations and optimization is not allowed.
     # m.options.NODES = 3
-    m.time = np.linspace(0, 100, 101)
+    # m.time = np.linspace(0, 100, 101)
 
     clean_eqn = []
     for i in range(len(model_obj["Eqns"])):
@@ -119,8 +118,9 @@ def dae_integrate(model_obj):
     solution_arr.append(m.time.tolist())
 
     solution_arr = np.transpose(solution_arr)
+    print(solution_arr)
 
-    # print("######################################")
+    print("######################################")
     # exec("print(S.value, E.value, I.value, R.value)")
     # print("######################################")
 

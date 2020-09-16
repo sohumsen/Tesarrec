@@ -2,11 +2,12 @@ import React from "react";
 import PlayCircleOutlineIcon from "@material-ui/icons/PlayCircleOutline";
 import AddBoxIcon from "@material-ui/icons/AddBox";
 import IconButton from "@material-ui/core/IconButton";
-import { Tooltip,  Paper } from "@material-ui/core";
+import { Tooltip, Paper } from "@material-ui/core";
 import RestoreIcon from "@material-ui/icons/Restore";
 import { green } from "@material-ui/core/colors";
-import TextFormatIcon from '@material-ui/icons/TextFormat';
-import DnsIcon from '@material-ui/icons/Dns';
+import TextFormatIcon from "@material-ui/icons/TextFormat";
+import DnsIcon from "@material-ui/icons/Dns";
+import WebIcon from "@material-ui/icons/Web";
 const LinearCoupledButtonEqnsContainer = (props) => {
   return (
     <Paper>
@@ -43,24 +44,38 @@ const LinearCoupledButtonEqnsContainer = (props) => {
             aria-label="Submit"
             onClick={props.handleChangeShowMathQuillBox}
           >
-            <TextFormatIcon  />
+            <TextFormatIcon />
           </IconButton>
         </span>
       </Tooltip>
 
-      <Tooltip title="Use Remote Server" placement="top" arrow>
-        <span>
-          <IconButton
-            disabled={props.Eqns.length === 0}
-            edge="end"
-            aria-label="Remote"
-            onClick={props.handleChangeLocalToServer}
-          >
-            <DnsIcon  />
-          </IconButton>
-        </span>
-      </Tooltip>
-
+      {props.localSolver ? (
+        <Tooltip title="Switch to Remote Server" placement="top" arrow>
+          <span>
+            <IconButton
+              disabled={props.Eqns.length === 0}
+              edge="end"
+              aria-label="Submit"
+              onClick={props.handleChangeLocalToServer}
+            >
+              <WebIcon />
+            </IconButton>
+          </span>
+        </Tooltip>
+      ) : (
+        <Tooltip title="Switch to Local" placement="top" arrow>
+          <span>
+            <IconButton
+              disabled={props.Eqns.length === 0}
+              edge="end"
+              aria-label="Remote"
+              onClick={props.handleChangeLocalToServer}
+            >
+              <DnsIcon />
+            </IconButton>
+          </span>
+        </Tooltip>
+      )}
       <Tooltip title="Submit Equations" placement="top" arrow>
         <span>
           <IconButton
@@ -73,8 +88,6 @@ const LinearCoupledButtonEqnsContainer = (props) => {
           </IconButton>
         </span>
       </Tooltip>
-
-     
 
       {/* <Tooltip
         style={{ float: "right" }}

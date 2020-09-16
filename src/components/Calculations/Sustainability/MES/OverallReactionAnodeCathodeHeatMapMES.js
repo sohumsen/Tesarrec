@@ -192,7 +192,7 @@ const OverallReactionAnodeCathode = (props) => {
         <img src={MESPic} width="110%" alt="mes pic"></img>
       </div>
       <div className={classes.HeatMapEnergyPerformance}>
-        <h3>Heat map of Theoretical potential (V)</h3>
+        <h3>Heat map of Theoretical potential (-V)</h3>
 
         <MyHeatMap
           xLabels={props.heatMapContents.xLabels}

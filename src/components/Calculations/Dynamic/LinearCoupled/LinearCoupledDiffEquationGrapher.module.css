@@ -1,23 +1,28 @@
 .Container{
-  /* display: flex; */
+  display: flex;
+  flex-flow: column wrap;
+  background-color: green;
+
 
 
 }
 
 .Table{
-  /* height: 100%; */
-  margin:5px;
+  /* margin:5px; */
   flex: 1;
+  background-color: aqua;
 
-  width: 39vw;
-  height: 37vh;
+  /* width: 39vw;
+  height: 36vh;  */
 
 
 }
 
 .Graph{
-  margin:5px;
+  /* margin:5px; */
   flex: 1;
+  background-color: red;
+
 
   /* width: 45vw; */
 

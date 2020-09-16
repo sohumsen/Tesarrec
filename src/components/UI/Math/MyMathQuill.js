@@ -6,7 +6,7 @@ addStyles();
 
 const MyMathQuill = (props) => {
   return (
-    <div>
+    <div style={{width:"100%"}}>
       <EditableMathField
         style={{ fontSize: "14px" }}
         latex={props.firstBit}
@@ -14,7 +14,7 @@ const MyMathQuill = (props) => {
         // }
         onChange={(mathField) => props.onLHSInputChange(mathField)}
       />
-      &nbsp;&nbsp;&nbsp;
+      {/* &nbsp;&nbsp;&nbsp; */}
       {!props.NoEdit ? (
         <EditableMathField
           style={props.style}
