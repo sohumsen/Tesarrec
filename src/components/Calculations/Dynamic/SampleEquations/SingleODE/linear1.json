@@ -1,14 +1,7 @@
 {
   "vars": [
     {
-      "id": "Constant1",
-      "LatexForm": "K_1",
-      "errorMessage": null,
-      "VarType": "Constant",
-
-      "VarLow": 0,
-      "VarCurrent": 50,
-      "VarHigh": 100
+     
     }
   ],
   "eqns": ["1"],

@@ -3,7 +3,7 @@ import NewDiffEquationSolver from "../LinearCoupled/NewDiffEquationSolver";
 
 import DEFAULTVARSFORMODEL from "./DEFAULTVARS";
 import DEFAULTEQUATIONSNEW from "./DEFAULTEQUATIONS";
-import DEFAULTMODELCONFIGNew from "../../../../containers/Lab/LinearCoupled/DefaultGraphConfignew";
+import DEFAULTMODELCONFIG from "./DEFAULTGRAPHCONFIG";
 import React from "react";
 
 import MyErrorMessage from "../../../UI/MyErrorMessage/CustomizedErrorMessage";
@@ -12,7 +12,7 @@ export default class Model {
   constructor(dbModel, meta) {
     if (dbModel === undefined && meta === undefined) {
       dbModel = {
-        Config: DEFAULTMODELCONFIGNew,
+        Config: DEFAULTMODELCONFIG,
         Eqns: DEFAULTEQUATIONSNEW,
         Vars: DEFAULTVARSFORMODEL,
       };

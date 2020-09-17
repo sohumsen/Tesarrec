@@ -121,14 +121,23 @@ class LinearCoupled extends Component {
       item.LHSLatexEqn = latex;
 
       let dependentLatex = item.lineName;
+      //try to figure out what the lineName is given a LHS
       if (/frac({d.*}){2}=/.test(latex)) {
         //its a valid fraction
-        //doesnt work for S_{11}
 
         dependentLatex = latex.substring(
           latex.indexOf("d") + 1,
           latex.indexOf("}")
         );
+        let idxOfIndependent = this.state.modelObj.Vars.findIndex(
+          (Var) => Var.VarType === "Independent"
+        );
+        let independentLatex = latex.substring(
+          latex.lastIndexOf("d") + 1,
+          latex.lastIndexOf("}")
+        );
+        modelObj.Vars[idxOfIndependent].LatexForm = independentLatex;
+
         if (dependentLatex.includes("{")) {
           dependentLatex = dependentLatex + "}";
         }
@@ -136,13 +145,35 @@ class LinearCoupled extends Component {
         //its E=
         dependentLatex = latex.substring(0, latex.indexOf("="));
       }
+
+      //returns dependentlatex (the new user input)
+
+      //TODO make sure lineName is NEVER ""
+
+      //replaces all item.lineNames instances with the new user input
+      console.log(dependentLatex==="")
+      if (dependentLatex===""){
+        modelObj.Eqns.forEach(Eqn=>{
+          Eqn.latexEqn=Eqn.latexEqn.replace(item.lineName,dependentLatex)
+        })
+      }
+    
+
+      //finds the index of the Var with item.lineName
       let idxOfVars = this.state.modelObj.Vars.findIndex(
         (Var) => Var.LatexForm === item.lineName
       );
       modelObj.Vars[idxOfVars].LatexForm = dependentLatex;
-      item.lineName = dependentLatex;
+
+      //sets new lineName as new user input
+        item.lineName = dependentLatex;
+
+        console.log("item.lineName "+item.lineName,"dependentLatex "+dependentLatex)
+
+     
       items[idx] = item;
       modelObj["Eqns"] = items;
+    
       modelObj.Config.calculate = false;
 
       this.setState({ modelObj: modelObj });
@@ -190,7 +221,7 @@ class LinearCoupled extends Component {
       //   modelObj.Eqns = Eqns;
       // } else
       if (item.VarType === "Independent") {
-        Eqns.forEach((Eqn, i) => {
+        Eqns.forEach((Eqn) => {
           if (/frac({d.*}){2}/.test(Eqn.LHSLatexEqn)) {
             //its a valid fraction
             Eqn.LHSLatexEqn =
@@ -505,7 +536,7 @@ class LinearCoupled extends Component {
     const results = Eqns.filter(({ lineName: a }) => {
       return !prevState.modelObj.Eqns.some(({ lineName: b }) => b === a);
     });
-   
+
     let EqnObj = {
       id: results[0].lineName,
       lineName: results[0].lineName,
@@ -619,7 +650,7 @@ class LinearCoupled extends Component {
     fetch("http://127.0.0.1:8080/solve_dae", {
       method: "POST",
       // cache: "no-cache",
-      // signal: signal,
+      signal: signal,
       headers: {
         "Content-Type": "application/json",
       },
