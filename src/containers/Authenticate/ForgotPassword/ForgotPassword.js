@@ -12,12 +12,14 @@ import Typography from "@material-ui/core/Typography";
 import Container from "@material-ui/core/Container";
 import { withStyles } from "@material-ui/core/styles";
 import FIREBASE_KEY from "../../../firebasekey";
+import SnackbarError from '../../../components/UI/MyErrorMessage/SnackbarError'
 
 // import classes from './SignIn.module.css'
 // import { createMuiTheme, withTheme } from "@material-ui/core/styles";
 
 import { NavLink } from "react-router-dom";
 import CustomizedErrorMessage from "../../../components/UI/MyErrorMessage/AuthenticateError";
+import { Snackbar } from "@material-ui/core";
 
 function Copyright() {
   return (
@@ -57,6 +59,7 @@ class ForgotPassword extends Component {
     showPassword: false,
     password: "",
     oobCode: "",
+    error: false,
   };
 
   onChange = (e) => {
@@ -88,7 +91,9 @@ class ForgotPassword extends Component {
         } else {
         }
       })
-      .catch((error) => {});
+      .catch((error) => {
+        this.setState({ error: true });
+      });
 
     //
   };
@@ -114,7 +119,9 @@ class ForgotPassword extends Component {
         } else {
         }
       })
-      .catch((error) => {});
+      .catch((error) => {
+        this.setState({ error: true });
+      });
   };
   onSubmit = (e) => {
     e.preventDefault();
@@ -129,6 +136,7 @@ class ForgotPassword extends Component {
 
     return (
       <Container component="main" maxWidth="xs">
+        {this.state.error?<SnackbarError/>:null}
         <CssBaseline />
         <div className={classes.paper}>
           <Avatar className={classes.avatar}>

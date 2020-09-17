@@ -118,6 +118,7 @@ class App extends Component {
     });
     localStorage.removeItem("token");
     localStorage.removeItem("expirationDate");
+    localStorage.removeItem("refreshToken");
     localStorage.removeItem("userId");
   };
 

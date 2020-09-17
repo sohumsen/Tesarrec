@@ -3,6 +3,7 @@ import MyMathQuill from "../Math/MyMathQuill";
 import classes from "./EqnItem.module.css";
 import CloseButton from "../Button/CloseButton";
 import { StaticMathField } from "react-mathquill";
+import { TextField } from "@material-ui/core";
 const EqnItem = (props) => {
   return (
     <li className={classes.Container} style={{ listStyleType: "none" }}>
@@ -24,7 +25,14 @@ const EqnItem = (props) => {
             <StaticMathField style={{ fontSize: "14px" }}>
               {props.LHSLatexEqn}
             </StaticMathField>
-            <input
+            {/* <input
+              onChange={props.handleTextEqnInputChange}
+              value={props.TextEqn}
+            /> */}
+            <TextField
+              style={{ width: "80%" }}
+              inputProps={{ style: { fontSize: 12 } }} // font size of input text
+              size="small"
               onChange={props.handleTextEqnInputChange}
               value={props.TextEqn}
             />
@@ -32,11 +40,10 @@ const EqnItem = (props) => {
         )}
       </div>
 
-     
       {props.error ? (
         <div className={classes.ErrorMsg}>{props.error}</div>
       ) : null}
-       <div className={classes.RemoveButton}>
+      <div className={classes.RemoveButton}>
         <CloseButton
           disabled={props.disabledRemoveButton}
           type="button"

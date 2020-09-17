@@ -3,20 +3,14 @@
 
 2. da/dt=b is valid 
 
-3. create new file, select it, its not updated
-
-4. error handling in db response
 
 
-allow y_10
-handle errors in forgot password 
+When renaming a parameter all the equations must change
+
 on go to new model, ask if they want to save
-change tree view
 on edit file name save update
-set calculate to false not working
-fix saving model
-reset eqns not working
-change to ds_1/dt and doesnt validate properly
+
+
 
 
 24th Jul - 7th Aug 

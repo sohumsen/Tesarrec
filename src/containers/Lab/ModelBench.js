@@ -11,6 +11,7 @@ import axios from "axios";
 import MathQuillTest from "../../components/UI/Math/MathQuillTest";
 import { FullScreen, useFullScreenHandle } from "react-full-screen";
 import FullScreenWrapper from "../../components/UI/FullScreenWrapper/FullScreenWrapper";
+import SnackbarError from '../../components/UI/MyErrorMessage/SnackbarError'
 
 class ModelBench extends Component {
   /**
@@ -335,8 +336,7 @@ class ModelBench extends Component {
               />
             ) : null}
           </div>
-          {/* {this.state.error ? <MyErrorMessage /> : null} */}
-
+          {this.state.error ? <SnackbarError /> : null}
           <div className={classes.copyright}>
             <p>
               For the Model Bench User, <br />

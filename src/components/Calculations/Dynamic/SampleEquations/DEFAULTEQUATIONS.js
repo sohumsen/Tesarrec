@@ -1,84 +1,86 @@
 const DEFAULTEQUATIONS = [
-    {
-      id: "qwert",
-      line: "a",
-      LHSLatexEqn: "\\frac{da}{dt}=",
-      LatexEqn: "-\\frac{{K_1}ab}{{K_2}+a}-\\frac{{K_3}}ac{{K_4}+a}",
-      TextEqn: "-(K_1*a*b)/(K_2+a)-(K_3)/(a)*c*K_4+a",
-      errorMessage: null,
-    },
-    {
-      id: "yuiop",
-      line: "b",
+  {
+    lineName: "Y_1",
+    LHSLatexEqn: "\\frac{dY_1}{dX_1}=",
 
-      LHSLatexEqn: "\\frac{db}{dt}=",
-      LatexEqn: "\\frac{{K_1}ab}{{K_3}+a}-{K_4}b",
-      TextEqn: "(K_1*a*b)/(K_3+a)-K_4*b",
-      errorMessage: null,
-    },
-    {
-      id: "asdfg",
-      line: "c",
+    textEqn: "-(K_1*Y_1*Y_2)/(K_2+Y_1)-(K_3)/(Y_1)*Y_3*K_4+Y_1*X_1",
+  },
+  {
+    lineName: "Y_2",
+    LHSLatexEqn: "\\frac{dY_2}{dX_1}=",
 
-      LHSLatexEqn: "\\frac{dc}{dt}=",
-      LatexEqn: "\\frac{K_2ac}{K_1+a}-K_4c",
-      TextEqn: "(K_2*a*c)/(K_1+a)-K_4*c",
-      errorMessage: null,
-    },
-    {
-      id: "hjklz",
-      line: "d",
+    textEqn: "(K_1*Y_1*Y_2)/(K_3+Y_1)-K_4*Y_2",
+  },
+  {
+    lineName: "Y_3",
+    LHSLatexEqn: "\\frac{dY_3}{dX_1}=",
 
-      LHSLatexEqn: "\\frac{dd}{dt}=",
-      LatexEqn: "-\\frac{{K_1}}ab{{K_4}+a}-\\frac{{K_3}ac}{{K_2}+a}",
-      TextEqn: "-(K_1*a*b)/(K_4+a)-(K_3*a*c)/(K_2+a)",
-      errorMessage: null,
-    },
-    {
-      id: "dfsf",
-      line: "f",
+    textEqn: "(K_2*Y_1*Y_3)/(K_1+Y_1)-K_4*Y_3",
+  },
+  {
+    lineName: "Y_4",
+    LHSLatexEqn: "\\frac{dY_4}{dX_1}=",
 
-      LHSLatexEqn: "\\frac{df}{dt}=",
-      LatexEqn: "-\\frac{{K_1}}ab{{K_4}+a}-\\frac{{K_3}ac}{{K_2}+a}",
-      TextEqn: "-(K_1*a*b)/(K_4+a)-(K_3*a*c)/(K_2+a)",
-      errorMessage: null,
-    },
-    {
-      id: "klsdf",
-      line: "g",
+    textEqn: "-(K_1*Y_1*Y_2)/(K_4+Y_1)-(K_3*Y_1*Y_3)/(K_2+Y_1)",
+  },
+  {
+    lineName: "Y_5",
+    LHSLatexEqn: "\\frac{dY_5}{dX_1}=",
 
-      LHSLatexEqn: "\\frac{dg}{dt}=",
-      LatexEqn: "-\\frac{{K_1}}ab{{K_4}+a}-\\frac{{K_3}ac}{{K_2}+a}",
-      TextEqn: "-(K_1*a*b)/(K_4+a)-(K_3*a*c)/(K_2+a)",
-      errorMessage: null,
-    },
-    {
-      id: "sdgfdg",
-      line: "h",
+    textEqn: "-(K_1*Y_1*Y_2)/(K_4+Y_1)-(K_3*Y_1*Y_3)/(K_2+Y_1)",
+  },
+  {
+    lineName: "Y_6",
+    LHSLatexEqn: "\\frac{dY_6}{dX_1}=",
 
-      LHSLatexEqn: "\\frac{dh}{dt}=",
-      LatexEqn: "-\\frac{{K_1}}ab{{K_4}+a}-\\frac{{K_3}ac}{{K_2}+a}",
-      TextEqn: "-(K_1*a*b)/(K_4+a)-(K_3*a*c)/(K_2+a)",
-      errorMessage: null,
-    },
-    {
-      id: "ewrtew",
-      line: "j",
+    textEqn: "-(K_1*Y_1*Y_2)/(K_4+Y_1)-(K_3*Y_1*Y_3)/(K_2+Y_1)",
+  },
+  {
+    lineName: "Y_7",
+    LHSLatexEqn: "\\frac{dY_7}{dX_1}=",
 
-      LHSLatexEqn: "\\frac{dj}{dt}=",
-      LatexEqn: "-\\frac{{K_1}}ab{{K_4}+a}-\\frac{{K_3}ac}{{K_2}+a}",
-      TextEqn: "-(K_1*a*b)/(K_4+a)-(K_3*a*c)/(K_2+a)",
-      errorMessage: null,
-    },
-    {
-      id: "sjmew",
-      line: "k",
+    textEqn: "-(K_1*Y_1*Y_2)/(K_4+Y_1)-(K_3*Y_1*Y_3)/(K_2+Y_1)",
+  },
+  {
+    lineName: "Y_8",
+    LHSLatexEqn: "\\frac{dY_8}{dX_1}=",
 
-      LHSLatexEqn: "\\frac{dk}{dt}=",
-      LatexEqn: "-\\frac{{K_1}}ab{{K_4}+a}-\\frac{{K_3}ac}{{K_2}+a}",
-      TextEqn: "-(K_1*a*b)/(K_4+a)-(K_3*a*c)/(K_2+a)",
-      errorMessage: null,
-    },
-  ];
+    textEqn: "-(K_1*Y_1*Y_2)/(K_4+Y_1)-(K_3*Y_1*Y_3)/(K_2+Y_1)",
+  },
+  {
+    lineName: "Y_9",
+    LHSLatexEqn: "\\frac{dY_9}{dX_1}=",
 
-  export default DEFAULTEQUATIONS
+    textEqn: "-(K_1*Y_1*Y_2)/(K_4+Y_1)-(K_3*Y_1*Y_3)/(K_2+Y_1)",
+  },
+  
+  {
+    lineName: "a",
+    LHSLatexEqn: "\\frac{da}{dX_1}=",
+
+    textEqn: "-(K_1*Y_1*Y_2)/(K_4+Y_1)-(K_3*Y_1*Y_3)/(K_2+Y_1)",
+  },
+  {
+    lineName: "b",
+    LHSLatexEqn: "\\frac{db}{dX_1}=",
+
+    textEqn: "-(K_1*Y_1*Y_2)/(K_4+Y_1)-(K_3*Y_1*Y_3)/(K_2+Y_1)",
+  },
+];
+
+export default DEFAULTEQUATIONS;
+
+// Y_3onst DEFAULTEQUATIONS = [
+//   {
+//     line: "a",
+//     TextEqn: "a",
+//   },
+//   {
+//     line: "Y_2",
+
+//     TextEqn: "Y_2",
+//   },
+
+// ];
+
+// export default DEFAULTEQUATIONS;

@@ -2,7 +2,7 @@ import { parse, evaluate, simplify } from "mathjs";
 import NewDiffEquationSolver from "../LinearCoupled/NewDiffEquationSolver";
 
 import DEFAULTVARSFORMODEL from "./DEFAULTVARS";
-import DEFAULTEQUATIONSNEW from "./DEFAULTEQUATIONSnew";
+import DEFAULTEQUATIONSNEW from "./DEFAULTEQUATIONS";
 import DEFAULTMODELCONFIGNew from "../../../../containers/Lab/LinearCoupled/DefaultGraphConfignew";
 import React from "react";
 import texFromExpression from "../../../toLatexCoverter";

@@ -10,7 +10,7 @@ import GraphConfig from "../../../components/UI/GraphConfig/GraphConfig";
 import LinearCoupledDiffEquationGrapher from "../../../components/Calculations/Dynamic/LinearCoupled/LinearCoupledDiffEquationGrapher";
 import { Paper, TextField, InputAdornment } from "@material-ui/core";
 import LinearCoupledButtonEqnsContainer from "../../../components/UI/ButtonContainer/LinearCoupledButtonEqnsContainer";
-import DEFAULTEQUATIONSNEW from "../../../components/Calculations/Dynamic/SampleEquations/DEFAULTEQUATIONSnew";
+import DEFAULTEQUATIONS from "../../../components/Calculations/Dynamic/SampleEquations/DEFAULTEQUATIONS";
 
 import LinearCoupledButtonVariablesContainer from "../../../components/UI/ButtonContainer/LinearCoupledButtonVariablesContainer";
 import LinearCoupledButtonGraphContainer from "../../../components/UI/ButtonContainer/LinearCoupledButtonGraphContainer";
@@ -21,6 +21,7 @@ import Draggable from "react-draggable";
 import DBAccess from "../DBAccess";
 import Spinner from "../../../components/UI/Skeleton/Spinner";
 import { Alert } from "@material-ui/lab";
+import SnackbarError from "../../../components/UI/MyErrorMessage/SnackbarError";
 
 class LinearCoupled extends Component {
   /**
@@ -395,10 +396,13 @@ class LinearCoupled extends Component {
     }
   };
   ITEMS_reset = () => {
-    console.log(new Model())
-    this.setState({
-      modelObj: new Model(),
-    },()=>console.log(this.state.modelObj));
+    console.log(new Model());
+    this.setState(
+      {
+        modelObj: new Model(),
+      },
+      () => console.log(this.state.modelObj)
+    );
   };
 
   VARS_handleInputChange = (id, calculate) => (event, value) => {
@@ -417,8 +421,10 @@ class LinearCoupled extends Component {
         : (Var["VarCurrent"] = event.target.value);
       Var["VarCurrent"] = value;
     } else {
-      console.log(isNaN(event.target.value),event.target.value[0]!=="-")
-      isNaN(event.target.value)&& (event.target.value[0]!=="-")&& (event.target.value[0]!=="+")
+      console.log(isNaN(event.target.value), event.target.value[0] !== "-");
+      isNaN(event.target.value) &&
+      event.target.value[0] !== "-" &&
+      event.target.value[0] !== "+"
         ? (Var[event.target.name] = 0)
         : (Var[event.target.name] = event.target.value);
     }
@@ -496,7 +502,7 @@ class LinearCoupled extends Component {
   };
 
   EQNS_nextPossible = (prevState) => {
-    let Eqns = DEFAULTEQUATIONSNEW;
+    let Eqns = DEFAULTEQUATIONS;
 
     const results = Eqns.filter(({ lineName: a }) => {
       return !prevState.modelObj.Eqns.some(({ lineName: b }) => b === a);
@@ -508,19 +514,10 @@ class LinearCoupled extends Component {
     let EqnObj = {
       id: results[0].lineName,
       lineName: results[0].lineName,
-      LHSLatexEqn:
-        "\\frac{d" + results[0].lineName + "}{d" + independentLatex + "}=",
-      latexEqn: parse(
-        parse(results[0].textEqn).toString({
-          implicit: "hide",
-          parenthesis: "auto",
-        })
-      ).toTex({
-        parenthesis: "auto",
-        implicit: "hide",
-      }),
+      LHSLatexEqn: results[0].LHSLatexEqn,
+      latexEqn: parse(parse(results[0].textEqn).toString({})).toTex({}),
       textEqn: results[0].textEqn,
-      parsedEqn: simplify(parse(results[0].textEqn)),
+      // parsedEqn: simplify(parse(results[0].textEqn)),
       errorMessage: null,
     };
 
@@ -649,14 +646,18 @@ class LinearCoupled extends Component {
         return json;
       })
       .catch((err) => {
-        console.log(err)
+        console.log(err);
+        modelObj.Config.calculate = false;
+
         if (err.name === "AbortError") {
           this.setState({
+            modelObj: modelObj,
             error: false,
             completed: true,
           });
         } else {
           this.setState({
+            modelObj: modelObj,
             error: true,
             completed: true,
           });
@@ -698,7 +699,7 @@ class LinearCoupled extends Component {
                 this.setState({
                   modelObj: modelObj,
                   localSolver: !this.state.localSolver,
-                  error:false
+                  error: false,
                 });
               }}
               localSolver={this.state.localSolver}
@@ -822,12 +823,8 @@ class LinearCoupled extends Component {
             {!this.state.localSolver && !this.state.completed ? (
               <Spinner />
             ) : null}
-            {this.state.error ? (
-              <Alert severity="error">This is an error alert</Alert>
-            ) : null}
 
-            {
-            (this.state.completed || this.state.localSolver)
+            {this.state.completed || this.state.localSolver
               ? this.GRAPH_renderCalced(
                   this.state.modelObj.solutions.calcedSolution
                 )
@@ -836,6 +833,7 @@ class LinearCoupled extends Component {
         ) : (
           <div className={classes.Graph} key="GraphButtons" />
         )}
+        {this.state.error ? <SnackbarError /> : null}
 
         {/* <Modal
                     open={this.state.modelObj.Config.show}
