@@ -18,9 +18,7 @@ import FileUpload from "../../../components/UI/FileUpload/FileUpload";
 
 import Model from "../../../components/Calculations/Dynamic/SampleEquations/Model";
 import Draggable from "react-draggable";
-import DBAccess from "../DBAccess";
 import Spinner from "../../../components/UI/Skeleton/Spinner";
-import { Alert } from "@material-ui/lab";
 import SnackbarError from "../../../components/UI/MyErrorMessage/SnackbarError";
 
 class LinearCoupled extends Component {
@@ -507,10 +505,7 @@ class LinearCoupled extends Component {
     const results = Eqns.filter(({ lineName: a }) => {
       return !prevState.modelObj.Eqns.some(({ lineName: b }) => b === a);
     });
-    let independentLatex = this.state.modelObj.Vars.find(
-      (Var) => Var.VarType === "Independent"
-    ).LatexForm;
-
+   
     let EqnObj = {
       id: results[0].lineName,
       lineName: results[0].lineName,

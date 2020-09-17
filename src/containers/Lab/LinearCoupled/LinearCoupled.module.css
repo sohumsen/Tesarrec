@@ -8,7 +8,7 @@
   /* overflow: hidden; */
 }
 .EqnColumn {
-  flex: 5 0;
+  flex: 5 ;
   width: 0;
   order: 2;
 }
@@ -20,7 +20,7 @@
   margin-top: 10px;
 }
 .VarColumn {
-  flex: 3 0;
+  flex: 3 ;
   width: 0;
 
   order: 4;

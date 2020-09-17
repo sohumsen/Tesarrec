@@ -1,5 +1,5 @@
 import React from "react";
-import { addStyles, EditableMathField, StaticMathField } from "react-mathquill";
+import { addStyles, EditableMathField} from "react-mathquill";
 // inserts the required css to the <head> block.
 // You can skip this, if you want to do that by yourself.
 addStyles();

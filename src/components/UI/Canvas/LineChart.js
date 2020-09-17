@@ -126,9 +126,7 @@ class MyLineChart extends Component {
               {/* <Line type="monotone" dataKey="y" stroke="#82ca9d" /> */}
             </LineChart>
           </ResponsiveContainer>
-          //{" "}
         </div>
-        //{" "}
       </div>
     );
   }

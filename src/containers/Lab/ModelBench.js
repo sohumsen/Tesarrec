@@ -4,14 +4,11 @@ import ModelExplorer from "../../components/UI/FileController/ModelExplorer";
 import PublishedDialog from "../../components/UI/PublishedDialog/PublishedDialog";
 
 import classes from "./ModelBench.module.css";
-import DBAccess from "./DBAccess";
 import SolverAnalysis from "./SolverAnalysis/SolverAnalysis";
 import Model from "../../components/Calculations/Dynamic/SampleEquations/Model";
 import axios from "axios";
-import MathQuillTest from "../../components/UI/Math/MathQuillTest";
-import { FullScreen, useFullScreenHandle } from "react-full-screen";
 import FullScreenWrapper from "../../components/UI/FullScreenWrapper/FullScreenWrapper";
-import SnackbarError from '../../components/UI/MyErrorMessage/SnackbarError'
+import SnackbarError from "../../components/UI/MyErrorMessage/SnackbarError";
 
 class ModelBench extends Component {
   /**
@@ -26,7 +23,6 @@ class ModelBench extends Component {
     selectedModelId: "",
     selectedModel: "",
 
-    calculate: false,
     error: false,
     tabChoiceValue: 1 /* TODO This component doesnt need to know this */,
     loading: false,
@@ -51,6 +47,8 @@ class ModelBench extends Component {
       })
       .catch((err) => {
         console.log(err);
+
+        // this.setState({error:true})
       });
   };
 
@@ -143,7 +141,6 @@ class ModelBench extends Component {
     let allModels = { ...this.state.allModelId, ...this.state.allPublicId };
 
     this.setState({
-      calculate: false,
       selectedModel: allModels[modelId],
       selectedModelId: modelId,
       tabChoiceValue: 1,
@@ -153,7 +150,7 @@ class ModelBench extends Component {
   MODEL_onEditName = (newModelName) => {
     let modelObj = this.state.selectedModel;
     modelObj.meta.name = newModelName;
-    this.setState({ selectedModel: modelObj });
+    this.setState({ selectedModel: modelObj }, () => this.MODEL_save());
   };
 
   MODEL_onRemove = () => {
@@ -241,6 +238,24 @@ class ModelBench extends Component {
     this.setState({ selectedModel: modelObj }, () => {
       let payload = this.state.selectedModel.returnConstructorObj();
       if (this.state.selectedModelId !== "") {
+        // axios.put(
+        //   "https://tesarrec.firebaseio.com/eqns/" +
+        //     this.props.userId +
+        //     "/" +
+        //     this.state.selectedModelId +
+        //     "/.json?auth=",
+        //   payload
+        // )
+        // .then((response) => {
+        //   this.setState({
+        //     error: false,
+        //     seekChildUpdates: false,
+           
+        //   });
+        // })
+        // .catch((error) => {
+        //   this.setState({ error: true });
+        // });
         this.generalDBRequest(
           payload,
           "https://tesarrec.firebaseio.com/eqns/" +
@@ -301,10 +316,8 @@ class ModelBench extends Component {
       <FullScreenWrapper>
         <div className={classes.ModelBenchContainer}>
           <div ref={nodeRef} className={classes.ModelBenchItemLeft}>
-            <div className={classes.ModelBenchItemLeftFileNav}>
               {/* {this.state.loading ? <Skeleton /> : null} */}
               {modelLinks}
-            </div>
 
             {/* <div className={classes.ModelBenchItemLeftEqnNav}>
             <MyTabs

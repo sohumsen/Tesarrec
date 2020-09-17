@@ -1,6 +1,5 @@
 import React, { Component } from "react";
-import $ from "jquery";
-import test from "./test.py";
+
 import axios from "axios";
 
 class DBAccess extends Component {

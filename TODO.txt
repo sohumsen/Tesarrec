@@ -8,7 +8,6 @@
 When renaming a parameter all the equations must change
 
 on go to new model, ask if they want to save
-on edit file name save update
 
 
 

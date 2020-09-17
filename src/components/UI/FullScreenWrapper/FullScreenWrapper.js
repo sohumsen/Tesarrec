@@ -1,5 +1,5 @@
 import { IconButton, Tooltip } from "@material-ui/core";
-import React, { useCallback } from "react";
+import React from "react";
 import { FullScreen, useFullScreenHandle } from "react-full-screen";
 import FullscreenIcon from "@material-ui/icons/Fullscreen";
 import classes from "./FullScreenWrapper.module.css";

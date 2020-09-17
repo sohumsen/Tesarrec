@@ -31,7 +31,7 @@ export default function AlertDialogSlide(props) {
         <DialogContent>
           <DialogContentText id="alert-dialog-slide-description">
             Once published it cannot be editted or deleted and will be open to
-            other users.
+            other users. This process cannot be undone
           </DialogContentText>
         </DialogContent>
         <DialogActions>

@@ -17,16 +17,7 @@
 }
 /*  */
 
-.ModelBenchItemLeftEqnNav {
-  flex: 1 1 auto;
 
-}
-.ModelBenchItemLeftFileNav {
-  /* border-color: blue;
-  background-color: blueviolet;*/
-  flex: 1 1 auto;
-  
-}
 .ModelBenchItemCenter {
   flex: 70 1 auto;
   /* overflow: hidden; */

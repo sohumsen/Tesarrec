@@ -19,7 +19,6 @@ import FIREBASE_KEY from "../../../firebasekey";
 
 import { NavLink } from "react-router-dom";
 import CustomizedErrorMessage from "../../../components/UI/MyErrorMessage/AuthenticateError";
-import axios from "axios";
 
 function Copyright() {
   return (

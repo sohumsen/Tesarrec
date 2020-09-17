@@ -19,7 +19,6 @@ import SnackbarError from '../../../components/UI/MyErrorMessage/SnackbarError'
 
 import { NavLink } from "react-router-dom";
 import CustomizedErrorMessage from "../../../components/UI/MyErrorMessage/AuthenticateError";
-import { Snackbar } from "@material-ui/core";
 
 function Copyright() {
   return (

@@ -5,10 +5,8 @@ import DEFAULTVARSFORMODEL from "./DEFAULTVARS";
 import DEFAULTEQUATIONSNEW from "./DEFAULTEQUATIONS";
 import DEFAULTMODELCONFIGNew from "../../../../containers/Lab/LinearCoupled/DefaultGraphConfignew";
 import React from "react";
-import texFromExpression from "../../../toLatexCoverter";
 
 import MyErrorMessage from "../../../UI/MyErrorMessage/CustomizedErrorMessage";
-import axios from "axios";
 
 export default class Model {
   constructor(dbModel, meta) {
@@ -153,7 +151,7 @@ export default class Model {
 
   tryConvertToLatex = (textEqn) => {
     try {
-      return parse(parse(textEqn).toString({})).toTex({});
+      return parse(parse(textEqn).toString()).toTex();
     } catch (error) {
       return textEqn;
     }

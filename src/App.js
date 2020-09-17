@@ -16,7 +16,6 @@ import SignUp from "./containers/Authenticate/SignUp/SignUp";
 import Logout from "./containers/Authenticate/Logout/Logout";
 import FIREBASE_KEY from "./firebasekey";
 import Chp from "./containers/Sustainability/Chp/Chp";
-import axios from "axios";
 class App extends Component {
   state = {
     isLoggedIn: false,

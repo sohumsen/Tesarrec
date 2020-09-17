@@ -1,5 +1,4 @@
 import React from "react";
-import MyMathQuill from "../Math/MyMathQuill";
 import classes from "./VarItem.module.css";
 import OutlinedInput from "../Input/OutlinedInput";
 import { Paper } from "@material-ui/core";
