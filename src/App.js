@@ -174,7 +174,7 @@ class App extends Component {
           render={(props) => (
             <SnackbarProvider
               bodyStyle={{ maxWidth: "10%" }}
-              maxSnack={2}
+              maxSnack={1}
               ref={notistackRef}
               action={(key) => (
                 <Button onClick={onClickDismiss(key)}>Dismiss</Button>
@@ -185,10 +185,10 @@ class App extends Component {
                 containerRoot: classes.containerRoot,
                 root: classes.root,
                 containerAnchorOriginBottomLeft: classes.snackContainer,
-                variantSuccess: classes.success,
-                variantError: classes.error,
-                variantWarning: classes.warning,
-                variantInfo: classes.info,
+                // variantSuccess: classes.success,
+                // variantError: classes.error,
+                // variantWarning: classes.warning,
+                // variantInfo: classes.info,
               }}
             >
               <ModelBench

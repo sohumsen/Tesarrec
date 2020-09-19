@@ -20,8 +20,7 @@ import Model from "../../../components/Calculations/Dynamic/SampleEquations/Mode
 import Draggable from "react-draggable";
 import Spinner from "../../../components/UI/Skeleton/Spinner";
 import SnackbarError from "../../../components/UI/MyErrorMessage/SnackbarError";
-import { withSnackbar,SnackbarProvider } from "notistack";
-
+import { withSnackbar, SnackbarProvider } from "notistack";
 
 class LinearCoupled extends Component {
   /**
@@ -34,7 +33,7 @@ class LinearCoupled extends Component {
 
   state = {
     modelId: "",
-   
+
     localSolver: true, // this flag determines if we are using JS or remote Python Server
     completed: false, // onky relevant for remote Python server
     showMathQuillBox: true,
@@ -66,7 +65,6 @@ class LinearCoupled extends Component {
       return {
         modelId: props.modelId,
         modelObj: newModel,
-      
       };
     }
 
@@ -331,7 +329,7 @@ class LinearCoupled extends Component {
     if (invalidIndex.length === 0) {
       //valid
       this.props.enqueueSnackbar("Valid model", {
-        variant: 'success'
+        variant: "success",
       });
       let newEqns2 = this.state.modelObj.insertDifferentialIntoText(newEqns);
       if (
@@ -342,10 +340,8 @@ class LinearCoupled extends Component {
         aModel.Config.calculate = false;
         aModel.Eqns = newEqns2;
         this.props.enqueueSnackbar("Invalid model", {
-          variant: 'error'
+          variant: "error",
         });
-      
-     
       } else {
         aModel.Eqns = newEqns2;
         aModel.Config.calculate = true;
@@ -358,7 +354,6 @@ class LinearCoupled extends Component {
           this.getDAESolution();
           // this.getODESolution()
         }
-
       }
     } else {
       aModel.Config.calculate = false;
@@ -441,7 +436,7 @@ class LinearCoupled extends Component {
   };
   ITEMS_reset = () => {
     this.props.enqueueSnackbar("Reset model", {
-      variant: 'success'
+      variant: "success",
     });
     this.setState({
       modelObj: new Model(),
@@ -677,7 +672,7 @@ class LinearCoupled extends Component {
         console.log(json);
         modelObj.solutions.calcedSolution = json;
         this.props.enqueueSnackbar("Request succeeded", {
-          variant: 'success'
+          variant: "success",
         });
         this.setState({
           error: false,
@@ -690,11 +685,10 @@ class LinearCoupled extends Component {
       .catch((err) => {
         console.log(err);
         modelObj.Config.calculate = false;
-      
 
         if (err.name === "AbortError") {
           this.props.enqueueSnackbar("Request aborted", {
-            variant: 'error'
+            variant: "error",
           });
           this.setState({
             modelObj: modelObj,
@@ -703,7 +697,7 @@ class LinearCoupled extends Component {
           });
         } else {
           this.props.enqueueSnackbar("Request failed", {
-            variant: 'error'
+            variant: "error",
           });
           this.setState({
             modelObj: modelObj,
@@ -767,18 +761,6 @@ class LinearCoupled extends Component {
             className={classes.MetaContainer}
             elevation={3}
           >
-            {/* <div className={classes.uploadButton}>
-            <FileUpload
-              setDescription={(txt) => {
-                let modelObj = this.state.modelObj;
-                modelObj.Config.calculate = false;
-                modelObj.meta.description = txt;
-                this.setState({ modelObj: modelObj });
-              }}
-            />
-
-            </div> */}
-            {/* <div className={classes.textfield}> */}
             <TextField
               id="outlined-multiline-static"
               multiline
@@ -811,15 +793,11 @@ class LinearCoupled extends Component {
               }}
               inputProps={{ style: { fontSize: 12 } }} // font size of input text
             />
-            {/* </div> */}
           </Paper>
-
         </div>
+
         <div className={classes.VarColumn}>
-          <Paper
-            className={classes.VarContainer}
-            // style={{ backgroundColor: "red" }}
-          >
+          <Paper className={classes.VarContainer}>
             <LinearCoupledButtonVariablesContainer
               Vars={this.state.modelObj.Vars}
               Eqns={this.state.modelObj.Eqns}
@@ -832,7 +810,14 @@ class LinearCoupled extends Component {
               handleMathQuillInputChange={this.MATHQUILL_handleInputChange}
             />
           </Paper>
-       
+
+          <Paper className={classes.PicContainer}>
+            <img
+              style={{ maxWidth: "100%", maxHeight: "100%" }}
+              src="https://www.lewuathe.com/assets/img/posts/2020-03-11-covid-19-dynamics-with-sir-model/sir.png"
+              alt="new"
+            />
+          </Paper>
         </div>
 
         {this.state.modelObj.Config.calculate ? (

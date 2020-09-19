@@ -19,6 +19,11 @@
 .MetaContainer {
   margin-top: 10px;
 }
+.PicContainer{
+
+  margin-top: 10px;
+
+}
 .VarColumn {
   flex: 3 ;
   width: 0;
