@@ -20,7 +20,7 @@ export default function CustomizedSnackbars() {
   return (
     <div>
       <Snackbar open={open} autoHideDuration={4000} onClose={handleClose}>
-        <Alert onClose={handleClose} severity="error" >
+        <Alert onClose={handleClose} severity="error">
           Oops, something went wrong!
         </Alert>
       </Snackbar>

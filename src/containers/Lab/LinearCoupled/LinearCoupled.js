@@ -3,12 +3,12 @@ import "../../../../node_modules/react-grid-layout/css/styles.css";
 
 import EqnItems from "../../../components/UI/Eqns/EqnItems";
 import VarItems from "../../../components/UI/Vars/VarItems";
-import { simplify, parse } from "mathjs";
+import { parse, simplify } from "mathjs";
 import classes from "./LinearCoupled.module.css";
 import MyErrorMessage from "../../../components/UI/MyErrorMessage/CustomizedErrorMessage";
 import GraphConfig from "../../../components/UI/GraphConfig/GraphConfig";
 import LinearCoupledDiffEquationGrapher from "../../../components/Calculations/Dynamic/LinearCoupled/LinearCoupledDiffEquationGrapher";
-import { Paper, TextField, InputAdornment } from "@material-ui/core";
+import { InputAdornment, Paper, TextField } from "@material-ui/core";
 import LinearCoupledButtonEqnsContainer from "../../../components/UI/ButtonContainer/LinearCoupledButtonEqnsContainer";
 import DEFAULTEQUATIONS from "../../../components/Calculations/Dynamic/SampleEquations/DEFAULTEQUATIONS";
 
@@ -20,6 +20,8 @@ import Model from "../../../components/Calculations/Dynamic/SampleEquations/Mode
 import Draggable from "react-draggable";
 import Spinner from "../../../components/UI/Skeleton/Spinner";
 import SnackbarError from "../../../components/UI/MyErrorMessage/SnackbarError";
+import { withSnackbar,SnackbarProvider } from "notistack";
+
 
 class LinearCoupled extends Component {
   /**
@@ -32,10 +34,7 @@ class LinearCoupled extends Component {
 
   state = {
     modelId: "",
-    consoleMessages: [
-      "Welcome to ModelBench!",
-      "Select a model to get started",
-    ],
+   
     localSolver: true, // this flag determines if we are using JS or remote Python Server
     completed: false, // onky relevant for remote Python server
     showMathQuillBox: true,
@@ -67,10 +66,7 @@ class LinearCoupled extends Component {
       return {
         modelId: props.modelId,
         modelObj: newModel,
-        consoleMessages: [
-          "Welcome to ModelBench!",
-          "Select a model to get started",
-        ],
+      
       };
     }
 
@@ -85,6 +81,7 @@ class LinearCoupled extends Component {
       this.props.sendToParent(this.state.modelObj);
     }
   }
+
   TEXTEQNS_handleInputChange = (id) => (event, value) => {
     let Eqns = this.state.modelObj.Eqns;
 
@@ -151,14 +148,23 @@ class LinearCoupled extends Component {
       //TODO make sure lineName is NEVER ""
 
       //replaces all item.lineNames instances with the new user input
-      console.log(dependentLatex==="")
-      if (dependentLatex===""){
-        modelObj.Eqns.forEach(Eqn=>{
-          Eqn.latexEqn=Eqn.latexEqn.replace(item.lineName,dependentLatex)
-        })
-      }
-    
+      // if (dependentLatex === "") {
+      //   dependentLatex = "a";
+      // }
 
+      //lineName=S,dependent="",lineName=""
+      //lineName=S,dependent="",lineName=""
+      //lineName=S,dependent="",lineName=""
+      //   console.log(
+      //     "item.lineName " + item.lineName,
+      //     "dependentLatex " + dependentLatex
+      //   );
+      //   modelObj.Eqns.forEach((Eqn) => {
+      //     Eqn.textEqn = Eqn.textEqn.replace(item.lineName, dependentLatex);
+      //     Eqn.latexEqn = this.state.modelObj.tryConvertToLatex(Eqn.textEqn)
+
+      //   });
+      //   console.log(modelObj.Eqns)
       //finds the index of the Var with item.lineName
       let idxOfVars = this.state.modelObj.Vars.findIndex(
         (Var) => Var.LatexForm === item.lineName
@@ -166,14 +172,11 @@ class LinearCoupled extends Component {
       modelObj.Vars[idxOfVars].LatexForm = dependentLatex;
 
       //sets new lineName as new user input
-        item.lineName = dependentLatex;
+      item.lineName = dependentLatex;
 
-        console.log("item.lineName "+item.lineName,"dependentLatex "+dependentLatex)
-
-     
       items[idx] = item;
       modelObj["Eqns"] = items;
-    
+
       modelObj.Config.calculate = false;
 
       this.setState({ modelObj: modelObj });
@@ -195,32 +198,31 @@ class LinearCoupled extends Component {
 
       let Eqns = this.state.modelObj.Eqns;
 
-      // if (item.VarType === "Dependent") {
-      //   //TODO rename var for Vars the LatexForm can be y_1 or y2 which is being compared to eqn linename
-      //   let index = Eqns.findIndex(
-      //     (Eqn) => Eqn.lineName === this.state.modelObj.Vars[idx].LatexForm
-      //   );
+      if (item.VarType === "Dependent") {
+        //TODO rename var for Vars the LatexForm can be y_1 or y2 which is being compared to eqn linename
+        let index = Eqns.findIndex(
+          (Eqn) => Eqn.lineName === this.state.modelObj.Vars[idx].LatexForm
+        );
 
-      //   let independentLatex = this.state.modelObj.Vars.find(
-      //     (Var) => Var.VarType === "Independent"
-      //   ).LatexForm;
+        let independentLatex = this.state.modelObj.Vars.find(
+          (Var) => Var.VarType === "Independent"
+        ).LatexForm;
 
-      //   if (/frac({d.+}){2}/.test(Eqns[index].LHSLatexEqn)) {
-      //     //its a valid fraction
+        if (/frac({d.*}){2}/.test(Eqns[index].LHSLatexEqn)) {
+          //its a valid fraction
 
-      //     Eqns[index].LHSLatexEqn =
-      //       "\\frac{d" + mathField.latex() + "}{d" + independentLatex + "}=";
-      //   }
-      //   if (/(\w+=)/.test(Eqns[index].LHSLatexEqn)) {
-      //     //its E=
-      //     Eqns[index].LHSLatexEqn = mathField.latex() + "=";
-      //   }
+          Eqns[index].LHSLatexEqn =
+            "\\frac{d" + mathField.latex() + "}{d" + independentLatex + "}=";
+        }
+        if (/(\w+=)/.test(Eqns[index].LHSLatexEqn)) {
+          //its E=
+          Eqns[index].LHSLatexEqn = mathField.latex() + "=";
+        }
 
-      //   Eqns[index].lineName = mathField.latex();
+        Eqns[index].lineName = mathField.latex();
 
-      //   modelObj.Eqns = Eqns;
-      // } else
-      if (item.VarType === "Independent") {
+        modelObj.Eqns = Eqns;
+      } else if (item.VarType === "Independent") {
         Eqns.forEach((Eqn) => {
           if (/frac({d.*}){2}/.test(Eqn.LHSLatexEqn)) {
             //its a valid fraction
@@ -279,7 +281,17 @@ class LinearCoupled extends Component {
         }
       }
       [...new Set(invalidIdx)].forEach(
-        (idx) => (items[idx].errorMessage = "Err")
+        (idx) =>
+          (items[idx].errorMessage = (
+            <MyErrorMessage
+              msg={
+                <div>
+                  <b>{items[idx].LatexForm}</b> <u>is a duplicate</u>
+                </div>
+              }
+              //   msg={items[idx].LatexForm + "is a duplicate"}
+            />
+          ))
       );
       items[idx] = item;
       modelObj[itemType] = items;
@@ -298,7 +310,15 @@ class LinearCoupled extends Component {
       const eqn = this.state.modelObj.Eqns[i];
 
       if (invalidIndex.includes(i)) {
-        eqn.errorMessage = <MyErrorMessage />;
+        eqn.errorMessage = (
+          <MyErrorMessage
+            msg={
+              <div>
+                <b>{eqn.lineName}</b> <u> uses a unknown variable</u>
+              </div>
+            }
+          />
+        );
         newEqns.push(eqn);
       } else {
         eqn.errorMessage = null;
@@ -310,6 +330,9 @@ class LinearCoupled extends Component {
 
     if (invalidIndex.length === 0) {
       //valid
+      this.props.enqueueSnackbar("Valid model", {
+        variant: 'success'
+      });
       let newEqns2 = this.state.modelObj.insertDifferentialIntoText(newEqns);
       if (
         newEqns2.some((eqn) => eqn.errorMessage !== null) ||
@@ -318,19 +341,14 @@ class LinearCoupled extends Component {
         //invalid
         aModel.Config.calculate = false;
         aModel.Eqns = newEqns2;
-        let msg = [
-          <p>
-            ERROR: Please correct the equations or vars highlighted to be able
-            to solve the model"
-          </p>,
-        ];
-        let consoleMessages = [...this.state.consoleMessages];
-        consoleMessages.push(msg);
-        this.setState({ consoleMessages: msg });
+        this.props.enqueueSnackbar("Invalid model", {
+          variant: 'error'
+        });
+      
+     
       } else {
         aModel.Eqns = newEqns2;
         aModel.Config.calculate = true;
-        let msg = [<p>Calculating...</p>];
 
         if (this.state.localSolver) {
           let solution = this.state.modelObj.solveDiffEqns();
@@ -341,9 +359,6 @@ class LinearCoupled extends Component {
           // this.getODESolution()
         }
 
-        let consoleMessages = [...this.state.consoleMessages];
-        consoleMessages.push(msg);
-        this.setState({ consoleMessages: msg });
       }
     } else {
       aModel.Config.calculate = false;
@@ -425,13 +440,12 @@ class LinearCoupled extends Component {
     }
   };
   ITEMS_reset = () => {
-    console.log(new Model());
-    this.setState(
-      {
-        modelObj: new Model(),
-      },
-      () => console.log(this.state.modelObj)
-    );
+    this.props.enqueueSnackbar("Reset model", {
+      variant: 'success'
+    });
+    this.setState({
+      modelObj: new Model(),
+    });
   };
 
   VARS_handleInputChange = (id, calculate) => (event, value) => {
@@ -605,27 +619,27 @@ class LinearCoupled extends Component {
     this.setState({ modelObj: modelObj });
   };
 
-  getODESolution = () => {
-    let modelObj = this.state.modelObj;
+  //   getODESolution = () => {
+  //     let modelObj = this.state.modelObj;
 
-    fetch("http://127.0.0.1:8080/solve_ode", {
-      method: "POST",
-      // cache: "no-cache",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(this.state.modelObj.returnConstructorObj()),
-    })
-      .then((response) => {
-        return response.json();
-      })
-      .then((json) => {
-        modelObj.solutions.calcedSolution = json;
-        this.setState({ modelObj: modelObj });
-        return json;
-      })
-      .catch((err) => console.log(err));
-  };
+  //     fetch("http://127.0.0.1:8080/solve_ode", {
+  //       method: "POST",
+  //       // cache: "no-cache",
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //       },
+  //       body: JSON.stringify(this.state.modelObj.returnConstructorObj()),
+  //     })
+  //       .then((response) => {
+  //         return response.json();
+  //       })
+  //       .then((json) => {
+  //         modelObj.solutions.calcedSolution = json;
+  //         this.setState({ modelObj: modelObj });
+  //         return json;
+  //       })
+  //       .catch((err) => console.log(err));
+  //   };
 
   getDAESolution = () => {
     /**
@@ -662,7 +676,9 @@ class LinearCoupled extends Component {
       .then((json) => {
         console.log(json);
         modelObj.solutions.calcedSolution = json;
-
+        this.props.enqueueSnackbar("Request succeeded", {
+          variant: 'success'
+        });
         this.setState({
           error: false,
 
@@ -674,14 +690,21 @@ class LinearCoupled extends Component {
       .catch((err) => {
         console.log(err);
         modelObj.Config.calculate = false;
+      
 
         if (err.name === "AbortError") {
+          this.props.enqueueSnackbar("Request aborted", {
+            variant: 'error'
+          });
           this.setState({
             modelObj: modelObj,
             error: false,
             completed: true,
           });
         } else {
+          this.props.enqueueSnackbar("Request failed", {
+            variant: 'error'
+          });
           this.setState({
             modelObj: modelObj,
             error: true,
@@ -791,15 +814,6 @@ class LinearCoupled extends Component {
             {/* </div> */}
           </Paper>
 
-          {/* <Paper
-            key="Console"
-            className={classes.ConsoleContainer}
-            elevation={3}
-          >
-            {this.state.consoleMessages.map((msg) => (
-              <p>{">  " + msg}</p>
-            ))}
-          </Paper> */}
         </div>
         <div className={classes.VarColumn}>
           <Paper
@@ -818,15 +832,7 @@ class LinearCoupled extends Component {
               handleMathQuillInputChange={this.MATHQUILL_handleInputChange}
             />
           </Paper>
-          {/* <Paper
-            key="Console"
-            className={classes.ConsoleContainer}
-            elevation={3}
-          >
-            {this.state.consoleMessages.map((msg) => (
-              <p>{">  " + msg}</p>
-            ))}
-          </Paper> */}
+       
         </div>
 
         {this.state.modelObj.Config.calculate ? (
@@ -835,7 +841,7 @@ class LinearCoupled extends Component {
               calculate={this.state.modelObj.Config.calculate}
               onGraphConfigOpen={this.GRAPHCONFIG_onClose}
               onGraphClose={() => {
-                this.state.controller.abort();
+                // this.state.controller.abort();
                 // this.abortFetch()
 
                 let modelObj = { ...this.state.modelObj };
@@ -859,7 +865,7 @@ class LinearCoupled extends Component {
         ) : (
           <div className={classes.Graph} key="GraphButtons" />
         )}
-        {this.state.error ? <SnackbarError /> : null}
+        {/* {this.state.error ? <SnackbarError /> : null} */}
 
         {/* <Modal
                     open={this.state.modelObj.Config.show}
@@ -883,4 +889,5 @@ class LinearCoupled extends Component {
   }
 }
 
+// export default withSnackbar(LinearCoupled);
 export default LinearCoupled;

@@ -150,12 +150,46 @@ export default class Model {
   };
 
   tryConvertToLatex = (textEqn) => {
+
     try {
-      return parse(parse(textEqn).toString()).toTex();
+      // let expression=parse(textEqn)
+
+      // return expression.toTex()
+      return parse(parse(textEqn).toString({parenthesis: 'auto'})).toTex();
     } catch (error) {
       return textEqn;
     }
   };
+
+  setVarItemErrorMessage=(items)=>{
+    let invalidIdx = [];
+
+    for (let i = 0; i < items.length; i++) {
+      for (let j = 0; j < items.length; j++) {
+        if (i !== j) {
+          if (items[i].LatexForm === items[j].LatexForm) {
+            invalidIdx.push(i, j);
+          } else {
+            items[i].errorMessage = null;
+            items[j].errorMessage = null;
+          }
+        }
+      }
+    }
+    [...new Set(invalidIdx)].forEach(
+      (idx) =>
+        (items[idx].errorMessage = (
+          <MyErrorMessage
+            msg={
+              <div>
+                <b>{items[idx].LatexForm}</b> <u>is a duplicate</u>
+              </div>
+            }
+          //   msg={items[idx].LatexForm + "is a duplicate"}
+          />
+        ))
+    );
+  }
 
   // set eqns(textEqnsArr){
   //   this.eqns.textEqns=textEqnsArr

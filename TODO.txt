@@ -2,8 +2,7 @@
 When renaming a parameter all the equations must change
 
 on go to new model, ask if they want to save
-SHOW WARNING FOR DUP VARS
-show warnings for dup eqns
+make snackbar thinner
 
 
 

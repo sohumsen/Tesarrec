@@ -9,6 +9,9 @@ import Model from "../../components/Calculations/Dynamic/SampleEquations/Model";
 import axios from "axios";
 import FullScreenWrapper from "../../components/UI/FullScreenWrapper/FullScreenWrapper";
 import SnackbarError from "../../components/UI/MyErrorMessage/SnackbarError";
+import { withSnackbar,SnackbarProvider } from "notistack";
+import Button from '@material-ui/core/Button';
+
 
 class ModelBench extends Component {
   /**
@@ -66,6 +69,8 @@ class ModelBench extends Component {
         aNewModel
       )
       .then((response) => {
+        this.props.enqueueSnackbar("Created new model", { variant: "success" });
+
         this.setState({
           error: false,
           selectedModelId: response.data.name,
@@ -77,6 +82,9 @@ class ModelBench extends Component {
         });
       })
       .catch((error) => {
+        this.props.enqueueSnackbar("Failed to create new model", {
+          variant: "error",
+        });
         this.setState({ error: true });
       });
   };
@@ -121,6 +129,9 @@ class ModelBench extends Component {
         payload
       )
       .then((response) => {
+        this.props.enqueueSnackbar("Published model", {
+          variant: "success",
+        });
         this.setState({
           error: false,
           selectedModelId: "",
@@ -132,6 +143,9 @@ class ModelBench extends Component {
         });
       })
       .catch((error) => {
+        this.props.enqueueSnackbar("Failed to publish model", {
+          variant: "error",
+        });
         this.setState({ error: true });
       });
   };
@@ -139,7 +153,9 @@ class ModelBench extends Component {
   MODEL_onSelectLink = (modelId) => {
     //sets model id and eqns
     let allModels = { ...this.state.allModelId, ...this.state.allPublicId };
-
+    this.props.enqueueSnackbar("Opened new model", {
+      variant: "info",
+    });
     this.setState({
       selectedModel: allModels[modelId],
       selectedModelId: modelId,
@@ -148,6 +164,9 @@ class ModelBench extends Component {
   };
 
   MODEL_onEditName = (newModelName) => {
+    this.props.enqueueSnackbar("Edited model name", {
+      variant: "success",
+    });
     let modelObj = this.state.selectedModel;
     modelObj.meta.name = newModelName;
     this.setState({ selectedModel: modelObj }, () => this.MODEL_save());
@@ -175,8 +194,18 @@ class ModelBench extends Component {
           ".json?auth=" +
           this.props.token
       )
-      .then((res) => this.setState({ error: false }))
-      .catch((err) => this.setState({ error: true }));
+      .then((res) => {
+        this.props.enqueueSnackbar("Deleted model", {
+          variant: "success",
+        });
+        this.setState({ error: false });
+      })
+      .catch((err) => {
+        this.props.enqueueSnackbar("Failed to delete model", {
+          variant: "error",
+        });
+        this.setState({ error: true });
+      });
   };
 
   MODEL_getPublic = () => {
@@ -223,6 +252,9 @@ class ModelBench extends Component {
       allTextEqns.push(Eqn.textEqn);
     }
     navigator.clipboard.writeText(allTextEqns);
+    this.props.enqueueSnackbar("Copied equations", {
+      variant: "success",
+    });
   };
   //        <TemplateController/>
 
@@ -250,7 +282,7 @@ class ModelBench extends Component {
         //   this.setState({
         //     error: false,
         //     seekChildUpdates: false,
-           
+
         //   });
         // })
         // .catch((error) => {
@@ -267,15 +299,24 @@ class ModelBench extends Component {
           "PUT",
           this.setState({ error: false, seekChildUpdates: false }, () => {
             this.MODEL_getPrivate();
+            // this.props.enqueueSnackbar("Saved Model", {
+            //   variant: 'success'
+            // });
           })
         );
       } else {
+        this.props.enqueueSnackbar("Failed to save model", {
+          variant: "error",
+        });
         this.setState({ error: true });
       }
     });
   };
 
   handleTabChange = (event, val) => {
+    this.props.enqueueSnackbar("Switched mode", {
+      variant: "info",
+    });
     this.setState({ tabChoiceValue: val });
   };
 
@@ -309,15 +350,18 @@ class ModelBench extends Component {
       : (modelLinks = null);
 
     const nodeRef = React.createRef(null);
-
+    const notistackRef = React.createRef();
+    const onClickDismiss = (key) => () => {
+      notistackRef.current.closeSnackbar(key);
+    };
     return (
       // can u inject a background-color: ranmdom lookup color if DEVMODE=TRUE
 
       <FullScreenWrapper>
         <div className={classes.ModelBenchContainer}>
           <div ref={nodeRef} className={classes.ModelBenchItemLeft}>
-              {/* {this.state.loading ? <Skeleton /> : null} */}
-              {modelLinks}
+            {/* {this.state.loading ? <Skeleton /> : null} */}
+            {modelLinks}
 
             {/* <div className={classes.ModelBenchItemLeftEqnNav}>
             <MyTabs
@@ -332,12 +376,22 @@ class ModelBench extends Component {
             {/* <MathQuillTest/> */}
             {/* {this.state.tabChoiceValue === 0 ? <SingleODE /> : null} */}
             {this.state.tabChoiceValue === 1 ? (
-              <LinearCoupled
-                modelId={this.state.selectedModelId}
-                modelObj={this.state.selectedModel}
-                sendToParent={this.sendToParent}
-                seekChildUpdates={this.state.seekChildUpdates}
-              />
+              // <SnackbarProvider
+              //   maxSnack={2}
+              //   ref={notistackRef}
+              //   action={(key) => (
+              //     <Button onClick={onClickDismiss(key)}>Dismiss</Button>
+              //   )}
+              //   preventDuplicate
+              // >
+                <LinearCoupled
+                  modelId={this.state.selectedModelId}
+                  modelObj={this.state.selectedModel}
+                  sendToParent={this.sendToParent}
+                  seekChildUpdates={this.state.seekChildUpdates}
+                  enqueueSnackbar={this.props.enqueueSnackbar}
+                />
+              // </SnackbarProvider>
             ) : null}
             {this.state.tabChoiceValue === 2 ? <SolverAnalysis /> : null}
             {this.state.published ? (
@@ -361,7 +415,7 @@ class ModelBench extends Component {
               >
                 https://tesarrec.org/modelbench
                 <br />
-              </a>{" "}
+              </a>
               01/05/2020
             </p>
           </div>
@@ -371,4 +425,4 @@ class ModelBench extends Component {
   }
 }
 
-export default ModelBench;
+export default withSnackbar(ModelBench);

@@ -16,6 +16,24 @@ import SignUp from "./containers/Authenticate/SignUp/SignUp";
 import Logout from "./containers/Authenticate/Logout/Logout";
 import FIREBASE_KEY from "./firebasekey";
 import Chp from "./containers/Sustainability/Chp/Chp";
+import { SnackbarProvider } from "notistack";
+import Button from "@material-ui/core/Button";
+import { withStyles } from "@material-ui/core";
+// import classes from './App.module.css'
+const styles = (theme) => ({
+  containerRoot: { width: 10, minWidth: 10, maxWidth: 10 },
+  root: { width: 10, minWidth: 10, maxWidth: 10 },
+  success: { backgroundColor: "purple !important" },
+  error: { backgroundColor: "blue !important" },
+  warning: { backgroundColor: "green !important" },
+  // info: {
+  //   backgroundColor: "yellow !important",
+  //   width: 10,
+  //   minWidth: 10,
+  //   maxWidth: 10,
+  // },
+});
+
 class App extends Component {
   state = {
     isLoggedIn: false,
@@ -40,7 +58,6 @@ class App extends Component {
       grant_type: "refresh_token",
       refresh_token: refreshToken,
     };
-
 
     fetch("https://securetoken.googleapis.com/v1/token?key=" + FIREBASE_KEY, {
       method: "post",
@@ -143,17 +160,43 @@ class App extends Component {
   }
 
   render() {
+    const notistackRef = React.createRef();
+    const onClickDismiss = (key) => () => {
+      notistackRef.current.closeSnackbar(key);
+    };
+    const { classes } = this.props;
+
     let ifLoggedIn = (
       <Switch>
         <Route
           path="/modelbench"
           exact
           render={(props) => (
-            <ModelBench
-              {...props}
-              userId={this.state.userId}
-              token={this.state.token}
-            />
+            <SnackbarProvider
+              bodyStyle={{ maxWidth: "10%" }}
+              maxSnack={2}
+              ref={notistackRef}
+              action={(key) => (
+                <Button onClick={onClickDismiss(key)}>Dismiss</Button>
+              )}
+              // style={{width:"100px"}}
+
+              classes={{
+                containerRoot: classes.containerRoot,
+                root: classes.root,
+                containerAnchorOriginBottomLeft: classes.snackContainer,
+                variantSuccess: classes.success,
+                variantError: classes.error,
+                variantWarning: classes.warning,
+                variantInfo: classes.info,
+              }}
+            >
+              <ModelBench
+                {...props}
+                userId={this.state.userId}
+                token={this.state.token}
+              />
+            </SnackbarProvider>
           )}
         />
         <Route
@@ -242,4 +285,4 @@ class App extends Component {
   }
 }
 
-export default withRouter(App);
+export default withStyles(styles)(withRouter(App));

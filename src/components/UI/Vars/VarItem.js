@@ -4,7 +4,6 @@ import OutlinedInput from "../Input/OutlinedInput";
 import { Paper } from "@material-ui/core";
 import MinMaxSlider from "../SliderContainer/MinMaxSlider/MinMaxSlider";
 import CloseButton from "../Button/CloseButton";
-import CustomizedErrorMessage from "../MyErrorMessage/CustomizedErrorMessage";
 import { EditableMathField, StaticMathField } from "react-mathquill";
 /**
  *
@@ -49,12 +48,7 @@ const VarItem = (props) => {
               onClick={props.removeItem}
             />
           </div>
-
-          {props.error ? (
-            <div className={classes.ErrorMsg}>
-              <CustomizedErrorMessage />
-            </div>
-          ) : null}
+          <div className={classes.ErrorMsg}>{props.error}</div>
         </Paper>
       ) : null}
 
@@ -64,14 +58,14 @@ const VarItem = (props) => {
           style={{ backgroundColor: "rgb(230, 250, 250)" }}
         >
           <div className={classes.mathQuill}>
-            {/* <EditableMathField
+            <EditableMathField
               latex={props.LatexForm}
               onChange={(mathField) =>
                 props.handleMathQuillInputChange(mathField)
               }
               style={{ fontSize: "14px" }}
-            /> */}
-            <StaticMathField>{props.LatexForm}</StaticMathField>
+            />
+            {/* <StaticMathField>{props.LatexForm}</StaticMathField> */}
           </div>
 
           <div className={classes.inputs}>
@@ -94,12 +88,7 @@ const VarItem = (props) => {
               onClick={props.removeItem}
             />
           </div>
-
-          {props.error ? (
-            <div className={classes.ErrorMsg}>
-              <CustomizedErrorMessage />
-            </div>
-          ) : null}
+          <div className={classes.ErrorMsg}>{props.error}</div>
         </Paper>
       ) : null}
 
@@ -148,11 +137,7 @@ const VarItem = (props) => {
               onClick={props.removeItem}
             />
           </div>
-          {props.error ? (
-            <div className={classes.ErrorMsg}>
-              <CustomizedErrorMessage />
-            </div>
-          ) : null}
+          <div className={classes.ErrorMsg}>{props.error}</div>
         </Paper>
       ) : null}
     </li>
