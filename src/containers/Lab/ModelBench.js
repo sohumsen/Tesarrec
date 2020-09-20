@@ -384,6 +384,7 @@ class ModelBench extends Component {
               //   )}
               //   preventDuplicate
               // >
+              
                 <LinearCoupled
                   modelId={this.state.selectedModelId}
                   modelObj={this.state.selectedModel}
