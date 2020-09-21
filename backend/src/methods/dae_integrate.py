@@ -28,14 +28,12 @@ def dae_integrate(model_obj):
                 var["LatexForm"]
                 + "= "
                 + "m.Param(value=m.time"
-                # + str(float(var["VarCurrent"]))
                 + ")"
             )
         elif var["VarType"] == "Dependent":
 
             dep_names.append(var["LatexForm"])
 
-            # expr=str(var["LatexForm"])+"="+str(m.Var(value=float(var["VarCurrent"])))
             variable = (
                 var["LatexForm"]
                 + "= "
@@ -46,7 +44,6 @@ def dae_integrate(model_obj):
 
         else:
 
-            # expr=str(var["LatexForm"])+"="+str(m.Param(value=float(var["VarCurrent"])))
             variable = (
                 var["LatexForm"]
                 + "= "
@@ -63,10 +60,7 @@ def dae_integrate(model_obj):
 
     clean_eqn = []
     for i in range(len(model_obj["Eqns"])):
-        # print(
-        #     LatexNodes2Text().latex_to_text( model_obj["Eqns"][i]["LHSLatexEqn"])
-        # )
-
+     
         first_bit = (
             (LatexNodes2Text().latex_to_text(model_obj["Eqns"][i]["LHSLatexEqn"]))
             .replace("/d" + indep_latex, ".dt()")
@@ -79,13 +73,7 @@ def dae_integrate(model_obj):
             .replace("e", str(np.exp(1)))
             # .replace("/d" + indep_latex, ".dt()")
         )
-        # new_eqn = (
-        #     model_obj["Eqns"][i]["textEqn"]
-        #     .replace("^", "**")
-        #     .replace("e", str(np.exp(1)))
-        #     .replace("/d" + indep_latex, ".dt()")
-        #     .replace("=", "==")
-        # )
+      
         for i in range(len(dep_names)):
             letter = dep_names[i]
             first_bit = first_bit.replace("d" + letter, letter)
@@ -100,28 +88,18 @@ def dae_integrate(model_obj):
     for i in range(len(variables_list)):
         exec(variables_list[i], globals(), locals())
 
-    print(clean_eqn)
 
     for i in range(len(clean_eqn)):
         m.Equation(eval(str(clean_eqn[i])))
 
     m.solve(disp=False)
-    # plt.plot(x)
 
-    # m.open_folder()
     solution_arr = []
     for i in range(len(dep_names)):
-        # print(dep_names[i])
-        # solution_arr.append(exec(dep_names[i]+".value"))
-        # print(dep_names[i]+".value")
+      
         exec("solution_arr.append(" + dep_names[i] + ".value)")
     solution_arr.append(m.time.tolist())
 
     solution_arr = np.transpose(solution_arr)
-    print(solution_arr)
-
-    print("######################################")
-    # exec("print(S.value, E.value, I.value, R.value)")
-    # print("######################################")
 
     return solution_arr.tolist()

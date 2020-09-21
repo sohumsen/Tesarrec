@@ -3,7 +3,7 @@ When renaming a parameter all the equations must change
 
 on go to new model, ask if they want to save
 make snackbar thinner
-
+deploy python server
 
 
 
