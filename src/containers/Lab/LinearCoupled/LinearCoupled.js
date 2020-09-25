@@ -614,28 +614,6 @@ class LinearCoupled extends Component {
     this.setState({ modelObj: modelObj });
   };
 
-  //   getODESolution = () => {
-  //     let modelObj = this.state.modelObj;
-
-  //     fetch("http://127.0.0.1:8080/solve_ode", {
-  //       method: "POST",
-  //       // cache: "no-cache",
-  //       headers: {
-  //         "Content-Type": "application/json",
-  //       },
-  //       body: JSON.stringify(this.state.modelObj.returnConstructorObj()),
-  //     })
-  //       .then((response) => {
-  //         return response.json();
-  //       })
-  //       .then((json) => {
-  //         modelObj.solutions.calcedSolution = json;
-  //         this.setState({ modelObj: modelObj });
-  //         return json;
-  //       })
-  //       .catch((err) => console.log(err));
-  //   };
-
   getDAESolution = () => {
     /**
      * This makes a call to a python server with the equations
@@ -655,17 +633,20 @@ class LinearCoupled extends Component {
 
     //Eqns frac MUST have "\\frac{da}{dt}"
     const signal = this.state.controller.signal;
+    console.log(this.state.modelObj);
 
-    fetch("http://127.0.0.1:8080/solve_dae", {
+    fetch("https://tesarrec.herokuapp.com/solve_dae", {
       method: "POST",
-      // cache: "no-cache",
-      signal: signal,
+
       headers: {
+        Accept: "application/json",
+
         "Content-Type": "application/json",
       },
       body: JSON.stringify(this.state.modelObj),
     })
       .then((response) => {
+        console.log(response);
         return response.json();
       })
       .then((json) => {
@@ -811,13 +792,13 @@ class LinearCoupled extends Component {
             />
           </Paper>
 
-          <Paper className={classes.PicContainer}>
+          {/* <Paper className={classes.PicContainer}>
             <img
               style={{ maxWidth: "100%", maxHeight: "100%" }}
               src="https://www.lewuathe.com/assets/img/posts/2020-03-11-covid-19-dynamics-with-sir-model/sir.png"
               alt="new"
             />
-          </Paper>
+          </Paper> */}
         </div>
 
         {this.state.modelObj.Config.calculate ? (
@@ -838,7 +819,9 @@ class LinearCoupled extends Component {
             {/*if remote solver and not completed show the spinner*/}
 
             {!this.state.localSolver && !this.state.completed ? (
-              <Spinner />
+              <div> <Spinner /><p className={classes.loadingText}>Loading...</p></div>
+
+             
             ) : null}
 
             {this.state.completed || this.state.localSolver

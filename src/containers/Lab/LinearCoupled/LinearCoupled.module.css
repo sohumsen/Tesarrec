@@ -71,7 +71,10 @@
   align-items: center; */
   margin: 0 auto;
 }
+.loadingText{
+  color: rgb(83, 81, 68);
 
+}
 /* .textfield{
   background-color: aqua;
   float: left;

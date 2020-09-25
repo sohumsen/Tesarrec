@@ -12,7 +12,7 @@ from methods.dae_integrate import dae_integrate
 app = Flask(__name__)
 CORS(app)
 
-main = Blueprint("main", __name__)
+# main = Blueprint("main", __name__)
 
 
 # @app.route("/")
@@ -21,10 +21,10 @@ main = Blueprint("main", __name__)
 #     return render_template("index.html")
 
 
-@main.route("/solve_dae", methods=["POST"])
+@app.route("/solve_dae", methods=["POST"])
 def solve_dae():
     model_obj = request.get_json()
-    start_time = time.time()
+    # start_time = time.time()
 
     solution = dae_integrate(model_obj)
     # print("--- %s seconds ---" % (time.time() - start_time))
@@ -35,8 +35,8 @@ def solve_dae():
 if __name__ == "__main__":
     # print("Running my server")
     # app.config["test"] = "test"
-    app.register_blueprint(main)
-    app.run(debug=True, port=int(os.environ.get("PORT", 8080)))
-    app.register_blueprint(main)
+    # app.register_blueprint(main)
+    # app.run(debug=True, port=int(os.environ.get("PORT", 8080)))
+    # app.register_blueprint(main)
 
-    # app.run()
+    app.run()
