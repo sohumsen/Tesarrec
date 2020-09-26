@@ -113,7 +113,7 @@ class LinearCoupled extends Component {
     if (itemType === "LHSEqns") {
       let latex = mathField.latex();
 
-      item.LHSLatexEqn = latex;
+      item.LHSLatexEqn = latex
 
       let dependentLatex = item.lineName;
       //try to figure out what the lineName is given a LHS
