@@ -25,6 +25,7 @@ class RightContent extends Component {
   state = {
     showEnergySliders: false,
     showCostSliders: false,
+    showSocialSliders: false,
   };
 
   showEnergySliderHandler = (event) => {
@@ -273,6 +274,92 @@ class RightContent extends Component {
         </MySliderContainer>
       );
     }
+
+    let socialSliders = null;
+
+    if (this.state.showSocialSliders) {
+      socialSliders = (
+        <MySliderContainer>
+          <h3>Social</h3>
+          <SliderWithText
+            rootWidth={"43%"}
+            inputWidth={52}
+            displayCaption={"Proportion import from Denmark"}
+            value={this.props.ProportionImportDenmark}
+            displayValue={this.props.ProportionImportDenmark}
+            lowestVal={0}
+            highestVal={1}
+            SliderhandleChange={this.props.SliderhandleChange(
+              "ProportionImportDenmark"
+            )}
+            InputhandleChange={this.props.InputhandleChange(
+              "ProportionImportDenmark"
+            )}
+          />
+          <SliderWithText
+            rootWidth={"43%"}
+            inputWidth={52}
+            displayCaption={"Proportion import from Ireland"}
+            value={this.props.ProportionImportIreland}
+            displayValue={this.props.ProportionImportIreland}
+            lowestVal={0}
+            highestVal={1}
+            SliderhandleChange={this.props.SliderhandleChange(
+              "ProportionImportIreland"
+            )}
+            InputhandleChange={this.props.InputhandleChange(
+              "ProportionImportIreland"
+            )}
+          />
+
+          <SliderWithText
+            rootWidth={"43%"}
+            inputWidth={52}
+            displayCaption={"Proportion import from Belgium"}
+            value={this.props.ProportionImportBelgium}
+            displayValue={this.props.ProportionImportBelgium}
+            lowestVal={0}
+            highestVal={1}
+            SliderhandleChange={this.props.SliderhandleChange(
+              "ProportionImportBelgium"
+            )}
+            InputhandleChange={this.props.InputhandleChange(
+              "ProportionImportBelgium"
+            )}
+          />
+          <SliderWithText
+            rootWidth={"43%"}
+            inputWidth={52}
+            displayCaption={"Proportion import from Netherlands"}
+            value={this.props.ProportionImportNetherlands}
+            displayValue={this.props.ProportionImportNetherlands}
+            lowestVal={0}
+            highestVal={1}
+            SliderhandleChange={this.props.SliderhandleChange(
+              "ProportionImportNetherlands"
+            )}
+            InputhandleChange={this.props.InputhandleChange(
+              "ProportionImportNetherlands"
+            )}
+          />
+          <SliderWithText
+            rootWidth={"43%"}
+            inputWidth={52}
+            displayCaption={"Proportion import from France"}
+            value={this.props.ProportionImportFrance}
+            displayValue={this.props.ProportionImportFrance}
+            lowestVal={0}
+            highestVal={1}
+            SliderhandleChange={this.props.SliderhandleChange(
+              "ProportionImportFrance"
+            )}
+            InputhandleChange={this.props.InputhandleChange(
+              "ProportionImportFrance"
+            )}
+          />
+        </MySliderContainer>
+      );
+    }
     return (
       <div className={classes.RightContent}>
         <h2>Settings</h2>
@@ -348,13 +435,26 @@ class RightContent extends Component {
               color="primary"
             />
           }
-          label="Cost"
+          label="Economic"
+          labelPlacement="start"
+        />
+        <FormControlLabel
+          control={
+            <PurpleSwitch
+              checked={this.state.showSocialSliders}
+              onChange={this.showEnergySliderHandler}
+              name="showSocialSliders"
+              color="primary"
+            />
+          }
+          label="Social"
           labelPlacement="start"
         />
 
         {environmentSliders}
 
         {costSliders}
+        {socialSliders}
       </div>
     );
   }

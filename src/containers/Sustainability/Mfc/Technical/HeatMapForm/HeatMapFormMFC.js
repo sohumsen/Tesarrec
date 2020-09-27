@@ -58,6 +58,14 @@ class HeatMapFormMFC extends Component {
     AnolyteCost: 0.0012,
     CatholyteCost: 0.5,
     ElectricityPriceCost: 0.15,
+
+    ProportionImportDenmark:0.000473,
+    ProportionImportIreland:0.061649,
+    ProportionImportBelgium:0.203841,
+    ProportionImportNetherlands:0.24222,
+    ProportionImportFrance:0.491818,
+
+
   };
 
   HeatMapChangedOnClick = (x, y, value) => {
@@ -118,6 +126,12 @@ class HeatMapFormMFC extends Component {
           ElectricityPriceCost={this.state.ElectricityPriceCost}
           AnnualCapitalChargeCost={this.state.AnnualCapitalChargeCost}
           IRRCost={this.state.IRRCost}
+          ProportionImportDenmark={this.state.ProportionImportDenmark}
+          ProportionImportIreland={this.state.ProportionImportIreland}
+          ProportionImportBelgium={this.state.ProportionImportBelgium}
+          ProportionImportNetherlands={this.state.ProportionImportNetherlands}
+          ProportionImportFrance={this.state.ProportionImportFrance}
+
         />
         </div>
        
@@ -152,6 +166,11 @@ class HeatMapFormMFC extends Component {
             IRRCost={this.state.IRRCost}
             xCoordAnode={this.state.xCoordAnode}
             yCoordCathode={this.state.yCoordCathode}
+            ProportionImportDenmark={this.state.ProportionImportDenmark}
+            ProportionImportIreland={this.state.ProportionImportIreland}
+            ProportionImportBelgium={this.state.ProportionImportBelgium}
+            ProportionImportNetherlands={this.state.ProportionImportNetherlands}
+            ProportionImportFrance={this.state.ProportionImportFrance}
             
           />
         </div>
