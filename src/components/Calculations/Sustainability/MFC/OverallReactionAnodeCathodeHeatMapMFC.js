@@ -177,7 +177,7 @@ const OverallReactionAnodeCathode = (props) => {
           props.ProportionImportNetherlands +
           props.ProportionImportFrance) -
         Social.UK.LRDW) *
-      ((1 - props.Other) /
+      (1 - (props.Other) /
         (props.CCGT +
           props.Nuclear +
           props.Biomass +
@@ -204,7 +204,7 @@ const OverallReactionAnodeCathode = (props) => {
           props.ProportionImportNetherlands +
           props.ProportionImportFrance) -
         Social.UK.HS) *
-      ((1 - props.Other) /
+      (1 - (props.Other) /
         (props.CCGT +
           props.Nuclear +
           props.Biomass +
@@ -231,7 +231,7 @@ const OverallReactionAnodeCathode = (props) => {
           props.ProportionImportNetherlands +
           props.ProportionImportFrance) -
         Social.UK.HR) *
-      ((1 - props.Other) /
+      (1 - (props.Other) /
         (props.CCGT +
           props.Nuclear +
           props.Biomass +
@@ -257,22 +257,22 @@ const OverallReactionAnodeCathode = (props) => {
           props.ProportionImportBelgium +
           props.ProportionImportNetherlands +
           props.ProportionImportFrance) -
-        Social.UK.LRDW) *
-      ((1 - props.Other) /
-        (props.CCGT +
-          props.Nuclear +
-          props.Biomass +
-          props.Coal +
-          props.Wind +
-          props.Solar +
-          props.Oil +
-          props.OCGT +
-          props.Hydroelectric +
-          props.PumpedHydro +
-          props.Other)) *
-      ElectricityGeneration *
-      24 *
-      0.365;
+        Social.UK.G)*
+        (1 - (props.Other) /
+          (props.CCGT +
+            props.Nuclear +
+            props.Biomass +
+            props.Coal +
+            props.Wind +
+            props.Solar +
+            props.Oil +
+            props.OCGT +
+            props.Hydroelectric +
+            props.PumpedHydro +
+            props.Other)) *
+        ElectricityGeneration *
+        24 *
+        0.365;
     let CI =
       ((Social.Denmark.CI * props.ProportionImportDenmark +
         Social.Ireland.CI * props.ProportionImportIreland +
@@ -285,7 +285,7 @@ const OverallReactionAnodeCathode = (props) => {
           props.ProportionImportNetherlands +
           props.ProportionImportFrance) -
         Social.UK.CI) *
-      ((1 - props.Other) /
+      (1 - (props.Other) /
         (props.CCGT +
           props.Nuclear +
           props.Biomass +

@@ -6,7 +6,6 @@
   right: 0px;
 
   text-align: center;
-  padding: 5px;
 
   position: fixed;
   overflow-y: scroll;
@@ -17,4 +16,11 @@
   position: absolute;
   top: 57%;
   left: 15%;;
+}
+
+.sliders{
+  display: flex;
+  flex: 1;
+  border-top: 5px dashed black;
+
 }

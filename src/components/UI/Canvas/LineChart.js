@@ -98,21 +98,23 @@ class MyLineChart extends Component {
           <ResponsiveContainer>
             <LineChart
               data={this.props.dataPoints[0]}
-              // margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
+              margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
             >
               <CartesianGrid strokeDasharray="3 3" />
               <XAxis
                 dataKey="x"
                 label={{
                   value: this.props.axisNames[0],
+                  position: 'left'
+
                 }}
               />
 
               <YAxis>
                 <Label
                   value={this.props.axisNames[1]}
-                  position="insideLeft"
-                  style={{ textAnchor: "middle" }}
+                  angle= "-90"
+                  position= 'insideBottomLeft'
                 />
               </YAxis>
               <Tooltip />

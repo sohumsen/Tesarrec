@@ -38,7 +38,7 @@ const MyHeatMap = (props) => {
         cellStyle={(background, value, min, max, data, x, y) => ({
       
           background: `${props.color}, ${1 - (max - value) / (max - min)})`,
-          fontSize: "12px",
+          fontSize: "14px",
         })}
 
         
