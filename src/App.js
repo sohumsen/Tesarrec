@@ -44,7 +44,13 @@ class App extends Component {
   };
 
   onLogoutHandler = () => {
-    this.setState({ isLoggedIn: false, token: null, userId: null });
+    this.setState({
+      isLoggedIn: false,
+      token: null,
+      userId: null,
+      error: null,
+      loading: false,
+    });
     localStorage.removeItem("token");
     localStorage.removeItem("expirationDate");
     localStorage.removeItem("refreshToken");

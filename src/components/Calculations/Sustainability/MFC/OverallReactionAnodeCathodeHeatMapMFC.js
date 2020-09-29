@@ -430,7 +430,7 @@ const OverallReactionAnodeCathode = (props) => {
         <MyHeatMap
           xLabels={props.heatMapContents.xLabels}
           yLabels={["GWP"]}
-          color={"rgba(8, 82, 210"}
+          color={"rgba(3, 236, 52"}
           data={TwoDGWPSavingyData}
           HeatMapChangedOnClick={props.HeatMapChangedOnClick}
         />
@@ -440,7 +440,7 @@ const OverallReactionAnodeCathode = (props) => {
         <MyHeatMap
           xLabels={props.heatMapContents.xLabels}
           yLabels={["Capital Cost"]}
-          color={"rgba(127, 96, 169"}
+          color={"rgba(63, 236, 52"}
           data={TwoDCapitalCostData}
           HeatMapChangedOnClick={props.HeatMapChangedOnClick}
         />
@@ -450,7 +450,7 @@ const OverallReactionAnodeCathode = (props) => {
         <MyHeatMap
           xLabels={props.heatMapContents.xLabels}
           yLabels={["Operating Cost"]}
-          color={"rgba(251, 57, 80"}
+          color={"rgba(103, 236, 52"}
           data={TwoDOpexData}
           HeatMapChangedOnClick={props.HeatMapChangedOnClick}
         />
@@ -460,7 +460,7 @@ const OverallReactionAnodeCathode = (props) => {
         <MyHeatMap
           xLabels={props.heatMapContents.xLabels}
           yLabels={["Product Value"]}
-          color={"rgba(19, 96, 82"}
+          color={"rgba(143, 236, 52"}
           data={TwoDProductValueData}
           HeatMapChangedOnClick={props.HeatMapChangedOnClick}
         />
@@ -470,7 +470,7 @@ const OverallReactionAnodeCathode = (props) => {
         <MyHeatMap
           xLabels={props.heatMapContents.xLabels}
           yLabels={["Product Value"]}
-          color={"rgba(200, 96, 30"}
+          color={"rgba(183, 236, 52"}
           data={TwoDMinimumProductSellingPrice}
           HeatMapChangedOnClick={props.HeatMapChangedOnClick}
         />
@@ -480,7 +480,7 @@ const OverallReactionAnodeCathode = (props) => {
         <MyHeatMap
           xLabels={props.heatMapContents.xLabels}
           yLabels={["Product Value"]}
-          color={"rgba(200, 96, 30"}
+          color={"rgba(223, 236, 52"}
           data={TwoDAPsavingData}
           HeatMapChangedOnClick={props.HeatMapChangedOnClick}
         />
@@ -490,7 +490,7 @@ const OverallReactionAnodeCathode = (props) => {
         <MyHeatMap
           xLabels={props.heatMapContents.xLabels}
           yLabels={["Product Value"]}
-          color={"rgba(200, 96, 30"}
+          color={"rgba(103, 200, 52"}
           data={TwoDUSsavingData}
           HeatMapChangedOnClick={props.HeatMapChangedOnClick}
         />
@@ -500,7 +500,7 @@ const OverallReactionAnodeCathode = (props) => {
         <MyHeatMap
           xLabels={props.heatMapContents.xLabels}
           yLabels={["Product Value"]}
-          color={"rgba(200, 96, 30"}
+          color={"rgba(103, 170, 52"}
           data={TwoDEPsavingData}
           HeatMapChangedOnClick={props.HeatMapChangedOnClick}
         />
@@ -510,7 +510,7 @@ const OverallReactionAnodeCathode = (props) => {
         <MyHeatMap
           xLabels={props.heatMapContents.xLabels}
           yLabels={["Product Value"]}
-          color={"rgba(100, 96, 200"}
+          color={"rgba(103, 140, 52"}
           data={TwoDFEsavingData}
           HeatMapChangedOnClick={props.HeatMapChangedOnClick}
         />
@@ -520,7 +520,7 @@ const OverallReactionAnodeCathode = (props) => {
         <MyHeatMap
           xLabels={props.heatMapContents.xLabels}
           yLabels={["Product Value"]}
-          color={"rgba(150, 96, 30"}
+          color={"rgba(103, 120, 52"}
           data={TwoDLRDWData}
           HeatMapChangedOnClick={props.HeatMapChangedOnClick}
         />
@@ -530,7 +530,7 @@ const OverallReactionAnodeCathode = (props) => {
         <MyHeatMap
           xLabels={props.heatMapContents.xLabels}
           yLabels={["Product Value"]}
-          color={"rgba(240, 96, 100"}
+          color={"rgba(103, 100, 52"}
           data={TwoDHSData}
           HeatMapChangedOnClick={props.HeatMapChangedOnClick}
         />
@@ -540,7 +540,7 @@ const OverallReactionAnodeCathode = (props) => {
         <MyHeatMap
           xLabels={props.heatMapContents.xLabels}
           yLabels={["Product Value"]}
-          color={"rgba(200, 0, 250"}
+          color={"rgba(103, 140, 80"}
           data={TwoDHRData}
           HeatMapChangedOnClick={props.HeatMapChangedOnClick}
         />
@@ -550,7 +550,7 @@ const OverallReactionAnodeCathode = (props) => {
         <MyHeatMap
           xLabels={props.heatMapContents.xLabels}
           yLabels={["Product Value"]}
-          color={"rgba(200, 50, 30"}
+          color={"rgba(103, 140, 60"}
           data={TwoDGData}
           HeatMapChangedOnClick={props.HeatMapChangedOnClick}
         />
@@ -560,7 +560,7 @@ const OverallReactionAnodeCathode = (props) => {
         <MyHeatMap
           xLabels={props.heatMapContents.xLabels}
           yLabels={["Product Value"]}
-          color={"rgba(200, 100, 30"}
+          color={"rgba(103, 140, 100"}
           data={TwoDCIData}
           HeatMapChangedOnClick={props.HeatMapChangedOnClick}
         />

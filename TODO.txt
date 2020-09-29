@@ -5,6 +5,7 @@ on go to new model, ask if they want to save
 make snackbar thinner
 work on solver analysis
 speed heroku server
+make heat map colour shades the same
 
 
 

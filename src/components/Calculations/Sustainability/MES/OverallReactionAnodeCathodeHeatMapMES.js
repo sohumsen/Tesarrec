@@ -209,7 +209,7 @@ const OverallReactionAnodeCathode = (props) => {
           xLabels={props.heatMapContents.xLabels}
           yLabels={props.heatMapContents.yLabels}
           data={TwoDProductionRategData}
-          color={"rgba(117, 224, 214"}
+          color={"rgba(180, 100, 100"}
           HeatMapChangedOnClick={props.HeatMapChangedOnClick}
         />
       </div>
@@ -220,7 +220,7 @@ const OverallReactionAnodeCathode = (props) => {
         <MyHeatMap
           xLabels={props.heatMapContents.xLabels}
           yLabels={props.heatMapContents.yLabels}
-          color={"rgba(4, 115, 180"}
+          color={"rgba(160, 100, 100"}
           data={TwoDGWPSavingyData}
           HeatMapChangedOnClick={props.HeatMapChangedOnClick}
         />
@@ -232,7 +232,7 @@ const OverallReactionAnodeCathode = (props) => {
         <MyHeatMap
           xLabels={props.heatMapContents.xLabels}
           yLabels={props.heatMapContents.yLabels}
-          color={"rgba(126, 176, 242"}
+          color={"rgba(140, 100, 100"}
           data={TwoDCapitalCostData}
           HeatMapChangedOnClick={props.HeatMapChangedOnClick}
         />
@@ -244,7 +244,7 @@ const OverallReactionAnodeCathode = (props) => {
         <MyHeatMap
           xLabels={props.heatMapContents.xLabels}
           yLabels={props.heatMapContents.yLabels}
-          color={"rgba(138, 235, 79"}
+          color={"rgba(120, 100, 100"}
           data={TwoDOpexData}
           HeatMapChangedOnClick={props.HeatMapChangedOnClick}
         />
@@ -256,7 +256,7 @@ const OverallReactionAnodeCathode = (props) => {
         <MyHeatMap
           xLabels={props.heatMapContents.xLabels}
           yLabels={props.heatMapContents.yLabels}
-          color={"rgba(23, 92, 132"}
+          color={"rgba(100, 100, 100"}
           data={TwoDProductValueData}
           HeatMapChangedOnClick={props.HeatMapChangedOnClick}
         />
@@ -268,7 +268,7 @@ const OverallReactionAnodeCathode = (props) => {
         <MyHeatMap
           xLabels={props.heatMapContents.xLabels}
           yLabels={props.heatMapContents.yLabels}
-          color={"rgba(23, 200, 79"}
+          color={"rgba(200, 120, 100"}
           data={TwoDMinimumProductSellingPriceData}
           HeatMapChangedOnClick={props.HeatMapChangedOnClick}
         />
