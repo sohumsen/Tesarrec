@@ -177,18 +177,19 @@ const OverallReactionAnodeCathode = (props) => {
           props.ProportionImportNetherlands +
           props.ProportionImportFrance) -
         Social.UK.LRDW) *
-      (1 - (props.Other) /
-        (props.CCGT +
-          props.Nuclear +
-          props.Biomass +
-          props.Coal +
-          props.Wind +
-          props.Solar +
-          props.Oil +
-          props.OCGT +
-          props.Hydroelectric +
-          props.PumpedHydro +
-          props.Other)) *
+      (1 -
+        props.Other /
+          (props.CCGT +
+            props.Nuclear +
+            props.Biomass +
+            props.Coal +
+            props.Wind +
+            props.Solar +
+            props.Oil +
+            props.OCGT +
+            props.Hydroelectric +
+            props.PumpedHydro +
+            props.Other)) *
       ElectricityGeneration *
       24 *
       0.365;
@@ -204,18 +205,19 @@ const OverallReactionAnodeCathode = (props) => {
           props.ProportionImportNetherlands +
           props.ProportionImportFrance) -
         Social.UK.HS) *
-      (1 - (props.Other) /
-        (props.CCGT +
-          props.Nuclear +
-          props.Biomass +
-          props.Coal +
-          props.Wind +
-          props.Solar +
-          props.Oil +
-          props.OCGT +
-          props.Hydroelectric +
-          props.PumpedHydro +
-          props.Other)) *
+      (1 -
+        props.Other /
+          (props.CCGT +
+            props.Nuclear +
+            props.Biomass +
+            props.Coal +
+            props.Wind +
+            props.Solar +
+            props.Oil +
+            props.OCGT +
+            props.Hydroelectric +
+            props.PumpedHydro +
+            props.Other)) *
       ElectricityGeneration *
       24 *
       0.365;
@@ -231,18 +233,19 @@ const OverallReactionAnodeCathode = (props) => {
           props.ProportionImportNetherlands +
           props.ProportionImportFrance) -
         Social.UK.HR) *
-      (1 - (props.Other) /
-        (props.CCGT +
-          props.Nuclear +
-          props.Biomass +
-          props.Coal +
-          props.Wind +
-          props.Solar +
-          props.Oil +
-          props.OCGT +
-          props.Hydroelectric +
-          props.PumpedHydro +
-          props.Other)) *
+      (1 -
+        props.Other /
+          (props.CCGT +
+            props.Nuclear +
+            props.Biomass +
+            props.Coal +
+            props.Wind +
+            props.Solar +
+            props.Oil +
+            props.OCGT +
+            props.Hydroelectric +
+            props.PumpedHydro +
+            props.Other)) *
       ElectricityGeneration *
       24 *
       0.365;
@@ -257,8 +260,9 @@ const OverallReactionAnodeCathode = (props) => {
           props.ProportionImportBelgium +
           props.ProportionImportNetherlands +
           props.ProportionImportFrance) -
-        Social.UK.G)*
-        (1 - (props.Other) /
+        Social.UK.G) *
+      (1 -
+        props.Other /
           (props.CCGT +
             props.Nuclear +
             props.Biomass +
@@ -270,9 +274,9 @@ const OverallReactionAnodeCathode = (props) => {
             props.Hydroelectric +
             props.PumpedHydro +
             props.Other)) *
-        ElectricityGeneration *
-        24 *
-        0.365;
+      ElectricityGeneration *
+      24 *
+      0.365;
     let CI =
       ((Social.Denmark.CI * props.ProportionImportDenmark +
         Social.Ireland.CI * props.ProportionImportIreland +
@@ -285,18 +289,19 @@ const OverallReactionAnodeCathode = (props) => {
           props.ProportionImportNetherlands +
           props.ProportionImportFrance) -
         Social.UK.CI) *
-      (1 - (props.Other) /
-        (props.CCGT +
-          props.Nuclear +
-          props.Biomass +
-          props.Coal +
-          props.Wind +
-          props.Solar +
-          props.Oil +
-          props.OCGT +
-          props.Hydroelectric +
-          props.PumpedHydro +
-          props.Other)) *
+      (1 -
+        props.Other /
+          (props.CCGT +
+            props.Nuclear +
+            props.Biomass +
+            props.Coal +
+            props.Wind +
+            props.Solar +
+            props.Oil +
+            props.OCGT +
+            props.Hydroelectric +
+            props.PumpedHydro +
+            props.Other)) *
       ElectricityGeneration *
       24 *
       0.365;
@@ -516,7 +521,7 @@ const OverallReactionAnodeCathode = (props) => {
         />
       </div>
       <div className={classes.HeatMapEnergyPerformance}>
-        <h3>Saving in Labor Rights {"&"} Decent Work in MHR on annual basis</h3>
+        <h3>Saving in Labor Rights {"&"} Decent Work in MRH on annual basis</h3>
         <MyHeatMap
           xLabels={props.heatMapContents.xLabels}
           yLabels={["Product Value"]}
@@ -526,7 +531,7 @@ const OverallReactionAnodeCathode = (props) => {
         />
       </div>
       <div className={classes.HeatMapEnergyPerformance}>
-        <h3>Saving in Health {"&"} Safety in MHR on annual basis</h3>
+        <h3>Saving in Health {"&"} Safety in MRH on annual basis</h3>
         <MyHeatMap
           xLabels={props.heatMapContents.xLabels}
           yLabels={["Product Value"]}
@@ -536,7 +541,7 @@ const OverallReactionAnodeCathode = (props) => {
         />
       </div>
       <div className={classes.HeatMapEnergyPerformance}>
-        <h3>Saving in Human Rights in MHR on annual basis</h3>
+        <h3>Saving in Human Rights in MRH on annual basis</h3>
         <MyHeatMap
           xLabels={props.heatMapContents.xLabels}
           yLabels={["Product Value"]}
@@ -546,7 +551,7 @@ const OverallReactionAnodeCathode = (props) => {
         />
       </div>
       <div className={classes.HeatMapEnergyPerformance}>
-        <h3>Saving in Governance in MHR on annual basis</h3>
+        <h3>Saving in Governance in MRH on annual basis</h3>
         <MyHeatMap
           xLabels={props.heatMapContents.xLabels}
           yLabels={["Product Value"]}
@@ -556,7 +561,7 @@ const OverallReactionAnodeCathode = (props) => {
         />
       </div>
       <div className={classes.HeatMapEnergyPerformance}>
-        <h3>Saving in Community Infrastructure in MHR on annual basis</h3>
+        <h3>Saving in Community Infrastructure in MRH on annual basis</h3>
         <MyHeatMap
           xLabels={props.heatMapContents.xLabels}
           yLabels={["Product Value"]}

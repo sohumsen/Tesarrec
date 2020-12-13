@@ -6,6 +6,10 @@ import CHPPic from "../../../../assets/CHP.png";
 import classes from "./OverallReactionAnodeCathodeCHP.module.css";
 import ColumnChart from "../../../UI/Canvas/ColumnChart";
 
+import MyHeatMap from "../../../UI/MyHeatMap/MyHeatMap";
+
+import Social from "../../../Excel/Social/Social.json";
+
 const OverallReactionAnodeCathode = (props) => {
   let {
     BiomassMoistureContent,
@@ -68,6 +72,184 @@ const OverallReactionAnodeCathode = (props) => {
 
   let NaturalGasGWPPotential = 499 * ElectricityDemand;
 
+  //////////////////////////////////////////////////////
+  let BiomassAPotential = 0.876595 * ElectricityDemand;
+
+  let SolarAPotentail = 0.4287 * ElectricityDemand;
+
+  let PumpedHydroAPotential = 1.962646 * ElectricityDemand;
+
+  let NaturalGasAPotential = 0.204136 * ElectricityDemand;
+
+  ///////////////////////////////////////////////////
+  let BiomassUSPotential = 0.848932 * ElectricityDemand;
+
+  let SolarUSPotentail = 0.302699 * ElectricityDemand;
+
+  let PumpedHydroUSPotential = 1.00526 * ElectricityDemand;
+
+  let NaturalGasUSPotential = 0.298885 * ElectricityDemand;
+
+  ////////////////////////////////////////////////////////
+  let BiomassEPotential = 0.360017 * ElectricityDemand;
+
+  let SolarEPotentail = 0.20286 * ElectricityDemand;
+
+  let PumpedHydroEPotential = 0.600598 * ElectricityDemand;
+
+  let NaturalGasEPotential = 0.044935 * ElectricityDemand;
+
+  ////////////////////////////////////////////////////////
+  let BiomassFPotential = 1347.577596 * ElectricityDemand;
+
+  let SolarFPotentail = 837.8352 * ElectricityDemand;
+
+  let PumpedHydroFPotential = 4781.759404 * ElectricityDemand;
+
+  let NaturalGasFPotential = 6484.06368 * ElectricityDemand;
+
+  ////////////////////////////////////////////////
+
+  let LRDWData = [];
+  let HSData = [];
+  let HRData = [];
+  let GData = [];
+  let CIData = [];
+
+  let LRDW =
+    ((Social.Denmark.LRDW * props.ProportionImportDenmark +
+      Social.Ireland.LRDW * props.ProportionImportIreland +
+      Social.Belgium.LRDW * props.ProportionImportBelgium +
+      Social.Netherlands.LRDW * props.ProportionImportNetherlands +
+      Social.France.LRDW * props.ProportionImportFrance) /
+      (props.ProportionImportDenmark +
+        props.ProportionImportIreland +
+        props.ProportionImportBelgium +
+        props.ProportionImportNetherlands +
+        props.ProportionImportFrance) -
+      Social.UK.LRDW) *
+    (1 -
+      props.Other /
+        (props.CCGT +
+          props.Nuclear +
+          props.Biomass +
+          props.Coal +
+          props.Wind +
+          props.Solar +
+          props.Oil +
+          props.OCGT +
+          props.Hydroelectric +
+          props.PumpedHydro +
+          props.Other)) *
+    ElectricityDemand;
+  let HS =
+    ((Social.Denmark.HS * props.ProportionImportDenmark +
+      Social.Ireland.HS * props.ProportionImportIreland +
+      Social.Belgium.HS * props.ProportionImportBelgium +
+      Social.Netherlands.HS * props.ProportionImportNetherlands +
+      Social.France.HS * props.ProportionImportFrance) /
+      (props.ProportionImportDenmark +
+        props.ProportionImportIreland +
+        props.ProportionImportBelgium +
+        props.ProportionImportNetherlands +
+        props.ProportionImportFrance) -
+      Social.UK.HS) *
+    (1 -
+      props.Other /
+        (props.CCGT +
+          props.Nuclear +
+          props.Biomass +
+          props.Coal +
+          props.Wind +
+          props.Solar +
+          props.Oil +
+          props.OCGT +
+          props.Hydroelectric +
+          props.PumpedHydro +
+          props.Other)) *
+    ElectricityDemand;
+
+  let HR =
+    ((Social.Denmark.HR * props.ProportionImportDenmark +
+      Social.Ireland.HR * props.ProportionImportIreland +
+      Social.Belgium.HR * props.ProportionImportBelgium +
+      Social.Netherlands.HR * props.ProportionImportNetherlands +
+      Social.France.HR * props.ProportionImportFrance) /
+      (props.ProportionImportDenmark +
+        props.ProportionImportIreland +
+        props.ProportionImportBelgium +
+        props.ProportionImportNetherlands +
+        props.ProportionImportFrance) -
+      Social.UK.HR) *
+    (1 -
+      props.Other /
+        (props.CCGT +
+          props.Nuclear +
+          props.Biomass +
+          props.Coal +
+          props.Wind +
+          props.Solar +
+          props.Oil +
+          props.OCGT +
+          props.Hydroelectric +
+          props.PumpedHydro +
+          props.Other)) *
+    ElectricityDemand;
+
+  let G =
+    ((Social.Denmark.G * props.ProportionImportDenmark +
+      Social.Ireland.G * props.ProportionImportIreland +
+      Social.Belgium.G * props.ProportionImportBelgium +
+      Social.Netherlands.G * props.ProportionImportNetherlands +
+      Social.France.G * props.ProportionImportFrance) /
+      (props.ProportionImportDenmark +
+        props.ProportionImportIreland +
+        props.ProportionImportBelgium +
+        props.ProportionImportNetherlands +
+        props.ProportionImportFrance) -
+      Social.UK.G) *
+    (1 -
+      props.Other /
+        (props.CCGT +
+          props.Nuclear +
+          props.Biomass +
+          props.Coal +
+          props.Wind +
+          props.Solar +
+          props.Oil +
+          props.OCGT +
+          props.Hydroelectric +
+          props.PumpedHydro +
+          props.Other)) *
+    ElectricityDemand;
+
+  let CI =
+    ((Social.Denmark.CI * props.ProportionImportDenmark +
+      Social.Ireland.CI * props.ProportionImportIreland +
+      Social.Belgium.CI * props.ProportionImportBelgium +
+      Social.Netherlands.CI * props.ProportionImportNetherlands +
+      Social.France.CI * props.ProportionImportFrance) /
+      (props.ProportionImportDenmark +
+        props.ProportionImportIreland +
+        props.ProportionImportBelgium +
+        props.ProportionImportNetherlands +
+        props.ProportionImportFrance) -
+      Social.UK.CI) *
+    (1 -
+      props.Other /
+        (props.CCGT +
+          props.Nuclear +
+          props.Biomass +
+          props.Coal +
+          props.Wind +
+          props.Solar +
+          props.Oil +
+          props.OCGT +
+          props.Hydroelectric +
+          props.PumpedHydro +
+          props.Other)) *
+    ElectricityDemand;
+
   let CapitalCost =
     (0.00174 * BiomassNeeded ** 0.7 + 0.1942 * ElectricityDemand ** 0.7) *
     LangFactor;
@@ -91,12 +273,12 @@ const OverallReactionAnodeCathode = (props) => {
   let ProductValue =
     ElectricityPrice * ElectricityDemand +
     0.000009 * SteamPrice * SteamGeneration;
+
   return (
     <div className={classes.HeatMaps}>
       <div className={classes.HeatMapEnergyPerformance}>
         <img src={CHPPic} width="100%" alt="MFC Pic "></img>
       </div>
-
       <div className={classes.HeatMapEnergyPerformance}>
         <ColumnChart
           labelData1={[
@@ -113,7 +295,7 @@ const OverallReactionAnodeCathode = (props) => {
         />
       </div>
       <div className={classes.HeatMapEnergyPerformance}>
-      <ColumnChart
+        <ColumnChart
           labelData1={[
             {
               label: "Heat Generation Efficiency",
@@ -121,7 +303,8 @@ const OverallReactionAnodeCathode = (props) => {
                 (
                   ChpGenerationEfficiency - ElectricityGenerationEfficiency
                 ).toFixed(2)
-              ),            },
+              ),
+            },
             {
               label: "Electricity Generation Efficiency",
               y: parseFloat(ElectricityGenerationEfficiency.toFixed(2)),
@@ -170,11 +353,10 @@ const OverallReactionAnodeCathode = (props) => {
           type={"bar"}
         />
       </div>
-
       <div className={classes.HeatMapEnergyPerformance}>
         <ColumnChart
           title={
-            "Global Warming Potential Saving compared to natural gas (t CO2 eq.)/year"
+            "Global Warming Potential Saving against natural gas t CO2 eq./year"
           }
           labelData1={[
             {
@@ -187,7 +369,6 @@ const OverallReactionAnodeCathode = (props) => {
           type={"bar"}
         />
       </div>
-
       <div className={classes.HeatMapEnergyPerformance}>
         <ColumnChart
           labelData1={[
@@ -226,6 +407,102 @@ const OverallReactionAnodeCathode = (props) => {
           Opex={parseFloat(Opex.toFixed(2))}
           ProductValue={parseFloat(ProductValue.toFixed(2))}
           IRRCost={parseFloat(IRRCost.toFixed(2))}
+        />
+      </div>
+      <div className={classes.HeatMapEnergyPerformance}>
+        <ColumnChart
+          title={"Acidification Potential (t SO2 eq.)/year"}
+          labelData1={[
+            {
+              label: "Natural gas",
+              y: parseFloat(NaturalGasAPotential.toFixed(2)),
+            },
+
+            {
+              label: "Pumped Hydro",
+              y: parseFloat(PumpedHydroAPotential.toFixed(2)),
+            },
+            { label: "Solar", y: parseFloat(SolarAPotentail.toFixed(2)) },
+            { label: "Biomass", y: parseFloat(BiomassAPotential.toFixed(2)) },
+          ]}
+          type={"bar"}
+        />
+      </div>
+      <div className={classes.HeatMapEnergyPerformance}>
+        <ColumnChart
+          title={"Urban Smog (t NMVOC eq.)/year"}
+          labelData1={[
+            {
+              label: "Natural gas",
+              y: parseFloat(NaturalGasUSPotential.toFixed(2)),
+            },
+
+            {
+              label: "Pumped Hydro",
+              y: parseFloat(PumpedHydroUSPotential.toFixed(2)),
+            },
+            { label: "Solar", y: parseFloat(SolarUSPotentail.toFixed(2)) },
+            { label: "Biomass", y: parseFloat(BiomassUSPotential.toFixed(2)) },
+          ]}
+          type={"bar"}
+        />
+      </div>
+      <div className={classes.HeatMapEnergyPerformance}>
+        <ColumnChart
+          title={"Eutrophication Potential (t Phosphate eq.)/year"}
+          labelData1={[
+            {
+              label: "Natural gas",
+              y: parseFloat(NaturalGasEPotential.toFixed(2)),
+            },
+
+            {
+              label: "Pumped Hydro",
+              y: parseFloat(PumpedHydroEPotential.toFixed(2)),
+            },
+            { label: "Solar", y: parseFloat(SolarEPotentail.toFixed(2)) },
+            { label: "Biomass", y: parseFloat(BiomassEPotential.toFixed(2)) },
+          ]}
+          type={"bar"}
+        />
+      </div>{" "}
+      <div className={classes.HeatMapEnergyPerformance}>
+        <ColumnChart
+          title={"Fossil Depletion GJ/year"}
+          labelData1={[
+            {
+              label: "Natural gas",
+              y: parseFloat(NaturalGasFPotential.toFixed(2)),
+            },
+
+            {
+              label: "Pumped Hydro",
+              y: parseFloat(PumpedHydroFPotential.toFixed(2)),
+            },
+            { label: "Solar", y: parseFloat(SolarFPotentail.toFixed(2)) },
+            { label: "Biomass", y: parseFloat(BiomassFPotential.toFixed(2)) },
+          ]}
+          type={"bar"}
+        />
+      </div>
+      <div className={classes.HeatMapEnergyPerformance}>
+        <ColumnChart
+          title={"Saving in MRH on annual basis"}
+          labelData1={[
+            {
+              label: "Labor Rights & Decent Work",
+              y: parseFloat(LRDW.toFixed(2)),
+            },
+
+            {
+              label: "Health & Safety",
+              y: parseFloat(HS.toFixed(2)),
+            },
+            { label: "Human Rights", y: parseFloat(HR.toFixed(2)) },
+            { label: "Governance", y: parseFloat(G.toFixed(2)) },
+            { label: "Community Infrastructure", y: parseFloat(CI.toFixed(2)) },
+          ]}
+          type={"bar"}
         />
       </div>
     </div>
