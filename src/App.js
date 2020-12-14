@@ -18,6 +18,7 @@ import FIREBASE_KEY from "./firebasekey";
 import Chp from "./containers/Sustainability/Chp/Chp";
 import { SnackbarProvider } from "notistack";
 import Button from "@material-ui/core/Button";
+import firebaseConfig from './firebaseConfig'
 import { withStyles } from "@material-ui/core";
 // import classes from './App.module.css'
 const styles = (theme) => ({
@@ -287,6 +288,8 @@ class App extends Component {
           <MyMobileView />
         </MobileView>
       </div>
+
+      
     );
   }
 }
