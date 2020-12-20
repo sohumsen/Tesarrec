@@ -6,6 +6,10 @@ make snackbar thinner
 work on solver analysis
 speed heroku server
 
+enter input in sliders
+
+stack biothanol  energy efficiency
+
 
 
 

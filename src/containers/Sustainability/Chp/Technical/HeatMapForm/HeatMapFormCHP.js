@@ -40,11 +40,36 @@ class HeatMapFormMFC extends Component {
     PumpedHydro: 100,
     Other: 100,
 
+
+
     ProportionImportDenmark:0.000473,
     ProportionImportIreland:0.061649,
     ProportionImportBelgium:0.203841,
     ProportionImportNetherlands:0.24222,
     ProportionImportFrance:0.491818,
+
+
+
+
+
+
+    BiomassFeedstockAvailability: 2670,
+    MoistureContent: 25,
+    CelluloseContent : 30,  XylanContent:15,
+    GlucanContent: 3,
+    ArabinanContent : 1.5,  MannanContent: 7,
+    GalactanContent: 1.5,
+    AshContent: 2,
+    ExtractiveContent: 5,
+    LigninContent: 15,
+    BiomassCalorificValue: 19.3,
+
+    InstallationFactor: 5,
+    AnnualCapitalCharge: 0.13,
+    IRRCost: 0.12,
+
+    BiomassCost: 40,
+    BioethanolPrice: 3.5,
   };
 
   SliderhandleChange = (name) => (event, value) => {

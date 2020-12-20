@@ -11,6 +11,8 @@ const navigationItems = (props) => {
         <NavigationItem link="/sustainability/mfc">MFC</NavigationItem>
         <NavigationItem link="/sustainability/mes">MES</NavigationItem>
         <NavigationItem link="/sustainability/chp">CHP</NavigationItem>
+        <NavigationItem link="/sustainability/bioethanol">Bioethanol</NavigationItem>
+
       </Dropdown>
       
 

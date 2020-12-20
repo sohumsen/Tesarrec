@@ -1,0 +1,142 @@
+{
+    "Sheet1": [
+        {
+            "User Navigation Bar": "Biomass (wet) feedstock availability t/d",
+            "Default": "2670",
+            "Range": "100-10000",
+            "VariableName": "BiomassFeedstockAvailability"
+        },
+        {
+            "User Navigation Bar": "Moisture content wt%",
+            "Default": "25",
+            "Range": "0-50",
+            "VariableName": "MoistureContent"
+        },
+        {
+            "User Navigation Bar": "Cellulose content (wet basis) wt%",
+            "Default": "30",
+            "Range": " 10-40",
+            "VariableName": "CelluloseContent"
+        },
+        {
+            "User Navigation Bar": "Xylan content (wet basis) wt%",
+            "Default": "15",
+            "Range": " 4-20",
+            "VariableName": "XylanContent"
+        },
+        {
+            "User Navigation Bar": "Glucan content (wet basis) wt%",
+            "Default": "3",
+            "Range": " 1-8",
+            "VariableName": "GlucanContent"
+        },
+        {
+            "User Navigation Bar": "Arabinan content (wet basis) wt%",
+            "Default": "1.5",
+            "Range": " 1-4",
+            "VariableName": "ArabinanContent"
+        },
+        {
+            "User Navigation Bar": "Mannan content (wet basis) wt%",
+            "Default": "7",
+            "Range": "0-8",
+            "VariableName": "MannanContent"
+        },
+        {
+            "User Navigation Bar": "Galactan content (wet basis) wt%",
+            "Default": "1.5",
+            "Range": "0-4",
+            "VariableName": "GalactanContent"
+        },
+        {
+            "User Navigation Bar": "Ash content (wet basis) wt%",
+            "Default": "2",
+            "Range": "0-15",
+            "VariableName": "AshContent"
+        },
+        {
+            "User Navigation Bar": "Extractive content wt%",
+            "Default": "5",
+            "Range": "0-15",
+            "VariableName": "ExtractiveContent"
+        },
+        {
+            "User Navigation Bar": "Lignin content (wet basis) wt%",
+            "Default": "15",
+            "Range": " 4-23",
+            "VariableName": "LigninContent"
+        },
+        {
+            "User Navigation Bar": "Biomass calorific value (wet basis) MJ/kg",
+            "Default": "19.3",
+            "Range": "15-27",
+            "VariableName": "BiomassCalorificValue"
+        },
+        {
+            "User Navigation Bar": "Installation factor",
+            "Default": "5",
+            "Range": "1.5-5",
+            "VariableName": "InstallationFactor"
+        },
+        {
+            "User Navigation Bar": "Annual capital charge",
+            "Default": "0.13",
+            "Range": "0.05-0.15",
+            "VariableName": "AnnualCapitalCharge"
+        },
+        {
+            "User Navigation Bar": "IRR",
+            "Default": "0.12",
+            "Range": "0.05-0.15",
+            "VariableName": "IRRCost"
+        },
+        {
+            "User Navigation Bar": "Biomass cost $/t",
+            "Default": "100",
+            "Range": "40-800",
+            "VariableName": "BiomassCost"
+        },
+        {
+            "User Navigation Bar": "Bioethanol price $/kg",
+            "Default": "3.5",
+            "Range": "2.5-6",
+            "VariableName": "BioethanolPrice"
+        },
+        {
+            "User Navigation Bar": "Proportion import from Brazil",
+            "Default": "0.04276947",
+            "Range": "0-100",
+            "VariableName": "ProportionImportBrazil"
+        },
+        {
+            "User Navigation Bar": "Proportion import from Canada",
+            "Default": "0.10316036",
+            "Range": "0-100",
+            "VariableName": "ProportionImportCanada"
+        },
+        {
+            "User Navigation Bar": "Proportion import from France",
+            "Default": "0.30905904",
+            "Range": "0-100",
+            "VariableName": "ProportionImportFrance"
+        },
+        {
+            "User Navigation Bar": "Proportion import from Germany",
+            "Default": "0.11873772",
+            "Range": "0-100",
+            "VariableName": "ProportionImportGermany"
+        },
+        {
+            "User Navigation Bar": "Proportion import from Guatemala",
+            "Default": "12.653868",
+            "Range": "0-100",
+            "VariableName": "ProportionImportGuatemala"
+        },
+        {
+            "User Navigation Bar": "Proportion import from USA",
+            "Default": "86.7724054",
+            "Range": "0-100",
+            "VariableName": "ProportionImportUSA"
+        }
+    ]
+}

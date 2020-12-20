@@ -464,7 +464,7 @@ const OverallReactionAnodeCathode = (props) => {
         <h3>Heat map of Product Value (&euro;/year)</h3>
         <MyHeatMap
           xLabels={props.heatMapContents.xLabels}
-          yLabels={["Product Value"]}
+          yLabels={[""]}
           color={"rgba(143, 236, 52"}
           data={TwoDProductValueData}
           HeatMapChangedOnClick={props.HeatMapChangedOnClick}
@@ -474,7 +474,7 @@ const OverallReactionAnodeCathode = (props) => {
         <h3>Heat map of Minimum Electricity Selling Price (&euro;/kWh)</h3>
         <MyHeatMap
           xLabels={props.heatMapContents.xLabels}
-          yLabels={["Product Value"]}
+          yLabels={[""]}
           color={"rgba(183, 236, 52"}
           data={TwoDMinimumProductSellingPrice}
           HeatMapChangedOnClick={props.HeatMapChangedOnClick}
@@ -484,7 +484,7 @@ const OverallReactionAnodeCathode = (props) => {
         <h3>Acidification potential saving (kg SO2 eq./year)</h3>
         <MyHeatMap
           xLabels={props.heatMapContents.xLabels}
-          yLabels={["Product Value"]}
+          yLabels={[""]}
           color={"rgba(223, 236, 52"}
           data={TwoDAPsavingData}
           HeatMapChangedOnClick={props.HeatMapChangedOnClick}
@@ -494,7 +494,7 @@ const OverallReactionAnodeCathode = (props) => {
         <h3>Urban smog saving (kg NMVOC eq./year)</h3>
         <MyHeatMap
           xLabels={props.heatMapContents.xLabels}
-          yLabels={["Product Value"]}
+          yLabels={[""]}
           color={"rgba(103, 200, 52"}
           data={TwoDUSsavingData}
           HeatMapChangedOnClick={props.HeatMapChangedOnClick}
@@ -504,7 +504,7 @@ const OverallReactionAnodeCathode = (props) => {
         <h3>Eutrophication potential saving (kg Phosphate eq./year)</h3>
         <MyHeatMap
           xLabels={props.heatMapContents.xLabels}
-          yLabels={["Product Value"]}
+          yLabels={[""]}
           color={"rgba(103, 170, 52"}
           data={TwoDEPsavingData}
           HeatMapChangedOnClick={props.HeatMapChangedOnClick}
@@ -514,7 +514,7 @@ const OverallReactionAnodeCathode = (props) => {
         <h3>Fossil energy saving (MJ/year) </h3>
         <MyHeatMap
           xLabels={props.heatMapContents.xLabels}
-          yLabels={["Product Value"]}
+          yLabels={[""]}
           color={"rgba(103, 140, 52"}
           data={TwoDFEsavingData}
           HeatMapChangedOnClick={props.HeatMapChangedOnClick}
@@ -524,7 +524,7 @@ const OverallReactionAnodeCathode = (props) => {
         <h3>Saving in Labor Rights {"&"} Decent Work in MRH on annual basis</h3>
         <MyHeatMap
           xLabels={props.heatMapContents.xLabels}
-          yLabels={["Product Value"]}
+          yLabels={[""]}
           color={"rgba(103, 120, 52"}
           data={TwoDLRDWData}
           HeatMapChangedOnClick={props.HeatMapChangedOnClick}
@@ -534,7 +534,7 @@ const OverallReactionAnodeCathode = (props) => {
         <h3>Saving in Health {"&"} Safety in MRH on annual basis</h3>
         <MyHeatMap
           xLabels={props.heatMapContents.xLabels}
-          yLabels={["Product Value"]}
+          yLabels={[""]}
           color={"rgba(103, 100, 52"}
           data={TwoDHSData}
           HeatMapChangedOnClick={props.HeatMapChangedOnClick}
@@ -544,7 +544,7 @@ const OverallReactionAnodeCathode = (props) => {
         <h3>Saving in Human Rights in MRH on annual basis</h3>
         <MyHeatMap
           xLabels={props.heatMapContents.xLabels}
-          yLabels={["Product Value"]}
+          yLabels={[""]}
           color={"rgba(103, 140, 80"}
           data={TwoDHRData}
           HeatMapChangedOnClick={props.HeatMapChangedOnClick}
@@ -554,7 +554,7 @@ const OverallReactionAnodeCathode = (props) => {
         <h3>Saving in Governance in MRH on annual basis</h3>
         <MyHeatMap
           xLabels={props.heatMapContents.xLabels}
-          yLabels={["Product Value"]}
+          yLabels={[""]}
           color={"rgba(103, 140, 60"}
           data={TwoDGData}
           HeatMapChangedOnClick={props.HeatMapChangedOnClick}
@@ -564,7 +564,7 @@ const OverallReactionAnodeCathode = (props) => {
         <h3>Saving in Community Infrastructure in MRH on annual basis</h3>
         <MyHeatMap
           xLabels={props.heatMapContents.xLabels}
-          yLabels={["Product Value"]}
+          yLabels={[""]}
           color={"rgba(103, 140, 100"}
           data={TwoDCIData}
           HeatMapChangedOnClick={props.HeatMapChangedOnClick}

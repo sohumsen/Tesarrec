@@ -6,6 +6,8 @@ import About from "./containers/About/About";
 import Reference from "./containers/Reference/Reference";
 import Mes from "./containers/Sustainability/Mes/Mes";
 import Mfc from "./containers/Sustainability/Mfc/Mfc";
+import Bioethanol from "./containers/Sustainability/Bioethanol/Bioethanol";
+
 import ModelBench from "./containers/Lab/ModelBench";
 import { BrowserView, MobileView } from "react-device-detect";
 import MyMobileView from "./hoc/MyMobileView/MyMobileView";
@@ -57,7 +59,7 @@ class App extends Component {
     localStorage.removeItem("refreshToken");
 
     localStorage.removeItem("userId");
-    this.props.history.push("/");
+    // this.props.history.push("/");
   };
 
   refreshSession = (refreshToken) => {
@@ -219,10 +221,13 @@ class App extends Component {
 
         <Route path="/sustainability/mfc" exact component={Mfc} />
         <Route path="/sustainability/mes" exact component={Mes} />
+        <Route path="/sustainability/bioethanol" exact component={Bioethanol} />
+
         <Route path="/reference" component={Reference} />
         {/* <Route path="/contact" component={Contact} /> */}
+        <Redirect exact from="/" to="/sustainability/bioethanol" />
 
-        <Redirect to="/" />
+        {/* <Redirect to="/" /> */}
       </Switch>
     );
     let ifNotLoggedIn = (
