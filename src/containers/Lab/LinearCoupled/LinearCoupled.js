@@ -102,7 +102,6 @@ class LinearCoupled extends Component {
 
   MATHQUILL_handleInputChange = (id, itemType) => (mathField) => {
     // When editing LHS of equations, we need to handle it and
-    // console.log(id, itemType, mathField.latex());
     let modelObj = this.state.modelObj;
     let items = modelObj["Eqns"];
     let idx = items.findIndex((e) => {
@@ -153,16 +152,12 @@ class LinearCoupled extends Component {
       //lineName=S,dependent="",lineName=""
       //lineName=S,dependent="",lineName=""
       //lineName=S,dependent="",lineName=""
-      //   console.log(
-      //     "item.lineName " + item.lineName,
-      //     "dependentLatex " + dependentLatex
-      //   );
+    
       //   modelObj.Eqns.forEach((Eqn) => {
       //     Eqn.textEqn = Eqn.textEqn.replace(item.lineName, dependentLatex);
       //     Eqn.latexEqn = this.state.modelObj.tryConvertToLatex(Eqn.textEqn)
 
       //   });
-      //   console.log(modelObj.Eqns)
       //finds the index of the Var with item.lineName
       let idxOfVars = this.state.modelObj.Vars.findIndex(
         (Var) => Var.LatexForm === item.lineName
@@ -459,7 +454,6 @@ class LinearCoupled extends Component {
         : (Var["VarCurrent"] = event.target.value);
       Var["VarCurrent"] = value;
     } else {
-      console.log(isNaN(event.target.value), event.target.value[0] !== "-");
       isNaN(event.target.value) &&
       event.target.value[0] !== "-" &&
       event.target.value[0] !== "+"
@@ -618,7 +612,6 @@ class LinearCoupled extends Component {
     /**
      * This makes a call to a python server with the equations
      */
-    console.log("going to python");
 
     let modelObj = this.state.modelObj;
     modelObj.Config.calculate = true;
@@ -633,7 +626,6 @@ class LinearCoupled extends Component {
 
     //Eqns frac MUST have "\\frac{da}{dt}"
     const signal = this.state.controller.signal;
-    console.log(this.state.modelObj);
 
     fetch("https://tesarrec.herokuapp.com/solve_dae", {
       method: "POST",
@@ -646,11 +638,9 @@ class LinearCoupled extends Component {
       body: JSON.stringify(this.state.modelObj),
     })
       .then((response) => {
-        console.log(response);
         return response.json();
       })
       .then((json) => {
-        console.log(json);
         modelObj.solutions.calcedSolution = json;
         this.props.enqueueSnackbar("Request succeeded", {
           variant: "success",
@@ -664,7 +654,6 @@ class LinearCoupled extends Component {
         return json;
       })
       .catch((err) => {
-        console.log(err);
         modelObj.Config.calculate = false;
 
         if (err.name === "AbortError") {

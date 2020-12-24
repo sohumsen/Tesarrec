@@ -6,14 +6,12 @@ function MyDropzone(props) {
   const onDrop = useCallback((acceptedFiles) => {
     acceptedFiles.forEach((file) => {
       const reader = new FileReader()
-      console.log(reader)
 
       reader.onabort = () => console.log('file reading was aborted')
       reader.onerror = () => console.log('file reading has failed')
       reader.onload = () => {
       // Do whatever you want with the file contents
         const binaryStr = reader.result
-        console.log(binaryStr)
         props.setDescription(binaryStr)
 
       }

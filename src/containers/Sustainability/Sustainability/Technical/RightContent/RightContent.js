@@ -7,7 +7,6 @@ import FormControlLabel from "@material-ui/core/FormControlLabel";
 import MySliderContainer from "../../../../../components/UI/SliderContainer/SliderContainer";
 
 import SliderWithText from "../../../../../components/UI/SliderContainer/Slider/SliderWithText";
-import bioethanolSource from "../HeatMapForm/bioethanolSource.json";
 
 const PurpleSwitch = withStyles({
   switchBase: {
@@ -34,7 +33,7 @@ class RightContent extends Component {
     let socialSliders = null;
 
 
-    let allSliders = bioethanolSource["Sheet1"].map((config) => {
+    let allSliders = this.props.source["Sheet1"].map((config) => {
       var fields = config["Range"].split("-");
 
       let lowestVal = parseFloat(fields[0]);

@@ -33,6 +33,24 @@ const OverallReactionAnodeCathode = (props) => {
     IRRCost,
   } = props;
 
+    ///////////////////////////////////////////////
+    BiomassMoistureContent=parseFloat(BiomassMoistureContent)   
+    BiomassCarbonContent=parseFloat(BiomassCarbonContent)   
+    BiomassHydrogenContent=parseFloat(BiomassHydrogenContent)   
+    BiomassCalorificValue=parseFloat(BiomassCalorificValue)   
+    BoilerEfficiency=parseFloat(BoilerEfficiency)   
+    IsentropicEfficiency=parseFloat(IsentropicEfficiency)   
+    MechanicalEfficiency=parseFloat(MechanicalEfficiency)   
+    ElectricityDemand=parseFloat(ElectricityDemand)   
+    LangFactor=parseFloat(LangFactor)   
+    AnnualCapitalCharge=parseFloat(AnnualCapitalCharge)   
+    ElectricityPrice=parseFloat(ElectricityPrice)   
+    SteamPrice=parseFloat(SteamPrice)   
+    BiomassCost=parseFloat(BiomassCost)
+    IRRCost=parseFloat(IRRCost)   
+
+    ////////////////////////////////////////////
+
   let BiomassNeeded =
     (1560 * ElectricityDemand - 0.23) /
     (BiomassCarbonContent * 0.375 + BiomassHydrogenContent * 1.154) /

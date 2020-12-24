@@ -44,7 +44,6 @@ describe('text', function() {
         //(d*a)/(d*t)
 
         mq.typedText = "a"
-        console.log(mq.text())
         //mq.latex('\\text{asdf}');
         //assertLatex('\\text{asdf}');
   

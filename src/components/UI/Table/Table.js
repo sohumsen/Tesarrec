@@ -39,9 +39,7 @@ export default function SimpleTable(props) {
             {props.columns.map((column) => (
               <TableCell
                 style={{ width: "10px" }}
-                onClick={() => {
-                  console.log(column);
-                }}
+              
               >
                 {column}
               </TableCell>

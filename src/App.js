@@ -18,6 +18,10 @@ import SignUp from "./containers/Authenticate/SignUp/SignUp";
 import Logout from "./containers/Authenticate/Logout/Logout";
 import FIREBASE_KEY from "./firebasekey";
 import Chp from "./containers/Sustainability/Chp/Chp";
+
+import Sustainability from "./containers/Sustainability/Sustainability/Sustainability";
+
+
 import { SnackbarProvider } from "notistack";
 import Button from "@material-ui/core/Button";
 import firebaseConfig from './firebaseConfig'
@@ -221,11 +225,17 @@ class App extends Component {
 
         <Route path="/sustainability/mfc" exact component={Mfc} />
         <Route path="/sustainability/mes" exact component={Mes} />
-        <Route path="/sustainability/bioethanol" exact component={Bioethanol} />
+        {/* <Route path="/sustainability/bioethanol" exact component={Bioethanol} /> */}
 
         <Route path="/reference" component={Reference} />
+
+
+
+
+        <Route path="/sustainability/:type" render={(props) => <Sustainability key={props.match.params.type} {...props} />} />
+
         {/* <Route path="/contact" component={Contact} /> */}
-        <Redirect exact from="/" to="/sustainability/bioethanol" />
+        {/* <Redirect exact from="/" to="/sustainability/chemical" /> */}
 
         {/* <Redirect to="/" /> */}
       </Switch>
@@ -275,6 +285,9 @@ class App extends Component {
 
         <Route path="/sustainability/mfc" exact component={Mfc} />
         <Route path="/sustainability/mes" exact component={Mes} />
+        {/* <Route path="/sustainability/bioethanol" exact component={Bioethanol} /> */}
+        <Route path="/sustainability/:type" render={(props) => <Sustainability key={props.match.params.type} {...props} />} />
+
         <Route path="/reference" component={Reference} />
         {/* <Route path="/contact" component={Contact} /> */}
         <Redirect to="/" />

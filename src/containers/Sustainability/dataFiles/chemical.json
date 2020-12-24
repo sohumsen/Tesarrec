@@ -1,0 +1,154 @@
+{
+    "Sheet1": [
+        {
+            "User Navigation Bar": "Biomass (dry) feedstock availability t/d",
+            "Default": "5",
+            "Range": "5-3000",
+            "VariableName": "BiomassFeedstockAvailability"
+        },
+        {
+            "User Navigation Bar": "Cellulose content (dry basis) wt%",
+            "Default": "20",
+            "Range": " 10-50",
+            "VariableName": "CelluloseContent"
+        },
+        {
+            "User Navigation Bar": "Hemicellulose content (dry basis) wt%",
+            "Default": "50",
+            "Range": " 20-70",
+            "VariableName": "HemicelluloseContent"
+        },
+        {
+            "User Navigation Bar": "Starch content (dry basis) wt%",
+            "Default": "0",
+            "Range": " 0-1",
+            "VariableName": "StarchContent"
+        },
+        {
+            "User Navigation Bar": "Protein content (dry basis) wt%",
+            "Default": "10",
+            "Range": " 1-20",
+            "VariableName": "ProteinContent"
+        },
+        {
+            "User Navigation Bar": "Ash content (dry basis) wt%",
+            "Default": "15",
+            "Range": "0-30",
+            "VariableName": "AshContent"
+        },
+        {
+            "User Navigation Bar": "Extractive content (dry basis) wt%",
+            "Default": "5",
+            "Range": "0-5",
+            "VariableName": "ExtractiveContent"
+        },
+        {
+            "User Navigation Bar": "Lignin content (dry basis) wt%",
+            "Default": "0",
+            "Range": "0-25",
+            "VariableName": "LigninContent"
+        },
+        {
+            "User Navigation Bar": "Installation factor",
+            "Default": "5",
+            "Range": "1.5-5",
+            "VariableName": "InstallationFactor"
+        },
+        {
+            "User Navigation Bar": "Annual capital charge",
+            "Default": "0.13",
+            "Range": "0.05-0.15",
+            "VariableName": "AnnualCapitalCharge"
+        },
+        {
+            "User Navigation Bar": "Biomass cost $/t",
+            "Default": "50",
+            "Range": "40-500",
+            "VariableName": "BiomassCost"
+        },
+        {
+            "User Navigation Bar": "Chemical price $/kg",
+            "Default": "3.5",
+            "Range": "0.5-6",
+            "VariableName": "ChemicalPrice"
+        },
+        {
+            "User Navigation Bar": "Electricity cost $/kWh",
+            "Default": "0.165",
+            "Range": "0.06-0.2",
+            "VariableName": "ElectricityCost"
+        },
+        {
+            "User Navigation Bar": "Steam cost $/kWh",
+            "Default": "0.02",
+            "Range": "0.01-0.05",
+            "VariableName": "SteamCost"
+        },
+        {
+            "User Navigation Bar": "Proportion import from Brazil",
+            "Default": "1.98313236336314",
+            "Range": "0-100",
+            "VariableName": "ProportionImportBrazil"
+        },
+        {
+            "User Navigation Bar": "Proportion import from Spain",
+            "Default": "32.5834510153259",
+            "Range": "0-100",
+            "VariableName": "ProportionImportSpain"
+        },
+        {
+            "User Navigation Bar": "Proportion import from France",
+            "Default": "8.46443991870316",
+            "Range": "0-100",
+            "VariableName": "ProportionImportFrance"
+        },
+        {
+            "User Navigation Bar": "Proportion import from Germany",
+            "Default": "0.0223483047028742",
+            "Range": "0-100",
+            "VariableName": "ProportionImportGermany"
+        },
+        {
+            "User Navigation Bar": "Proportion import from Netherlands",
+            "Default": "13.7503473223141",
+            "Range": "0-100",
+            "VariableName": "ProportionImportNetherlands"
+        },
+        {
+            "User Navigation Bar": "Proportion import from USA",
+            "Default": "24.444102180924",
+            "Range": "0-100",
+            "VariableName": "ProportionImportUSA"
+        },
+        {
+            "User Navigation Bar": "Proportion import from China",
+            "Default": "12.1777967641528",
+            "Range": "0-100",
+            "VariableName": "ProportionImportChina"
+        },
+        {
+            "User Navigation Bar": "Proportion import from Belgium",
+            "Default": "6.37506855387997",
+            "Range": "0-100",
+            "VariableName": "ProportionImportBelgium"
+        },
+        {
+            "User Navigation Bar": "Proportion import from Malaysia",
+            "Default": "0.19538506207053",
+            "Range": "0-100",
+            "VariableName": "ProportionImportMalaysia"
+        },
+        {
+            "User Navigation Bar": "Proportion import from Japan",
+            "Default": "0.00381143962627599",
+            "Range": "0-100",
+            "VariableName": "ProportionImportJapan"
+        },
+        {
+            "User Navigation Bar": "Proportion import from Colombia",
+            "Default": "0.000117074937325884",
+            "Range": "0-100",
+            "VariableName": "ProportionImportColombia"
+        }
+    ]
+}

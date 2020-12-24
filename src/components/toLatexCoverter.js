@@ -1,6 +1,5 @@
 export default function texFromExpression(str){
     // let str="(d*Y_1)/(d*X_1)=Y_1"
-    console.log(str)
     var pos = -1, ch;
     function nextChar(){
         ch = (++pos < str.length) ? str.charAt(pos) : -1;

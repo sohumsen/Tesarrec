@@ -31,9 +31,41 @@ const OverallReactionAnodeCathode = (props) => {
 
     BiomassCost,
     BioethanolPrice,
+
+    ProportionImportBrazil,
+    ProportionImportCanada,
+    ProportionImportFrance ,
+    ProportionImportGermany ,
+    ProportionImportGuatemala ,
+    ProportionImportUSA,
   } = props.state.data;
 
   ///////////////////////////////////////////////
+  BiomassFeedstockAvailability=parseFloat(BiomassFeedstockAvailability)   
+  MoistureContent=parseFloat(MoistureContent)   
+  CelluloseContent=parseFloat(CelluloseContent)   
+  XylanContent=parseFloat(XylanContent)   
+  GlucanContent=parseFloat(GlucanContent)   
+  ArabinanContent=parseFloat(ArabinanContent)   
+  MannanContent=parseFloat(MannanContent)   
+  GalactanContent=parseFloat(GalactanContent)   
+  AshContent=parseFloat(AshContent)   
+  ExtractiveContent=parseFloat(ExtractiveContent)   
+  LigninContent=parseFloat(LigninContent)   
+  BiomassCalorificValue=parseFloat(BiomassCalorificValue)   
+  InstallationFactor=parseFloat(InstallationFactor)
+  AnnualCapitalCharge=parseFloat(AnnualCapitalCharge)   
+  IRRCost=parseFloat(IRRCost)   
+  BiomassCost=parseFloat(BiomassCost)   
+  BioethanolPrice=parseFloat(BioethanolPrice)   
+
+  ProportionImportBrazil=parseFloat(ProportionImportBrazil)   
+  ProportionImportCanada=parseFloat(ProportionImportCanada)
+  ProportionImportFrance=parseFloat(ProportionImportFrance)   
+  ProportionImportGermany=parseFloat(ProportionImportGermany)   
+  ProportionImportGuatemala=parseFloat(ProportionImportGuatemala)   
+  ProportionImportUSA=parseFloat(ProportionImportUSA)   
+  ////////////////////////////////////////////
   let Total =
     MoistureContent +
     CelluloseContent +
@@ -82,37 +114,41 @@ const OverallReactionAnodeCathode = (props) => {
   ///////////////////////////////////////////////////////
   let BioethanolEfficiency =
     (BioethanolProduction * 29.7) / BiomassCalorificValue;
+
+  let HeatEfficiency =
+    (SteamtoTurbine * 0.9 - ElectricityOutputGj) / BiomassCalorificValue;
   let ElectricityEfficiency = (ElectricityOutput * 3.6) / BiomassCalorificValue;
 
   ///////////////////////////////////////////////////////
   let DeliveredCostofEquipment =
-    ((4.44 *
-      ((BiomassFeedstockAvailability * (1 - MoistureFraction)) / (83.3 * 24))) ^
-      (0.67 +
-        14.1 *
-          ((BiomassFeedstockAvailability * (1 - MoistureFraction)) /
-            (83.3 * 24))) ^
-      (0.78 +
-        0.26 *
-          ((BioethanolProduction * BiomassFeedstockAvailability) /
-            (24 * 3.53))) ^
-      (0.6 +
-        5.88 *
-          ((BioethanolProduction * BiomassFeedstockAvailability) /
-            (24 * 18.466))) ^
-      (0.7 +
-        1.05 *
-          ((OrganicProduction * BiomassFeedstockAvailability) / (24 * 10.1))) ^
-      (0.65 +
-        1.54 *
-          (((OrganicProduction + MoistureFraction) *
-            BiomassFeedstockAvailability) /
-            (24 * 43))) ^
-      (0.6 +
-        116 *
-          ((BiomassFeedstockAvailability * (1 - MoistureFraction)) / 2000)) ^
-      0.6) *
+    (4.44 *
+      ((BiomassFeedstockAvailability * (1 - MoistureFraction)) / (83.3 * 24)) **
+        0.67 +
+      14.1 *
+        ((BiomassFeedstockAvailability * (1 - MoistureFraction)) /
+          (83.3 * 24)) **
+          0.78 +
+      0.26 *
+        ((BioethanolProduction * BiomassFeedstockAvailability) / (24 * 3.53)) **
+          0.6 +
+      5.88 *
+        ((BioethanolProduction * BiomassFeedstockAvailability) /
+          (24 * 18.466)) **
+          0.7 +
+      1.05 *
+        ((OrganicProduction * BiomassFeedstockAvailability) / (24 * 10.1)) **
+          0.65 +
+      1.54 *
+        (((OrganicProduction + MoistureFraction) *
+          BiomassFeedstockAvailability) /
+          (24 * 43)) **
+          0.6 +
+      116 *
+        ((BiomassFeedstockAvailability * (1 - MoistureFraction)) / 2000) **
+          0.6) *
     (600 / 402);
+
+
   let Capex =
     DeliveredCostofEquipment * InstallationFactor * AnnualCapitalCharge;
   let Opex =
@@ -136,22 +172,68 @@ const OverallReactionAnodeCathode = (props) => {
   ///////////////////////////////////////////////////////
 
   let GlobalWarmingPotential =
-    (0.126 * ElectricityOutput * BiomassFeedstockAvailability * 365) / 1000000;
+    (0.126 * ElectricityOutputGj * BiomassFeedstockAvailability * 365) / 1000000;
   let FossilResourceDepletion =
-    (1.43 * ElectricityOutput * BiomassFeedstockAvailability * 365) / 1000000;
+    (1.43 * ElectricityOutputGj * BiomassFeedstockAvailability * 365) / 1000000;
 
   //////////////////////////////////////////////////////////
-  let TotalSocial = props.state.data.ProportionImportBrazil + props.state.data.ProportionImportCanada + props.state.data.ProportionImportFrance + props.state.data.ProportionImportGermany + props.state.data.ProportionImportGuatemala + props.state.data.ProportionImportUSA
+  let TotalSocial =
+    ProportionImportBrazil +
+    ProportionImportCanada +
+    ProportionImportFrance +
+    ProportionImportGermany +
+    ProportionImportGuatemala +
+    ProportionImportUSA;
 
-  let LRDW = ((Social.Brazil.LRDW * props.state.data.ProportionImportBrazil + Social.Canada.LRDW * props.state.data.ProportionImportCanada + Social.France.LRDW * props.state.data.ProportionImportFrance + Social.Germany.LRDW * props.state.data.ProportionImportGermany + Social.Guatemala.LRDW * props.state.data.ProportionImportGuatemala + Social.USA.LRDW * props.state.data.ProportionImportUSA) - Social.Mexico.LRDW * TotalSocial) / (Social.Mexico.LRDW * TotalSocial)
-  
-  let HS = ((Social.Brazil.HS * props.state.data.ProportionImportBrazil + Social.Canada.HS * props.state.data.ProportionImportCanada + Social.France.HS * props.state.data.ProportionImportFrance + Social.Germany.HS * props.state.data.ProportionImportGermany + Social.Guatemala.HS * props.state.data.ProportionImportGuatemala + Social.USA.HS * props.state.data.ProportionImportUSA) - Social.Mexico.HS * TotalSocial) / (Social.Mexico.HS * TotalSocial)
-  
-  let HR = ((Social.Brazil.HR * props.state.data.ProportionImportBrazil + Social.Canada.HR * props.state.data.ProportionImportCanada + Social.France.HR * props.state.data.ProportionImportFrance + Social.Germany.HR * props.state.data.ProportionImportGermany + Social.Guatemala.HR * props.state.data.ProportionImportGuatemala + Social.USA.HR * props.state.data.ProportionImportUSA) - Social.Mexico.HR * TotalSocial) / (Social.Mexico.HR * TotalSocial)
-  let G = ((Social.Brazil.G * props.state.data.ProportionImportBrazil + Social.Canada.G * props.state.data.ProportionImportCanada + Social.France.G * props.state.data.ProportionImportFrance + Social.Germany.G * props.state.data.ProportionImportGermany + Social.Guatemala.G * props.state.data.ProportionImportGuatemala + Social.USA.G * props.state.data.ProportionImportUSA) - Social.Mexico.G * TotalSocial) / (Social.Mexico.G * TotalSocial)
-  
-  let CI = ((Social.Brazil.CI * props.state.data.ProportionImportBrazil + Social.Canada.CI * props.state.data.ProportionImportCanada + Social.France.CI * props.state.data.ProportionImportFrance + Social.Germany.CI * props.state.data.ProportionImportGermany + Social.Guatemala.CI * props.state.data.ProportionImportGuatemala + Social.USA.CI * props.state.data.ProportionImportUSA) - Social.Mexico.CI * TotalSocial) / (Social.Mexico.CI * TotalSocial)
-  
+  let LRDW =
+    (Social.Brazil.LRDW * ProportionImportBrazil +
+      Social.Canada.LRDW * ProportionImportCanada +
+      Social.France.LRDW * ProportionImportFrance +
+      Social.Germany.LRDW * ProportionImportGermany +
+      Social.Guatemala.LRDW * ProportionImportGuatemala +
+      Social.USA.LRDW * ProportionImportUSA -
+      Social.Mexico.LRDW * TotalSocial) /
+    (Social.Mexico.LRDW * TotalSocial)*100;
+
+  let HS =
+    (Social.Brazil.HS * ProportionImportBrazil +
+      Social.Canada.HS * ProportionImportCanada +
+      Social.France.HS * ProportionImportFrance +
+      Social.Germany.HS * ProportionImportGermany +
+      Social.Guatemala.HS * ProportionImportGuatemala +
+      Social.USA.HS * ProportionImportUSA -
+      Social.Mexico.HS * TotalSocial) /
+    (Social.Mexico.HS * TotalSocial)*100;
+
+  let HR =
+    (Social.Brazil.HR * ProportionImportBrazil +
+      Social.Canada.HR * ProportionImportCanada +
+      Social.France.HR * ProportionImportFrance +
+      Social.Germany.HR * ProportionImportGermany +
+      Social.Guatemala.HR * ProportionImportGuatemala +
+      Social.USA.HR * ProportionImportUSA -
+      Social.Mexico.HR * TotalSocial) /
+    (Social.Mexico.HR * TotalSocial)*100;
+  let G =
+    (Social.Brazil.G * ProportionImportBrazil +
+      Social.Canada.G * ProportionImportCanada +
+      Social.France.G * ProportionImportFrance +
+      Social.Germany.G * ProportionImportGermany +
+      Social.Guatemala.G * ProportionImportGuatemala +
+      Social.USA.G * ProportionImportUSA -
+      Social.Mexico.G * TotalSocial) /
+    (Social.Mexico.G * TotalSocial)*100;
+
+  let CI =
+    (Social.Brazil.CI * ProportionImportBrazil +
+      Social.Canada.CI * ProportionImportCanada +
+      Social.France.CI * ProportionImportFrance +
+      Social.Germany.CI * ProportionImportGermany +
+      Social.Guatemala.CI * ProportionImportGuatemala +
+      Social.USA.CI * ProportionImportUSA -
+      Social.Mexico.CI * TotalSocial) /
+    (Social.Mexico.CI * TotalSocial)*100;
+
   return (
     <div className={classes.HeatMaps}>
       <div className={classes.HeatMapEnergyPerformance}>
@@ -171,7 +253,7 @@ const OverallReactionAnodeCathode = (props) => {
               label: "Electricity Output MWh",
               y: parseFloat(ElectricityOutput.toFixed(2)),
             },
-          
+
             {
               label: "Bioethanol Production t",
               y: parseFloat(BioethanolProduction.toFixed(2)),
@@ -187,6 +269,10 @@ const OverallReactionAnodeCathode = (props) => {
             {
               label: "Bioethanol Efficiency ",
               y: parseFloat(BioethanolEfficiency.toFixed(2)),
+            },
+            {
+              label: "Heat Efficiency",
+              y: parseFloat(HeatEfficiency.toFixed(2)),
             },
 
             {
@@ -242,8 +328,6 @@ const OverallReactionAnodeCathode = (props) => {
         />
       </div>
 
-   
-
       <div className={classes.HeatMapEnergyPerformance}>
         <ColumnChart
           title={" Environmental impact saving per year"}
@@ -263,7 +347,7 @@ const OverallReactionAnodeCathode = (props) => {
       </div>
       <div className={classes.HeatMapEnergyPerformance}>
         <ColumnChart
-          title={"Saving in % MRH on annual basis"}
+          title={"Social LCA savings in %"}
           labelData1={[
             {
               label: "Labor Rights & Decent Work",

@@ -1,0 +1,10 @@
+.parentContainer {
+  position: relative;
+
+
+  float: left;
+  align-items: center;
+  width: 75%;
+  margin: 30px;
+  background-color: "blue";
+}

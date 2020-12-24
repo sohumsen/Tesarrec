@@ -17,7 +17,6 @@ const useStyles = makeStyles({
 
 const InputSlider = (props) => {
   const classes = useStyles(props);
-
   return (
     <div className={classes.root}>
       <Typography id="input-slider" gutterBottom>
