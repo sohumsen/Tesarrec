@@ -35,7 +35,7 @@ class RightContent extends Component {
     if (this.state.showSocialSliders) {
       socialSliders = (
         <MySliderContainer>
-          <h3>Social</h3>
+          <h3>Social (UK)</h3>
           <SliderWithText
             rootWidth={"50%"}
             inputWidth={72}

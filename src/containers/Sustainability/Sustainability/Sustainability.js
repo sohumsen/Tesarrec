@@ -26,9 +26,15 @@ class Bioethanol extends Component {
         purposes, as long as you creadit: ©
         <a href={"https://tesarrec.web.app"}>https://tesarrec.web.app</a>
         {" and "}
-        <a href={"https://doi.org/10.1016/j.biteb.2019.100230"}>
-          https://doi.org/10.1016/j.biteb.2019.100230
-        </a>
+        {type === "chemical" ? (
+          <a href={"https://doi.org/10.1039/C9GC00607A"}>
+            https://doi.org/10.1039/C9GC00607A
+          </a>
+        ) : (
+          <a href={"https://doi.org/10.1016/j.biteb.2019.100230"}>
+            https://doi.org/10.1016/j.biteb.2019.100230
+          </a>
+        )}
         <h1>{type.charAt(0).toUpperCase() + type.slice(1)}</h1>
         <div>
           {/* <a style={{ float: "right" }} href={"https://youtu.be/FNoEY1NhqPo"}>

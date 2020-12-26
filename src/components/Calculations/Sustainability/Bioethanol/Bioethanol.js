@@ -347,7 +347,7 @@ const OverallReactionAnodeCathode = (props) => {
       </div>
       <div className={classes.HeatMapEnergyPerformance}>
         <ColumnChart
-          title={"Social LCA savings in %"}
+          title={"Social LCA savings in % (Mexico)"}
           labelData1={[
             {
               label: "Labor Rights & Decent Work",

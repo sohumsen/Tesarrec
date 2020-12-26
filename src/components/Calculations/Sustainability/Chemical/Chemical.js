@@ -199,7 +199,7 @@ const OverallReactionAnodeCathode = (props) => {
       Social.Malaysia.LRDW * props.state.data.ProportionImportMalaysia +
       Social.Japan.LRDW * props.state.data.ProportionImportJapan +
       Social.Colombia.LRDW * props.state.data.ProportionImportColombia -
-      Social.Mexico.LRDW * TotalSocial) /
+      Social.Mexico.LRDW * TotalSocial)*100 /
     (Social.Mexico.LRDW * TotalSocial);
 
   let HS =
@@ -214,7 +214,7 @@ const OverallReactionAnodeCathode = (props) => {
       Social.Malaysia.HS * props.state.data.ProportionImportMalaysia +
       Social.Japan.HS * props.state.data.ProportionImportJapan +
       Social.Colombia.HS * props.state.data.ProportionImportColombia -
-      Social.Mexico.HS * TotalSocial) /
+      Social.Mexico.HS * TotalSocial)*100 /
     (Social.Mexico.HS * TotalSocial);
 
   let HR =
@@ -229,7 +229,7 @@ const OverallReactionAnodeCathode = (props) => {
       Social.Malaysia.HR * props.state.data.ProportionImportMalaysia +
       Social.Japan.HR * props.state.data.ProportionImportJapan +
       Social.Colombia.HR * props.state.data.ProportionImportColombia -
-      Social.Mexico.HR * TotalSocial) /
+      Social.Mexico.HR * TotalSocial)*100 /
     (Social.Mexico.HR * TotalSocial);
   let G =
     (Social.Brazil.G * props.state.data.ProportionImportBrazil +
@@ -243,7 +243,7 @@ const OverallReactionAnodeCathode = (props) => {
       Social.Malaysia.G * props.state.data.ProportionImportMalaysia +
       Social.Japan.G * props.state.data.ProportionImportJapan +
       Social.Colombia.G * props.state.data.ProportionImportColombia -
-      Social.Mexico.G * TotalSocial) /
+      Social.Mexico.G * TotalSocial)*100 /
     (Social.Mexico.G * TotalSocial);
 
   let CI =
@@ -258,7 +258,7 @@ const OverallReactionAnodeCathode = (props) => {
       Social.Malaysia.CI * props.state.data.ProportionImportMalaysia +
       Social.Japan.CI * props.state.data.ProportionImportJapan +
       Social.Colombia.CI * props.state.data.ProportionImportColombia -
-      Social.Mexico.CI * TotalSocial) /
+      Social.Mexico.CI * TotalSocial)*100 /
     (Social.Mexico.CI * TotalSocial);
 
   return (
@@ -447,7 +447,7 @@ const OverallReactionAnodeCathode = (props) => {
       </div>
       <div className={classes.HeatMapEnergyPerformance}>
         <ColumnChart
-          title={"Social LCA Savings in %"}
+          title={"Social LCA Savings in % (Mexico)"}
           labelData1={[
             {
               label: "Labor Rights & Decent Work",
