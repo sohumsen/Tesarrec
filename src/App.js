@@ -63,7 +63,7 @@ class App extends Component {
     localStorage.removeItem("refreshToken");
 
     localStorage.removeItem("userId");
-    // this.props.history.push("/");
+    this.props.history.push("/");
   };
 
   refreshSession = (refreshToken) => {
@@ -137,7 +137,7 @@ class App extends Component {
       loading: false,
       isLoggedIn: true,
     });
-    // this.props.history.push("/modelbench");
+    this.props.history.push("/modelbench");
   };
   authFail = (errorMsg) => {
     this.setState({

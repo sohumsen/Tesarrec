@@ -473,7 +473,7 @@ class LinearCoupled extends Component {
         modelObj.solutions.calcedSolution = solution;
         this.setState({ modelObj: modelObj });
       } else {
-        this.getDAESolution();
+        // this.getDAESolution();
         // this.getODESolution()
       }
     }
@@ -808,8 +808,7 @@ class LinearCoupled extends Component {
             {/*if remote solver and not completed show the spinner*/}
 
             {!this.state.localSolver && !this.state.completed ? (
-              <div> <Spinner /><p className={classes.loadingText}>Loading...</p></div>
-
+              <div> <Spinner /></div>
              
             ) : null}
 
