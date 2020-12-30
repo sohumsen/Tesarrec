@@ -1,0 +1,11 @@
+{
+    "Sheet1": [
+        {
+            "User Navigation Bar": "Temperature C",
+            "Default": "300",
+            "Range": "300-500",
+            "VariableName": "Temperature"
+        }
+       
+    ]
+}

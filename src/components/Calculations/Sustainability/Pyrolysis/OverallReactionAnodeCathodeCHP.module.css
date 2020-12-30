@@ -1,0 +1,17 @@
+.HeatMaps{
+    
+    float: left;
+    width: 100%;
+    /* display: flex;
+    flex-direction: column ; */
+}
+
+.HeatMapEnergyPerformance {
+    float: left;
+    width: 50%;
+    padding-top: 0%;
+
+    text-align: center;
+    flex:1;
+
+  }

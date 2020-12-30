@@ -3,9 +3,11 @@ import React, { Component } from "react";
 import RightContent from "../RightContent/RightContent";
 import BioethanolCalc from "../../../../../components/Calculations/Sustainability/Bioethanol/Bioethanol";
 import ChemicalCalc from "../../../../../components/Calculations/Sustainability/Chemical/Chemical";
+import PyrolysisCalc from "../../../../../components/Calculations/Sustainability/Pyrolysis/Pyrolysis";
 
 import bioethanolData from "../../../dataFiles/bioethanol.json";
 import chemicalData from "../../../dataFiles/chemical.json";
+import pyrolysisData from "../../../dataFiles/pyrolysis.json";
 
 class HeatMapForm extends Component {
   state = {
@@ -34,22 +36,21 @@ class HeatMapForm extends Component {
   getDataFile = () => {
     switch (this.props.type) {
       case "bioethanol":
-        // code block
-
         return bioethanolData;
       case "chemical":
-        // code block
-
         return chemicalData;
+
+      case "pyrolysis":
+        return pyrolysisData;
+
       default:
         return bioethanolData;
 
       // code block
     }
   };
-  static getderivedstate
 
-  updateNewState=()=>{
+  updateNewState = () => {
     let newData = {};
     let source = this.getDataFile();
     source["Sheet1"].forEach((config) => {
@@ -59,22 +60,10 @@ class HeatMapForm extends Component {
     this.setState({
       data: newData,
     });
-  }
-
-  // static getDerivedStateFromProps(nextProps, prevState) {
-  //   // do things with nextProps.someProp and prevState.cachedSomeProp
-
-  //   if (nextProps.data!==prevState.data){
-  //     this.updateNewState()
-
-  //   }
-  //   return {
-  //     // ... other derived state properties
-  //   };
-  // }
+  };
 
   componentDidMount() {
-    this.updateNewState()
+    this.updateNewState();
   }
 
   render() {
@@ -96,6 +85,10 @@ class HeatMapForm extends Component {
 
             {this.props.type === "chemical" ? (
               <ChemicalCalc state={this.state} />
+            ) : null}
+
+            {this.props.type === "pyrolysis" ? (
+              <PyrolysisCalc state={this.state} />
             ) : null}
           </div>
         ) : null}

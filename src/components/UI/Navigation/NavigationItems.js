@@ -13,6 +13,7 @@ const navigationItems = (props) => {
         <NavigationItem link="/sustainability/chp">CHP</NavigationItem>
         <NavigationItem link="/sustainability/bioethanol">Bioethanol</NavigationItem>
         <NavigationItem link="/sustainability/chemical">Chemical</NavigationItem>
+        <NavigationItem link="/sustainability/pyrolysis">Pyrolysis</NavigationItem>
 
       </Dropdown>
       
