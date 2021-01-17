@@ -8,8 +8,8 @@
 
 .HeatMapEnergyPerformance {
     float: left;
-    width: 50%;
-    padding-top: 3%;
+    width: 46%;
+    margin: 2%;
 
     text-align: center;
     flex:1;

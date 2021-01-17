@@ -6,7 +6,6 @@ make snackbar thinner
 work on solver analysis
 speed heroku server
 
-dont forward users to modelbench on login
 stack biothanol.js  energy efficiency
 
 

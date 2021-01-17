@@ -9,6 +9,7 @@ import ColumnChart from "../../../UI/Canvas/ColumnChart";
 import MyHeatMap from "../../../UI/MyHeatMap/MyHeatMap";
 
 import Social from "../../../Excel/Social/SocialInternational.json";
+import { Paper } from "@material-ui/core";
 
 const OverallReactionAnodeCathode = (props) => {
   let {
@@ -235,12 +236,13 @@ const OverallReactionAnodeCathode = (props) => {
     (Social.Mexico.CI * TotalSocial)*100;
 
   return (
-    <div className={classes.HeatMaps}>
-      <div className={classes.HeatMapEnergyPerformance}>
+    <div  className={classes.HeatMaps}>
+      
+      <Paper  className={classes.HeatMapEnergyPerformance}>
         <img src={BioethanolPic} width="100%" alt="Bioethanol Pic"></img>
-      </div>
+      </Paper >
 
-      <div className={classes.HeatMapEnergyPerformance}>
+      <Paper  className={classes.HeatMapEnergyPerformance}>
         <ColumnChart
           title={"Product yields 1 tonne (wet) biomass"}
           labelData1={[
@@ -261,8 +263,8 @@ const OverallReactionAnodeCathode = (props) => {
           ]}
           type={"bar"}
         />
-      </div>
-      <div className={classes.HeatMapEnergyPerformance}>
+      </Paper >
+      <Paper  className={classes.HeatMapEnergyPerformance}>
         <ColumnChart
           title={"Dimensionless energy efficiency"}
           labelData1={[
@@ -282,9 +284,9 @@ const OverallReactionAnodeCathode = (props) => {
           ]}
           type={"column"}
         />
-      </div>
+      </Paper >
 
-      <div className={classes.HeatMapEnergyPerformance}>
+      <Paper  className={classes.HeatMapEnergyPerformance}>
         <ColumnChart
           title={"Economic analysis million $/y"}
           labelData1={[
@@ -308,9 +310,9 @@ const OverallReactionAnodeCathode = (props) => {
           ]}
           type={"pie"}
         />
-      </div>
+      </Paper >
 
-      <div className={classes.HeatMapEnergyPerformance}>
+      <Paper  className={classes.HeatMapEnergyPerformance}>
         <ColumnChart
           title={" $/kg Bioethanol cost and price"}
           labelData1={[
@@ -326,9 +328,9 @@ const OverallReactionAnodeCathode = (props) => {
           ]}
           type={"bar"}
         />
-      </div>
+      </Paper >
 
-      <div className={classes.HeatMapEnergyPerformance}>
+      <Paper  className={classes.HeatMapEnergyPerformance}>
         <ColumnChart
           title={" Environmental impact saving per year"}
           labelData1={[
@@ -344,8 +346,8 @@ const OverallReactionAnodeCathode = (props) => {
           ]}
           type={"bar"}
         />
-      </div>
-      <div className={classes.HeatMapEnergyPerformance}>
+      </Paper >
+      <Paper  className={classes.HeatMapEnergyPerformance}>
         <ColumnChart
           title={"Social LCA savings in % (Mexico)"}
           labelData1={[
@@ -364,8 +366,8 @@ const OverallReactionAnodeCathode = (props) => {
           ]}
           type={"bar"}
         />
-      </div>
-      <div className={classes.HeatMapEnergyPerformance}>
+      </Paper >
+      <Paper  className={classes.HeatMapEnergyPerformance}>
         <CashFlowGraph
           CapitalCost={parseFloat(
             (DeliveredCostofEquipment * InstallationFactor).toFixed(2)
@@ -375,8 +377,8 @@ const OverallReactionAnodeCathode = (props) => {
           ProductValue={parseFloat(ProductValue.toFixed(2))}
           IRRCost={parseFloat(IRRCost.toFixed(2))}
         />
-      </div>
-    </div>
+      </Paper >
+    </div >
   );
 };
 

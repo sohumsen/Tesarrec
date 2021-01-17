@@ -4,6 +4,7 @@ import React from "react";
 import BioethanolPic from "../../../../assets/pyrolysis.png";
 import classes from "./OverallReactionAnodeCathodeCHP.module.css";
 import MultiLineChart from "../../../UI/Canvas/MultiLineChart";
+import { Paper } from "@material-ui/core";
 
 const OverallReactionAnodeCathode = (props) => {
   let { Temperature } = props.state.data;
@@ -56,21 +57,19 @@ const OverallReactionAnodeCathode = (props) => {
   }
 
   return (
-    <div className={classes.HeatMaps}>
-      <div className={classes.HeatMapEnergyPerformance}>
+    <div  className={classes.HeatMaps}>
+      <Paper  className={classes.HeatMapEnergyPerformance}>
         <img src={BioethanolPic} width="100%" alt="Bioethanol Pic"></img>
-      </div>
-      <div
+      </Paper >
+      <Paper
         style={{
           width: "100%",
           height: "600px",
         }}
       >
         <MultiLineChart dataPoints={dataPoints} />
-      </div>
-
-    
-    </div>
+      </Paper >
+    </div >
   );
 };
 

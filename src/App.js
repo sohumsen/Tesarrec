@@ -21,10 +21,9 @@ import Chp from "./containers/Sustainability/Chp/Chp";
 
 import Sustainability from "./containers/Sustainability/Sustainability/Sustainability";
 
-
 import { SnackbarProvider } from "notistack";
 import Button from "@material-ui/core/Button";
-import firebaseConfig from './firebaseConfig'
+import firebaseConfig from "./firebaseConfig";
 import { withStyles } from "@material-ui/core";
 // import classes from './App.module.css'
 const styles = (theme) => ({
@@ -137,7 +136,9 @@ class App extends Component {
       loading: false,
       isLoggedIn: true,
     });
-    this.props.history.push("/modelbench");
+    if (this.props.location.pathname === "/signin") {
+      this.props.history.push("/modelbench");
+    }
   };
   authFail = (errorMsg) => {
     this.setState({
@@ -229,10 +230,12 @@ class App extends Component {
 
         <Route path="/reference" component={Reference} />
 
-
-
-
-        <Route path="/sustainability/:type" render={(props) => <Sustainability key={props.match.params.type} {...props} />} />
+        <Route
+          path="/sustainability/:type"
+          render={(props) => (
+            <Sustainability key={props.match.params.type} {...props} />
+          )}
+        />
 
         {/* <Route path="/contact" component={Contact} /> */}
         {/* <Redirect exact from="/" to="/sustainability/chemical" /> */}
@@ -286,7 +289,12 @@ class App extends Component {
         <Route path="/sustainability/mfc" exact component={Mfc} />
         <Route path="/sustainability/mes" exact component={Mes} />
         {/* <Route path="/sustainability/bioethanol" exact component={Bioethanol} /> */}
-        <Route path="/sustainability/:type" render={(props) => <Sustainability key={props.match.params.type} {...props} />} />
+        <Route
+          path="/sustainability/:type"
+          render={(props) => (
+            <Sustainability key={props.match.params.type} {...props} />
+          )}
+        />
 
         <Route path="/reference" component={Reference} />
         {/* <Route path="/contact" component={Contact} /> */}
@@ -306,8 +314,6 @@ class App extends Component {
           <MyMobileView />
         </MobileView>
       </div>
-
-      
     );
   }
 }

@@ -18,7 +18,7 @@ class MFC extends Component {
         {" "}
          lets you remix, adapt,
         and build upon this work even for commercial purposes, as long as you
-        creadit: ©
+        credit: ©
 
          <a href={"https://tesarrec.web.app"}>
          https://tesarrec.web.app

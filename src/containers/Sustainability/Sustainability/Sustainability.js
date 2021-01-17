@@ -8,10 +8,10 @@ import PyrolysisWordDoc from "../../../assets/Pyrolysis.pdf";
 import DonwloadButton from "../../../components/UI/Button/DownloadButton";
 
 import HeatMapForm from "./Technical/HeatMapForm/HeatMapFormCHP";
+import { Paper } from "@material-ui/core";
 class Bioethanol extends Component {
   render() {
     const {
-      text,
       match: { params },
     } = this.props;
 
@@ -33,45 +33,54 @@ class Bioethanol extends Component {
     }
 
     return (
-      <div className={classes.parentContainer}>
-        This license available under{" "}
-        <a href={"https://creativecommons.org/licenses/by-sa/4.0/"}>
-          https://creativecommons.org/licenses/by-sa/4.0/
-        </a>{" "}
-        lets you remix, adapt, and build upon this work even for commercial
-        purposes, as long as you creadit: ©
-        <a href={"https://tesarrec.web.app"}>https://tesarrec.web.app</a>
-        {" and "}
-        {type === "chemical" ? (
-          <a href={"https://doi.org/10.1039/C9GC00607A"}>
-            https://doi.org/10.1039/C9GC00607A
-          </a>
-        ) : null}
-        {type === "bioethanol" ? (
-          <a href={"https://doi.org/10.1016/j.biteb.2019.100230"}>
-            https://doi.org/10.1016/j.biteb.2019.100230
-          </a>
-        ) : null}
-        {type === "pyrolysis" ? (
-          <a
-            href={
-              "https://onlinelibrary.wiley.com/doi/book/10.1002/9781118698129 "
-            }
-          >
-            https://onlinelibrary.wiley.com/doi/book/10.1002/9781118698129{" "}
-          </a>
-        ) : null}
-        <h1>{type.charAt(0).toUpperCase() + type.slice(1)}</h1>
-        <div>
-          {/* <a style={{ float: "right" }} href={"https://youtu.be/FNoEY1NhqPo"}>
-            Youtube link
-          </a> */}
+      <div className={classes.parentContainer} elevation={3}>
+        <div style={{ fontSize: 11 }}>
+          This license available under{" "}
+          <a href={"https://creativecommons.org/licenses/by-sa/4.0/"}>
+            https://creativecommons.org/licenses/by-sa/4.0/
+          </a>{" "}
+          lets you remix, adapt, and build upon this work even for commercial
+          purposes, as long as you credit: ©
+          <a href={"https://tesarrec.web.app"}>https://tesarrec.web.app</a>
+          {" and "}
+          {type === "chemical" ? (
+            <a href={"https://doi.org/10.1039/C9GC00607A"}>
+              https://doi.org/10.1039/C9GC00607A
+            </a>
+          ) : null}
+          {type === "bioethanol" ? (
+            <a href={"https://doi.org/10.1016/j.biteb.2019.100230"}>
+              https://doi.org/10.1016/j.biteb.2019.100230
+            </a>
+          ) : null}
+          {type === "pyrolysis" ? (
+            <a
+              href={
+                "https://onlinelibrary.wiley.com/doi/book/10.1002/9781118698129 "
+              }
+            >
+              https://onlinelibrary.wiley.com/doi/book/10.1002/9781118698129{" "}
+            </a>
+          ) : null}
+        </div>
 
-          <form style={{ float: "right" }} method="get" action={wordDoc}>
+        <div
+          style={{
+            display: "flex",
+          }}
+        >
+          <h1 style={{ flex: 7, textAlign: "center" }}>
+            {type.charAt(0).toUpperCase() + type.slice(1)}
+          </h1>
+          <form
+            style={{
+              flex: 1,
+            }}
+            method="get"
+            action={wordDoc}
+          >
             Read me
-            <DonwloadButton style={{ float: "right" }} type="submit">
-              Download!
-            </DonwloadButton>
+            <DonwloadButton type="submit">Download!</DonwloadButton>
           </form>
         </div>
         <HeatMapForm type={type} />

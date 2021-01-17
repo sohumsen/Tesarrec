@@ -7,20 +7,8 @@ import FormControlLabel from "@material-ui/core/FormControlLabel";
 import MySliderContainer from "../../../../../components/UI/SliderContainer/SliderContainer";
 
 import SliderWithText from "../../../../../components/UI/SliderContainer/Slider/SliderWithText";
+import { Paper } from "@material-ui/core";
 
-const PurpleSwitch = withStyles({
-  switchBase: {
-    color: "black",
-    "&$checked": {
-      color: "black",
-    },
-    "&$checked + $track": {
-      backgroundColor: "black",
-    },
-  },
-  checked: {},
-  track: {},
-})(Switch);
 class RightContent extends Component {
   state = {
     showSocialSliders: true,
@@ -30,8 +18,6 @@ class RightContent extends Component {
     this.setState({ [event.target.name]: event.target.checked });
   };
   render() {
-    let socialSliders = null;
-
 
     let allSliders = this.props.source["Sheet1"].map((config) => {
       var fields = config["Range"].split("-");
@@ -57,32 +43,13 @@ class RightContent extends Component {
     });
 
     return (
-      <div className={classes.RightContent}>
+      <Paper className={classes.RightContent} elevation={3}>
         <h2>Settings</h2>
         <br />
-        <MySliderContainer>
-        {allSliders}
+          {allSliders}
 
-        
-{/* 
-          <FormControlLabel
-            control={
-              <PurpleSwitch
-                checked={this.state.showSocialSliders}
-                onChange={this.showEnergySliderHandler}
-                name="showSocialSliders"
-                color="primary"
-              />
-            }
-            label="Social"
-            labelPlacement="start"
-          /> */}
 
-          {this.state.showSocialSliders ? (
-            <div className={classes.sliders}>{socialSliders}</div>
-          ) : null}
-        </MySliderContainer>
-      </div>
+      </Paper>
     );
   }
 }

@@ -21,7 +21,7 @@ export default class Example extends PureComponent {
         
         >
           <CartesianGrid strokeDasharray="3 3" />
-          <XAxis scale="log" domain={[0, 5]} allowDataOverflow dataKey="time" />
+          <XAxis   dataKey="time" />
           <YAxis />
           <Tooltip />
           <Legend />

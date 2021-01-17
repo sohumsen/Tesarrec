@@ -8,6 +8,7 @@ import PyrolysisCalc from "../../../../../components/Calculations/Sustainability
 import bioethanolData from "../../../dataFiles/bioethanol.json";
 import chemicalData from "../../../dataFiles/chemical.json";
 import pyrolysisData from "../../../dataFiles/pyrolysis.json";
+import classes from "./styles.module.css";
 
 class HeatMapForm extends Component {
   state = {
@@ -71,25 +72,28 @@ class HeatMapForm extends Component {
       <div>
         {Object.keys(this.state.data).length !== 0 ||
         this.state.data.constructor !== Object ? (
-          <div>
-            <RightContent
-              state={this.state.data}
-              source={this.getDataFile()}
-              InputhandleChange={this.InputhandleChange}
-              SliderhandleChange={this.SliderhandleChange}
-            />
+          <div className={classes.Main}>
+            <div className={classes.Calcs}>
+              {this.props.type === "bioethanol" ? (
+                <BioethanolCalc state={this.state} />
+              ) : null}
 
-            {this.props.type === "bioethanol" ? (
-              <BioethanolCalc state={this.state} />
-            ) : null}
-
-            {this.props.type === "chemical" ? (
+              {this.props.type === "chemical" ? (
               <ChemicalCalc state={this.state} />
             ) : null}
 
-            {this.props.type === "pyrolysis" ? (
-              <PyrolysisCalc state={this.state} />
-            ) : null}
+              {this.props.type === "pyrolysis" ? (
+                <PyrolysisCalc state={this.state} />
+              ) : null}
+            </div>
+            <div className={classes.Right}>
+              <RightContent
+                state={this.state.data}
+                source={this.getDataFile()}
+                InputhandleChange={this.InputhandleChange}
+                SliderhandleChange={this.SliderhandleChange}
+              />
+            </div>
           </div>
         ) : null}
       </div>

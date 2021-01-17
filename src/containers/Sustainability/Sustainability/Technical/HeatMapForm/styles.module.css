@@ -1,0 +1,21 @@
+.Main {
+
+
+  display: flex;
+  background-color: rgb(240, 240, 240);
+  justify-content: flex-end;  /*background-color: aqua;*/
+}
+
+.Calcs{
+
+  flex: 4;
+
+}
+
+.Right{
+
+  flex: 1;
+  margin: 20px;
+
+}
+

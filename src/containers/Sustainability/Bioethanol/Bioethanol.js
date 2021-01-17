@@ -14,7 +14,7 @@ class Bioethanol extends Component {
           https://creativecommons.org/licenses/by-sa/4.0/
         </a>{" "}
         lets you remix, adapt, and build upon this work even for commercial
-        purposes, as long as you creadit: ©
+        purposes, as long as you credit: ©
         <a href={"https://tesarrec.web.app"}>https://tesarrec.web.app</a>{" and "}
         <a href={"https://doi.org/10.1016/j.biteb.2019.100230"}>
           https://doi.org/10.1016/j.biteb.2019.100230
