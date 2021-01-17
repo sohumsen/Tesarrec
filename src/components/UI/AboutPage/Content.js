@@ -8,7 +8,7 @@ const Content = (props) => {
         New gen engineered technologies and solutions for sustainability and
         circular economy
       </h2>
-      
+
       <p>
         We develop computer software for use in:
         <ol>
@@ -24,11 +24,14 @@ const Content = (props) => {
         </ol>
       </p>
 
-      <h3>
-      One such group of technologies are electrochemical technologies
-      </h3>
+      <h3>One such group of technologies are electrochemical technologies</h3>
       <p>
-      Bio-based electrochemical technologies are becoming popular due to their non-toxic non-chemical way of transforming waste into electricity generation or fuel or chemical synthesis from carbon dioxide reuse, depending on the mode of operation. Their main modes of operation include microbial fuel cells (MFC) and microbial electrosynthesis systems (MES).
+        Bio-based electrochemical technologies are becoming popular due to their
+        non-toxic non-chemical way of transforming waste into electricity
+        generation or fuel or chemical synthesis from carbon dioxide reuse,
+        depending on the mode of operation. Their main modes of operation
+        include microbial fuel cells (MFC) and microbial electrosynthesis
+        systems (MES).
       </p>
     </div>
   );

@@ -34,8 +34,8 @@
   .row{
     text-align: center;
       height: 100vh;
-      background-color: rgba(219, 107, 107, 0.397);
-      color: white;
+      background-color:rgb(216, 215, 230);
+      color: black;
       padding: 5%;
   }
   .title {
