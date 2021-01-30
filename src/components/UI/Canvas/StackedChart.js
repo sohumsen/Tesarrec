@@ -18,19 +18,7 @@ class ColumnChart extends Component {
    
       backgroundColor: "white",
       zoomEnabled: true,
-      data: [{
-				type: "stackedBar",
-				name: this.props.name1,
-				showInLegend: "true",
-
-				dataPoints:this.props.data1
-			},
-			{
-				type: "stackedBar",
-				name: this.props.name2,
-				showInLegend: "true",
-				dataPoints: this.props.data2
-			}]
+      data:this.props.data
     };
     return (
       <div style={{ width: "100%" }}>

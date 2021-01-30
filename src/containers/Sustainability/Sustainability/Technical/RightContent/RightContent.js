@@ -1,13 +1,10 @@
 import React, { Component } from "react";
 import classes from "./RightContent.module.css";
-import { withStyles } from "@material-ui/core/styles";
-import Switch from "@material-ui/core/Switch";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
 
-import MySliderContainer from "../../../../../components/UI/SliderContainer/SliderContainer";
-
+import RefreshIcon from "@material-ui/icons/Refresh";
 import SliderWithText from "../../../../../components/UI/SliderContainer/Slider/SliderWithText";
 import { Paper } from "@material-ui/core";
+import IconButton from "@material-ui/core/IconButton";
 
 class RightContent extends Component {
   state = {
@@ -24,9 +21,11 @@ class RightContent extends Component {
 
       let lowestVal = parseFloat(fields[0]);
       let highestVal = parseFloat(fields[1]);
+
+
       return (
         <SliderWithText
-          rootWidth={"90%"}
+          rootWidth={300}
           inputWidth={72}
           displayCaption={config["User Navigation Bar"]}
           value={this.props.state[config["VariableName"]]}
@@ -39,6 +38,20 @@ class RightContent extends Component {
             config["VariableName"]
           )}
         />
+      //   <SliderWithText
+      //   rootWidth={300}
+      //   inputWidth={72}
+      //   displayCaption={"User Navigation Bar"}
+      //   value={20}
+      //   InputhandleChange={this.props.InputhandleChange(
+      //     config["VariableName"]
+      //   )}
+      //   lowestVal={10}
+      //   highestVal={50}
+      //   SliderhandleChange={this.props.SliderhandleChange(
+      //     config["VariableName"]
+      //   )}
+      // />
       );
     });
 
@@ -46,9 +59,22 @@ class RightContent extends Component {
       <Paper className={classes.RightContent} elevation={3}>
         <h2>Settings</h2>
         <br />
-          {allSliders}
-
-
+        <IconButton
+          style={{
+            float: "right",
+            position: "absolute",
+            right: 10,
+            top: 0,
+          }}
+          onClick={
+            ()=>{
+              this.props.updateNewState()
+            }
+          }
+        >
+          <RefreshIcon />
+        </IconButton>
+        {allSliders}
       </Paper>
     );
   }

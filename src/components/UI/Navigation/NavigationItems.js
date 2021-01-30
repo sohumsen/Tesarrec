@@ -6,8 +6,10 @@ const navigationItems = (props) => {
   return (
     <ul className={classes.NavigationItems}>
       <NavigationItem link="/">About</NavigationItem>
+      <NavigationItem link="/sustainability">Sustainability</NavigationItem>
 
-      <Dropdown name="Sustainability">
+      {/* <Dropdown name="Sustainability">
+
         <NavigationItem link="/sustainability/mfc">MFC</NavigationItem>
         <NavigationItem link="/sustainability/mes">MES</NavigationItem>
         <NavigationItem link="/sustainability/chp">CHP</NavigationItem>
@@ -16,7 +18,7 @@ const navigationItems = (props) => {
         <NavigationItem link="/sustainability/pyrolysis">Pyrolysis</NavigationItem>
 
       </Dropdown>
-      
+       */}
 
       {/* {props.isLoggedIn ? (
         <Dropdown name="Dynamic">
@@ -25,7 +27,7 @@ const navigationItems = (props) => {
         </Dropdown>
       ) : null} */}
       {props.isLoggedIn ? (
-        <NavigationItem link="/modelbench"> Model Bench</NavigationItem>
+        <NavigationItem link="/modelbench"> Model Bench 🆕 </NavigationItem>
       ) : null}
 
       <NavigationItem link="/reference">Reference</NavigationItem>

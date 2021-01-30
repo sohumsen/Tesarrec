@@ -8,8 +8,11 @@
     bottom: 0;
     right: 0px;
      */
-  padding: 5px;
+  padding-left: 25px;
   text-align: center;
+  height:90vh;
+  position: fixed;
+  margin:5px;
 
   overflow-y: scroll;
   overflow-x: hidden;

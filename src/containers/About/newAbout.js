@@ -1,12 +1,16 @@
 import React from "react";
 import { Component } from "react";
 import Team from "../../components/UI/AboutPage/Team";
-
+import Sidebar from "../Sustainability/utils/Sidebar";
+import GitHubIcon from "@material-ui/icons/GitHub";
+import FacebookIcon from "@material-ui/icons/Facebook";
+import CallToActionIcon from "@material-ui/icons/CallToAction";
+import TwitterIcon from "@material-ui/icons/Twitter";
 export default class About extends Component {
   render() {
     return (
       <div>
-        <title>W3.CSS Template</title>
+        <title>About</title>
         <meta charSet="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link
@@ -31,67 +35,7 @@ export default class About extends Component {
               '\nbody,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}\n.w3-bar,h1,button {font-family: "Montserrat", sans-serif}\n.fa-anchor,.fa-coffee {font-size:200px}\n',
           }}
         />
-        {/* Navbar */}
-        <div className="w3-top">
-          <div className="w3-bar w3-blue w3-card w3-left-align w3-large">
-            <a
-              className="w3-bar-item w3-button w3-hide-medium w3-hide-large w3-right w3-padding-large w3-hover-white w3-large w3-blue"
-              href="javascript:void(0);"
-              onclick="myFunction()"
-              title="Toggle Navigation Menu"
-            >
-              <i className="fa fa-bars" />
-            </a>
-            <a
-              href="#"
-              className="w3-bar-item w3-button w3-padding-large w3-white"
-            >
-              Home
-            </a>
-            <a
-              href="#"
-              className="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white"
-            >
-              Link 1
-            </a>
-            <a
-              href="#"
-              className="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white"
-            >
-              Link 2
-            </a>
-            <a
-              href="#"
-              className="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white"
-            >
-              Link 3
-            </a>
-            <a
-              href="#"
-              className="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white"
-            >
-              Link 4
-            </a>
-          </div>
-          {/* Navbar on small screens */}
-          <div
-            id="navDemo"
-            className="w3-bar-block w3-white w3-hide w3-hide-large w3-hide-medium w3-large"
-          >
-            <a href="#" className="w3-bar-item w3-button w3-padding-large">
-              Link 1
-            </a>
-            <a href="#" className="w3-bar-item w3-button w3-padding-large">
-              Link 2
-            </a>
-            <a href="#" className="w3-bar-item w3-button w3-padding-large">
-              Link 3
-            </a>
-            <a href="#" className="w3-bar-item w3-button w3-padding-large">
-              Link 4
-            </a>
-          </div>
-        </div>
+
         {/* Header */}
         <header
           className="w3-container w3-blue w3-center"
@@ -101,17 +45,16 @@ export default class About extends Component {
           <p className="w3-xlarge">Learn, Compare, Fit</p>
           <a
             className="w3-button w3-black w3-padding-large w3-large w3-margin-top"
-            href="https://tesarrec.web.app/sustainability/mes"
+            href="https://tesarrec.web.app/sustainability"
           >
-            Go to MES
+            Go to Sustainability
           </a>
-       
         </header>
         {/* First Grid */}
         <div className="w3-row-padding w3-padding-64 w3-container">
           <div className="w3-content">
             <div className="w3-twothird">
-              <h1>TESARREC?</h1>
+              <h1>TESARREC</h1>
               <h3 className="w3-padding-42 ">
                 <p>
                   <b>T</b>ool for techno-
@@ -145,32 +88,37 @@ export default class About extends Component {
               />
             </div>
             <div className="w3-twothird">
-              <h1>
-                {" "}
-                New gen engineered technologies and solutions for sustainability
-                and circular economy
-              </h1>
+              <h1> We solve interdisciplinary sustainability problems</h1>
               <h5 className="w3-padding-32">
                 We develop computer software for use in:
               </h5>
               <p className="w3-text-grey">
                 <ol>
                   <li>
-                    Evaluation of organic compounds synthesized by carbon
-                    dioxide capture by organic degradation in wastewater;
+                    Default life cycle impacts and savings by products and
+                    services for sustainability
                   </li>
-                  <li>Evaluating the dynamic performance of these systems;</li>
+
                   <li>
-                    Evaluating technical feasibility and life cycle
-                    sustainability of these systems;
+                    {" "}
+                    Default life cycle impacts and savings by products and
+                    services for net zero carbon future
                   </li>
+                  <li>
+                    Bio-product synthesis from wastes, residues, non-food
+                    cellulosic and lignocellulosic feedstocks
+                  </li>
+                  <li>Resource recovery from waste </li>
+                  <li>Carbon dioxide capture and reuse </li>
+                  <li>Renewable technologies </li>
+                  <li>Circular economy systems </li>
                 </ol>
               </p>
             </div>
           </div>
         </div>
         <div className="w3-row-padding w3-light-grey w3-padding-64 w3-container">
-          <div className="w3-content">
+          {/* <div className="w3-content">
             <div className="w3-twothird">
               <h1>
                 One such group of technologies are electrochemical technologies
@@ -189,15 +137,30 @@ export default class About extends Component {
             <div className="w3-third w3-center">
               <i className="fa fa-coffee w3-padding-64 w3-text-blue w3-margin-right" />
             </div>
-          </div>
+          </div> */}
         </div>
         <Team />
 
         <div className="w3-container w3-black w3-center w3-opacity w3-padding-64">
-          <h1 className="w3-margin w3-xlarge">Quote of the day: live life</h1>
-        </div>
+          <Sidebar
+          social={[
+            {
+              name: "",
+              icon: GitHubIcon,
+              link: "https://github.com/sohumsen/React-tesarrec",
+            },
+            { name: "", icon: TwitterIcon, link: "" },
+            { name: "", icon: FacebookIcon, link: "" },
+            {
+              name: "Please fill out this form to help us measure our demographic",
+              icon: CallToActionIcon,
+              link:
+                "https://docs.google.com/forms/d/e/1FAIpQLSdWsZgVV5gz6i0jGcaxlhbyV_jaq7gWWvdTahl8kyMwgwYABA/viewform",
+            },
+          ]}
+        />
 
-     
+        </div>
       </div>
     );
   }

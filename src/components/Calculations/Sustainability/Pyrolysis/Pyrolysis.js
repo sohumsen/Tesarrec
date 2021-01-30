@@ -3,11 +3,12 @@ import React from "react";
 //import ReadCathodeJSON from "../../Excel/Cathode/ReadCathodeJSON";
 import BioethanolPic from "../../../../assets/pyrolysis.png";
 import classes from "./OverallReactionAnodeCathodeCHP.module.css";
-import MultiLineChart from "../../../UI/Canvas/MultiLineChart";
+import MultiLineChart from "../../../UI/Canvas/MultiLineChartPyrolysis";
 import { Paper } from "@material-ui/core";
 
 const OverallReactionAnodeCathode = (props) => {
-  let { Temperature } = props.state.data;
+  let { Temperature } = props.state;
+
 
   ///////////////////////////////////////////////
 
@@ -58,13 +59,14 @@ const OverallReactionAnodeCathode = (props) => {
 
   return (
     <div  className={classes.HeatMaps}>
-      <Paper  className={classes.HeatMapEnergyPerformance}>
+      <div  className={classes.HeatMapEnergyPerformance}>
         <img src={BioethanolPic} width="100%" alt="Bioethanol Pic"></img>
-      </Paper >
+      </div >
       <Paper
         style={{
-          width: "100%",
-          height: "600px",
+          width: "50%",
+          height: "500px",
+          float:"left"
         }}
       >
         <MultiLineChart dataPoints={dataPoints} />

@@ -12,6 +12,7 @@ import Social from "../../../Excel/Social/SocialChemical.json";
 import { Paper } from "@material-ui/core";
 
 const OverallReactionAnodeCathode = (props) => {
+
   let {
     BiomassFeedstockAvailability,
     CelluloseContent,
@@ -29,7 +30,7 @@ const OverallReactionAnodeCathode = (props) => {
     ChemicalPrice,
     ElectricityCost,
     SteamCost,
-  } = props.state.data;
+  } = props.state;
 
   ///////////////////////////////////////////////
   let Total =
@@ -177,88 +178,88 @@ const OverallReactionAnodeCathode = (props) => {
 
   //////////////////////////////////////////////////////////
   let TotalSocial =
-    props.state.data.ProportionImportBrazil +
-    props.state.data.ProportionImportSpain +
-    props.state.data.ProportionImportFrance +
-    props.state.data.ProportionImportGermany +
-    props.state.data.ProportionImportNetherlands +
-    props.state.data.ProportionImportUSA +
-    props.state.data.ProportionImportBelgium +
-    props.state.data.ProportionImportChina +
-    props.state.data.ProportionImportMalaysia +
-    props.state.data.ProportionImportJapan +
-    props.state.data.ProportionImportColombia;
+    props.state.ProportionImportBrazil +
+    props.state.ProportionImportSpain +
+    props.state.ProportionImportFrance +
+    props.state.ProportionImportGermany +
+    props.state.ProportionImportNetherlands +
+    props.state.ProportionImportUSA +
+    props.state.ProportionImportBelgium +
+    props.state.ProportionImportChina +
+    props.state.ProportionImportMalaysia +
+    props.state.ProportionImportJapan +
+    props.state.ProportionImportColombia;
   let LRDW =
-    (Social.Brazil.LRDW * props.state.data.ProportionImportBrazil +
-      Social.Spain.LRDW * props.state.data.ProportionImportSpain +
-      Social.France.LRDW * props.state.data.ProportionImportFrance +
-      Social.Germany.LRDW * props.state.data.ProportionImportGermany +
-      Social.Netherlands.LRDW * props.state.data.ProportionImportNetherlands +
-      Social.USA.LRDW * props.state.data.ProportionImportUSA +
-      Social.China.LRDW * props.state.data.ProportionImportChina +
-      Social.Belgium.LRDW * props.state.data.ProportionImportBelgium +
-      Social.Malaysia.LRDW * props.state.data.ProportionImportMalaysia +
-      Social.Japan.LRDW * props.state.data.ProportionImportJapan +
-      Social.Colombia.LRDW * props.state.data.ProportionImportColombia -
+    (Social.Brazil.LRDW * props.state.ProportionImportBrazil +
+      Social.Spain.LRDW * props.state.ProportionImportSpain +
+      Social.France.LRDW * props.state.ProportionImportFrance +
+      Social.Germany.LRDW * props.state.ProportionImportGermany +
+      Social.Netherlands.LRDW * props.state.ProportionImportNetherlands +
+      Social.USA.LRDW * props.state.ProportionImportUSA +
+      Social.China.LRDW * props.state.ProportionImportChina +
+      Social.Belgium.LRDW * props.state.ProportionImportBelgium +
+      Social.Malaysia.LRDW * props.state.ProportionImportMalaysia +
+      Social.Japan.LRDW * props.state.ProportionImportJapan +
+      Social.Colombia.LRDW * props.state.ProportionImportColombia -
       Social.Mexico.LRDW * TotalSocial)*100 /
     (Social.Mexico.LRDW * TotalSocial);
 
   let HS =
-    (Social.Brazil.HS * props.state.data.ProportionImportBrazil +
-      Social.Spain.HS * props.state.data.ProportionImportSpain +
-      Social.France.HS * props.state.data.ProportionImportFrance +
-      Social.Germany.HS * props.state.data.ProportionImportGermany +
-      Social.Netherlands.HS * props.state.data.ProportionImportNetherlands +
-      Social.USA.HS * props.state.data.ProportionImportUSA +
-      Social.China.HS * props.state.data.ProportionImportChina +
-      Social.Belgium.HS * props.state.data.ProportionImportBelgium +
-      Social.Malaysia.HS * props.state.data.ProportionImportMalaysia +
-      Social.Japan.HS * props.state.data.ProportionImportJapan +
-      Social.Colombia.HS * props.state.data.ProportionImportColombia -
+    (Social.Brazil.HS * props.state.ProportionImportBrazil +
+      Social.Spain.HS * props.state.ProportionImportSpain +
+      Social.France.HS * props.state.ProportionImportFrance +
+      Social.Germany.HS * props.state.ProportionImportGermany +
+      Social.Netherlands.HS * props.state.ProportionImportNetherlands +
+      Social.USA.HS * props.state.ProportionImportUSA +
+      Social.China.HS * props.state.ProportionImportChina +
+      Social.Belgium.HS * props.state.ProportionImportBelgium +
+      Social.Malaysia.HS * props.state.ProportionImportMalaysia +
+      Social.Japan.HS * props.state.ProportionImportJapan +
+      Social.Colombia.HS * props.state.ProportionImportColombia -
       Social.Mexico.HS * TotalSocial)*100 /
     (Social.Mexico.HS * TotalSocial);
 
   let HR =
-    (Social.Brazil.HR * props.state.data.ProportionImportBrazil +
-      Social.Spain.HR * props.state.data.ProportionImportSpain +
-      Social.France.HR * props.state.data.ProportionImportFrance +
-      Social.Germany.HR * props.state.data.ProportionImportGermany +
-      Social.Netherlands.HR * props.state.data.ProportionImportNetherlands +
-      Social.USA.HR * props.state.data.ProportionImportUSA +
-      Social.China.HR * props.state.data.ProportionImportChina +
-      Social.Belgium.HR * props.state.data.ProportionImportBelgium +
-      Social.Malaysia.HR * props.state.data.ProportionImportMalaysia +
-      Social.Japan.HR * props.state.data.ProportionImportJapan +
-      Social.Colombia.HR * props.state.data.ProportionImportColombia -
+    (Social.Brazil.HR * props.state.ProportionImportBrazil +
+      Social.Spain.HR * props.state.ProportionImportSpain +
+      Social.France.HR * props.state.ProportionImportFrance +
+      Social.Germany.HR * props.state.ProportionImportGermany +
+      Social.Netherlands.HR * props.state.ProportionImportNetherlands +
+      Social.USA.HR * props.state.ProportionImportUSA +
+      Social.China.HR * props.state.ProportionImportChina +
+      Social.Belgium.HR * props.state.ProportionImportBelgium +
+      Social.Malaysia.HR * props.state.ProportionImportMalaysia +
+      Social.Japan.HR * props.state.ProportionImportJapan +
+      Social.Colombia.HR * props.state.ProportionImportColombia -
       Social.Mexico.HR * TotalSocial)*100 /
     (Social.Mexico.HR * TotalSocial);
   let G =
-    (Social.Brazil.G * props.state.data.ProportionImportBrazil +
-      Social.Spain.G * props.state.data.ProportionImportSpain +
-      Social.France.G * props.state.data.ProportionImportFrance +
-      Social.Germany.G * props.state.data.ProportionImportGermany +
-      Social.Netherlands.G * props.state.data.ProportionImportNetherlands +
-      Social.USA.G * props.state.data.ProportionImportUSA +
-      Social.China.G * props.state.data.ProportionImportChina +
-      Social.Belgium.G * props.state.data.ProportionImportBelgium +
-      Social.Malaysia.G * props.state.data.ProportionImportMalaysia +
-      Social.Japan.G * props.state.data.ProportionImportJapan +
-      Social.Colombia.G * props.state.data.ProportionImportColombia -
+    (Social.Brazil.G * props.state.ProportionImportBrazil +
+      Social.Spain.G * props.state.ProportionImportSpain +
+      Social.France.G * props.state.ProportionImportFrance +
+      Social.Germany.G * props.state.ProportionImportGermany +
+      Social.Netherlands.G * props.state.ProportionImportNetherlands +
+      Social.USA.G * props.state.ProportionImportUSA +
+      Social.China.G * props.state.ProportionImportChina +
+      Social.Belgium.G * props.state.ProportionImportBelgium +
+      Social.Malaysia.G * props.state.ProportionImportMalaysia +
+      Social.Japan.G * props.state.ProportionImportJapan +
+      Social.Colombia.G * props.state.ProportionImportColombia -
       Social.Mexico.G * TotalSocial)*100 /
     (Social.Mexico.G * TotalSocial);
 
   let CI =
-    (Social.Brazil.CI * props.state.data.ProportionImportBrazil +
-      Social.Spain.CI * props.state.data.ProportionImportSpain +
-      Social.France.CI * props.state.data.ProportionImportFrance +
-      Social.Germany.CI * props.state.data.ProportionImportGermany +
-      Social.Netherlands.CI * props.state.data.ProportionImportNetherlands +
-      Social.USA.CI * props.state.data.ProportionImportUSA +
-      Social.China.CI * props.state.data.ProportionImportChina +
-      Social.Belgium.CI * props.state.data.ProportionImportBelgium +
-      Social.Malaysia.CI * props.state.data.ProportionImportMalaysia +
-      Social.Japan.CI * props.state.data.ProportionImportJapan +
-      Social.Colombia.CI * props.state.data.ProportionImportColombia -
+    (Social.Brazil.CI * props.state.ProportionImportBrazil +
+      Social.Spain.CI * props.state.ProportionImportSpain +
+      Social.France.CI * props.state.ProportionImportFrance +
+      Social.Germany.CI * props.state.ProportionImportGermany +
+      Social.Netherlands.CI * props.state.ProportionImportNetherlands +
+      Social.USA.CI * props.state.ProportionImportUSA +
+      Social.China.CI * props.state.ProportionImportChina +
+      Social.Belgium.CI * props.state.ProportionImportBelgium +
+      Social.Malaysia.CI * props.state.ProportionImportMalaysia +
+      Social.Japan.CI * props.state.ProportionImportJapan +
+      Social.Colombia.CI * props.state.ProportionImportColombia -
       Social.Mexico.CI * TotalSocial)*100 /
     (Social.Mexico.CI * TotalSocial);
 

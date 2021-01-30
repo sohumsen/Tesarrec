@@ -136,9 +136,7 @@ export default class Model {
           if (res instanceof Object) {
             invalidIndex.push(i);
           }
-          // console.log(res instanceof Object);
 
-          // console.log(textEqns[i],evaluate(textEqns[i], scope))
         } catch (error) {
           invalidIndex.push(i);
         }

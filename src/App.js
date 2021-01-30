@@ -19,7 +19,8 @@ import Logout from "./containers/Authenticate/Logout/Logout";
 import FIREBASE_KEY from "./firebasekey";
 import Chp from "./containers/Sustainability/Chp/Chp";
 
-import Sustainability from "./containers/Sustainability/Sustainability/Sustainability";
+import Blog from "./containers/Sustainability/Main";
+import Sustainability from "./containers/Sustainability/Sustainability/Technical/HeatMapForm/HeatMapForm";
 
 import { SnackbarProvider } from "notistack";
 import Button from "@material-ui/core/Button";
@@ -227,15 +228,15 @@ class App extends Component {
         <Route path="/sustainability/mfc" exact component={Mfc} />
         <Route path="/sustainability/mes" exact component={Mes} />
         {/* <Route path="/sustainability/bioethanol" exact component={Bioethanol} /> */}
-
-        <Route path="/reference" component={Reference} />
-
         <Route
           path="/sustainability/:type"
+          exact
           render={(props) => (
             <Sustainability key={props.match.params.type} {...props} />
           )}
         />
+        <Route path="/reference" component={Reference} />
+        <Route path="/sustainability" component={Blog} />
 
         {/* <Route path="/contact" component={Contact} /> */}
         {/* <Redirect exact from="/" to="/sustainability/chemical" /> */}
@@ -289,15 +290,19 @@ class App extends Component {
         <Route path="/sustainability/mfc" exact component={Mfc} />
         <Route path="/sustainability/mes" exact component={Mes} />
         {/* <Route path="/sustainability/bioethanol" exact component={Bioethanol} /> */}
+
         <Route
           path="/sustainability/:type"
+          exact
           render={(props) => (
             <Sustainability key={props.match.params.type} {...props} />
           )}
         />
+        <Route path="/sustainability" component={Blog} />
 
         <Route path="/reference" component={Reference} />
         {/* <Route path="/contact" component={Contact} /> */}
+
         <Redirect to="/" />
       </Switch>
     );

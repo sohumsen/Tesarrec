@@ -5,6 +5,7 @@ import CashFlowGraph from "./CashFlowGraph";
 import BioethanolPic from "../../../../assets/Bioethanol.png";
 import classes from "./OverallReactionAnodeCathodeCHP.module.css";
 import ColumnChart from "../../../UI/Canvas/ColumnChart";
+import StackedChart from "../../../UI/Canvas/StackedChart";
 
 import MyHeatMap from "../../../UI/MyHeatMap/MyHeatMap";
 
@@ -35,37 +36,37 @@ const OverallReactionAnodeCathode = (props) => {
 
     ProportionImportBrazil,
     ProportionImportCanada,
-    ProportionImportFrance ,
-    ProportionImportGermany ,
-    ProportionImportGuatemala ,
+    ProportionImportFrance,
+    ProportionImportGermany,
+    ProportionImportGuatemala,
     ProportionImportUSA,
-  } = props.state.data;
+  } = props.state;
 
   ///////////////////////////////////////////////
-  BiomassFeedstockAvailability=parseFloat(BiomassFeedstockAvailability)   
-  MoistureContent=parseFloat(MoistureContent)   
-  CelluloseContent=parseFloat(CelluloseContent)   
-  XylanContent=parseFloat(XylanContent)   
-  GlucanContent=parseFloat(GlucanContent)   
-  ArabinanContent=parseFloat(ArabinanContent)   
-  MannanContent=parseFloat(MannanContent)   
-  GalactanContent=parseFloat(GalactanContent)   
-  AshContent=parseFloat(AshContent)   
-  ExtractiveContent=parseFloat(ExtractiveContent)   
-  LigninContent=parseFloat(LigninContent)   
-  BiomassCalorificValue=parseFloat(BiomassCalorificValue)   
-  InstallationFactor=parseFloat(InstallationFactor)
-  AnnualCapitalCharge=parseFloat(AnnualCapitalCharge)   
-  IRRCost=parseFloat(IRRCost)   
-  BiomassCost=parseFloat(BiomassCost)   
-  BioethanolPrice=parseFloat(BioethanolPrice)   
+  BiomassFeedstockAvailability = parseFloat(BiomassFeedstockAvailability);
+  MoistureContent = parseFloat(MoistureContent);
+  CelluloseContent = parseFloat(CelluloseContent);
+  XylanContent = parseFloat(XylanContent);
+  GlucanContent = parseFloat(GlucanContent);
+  ArabinanContent = parseFloat(ArabinanContent);
+  MannanContent = parseFloat(MannanContent);
+  GalactanContent = parseFloat(GalactanContent);
+  AshContent = parseFloat(AshContent);
+  ExtractiveContent = parseFloat(ExtractiveContent);
+  LigninContent = parseFloat(LigninContent);
+  BiomassCalorificValue = parseFloat(BiomassCalorificValue);
+  InstallationFactor = parseFloat(InstallationFactor);
+  AnnualCapitalCharge = parseFloat(AnnualCapitalCharge);
+  IRRCost = parseFloat(IRRCost);
+  BiomassCost = parseFloat(BiomassCost);
+  BioethanolPrice = parseFloat(BioethanolPrice);
 
-  ProportionImportBrazil=parseFloat(ProportionImportBrazil)   
-  ProportionImportCanada=parseFloat(ProportionImportCanada)
-  ProportionImportFrance=parseFloat(ProportionImportFrance)   
-  ProportionImportGermany=parseFloat(ProportionImportGermany)   
-  ProportionImportGuatemala=parseFloat(ProportionImportGuatemala)   
-  ProportionImportUSA=parseFloat(ProportionImportUSA)   
+  ProportionImportBrazil = parseFloat(ProportionImportBrazil);
+  ProportionImportCanada = parseFloat(ProportionImportCanada);
+  ProportionImportFrance = parseFloat(ProportionImportFrance);
+  ProportionImportGermany = parseFloat(ProportionImportGermany);
+  ProportionImportGuatemala = parseFloat(ProportionImportGuatemala);
+  ProportionImportUSA = parseFloat(ProportionImportUSA);
   ////////////////////////////////////////////
   let Total =
     MoistureContent +
@@ -149,7 +150,6 @@ const OverallReactionAnodeCathode = (props) => {
           0.6) *
     (600 / 402);
 
-
   let Capex =
     DeliveredCostofEquipment * InstallationFactor * AnnualCapitalCharge;
   let Opex =
@@ -173,7 +173,8 @@ const OverallReactionAnodeCathode = (props) => {
   ///////////////////////////////////////////////////////
 
   let GlobalWarmingPotential =
-    (0.126 * ElectricityOutputGj * BiomassFeedstockAvailability * 365) / 1000000;
+    (0.126 * ElectricityOutputGj * BiomassFeedstockAvailability * 365) /
+    1000000;
   let FossilResourceDepletion =
     (1.43 * ElectricityOutputGj * BiomassFeedstockAvailability * 365) / 1000000;
 
@@ -187,62 +188,66 @@ const OverallReactionAnodeCathode = (props) => {
     ProportionImportUSA;
 
   let LRDW =
-    (Social.Brazil.LRDW * ProportionImportBrazil +
+    ((Social.Brazil.LRDW * ProportionImportBrazil +
       Social.Canada.LRDW * ProportionImportCanada +
       Social.France.LRDW * ProportionImportFrance +
       Social.Germany.LRDW * ProportionImportGermany +
       Social.Guatemala.LRDW * ProportionImportGuatemala +
       Social.USA.LRDW * ProportionImportUSA -
       Social.Mexico.LRDW * TotalSocial) /
-    (Social.Mexico.LRDW * TotalSocial)*100;
+      (Social.Mexico.LRDW * TotalSocial)) *
+    100;
 
   let HS =
-    (Social.Brazil.HS * ProportionImportBrazil +
+    ((Social.Brazil.HS * ProportionImportBrazil +
       Social.Canada.HS * ProportionImportCanada +
       Social.France.HS * ProportionImportFrance +
       Social.Germany.HS * ProportionImportGermany +
       Social.Guatemala.HS * ProportionImportGuatemala +
       Social.USA.HS * ProportionImportUSA -
       Social.Mexico.HS * TotalSocial) /
-    (Social.Mexico.HS * TotalSocial)*100;
+      (Social.Mexico.HS * TotalSocial)) *
+    100;
 
   let HR =
-    (Social.Brazil.HR * ProportionImportBrazil +
+    ((Social.Brazil.HR * ProportionImportBrazil +
       Social.Canada.HR * ProportionImportCanada +
       Social.France.HR * ProportionImportFrance +
       Social.Germany.HR * ProportionImportGermany +
       Social.Guatemala.HR * ProportionImportGuatemala +
       Social.USA.HR * ProportionImportUSA -
       Social.Mexico.HR * TotalSocial) /
-    (Social.Mexico.HR * TotalSocial)*100;
+      (Social.Mexico.HR * TotalSocial)) *
+    100;
   let G =
-    (Social.Brazil.G * ProportionImportBrazil +
+    ((Social.Brazil.G * ProportionImportBrazil +
       Social.Canada.G * ProportionImportCanada +
       Social.France.G * ProportionImportFrance +
       Social.Germany.G * ProportionImportGermany +
       Social.Guatemala.G * ProportionImportGuatemala +
       Social.USA.G * ProportionImportUSA -
       Social.Mexico.G * TotalSocial) /
-    (Social.Mexico.G * TotalSocial)*100;
+      (Social.Mexico.G * TotalSocial)) *
+    100;
 
   let CI =
-    (Social.Brazil.CI * ProportionImportBrazil +
+    ((Social.Brazil.CI * ProportionImportBrazil +
       Social.Canada.CI * ProportionImportCanada +
       Social.France.CI * ProportionImportFrance +
       Social.Germany.CI * ProportionImportGermany +
       Social.Guatemala.CI * ProportionImportGuatemala +
       Social.USA.CI * ProportionImportUSA -
       Social.Mexico.CI * TotalSocial) /
-    (Social.Mexico.CI * TotalSocial)*100;
+      (Social.Mexico.CI * TotalSocial)) *
+    100;
 
   return (
-    <div  className={classes.HeatMaps}>
-      
-      <Paper  className={classes.HeatMapEnergyPerformance}>
+    <div className={classes.HeatMaps}>
+      <Paper className={classes.HeatMapEnergyPerformance}>
         <img src={BioethanolPic} width="100%" alt="Bioethanol Pic"></img>
-      </Paper >
+      </Paper>
 
-      <Paper  className={classes.HeatMapEnergyPerformance}>
+      <Paper className={classes.HeatMapEnergyPerformance}>
         <ColumnChart
           title={"Product yields 1 tonne (wet) biomass"}
           labelData1={[
@@ -263,9 +268,42 @@ const OverallReactionAnodeCathode = (props) => {
           ]}
           type={"bar"}
         />
-      </Paper >
-      <Paper  className={classes.HeatMapEnergyPerformance}>
-        <ColumnChart
+      </Paper>
+      <Paper className={classes.HeatMapEnergyPerformance}>
+        <StackedChart
+          data={[
+            {
+              type: "stackedBar",
+              name: "Bioethanol Efficiency",
+              showInLegend: "true",
+
+              dataPoints: [
+                { y: parseFloat(BioethanolEfficiency.toFixed(2)), x: 1 },
+             
+              ],
+            },
+            {
+              type: "stackedBar",
+              name: "Heat Efficiency",
+              showInLegend: "true",
+              dataPoints: [
+                { y: parseFloat(HeatEfficiency.toFixed(2)), x: 1  },
+            
+              ],
+            },
+            {
+              type: "stackedBar",
+              name: "Electricity Efficiency ",
+              showInLegend: "true",
+              dataPoints: [
+                { y: parseFloat(ElectricityEfficiency.toFixed(2)), x: 1 },
+              
+              ],
+            },
+          ]}
+          title={"Dimensionless energy efficiency"}
+        />
+        {/* <ColumnChart
           title={"Dimensionless energy efficiency"}
           labelData1={[
             {
@@ -282,11 +320,11 @@ const OverallReactionAnodeCathode = (props) => {
               y: parseFloat(ElectricityEfficiency.toFixed(2)),
             },
           ]}
-          type={"column"}
-        />
-      </Paper >
+          type={"stackedColumn"}
+        /> */}
+      </Paper>
 
-      <Paper  className={classes.HeatMapEnergyPerformance}>
+      <Paper className={classes.HeatMapEnergyPerformance}>
         <ColumnChart
           title={"Economic analysis million $/y"}
           labelData1={[
@@ -310,9 +348,9 @@ const OverallReactionAnodeCathode = (props) => {
           ]}
           type={"pie"}
         />
-      </Paper >
+      </Paper>
 
-      <Paper  className={classes.HeatMapEnergyPerformance}>
+      <Paper className={classes.HeatMapEnergyPerformance}>
         <ColumnChart
           title={" $/kg Bioethanol cost and price"}
           labelData1={[
@@ -328,9 +366,9 @@ const OverallReactionAnodeCathode = (props) => {
           ]}
           type={"bar"}
         />
-      </Paper >
+      </Paper>
 
-      <Paper  className={classes.HeatMapEnergyPerformance}>
+      <Paper className={classes.HeatMapEnergyPerformance}>
         <ColumnChart
           title={" Environmental impact saving per year"}
           labelData1={[
@@ -346,8 +384,8 @@ const OverallReactionAnodeCathode = (props) => {
           ]}
           type={"bar"}
         />
-      </Paper >
-      <Paper  className={classes.HeatMapEnergyPerformance}>
+      </Paper>
+      <Paper className={classes.HeatMapEnergyPerformance}>
         <ColumnChart
           title={"Social LCA savings in % (Mexico)"}
           labelData1={[
@@ -366,8 +404,8 @@ const OverallReactionAnodeCathode = (props) => {
           ]}
           type={"bar"}
         />
-      </Paper >
-      <Paper  className={classes.HeatMapEnergyPerformance}>
+      </Paper>
+      <Paper className={classes.HeatMapEnergyPerformance}>
         <CashFlowGraph
           CapitalCost={parseFloat(
             (DeliveredCostofEquipment * InstallationFactor).toFixed(2)
@@ -377,8 +415,8 @@ const OverallReactionAnodeCathode = (props) => {
           ProductValue={parseFloat(ProductValue.toFixed(2))}
           IRRCost={parseFloat(IRRCost.toFixed(2))}
         />
-      </Paper >
-    </div >
+      </Paper>
+    </div>
   );
 };
 

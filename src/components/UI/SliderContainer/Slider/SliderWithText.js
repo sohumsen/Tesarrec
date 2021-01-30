@@ -35,6 +35,8 @@ const InputSlider = (props) => {
             max={props.highestVal}
             step={props.highestVal / 1000}
           />
+
+
         </Grid>
         <Grid item>
           <InputBase
@@ -43,6 +45,13 @@ const InputSlider = (props) => {
             value={props.value}
             margin="dense"
             onChange={props.InputhandleChange}
+            type= "number"
+            InputProps={{
+              inputProps: { 
+                min: props.lowestVal,
+                max: props.highestVal,
+              }
+          }}
             inputProps={{
               step: props.highestVal / 100,
               min: props.lowestVal,

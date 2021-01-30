@@ -1,0 +1,106 @@
+{
+    "Sheet1": [
+        {
+            "User Navigation Bar": "Biooil throughput kg/hour",
+            "Default": "10000",
+            "Range": "10000-50000",
+            "VariableName": "BiooilThroughput"
+        },
+        {
+            "User Navigation Bar": "Phenol in biooil (wt%)",
+            "Default": "0.33",
+            "Range": "0.31-0.38",
+            "VariableName": "PhenolinBiooil"
+        },
+        {
+            "User Navigation Bar": "Dextrose in biooil (wt%)",
+            "Default": "0.27",
+            "Range": " 0.27-0.30",
+            "VariableName": "DextroseinBiooil"
+        },
+        {
+            "User Navigation Bar": "Furfural in biooil (wt%)",
+            "Default": "0.077",
+            "Range": " 0.07-0.10",
+            "VariableName": "FurfuralinBiooil"
+        },
+        {
+            "User Navigation Bar": "Acetic acid in biooil (wt%)",
+            "Default": "0.056",
+            "Range": " 0.05-0.06",
+            "VariableName": "AceticacidinBiooil"
+        },
+        {
+            "User Navigation Bar": "Hydroxyacetone in biooil (wt%)",
+            "Default": "0.04",
+            "Range": " 0.04-0.05",
+            "VariableName": "HydroxyacetoneinBiooil"
+        },
+        {
+            "User Navigation Bar": "Formic acid in biooil (wt%)",
+            "Default": "0.015",
+            "Range": "0.01-0.015",
+            "VariableName": "FormicacidinBiooil"
+        },
+        {
+            "User Navigation Bar": "Water in biooil (wt%)",
+            "Default": "0.212",
+            "Range": " 0.10-0.25",
+            "VariableName": "WaterinBiooil"
+        },
+        {
+            "User Navigation Bar": "Biomass calorific value MJ/kg",
+            "Default": "19.3",
+            "Range": " 13-23",
+            "VariableName": "BiomassCalorificvalue"
+        },
+        {
+            "User Navigation Bar": "Phenol fractional conversion to 1-tridecene",
+            "Default": "0.55",
+            "Range": " 0.158-0.55",
+            "VariableName": "PhenoltoTridecene1"
+        },
+        {
+            "User Navigation Bar": "Phenol fractional conversion to 1-tridecene, phenanthrene and alkanes",
+            "Default": "0.4",
+            "Range": "0.072-0.4",
+            "VariableName": "PhenoltoTridecene2"
+        },
+        {
+            "User Navigation Bar": "Installation factor",
+            "Default": "1",
+            "Range": " 1-5",
+            "VariableName": "InstallationFactor"
+        },
+        {
+            "User Navigation Bar": "Annual capital charge",
+            "Default": "0.13",
+            "Range": "0.1-0.15",
+            "VariableName": "ACC"
+        },
+        {
+            "User Navigation Bar": "Biomass cost $/t",
+            "Default": "40",
+            "Range": "10-100",
+            "VariableName": "BiomassCost"
+        },
+        {
+            "User Navigation Bar": "Jet fuel price $/gallon",
+            "Default": "1",
+            "Range": " 1-2",
+            "VariableName": "JetfuelPrice"
+        },
+        {
+            "User Navigation Bar": "Char price $/t",
+            "Default": "100",
+            "Range": "100-600",
+            "VariableName": "CharPrice"
+        },
+        {
+            "User Navigation Bar": "Steam price $/t",
+            "Default": "24.4",
+            "Range": "24.4-35.5",
+            "VariableName": "SteamPrice"
+        }
+    ]
+}

@@ -3,19 +3,18 @@
 
   display: flex;
   background-color: rgb(240, 240, 240);
-  justify-content: flex-end;  /*background-color: aqua;*/
+  flex-flow: row wrap;
 }
 
 .Calcs{
 
-  flex: 4;
+  flex: 3;
 
 }
 
 .Right{
 
   flex: 1;
-  margin: 20px;
 
 }
 

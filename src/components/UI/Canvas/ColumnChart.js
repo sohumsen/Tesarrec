@@ -5,6 +5,8 @@ import CanvasJSReact from "../../../assets/canvasjs.react";
 var CanvasJSChart = CanvasJSReact.CanvasJSChart;
 
 class ColumnChart extends Component {
+
+
   render() {
     const options = {
       animationEnabled: true,
@@ -18,6 +20,7 @@ class ColumnChart extends Component {
    
       backgroundColor: "white",
       zoomEnabled: true,
+
       data: [
         {
           type: this.props.type,

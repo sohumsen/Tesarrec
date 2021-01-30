@@ -14,7 +14,7 @@ const toolbar=(props)=>{
             <NavLink to="/"><Logo/></NavLink>
 
         </div>
-        <img className={classes.caption} src={caption} alt="caption"/>
+        {/* <img className={classes.caption} src={caption} alt="caption"/> */}
 
 
         <nav className={classes.DesktopOnly} >
