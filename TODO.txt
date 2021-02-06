@@ -7,14 +7,37 @@ work on solver analysis
 speed heroku server
 
 
-
-stack biothanol.js  energy efficiency
 enlarge pic on click
 
+/////////////////////
+///Jhuma 06/02/2021//
 
-this is jhuma
-*2
-*3
+In Jet fuel: reduce font size to fit the Flowrate
+    Readme: Comment out
+    Table heading 'Jet Fuel Property'   
+    Heading on the stair case graph: From top to bottom: Jet Fuel,Char,Steam
+        x-axis title: Flowrate kg/hr
+        Cost of Production ($/kg)
+        Value on Processing ($/kg)
+        2 decimal places
+
+In Bioethanol
+    Global warming potential million t CO2 eq. = 0.567 * Bioethanol production t * Biomass (wet) feedstock availability * 365 / 1000000
+    Fossil resource PJ = Bioethanol production t * 50 * Biomass (wet) feedstock availability * 365 / 1000000
+
+
+
+
+
+
+////////////////////
+
+
+
+
+
+
+
 
 
 24th Jul - 7th Aug 
