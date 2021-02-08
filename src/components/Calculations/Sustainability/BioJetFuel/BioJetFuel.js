@@ -745,6 +745,7 @@ const OverallReactionAnodeCathode = (props) => {
               value: parseFloat(VABP.toFixed(2)),
             },
           ]}
+          title={"Jet Fuel Property"}
         />
       </Paper>
 
@@ -756,7 +757,16 @@ const OverallReactionAnodeCathode = (props) => {
           margin: "2%",
         }}
       >
-        <MultiLineChart dataPoints={dataPoints.reverse()} />
+        <MultiLineChart
+          dataPoints={dataPoints.map((el) => {
+            let newObj = {
+              x: el.x.toFixed(2),
+              ProductCost: el.ProductCost.toFixed(2),
+              ProcessingValue: el.ProcessingValue.toFixed(2),
+            };
+            return newObj;
+          })}
+        />
       </Paper>
     </div>
   );

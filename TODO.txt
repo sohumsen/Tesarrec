@@ -14,12 +14,7 @@ enlarge pic on click
 
 In Jet fuel: reduce font size to fit the Flowrate
     Readme: Comment out
-    Table heading 'Jet Fuel Property'   
-    Heading on the stair case graph: From top to bottom: Jet Fuel,Char,Steam
-        x-axis title: Flowrate kg/hr
-        Cost of Production ($/kg)
-        Value on Processing ($/kg)
-        2 decimal places
+
 
 In Bioethanol
     Global warming potential million t CO2 eq. = 0.567 * Bioethanol production t * Biomass (wet) feedstock availability * 365 / 1000000
