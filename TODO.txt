@@ -12,13 +12,13 @@ enlarge pic on click
 /////////////////////
 ///Jhuma 06/02/2021//
 
-In Jet fuel: reduce font size to fit the Flowrate
+In Jet fuel:
     Readme: Comment out
+    Label below or above the strokeDasharray="3 3"
 
 
-In Bioethanol
-    Global warming potential million t CO2 eq. = 0.567 * Bioethanol production t * Biomass (wet) feedstock availability * 365 / 1000000
-    Fossil resource PJ = Bioethanol production t * 50 * Biomass (wet) feedstock availability * 365 / 1000000
+Redirected to the same page
+
 
 
 
