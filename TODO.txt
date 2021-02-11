@@ -14,7 +14,6 @@ enlarge pic on click
 
 In Jet fuel:
     Readme: Comment out
-    Label below or above the strokeDasharray="3 3"
 
 
 Redirected to the same page
