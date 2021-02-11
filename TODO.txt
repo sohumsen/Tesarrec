@@ -14,8 +14,11 @@ enlarge pic on click
 
 In Jet fuel:
     Readme: Comment out
+<<<<<<< HEAD
     Label below or above the strokeDasharray="3 3"
     
+=======
+>>>>>>> cd220a56e9f60b7ec65c71e367cef062610c3671
 
 
 Redirected to the same page
