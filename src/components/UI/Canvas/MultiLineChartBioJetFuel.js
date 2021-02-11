@@ -28,18 +28,8 @@ export default class Example extends PureComponent {
             <Label value="Jet Fuel" offset={5} position="insideBottom" />
           </ReferenceLine>
           <ReferenceLine
-<<<<<<< HEAD
-            y={
-              this.props.dataPoints[
-                2
-              ]["ProcessingValue"]
-            }
-            label="Char"
-            stroke="red"
-=======
             y={this.props.dataPoints[2]["ProcessingValue"]}
-            stroke="purple"
->>>>>>> cd220a56e9f60b7ec65c71e367cef062610c3671
+            stroke="red"
             strokeDasharray="3 3"
           >
             <Label value="Char" offset={5} position="insideBottom" />
@@ -50,17 +40,12 @@ export default class Example extends PureComponent {
                 "ProcessingValue"
               ]
             }
-<<<<<<< HEAD
-            label={"Steam"}
             stroke="red"
             strokeDasharray="3 3"
-          />
-=======
-            stroke="green"
+
           >
             <Label value="Steam" offset={5} position="insideBottom" />
           </ReferenceLine>
->>>>>>> cd220a56e9f60b7ec65c71e367cef062610c3671
           <CartesianGrid strokeDasharray="3 3" />
           <XAxis dataKey="x" type="number" label="Flowrate kg/hr" height={70} />
           <YAxis type="number" />
