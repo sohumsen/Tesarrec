@@ -173,10 +173,10 @@ const OverallReactionAnodeCathode = (props) => {
   ///////////////////////////////////////////////////////
 
   let GlobalWarmingPotential =
-    (0.126 * ElectricityOutputGj * BiomassFeedstockAvailability * 365) /
+    (567 * BioethanolProduction * BiomassFeedstockAvailability * 365) /
     1000000;
   let FossilResourceDepletion =
-    (1.43 * ElectricityOutputGj * BiomassFeedstockAvailability * 365) / 1000000;
+    (50 * BioethanolProduction * BiomassFeedstockAvailability * 365) / 1000000;
 
   //////////////////////////////////////////////////////////
   let TotalSocial =
@@ -373,7 +373,7 @@ const OverallReactionAnodeCathode = (props) => {
           title={" Environmental impact saving per year"}
           labelData1={[
             {
-              label: "Global Warming Potential million t CO2 eq.",
+              label: "Global Warming Potential kt CO2 eq.",
               y: parseFloat(GlobalWarmingPotential.toFixed(2)),
             },
 

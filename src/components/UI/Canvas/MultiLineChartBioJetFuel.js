@@ -32,17 +32,18 @@ export default class Example extends PureComponent {
               ]["ProcessingValue"]
             }
             label="Char"
-            stroke="purple"
+            stroke="red"
             strokeDasharray="3 3"
           />
           <ReferenceLine
             y={
-              this.props.dataPoints[this.props.dataPoints.length - 1][
+              this.props.dataPoints[this.props.dataPoints.length - 4][
                 "ProcessingValue"
               ]
             }
             label={"Steam"}
-            stroke="green"
+            stroke="red"
+            strokeDasharray="3 3"
           />
           <CartesianGrid strokeDasharray="3 3" />
           <XAxis dataKey="x" type="number" label="Flowrate kg/hr" height={70} />

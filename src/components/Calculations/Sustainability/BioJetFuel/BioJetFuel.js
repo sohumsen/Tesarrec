@@ -623,7 +623,7 @@ const OverallReactionAnodeCathode = (props) => {
           title={"Flowrate kg/h"}
           labelData1={[
             {
-              label: "Hydrogen from reforming and PSA  ",
+              label: "Hydrogen from PSA ",
               y: parseFloat(HydrogenfromReforming.toFixed(2)),
             },
             {
@@ -648,7 +648,7 @@ const OverallReactionAnodeCathode = (props) => {
               y: parseFloat(CharfromBiomass.toFixed(2)),
             },
             {
-              label: "Oxygen from MIEC to CHP",
+              label: "Oxygen from MIEC",
               y: parseFloat(OxygenfromSteam.toFixed(2)),
             },
             {
@@ -656,11 +656,11 @@ const OverallReactionAnodeCathode = (props) => {
               y: parseFloat(FueltoCHP.toFixed(2)),
             },
             {
-              label: "Jet fuel product",
+              label: "Jet Fuel product",
               y: parseFloat(JetFuel.toFixed(2)),
             },
             {
-              label: "Biooil from biomass pyrolysis",
+              label: "Biooil from pyrolysis",
               y: parseFloat(BiooilThroughput.toFixed(2)),
             },
             {
@@ -677,7 +677,7 @@ const OverallReactionAnodeCathode = (props) => {
           title={"Economic margin analysis million $/y"}
           labelData1={[
             {
-              label: "Product (Jet fuel) Value",
+              label: "Product (Jet Fuel) Value",
               y: parseFloat(ProductValue.toFixed(2)),
             },
             {
