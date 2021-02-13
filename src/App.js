@@ -63,7 +63,10 @@ class App extends Component {
     localStorage.removeItem("refreshToken");
 
     localStorage.removeItem("userId");
-    this.props.history.push("/");
+    // if (this.props.location.pathname === "/signout") {
+    //   this.props.history.push("/");
+
+    // }
   };
 
   refreshSession = (refreshToken) => {
@@ -298,12 +301,11 @@ class App extends Component {
             <Sustainability key={props.match.params.type} {...props} />
           )}
         />
-        <Route path="/sustainability" component={Blog} />
 
         <Route path="/reference" component={Reference} />
-        {/* <Route path="/contact" component={Contact} /> */}
+        <Route path="/sustainability" component={Blog} />
 
-        <Redirect to="/" />
+
       </Switch>
     );
     let dynamicRoutes = this.state.isLoggedIn ? ifLoggedIn : ifNotLoggedIn;
