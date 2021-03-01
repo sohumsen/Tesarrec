@@ -1,5 +1,4 @@
 
-python './app.py
 # React Tesserac 
 
 ## User Guidelines
