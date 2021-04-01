@@ -7,7 +7,7 @@ const navigationItems = (props) => {
     <ul className={classes.NavigationItems}>
       <NavigationItem link="/">About</NavigationItem>
       <NavigationItem link="/sustainability">Sustainability</NavigationItem>
-      <NavigationItem link="/costcalculator">Cost Calculator</NavigationItem>
+      <NavigationItem link="/economicanalysis">Economic Analysis</NavigationItem>
 
       {/* <Dropdown name="Sustainability">
 

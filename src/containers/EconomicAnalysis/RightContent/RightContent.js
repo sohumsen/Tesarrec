@@ -2,9 +2,10 @@ import React, { Component } from "react";
 import classes from "./RightContent.module.css";
 
 import RefreshIcon from "@material-ui/icons/Refresh";
-import SliderWithText from "../../../../../components/UI/SliderContainer/Slider/SliderWithText";
+import SliderWithText from "../../../components/UI/SliderContainer/Slider/SliderWithText";
 import { Paper } from "@material-ui/core";
 import IconButton from "@material-ui/core/IconButton";
+import UserNav from "./../UserNav.json";
 
 class RightContent extends Component {
   state = {
@@ -14,11 +15,11 @@ class RightContent extends Component {
   showEnergySliderHandler = (event) => {
     this.setState({ [event.target.name]: event.target.checked });
   };
-  render() {
-
-    let allSliders = this.props.source["Sheet1"].map((config) => {
+  render() {  
+    console.log(UserNav)
+    let allSliders = UserNav.map((config) => {
       var fields = config["Range"].split("-");
-
+      console.log(fields)
       let lowestVal = parseFloat(fields[0]);
       let highestVal = parseFloat(fields[1]);
 
@@ -28,7 +29,7 @@ class RightContent extends Component {
           rootWidth={300}
           inputWidth={72}
           displayCaption={config["User Navigation Bar"]}
-          value={this.props.state[config["VariableName"]]}
+          value={this.props.userNavData[config["VariableName"]]}
           InputhandleChange={this.props.InputhandleChange(
             config["VariableName"]
           )}

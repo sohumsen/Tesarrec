@@ -1,0 +1,92 @@
+ [
+        {
+            "User Navigation Bar": "Biomass throughput tph",
+            "Default": "1000",
+            "Range": "0.001-50000",
+            "VariableName": "BiomassThroughput"
+        },
+        {
+            "User Navigation Bar": "Reagent use kg/h",
+            "Default": "0",
+            "Range": "0-100000",
+            "VariableName": "ReagentUse"
+        },
+        {
+            "User Navigation Bar": "Electricity generation kW",
+            "Default": "1",
+            "Range": "0-5",
+            "VariableName": "ElectricityGeneration"
+        },
+        {
+            "User Navigation Bar": "Electricity demand kW",
+            "Default": "1",
+            "Range": "0-5",
+            "VariableName": "ElectricityDemand"
+        },
+        {
+            "User Navigation Bar": "Steam generation kW",
+            "Default": "1",
+            "Range": "0-5",
+            "VariableName": "SteamGeneration"
+        },
+        {
+            "User Navigation Bar": "Steam demand kW",
+            "Default": "1",
+            "Range": "0-5",
+            "VariableName": "SteamDemand"
+        },
+        {
+            "User Navigation Bar": "Production rate tph",
+            "Default": "1000",
+            "Range": "0.001-50000",
+            "VariableName": "ProductionRate"
+        },
+        {
+            "User Navigation Bar": "Installation factor",
+            "Default": "1",
+            "Range": "1-5",
+            "VariableName": "InstallationFactor"
+        },
+        {
+            "User Navigation Bar": "Annual capital charge",
+            "Default": "0.13",
+            "Range": "0.05-0.15",
+            "VariableName": "AnnualCapitalCharge"
+        },
+        {
+            "User Navigation Bar": "Internal rate of return",
+            "Default": "0.1",
+            "Range": "0.05-0.15",
+            "VariableName": "InternalRateofReturn"
+        },
+        {
+            "User Navigation Bar": "Biomass cost $/t",
+            "Default": "40",
+            "Range": "10-100",
+            "VariableName": "BiomassCost"
+        },
+        {
+            "User Navigation Bar": "Reagent cost $/kg",
+            "Default": "100",
+            "Range": "0.1-5000",
+            "VariableName": "ReagentCost"
+        },
+        {
+            "User Navigation Bar": "Electricity price $/kWh",
+            "Default": "0.165",
+            "Range": "0.06-0.2",
+            "VariableName": "ElectricityPrice"
+        },
+        {
+            "User Navigation Bar": "Steam price $/kWh",
+            "Default": "0.02",
+            "Range": "0.01-0.05",
+            "VariableName": "SteamPrice"
+        },
+        {
+            "User Navigation Bar": "Product price $/kg",
+            "Default": "100",
+            "Range": "0.1-5000",
+            "VariableName": "ProductPrice"
+        }
+    ]

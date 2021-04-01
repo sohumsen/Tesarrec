@@ -9,10 +9,10 @@ import Autocomplete from '@material-ui/lab/Autocomplete';
 import ButtonBase from '@material-ui/core/ButtonBase';
 import InputBase from '@material-ui/core/InputBase';
 import { Card } from '@material-ui/core';
-
+import PickerRow from './PickerRow'
 const useStyles = makeStyles((theme) => ({
   root: {
-    width: 300,
+    width: "100%",
     fontSize: 13,
     backgroundColor: "white",
     padding:10,
@@ -123,22 +123,23 @@ const useStyles = makeStyles((theme) => ({
 export default function GitHubLabel(props) {
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState(null);
-  const [value, setValue] = React.useState([props.labels[1], props.labels[11]]);
+  // const [value, setValue] = React.useState([props.labels[1], props.labels[11]]);
   const [pendingValue, setPendingValue] = React.useState([]);
   const theme = useTheme();
 
   const handleClick = (event) => {
 
-    setPendingValue(value);
+    //setPendingValue(value);
+    setPendingValue(props.selected);
+
     setAnchorEl(event.currentTarget);
   };
 
   const handleClose = (event, reason) => {
-
     if (reason === 'toggleInput') {
       return;
     }
-    setValue(pendingValue);
+    // setValue(pendingValue);
 
     props.setSelected(pendingValue)
 
@@ -162,16 +163,16 @@ export default function GitHubLabel(props) {
           <span>Modules</span>
           <SettingsIcon />
         </ButtonBase>
-        {value.map((label) => (
+        {props.selected.map((label) => (
           <div
-            key={label.name}
-            className={classes.tag}
+            key={label.Name}
+            // className={classes.tag}
             style={{
               backgroundColor: label.color,
               color: theme.palette.getContrastText(label.color),
             }}
           >
-            {label.name}
+            <PickerRow label={label} InputhandleChange={props.InputhandleChange} SliderhandleChange={props.SliderhandleChange}/>
           </div>
         ))}
       </div>
@@ -208,9 +209,9 @@ export default function GitHubLabel(props) {
               />
               <span className={classes.color} style={{ backgroundColor: option.color }} />
               <div className={classes.text}>
-                {option.name}
+                {option["Name"]}
                 <br />
-                {option.description}
+                {option["Unit"]}
               </div>
               <CloseIcon
                 className={classes.close}
@@ -220,13 +221,13 @@ export default function GitHubLabel(props) {
           )}
           options={[...props.labels].sort((a, b) => {
             // Display the selected props.labels first.
-            let ai = value.indexOf(a);
-            ai = ai === -1 ? value.length + props.labels.indexOf(a) : ai;
-            let bi = value.indexOf(b);
-            bi = bi === -1 ? value.length + props.labels.indexOf(b) : bi;
+            let ai = props.selected.indexOf(a);
+            ai = ai === -1 ? props.selected.length + props.labels.indexOf(a) : ai;
+            let bi = props.selected.indexOf(b);
+            bi = bi === -1 ? props.selected.length + props.labels.indexOf(b) : bi;
             return ai - bi;
           })}
-          getOptionLabel={(option) => option.name}
+          getOptionLabel={(option) => option["Name"]}
           renderInput={(params) => (
             <InputBase
               ref={params.InputProps.ref}

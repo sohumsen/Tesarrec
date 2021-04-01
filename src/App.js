@@ -27,7 +27,7 @@ import Button from "@material-ui/core/Button";
 import firebaseConfig from "./firebaseConfig";
 import { withStyles } from "@material-ui/core";
 
-import CostCalculator from './containers/CostCalculator/CostCalculator'
+import EconomicAnalysis from './containers/EconomicAnalysis/EconomicAnalysis'
 // import classes from './App.module.css'
 const styles = (theme) => ({
   containerRoot: { width: 10, minWidth: 10, maxWidth: 10 },
@@ -240,7 +240,7 @@ class App extends Component {
             <Sustainability key={props.match.params.type} {...props} />
           )}
         />
-                <Route path="/costcalculator" component={CostCalculator} />
+                <Route path="/economicanalysis" component={EconomicAnalysis} />
 
         <Route path="/reference" component={Reference} />
         <Route path="/sustainability" component={Blog} />
@@ -305,7 +305,7 @@ class App extends Component {
             <Sustainability key={props.match.params.type} {...props} />
           )}
         />
-        <Route path="/costcalculator" component={CostCalculator} />
+        <Route path="/economicanalysis" component={EconomicAnalysis} />
 
         <Route path="/reference" component={Reference} />
         <Route path="/sustainability" component={Blog} />
