@@ -54,7 +54,7 @@ const CashFlowGraph = (props) => {
   return (
     <div>
       <MyChart
-        axisNames={["Year", "Discounted cash flow (€)"]}
+        axisNames={["Year", "Discounted cash flow (million €)"]}
         verticalAlign={"top"}
         horizontalAlign={"center"}
         LineNames={["Discounted cash flow analysis"]}

@@ -61,7 +61,10 @@ class CostCalculator extends Component {
   render() {
     return (
       <div className={classes.Reference}>
-        <h1>Economic Analysis</h1>
+
+
+
+      <h1>Economic Analysis</h1>
 
       <Container maxWidth={"xl"}>
 
@@ -99,6 +102,7 @@ class CostCalculator extends Component {
         </Container>
 
       </div>
+
     );
   }
 }

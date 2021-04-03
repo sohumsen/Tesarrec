@@ -160,7 +160,7 @@ export default function GitHubLabel(props) {
           aria-describedby={id}
           onClick={handleClick}
         >
-          <span>Modules</span>
+          <span>Process</span>
           <SettingsIcon />
         </ButtonBase>
         {props.selected.map((label) => (
@@ -183,7 +183,7 @@ export default function GitHubLabel(props) {
         placement="bottom-start"
         className={classes.popper}
       >
-        <div className={classes.header}>Select Module</div>
+        <div className={classes.header}>Select Process</div>
         <Autocomplete
           open
           onClose={handleClose}

@@ -1,14 +1,12 @@
 import React from "react";
-import MyChart from "../../../UI/Canvas/LineChart";
+import MyChart from "../../UI/Canvas/LineChart";
 
 const CashFlowGraph = (props) => {
   let k = props.ProductValue - props.Opex - props.Capex;
-
   let dataArr = [-1 * props.CapitalCost];
   for (let t = 1; t < 15; t++) {
     dataArr[t] = dataArr[t - 1] + k / (1 + props.IRRCost) ** t;
   }
-
   let data = [
     { x: -3, y: 0 },
     { x: -2, y: dataArr[0] / 3 },
@@ -24,7 +22,7 @@ const CashFlowGraph = (props) => {
   return (
     <div>
       <MyChart
-        axisNames={["Year", "Discounted cash flow (million €)"]}
+        axisNames={["Year", "Discounted cash flow ( million $)"]}
         
         verticalAlign={"top"}
         horizontalAlign={"center"}

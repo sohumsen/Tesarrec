@@ -16,10 +16,8 @@ class RightContent extends Component {
     this.setState({ [event.target.name]: event.target.checked });
   };
   render() {  
-    console.log(UserNav)
     let allSliders = UserNav.map((config) => {
       var fields = config["Range"].split("-");
-      console.log(fields)
       let lowestVal = parseFloat(fields[0]);
       let highestVal = parseFloat(fields[1]);
 
