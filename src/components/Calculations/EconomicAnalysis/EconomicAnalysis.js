@@ -171,7 +171,7 @@ export default function EconomicAnalysis(props) {
           </Paper>
         </Grid>
       
-        <Grid item xs={5} spacing={3}>
+        {/* <Grid item xs={5} spacing={3}>
           <Paper>
             <CustomizedTables
               rows={TotalCapitalInvestmentTable}
@@ -182,7 +182,7 @@ export default function EconomicAnalysis(props) {
               }
             />
           </Paper>
-        </Grid>
+        </Grid> */}
       </Grid>
     </div>
   );

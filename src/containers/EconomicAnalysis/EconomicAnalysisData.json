@@ -90,7 +90,7 @@
         "Unit": "tph biomass (dry)"
     },
     {
-        "Name": "Distilation, Fractionater, Splitter, Reboiler, Condenser, Reflex drum (thermochemical processing)",
+        "Name": "Distillation, Fractionater, Splitter, Reboiler, Condenser, Reflux drum (thermochemical processing)",
         "BaseCost": "3.469439513",
         "ScaleFactor": "0.65",
         "BaseSize": "2250",

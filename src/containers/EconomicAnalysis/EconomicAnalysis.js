@@ -6,8 +6,9 @@ import RightContent from "./RightContent/RightContent";
 import EconomicAnalysisData from "./EconomicAnalysisData.json";
 import UserNav from "./UserNav.json";
 import Calculations from "../../components/Calculations/EconomicAnalysis/EconomicAnalysis";
-
-class CostCalculator extends Component {
+import DonwloadButton from "../../components/UI/Button/DownloadButton";
+import WordDoc from "./economic.pdf";
+class EconomicAnalys extends Component {
   state = {
     selectedProcesses: [labels[1], labels[9]],
 
@@ -61,53 +62,54 @@ class CostCalculator extends Component {
   render() {
     return (
       <div className={classes.Reference}>
+        <Container maxWidth={"xl"}>
+          <form method="get" action={WordDoc} target="_blank" style={{}}>
+            <h1>Economic Analysis</h1>
 
+            <p
+              style={{
+                fontSize: "10px",
+              }}
+            >
+              This license available under https://creativecommons.org/licenses/by-sa/4.0/ lets you remix, adapt, and build upon this work even for commercial purposes, as long as you credit: ©https://tesarrec.web.app and ©Sadhukhan J., Ng KS. and Hernandez EM. 2014. Biorefineries and Chemical Processes: Design, Integration & Sustainability Analysis. Wiley. 10.1002/9781118698129
+            </p>
+            <DonwloadButton type="submit">Download!</DonwloadButton>
+          </form>
 
-
-      <h1>Economic Analysis</h1>
-
-      <Container maxWidth={"xl"}>
-
-
-        <Grid container spacing={3}>
-          <Grid item xs={9} spacing={3}>
-            <Picker
-              SliderhandleChange={this.SliderhandleChange}
-              InputhandleChange={this.InputhandleChange}
-              setSelected={this.setSelected}
-              labels={labels}
-              selected={this.state.selectedProcesses}
-            />
-          </Grid>
-          <Grid item xs={3} spacing={3}>
-          {Object.keys(this.state.userNavData).length !== 0 ? (
-              <RightContent
-                userNavData={this.state.userNavData}
-                InputhandleChange={this.InputhandleChange}
+          <Grid container spacing={3}>
+            <Grid item xs={9} spacing={3}>
+              <Picker
                 SliderhandleChange={this.SliderhandleChange}
+                InputhandleChange={this.InputhandleChange}
+                setSelected={this.setSelected}
+                labels={labels}
+                selected={this.state.selectedProcesses}
               />
-            ) : null}
-          </Grid>
+            </Grid>
+            <Grid item xs={3} spacing={3}>
+              {Object.keys(this.state.userNavData).length !== 0 ? (
+                <RightContent
+                  userNavData={this.state.userNavData}
+                  InputhandleChange={this.InputhandleChange}
+                  SliderhandleChange={this.SliderhandleChange}
+                />
+              ) : null}
+            </Grid>
 
-        
-          <Grid item xs={11} spacing={3}>
-          <Calculations
-            selectedProcesses={this.state.selectedProcesses}
-            userNavData={this.state.userNavData}
-          />
+            <Grid item xs={11} spacing={3}>
+              <Calculations
+                selectedProcesses={this.state.selectedProcesses}
+                userNavData={this.state.userNavData}
+              />
+            </Grid>
           </Grid>
-        
-        
-        </Grid>
         </Container>
-
       </div>
-
     );
   }
 }
 
-export default CostCalculator;
+export default EconomicAnalys;
 
 const labels = EconomicAnalysisData.map((el) => {
   return {

@@ -7,7 +7,7 @@ work on solver analysis
 speed heroku server
 
 
-fix econmic sliders
+fix econmic analysis sliders
 
 enlarge pic on click
 

@@ -37,8 +37,8 @@
         },
         {
             "User Navigation Bar": "Production rate tph",
-            "Default": "1000",
-            "Range": "0.001-50000",
+            "Default": "300",
+            "Range": "0.00005-40000",
             "VariableName": "ProductionRate"
         },
         {
@@ -85,7 +85,7 @@
         },
         {
             "User Navigation Bar": "Product price $/kg",
-            "Default": "100",
+            "Default": "0.5",
             "Range": "0.1-5000",
             "VariableName": "ProductPrice"
         }
