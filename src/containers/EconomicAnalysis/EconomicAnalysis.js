@@ -71,7 +71,17 @@ class EconomicAnalys extends Component {
                 fontSize: "10px",
               }}
             >
-              This license available under https://creativecommons.org/licenses/by-sa/4.0/ lets you remix, adapt, and build upon this work even for commercial purposes, as long as you credit: ©https://tesarrec.web.app and ©Sadhukhan J., Ng KS. and Hernandez EM. 2014. Biorefineries and Chemical Processes: Design, Integration & Sustainability Analysis. Wiley. 10.1002/9781118698129
+              This license available under
+              <a href={"https://creativecommons.org/licenses/by-sa/4.0/"}>
+                https://creativecommons.org/licenses/by-sa/4.0/
+              </a>{" "}
+              lets you remix, adapt, and build upon this work even for
+              commercial purposes, as long as you credit: ©
+              <a href={"https://tesarrec.web.app"}>https://tesarrec.web.app</a>{" "}
+              and <br />
+              ©Sadhukhan J., Ng KS. and Hernandez EM. 2014. Biorefineries and
+              Chemical Processes: Design, Integration & Sustainability Analysis.
+              Wiley. <a href={"https://onlinelibrary.wiley.com/doi/book/10.1002/9781118698129" } target={"_blank"} >https://onlinelibrary.wiley.com/doi/book/10.1002/9781118698129</a> 
             </p>
             <DonwloadButton type="submit">Download!</DonwloadButton>
           </form>
