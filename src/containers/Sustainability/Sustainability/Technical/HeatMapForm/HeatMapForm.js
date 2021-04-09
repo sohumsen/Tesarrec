@@ -1,23 +1,26 @@
 import React, { Component } from "react";
 
+import classes from "./styles.module.css";
+
+import DonwloadButton from "../../../../../components/UI/Button/DownloadButton";
+
 import RightContent from "../RightContent/RightContent";
 import BioethanolCalc from "../../../../../components/Calculations/Sustainability/Bioethanol/Bioethanol";
 import ChemicalCalc from "../../../../../components/Calculations/Sustainability/Chemical/Chemical";
 import PyrolysisCalc from "../../../../../components/Calculations/Sustainability/Pyrolysis/Pyrolysis";
 import BioJetFuelCalc from "../../../../../components/Calculations/Sustainability/BioJetFuel/BioJetFuel";
+import BiodieselCalc from "../../../../../components/Calculations/Sustainability/Biodiesel/Biodiesel";
 
 import bioethanolData from "../../../dataFiles/bioethanol.json";
 import chemicalData from "../../../dataFiles/chemical.json";
 import pyrolysisData from "../../../dataFiles/pyrolysis.json";
 import bioJetFuelData from "../../../dataFiles/bioJetFuel.json";
-
-import classes from "./styles.module.css";
-
-import DonwloadButton from "../../../../../components/UI/Button/DownloadButton";
+import biodieselData from "../../../dataFiles/biodiesel.json";
 
 import BioethanolWordDoc from "../../../../../assets/Bioethanol.pdf";
 import ChemicalWordDoc from "../../../../../assets/Chemical.pdf";
 import PyrolysisWordDoc from "../../../../../assets/Pyrolysis.pdf";
+import BiodieselWordDoc from "../../../../../assets/Biodiesel.pdf";
 
 class HeatMapForm extends Component {
   state = {
@@ -82,7 +85,13 @@ class HeatMapForm extends Component {
           "https://onlinelibrary.wiley.com/doi/book/10.1002/9781118698129";
 
         break;
+      case "biodiesel":
+        wordDoc = BiodieselWordDoc;
+        fileData = biodieselData;
+        doiLink =
+          "https://onlinelibrary.wiley.com/doi/book/10.1002/9781118698129";
 
+        break;
       default:
         break;
     }
@@ -174,6 +183,10 @@ class HeatMapForm extends Component {
 
             {this.state.type === "bio-jet-fuel" ? (
               <BioJetFuelCalc state={this.state.data} />
+            ) : null}
+
+            {this.state.type === "biodiesel" ? (
+              <BiodieselCalc state={this.state.data} />
             ) : null}
           </div>
 

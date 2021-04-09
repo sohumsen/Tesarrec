@@ -1,0 +1,76 @@
+{
+    "Sheet1": [
+        {
+            "User Navigation Bar": "Oily feedstock throughput kg/hour",
+            "Default": "10000",
+            "Range": "100-50000",
+            "VariableName": "OilyfeedstockThroughput"
+        },
+        {
+            "User Navigation Bar": "Triglyceride fraction",
+            "Default": "0.5",
+            "Range": " 0.35-1",
+            "VariableName": "TriglycerideFraction"
+        },
+        {
+            "User Navigation Bar": "Free fatty acid fraction",
+            "Default": "0.5",
+            "Range": " 0.35-1",
+            "VariableName": "FreefattyacidFraction"
+        },
+        {
+            "User Navigation Bar": "Other fraction",
+            "Default": "0",
+            "Range": " 0-0.3",
+            "VariableName": "OtherFraction"
+        },
+        {
+            "User Navigation Bar": "Installation factor",
+            "Default": "1",
+            "Range": " 1-5",
+            "VariableName": "InstallationFactor"
+        },
+        {
+            "User Navigation Bar": "Annual capital charge",
+            "Default": "0.13",
+            "Range": "0.1-0.15",
+            "VariableName": "ACC"
+        },
+        {
+            "User Navigation Bar": "Internal rate of return",
+            "Default": "0.1",
+            "Range": "0.1-0.15",
+            "VariableName": "InternalRateofReturn"
+        },
+        {
+            "User Navigation Bar": "Oily feedstock cost $/t",
+            "Default": "40",
+            "Range": "0-100",
+            "VariableName": "OilyfeedstockCost"
+        },
+        {
+            "User Navigation Bar": "Methanol cost $/t",
+            "Default": "500",
+            "Range": "0-2000",
+            "VariableName": "MethanolCost"
+        },
+        {
+            "User Navigation Bar": "Biodiesel price $/L",
+            "Default": "0.8",
+            "Range": "0.65-1.10",
+            "VariableName": "BiodieselPrice"
+        },
+        {
+            "User Navigation Bar": "Glycerol price $/kg",
+            "Default": "1",
+            "Range": " 1-4",
+            "VariableName": "GlycerolPrice"
+        },
+        {
+            "User Navigation Bar": "Electricity price $/kWh",
+            "Default": "0.06",
+            "Range": " 0.06-0.17",
+            "VariableName": "ElectricityPrice"
+        }
+    ]
+}

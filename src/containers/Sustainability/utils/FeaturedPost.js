@@ -13,6 +13,7 @@ import { NavLink } from "react-router-dom";
 const useStyles = makeStyles({
   card: {
     display: "flex",
+    height:140
   },
   cardDetails: {
     flex: 1,

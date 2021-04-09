@@ -98,6 +98,15 @@ const featuredPosts = [
     image:
       "https://cdn.pixabay.com/photo/2019/07/18/20/14/aeroplane-4347341__340.jpg",
   },
+
+  {
+    title: "Biodiesel",
+    slug: "biodiesel",
+
+    description: "Biodiesel, a drop-in biofuel, production from non-food oily waste feedstock.",
+    image:
+      "https://biofuels-news.com/wp-content/uploads/2019/11/bigstock-Male-Hands-In-Protective-Glove-300882514.jpg",
+  },
 ];
 
 

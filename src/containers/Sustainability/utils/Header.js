@@ -53,7 +53,7 @@ export default function Header(props) {
           <SearchBar changeFeaturedPosts={props.changeFeaturedPosts} />
         </div>
       </Toolbar>
-      <Toolbar
+      {/* <Toolbar
         component="nav"
         variant="dense"
         className={classes.toolbarSecondary}
@@ -70,7 +70,7 @@ export default function Header(props) {
             {section.title}
           </Link>
         ))}
-      </Toolbar>
+      </Toolbar> */}
     </React.Fragment>
   );
 }

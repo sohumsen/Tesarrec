@@ -23,11 +23,10 @@ import CustomizedErrorMessage from "../../../components/UI/MyErrorMessage/Authen
 function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
-      {"Copyright © "}
-      <Link color="inherit" href="https://material-ui.com/">
-        Tesarrec™
-      </Link>
-      {new Date().getFullYear()}
+      {'Copyright ©'}
+      <Link color="inherit" href="https://tesarrec.web.app/">
+        Tesarrec
+      </Link>{' 2018 '}
     </Typography>
   );
 }

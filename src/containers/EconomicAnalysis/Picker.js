@@ -2,7 +2,7 @@
 import React from 'react';
 import { useTheme, fade, makeStyles } from '@material-ui/core/styles';
 import Popper from '@material-ui/core/Popper';
-import SettingsIcon from '@material-ui/icons/Settings';
+import AddIcon from '@material-ui/icons/Add';
 import CloseIcon from '@material-ui/icons/Close';
 import DoneIcon from '@material-ui/icons/Done';
 import Autocomplete from '@material-ui/lab/Autocomplete';
@@ -160,8 +160,8 @@ export default function GitHubLabel(props) {
           aria-describedby={id}
           onClick={handleClick}
         >
-          <span>Process</span>
-          <SettingsIcon />
+          <span>Process  <AddIcon /></span>
+         
         </ButtonBase>
         {props.selected.map((label) => (
           <div
