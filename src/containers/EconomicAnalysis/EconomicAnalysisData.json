@@ -1,502 +1,502 @@
 [
-    {
-        "Name": "(An)aerobic digestion",
-        "BaseCost": "2.343393355",
-        "ScaleFactor": "0.6",
-        "BaseSize": "43",
-        "BaseSizeMin": "1",
-        "BaseSizeDefault": "21500",
-        "BaseSizeMax": "43000",
-        "Unit": "tph feedstock"
-    },
-    {
-        "Name": "Autothermal reformer",
-        "BaseCost": "7.151914786",
-        "ScaleFactor": "0.6",
-        "BaseSize": "1390",
-        "BaseSizeMin": "1",
-        "BaseSizeDefault": "695000",
-        "BaseSizeMax": "1390000",
-        "Unit": "kmol per hour gas feedstock"
-    },
-    {
-        "Name": "Baghouse filter",
-        "BaseCost": "2.434694395",
-        "ScaleFactor": "0.65",
-        "BaseSize": "12.1",
-        "BaseSizeMin": "1",
-        "BaseSizeDefault": "6050",
-        "BaseSizeMax": "12100",
-        "Unit": "cubic meter per second feedstock"
-    },
-    {
-        "Name": "Compressor",
-        "BaseCost": "16.89069237",
-        "ScaleFactor": "0.85",
-        "BaseSize": "13.2",
-        "BaseSizeMin": "1",
-        "BaseSizeDefault": "6600",
-        "BaseSizeMax": "13200",
-        "Unit": "MW electricity"
-    },
-    {
-        "Name": "Condensing scrubber",
-        "BaseCost": "3.956378392",
-        "ScaleFactor": "0.7",
-        "BaseSize": "12.1",
-        "BaseSizeMin": "1",
-        "BaseSizeDefault": "6050",
-        "BaseSizeMax": "12100",
-        "Unit": "cubic meter per second feedstock"
-    },
-    {
-        "Name": "Consolidated bio-processing",
-        "BaseCost": "1.019528278",
-        "ScaleFactor": "0.8",
-        "BaseSize": "1.04",
-        "BaseSizeMin": "1",
-        "BaseSizeDefault": "520",
-        "BaseSizeMax": "1040",
-        "Unit": "tph product"
-    },
-    {
-        "Name": "Conveyer",
-        "BaseCost": "0.532589399",
-        "ScaleFactor": "0.8",
-        "BaseSize": "33.5",
-        "BaseSizeMin": "1",
-        "BaseSizeDefault": "16750",
-        "BaseSizeMax": "33500",
-        "Unit": "tph biomass (inc. moisture)"
-    },
-    {
-        "Name": "Cyclone",
-        "BaseCost": "3.956378392",
-        "ScaleFactor": "0.7",
-        "BaseSize": "34.2",
-        "BaseSizeMin": "1",
-        "BaseSizeDefault": "17100",
-        "BaseSizeMax": "34200",
-        "Unit": "cubic meter per second feedstock"
-    },
-    {
-        "Name": "Dilute acid pretreatment",
-        "BaseCost": "21.45574436",
-        "ScaleFactor": "0.78",
-        "BaseSize": "83.3",
-        "BaseSizeMin": "1",
-        "BaseSizeDefault": "41650",
-        "BaseSizeMax": "83300",
-        "Unit": "tph biomass (dry)"
-    },
-    {
-        "Name": "Distillation, Fractionater, Splitter, Reboiler, Condenser, Reflux drum (thermochemical processing)",
-        "BaseCost": "3.469439513",
-        "ScaleFactor": "0.65",
-        "BaseSize": "2250",
-        "BaseSizeMin": "1",
-        "BaseSizeDefault": "1125000",
-        "BaseSizeMax": "2250000",
-        "Unit": "bpd feedstock"
-    },
-    {
-        "Name": "Distillation and purification (biochemical processing)",
-        "BaseCost": "4.504184631",
-        "ScaleFactor": "0.7",
-        "BaseSize": "18.466",
-        "BaseSizeMin": "1",
-        "BaseSizeDefault": "9233",
-        "BaseSizeMax": "18466",
-        "Unit": "tph product"
-    },
-    {
-        "Name": "Dryer",
-        "BaseCost": "11.56479838",
-        "ScaleFactor": "0.8",
-        "BaseSize": "33.5",
-        "BaseSizeMin": "1",
-        "BaseSizeDefault": "16750",
-        "BaseSizeMax": "33500",
-        "Unit": "tph biomass (inc. moisture)"
-    },
-    {
-        "Name": "Enzyme production",
-        "BaseCost": "1.947755516",
-        "ScaleFactor": "0.8",
-        "BaseSize": "50",
-        "BaseSizeMin": "1",
-        "BaseSizeDefault": "25000",
-        "BaseSizeMax": "50000",
-        "Unit": "kg per hour enzyme produced"
-    },
-    {
-        "Name": "Feeding system",
-        "BaseCost": "0.623890439",
-        "ScaleFactor": "1",
-        "BaseSize": "33.5",
-        "BaseSizeMin": "1",
-        "BaseSizeDefault": "16750",
-        "BaseSizeMax": "33500",
-        "Unit": "tph biomass (inc. moisture)"
-    },
-    {
-        "Name": "Fischer-Tropsch product upgrading",
-        "BaseCost": "354.5523713",
-        "ScaleFactor": "0.7",
-        "BaseSize": "286",
-        "BaseSizeMin": "1",
-        "BaseSizeDefault": "143000",
-        "BaseSizeMax": "286000",
-        "Unit": "cubic meter per hour product"
-    },
-    {
-        "Name": "Gas cooling",
-        "BaseCost": "10.63657114",
-        "ScaleFactor": "0.6",
-        "BaseSize": "39.2",
-        "BaseSizeMin": "1",
-        "BaseSizeDefault": "19600",
-        "BaseSizeMax": "39200",
-        "Unit": "kg per second gas stream"
-    },
-    {
-        "Name": "Gas phase methanol synthesis",
-        "BaseCost": "10.65178798",
-        "ScaleFactor": "0.6",
-        "BaseSize": "87.5",
-        "BaseSizeMin": "1",
-        "BaseSizeDefault": "43750",
-        "BaseSizeMax": "87500",
-        "Unit": "tph methanol"
-    },
-    {
-        "Name": "Gas turbine and heat recovery steam generator",
-        "BaseCost": "28.75982754",
-        "ScaleFactor": "0.7",
-        "BaseSize": "26.3",
-        "BaseSizeMin": "1",
-        "BaseSizeDefault": "13150",
-        "BaseSizeMax": "26300",
-        "Unit": "MW electricity"
-    },
-    {
-        "Name": "Gasifier (direct, oxygen-blown, pressurised)",
-        "BaseCost": "57.97616028",
-        "ScaleFactor": "0.7",
-        "BaseSize": "68.8",
-        "BaseSizeMin": "1",
-        "BaseSizeDefault": "34400",
-        "BaseSizeMax": "68800",
-        "Unit": "tph biomass (dry)"
-    },
-    {
-        "Name": "Gasifier (indirect, air-blown, atmospheric)",
-        "BaseCost": "24.80344915",
-        "ScaleFactor": "0.65",
-        "BaseSize": "68.8",
-        "BaseSizeMin": "1",
-        "BaseSizeDefault": "34400",
-        "BaseSizeMax": "68800",
-        "Unit": "tph biomass (dry)"
-    },
-    {
-        "Name": "Grinding",
-        "BaseCost": "0.623890439",
-        "ScaleFactor": "0.6",
-        "BaseSize": "33.5",
-        "BaseSizeMin": "1",
-        "BaseSizeDefault": "16750",
-        "BaseSizeMax": "33500",
-        "Unit": "tph biomass (inc. moisture)"
-    },
-    {
-        "Name": "Hot gas cleaning",
-        "BaseCost": "45.65051991",
-        "ScaleFactor": "1",
-        "BaseSize": "74.1",
-        "BaseSizeMin": "1",
-        "BaseSizeDefault": "37050",
-        "BaseSizeMax": "74100",
-        "Unit": "cubic meter per second feedstock"
-    },
-    {
-        "Name": "Hydrocracker unit",
-        "BaseCost": "45.65051991",
-        "ScaleFactor": "0.65",
-        "BaseSize": "2250",
-        "BaseSizeMin": "1",
-        "BaseSizeDefault": "1125000",
-        "BaseSizeMax": "2250000",
-        "Unit": "bpd feedstock"
-    },
-    {
-        "Name": "Hydrolyse-fermentation",
-        "BaseCost": "1.019528278",
-        "ScaleFactor": "0.8",
-        "BaseSize": "1.04",
-        "BaseSizeMin": "1",
-        "BaseSizeDefault": "520",
-        "BaseSizeMax": "1040",
-        "Unit": "tph product"
-    },
-    {
-        "Name": "Ion exchange column",
-        "BaseCost": "3.636824753",
-        "ScaleFactor": "0.33",
-        "BaseSize": "83.3",
-        "BaseSizeMin": "1",
-        "BaseSizeDefault": "41650",
-        "BaseSizeMax": "83300",
-        "Unit": "tph biomass (dry)"
-    },
-    {
-        "Name": "Iron removal",
-        "BaseCost": "0.563023079",
-        "ScaleFactor": "0.7",
-        "BaseSize": "33.5",
-        "BaseSizeMin": "1",
-        "BaseSizeDefault": "16750",
-        "BaseSizeMax": "33500",
-        "Unit": "tph biomass (inc. moisture)"
-    },
-    {
-        "Name": "Liquid hot water pretreatment",
-        "BaseCost": "8.551864063",
-        "ScaleFactor": "0.78",
-        "BaseSize": "83.3",
-        "BaseSizeMin": "1",
-        "BaseSizeDefault": "41650",
-        "BaseSizeMax": "83300",
-        "Unit": "tph biomass (dry)"
-    },
-    {
-        "Name": "Liquid phase methanol synthesis",
-        "BaseCost": "5.325893989",
-        "ScaleFactor": "0.72",
-        "BaseSize": "87.5",
-        "BaseSizeMin": "1",
-        "BaseSizeDefault": "43750",
-        "BaseSizeMax": "87500",
-        "Unit": "tph methanol"
-    },
-    {
-        "Name": "Mechanical pretreatment",
-        "BaseCost": "6.756276946",
-        "ScaleFactor": "0.67",
-        "BaseSize": "83.3",
-        "BaseSizeMin": "1",
-        "BaseSizeDefault": "41650",
-        "BaseSizeMax": "83300",
-        "Unit": "tph biomass (dry)"
-    },
-    {
-        "Name": "Membrane for hydrogen purification",
-        "BaseCost": "32.86837433",
-        "ScaleFactor": "0.8",
-        "BaseSize": "17",
-        "BaseSizeMin": "1",
-        "BaseSizeDefault": "8500",
-        "BaseSizeMax": "17000",
-        "Unit": "tph hydrogen"
-    },
-    {
-        "Name": "Methanol product upgrading",
-        "BaseCost": "22.97742835",
-        "ScaleFactor": "0.7",
-        "BaseSize": "87.5",
-        "BaseSizeMin": "1",
-        "BaseSizeDefault": "43750",
-        "BaseSizeMax": "87500",
-        "Unit": "tph methanol"
-    },
-    {
-        "Name": "Milling",
-        "BaseCost": "0.563023079",
-        "ScaleFactor": "0.7",
-        "BaseSize": "50",
-        "BaseSizeMin": "1",
-        "BaseSizeDefault": "25000",
-        "BaseSizeMax": "50000",
-        "Unit": "tph biomass (inc. moisture)"
-    },
-    {
-        "Name": "Molecular sieve",
-        "BaseCost": "4.443317271",
-        "ScaleFactor": "0.7",
-        "BaseSize": "18.466",
-        "BaseSizeMin": "1",
-        "BaseSizeDefault": "9233",
-        "BaseSizeMax": "18466",
-        "Unit": "tph product"
-    },
-    {
-        "Name": "Overliming pretreatment",
-        "BaseCost": "1.171696678",
-        "ScaleFactor": "0.46",
-        "BaseSize": "83.3",
-        "BaseSizeMin": "1",
-        "BaseSizeDefault": "41650",
-        "BaseSizeMax": "83300",
-        "Unit": "tph biomass (dry)"
-    },
-    {
-        "Name": "Oxygen plant",
-        "BaseCost": "67.25843267",
-        "ScaleFactor": "0.85",
-        "BaseSize": "41.7",
-        "BaseSizeMin": "1",
-        "BaseSizeDefault": "20850",
-        "BaseSizeMax": "41700",
-        "Unit": "tph oxygen product"
-    },
-    {
-        "Name": "Pressure swing adsorption for hydrogen purification",
-        "BaseCost": "42.60715191",
-        "ScaleFactor": "0.7",
-        "BaseSize": "9600",
-        "BaseSizeMin": "1",
-        "BaseSizeDefault": "4800000",
-        "BaseSizeMax": "9600000",
-        "Unit": "kmol per hour feed"
-    },
-    {
-        "Name": "Pyrolyser (circulating fluid bed)",
-        "BaseCost": "5.161552118",
-        "ScaleFactor": "0.7",
-        "BaseSize": "500",
-        "BaseSizeMin": "1",
-        "BaseSizeDefault": "250000",
-        "BaseSizeMax": "500000",
-        "Unit": "tpd feedstock"
-    },
-    {
-        "Name": "Seed fermentation",
-        "BaseCost": "0.395637839",
-        "ScaleFactor": "0.6",
-        "BaseSize": "3.53",
-        "BaseSizeMin": "1",
-        "BaseSizeDefault": "1765",
-        "BaseSizeMax": "3530",
-        "Unit": "tph product"
-    },
-    {
-        "Name": "Selexol carbon dioxide capture",
-        "BaseCost": "82.32310424",
-        "ScaleFactor": "0.7",
-        "BaseSize": "9909",
-        "BaseSizeMin": "1",
-        "BaseSizeDefault": "4954500",
-        "BaseSizeMax": "9909000",
-        "Unit": "kmol per hour carbon dioxide removal"
-    },
-    {
-        "Name": "Shift reactor",
-        "BaseCost": "0.056150139",
-        "ScaleFactor": "0.85",
-        "BaseSize": "15.6",
-        "BaseSizeMin": "1",
-        "BaseSizeDefault": "7800",
-        "BaseSizeMax": "15600",
-        "Unit": "kmol per hour gas feedstock"
-    },
-    {
-        "Name": "Simultaneous saccharification and co-fermentation",
-        "BaseCost": "1.019528278",
-        "ScaleFactor": "0.8",
-        "BaseSize": "1.04",
-        "BaseSizeMin": "1",
-        "BaseSizeDefault": "520",
-        "BaseSizeMax": "1040",
-        "Unit": "tph product"
-    },
-    {
-        "Name": "Simultaneous saccharification and fermentation",
-        "BaseCost": "1.019528278",
-        "ScaleFactor": "0.8",
-        "BaseSize": "1.04",
-        "BaseSizeMin": "1",
-        "BaseSizeDefault": "520",
-        "BaseSizeMax": "1040",
-        "Unit": "tph product"
-    },
-    {
-        "Name": "Slurry phase Fischer-Tropsch reactor",
-        "BaseCost": "55.54146589",
-        "ScaleFactor": "0.72",
-        "BaseSize": "131",
-        "BaseSizeMin": "1",
-        "BaseSizeDefault": "65500",
-        "BaseSizeMax": "131000",
-        "Unit": "MW product"
-    },
-    {
-        "Name": "Solid-gas phase Fischer-Tropsch reactor",
-        "BaseCost": "38.49860512",
-        "ScaleFactor": "1",
-        "BaseSize": "100",
-        "BaseSizeMin": "1",
-        "BaseSizeDefault": "50000",
-        "BaseSizeMax": "100000",
-        "Unit": "MW product"
-    },
-    {
-        "Name": "Solids separation",
-        "BaseCost": "1.597768197",
-        "ScaleFactor": "0.65",
-        "BaseSize": "10.1",
-        "BaseSizeMin": "1",
-        "BaseSizeDefault": "5050",
-        "BaseSizeMax": "10100",
-        "Unit": "dry tph solid"
-    },
-    {
-        "Name": "Steam explosion pretreatment",
-        "BaseCost": "2.145574436",
-        "ScaleFactor": "0.78",
-        "BaseSize": "83.3",
-        "BaseSizeMin": "1",
-        "BaseSizeDefault": "41650",
-        "BaseSizeMax": "83300",
-        "Unit": "tph biomass (dry)"
-    },
-    {
-        "Name": "Steam reformer",
-        "BaseCost": "14.30382957",
-        "ScaleFactor": "0.6",
-        "BaseSize": "1390",
-        "BaseSizeMin": "1",
-        "BaseSizeDefault": "695000",
-        "BaseSizeMax": "1390000",
-        "Unit": "kmol per hour gas feedstock"
-    },
-    {
-        "Name": "Steam turbine and steam system",
-        "BaseCost": "7.760588384",
-        "ScaleFactor": "0.7",
-        "BaseSize": "10.3",
-        "BaseSizeMin": "1",
-        "BaseSizeDefault": "5150",
-        "BaseSizeMax": "10300",
-        "Unit": "MW electricity"
-    },
-    {
-        "Name": "Storage",
-        "BaseCost": "1.521683997",
-        "ScaleFactor": "0.65",
-        "BaseSize": "33.5",
-        "BaseSizeMin": "1",
-        "BaseSizeDefault": "16750",
-        "BaseSizeMax": "33500",
-        "Unit": "tph biomass (inc. moisture)"
-    },
-    {
-        "Name": "Tar cracker",
-        "BaseCost": "4.717220391",
-        "ScaleFactor": "0.7",
-        "BaseSize": "34.2",
-        "BaseSizeMin": "1",
-        "BaseSizeDefault": "17100",
-        "BaseSizeMax": "34200",
-        "Unit": "cubic meter per second feedstock"
-    }
-]
+        {
+            "Name": "(An)aerobic digestion",
+            "BaseCost": "2.343393355",
+            "ScaleFactor": "0.6",
+            "BaseSize": "43",
+            "BaseSizeMin": "1",
+            "BaseSizeDefault": "50",
+            "BaseSizeMax": "1000",
+            "Unit": "tph feedstock"
+        },
+        {
+            "Name": "Autothermal reformer",
+            "BaseCost": "7.151914786",
+            "ScaleFactor": "0.6",
+            "BaseSize": "1390",
+            "BaseSizeMin": "1",
+            "BaseSizeDefault": "50",
+            "BaseSizeMax": "3000",
+            "Unit": "kmol per hour gas feedstock"
+        },
+        {
+            "Name": "Baghouse filter",
+            "BaseCost": "2.434694395",
+            "ScaleFactor": "0.65",
+            "BaseSize": "12.1",
+            "BaseSizeMin": "1",
+            "BaseSizeDefault": "6050",
+            "BaseSizeMax": "12100",
+            "Unit": "cubic meter per second feedstock"
+        },
+        {
+            "Name": "Compressor",
+            "BaseCost": "16.89069237",
+            "ScaleFactor": "0.85",
+            "BaseSize": "13.2",
+            "BaseSizeMin": "1",
+            "BaseSizeDefault": "6600",
+            "BaseSizeMax": "13200",
+            "Unit": "MW electricity"
+        },
+        {
+            "Name": "Condensing scrubber",
+            "BaseCost": "3.956378392",
+            "ScaleFactor": "0.7",
+            "BaseSize": "12.1",
+            "BaseSizeMin": "1",
+            "BaseSizeDefault": "6050",
+            "BaseSizeMax": "12100",
+            "Unit": "cubic meter per second feedstock"
+        },
+        {
+            "Name": "Consolidated bio-processing",
+            "BaseCost": "1.019528278",
+            "ScaleFactor": "0.8",
+            "BaseSize": "1.04",
+            "BaseSizeMin": "1",
+            "BaseSizeDefault": "50",
+            "BaseSizeMax": "1000",
+            "Unit": "tph product"
+        },
+        {
+            "Name": "Conveyer",
+            "BaseCost": "0.532589399",
+            "ScaleFactor": "0.8",
+            "BaseSize": "33.5",
+            "BaseSizeMin": "1",
+            "BaseSizeDefault": "50",
+            "BaseSizeMax": "1000",
+            "Unit": "tph biomass (inc. moisture)"
+        },
+        {
+            "Name": "Cyclone",
+            "BaseCost": "3.956378392",
+            "ScaleFactor": "0.7",
+            "BaseSize": "34.2",
+            "BaseSizeMin": "1",
+            "BaseSizeDefault": "17100",
+            "BaseSizeMax": "34200",
+            "Unit": "cubic meter per second feedstock"
+        },
+        {
+            "Name": "Dilute acid pretreatment",
+            "BaseCost": "21.45574436",
+            "ScaleFactor": "0.78",
+            "BaseSize": "83.3",
+            "BaseSizeMin": "1",
+            "BaseSizeDefault": "50",
+            "BaseSizeMax": "750",
+            "Unit": "tph biomass (dry)"
+        },
+        {
+            "Name": "Distillation, Fractionater, Splitter, Reboiler, Condenser, Reflux drum (thermochemical processing)",
+            "BaseCost": "3.469439513",
+            "ScaleFactor": "0.65",
+            "BaseSize": "2250",
+            "BaseSizeMin": "1",
+            "BaseSizeDefault": "40",
+            "BaseSizeMax": "5000",
+            "Unit": "bpd feedstock"
+        },
+        {
+            "Name": "Distillation and purification (biochemical processing)",
+            "BaseCost": "4.504184631",
+            "ScaleFactor": "0.7",
+            "BaseSize": "18.466",
+            "BaseSizeMin": "1",
+            "BaseSizeDefault": "20",
+            "BaseSizeMax": "500",
+            "Unit": "tph product"
+        },
+        {
+            "Name": "Dryer",
+            "BaseCost": "11.56479838",
+            "ScaleFactor": "0.8",
+            "BaseSize": "33.5",
+            "BaseSizeMin": "1",
+            "BaseSizeDefault": "50",
+            "BaseSizeMax": "1000",
+            "Unit": "tph biomass (inc. moisture)"
+        },
+        {
+            "Name": "Enzyme production",
+            "BaseCost": "1.947755516",
+            "ScaleFactor": "0.8",
+            "BaseSize": "50",
+            "BaseSizeMin": "1",
+            "BaseSizeDefault": "500",
+            "BaseSizeMax": "50000",
+            "Unit": "kg per hour enzyme produced"
+        },
+        {
+            "Name": "Feeding system",
+            "BaseCost": "0.623890439",
+            "ScaleFactor": "1",
+            "BaseSize": "33.5",
+            "BaseSizeMin": "1",
+            "BaseSizeDefault": "50",
+            "BaseSizeMax": "1000",
+            "Unit": "tph biomass (inc. moisture)"
+        },
+        {
+            "Name": "Fischer-Tropsch product upgrading",
+            "BaseCost": "354.5523713",
+            "ScaleFactor": "0.7",
+            "BaseSize": "286",
+            "BaseSizeMin": "1",
+            "BaseSizeDefault": "143000",
+            "BaseSizeMax": "286000",
+            "Unit": "cubic meter per hour product"
+        },
+        {
+            "Name": "Gas cooling",
+            "BaseCost": "10.63657114",
+            "ScaleFactor": "0.6",
+            "BaseSize": "39.2",
+            "BaseSizeMin": "1",
+            "BaseSizeDefault": "19600",
+            "BaseSizeMax": "39200",
+            "Unit": "kg per second gas stream"
+        },
+        {
+            "Name": "Gas phase methanol synthesis",
+            "BaseCost": "10.65178798",
+            "ScaleFactor": "0.6",
+            "BaseSize": "87.5",
+            "BaseSizeMin": "1",
+            "BaseSizeDefault": "43750",
+            "BaseSizeMax": "87500",
+            "Unit": "tph methanol"
+        },
+        {
+            "Name": "Gas turbine and heat recovery steam generator",
+            "BaseCost": "28.75982754",
+            "ScaleFactor": "0.7",
+            "BaseSize": "26.3",
+            "BaseSizeMin": "1",
+            "BaseSizeDefault": "200",
+            "BaseSizeMax": "25000",
+            "Unit": "MW electricity"
+        },
+        {
+            "Name": "Gasifier (direct, oxygen-blown, pressurised)",
+            "BaseCost": "57.97616028",
+            "ScaleFactor": "0.7",
+            "BaseSize": "68.8",
+            "BaseSizeMin": "1",
+            "BaseSizeDefault": "50",
+            "BaseSizeMax": "1000",
+            "Unit": "tph biomass (dry)"
+        },
+        {
+            "Name": "Gasifier (indirect, air-blown, atmospheric)",
+            "BaseCost": "24.80344915",
+            "ScaleFactor": "0.65",
+            "BaseSize": "68.8",
+            "BaseSizeMin": "1",
+            "BaseSizeDefault": "50",
+            "BaseSizeMax": "1000",
+            "Unit": "tph biomass (dry)"
+        },
+        {
+            "Name": "Grinding",
+            "BaseCost": "0.623890439",
+            "ScaleFactor": "0.6",
+            "BaseSize": "33.5",
+            "BaseSizeMin": "1",
+            "BaseSizeDefault": "50",
+            "BaseSizeMax": "1000",
+            "Unit": "tph biomass (inc. moisture)"
+        },
+        {
+            "Name": "Hot gas cleaning",
+            "BaseCost": "45.65051991",
+            "ScaleFactor": "1",
+            "BaseSize": "74.1",
+            "BaseSizeMin": "1",
+            "BaseSizeDefault": "37050",
+            "BaseSizeMax": "74100",
+            "Unit": "cubic meter per second feedstock"
+        },
+        {
+            "Name": "Hydrocracker unit",
+            "BaseCost": "45.65051991",
+            "ScaleFactor": "0.65",
+            "BaseSize": "2250",
+            "BaseSizeMin": "1",
+            "BaseSizeDefault": "40",
+            "BaseSizeMax": "5000",
+            "Unit": "bpd feedstock"
+        },
+        {
+            "Name": "Hydrolyse-fermentation",
+            "BaseCost": "1.019528278",
+            "ScaleFactor": "0.8",
+            "BaseSize": "1.04",
+            "BaseSizeMin": "1",
+            "BaseSizeDefault": "520",
+            "BaseSizeMax": "1040",
+            "Unit": "tph product"
+        },
+        {
+            "Name": "Ion exchange column",
+            "BaseCost": "3.636824753",
+            "ScaleFactor": "0.33",
+            "BaseSize": "83.3",
+            "BaseSizeMin": "1",
+            "BaseSizeDefault": "50",
+            "BaseSizeMax": "1000",
+            "Unit": "tph biomass (dry)"
+        },
+        {
+            "Name": "Iron removal",
+            "BaseCost": "0.563023079",
+            "ScaleFactor": "0.7",
+            "BaseSize": "33.5",
+            "BaseSizeMin": "1",
+            "BaseSizeDefault": "50",
+            "BaseSizeMax": "1000",
+            "Unit": "tph biomass (inc. moisture)"
+        },
+        {
+            "Name": "Liquid hot water pretreatment",
+            "BaseCost": "8.551864063",
+            "ScaleFactor": "0.78",
+            "BaseSize": "83.3",
+            "BaseSizeMin": "1",
+            "BaseSizeDefault": "50",
+            "BaseSizeMax": "1000",
+            "Unit": "tph biomass (dry)"
+        },
+        {
+            "Name": "Liquid phase methanol synthesis",
+            "BaseCost": "5.325893989",
+            "ScaleFactor": "0.72",
+            "BaseSize": "87.5",
+            "BaseSizeMin": "1",
+            "BaseSizeDefault": "50",
+            "BaseSizeMax": "1000",
+            "Unit": "tph methanol"
+        },
+        {
+            "Name": "Mechanical pretreatment",
+            "BaseCost": "6.756276946",
+            "ScaleFactor": "0.67",
+            "BaseSize": "83.3",
+            "BaseSizeMin": "1",
+            "BaseSizeDefault": "50",
+            "BaseSizeMax": "1000",
+            "Unit": "tph biomass (dry)"
+        },
+        {
+            "Name": "Membrane for hydrogen purification",
+            "BaseCost": "32.86837433",
+            "ScaleFactor": "0.8",
+            "BaseSize": "17",
+            "BaseSizeMin": "1",
+            "BaseSizeDefault": "10",
+            "BaseSizeMax": "500",
+            "Unit": "tph hydrogen"
+        },
+        {
+            "Name": "Methanol product upgrading",
+            "BaseCost": "22.97742835",
+            "ScaleFactor": "0.7",
+            "BaseSize": "87.5",
+            "BaseSizeMin": "1",
+            "BaseSizeDefault": "1000",
+            "BaseSizeMax": "10000",
+            "Unit": "tph methanol"
+        },
+        {
+            "Name": "Milling",
+            "BaseCost": "0.563023079",
+            "ScaleFactor": "0.7",
+            "BaseSize": "50",
+            "BaseSizeMin": "1",
+            "BaseSizeDefault": "50",
+            "BaseSizeMax": "1000",
+            "Unit": "tph biomass (inc. moisture)"
+        },
+        {
+            "Name": "Molecular sieve",
+            "BaseCost": "4.443317271",
+            "ScaleFactor": "0.7",
+            "BaseSize": "18.466",
+            "BaseSizeMin": "1",
+            "BaseSizeDefault": "50",
+            "BaseSizeMax": "1000",
+            "Unit": "tph product"
+        },
+        {
+            "Name": "Overliming pretreatment",
+            "BaseCost": "1.171696678",
+            "ScaleFactor": "0.46",
+            "BaseSize": "83.3",
+            "BaseSizeMin": "1",
+            "BaseSizeDefault": "50",
+            "BaseSizeMax": "1000",
+            "Unit": "tph biomass (dry)"
+        },
+        {
+            "Name": "Oxygen plant",
+            "BaseCost": "67.25843267",
+            "ScaleFactor": "0.85",
+            "BaseSize": "41.7",
+            "BaseSizeMin": "1",
+            "BaseSizeDefault": "5000",
+            "BaseSizeMax": "10000",
+            "Unit": "tph oxygen product"
+        },
+        {
+            "Name": "Pressure swing adsorption for hydrogen purification",
+            "BaseCost": "42.60715191",
+            "ScaleFactor": "0.7",
+            "BaseSize": "9600",
+            "BaseSizeMin": "1",
+            "BaseSizeDefault": "5500",
+            "BaseSizeMax": "100000",
+            "Unit": "kmol per hour feed"
+        },
+        {
+            "Name": "Pyrolyser (circulating fluid bed)",
+            "BaseCost": "5.161552118",
+            "ScaleFactor": "0.7",
+            "BaseSize": "500",
+            "BaseSizeMin": "1",
+            "BaseSizeDefault": "10000",
+            "BaseSizeMax": "20000",
+            "Unit": "tpd feedstock"
+        },
+        {
+            "Name": "Seed fermentation",
+            "BaseCost": "0.395637839",
+            "ScaleFactor": "0.6",
+            "BaseSize": "3.53",
+            "BaseSizeMin": "1",
+            "BaseSizeDefault": "1765",
+            "BaseSizeMax": "3530",
+            "Unit": "tph product"
+        },
+        {
+            "Name": "Selexol carbon dioxide capture",
+            "BaseCost": "82.32310424",
+            "ScaleFactor": "0.7",
+            "BaseSize": "9909",
+            "BaseSizeMin": "1",
+            "BaseSizeDefault": "4954500",
+            "BaseSizeMax": "9909000",
+            "Unit": "kmol per hour carbon dioxide removal"
+        },
+        {
+            "Name": "Shift reactor",
+            "BaseCost": "0.056150139",
+            "ScaleFactor": "0.85",
+            "BaseSize": "15.6",
+            "BaseSizeMin": "1",
+            "BaseSizeDefault": "7800",
+            "BaseSizeMax": "15600",
+            "Unit": "kmol per hour gas feedstock"
+        },
+        {
+            "Name": "Simultaneous saccharification and co-fermentation",
+            "BaseCost": "1.019528278",
+            "ScaleFactor": "0.8",
+            "BaseSize": "1.04",
+            "BaseSizeMin": "1",
+            "BaseSizeDefault": "520",
+            "BaseSizeMax": "1040",
+            "Unit": "tph product"
+        },
+        {
+            "Name": "Simultaneous saccharification and fermentation",
+            "BaseCost": "1.019528278",
+            "ScaleFactor": "0.8",
+            "BaseSize": "1.04",
+            "BaseSizeMin": "1",
+            "BaseSizeDefault": "520",
+            "BaseSizeMax": "1040",
+            "Unit": "tph product"
+        },
+        {
+            "Name": "Slurry phase Fischer-Tropsch reactor",
+            "BaseCost": "55.54146589",
+            "ScaleFactor": "0.72",
+            "BaseSize": "131",
+            "BaseSizeMin": "1",
+            "BaseSizeDefault": "65500",
+            "BaseSizeMax": "131000",
+            "Unit": "MW product"
+        },
+        {
+            "Name": "Solid-gas phase Fischer-Tropsch reactor",
+            "BaseCost": "38.49860512",
+            "ScaleFactor": "1",
+            "BaseSize": "100",
+            "BaseSizeMin": "1",
+            "BaseSizeDefault": "50000",
+            "BaseSizeMax": "100000",
+            "Unit": "MW product"
+        },
+        {
+            "Name": "Solids separation",
+            "BaseCost": "1.597768197",
+            "ScaleFactor": "0.65",
+            "BaseSize": "10.1",
+            "BaseSizeMin": "1",
+            "BaseSizeDefault": "5050",
+            "BaseSizeMax": "10100",
+            "Unit": "dry tph solid"
+        },
+        {
+            "Name": "Steam explosion pretreatment",
+            "BaseCost": "2.145574436",
+            "ScaleFactor": "0.78",
+            "BaseSize": "83.3",
+            "BaseSizeMin": "1",
+            "BaseSizeDefault": "50",
+            "BaseSizeMax": "1000",
+            "Unit": "tph biomass (dry)"
+        },
+        {
+            "Name": "Steam reformer",
+            "BaseCost": "14.30382957",
+            "ScaleFactor": "0.6",
+            "BaseSize": "1390",
+            "BaseSizeMin": "1",
+            "BaseSizeDefault": "1000",
+            "BaseSizeMax": "10000",
+            "Unit": "kmol per hour gas feedstock"
+        },
+        {
+            "Name": "Steam turbine and steam system",
+            "BaseCost": "7.760588384",
+            "ScaleFactor": "0.7",
+            "BaseSize": "10.3",
+            "BaseSizeMin": "1",
+            "BaseSizeDefault": "200",
+            "BaseSizeMax": "10000",
+            "Unit": "MW electricity"
+        },
+        {
+            "Name": "Storage",
+            "BaseCost": "1.521683997",
+            "ScaleFactor": "0.65",
+            "BaseSize": "33.5",
+            "BaseSizeMin": "1",
+            "BaseSizeDefault": "50",
+            "BaseSizeMax": "1000",
+            "Unit": "tph biomass (inc. moisture)"
+        },
+        {
+            "Name": "Tar cracker",
+            "BaseCost": "4.717220391",
+            "ScaleFactor": "0.7",
+            "BaseSize": "34.2",
+            "BaseSizeMin": "1",
+            "BaseSizeDefault": "17100",
+            "BaseSizeMax": "34200",
+            "Unit": "cubic meter per second feedstock"
+        }
+    ]

@@ -9,6 +9,8 @@ import MultiLineChart from "../../../UI/Canvas/MultiLineChartBioJetFuel";
 import { Paper } from "@material-ui/core";
 import CustomizedTables from "../../../UI/Table/CustomTable";
 
+import MultiColumnTable from "../../../UI/Table/MultiColumnTable";
+import CashFlowGraph from "./CashFlowGraph";
 const OverallReactionAnodeCathode = (props) => {
   let {
     BiooilThroughput,
@@ -28,7 +30,7 @@ const OverallReactionAnodeCathode = (props) => {
 
     InstallationFactor,
     ACC,
-
+    InternalRateofReturn,
     BiomassCost,
     JetfuelPrice,
     CharPrice,
@@ -294,6 +296,9 @@ const OverallReactionAnodeCathode = (props) => {
       60 +
     (((3 + 1) * 18 * 0.25 * 0.966 + 3 * 18 * 0.034) * Hydroxyacetone) / 74 +
     (((2 + 1) * 18 * 0.25 * 0.954 + 18 * 0.5 * 0.046) * Formicacid) / 46;
+
+  let PSAFeed = AlkanestoReforming + SteamneededReforming;
+
   let SteamProduced =
     (((PhenoltoTridecene1 +
       PhenoltoTridecene2 +
@@ -334,6 +339,8 @@ const OverallReactionAnodeCathode = (props) => {
     (((1.5 * 0.954 + 0.046) * Formicacid) / 46) * 18;
   let HydrogenfromSteam = HydrogenNeeded - HydrogenfromReforming;
   let OxygenfromSteam = (HydrogenfromSteam / 2) * 16;
+
+  let MIECFeed = HydrogenfromSteam + OxygenfromSteam;
   let ExcessSteam =
     SteamProduced +
     Water -
@@ -552,6 +559,50 @@ const OverallReactionAnodeCathode = (props) => {
         0.0018) /
         10.3) **
         0.7;
+
+  let PyrolysisDeliveredcost = 5.063 * (BiomassNeeded * 0.000044) ** 0.7;
+  let HdohcDeliveredcost = 38.445 * (BiooilThroughput * 0.00000005) ** 0.65;
+  let DisdecantDeliveredcost = 2.604 * (BiooilThroughput * 0.00000005) ** 0.65;
+  let PSADeliveredcost =
+    42.607 *
+    ((HydrogenfromReforming / 2 +
+      (AlkanestoReforming - HydrogenfromReforming + SteamneededReforming) /
+        28) /
+      9600) **
+      0.7;
+  let MIECDeliveredcost = 32.868 * (HydrogenfromSteam / 17000) ** 0.8;
+  let SMRDeliveredcost =
+    14.304 *
+    (((0.1351 * 0.33 * (1 - PhenoltoTridecene1 - PhenoltoTridecene2) * Phenol) /
+      94 +
+      (PhenoltoTridecene2 * 0.161 * Phenol) / 94 +
+      (0.0065 * 0.33 * (1 - PhenoltoTridecene1 - PhenoltoTridecene2) * Phenol) /
+        94 +
+      (0.0026 * 0.5 * (1 - PhenoltoTridecene1 - PhenoltoTridecene2) * Phenol) /
+        94 +
+      (0.0026 * 0.5 * (1 - PhenoltoTridecene1 - PhenoltoTridecene2) * Phenol) /
+        94 +
+      ((0.124 * 4.04 + 0.041 * 0.5 + 0.036 * 0.5 + 0.02 * 0.33 + 0.012 * 0.5) *
+        Dextrose) /
+        180 +
+      ((4.19 * 0.139 + 0.108) * Furfural) / 96 +
+      (0.108 * Furfural) / 96 +
+      (((0.5 + 0.5) * 0.616 + 0.11 * 0.384) * Aceticacid) / 60 +
+      ((0.25 * 0.966 + 3 * 16 * 0.034) * Hydroxyacetone) / 74 +
+      ((0.25 * 0.954 + 0.5 * 0.046) * Formicacid) / 46 +
+      ((Mcyclohexane / 98 / 0.9) * 0.1) / 2) /
+      1390) **
+      0.6;
+  let CHPDeliveredcost =
+    7.761 *
+    (((BiomassNeeded * 0.13 +
+      AlkanestoReforming -
+      HydrogenfromReforming +
+      SteamneededReforming) *
+      0.0018) /
+      10.3) **
+      0.7;
+
   let TotalCapitalInvestment = DeliveryCostofEquipment * InstallationFactor;
   let Capex = TotalCapitalInvestment * ACC;
   let Opex = 1.3 * (DeliveryCostofEquipment * ACC * 0.25 + 0.0001 * JetFuel);
@@ -614,10 +665,9 @@ const OverallReactionAnodeCathode = (props) => {
 
   return (
     <div className={classes.HeatMaps}>
-      <Paper className={classes.HeatMapEnergyPerformance}>
-        <img src={BiojetfuelPic} width="100%" alt="Biojetfuel Pic"></img>
-      </Paper>
+              <img src={BiojetfuelPic} width="98%" alt="Biojetfuel Pic"></img>
 
+    
       <Paper className={classes.HeatMapEnergyPerformance}>
         <ColumnChart
           title={"Flowrate kg/h"}
@@ -696,7 +746,40 @@ const OverallReactionAnodeCathode = (props) => {
           type={"pie"}
         />
       </Paper>
+      <Paper className={classes.HeatMapEnergyPerformance}>
+        <CashFlowGraph
+          CapitalCost={parseFloat(
+            (DeliveryCostofEquipment * InstallationFactor).toFixed(2)
+          )}
+          Capex={parseFloat(Capex.toFixed(2))}
+          Opex={parseFloat(Opex.toFixed(2))}
+          ProductValue={parseFloat(ProductValue.toFixed(2))}
+          IRRCost={parseFloat(InternalRateofReturn.toFixed(2))}
+        />
+      </Paper>
+     
 
+     
+
+      <Paper
+        style={{
+          height: "400px",
+          float: "left",
+          width: "46%",
+          margin: "2%",
+        }}
+      >
+        <MultiLineChart
+          dataPoints={dataPoints.map((el) => {
+            let newObj = {
+              x: el.x.toFixed(2),
+              ProductCost: el.ProductCost.toFixed(2),
+              ProcessingValue: el.ProcessingValue.toFixed(2),
+            };
+            return newObj;
+          })}
+        />
+      </Paper>
       <Paper className={classes.HeatMapEnergyPerformance}>
         <ColumnChart
           title={"Environmental impact saving per year"}
@@ -745,27 +828,38 @@ const OverallReactionAnodeCathode = (props) => {
               value: parseFloat(VABP.toFixed(2)),
             },
           ]}
-          title={"Jet Fuel Property"}
+          title={"Bio Jet Fuel Property"}
         />
       </Paper>
-
-      <Paper
-        style={{
-          height: "400px",
-          float: "left",
-          width: "46%",
-          margin: "2%",
-        }}
-      >
-        <MultiLineChart
-          dataPoints={dataPoints.map((el) => {
-            let newObj = {
-              x: el.x.toFixed(2),
-              ProductCost: el.ProductCost.toFixed(2),
-              ProcessingValue: el.ProcessingValue.toFixed(2),
-            };
-            return newObj;
-          })}
+      <Paper className={classes.HeatMapEnergyPerformance}>
+        <MultiColumnTable
+          headers={[
+            "Process",
+            "Feed flowrate kg/hr	",
+            "Delivered cost million $",
+          ]}
+          title={
+            "Delivered cost of equipment " +
+            DeliveryCostofEquipment.toFixed(2) +
+            " millions $"
+          }
+          rows={[
+            ["CHP", FueltoCHP, CHPDeliveredcost],
+            ["Pyrolysis", BiomassNeeded, PyrolysisDeliveredcost],
+            ["PSA", PSAFeed, PSADeliveredcost],
+            ["Steam reforming", AlkanestoReforming, SMRDeliveredcost],
+            ["MIEC", MIECFeed, MIECDeliveredcost],
+            [
+              "Hydrodeoxygenation and hydrocracking",
+              BiooilThroughput,
+              HdohcDeliveredcost,
+            ],
+            [
+              "Distillation and decanter",
+              BiooilThroughput,
+              DisdecantDeliveredcost,
+            ],
+          ]}
         />
       </Paper>
     </div>

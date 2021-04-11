@@ -210,9 +210,16 @@ export default function GitHubLabel(props) {
               <span className={classes.color} style={{ backgroundColor: option.color }} />
               <div className={classes.text}>
                 {option["Name"]}
-                <br />
-                {option["Unit"]}
-              </div>
+                </div>
+
+                <div className={classes.text} style={{
+                  fontSize:12,
+                  fontStyle:"italic"
+                }}>
+                {"("+option["Unit"]+")"}
+
+                </div>
+
               <CloseIcon
                 className={classes.close}
                 style={{ visibility: selected ? 'visible' : 'hidden' }}

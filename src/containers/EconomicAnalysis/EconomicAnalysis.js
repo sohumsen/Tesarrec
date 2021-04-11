@@ -8,9 +8,10 @@ import UserNav from "./UserNav.json";
 import Calculations from "../../components/Calculations/EconomicAnalysis/EconomicAnalysis";
 import DonwloadButton from "../../components/UI/Button/DownloadButton";
 import WordDoc from "./economic.pdf";
+
 class EconomicAnalys extends Component {
   state = {
-    selectedProcesses: [labels[1], labels[9]],
+    selectedProcesses: initialSelectedProcesses,
 
     userNavData: {},
   };
@@ -81,7 +82,15 @@ class EconomicAnalys extends Component {
               and <br />
               ©Sadhukhan J., Ng KS. and Hernandez EM. 2014. Biorefineries and
               Chemical Processes: Design, Integration & Sustainability Analysis.
-              Wiley. <a href={"https://onlinelibrary.wiley.com/doi/book/10.1002/9781118698129" } target={"_blank"} >https://onlinelibrary.wiley.com/doi/book/10.1002/9781118698129</a> 
+              Wiley.{" "}
+              <a
+                href={
+                  "https://onlinelibrary.wiley.com/doi/book/10.1002/9781118698129"
+                }
+                target={"_blank"}
+              >
+                https://onlinelibrary.wiley.com/doi/book/10.1002/9781118698129
+              </a>
             </p>
             <DonwloadButton type="submit">Download!</DonwloadButton>
           </form>
@@ -126,7 +135,7 @@ const labels = EconomicAnalysisData.map((el) => {
     ...el,
     // color:
     //   "#" + ((Math.random() * 0xffffff) << 0).toString(16).padStart(6, "0"),
-    color: "#FFF0F0",
+    //  color: "#FFF0F0",
     color:
       "hsl(" +
       360 * Math.random() +
@@ -137,96 +146,18 @@ const labels = EconomicAnalysisData.map((el) => {
       "%)",
   };
 });
+let initialSelectedProcesses = labels.filter(
+  (el) =>
+    el["Name"] === "Gas turbine and heat recovery steam generator" ||
+    el["Name"] ===
+      "Distillation, Fractionater, Splitter, Reboiler, Condenser, Reflux drum (thermochemical processing)" ||
+    el["Name"] === "Hydrocracker unit" ||
+    el["Name"] === "Membrane for hydrogen purification" ||
+    el["Name"] === "Pyrolyser (circulating fluid bed)" ||
+    el["Name"] === "Pressure swing adsorption for hydrogen purification" ||
+    el["Name"] === "Steam reformer" ||
+    el["Name"] === "Steam turbine and steam system"
+);
+
 console.log(labels);
-// const labels = [
-//   {
-//     name: 'good first issue',
-//     color: '#7057ff',
-//     description: 'Good for newcomers',
-//   },
-//   {
-//     name: 'help wanted',
-//     color: '#008672',
-//     description: 'Extra attention is needed',
-//   },
-//   {
-//     name: 'priority: critical',
-//     color: '#b60205',
-//     description: '',
-//   },
-//   {
-//     name: 'priority: high',
-//     color: '#d93f0b',
-//     description: '',
-//   },
-//   {
-//     name: 'priority: low',
-//     color: '#0e8a16',
-//     description: '',
-//   },
-//   {
-//     name: 'priority: medium',
-//     color: '#fbca04',
-//     description: '',
-//   },
-//   {
-//     name: "status: can't reproduce",
-//     color: '#fec1c1',
-//     description: '',
-//   },
-//   {
-//     name: 'status: confirmed',
-//     color: '#215cea',
-//     description: '',
-//   },
-//   {
-//     name: 'status: duplicate',
-//     color: '#cfd3d7',
-//     description: 'This issue or pull request already exists',
-//   },
-//   {
-//     name: 'status: needs information',
-//     color: '#fef2c0',
-//     description: '',
-//   },
-//   {
-//     name: 'status: wont do/fix',
-//     color: '#eeeeee',
-//     description: 'This will not be worked on',
-//   },
-//   {
-//     name: 'type: bug',
-//     color: '#d73a4a',
-//     description: "Something isn't working",
-//   },
-//   {
-//     name: 'type: discussion',
-//     color: '#d4c5f9',
-//     description: '',
-//   },
-//   {
-//     name: 'type: documentation',
-//     color: '#006b75',
-//     description: '',
-//   },
-//   {
-//     name: 'type: enhancement',
-//     color: '#84b6eb',
-//     description: '',
-//   },
-//   {
-//     name: 'type: epic',
-//     color: '#3e4b9e',
-//     description: 'A theme of work that contain sub-tasks',
-//   },
-//   {
-//     name: 'type: feature request',
-//     color: '#fbca04',
-//     description: 'New feature or request',
-//   },
-//   {
-//     name: 'type: question',
-//     color: '#d876e3',
-//     description: 'Further information is requested',
-//   },
-// ];
+

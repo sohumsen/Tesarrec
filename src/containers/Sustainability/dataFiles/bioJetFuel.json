@@ -79,6 +79,12 @@
             "VariableName": "ACC"
         },
         {
+            "User Navigation Bar": "Internal rate of return",
+            "Default": "0.1",
+            "Range": "0.1-0.15",
+            "VariableName": "InternalRateofReturn"
+        },
+        {
             "User Navigation Bar": "Biomass cost $/t",
             "Default": "40",
             "Range": "10-100",
