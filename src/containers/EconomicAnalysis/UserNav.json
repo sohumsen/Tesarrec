@@ -36,14 +36,42 @@
             "VariableName": "SteamDemand"
         },
         {
-            "User Navigation Bar": "Production rate tph",
+            "User Navigation Bar": "Product 1 rate tph",
             "Default": "150",
             "Range": "0.00005-40000",
-            "VariableName": "ProductionRate"
+            "VariableName": "Product1Rate"
+        },
+
+        {
+            "User Navigation Bar": "Product 2 rate tph",
+            "Default": "0",
+            "Range": "0.00005-40000",
+            "VariableName": "Product2Rate"
+        },
+
+        {
+            "User Navigation Bar": "Product 3 rate tph",
+            "Default": "0",
+            "Range": "0.00005-40000",
+            "VariableName": "Product3Rate"
+        },
+
+
+        {
+            "User Navigation Bar": "Product 4 rate tph",
+            "Default": "0",
+            "Range": "0.00005-40000",
+            "VariableName": "Product4Rate"
+        },
+        {
+            "User Navigation Bar": "Product 5 rate tph",
+            "Default": "0",
+            "Range": "0.00005-40000",
+            "VariableName": "Product5Rate"
         },
         {
             "User Navigation Bar": "Installation factor",
-            "Default": "1",
+            "Default": "3.5",
             "Range": "1-5",
             "VariableName": "InstallationFactor"
         },
@@ -84,9 +112,34 @@
             "VariableName": "SteamPrice"
         },
         {
-            "User Navigation Bar": "Product price $/kg",
+            "User Navigation Bar": "Product 1 price $/kg",
             "Default": "0.5",
             "Range": "0.1-5000",
-            "VariableName": "ProductPrice"
+            "VariableName": "Product1Price"
+        },
+
+        {
+            "User Navigation Bar": "Product 2 price $/kg",
+            "Default": "0.5",
+            "Range": "0.1-5000",
+            "VariableName": "Product2Price"
+        },
+        {
+            "User Navigation Bar": "Product 3 price $/kg",
+            "Default": "0.5",
+            "Range": "0.1-5000",
+            "VariableName": "Product3Price"
+        },
+        {
+            "User Navigation Bar": "Product 4 price $/kg",
+            "Default": "0.5",
+            "Range": "0.1-5000",
+            "VariableName": "Product4Price"
+        },
+        {
+            "User Navigation Bar": "Product 5 price $/kg",
+            "Default": "0.5",
+            "Range": "0.1-5000",
+            "VariableName": "Product5Price"
         }
     ]

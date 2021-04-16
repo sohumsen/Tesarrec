@@ -12,7 +12,12 @@ export default function EconomicAnalysis(props) {
     ElectricityDemand,
     SteamGeneration,
     SteamDemand,
-    ProductionRate,
+    Product1Rate,
+Product2Rate,
+Product3Rate,
+Product4Rate,
+Product5Rate,
+
     InstallationFactor,
     AnnualCapitalCharge,
     InternalRateofReturn,
@@ -20,7 +25,12 @@ export default function EconomicAnalysis(props) {
     ReagentCost,
     ElectricityPrice,
     SteamPrice,
-    ProductPrice,
+    Product1Price,
+Product2Price,
+Product3Price,
+Product4Price,
+Product5Price
+
   } = props.userNavData;
   console.log(props.userNavData);
 
@@ -45,16 +55,16 @@ export default function EconomicAnalysis(props) {
   let Opex =
     1.3 *
     (DeliveredCost * AnnualCapitalCharge * 0.25 +
-      0.1 * ProductionRate +
+      0.1 * (Product1Rate + Product2Rate + Product3Rate + Product4Rate + Product5Rate) +
       ReagentUse * ReagentCost * 0.008);
   let FeedstockCost = BiomassCost * BiomassThroughput * 0.008;
   let ProductValue =
-    (ProductPrice * ProductionRate * 1000 +
+  ((Product1Price * Product1Rate + Product2Price * Product2Rate + Product3Price * Product3Rate + Product4Price * Product4Rate + Product5Price * Product5Rate) * 1000 +
       (ElectricityGeneration - ElectricityDemand) * ElectricityPrice +
       (SteamGeneration - SteamDemand) * SteamPrice) *
     0.008;
   let CostofProduction =
-    ((Capex + Opex + FeedstockCost) * (1000000 / 8000)) / ProductionRate;
+    ((Capex + Opex + FeedstockCost) * (1000000 / 8000)) / (Product1Rate + Product2Rate + Product3Rate + Product4Rate + Product5Rate);
 
   let tableData = [];
   props.selectedProcesses.map((el, i) => {
@@ -63,19 +73,19 @@ export default function EconomicAnalysis(props) {
       value: DeliveredCostofProcessArr[i].toFixed(0),
     });
   });
-  let WorkingCapital = 0.75 * TotalCapitalInvestment,
-    ServiceFacility = 0.55 * TotalCapitalInvestment,
-    Installation = 0.39 * TotalCapitalInvestment,
-    Contingency = 0.37 * TotalCapitalInvestment,
-    ConstructionExpense = 0.34 * TotalCapitalInvestment,
-    EngineeringSupervision = 0.32 * TotalCapitalInvestment,
-    Piping = 0.31 * TotalCapitalInvestment,
-    Building = 0.29 * TotalCapitalInvestment,
-    InstrumentationControl = 0.26 * TotalCapitalInvestment,
-    ContractorFee = 0.19 * TotalCapitalInvestment,
-    YardImprovement = 0.12 * TotalCapitalInvestment,
-    ElectricalSystem = 0.1 * TotalCapitalInvestment,
-    LegalExpense = 0.04 * TotalCapitalInvestment;
+  let WorkingCapital = 0.1861* (TotalCapitalInvestment - DeliveredCost),
+    ServiceFacility = 0.1365* (TotalCapitalInvestment - DeliveredCost),
+    Installation = 0.0968* (TotalCapitalInvestment - DeliveredCost),
+    Contingency = 0.0918* (TotalCapitalInvestment - DeliveredCost),
+    ConstructionExpense = 0.0844* (TotalCapitalInvestment - DeliveredCost),
+    EngineeringSupervision = 0.0794* (TotalCapitalInvestment - DeliveredCost),
+    Piping = 0.0769* (TotalCapitalInvestment - DeliveredCost),
+    Building = 0.0720* (TotalCapitalInvestment - DeliveredCost),
+    InstrumentationControl = 0.0645* (TotalCapitalInvestment - DeliveredCost),
+    ContractorFee = 0.0471* (TotalCapitalInvestment - DeliveredCost),
+    YardImprovement = 0.0298* (TotalCapitalInvestment - DeliveredCost),
+    ElectricalSystem = 0.0248* (TotalCapitalInvestment - DeliveredCost),
+    LegalExpense = 0.0099* (TotalCapitalInvestment - DeliveredCost);
 
   let TotalCapitalInvestmentTable = [
     { name: "Working capital", value: WorkingCapital.toFixed(0) },
@@ -120,7 +130,7 @@ export default function EconomicAnalysis(props) {
               CapitalCost={TotalCapitalInvestment}
               Capex={parseFloat(Capex.toFixed(2))}
               Opex={parseFloat(Opex.toFixed(2))}
-              ProductValue={parseFloat(ProductValue.toFixed(2))/1000}
+              ProductValue={parseFloat(ProductValue.toFixed(2))}
               IRRCost={InternalRateofReturn}
             />
           </Paper>
@@ -158,12 +168,12 @@ export default function EconomicAnalysis(props) {
               labelData1={[
                 {
                   label: "Cost of Production  ",
-                  y: parseFloat(CostofProduction.toFixed(2)),
+                  y: parseFloat((CostofProduction/1000).toFixed(2)),
                 },
 
                 {
                   label: "Product Price ",
-                  y: ProductPrice,
+                  y: ((Product1Price * Product1Rate + Product2Price * Product2Rate + Product3Price * Product3Rate + Product4Price * Product4Rate + Product5Price * Product5Rate)/ (Product1Rate + Product2Rate + Product3Rate + Product4Rate + Product5Rate)),
                 },
               ]}
               type={"bar"}
@@ -171,7 +181,7 @@ export default function EconomicAnalysis(props) {
           </Paper>
         </Grid>
       
-        {/* <Grid item xs={5} spacing={3}>
+        <Grid item xs={5} spacing={3}>
           <Paper>
             <CustomizedTables
               rows={TotalCapitalInvestmentTable}
@@ -182,7 +192,7 @@ export default function EconomicAnalysis(props) {
               }
             />
           </Paper>
-        </Grid> */}
+        </Grid>
       </Grid>
     </div>
   );
