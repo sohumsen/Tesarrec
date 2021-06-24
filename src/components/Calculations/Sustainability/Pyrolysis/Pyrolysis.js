@@ -13,7 +13,6 @@ const OverallReactionAnodeCathode = (props) => {
   ///////////////////////////////////////////////
 
   Temperature = parseFloat(Temperature);
-
   ////////////////////////////////////////////
   let time = 2;
 
@@ -32,8 +31,21 @@ const OverallReactionAnodeCathode = (props) => {
     (k1 + k2);
   let k4 = 7900 * Math.E ** (-81000 / (8.314 * (273 + Temperature)));
   let k = k1 + k2 + k3;
+  let  stepTime;
+  let upperTime;
 
-  for (let time = 0; time < 5; time = time + 0.1) {
+  if (300<=Temperature&&Temperature <=350){
+    stepTime=500
+    upperTime=3000
+  }else if (350<Temperature&&Temperature <450){
+    stepTime=50
+    upperTime=550
+
+  }else{
+    stepTime=1
+    upperTime=10
+  }
+  for (let time = 0; time < upperTime; time = time +stepTime) {
     let mb = Math.E ** (-k * time);
     let mg =
       (-(k - k4) / k) *
