@@ -179,7 +179,7 @@ const OverallReactionAnodeCathode = (props) => {
       2 +
     (((3 * 0.376 +
       0.67 * 0.196 +
-      0.33 * 0.124 +
+      8 * 0.124 +
       6 * 0.094 +
       6 * 0.094 +
       2 * 0.041 +
@@ -193,9 +193,9 @@ const OverallReactionAnodeCathode = (props) => {
     (((4.5 * 0.313 +
       5.5 * 0.232 +
       3.5 * 0.204 +
-      3.5 * 0.139 +
+      10 * 0.139 +
       4 * 0.108 +
-      4 * 0.005) *
+      5 * 0.005) *
       Furfural) /
       96) *
       2 +
@@ -214,7 +214,7 @@ const OverallReactionAnodeCathode = (props) => {
     ((0.1351 * 0.33 * (1 - PhenoltoTridecene1 - PhenoltoTridecene2) * Phenol) /
       94) *
       58 +
-    ((PhenoltoTridecene2 * 0.161 * Phenol) / 94) * 30 +
+    ((PhenoltoTridecene2 * 0.167 * Phenol) / 94) * 30 +
     ((0.0065 * 0.33 * (1 - PhenoltoTridecene1 - PhenoltoTridecene2) * Phenol) /
       94) *
       58 +
@@ -224,11 +224,11 @@ const OverallReactionAnodeCathode = (props) => {
     ((0.0026 * 0.5 * (1 - PhenoltoTridecene1 - PhenoltoTridecene2) * Phenol) /
       94) *
       16 +
-    (((0.124 * 4.04 + 0.041 * 0.5 + 0.036 * 0.5 + 0.02 * 0.33 + 0.012 * 0.5) *
+    (((0.124 * 5 + 0.041 * 0.5 + 0.036 * 0.5 + 0.02 * 0.33 + 0.012 * 0.5) *
       Dextrose) /
       180) *
       16 +
-    (((4.19 * 0.139 + 0.108) * Furfural) / 96) * 16 +
+    (((5 * 0.139 + 0.108) * Furfural) / 96) * 16 +
     ((0.108 * Furfural) / 96) * 44 +
     (((0.5 * 30 + 0.5 * 16) * 0.616 + (58 + 44 + 30 + 16) * 0.11 * 0.384) *
       Aceticacid) /
@@ -241,7 +241,7 @@ const OverallReactionAnodeCathode = (props) => {
       94) *
       9 *
       2 +
-    ((PhenoltoTridecene2 * 0.161 * Phenol) / 94) * 5 * 2 +
+    ((PhenoltoTridecene2 * 0.167 * Phenol) / 94) * 5 * 2 +
     ((0.0065 * 0.33 * (1 - PhenoltoTridecene1 - PhenoltoTridecene2) * Phenol) /
       94) *
       9 *
@@ -254,12 +254,12 @@ const OverallReactionAnodeCathode = (props) => {
       94) *
       3 *
       2 +
-    (((0.124 * 4.04 + 0.041 * 0.5 + 0.036 * 0.5 + 0.02 * 0.33 + 0.012 * 0.5) *
+    (((0.124 * 5 + 0.041 * 0.5 + 0.036 * 0.5 + 0.02 * 0.33 + 0.012 * 0.5) *
       Dextrose) /
       180) *
       3 *
       2 +
-    (((4.19 * 0.139 + 0.108) * Furfural) / 96) * 3 * 2 +
+    (((5 * 0.139 + 0.108) * Furfural) / 96) * 3 * 2 +
     ((0.108 * Furfural) / 96) * 7 * 2 +
     (((0.5 * 5 * 2 + 0.5 * 3 * 2) * 0.616 +
       (9 + 7 + 5 + 3) * 2 * 0.11 * 0.384) *
@@ -273,7 +273,7 @@ const OverallReactionAnodeCathode = (props) => {
       94) *
       4 *
       18 +
-    ((PhenoltoTridecene2 * 0.161 * Phenol) / 94) * 2 * 18 +
+    ((PhenoltoTridecene2 * 0.167 * Phenol) / 94) * 2 * 18 +
     ((0.0065 * 0.33 * (1 - PhenoltoTridecene1 - PhenoltoTridecene2) * Phenol) /
       94) *
       4 *
@@ -285,11 +285,11 @@ const OverallReactionAnodeCathode = (props) => {
     ((0.0026 * 0.5 * (1 - PhenoltoTridecene1 - PhenoltoTridecene2) * Phenol) /
       94) *
       18 +
-    (((0.124 * 4.04 + 0.041 * 0.5 + 0.036 * 0.5 + 0.02 * 0.33 + 0.012 * 0.5) *
+    (((0.124 * 5 + 0.041 * 0.5 + 0.036 * 0.5 + 0.02 * 0.33 + 0.012 * 0.5) *
       Dextrose) /
       180) *
       18 +
-    (((4.19 * 0.139 + 0.108) * Furfural) / 96) * 18 +
+    (((5 * 0.139 + 0.108) * Furfural) / 96) * 18 +
     ((0.108 * Furfural) / 96) * 3 * 18 +
     (((0.5 * 2 + 0.5) * 18 * 0.616 + (4 + 3 + 2 + 1) * 18 * 0.11 * 0.384) *
       Aceticacid) /
@@ -520,7 +520,7 @@ const OverallReactionAnodeCathode = (props) => {
         (1 - PhenoltoTridecene1 - PhenoltoTridecene2) *
         Phenol) /
         94 +
-        (PhenoltoTridecene2 * 0.161 * Phenol) / 94 +
+        (PhenoltoTridecene2 * 0.167 * Phenol) / 94 +
         (0.0065 *
           0.33 *
           (1 - PhenoltoTridecene1 - PhenoltoTridecene2) *
@@ -536,14 +536,14 @@ const OverallReactionAnodeCathode = (props) => {
           (1 - PhenoltoTridecene1 - PhenoltoTridecene2) *
           Phenol) /
           94 +
-        ((0.124 * 4.04 +
+        ((0.124 * 5 +
           0.041 * 0.5 +
           0.036 * 0.5 +
           0.02 * 0.33 +
           0.012 * 0.5) *
           Dextrose) /
           180 +
-        ((4.19 * 0.139 + 0.108) * Furfural) / 96 +
+        ((5 * 0.139 + 0.108) * Furfural) / 96 +
         (0.108 * Furfural) / 96 +
         (((0.5 + 0.5) * 0.616 + 0.11 * 0.384) * Aceticacid) / 60 +
         ((0.25 * 0.966 + 3 * 16 * 0.034) * Hydroxyacetone) / 74 +
@@ -575,17 +575,17 @@ const OverallReactionAnodeCathode = (props) => {
     14.304 *
     (((0.1351 * 0.33 * (1 - PhenoltoTridecene1 - PhenoltoTridecene2) * Phenol) /
       94 +
-      (PhenoltoTridecene2 * 0.161 * Phenol) / 94 +
+      (PhenoltoTridecene2 * 0.167 * Phenol) / 94 +
       (0.0065 * 0.33 * (1 - PhenoltoTridecene1 - PhenoltoTridecene2) * Phenol) /
         94 +
       (0.0026 * 0.5 * (1 - PhenoltoTridecene1 - PhenoltoTridecene2) * Phenol) /
         94 +
       (0.0026 * 0.5 * (1 - PhenoltoTridecene1 - PhenoltoTridecene2) * Phenol) /
         94 +
-      ((0.124 * 4.04 + 0.041 * 0.5 + 0.036 * 0.5 + 0.02 * 0.33 + 0.012 * 0.5) *
+      ((0.124 * 5 + 0.041 * 0.5 + 0.036 * 0.5 + 0.02 * 0.33 + 0.012 * 0.5) *
         Dextrose) /
         180 +
-      ((4.19 * 0.139 + 0.108) * Furfural) / 96 +
+      ((5 * 0.139 + 0.108) * Furfural) / 96 +
       (0.108 * Furfural) / 96 +
       (((0.5 + 0.5) * 0.616 + 0.11 * 0.384) * Aceticacid) / 60 +
       ((0.25 * 0.966 + 3 * 16 * 0.034) * Hydroxyacetone) / 74 +

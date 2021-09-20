@@ -13,12 +13,40 @@ class Reference extends Component {
               Biorefineries and Chemical Processes: Design, integration and
               Sustainability Analysis, Wiley, Chichester, UK.
               <br />
+
+
               <a
                 href="https://onlinelibrary.wiley.com/doi/book/10.1002/9781118698129 "
                 target="_blank"
                 rel="noopener noreferrer"
               >
                 https://onlinelibrary.wiley.com/doi/book/10.1002/9781118698129
+              </a>
+            </li>
+            <li>
+            Sadhukhan, J., Sen, S. and Gadkari, S., 2021. The Mathematics of life cycle sustainability assessment. Journal of Cleaner Production, 309, p.127457.
+
+
+              <br />
+              <a
+                href="https://doi.org/10.1016/j.jclepro.2021.127457"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                https://doi.org/10.1016/j.jclepro.2021.127457{" "}
+              </a>
+            </li>
+            <li>
+            Gadkari, S., Beigi, B.H.M., Aryal, N. and Sadhukhan, J., 2021. Microbial electrosynthesis: is it sustainable for bioproduction of acetic acid?. RSC Advances, 11(17), pp.9921-9932.
+
+
+              <br />
+              <a
+                href="https://pubs.rsc.org/en/content/articlelanding/2021/RA/D1RA00920F"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                10.1039/D1RA00920F{" "}
               </a>
             </li>
             <li>
