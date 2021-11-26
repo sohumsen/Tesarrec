@@ -21,6 +21,7 @@ import BioethanolWordDoc from "../../../../../assets/Bioethanol.pdf";
 import ChemicalWordDoc from "../../../../../assets/Chemical.pdf";
 import PyrolysisWordDoc from "../../../../../assets/Pyrolysis.pdf";
 import BiodieselWordDoc from "../../../../../assets/Biodiesel.pdf";
+import BiojetfuelWordDoc from "../../../../../assets/Biojetfuel.pdf";
 
 class HeatMapForm extends Component {
   state = {
@@ -79,11 +80,10 @@ class HeatMapForm extends Component {
         break;
 
       case "bio-jet-fuel":
-        wordDoc = PyrolysisWordDoc;
+        wordDoc = BiojetfuelWordDoc;
         fileData = bioJetFuelData;
         doiLink =
           "https://onlinelibrary.wiley.com/doi/book/10.1002/9781118698129";
-
         break;
       case "biodiesel":
         wordDoc = BiodieselWordDoc;
@@ -139,7 +139,9 @@ class HeatMapForm extends Component {
               lets you remix, adapt, and build upon this work even for
               commercial purposes, as long as you credit: ©
               <a href={"https://tesarrec.web.app"}>https://tesarrec.web.app</a>
+              ,
               {" and "}
+              {this.state.type==="bio-jet-fuel"? <a href={"https://www.sciencedirect.com/science/article/abs/pii/S0263876221003828"}>{"https://www.sciencedirect.com/science/article/abs/pii/S0263876221003828 "}</a> :null}
               <a href={this.state.doiLink}>{this.state.doiLink}</a>
             </div>
 
