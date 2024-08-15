@@ -56,12 +56,12 @@
   },
   "scripts": {
     "start": "react-scripts --openssl-legacy-provider start",
-    "build": "react-scripts build",
+    "build": "react-scripts --openssl-legacy-provider build",
     "test": "react-scripts test",
     "test:debug": "node --inspect node_modules/.bin/jest --runInBand",
     "debug": "node --nolazy myProgram.js",
     "eject": "react-scripts eject",
-    "deploy": "react-scripts build && firebase deploy"
+    "deploy": "react-scripts --openssl-legacy-provider build && firebase deploy"
 
   },
   "eslintConfig": {
