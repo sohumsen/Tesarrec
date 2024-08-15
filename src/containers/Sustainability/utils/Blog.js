@@ -45,7 +45,7 @@ const featuredPosts = [
     description:
       "Electricity harvesting from wastewaters.",
     image:
-      "https://h7f7z2r7.stackpathcdn.com/sites/default/files/images/articles/hydrogen-hwy-lead-hyundai-fuel-cell-truck-1.jpg",
+      "https://d3hnfqimznafg0.cloudfront.net/images/Article_Images/ImageForArticle_1085(1).jpg",
   },
   {
     title: "Microbial Electrosynthesis",
@@ -54,7 +54,7 @@ const featuredPosts = [
     description:
       "Recovery of organic acids as high value products from CO2 capture and reuse.",
     image:
-      "https://learnaboutgmp.com/wp-content/uploads/2015/06/cont.png",
+      "https://www.openaccessgovernment.org/wp-content/uploads/2022/11/Picture1-356x220.jpg",
   },
   {
     title: "Combined Heat and Power",
@@ -71,7 +71,7 @@ const featuredPosts = [
 
     description:
       "Bioethanol, a drop-in biofuel to petrol, production from non-food cellulosic and lignocellulosic feedstock.",
-    image: "https://www.hrs-heatexchangers.com/wp-content/uploads/2016/06/HRS-Bioethanol-1140x600.png",
+    image: "https://www.hrs-heatexchangers.com/wp-content/uploads/2021/06/HRS-Bioethanol-1140x600-1.png",
   },
   {
     title: "Chemical",
@@ -106,6 +106,14 @@ const featuredPosts = [
     description: "Biodiesel, a drop-in biofuel, production from non-food oily waste feedstock.",
     image:
       "https://biofuels-news.com/wp-content/uploads/2019/11/bigstock-Male-Hands-In-Protective-Glove-300882514.jpg",
+  },
+  {
+    title: "Bio Gas",
+    slug: "biogas",
+
+    description: "Biogas is produced from non-food oily waste feedstock as a drop-in renewable fuel.",
+    image:
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQC2xMp7BaW7EtAXn1PjCvrZ3xV8_kcv8LnDg&s",
   },
 ];
 

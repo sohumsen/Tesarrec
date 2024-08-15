@@ -10,18 +10,21 @@ import ChemicalCalc from "../../../../../components/Calculations/Sustainability/
 import PyrolysisCalc from "../../../../../components/Calculations/Sustainability/Pyrolysis/Pyrolysis";
 import BioJetFuelCalc from "../../../../../components/Calculations/Sustainability/BioJetFuel/BioJetFuel";
 import BiodieselCalc from "../../../../../components/Calculations/Sustainability/Biodiesel/Biodiesel";
+import BiogasCalc from "../../../../../components/Calculations/Sustainability/Biogas/Biogas";
 
 import bioethanolData from "../../../dataFiles/bioethanol.json";
 import chemicalData from "../../../dataFiles/chemical.json";
 import pyrolysisData from "../../../dataFiles/pyrolysis.json";
 import bioJetFuelData from "../../../dataFiles/bioJetFuel.json";
 import biodieselData from "../../../dataFiles/biodiesel.json";
+import biogasData from "../../../dataFiles/biogas.json";
 
 import BioethanolWordDoc from "../../../../../assets/Bioethanol.pdf";
 import ChemicalWordDoc from "../../../../../assets/Chemical.pdf";
 import PyrolysisWordDoc from "../../../../../assets/Pyrolysis.pdf";
 import BiodieselWordDoc from "../../../../../assets/Biodiesel.pdf";
 import BiojetfuelWordDoc from "../../../../../assets/Biojetfuel.pdf";
+import BiogasWordDoc from "../../../../../assets/Biogas.pdf";
 
 class HeatMapForm extends Component {
   state = {
@@ -88,6 +91,13 @@ class HeatMapForm extends Component {
       case "biodiesel":
         wordDoc = BiodieselWordDoc;
         fileData = biodieselData;
+        doiLink =
+          "https://onlinelibrary.wiley.com/doi/book/10.1002/9781118698129";
+
+        break;
+        case "biogas":
+        wordDoc = BiogasWordDoc;
+        fileData = biogasData;
         doiLink =
           "https://onlinelibrary.wiley.com/doi/book/10.1002/9781118698129";
 
@@ -189,6 +199,9 @@ class HeatMapForm extends Component {
 
             {this.state.type === "biodiesel" ? (
               <BiodieselCalc state={this.state.data} />
+            ) : null}
+            {this.state.type === "biogas" ? (
+              <BiogasCalc state={this.state.data} />
             ) : null}
           </div>
 

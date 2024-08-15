@@ -1,0 +1,70 @@
+{
+    "Sheet1": [
+        {
+            "User Navigation Bar": "AD Feedstock tonne",
+            "Default": "1",
+            "Range": "0.001-1000",
+            "VariableName": "ADFeedstock"
+        },
+        {
+            "User Navigation Bar": "Manure fraction",
+            "Default": "0.2",
+            "Range": "0-1",
+            "VariableName": "ManureFraction"
+        },
+        {
+            "User Navigation Bar": "Sludge fraction",
+            "Default": "0.2",
+            "Range": "0-1",
+            "VariableName": "SludgeFraction"
+        },
+        {
+            "User Navigation Bar": "Used cooking oil fraction",
+            "Default": "0.2",
+            "Range": "0-1",
+            "VariableName": "UsedCookingOilFraction"
+        },
+        {
+            "User Navigation Bar": "Grass silage fraction",
+            "Default": "0.2",
+            "Range": "0-1",
+            "VariableName": "GrassSilageFraction"
+        },
+        {
+            "User Navigation Bar": "Biowaste fraction",
+            "Default": "0.2",
+            "Range": "0-1",
+            "VariableName": "BiowasteFraction"
+        },
+        {
+            "User Navigation Bar": "Electricity use kWh/(t AD feedstock)",
+            "Default": "0.04",
+            "Range": "0-0.2",
+            "VariableName": "ElectricityUse"
+        },
+        {
+            "User Navigation Bar": "Heat use MJ/(t AD feedstock)",
+            "Default": "0.8",
+            "Range": "0-4",
+            "VariableName": "HeatUse"
+        },
+        {
+            "User Navigation Bar": "Steam use kg/(t AD feedstock)",
+            "Default": "0.006",
+            "Range": "0.005-0.009",
+            "VariableName": "SteamUse"
+        },
+        {
+            "User Navigation Bar": "Biogas yield m3/(t AD feedstock)",
+            "Default": "400",
+            "Range": "0-1000",
+            "VariableName": "BiogasYield"
+        },
+        {
+            "User Navigation Bar": "Biomethane yield m3/(t AD feedstock)",
+            "Default": "240",
+            "Range": "200-280",
+            "VariableName": "BiomethaneYield"
+        }
+    ]
+}

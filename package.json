@@ -55,7 +55,7 @@
     "xlsx": "^0.16.2"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "react-scripts --openssl-legacy-provider start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "test:debug": "node --inspect node_modules/.bin/jest --runInBand",
