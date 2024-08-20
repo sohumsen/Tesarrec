@@ -108,10 +108,10 @@ const featuredPosts = [
       "https://biofuels-news.com/wp-content/uploads/2019/11/bigstock-Male-Hands-In-Protective-Glove-300882514.jpg",
   },
   {
-    title: "Bio Gas",
+    title: "Biogas",
     slug: "biogas",
 
-    description: "Biogas is produced from non-food oily waste feedstock as a drop-in renewable fuel.",
+    description: "Biogas is produced from non-food waste feedstock as a drop-in renewable fuel.",
     image:
       "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQC2xMp7BaW7EtAXn1PjCvrZ3xV8_kcv8LnDg&s",
   },

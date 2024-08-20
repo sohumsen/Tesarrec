@@ -91,6 +91,11 @@ const Biogas = (props) => {
       <Grid item xs={6} spacing={3}>
       <Paper>
           <StackedChart
+          axisXData={ {title: "Region",  // Optional: Title for X-axis
+            interval: 1,
+            labelFormatter: function(e) {
+              return e.value === 1 ? "CH (Switzerland)" : "ROW (Rest of the World)";
+            }}}
             data={[
               {
                 type: "stackedBar",
@@ -138,7 +143,7 @@ const Biogas = (props) => {
                 ],
               },
             ]}
-            title={"Global Warming Potential (kg CO2e)"}
+            title={"Global Warming Potential (kg CO₂e)"}
           />
         </Paper>
       </Grid>
@@ -147,7 +152,7 @@ const Biogas = (props) => {
       <Grid item xs={6} spacing={3}>
         <Paper>
           <ColumnChart
-            title={"Global Warming Potential (kg CO2e/m3 biogas)"}
+            title={"Global Warming Potential (kg CO₂e/m³ biogas)"}
             labelData1={[
               {
                 label: "CH (Switzerland)",
@@ -167,7 +172,7 @@ const Biogas = (props) => {
       <Grid item xs={6} spacing={3}>
         <Paper>
           <ColumnChart
-            title={"Global Warming Potential (kg CO2e/m3 biomethane)"}
+            title={"Global Warming Potential (kg CO₂e/m³ biomethane)"}
             labelData1={[
               {
                 label: "CH (Switzerland)",

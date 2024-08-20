@@ -18,6 +18,9 @@ class ColumnChart extends Component {
    
       backgroundColor: "white",
       zoomEnabled: true,
+
+      axisX: this.props.axisXData,
+     
       data:this.props.data
     };
     return (
