@@ -78,8 +78,8 @@ const Biogas = (props) => {
   let BiogenicGWPBiogasCH = -(ManureFraction1*3.1103054 + SludgeFraction1*0.044920374 + UsedCookingOilFraction1*0.33735073 + GrassSilageFraction1*0.012879702 + BiowasteFraction1*0.12088928);
   let BiogenicGWPBiogasROW = -(ManureFraction1*3.0631942 + SludgeFraction1*0.055278704 + UsedCookingOilFraction1*0.134941 + GrassSilageFraction1*0.012879702 + BiowasteFraction1*0.077214499);
  let NaturalgasGWPavoidedperbiogas = - 0.2*BiomethaneYield/BiogasYield;
-let BiogenicGWPBiogasCHTotal = BiogenicGWPBiogasCH * ADFeedstock;
-let BiogenicGWPBiogasROWTotal = BiogenicGWPBiogasROW * ADFeedstock;
+let BiogenicGWPBiogasCHTotal = BiogenicGWPBiogasCH*BiogasYield*ADFeedstock;
+let BiogenicGWPBiogasROWTotal = BiogenicGWPBiogasROW*BiogasYield*ADFeedstock;
  let NaturalgasGWPavoidedTotal = NaturalgasGWPavoidedperbiogas*BiogasYield*ADFeedstock;
    
   let GWPBiomethaneCH = (GWPFeedCH) / (ADFeedstock*BiomethaneYield)+0.4;
