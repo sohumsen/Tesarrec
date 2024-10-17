@@ -75,17 +75,17 @@ const Biogas = (props) => {
 
   let GWPBiogasCH = GWPFeedCH / (ADFeedstock*BiogasYield);
   let GWPBiogasROW = GWPFeedROW / (ADFeedstock*BiogasYield);
-  let BiogenicGWPBiogasCH = -(ManureFraction1*3.1103054 + SludgeFraction1*0.044920374 + UsedCookingOilFraction1*0.33735073 + GrassSilageFraction1*0.012879702 + BiowasteFraction1*0.12088928)/BiogasYield;
-  let BiogenicGWPBiogasROW = -(ManureFraction1*3.0631942 + SludgeFraction1*0.055278704 + UsedCookingOilFraction1*0.134941 + GrassSilageFraction1*0.012879702 + BiowasteFraction1*0.077214499)/BiogasYield;
+  let BiogenicGWPBiogasCH = -(ManureFraction1*3.1103054 + SludgeFraction1*0.044920374 + UsedCookingOilFraction1*0.33735073 + GrassSilageFraction1*0.012879702 + BiowasteFraction1*0.12088928);
+  let BiogenicGWPBiogasROW = -(ManureFraction1*3.0631942 + SludgeFraction1*0.055278704 + UsedCookingOilFraction1*0.134941 + GrassSilageFraction1*0.012879702 + BiowasteFraction1*0.077214499);
  let NaturalgasGWPavoidedperbiogas = - 0.2*BiomethaneYield/BiogasYield;
-let BiogenicGWPBiogasCHTotal = BiogenicGWPBiogasCH * BiogasYield * ADFeedstock;
-let BiogenicGWPBiogasROWTotal = BiogenicGWPBiogasROW * BiogasYield * ADFeedstock;
+let BiogenicGWPBiogasCHTotal = BiogenicGWPBiogasCH * ADFeedstock;
+let BiogenicGWPBiogasROWTotal = BiogenicGWPBiogasROW * ADFeedstock;
  let NaturalgasGWPavoidedTotal = NaturalgasGWPavoidedperbiogas*BiogasYield*ADFeedstock;
    
   let GWPBiomethaneCH = (GWPFeedCH) / (ADFeedstock*BiomethaneYield)+0.4;
   let GWPBiomethaneROW = (GWPFeedROW) / (ADFeedstock*BiomethaneYield)+0.4;
-  let BiogenicGWPBiomethaneCH = -(BiogenicGWPBiogasCH*BiogasYield/BiomethaneYield+1.35);
-  let BiogenicGWPBiomethaneROW = -(BiogenicGWPBiogasROW*BiogasYield/BiomethaneYield+1.35);
+  let BiogenicGWPBiomethaneCH = -(BiogenicGWPBiogasCH*BiogasYield/BiomethaneYield);
+  let BiogenicGWPBiomethaneROW = -(BiogenicGWPBiogasROW*BiogasYield/BiomethaneYield);
   let NaturalgasGWPavoidedperbiomethane = - 0.2;
   
   return (
@@ -214,7 +214,7 @@ let BiogenicGWPBiogasROWTotal = BiogenicGWPBiogasROW * BiogasYield * ADFeedstock
               },
              
             ]}
-            title={"Global Warming Potential (kg CO₂e)"}
+            title={"Global Warming Potential (kg CO₂e/m³ biogas)"}
           />
       </Paper>
       </Grid>
@@ -258,7 +258,7 @@ let BiogenicGWPBiogasROWTotal = BiogenicGWPBiogasROW * BiogasYield * ADFeedstock
               },
              
             ]}
-            title={"Global Warming Potential (kg CO₂e)"}
+            title={"Global Warming Potential (kg CO₂e/m³ biomethane)"}
           />
       </Paper>
       </Grid>
