@@ -38,33 +38,33 @@ const Biogas = (props) => {
   let BiowasteFraction1 = BiowasteFraction / Total;
   ///////////////////////////////////////////////
   let GWPManureCH =
-    (87.8 + 5.5 * ElectricityUse + 5.8 * HeatUse) *
+   8.64*BiogasYield/1000* (87.8 + 5.5 * ElectricityUse + 5.8 * HeatUse) *
     ADFeedstock *
     ManureFraction1;
   let GWPManureROW =
-    (88.8 + 84.5 * ElectricityUse + 15.2 * HeatUse) *
+    8.64*BiogasYield/1000* (88.8 + 84.5 * ElectricityUse + 15.2 * HeatUse) *
     ADFeedstock *
     ManureFraction1;
   let GWPSludgeCH =
-    (14.3 + 13.3 * ElectricityUse + 5.3 * HeatUse + 14.6 * SteamUse) *
+   19.8*BiogasYield/1000* (14.3 + 13.3 * ElectricityUse + 5.3 * HeatUse + 14.6 * SteamUse) *
     ADFeedstock *
     SludgeFraction1;
   let GWPSludgeROW =
-    (23.7 + 44.7 * ElectricityUse + 8.2 * HeatUse + 20.8 * SteamUse) *
+   15*BiogasYield/1000* (23.7 + 44.7 * ElectricityUse + 8.2 * HeatUse + 20.8 * SteamUse) *
     ADFeedstock *
     SludgeFraction1;
   let GWPUCOCH =
-    (245.4 + 0.005 * ElectricityUse + 0.005 * HeatUse) *
+    1.18*BiogasYield/1000* (245.4 + 0.005 * ElectricityUse + 0.005 * HeatUse) *
     ADFeedstock *
     UsedCookingOilFraction1;
   let GWPUCOROW =
-    (136 + 620.4 * ElectricityUse + 110.8 * HeatUse) *
+    1.18*BiogasYield/1000*(136 + 620.4 * ElectricityUse + 110.8 * HeatUse) *
     ADFeedstock *
     UsedCookingOilFraction1;
   let GWPBiowasteCH = 0.18 * BiogasYield * ADFeedstock * BiowasteFraction1;
   let GWPBiowasteROW = 0.23 * BiogasYield * ADFeedstock * BiowasteFraction1;
   let GWPGrassSilage =
-    (224.7 + 31.9 * ElectricityUse + 19.8 * HeatUse) *
+    1.5*BiogasYield/1000*(224.7 + 31.9 * ElectricityUse + 19.8 * HeatUse) *
     ADFeedstock *
     GrassSilageFraction1;
 
