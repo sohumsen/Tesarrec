@@ -75,10 +75,13 @@ const Biogas = (props) => {
 
   let GWPBiogasCH = GWPFeedCH / (ADFeedstock*BiogasYield);
   let GWPBiogasROW = GWPFeedROW / (ADFeedstock*BiogasYield);
-  let BiogenicGWPBiogasCH = -(ManureFraction1*3.1103054 + SludgeFraction1*0.044920374 + UsedCookingOilFraction1*0.33735073 + GrassSilageFraction1*0.012879702 + BiowasteFraction1*0.12088928);
-  let BiogenicGWPBiogasROW = -(ManureFraction1*3.0631942 + SludgeFraction1*0.055278704 + UsedCookingOilFraction1*0.134941 + GrassSilageFraction1*0.012879702 + BiowasteFraction1*0.077214499);
+  let BiogenicGWPBiogasCH = -(ManureFraction1*3.1103054 + SludgeFraction1*0.044920374 + UsedCookingOilFraction1*0.33735073 + GrassSilageFraction1*0.012879702 + BiowasteFraction1*0.12088928)/BiogasYield;
+  let BiogenicGWPBiogasROW = -(ManureFraction1*3.0631942 + SludgeFraction1*0.055278704 + UsedCookingOilFraction1*0.134941 + GrassSilageFraction1*0.012879702 + BiowasteFraction1*0.077214499)/BiogasYield;
  let NaturalgasGWPavoidedperbiogas = - 0.2*BiomethaneYield/BiogasYield;
-
+let BiogenicGWPBiogasCHTotal = BiogenicGWPBiogasCH * BiogasYield * ADFeedstock;
+let BiogenicGWPBiogasROWTotal = BiogenicGWPBiogasROW * BiogasYield * ADFeedstock;
+ let NaturalgasGWPavoidedTotal = NaturalgasGWPavoidedperbiogas*BiogasYield*ADFeedstock;
+   
   let GWPBiomethaneCH = (GWPFeedCH) / (ADFeedstock*BiomethaneYield)+0.4;
   let GWPBiomethaneROW = (GWPFeedROW) / (ADFeedstock*BiomethaneYield)+0.4;
   let BiogenicGWPBiomethaneCH = -(BiogenicGWPBiogasCH*BiogasYield/BiomethaneYield+1.35);
@@ -97,12 +100,30 @@ const Biogas = (props) => {
       <Grid item xs={6} spacing={3}>
       <Paper>
           <StackedChart
-          axisXData={ {title: "Region",  // Optional: Title for X-axis
+          axisXData={ {title: "",  // Optional: Title for X-axis
             interval: 1,
             labelFormatter: function(e) {
               return e.value === 1 ? "CH (Switzerland)" : "ROW (Rest of the World)";
             }}}
             data={[
+            {
+                type: "stackedBar",
+                name: "Avoided natural gas",
+                showInLegend: "true",
+                dataPoints: [
+                  { y: parseFloat(NaturalgasGWPavoidedTotal.toFixed(2)), x: 1 },
+                  { y: parseFloat(NaturalgasGWPavoidedTotal.toFixed(2)), x: 2 },
+                ],
+              }, 
+            {
+                type: "stackedBar",
+                name: "Biogenic carbon dioxide",
+                showInLegend: "true",
+                dataPoints: [
+                  { y: parseFloat(BiogenicGWPBiogasCHTotal.toFixed(2)), x: 1 },
+                  { y: parseFloat(BiogenicGWPBiogasROWTotal.toFixed(2)), x: 2 },
+                ],
+              },
               {
                 type: "stackedBar",
                 name: "Manure",
@@ -157,42 +178,92 @@ const Biogas = (props) => {
       {/* Bar Chart for GWP (kg CO2e/m3 biogas) */}
       <Grid item xs={6} spacing={3}>
         <Paper>
-          <ColumnChart
-            title={"Global Warming Potential (kg CO₂e/m³ biogas)"}
-            labelData1={[
-              {
-                label: "CH (Switzerland)",
-                y: parseFloat(GWPBiogasCH.toFixed(2)),
+         <StackedChart
+          axisXData={ {title: "",  // Optional: Title for X-axis
+            interval: 1,
+            labelFormatter: function(e) {
+              return e.value === 1 ? "CH (Switzerland)" : "ROW (Rest of the World)";
+            }}}
+            data={[
+            {
+                type: "stackedBar",
+                name: "Avoided natural gas",
+                showInLegend: "true",
+                dataPoints: [
+                  { y: parseFloat(NaturalgasGWPavoidedperbiogas.toFixed(2)), x: 1 },
+                  { y: parseFloat(NaturalgasGWPavoidedperbiogas.toFixed(2)), x: 2 },
+                ],
+              }, 
+            {
+                type: "stackedBar",
+                name: "Biogenic carbon dioxide",
+                showInLegend: "true",
+                dataPoints: [
+                  { y: parseFloat(BiogenicGWPBiogasCH.toFixed(2)), x: 1 },
+                  { y: parseFloat(BiogenicGWPBiogasROW.toFixed(2)), x: 2 },
+                ],
               },
               {
-                label: "ROW (Rest of the World)",
-                y: parseFloat(GWPBiogasROW.toFixed(2)),
+                type: "stackedBar",
+                name: "Biogas generation",
+                showInLegend: "true",
+                dataPoints: [
+                  { y: parseFloat(GWPBiogasCH.toFixed(2)), x: 1 },
+                  { y: parseFloat(GWPBiogasROW.toFixed(2)), x: 2 },
+                ],
               },
+             
             ]}
-            type={"bar"}
+            title={"Global Warming Potential (kg CO₂e)"}
           />
-        </Paper>
+      </Paper>
       </Grid>
 
-      {/* Bar Chart for GWP (kg CO2e/m3 biomethane) */}
+               {/* Bar Chart for GWP (kg CO2e/m3 biomethane) */}
       <Grid item xs={6} spacing={3}>
         <Paper>
-          <ColumnChart
-            title={"Global Warming Potential (kg CO₂e/m³ biomethane)"}
-            labelData1={[
-              {
-                label: "CH (Switzerland)",
-                y: parseFloat(GWPBiomethaneCH.toFixed(2)),
+         <StackedChart
+          axisXData={ {title: "",  // Optional: Title for X-axis
+            interval: 1,
+            labelFormatter: function(e) {
+              return e.value === 1 ? "CH (Switzerland)" : "ROW (Rest of the World)";
+            }}}
+            data={[
+            {
+                type: "stackedBar",
+                name: "Avoided natural gas",
+                showInLegend: "true",
+                dataPoints: [
+                  { y: parseFloat(NaturalgasGWPavoidedperbiomethane.toFixed(2)), x: 1 },
+                  { y: parseFloat(NaturalgasGWPavoidedperbiomethane.toFixed(2)), x: 2 },
+                ],
+              }, 
+            {
+                type: "stackedBar",
+                name: "Biogenic carbon dioxide",
+                showInLegend: "true",
+                dataPoints: [
+                  { y: parseFloat(BiogenicGWPBiomethaneCH.toFixed(2)), x: 1 },
+                  { y: parseFloat(BiogenicGWPBiomethaneROW.toFixed(2)), x: 2 },
+                ],
               },
               {
-                label: "ROW (Rest of the World)",
-                y: parseFloat(GWPBiomethaneROW.toFixed(2)),
+                type: "stackedBar",
+                name: "Biomethane generation",
+                showInLegend: "true",
+                dataPoints: [
+                  { y: parseFloat(GWPBiomethaneCH.toFixed(2)), x: 1 },
+                  { y: parseFloat(GWPBiomethaneROW.toFixed(2)), x: 2 },
+                ],
               },
+             
             ]}
-            type={"bar"}
+            title={"Global Warming Potential (kg CO₂e)"}
           />
-        </Paper>
+      </Paper>
       </Grid>
+              
+              
     </Grid>
   );
 };
