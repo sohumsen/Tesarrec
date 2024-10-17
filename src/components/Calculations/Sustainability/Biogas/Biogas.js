@@ -77,12 +77,13 @@ const Biogas = (props) => {
   let GWPBiogasROW = GWPFeedROW / (ADFeedstock*BiogasYield);
   let BiogenicGWPBiogasCH = -(ManureFraction1*3.1103054 + SludgeFraction1*0.044920374 + UsedCookingOilFraction1*0.33735073 + GrassSilageFraction1*0.012879702 + BiowasteFraction1*0.12088928);
   let BiogenicGWPBiogasROW = -(ManureFraction1*3.0631942 + SludgeFraction1*0.055278704 + UsedCookingOilFraction1*0.134941 + GrassSilageFraction1*0.012879702 + BiowasteFraction1*0.077214499);
- 
+ let NaturalgasGWPavoidedperbiogas = - 0.2*BiomethaneYield/BiogasYield;
 
   let GWPBiomethaneCH = (GWPFeedCH) / (ADFeedstock*BiomethaneYield)+0.4;
   let GWPBiomethaneROW = (GWPFeedROW) / (ADFeedstock*BiomethaneYield)+0.4;
   let BiogenicGWPBiomethaneCH = -(BiogenicGWPBiogasCH*BiogasYield/BiomethaneYield+1.35);
   let BiogenicGWPBiomethaneROW = -(BiogenicGWPBiogasROW*BiogasYield/BiomethaneYield+1.35);
+  let NaturalgasGWPavoidedperbiomethane = - 0.2;
   
   return (
     <Grid container spacing={3}>
