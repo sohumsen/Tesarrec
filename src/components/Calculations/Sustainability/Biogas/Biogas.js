@@ -84,8 +84,8 @@ let BiogenicGWPBiogasROWTotal = BiogenicGWPBiogasROW * ADFeedstock;
    
   let GWPBiomethaneCH = (GWPFeedCH) / (ADFeedstock*BiomethaneYield)+0.4;
   let GWPBiomethaneROW = (GWPFeedROW) / (ADFeedstock*BiomethaneYield)+0.4;
-  let BiogenicGWPBiomethaneCH = -(BiogenicGWPBiogasCH*BiogasYield/BiomethaneYield);
-  let BiogenicGWPBiomethaneROW = -(BiogenicGWPBiogasROW*BiogasYield/BiomethaneYield);
+  let BiogenicGWPBiomethaneCH = (BiogenicGWPBiogasCH*BiogasYield/BiomethaneYield);
+  let BiogenicGWPBiomethaneROW = (BiogenicGWPBiogasROW*BiogasYield/BiomethaneYield);
   let NaturalgasGWPavoidedperbiomethane = - 0.2;
   
   return (
