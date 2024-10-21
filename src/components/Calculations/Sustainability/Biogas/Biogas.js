@@ -77,7 +77,7 @@ const Biogas = (props) => {
   let GWPBiogasROW = GWPFeedROW / (ADFeedstock*BiogasYield);
   let BiogenicGWPBiogasCH = -(ManureFraction1*3.1103054 + SludgeFraction1*0.044920374 + UsedCookingOilFraction1*0.33735073 + GrassSilageFraction1*0.012879702 + BiowasteFraction1*0.12088928);
   let BiogenicGWPBiogasROW = -(ManureFraction1*3.0631942 + SludgeFraction1*0.055278704 + UsedCookingOilFraction1*0.134941 + GrassSilageFraction1*0.012879702 + BiowasteFraction1*0.077214499);
- let NaturalgasGWPavoidedperbiogas = - 0.2*BiomethaneYield/BiogasYield;
+ let NaturalgasGWPavoidedperbiogas = - 0.36*BiomethaneYield/BiogasYield;
 let BiogenicGWPBiogasCHTotal = BiogenicGWPBiogasCH*BiogasYield*ADFeedstock;
 let BiogenicGWPBiogasROWTotal = BiogenicGWPBiogasROW*BiogasYield*ADFeedstock;
  let NaturalgasGWPavoidedTotal = NaturalgasGWPavoidedperbiogas*BiogasYield*ADFeedstock;
@@ -86,7 +86,14 @@ let BiogenicGWPBiogasROWTotal = BiogenicGWPBiogasROW*BiogasYield*ADFeedstock;
   let GWPBiomethaneROW = (GWPFeedROW) / (ADFeedstock*BiomethaneYield)+0.4;
   let BiogenicGWPBiomethaneCH = (BiogenicGWPBiogasCH*BiogasYield/BiomethaneYield);
   let BiogenicGWPBiomethaneROW = (BiogenicGWPBiogasROW*BiogasYield/BiomethaneYield);
-  let NaturalgasGWPavoidedperbiomethane = - 0.2;
+  let NaturalgasGWPavoidedperbiomethane = - 0.36;
+
+  let GWPBiomethaneCHCV = GWPBiomethaneCH/9.92;
+  let GWPBiomethaneROWCV = GWPBiomethaneROW/9.92;
+  let BiogenicGWPBiomethaneCHCV = BiogenicGWPBiomethaneCH/9.92;
+  let BiogenicGWPBiomethaneROWCV = BiogenicGWPBiomethaneROW/9.92;
+  let NaturalgasGWPavoidedperbiomethaneCV = - 0.36/13.89;
+
   
   return (
     <Grid container spacing={3}>
@@ -219,7 +226,7 @@ let BiogenicGWPBiogasROWTotal = BiogenicGWPBiogasROW*BiogasYield*ADFeedstock;
       </Paper>
       </Grid>
 
-               {/* Bar Chart for GWP (kg CO2e/m3 biomethane) */}
+               {/* Bar Chart for GWP (kg CO2e/kWh biomethane) */}
       <Grid item xs={6} spacing={3}>
         <Paper>
          <StackedChart
@@ -262,7 +269,49 @@ let BiogenicGWPBiogasROWTotal = BiogenicGWPBiogasROW*BiogasYield*ADFeedstock;
           />
       </Paper>
       </Grid>
-              
+    {/* Bar Chart for GWP (kg CO2e/kWh biomethane) */}
+      <Grid item xs={6} spacing={3}>
+        <Paper>
+         <StackedChart
+          axisXData={ {title: "",  // Optional: Title for X-axis
+            interval: 1,
+            labelFormatter: function(e) {
+              return e.value === 1 ? "CH (Switzerland)" : "ROW (Rest of the World)";
+            }}}
+            data={[
+            {
+                type: "stackedBar",
+                name: "Avoided natural gas",
+                showInLegend: "true",
+                dataPoints: [
+                  { y: parseFloat(NaturalgasGWPavoidedperbiomethaneCV.toFixed(2)), x: 1 },
+                  { y: parseFloat(NaturalgasGWPavoidedperbiomethaneCV.toFixed(2)), x: 2 },
+                ],
+              }, 
+            {
+                type: "stackedBar",
+                name: "Biogenic carbon dioxide",
+                showInLegend: "true",
+                dataPoints: [
+                  { y: parseFloat(BiogenicGWPBiomethaneCHCV.toFixed(2)), x: 1 },
+                  { y: parseFloat(BiogenicGWPBiomethaneROWCV.toFixed(2)), x: 2 },
+                ],
+              },
+              {
+                type: "stackedBar",
+                name: "Biomethane generation",
+                showInLegend: "true",
+                dataPoints: [
+                  { y: parseFloat(GWPBiomethaneCHCV.toFixed(2)), x: 1 },
+                  { y: parseFloat(GWPBiomethaneROWCV.toFixed(2)), x: 2 },
+                ],
+              },
+             
+            ]}
+            title={"Global Warming Potential (kg CO₂e/kWh biomethane)"}
+          />
+      </Paper>
+      </Grid>           
               
     </Grid>
   );
